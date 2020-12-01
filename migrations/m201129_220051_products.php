@@ -18,13 +18,15 @@ class m201129_220051_products extends Migration
         $this->createTable('{{%products}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
-            'thumbnail'=> $this->string(32)->notNull(),
+            'thumbnail'=> $this->string(255)->notNull(),
             'purchasing_price'=> $this->double()->notNull(),
             'selling price'=> $this->double()->notNull(),
-            'quantity'=> $this->smallInteger()->notNull()->defaultValue(1),
+            'quantity'=> $this->integer()->notNull()->defaultValue(1),
             'category_id'=> $this->integer()->notNull(),
             'status' => $this->smallInteger()->notNull()->defaultValue(1),
             'supplier_id'=>$this->integer()->defaultValue(null),
+            'unit_id'=>$this->integer()->defaultValue(null),
+            'warehouse_id'=>$this->integer()->notNull(),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);

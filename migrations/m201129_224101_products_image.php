@@ -13,7 +13,7 @@ class m201129_224101_products_image extends Migration
         $this->createTable('{{%products_image}}', [
             'id' => $this->primaryKey(),
             'product_id' => $this->integer()->notNull(),
-            'path'=> $this->string(200)->notNull(),
+            'path'=> $this->string(255)->notNull(),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
             

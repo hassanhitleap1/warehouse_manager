@@ -18,6 +18,7 @@ class m201129_225724_orders extends Migration
         $this->createTable('{{%orders}}', [
             'id' => $this->primaryKey(),
             'order_id' => $this->string()->notNull(),
+            'user_id' => $this->integer()->defaultValue(null),
             'delivery_date'=> $this->dateTime()->defaultValue(null),
             'delivery_time'=> $this->time()->defaultValue(null),
             'country_id'=>$this->integer()->defaultValue(null),
