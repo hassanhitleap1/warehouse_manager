@@ -27,36 +27,72 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
+<?php
+        $menuItemsleft=[];
+        $menuItems=[];
+
+        NavBar::begin([
+            //'brandLabel' => Html::img('@web/images/logo.svg'),
+            'brandLabel' => Yii::$app->name ,
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => [
+                'class' => 'navbar-inverse navbar-fixed-top',
+            ],
+        ]);
+
+        if (Yii::$app->user->isGuest) {
+            $menuItemsleft[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
+
+            $menuItems[] = [
+                'label' =>Yii::t('app', 'Additional') ,
+                'items' => [
+                    ['label' => Yii::t('app', 'Countries'), 'url' => ['/countries/index']],
+                    ['label' => Yii::t('app', 'Regions'), 'url' => ['/regions/index']],
+                    ['label' => Yii::t('app', 'Area'), 'url' => ['/area/index']],
+                   
+                ],
+            ];
+
+            $menuItems[] = [
+                'label' =>Yii::t('app', 'Additional') ,
+                'items' => [
+                    ['label' => Yii::t('app', 'Categorises'), 'url' => ['/categorises/index']],
+                    ['label' => Yii::t('app', 'Units'), 'url' => ['/units/index']],
+                    ['label' => Yii::t('app', 'Status'), 'url' => ['/status/index']],
+                 
+                ],
+            ];
+
+            $menuItems[] = [
+                'label' =>Yii::t('app', 'Additional') ,
+                'items' => [
+                    ['label' => Yii::t('app', 'Suppliers'), 'url' => ['/suppliers/index']],
+                    ['label' => Yii::t('app', 'Users'), 'url' => ['/users/index']],
+                 
+                ],
+            ];
+
+        } else {
+
+            $menuItems[] = '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    '( ' . Yii::t('app', 'Logout') . ' ' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
+                . '</li>';
+        }
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => $menuItems,
+        ]);
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-left'],
+            'items' => $menuItemsleft,
+        ]);
+        NavBar::end();
+        ?>
 
     <div class="container">
         <?= Breadcrumbs::widget([
