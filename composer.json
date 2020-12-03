@@ -22,7 +22,8 @@
         "kartik-v/yii2-widget-datepicker": "^1.4",
         "kartik-v/yii2-widget-select2": "^2.2",
         "wbraganca/yii2-dynamicform": "*",
-        "kartik-v/yii2-widget-fileinput": "^1.1"
+        "kartik-v/yii2-widget-fileinput": "^1.1",
+        "nesbot/carbon": "^2.42"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

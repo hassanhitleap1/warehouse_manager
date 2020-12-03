@@ -42,9 +42,10 @@ AppAsset::register($this);
 
         if (Yii::$app->user->isGuest) {
             $menuItemsleft[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
+       
 
             $menuItems[] = [
-                'label' =>Yii::t('app', 'Additional') ,
+                'label' =>Yii::t('app', 'Countries') ,
                 'items' => [
                     ['label' => Yii::t('app', 'Countries'), 'url' => ['/countries/index']],
                     ['label' => Yii::t('app', 'Regions'), 'url' => ['/regions/index']],
@@ -72,6 +73,8 @@ AppAsset::register($this);
                 ],
             ];
 
+            $menuItems[] = ['label' => Yii::t('app', 'products'), 'url' => ['/products/index']];
+            $menuItems[] = ['label' => Yii::t('app', 'orders'), 'url' => ['/orders/index']];
         } else {
 
             $menuItems[] = '<li>'

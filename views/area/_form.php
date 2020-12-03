@@ -1,5 +1,8 @@
 <?php
 
+use app\models\regions\Regions;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -16,11 +19,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name_en')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'region_id')->textInput() ?>
+    <?= $form->field($model, 'region_id')->widget(Select2::classname(), [
+                        'data' =>  ArrayHelper::map(Regions::find()->all(), 'id', 'name_ar'),
+                        'language' => 'ar',
+                        'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
+                       
+                    ]); ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

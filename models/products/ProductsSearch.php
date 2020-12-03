@@ -19,7 +19,7 @@ class ProductsSearch extends Products
         return [
             [['id', 'quantity', 'category_id', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
             [['name', 'thumbnail', 'created_at', 'updated_at'], 'safe'],
-            [['purchasing_price', 'selling price'], 'number'],
+            [['purchasing_price', 'selling_price'], 'number'],
         ];
     }
 
@@ -61,7 +61,7 @@ class ProductsSearch extends Products
         $query->andFilterWhere([
             'id' => $this->id,
             'purchasing_price' => $this->purchasing_price,
-            'selling price' => $this->selling price,
+            'selling_price' => $this->selling_price,
             'quantity' => $this->quantity,
             'category_id' => $this->category_id,
             'status' => $this->status,

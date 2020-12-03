@@ -11,7 +11,7 @@ use Yii;
  * @property string $name
  * @property string $thumbnail
  * @property float $purchasing_price
- * @property float $selling price
+ * @property float $selling_price
  * @property int $quantity
  * @property int $category_id
  * @property int $status
@@ -37,8 +37,8 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'thumbnail', 'purchasing_price', 'selling price', 'category_id', 'warehouse_id', 'created_at', 'updated_at'], 'required'],
-            [['purchasing_price', 'selling price'], 'number'],
+            [['name', 'thumbnail', 'purchasing_price', 'selling_price', 'category_id', 'warehouse_id', 'created_at', 'updated_at'], 'required'],
+            [['purchasing_price', 'selling_price'], 'number'],
             [['quantity', 'category_id', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'thumbnail'], 'string', 'max' => 255],
@@ -55,7 +55,7 @@ class Products extends \yii\db\ActiveRecord
             'name' => Yii::t('app', 'Name'),
             'thumbnail' => Yii::t('app', 'Thumbnail'),
             'purchasing_price' => Yii::t('app', 'Purchasing Price'),
-            'selling price' => Yii::t('app', 'Selling Price'),
+            'selling_price' => Yii::t('app', 'Selling Price'),
             'quantity' => Yii::t('app', 'Quantity'),
             'category_id' => Yii::t('app', 'Category ID'),
             'status' => Yii::t('app', 'Status'),

@@ -3,6 +3,7 @@
 namespace app\models\countries;
 
 use Yii;
+use Carbon\Carbon;
 
 /**
  * This is the model class for table "{{%countries}}".
@@ -33,7 +34,6 @@ class Countries extends \yii\db\ActiveRecord
     {
         return [
             [['name_en', 'name_ar'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
             [['country_code'], 'string', 'max' => 5],
             [['name_en', 'name_ar', 'nationality_en', 'nationality_ar'], 'string', 'max' => 255],
         ];
@@ -46,13 +46,13 @@ class Countries extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'country_code' => Yii::t('app', 'Country Code'),
-            'name_en' => Yii::t('app', 'Name En'),
-            'name_ar' => Yii::t('app', 'Name Ar'),
-            'nationality_en' => Yii::t('app', 'Nationality En'),
-            'nationality_ar' => Yii::t('app', 'Nationality Ar'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'country_code' => Yii::t('app', 'Country_Code'),
+            'name_en' => Yii::t('app', 'Name_En'),
+            'name_ar' => Yii::t('app', 'Name_Ar'),
+            'nationality_en' => Yii::t('app', 'Nationality_En'),
+            'nationality_ar' => Yii::t('app', 'Nationality_Ar'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
@@ -63,5 +63,28 @@ class Countries extends \yii\db\ActiveRecord
     public static function find()
     {
         return new CountriesQuery(get_called_class());
+    }
+
+     /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

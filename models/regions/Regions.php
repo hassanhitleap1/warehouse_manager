@@ -2,7 +2,9 @@
 
 namespace app\models\regions;
 
+use app\models\countries\Countries;
 use Yii;
+use Carbon\Carbon;
 
 /**
  * This is the model class for table "{{%regions}}".
@@ -46,12 +48,12 @@ class Regions extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name_en' => Yii::t('app', 'Name En'),
-            'name_ar' => Yii::t('app', 'Name Ar'),
-            'price_delivery' => Yii::t('app', 'Price Delivery'),
-            'country_id' => Yii::t('app', 'Country ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'name_en' => Yii::t('app', 'Name_En'),
+            'name_ar' => Yii::t('app', 'Name_Ar'),
+            'price_delivery' => Yii::t('app', 'Price_Delivery'),
+            'country_id' => Yii::t('app', 'Country'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
@@ -62,5 +64,35 @@ class Regions extends \yii\db\ActiveRecord
     public static function find()
     {
         return new RegionsQuery(get_called_class());
+    }
+
+
+         
+    public function getCountry()
+    {
+        return $this->hasOne(Countries::className(), ['id' => 'country_id']);
+    }
+
+       /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

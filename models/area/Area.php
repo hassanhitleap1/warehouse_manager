@@ -2,7 +2,9 @@
 
 namespace app\models\area;
 
+use app\models\regions\Regions;
 use Yii;
+use Carbon\Carbon;
 
 /**
  * This is the model class for table "area".
@@ -32,7 +34,6 @@ class Area extends \yii\db\ActiveRecord
         return [
             [['name_ar'], 'required'],
             [['region_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
             [['name_ar', 'name_en'], 'string', 'max' => 255],
         ];
     }
@@ -44,11 +45,11 @@ class Area extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name_ar' => Yii::t('app', 'Name Ar'),
-            'name_en' => Yii::t('app', 'Name En'),
-            'region_id' => Yii::t('app', 'Region ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'name_ar' => Yii::t('app', 'Name_Ar'),
+            'name_en' => Yii::t('app', 'Name_En'),
+            'region_id' => Yii::t('app', 'Region_ID'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
@@ -59,5 +60,35 @@ class Area extends \yii\db\ActiveRecord
     public static function find()
     {
         return new AreaQuery(get_called_class());
+    }
+
+
+     
+    public function getRegion()
+    {
+        return $this->hasOne(Regions::className(), ['id' => 'region_id']);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
