@@ -3,7 +3,7 @@
 namespace app\models\status;
 
 use Yii;
-
+use Carbon\Carbon;
 /**
  * This is the model class for table "{{%status}}".
  *
@@ -29,8 +29,7 @@ class Status extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name_en', 'name_ar', 'created_at', 'updated_at'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['name_en', 'name_ar'], 'required'],
             [['name_en', 'name_ar'], 'string', 'max' => 32],
         ];
     }
@@ -42,10 +41,10 @@ class Status extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name_en' => Yii::t('app', 'Name En'),
-            'name_ar' => Yii::t('app', 'Name Ar'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'name_en' => Yii::t('app', 'Name_En'),
+            'name_ar' => Yii::t('app', 'Name_Ar'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
@@ -56,5 +55,29 @@ class Status extends \yii\db\ActiveRecord
     public static function find()
     {
         return new StatusQuery(get_called_class());
+    }
+
+
+          /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

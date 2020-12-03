@@ -287,5 +287,12 @@ return [
     "Nationality_Ar"=>"الجنسية بالعربي",
     "Price_Delivery"=>"سعر توصيل",
     "Create_Region"=>"انشاء مقاطعة او محافظة",
+    "Create_Category"=>"انشاءالصنف",
+    "Categorises"=>"الاصناف",
+    "Units"=>"الوحدة",
+    "Create_Unit"=>"انشاء وحدة",
+    "Statuses"=>"الحالات",
+    "Create_Status"=>"انشاء حالة"
+
 
 ];
