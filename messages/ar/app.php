@@ -106,7 +106,10 @@ return [
     "Location"=>"العنوان",
     "Other_Phone"=>"هاتف اخر",
     "Create_User"=>"انشاء زبون",
-    "Address"=>"العنوان"
+    "Address"=>"العنوان",
+    "Additional"=>"الاضافات",
+    "Users"=>"المستخدمين",
+    "Products"=>"المنتجات",
 
 
 ];
