@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\products\ProductsSearch */
+/* @var $searchModel app\models\subproductcount\SubProductCountSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Products');
+$this->title = Yii::t('app', 'Sub Product Counts');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="Create_Product">
+<div class="sub-product-count-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create_Product'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Sub Product Count'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -27,17 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            // 'id',
-            'name',
-            'thumbnail',
-            'purchasing_price',
-            'selling_price',
-            'quantity',
-            'category_id',
-            'status',
-            'supplier_id',
-            'unit_id',
-            'warehouse_id',
+            'id',
+            'type',
+            'count',
+            'product_id',
             'created_at',
             //'updated_at',
 

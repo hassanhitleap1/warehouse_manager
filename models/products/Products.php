@@ -2,6 +2,7 @@
 
 namespace app\models\products;
 
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -37,7 +38,7 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'thumbnail', 'purchasing_price', 'selling_price', 'category_id', 'warehouse_id', 'created_at', 'updated_at'], 'required'],
+            [['name', 'thumbnail', 'purchasing_price', 'selling_price', 'category_id', 'warehouse_id'], 'required'],
             [['purchasing_price', 'selling_price'], 'number'],
             [['quantity', 'category_id', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
@@ -54,16 +55,16 @@ class Products extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'thumbnail' => Yii::t('app', 'Thumbnail'),
-            'purchasing_price' => Yii::t('app', 'Purchasing Price'),
-            'selling_price' => Yii::t('app', 'Selling Price'),
+            'purchasing_price' => Yii::t('app', 'Purchasing_Price'),
+            'selling_price' => Yii::t('app', 'Selling_Price'),
             'quantity' => Yii::t('app', 'Quantity'),
-            'category_id' => Yii::t('app', 'Category ID'),
+            'category_id' => Yii::t('app', 'Category'),
             'status' => Yii::t('app', 'Status'),
-            'supplier_id' => Yii::t('app', 'Supplier ID'),
-            'unit_id' => Yii::t('app', 'Unit ID'),
-            'warehouse_id' => Yii::t('app', 'Warehouse ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'supplier_id' => Yii::t('app', 'Supplier'),
+            'unit_id' => Yii::t('app', 'Unit'),
+            'warehouse_id' => Yii::t('app', 'Warehouse'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
@@ -74,5 +75,28 @@ class Products extends \yii\db\ActiveRecord
     public static function find()
     {
         return new ProductsQuery(get_called_class());
+    }
+
+       /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

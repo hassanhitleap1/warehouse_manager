@@ -110,6 +110,14 @@ return [
     "Additional"=>"الاضافات",
     "Users"=>"المستخدمين",
     "Products"=>"المنتجات",
+    "Create_Product"=>"انشاء منتج",
+    "thumbnail"=>"صورة",
+    "Purchasing_Price"=>"سعر الشراء",
+    "Selling_Price"=>"سعر البيع",
+    "Quantity"=>"العدد",
+    "Supplier"=>"المزود",
+    "Unit"=>"الوحدة",
+    
 
 
 ];
