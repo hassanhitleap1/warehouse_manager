@@ -71,12 +71,11 @@ if (!$model->isNewRecord) {
                         'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
                        
                     ]); ?>
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <?php include('sub_product_count.php') ?>
-                </div>
-
+                <?= $form->field($model, 'thumbnail')->widget(FileInput::classname(), [
+                'options' => ['accept' => 'image/*'],
+                'pluginOptions' => $dataThumbnail
+                    ]);
+                ?>
             </div>
             <div class="col-md-4">
                 <?= $form->field($model, 'quantity')->textInput() ?>
@@ -92,36 +91,28 @@ if (!$model->isNewRecord) {
                         'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
                        
                     ]); ?>
-            <?= $form->field($model, 'unit_id')->widget(Select2::classname(), [
+                <?= $form->field($model, 'unit_id')->widget(Select2::classname(), [
                         'data' =>  ArrayHelper::map(Units::find()->all(), 'id', 'name_en'),
                         'language' => 'ar',
                         'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
                        
                     ]); ?>    
+
+            <?= $form->field($model, 'images_product[]')->widget(FileInput::classname(), [
+                            'options' => ['accept' => 'image/*', 'multiple' => true],
+                            'pluginOptions' => $dataImages
+                        ]);
+            ?>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="row">
+                    <?php include('sub_product_count.php') ?>
+                </div>
+
             </div>
             
         </div>   
-
-    
-    <div class="row">
-        <div class="col-md-3">
-            <?= $form->field($model, 'thumbnail')->widget(FileInput::classname(), [
-                'options' => ['accept' => 'image/*'],
-                'pluginOptions' => $dataThumbnail
-            ]);
-            ?>
-        </div>
-        <div class="col-md-3">
-        
-        <?= $form->field($model, 'images_product[]')->widget(FileInput::classname(), [
-                'options' => ['accept' => 'image/*', 'multiple' => true],
-                'pluginOptions' => $dataImages
-            ]);
-            ?>
-      
-        </div>
-    </div>   
-
 
    
     <div class="form-group">
