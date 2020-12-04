@@ -22,19 +22,19 @@ use yii\bootstrap\Html;
             ],
         ]); ?>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa fa-envelope"></i> 
-                <div class="clearfix"></div>
-            </div>
-            <div class="panel-body container-items">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-envelope"></i> Address Book
+            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i> Add address</button>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body container-items"><!-- widgetContainer -->
                 <!-- widgetContainer -->
                 <?php foreach ($subProductCounts as $index => $subProductCount) : ?>
                     <div class="item panel panel-default">
                         <!-- widgetBody -->
                         <div class="panel-heading">
                             <span class="panel-title-address">  : <?= ($index + 1) ?></span>
-                            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></button>
                             <button type="button" class="pull-right remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
                             <div class="clearfix"></div>
                         </div>
@@ -74,20 +74,18 @@ use yii\bootstrap\Html;
 </div>
 
 <?php
+
 $js = '
-
-
-
-jQuery(".dynamicform_wrapper_courses").on("afterInsert", function(e, item) {
-jQuery(".dynamicform_wrapper_courses .panel-title-address").each(function(index) {
-jQuery(this).html("' . Yii::t('app', 'Courses') . ': " + (index + 1))
-});
+jQuery(".dynamicform_wrapper").on("afterInsert", function(e, item) {
+    jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
+        jQuery(this).html("Address: " + (index + 1))
+    });
 });
 
-jQuery(".dynamicform_wrapper_courses").on("afterDelete", function(e) {
-jQuery(".dynamicform_wrapper_courses .panel-title-address").each(function(index) {
-jQuery(this).html("' . Yii::t('app', 'Courses') . ': " + (index - 1))
-});
+jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
+    jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
+        jQuery(this).html("Address: " + (index + 1))
+    });
 });
 ';
 

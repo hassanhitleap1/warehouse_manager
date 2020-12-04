@@ -59,8 +59,7 @@ if (!$model->isNewRecord) {
 ?>
 
 <div class="container">
-
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'dynamic-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
         <div class="row">
             <div class="col-md-4">
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
