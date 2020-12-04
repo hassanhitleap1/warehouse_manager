@@ -117,7 +117,8 @@ return [
     "Quantity"=>"العدد",
     "Supplier"=>"المزود",
     "Unit"=>"الوحدة",
-    
-
+    "Images_Product"=>"صور اضافية للمنتج",
+    "Type"=>"نوع",
+    "Count"=>"العدد",
 
 ];

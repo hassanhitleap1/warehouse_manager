@@ -32,7 +32,6 @@ class SubProductCount extends \yii\db\ActiveRecord
         return [
             [['type', 'count', 'product_id'], 'required'],
             [['count', 'product_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
             [['type'], 'string', 'max' => 255],
         ];
     }
@@ -46,9 +45,9 @@ class SubProductCount extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'type' => Yii::t('app', 'Type'),
             'count' => Yii::t('app', 'Count'),
-            'product_id' => Yii::t('app', 'Product ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'product_id' => Yii::t('app', 'Product'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 

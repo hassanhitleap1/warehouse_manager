@@ -24,6 +24,8 @@ use Yii;
  */
 class Products extends \yii\db\ActiveRecord
 {
+
+    public $images_product;
     /**
      * {@inheritdoc}
      */
@@ -65,6 +67,7 @@ class Products extends \yii\db\ActiveRecord
             'warehouse_id' => Yii::t('app', 'Warehouse'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
+            "images_product"=>Yii::t('app', 'Images_Product'),
         ];
     }
 

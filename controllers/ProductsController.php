@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\Model;
 use Yii;
 use app\models\products\Products;
 use app\models\products\ProductsSearch;
+use app\models\subproductcount\SubProductCount;
+use Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,10 +68,50 @@ class ProductsController extends Controller
     public function actionCreate()
     {
         $model = new Products();
+        $subProductCounts = [new SubProductCount()];
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $modelsAddress = Model::createMultiple(SubProductCount::classname());
+            Model::loadMultiple($modelsAddress, Yii::$app->request->post());
+
+             // validate all models
+             $valid = $model->validate();
+             $valid = Model::validateMultiple($subProductCounts) && $valid;
+             if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+
+                try {
+                    if ($flag = $model->save(false)) {
+                        foreach ($subProductCounts as $subProductCount) {
+                            $subProductCount->product_id = $model->id;
+                            if (! ($flag = $subProductCount->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
         }
+
+        
+        return $this->render('create', [
+            'model' => $model,
+            'subProductCounts' => (empty($subProductCounts)) ? [new SubProductCount] : $subProductCounts
+        ]);
+
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //     return $this->redirect(['view', 'id' => $model->id]);
+        // }
 
         return $this->render('create', [
             'model' => $model,
