@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Users'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create_User'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -27,19 +27,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'username',
+          
             'phone',
             'other_phone',
-            'auth_key',
-            //'password_hash',
-            //'password_reset_token',
-            //'email:email',
+            'email:email',
             //'status',
-            //'country_id',
-            //'region_id',
-            //'area_id',
-            //'address',
+            [
+                'attribute'=>"country_id",
+                'value'=>'country.name_ar'
+            ],
+
+            [
+                'attribute'=>"region_id",
+                'value'=>'region.name_ar'
+            ],
+            [
+                'attribute'=>"area_id",
+                'value'=>'area.name_ar'
+            ],
+            'address',
             //'created_at',
             //'updated_at',
 

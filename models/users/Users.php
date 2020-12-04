@@ -2,6 +2,10 @@
 
 namespace app\models\users;
 
+use app\models\area\Area;
+use app\models\countries\Countries;
+use app\models\regions\Regions;
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -39,13 +43,11 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['phone', 'auth_key', 'password_hash', 'created_at', 'updated_at'], 'required'],
-            [['status', 'country_id', 'region_id', 'area_id', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
+            [['phone'], 'required'],
+            [['status', 'country_id', 'region_id', 'area_id'], 'integer'],
+            [['username', 'email'], 'string', 'max' => 255],
             [['phone', 'other_phone', 'auth_key'], 'string', 'max' => 32],
             [['address'], 'string', 'max' => 250],
-            [['username'], 'unique'],
-            [['password_reset_token'], 'unique'],
             [['email'], 'unique'],
         ];
     }
@@ -57,20 +59,16 @@ class Users extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'username' => Yii::t('app', 'Username'),
             'phone' => Yii::t('app', 'Phone'),
-            'other_phone' => Yii::t('app', 'Other Phone'),
-            'auth_key' => Yii::t('app', 'Auth Key'),
-            'password_hash' => Yii::t('app', 'Password Hash'),
-            'password_reset_token' => Yii::t('app', 'Password Reset Token'),
+            'other_phone' => Yii::t('app', 'Other_Phone'),
             'email' => Yii::t('app', 'Email'),
             'status' => Yii::t('app', 'Status'),
-            'country_id' => Yii::t('app', 'Country ID'),
-            'region_id' => Yii::t('app', 'Region ID'),
-            'area_id' => Yii::t('app', 'Area ID'),
+            'country_id' => Yii::t('app', 'Country'),
+            'region_id' => Yii::t('app', 'Region'),
+            'area_id' => Yii::t('app', 'Area'),
             'address' => Yii::t('app', 'Address'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
@@ -81,5 +79,29 @@ class Users extends \yii\db\ActiveRecord
     public static function find()
     {
         return new UserQuery(get_called_class());
+    }
+
+
+    
+       /**
+     * @inheritdoc
+     */
+
+
+
+
+    public function getCountry()
+    {
+        return $this->hasOne(Countries::className(), ['id' => 'country_id']);
+    }
+
+    public function getRegion()
+    {
+        return $this->hasOne(Regions::className(), ['id' => 'region_id']);
+    }
+
+    public function getArea()
+    {
+        return $this->hasOne(Area::className(), ['id' => 'area_id']);
     }
 }
