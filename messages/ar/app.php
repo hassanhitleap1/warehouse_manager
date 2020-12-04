@@ -292,7 +292,17 @@ return [
     "Units"=>"الوحدة",
     "Create_Unit"=>"انشاء وحدة",
     "Statuses"=>"الحالات",
-    "Create_Status"=>"انشاء حالة"
+    "Create_Status"=>"انشاء حالة",
+    "Warehouse"=>"المستودع",
+    "Localtion"=>"العنوان",
+    "Create_Warehouse"=>"انشاء مستودع",
+    "Warehouses"=>"المستودعات",
+    "Suppliers"=>"المزودين",
+    "Create_Supplier"=>"انشاء مزود" ,
+    "Site"=>"الموقع الاليكتروني",
+    "Location"=>"العنوان",
+    "Other_Phone"=>"هاتف اخر",
+    
 
 
 ];

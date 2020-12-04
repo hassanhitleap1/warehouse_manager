@@ -60,12 +60,13 @@ AppAsset::register($this);
                     ['label' => Yii::t('app', 'Categorises'), 'url' => ['/categorises/index']],
                     ['label' => Yii::t('app', 'Units'), 'url' => ['/units/index']],
                     ['label' => Yii::t('app', 'Status'), 'url' => ['/status/index']],
+                    ['label' => Yii::t('app', 'Warehouse'), 'url' => ['/warehouse/index']],
                  
                 ],
             ];
 
             $menuItems[] = [
-                'label' =>Yii::t('app', 'Additional') ,
+                'label' =>Yii::t('app', 'Users') ,
                 'items' => [
                     ['label' => Yii::t('app', 'Suppliers'), 'url' => ['/suppliers/index']],
                     ['label' => Yii::t('app', 'Users'), 'url' => ['/users/index']],

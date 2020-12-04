@@ -2,6 +2,7 @@
 
 namespace app\models\warehouse;
 
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -29,8 +30,8 @@ class Warehouse extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'localtion', 'created_at', 'updated_at'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['name', 'localtion'], 'required'],
+        
             [['name', 'localtion'], 'string', 'max' => 32],
         ];
     }
@@ -44,8 +45,8 @@ class Warehouse extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'localtion' => Yii::t('app', 'Localtion'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
@@ -56,5 +57,29 @@ class Warehouse extends \yii\db\ActiveRecord
     public static function find()
     {
         return new WarehouseQuery(get_called_class());
+    }
+
+
+              /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
