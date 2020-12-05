@@ -2,6 +2,9 @@
 
 namespace app\models\orders;
 
+use app\models\area\Area;
+use app\models\regions\Regions;
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -22,6 +25,10 @@ use Yii;
  */
 class Orders extends \yii\db\ActiveRecord
 {
+    public $phone;
+    public $name;
+    public $other_phone;
+    public $address;
     /**
      * {@inheritdoc}
      */
@@ -36,9 +43,9 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'status_id', 'created_at', 'updated_at'], 'required'],
+            [['order_id', 'status_id','phone','other_phone','address'], 'required'],
             [['user_id', 'country_id', 'region_id', 'area_id', 'status_id'], 'integer'],
-            [['delivery_date', 'delivery_time', 'created_at', 'updated_at'], 'safe'],
+            [['delivery_date', 'delivery_time'], 'safe'],
             [['order_id'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 250],
         ];
@@ -51,17 +58,21 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'order_id' => Yii::t('app', 'Order ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'delivery_date' => Yii::t('app', 'Delivery Date'),
-            'delivery_time' => Yii::t('app', 'Delivery Time'),
-            'country_id' => Yii::t('app', 'Country ID'),
-            'region_id' => Yii::t('app', 'Region ID'),
-            'area_id' => Yii::t('app', 'Area ID'),
+            'order_id' => Yii::t('app', 'Order_Id'),
+            'user_id' => Yii::t('app', 'Name'),
+            'delivery_date' => Yii::t('app', 'Delivery_Date'),
+            'delivery_time' => Yii::t('app', 'Delivery_Time'),
+            'country_id' => Yii::t('app', 'Country'),
+            'region_id' => Yii::t('app', 'Region'),
+            'area_id' => Yii::t('app', 'Area'),
             'address' => Yii::t('app', 'Address'),
-            'status_id' => Yii::t('app', 'Status ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'status_id' => Yii::t('app', 'Status'),
+            'phone' => Yii::t('app', 'Phone'),
+            'other_phone' => Yii::t('app', 'Other_Phone'),
+            'address'=> Yii::t('app', 'Address'),
+            'name' => Yii::t('app', 'Name'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
@@ -73,4 +84,51 @@ class Orders extends \yii\db\ActiveRecord
     {
         return new OrdersQuery(get_called_class());
     }
+
+
+     /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+    public function getArea()
+    {
+        return $this->hasOne(Area::className(), ['id' => 'area_id']);
+    }
+
+    public function getCountry()
+    {
+        return $this->hasOne(Regions::className(), ['id' => 'country_id']);
+    }
+
+
+    public function getRegion()
+    {
+        return $this->hasOne(Regions::className(), ['id' => 'region_id']);
+    }
+
+
+
+
 }

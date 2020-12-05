@@ -120,5 +120,9 @@ return [
     "Images_Product"=>"صور اضافية للمنتج",
     "Type"=>"نوع",
     "Count"=>"العدد",
+    "Orders"=>"الطلبات",
+    "Order_Id"=>"رقم الطلب",
+    "Delivery_Date"=>"تاريخ التسليم",
+    "Delivery_Time"=>"وقت التسليم"
 
 ];
