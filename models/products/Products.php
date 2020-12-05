@@ -25,6 +25,7 @@ use Yii;
 class Products extends \yii\db\ActiveRecord
 {
 
+    public $file;
     public $images_product;
     /**
      * {@inheritdoc}
@@ -40,10 +41,9 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'thumbnail', 'purchasing_price', 'selling_price', 'category_id', 'warehouse_id'], 'required'],
+            [['name', 'purchasing_price', 'selling_price', 'category_id', 'warehouse_id'], 'required'],
             [['purchasing_price', 'selling_price'], 'number'],
             [['quantity', 'category_id', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
             [['name', 'thumbnail'], 'string', 'max' => 255],
         ];
     }

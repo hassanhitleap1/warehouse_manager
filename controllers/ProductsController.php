@@ -1,16 +1,18 @@
 <?php
 
 namespace app\controllers;
-
 use app\models\Model;
 use Yii;
 use app\models\products\Products;
 use app\models\products\ProductsSearch;
+use app\models\productsimage\ProductsImage;
 use app\models\subproductcount\SubProductCount;
 use Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\FileHelper;
+use yii\web\UploadedFile;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -69,13 +71,14 @@ class ProductsController extends Controller
     {
         $model = new Products();
         $subProductCounts = [new SubProductCount()];
-
+        $newId = Products::find()->max('id') + 1;
+       
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $modelsAddress = Model::createMultiple(SubProductCount::classname());
-            Model::loadMultiple($modelsAddress, Yii::$app->request->post());
-
+            $subProductCounts = Model::createMultiple(SubProductCount::classname());
+            Model::loadMultiple($subProductCounts, Yii::$app->request->post());
+        
              // validate all models
              $valid = $model->validate();
              $valid = Model::validateMultiple($subProductCounts) && $valid;
@@ -83,6 +86,37 @@ class ProductsController extends Controller
                 $transaction = \Yii::$app->db->beginTransaction();
 
                 try {
+                   
+
+                    $file = UploadedFile::getInstance($model, 'thumbnail');
+                    $images_product = UploadedFile::getInstances($model, 'images_product');
+                    if (!is_null($file)) {
+                        $folder_path = "products/$newId";
+                        FileHelper::createDirectory($folder_path, $mode = 0775, $recursive = true);
+                        $thumbnail_path = "$folder_path/index" . "." . $file->extension;
+                        $model->thumbnail= $thumbnail_path;
+                        $file->saveAs($thumbnail_path);
+                        $model->thumbnail = $thumbnail_path;
+                    }
+
+
+                    if (!is_null($images_product)) {
+
+                        $folder_path = "products/$newId";
+                        
+                        FileHelper::createDirectory("$folder_path/images",
+                             $mode = 0775, $recursive = true);
+                        foreach ($images_product as $key => $image_product) {
+                            $modelImagesProduct = new  ProductsImage();
+                            $file_path = "$folder_path/images/$key" . "." . $image_product->extension;
+                            $modelImagesProduct->product_id = $newId;
+                            $modelImagesProduct->path = $file_path;
+                            $image_product->saveAs($file_path);
+                            $modelImagesProduct->save(false);
+                
+                        }
+                    }
+
                     if ($flag = $model->save(false)) {
                         foreach ($subProductCounts as $subProductCount) {
                             $subProductCount->product_id = $model->id;
@@ -94,6 +128,9 @@ class ProductsController extends Controller
                     }
 
                     if ($flag) {
+                     
+            
+
                         $transaction->commit();
                         return $this->redirect(['view', 'id' => $model->id]);
                     }
@@ -103,19 +140,14 @@ class ProductsController extends Controller
             }
         }
 
+
         
         return $this->render('create', [
             'model' => $model,
             'subProductCounts' => (empty($subProductCounts)) ? [new SubProductCount] : $subProductCounts
         ]);
 
-        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        //     return $this->redirect(['view', 'id' => $model->id]);
-        // }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+   
     }
 
     /**

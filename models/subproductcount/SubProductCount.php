@@ -30,7 +30,7 @@ class SubProductCount extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'count', 'product_id'], 'required'],
+            [['type', 'count'], 'required'],
             [['count', 'product_id'], 'integer'],
             [['type'], 'string', 'max' => 255],
         ];

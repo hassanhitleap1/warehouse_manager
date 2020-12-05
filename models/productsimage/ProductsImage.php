@@ -2,6 +2,7 @@
 
 namespace app\models\productsimage;
 
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -29,9 +30,8 @@ class ProductsImage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'path', 'created_at', 'updated_at'], 'required'],
+            [['product_id', 'path'], 'required'],
             [['product_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
             [['path'], 'string', 'max' => 255],
         ];
     }
@@ -48,6 +48,29 @@ class ProductsImage extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+        /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -80,7 +80,7 @@ if (!$model->isNewRecord) {
             <div class="col-md-4">
                 <?= $form->field($model, 'quantity')->textInput() ?>
                 <?= $form->field($model, 'warehouse_id')->widget(Select2::classname(), [
-                        'data' =>  ArrayHelper::map(Warehouse::find()->all(), 'id', 'name_en'),
+                        'data' =>  ArrayHelper::map(Warehouse::find()->all(), 'id', 'name'),
                         'language' => 'ar',
                         'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
                        
