@@ -33,11 +33,32 @@ $this->params['breadcrumbs'][] = $this->title;
             'purchasing_price',
             'selling_price',
             'quantity',
-            'category_id',
-            'status',
-            'supplier_id',
-            'unit_id',
-            'warehouse_id',
+            [
+                'attribute' => 'category_id',
+                'value' => 'category.name_ar',
+
+            ],
+           
+            // 'status',
+            [
+                'attribute' => 'supplier_id',
+                'value' => 'supplier.name_ar',
+
+            ],
+           
+            [
+                'attribute' => 'unit_id',
+                'value' => 'unit.name_ar',
+
+            ],
+           
+            [
+                'attribute' => 'warehouse_id',
+                'value' => 'warehouse.name',
+
+            ],
+          
+           
             'created_at',
             //'updated_at',
 

@@ -11,6 +11,7 @@ use Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 
@@ -160,13 +161,85 @@ class ProductsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $newId=$id;
+        
+        $modelSubProductCount = $model->subProductCount;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $oldIDs = ArrayHelper::map($modelSubProductCount, 'id', 'id');
+            $modelSubProductCount = Model::createMultiple(SubProductCount::classname(), $modelSubProductCount);
+            Model::loadMultiple($modelSubProductCount, Yii::$app->request->post());
+
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelSubProductCount, 'id', 'id')));
+            // validate all models
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($modelSubProductCount) && $valid;
+
+            if ($valid) {
+               $transaction = \Yii::$app->db->beginTransaction();
+
+               try {
+                  
+
+                   $file = UploadedFile::getInstance($model, 'thumbnail');
+                   $images_product = UploadedFile::getInstances($model, 'images_product');
+                   if (!is_null($file)) {
+                       $folder_path = "products/$newId";
+                       FileHelper::createDirectory($folder_path, $mode = 0775, $recursive = true);
+                       $thumbnail_path = "$folder_path/index" . "." . $file->extension;
+                       $model->thumbnail= $thumbnail_path;
+                       $file->saveAs($thumbnail_path);
+                       $model->thumbnail = $thumbnail_path;
+                   }
+
+
+                   if (!is_null($images_product)) {
+
+                       $folder_path = "products/$newId";
+                       
+                       FileHelper::createDirectory("$folder_path/images",
+                            $mode = 0775, $recursive = true);
+                       foreach ($images_product as $key => $image_product) {
+                           $modelImagesProduct = new  ProductsImage();
+                           $file_path = "$folder_path/images/$key" . "." . $image_product->extension;
+                           $modelImagesProduct->product_id = $newId;
+                           $modelImagesProduct->path = $file_path;
+                           $image_product->saveAs($file_path);
+                           $modelImagesProduct->save(false);
+               
+                       }
+                   }
+
+                   if ($flag = $model->save(false)) {
+                       foreach ($modelSubProductCount as $subProductCount) {
+                           $subProductCount->product_id = $model->id;
+                           if (! ($flag = $subProductCount->save(false))) {
+                               $transaction->rollBack();
+                               break;
+                           }
+                       }
+                   }
+
+                   if ($flag) {
+                    
+           
+
+                       $transaction->commit();
+                       return $this->redirect(['view', 'id' => $model->id]);
+                   }
+               } catch (Exception $e) {
+                   $transaction->rollBack();
+               }
+           }
+
+
         }
+
+   
 
         return $this->render('update', [
             'model' => $model,
+            'subProductCounts' => (empty($modelSubProductCount)) ? [new SubProductCount] : $modelSubProductCount
         ]);
     }
 

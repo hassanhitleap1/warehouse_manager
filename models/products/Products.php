@@ -2,6 +2,11 @@
 
 namespace app\models\products;
 
+use app\models\categorises\Categorises;
+use app\models\productsimage\ProductsImage;
+use app\models\subproductcount\SubProductCount;
+use app\models\suppliers\Suppliers;
+use app\models\warehouse\Warehouse;
 use Carbon\Carbon;
 use Yii;
 
@@ -71,6 +76,23 @@ class Products extends \yii\db\ActiveRecord
         ];
     }
 
+      /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSubProductCount()
+    {
+        return $this->hasMany(SubProductCount::className(), ['product_id' => 'id']);
+    }
+
+      /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImagesProduct()
+    {
+        return $this->hasMany(ProductsImage::className(), ['product_id' => 'id']);
+    }
+
+    
     /**
      * {@inheritdoc}
      * @return ProductsQuery the active query used by this AR class.
@@ -102,4 +124,28 @@ class Products extends \yii\db\ActiveRecord
             return false;
         }
     }
+
+
+    public function getCategory()
+    {
+        return $this->hasOne(Categorises::className(), ['id' => 'category_id']);
+    } 
+
+
+    public function getWarehouse()
+    {
+        return $this->hasOne(Warehouse::className(), ['id' => 'warehouse_id']);
+    } 
+
+
+    public function getSupplier()
+    {
+        return $this->hasOne(Suppliers::className(), ['id' => 'supplier_id']);
+    } 
+
+
+    public function getUnit()
+    {
+        return $this->hasOne(Categorises::className(), ['id' => 'unit_id']);
+    } 
 }
