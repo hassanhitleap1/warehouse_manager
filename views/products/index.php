@@ -67,7 +67,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ],
           
-           
+            [
+                'attribute'=>'quantity',
+                'value' => function ($searchModel) {
+                    $str="العدد الكلي " . $searchModel->quantity;  
+                    foreach($searchModel->subProductCount as $subProductCount){
+                        $str.="<br />".$subProductCount->type ." ".$subProductCount->count ;
+                        
+                    }
+                
+                    return  $str;
+    
+                },
+                'format' => 'html',
+            ],
             'created_at',
             //'updated_at',
 
