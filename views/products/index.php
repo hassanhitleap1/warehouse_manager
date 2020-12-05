@@ -29,7 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // 'id',
             'name',
-            'thumbnail',
+            
+            [
+                'attribute'=>'thumbnail',
+                'value' => function ($searchModel) {
+
+                    return Html::img($searchModel->thumbnail,['width'=>'100','height'=>'100']);
+    
+                },
+                'format' => 'html',
+            ],
             'purchasing_price',
             'selling_price',
             'quantity',

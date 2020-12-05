@@ -29,17 +29,41 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            // 'id',
             'name',
-            'thumbnail',
+           
+            [
+                'attribute'=>'thumbnail',
+                'value'=> Yii::getAlias('@web') . '/' .$model->thumbnail,
+                'format' => ['image',['width'=>'100','height'=>'100']],
+            ],
             'purchasing_price',
             'selling_price',
             'quantity',
-            'category_id',
-            'status',
-            'supplier_id',
-            'unit_id',
-            'warehouse_id',
+            
+            [
+                'format' => 'raw',
+                'attribute' => 'category_id',
+                'value' =>  $model->category->name_ar,
+
+            ],
+
+            [
+                'format' => 'raw',
+                'attribute' => 'supplier_id',
+                'value' =>  $model->supplier->name,
+
+            ],
+            [
+                'format' => 'raw',
+                'attribute' => 'unit_id',
+                'value' =>  $model->unit->name_ar, 
+            ],
+            [
+                'format' => 'raw',
+                'attribute' => 'warehouse_id',
+                'value' =>  $model->warehouse->name,
+            ],
             'created_at',
             'updated_at',
         ],
