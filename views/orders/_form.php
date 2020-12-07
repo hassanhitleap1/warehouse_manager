@@ -19,7 +19,7 @@ use kartik\time\TimePicker;
 
 <div class="container">
 
-    <?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(['id' => 'dynamic-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="row">
         <div class="col-md-4">
              <?= $form->field($model, 'order_id')->textInput(['maxlength' => true]) ?>
@@ -82,7 +82,9 @@ use kartik\time\TimePicker;
 
         </div>
         <div class="col-md-4">
-                
+            <div class="row">
+                    <?php include('order_items.php') ?>
+                </div>
         </div>
     </div>
 

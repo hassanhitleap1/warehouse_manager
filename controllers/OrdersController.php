@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\Model;
 use Yii;
 use app\models\orders\Orders;
 use app\models\orders\OrdersSearch;
+use app\models\ordersitem\OrdersItem;
+use Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,14 +68,51 @@ class OrdersController extends Controller
     public function actionCreate()
     {
         $model = new Orders();
+        $ordersItem = [new OrdersItem()];
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $ordersItem = Model::createMultiple(OrdersItem::classname());
+            Model::loadMultiple($ordersItem, Yii::$app->request->post());
+        
+             // validate all models
+             $valid = $model->validate();
+             $valid = Model::validateMultiple($ordersItem) && $valid;
+             if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+
+                try {
+                                  
+                    if ($flag = $model->save(false)) {
+                        foreach ($ordersItem as $orderItem) {
+                            $orderItem->order_id = $model->id;
+                            if (! ($flag = $orderItem->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($flag) {
+                     
+
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
         }
 
+
+        
         return $this->render('create', [
             'model' => $model,
+            'ordersItem' => (empty($ordersItem)) ? [new OrdersItem()] : $ordersItem
         ]);
+
+
     }
 
     /**

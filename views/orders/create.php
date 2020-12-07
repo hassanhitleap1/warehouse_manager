@@ -1,11 +1,12 @@
 <?php
 
+use app\models\ordersitem\OrdersItem;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\orders\Orders */
 
-$this->title = Yii::t('app', 'Create Orders');
+$this->title = Yii::t('app', 'Create_Orders');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'ordersItem' => (empty($ordersItem)) ? [new OrdersItem()] : $ordersItem
     ]) ?>
 
 </div>
