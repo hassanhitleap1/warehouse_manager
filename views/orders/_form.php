@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
+use kartik\time\TimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\orders\Orders */
@@ -49,7 +50,7 @@ use kartik\date\DatePicker;
 
 
             
-            <?= $form->field($model, 'delivery_time')->widget(TimePic::classname(), []);?>
+            <?= $form->field($model, 'delivery_time')->widget(TimePicker::classname(), []);?>
         
             
              <?= $form->field($model, 'country_id')->widget(Select2::classname(), [
@@ -81,6 +82,7 @@ use kartik\date\DatePicker;
 
         </div>
         <div class="col-md-4">
+                
         </div>
     </div>
 
