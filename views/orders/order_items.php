@@ -84,12 +84,42 @@ use yii\helpers\ArrayHelper;
     </div>
 </div>
 
-<?php
 
-$js = '
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script  type="text/javascript">
+
 jQuery(".dynamicform_wrapper").on("afterInsert", function(e, item) {
     jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
         jQuery(this).html("Address: " + (index + 1))
+           
+
+        // "kartik-v/yii2-widget-select2"
+var $hasSelect2 = $(widgetOptionsRoot.widgetItem).find('[data-krajee-select2]');
+
+if ($hasSelect2.length > 0) {
+    $hasSelect2.each(function() {
+        var id = $(this).attr('id');
+        var configSelect2 = eval($(this).attr('data-krajee-select2'));
+        $(this).select2('destroy');
+        $.when($('#' + id).select2(configSelect2)).done(initS2Loading(id));
+        $('#' + id).on('select2-open', function() {
+            initS2Open(id)
+        });
+        if ($(this).attr('data-krajee-depdrop')) {
+            $(this).on('depdrop.beforeChange', function(e,i,v) {
+                var configDepdrop = eval($(this).attr('data-krajee-depdrop'));
+                var loadingText = (configDepdrop.loadingText)? configDepdrop.loadingText : 'Loading ...';
+                $('#' + id).select2('data', {text: loadingText});
+            });
+            $(this).on('depdrop.change', function(e,i,v,c) {
+                $('#' + id).select2('val', $('#' + id).val());
+            });
+        }
+    });
+}
+
+    
+
     });
 });
 
@@ -98,7 +128,4 @@ jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
         jQuery(this).html("Address: " + (index + 1))
     });
 });
-';
-
-$this->registerJs($js);
-?>
+</script>
