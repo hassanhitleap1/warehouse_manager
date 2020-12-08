@@ -126,13 +126,56 @@ class OrdersController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        $orderItems = $model->orderItems;
+        
+        if ($model->load(Yii::$app->request->post())) {
+            $oldIDs = ArrayHelper::map($orderItems, 'id', 'id');
+             $orderItems = Model::createMultiple(OrderItems::classname(), $orderItems);
+            Model::loadMultiple($orderItems, Yii::$app->request->post());
+             $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($orderItems, 'id', 'id')));
+            // validate all models
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($orderItems) && $valid;
+            
+            
+            
+            
+             if ($valid) {
+               $transaction = \Yii::$app->db->beginTransaction();
 
+               try {
+
+                   if ($flag = $model->save(false)) {
+                       foreach ($orderItems as $orderItem) {
+                           $orderItem->order_id = $model->id;
+                           if (! ($flag = $subProductCount->save(false))) {
+                               $transaction->rollBack();
+                               break;
+                           }
+                       }
+                   }
+
+                   if ($flag) {
+                    
+           
+
+                       $transaction->commit();
+                       return $this->redirect(['view', 'id' => $model->id]);
+                   }
+               } catch (Exception $e) {
+                   $transaction->rollBack();
+               }
+           }
+            
+
+        }
+        
+        
         return $this->render('update', [
             'model' => $model,
+            'orderItems' => (empty($orderItems)) ? [new OrderItems] : $orderItems
         ]);
+    
     }
 
     /**
