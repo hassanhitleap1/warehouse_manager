@@ -88,10 +88,13 @@ use yii\helpers\ArrayHelper;
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script  type="text/javascript">
 
+$(".add-item").on("click", function(e) {
+    reload_js_select2();
+});
+
 jQuery(".dynamicform_wrapper").on("afterInsert", function(e, item) {
     jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
         jQuery(this).html("Address: " + (index + 1))
-        
     });
 });
 
@@ -100,4 +103,6 @@ jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
         jQuery(this).html("Address: " + (index + 1))
     });
 });
+
+
 </script>
