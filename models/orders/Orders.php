@@ -5,6 +5,7 @@ namespace app\models\orders;
 use app\models\area\Area;
 use app\models\regions\Regions;
 use Carbon\Carbon;
+use app\models\ordersitem\OrdersItem;
 use Yii;
 
 /**
@@ -86,6 +87,15 @@ class Orders extends \yii\db\ActiveRecord
     }
 
 
+    
+        /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrderItems()
+    {
+        return $this->hasMany(OrdersItem::className(), ['order_id' => 'id']);
+    }
+    
      /**
      * @inheritdoc
      */
