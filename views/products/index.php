@@ -3,6 +3,14 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use app\models\categorises\Categorises;
+use app\models\suppliers\Suppliers;
+use app\models\units\Units;
+use app\models\warehouse\Warehouse;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
+
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\products\ProductsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -45,6 +53,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'category_id',
                 'value' => 'category.name_ar',
+                'filter' =>Select2::widget([
+                    'name' => 'category_id',
+                    "value"=>(isset($_GET['category_id']))?$_GET['category_id']:null,
+                    'data' => ArrayHelper::map(Categorises::find()->all(), 'id', 'name_ar'),
+                    'options' => [
+                        'placeholder' => 'Select  ...',
+                        'multiple' => false
+                    ],
+                ]),
+
+                'format' => 'html',
 
             ],
            
@@ -52,18 +71,55 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'supplier_id',
                 'value' => 'supplier.name_ar',
+                    'filter' =>Select2::widget([
+                    'name' => 'supplier_id',
+                    "value"=>(isset($_GET['supplier_id']))?$_GET['supplier_id']:null,
+                    'data' => ArrayHelper::map(Suppliers::find()->all(), 'id', 'name'),
+                    'options' => [
+                        'placeholder' => 'Select  ...',
+                        'multiple' => false
+                    ],
+                ]),
+
+                'format' => 'html',
+                
 
             ],
            
             [
                 'attribute' => 'unit_id',
                 'value' => 'unit.name_ar',
+                
+                 'filter' =>Select2::widget([
+                    'name' => 'unit_id',
+                    "value"=>(isset($_GET['unit_id']))?$_GET['unit_id']:null,
+                    'data' => ArrayHelper::map(Units::find()->all(), 'id', 'name_ar'),
+                    'options' => [
+                        'placeholder' => 'Select  ...',
+                        'multiple' => false
+                    ],
+                ]),
+
+                'format' => 'html',
+                
 
             ],
            
             [
                 'attribute' => 'warehouse_id',
                 'value' => 'warehouse.name',
+                'filter' =>Select2::widget([
+                    'name' => 'warehouse_id',
+                    "value"=>(isset($_GET['warehouse_id']))?$_GET['warehouse_id']:null,
+                    'data' => ArrayHelper::map(Warehouse::find()->all(), 'id', 'name'),
+                    'options' => [
+                        'placeholder' => 'Select  ...',
+                        'multiple' => false
+                    ],
+                ]),
+
+                'format' => 'html',
+                
 
             ],
           

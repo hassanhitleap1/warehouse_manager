@@ -2,6 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker
+use kartikorm\ActiveForm
+    
+    
+    
 
 /* @var $this yii\web\View */
 /* @var $model app\models\orders\OrdersSearch */
@@ -17,16 +22,30 @@ use yii\widgets\ActiveForm;
             'data-pjax' => 1
         ],
     ]); ?>
+    
+    <?=  DatePicker::widget([
+    'model' => $model,
+    'attribute' => 'delivery_date',
+    'attribute2' => 'delivery_date',
+    'options' => ['placeholder' => 'Start date'],
+    'options2' => ['placeholder' => 'End date'],
+    'type' => DatePicker::TYPE_RANGE,
+    'form' => $form,
+    'pluginOptions' => [
+        'format' => 'yyyy-mm-dd',
+        'autoclose' => true,
+    ]
+    ]);?>
 
-    <?= $form->field($model, 'id') ?>
+    <?=  // echo  $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'order_id') ?>
+    <?=  // echo  $form->field($model, 'order_id') ?>
 
-    <?= $form->field($model, 'user_id') ?>
+    <?=  // echo  $form->field($model, 'user_id') ?>
 
-    <?= $form->field($model, 'delivery_date') ?>
+    <?=  // echo $form->field($model, 'delivery_date') ?>
 
-    <?= $form->field($model, 'delivery_time') ?>
+    <?=  // echo  $form->field($model, 'delivery_time') ?>
 
     <?php // echo $form->field($model, 'country_id') ?>
 
