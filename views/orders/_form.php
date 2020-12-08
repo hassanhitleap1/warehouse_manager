@@ -11,7 +11,12 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
 use kartik\time\TimePicker;
+$order_id = rand(1, 999999999999);
 
+
+if (!$model->isNewRecord) {
+ $order_id=$model->order_id;
+}
 /* @var $this yii\web\View */
 /* @var $model app\models\orders\Orders */
 /* @var $form yii\widgets\ActiveForm */
@@ -22,7 +27,7 @@ use kartik\time\TimePicker;
 <?php $form = ActiveForm::begin(['id' => 'dynamic-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="row">
         <div class="col-md-4">
-             <?= $form->field($model, 'order_id')->textInput(['maxlength' => true]) ?>
+             <?= $form->field($model, 'order_id')->textInput(['maxlength' => true,'value'=>$order_id,'disabled'=>true]) ?>
              <?= $form->field($model, 'name')->textInput() ?>
              <?= $form->field($model, 'phone')->textInput() ?>
              <?= $form->field($model, 'other_phone')->textInput() ?>

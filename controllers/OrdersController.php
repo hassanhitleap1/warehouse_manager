@@ -11,6 +11,7 @@ use Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -130,7 +131,7 @@ class OrdersController extends Controller
         
         if ($model->load(Yii::$app->request->post())) {
             $oldIDs = ArrayHelper::map($orderItems, 'id', 'id');
-             $orderItems = Model::createMultiple(OrderItems::classname(), $orderItems);
+             $orderItems = Model::createMultiple(OrdersItem::classname(), $orderItems);
             Model::loadMultiple($orderItems, Yii::$app->request->post());
              $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($orderItems, 'id', 'id')));
             // validate all models
@@ -148,7 +149,7 @@ class OrdersController extends Controller
                    if ($flag = $model->save(false)) {
                        foreach ($orderItems as $orderItem) {
                            $orderItem->order_id = $model->id;
-                           if (! ($flag = $subProductCount->save(false))) {
+                           if (! ($flag = $orderItem->save(false))) {
                                $transaction->rollBack();
                                break;
                            }
@@ -173,7 +174,7 @@ class OrdersController extends Controller
         
         return $this->render('update', [
             'model' => $model,
-            'orderItems' => (empty($orderItems)) ? [new OrderItems] : $orderItems
+            'orderItems' => (empty($orderItems)) ? [new OrdersItem()] : $orderItems
         ]);
     
     }
