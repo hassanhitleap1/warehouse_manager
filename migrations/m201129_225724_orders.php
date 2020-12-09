@@ -26,6 +26,10 @@ class m201129_225724_orders extends Migration
             'area_id'=>$this->integer()->defaultValue(null),
             'address' => $this->string(250)->defaultValue(null),
             'status_id'=> $this->integer()->notNull(),
+            'delivery_price'=>$this->dubale()->defaultValue(0.0),
+            "discount"=>$this->dubale()->defaultValue(0.0),
+            "total_price"=>$this->dubale()->notNull(),
+            "amount_required"=>$this->dubale()->notNull(),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);
