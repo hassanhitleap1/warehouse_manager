@@ -75,15 +75,15 @@ class OrdersController extends Controller
 
             $ordersItem = Model::createMultiple(OrdersItem::classname());
             Model::loadMultiple($ordersItem, Yii::$app->request->post());
-        
-             // validate all models
-             $valid = $model->validate();
-             $valid = Model::validateMultiple($ordersItem) && $valid;
-             if ($valid) {
+
+            // validate all models
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($ordersItem) && $valid;
+            if ($valid) {
                 $transaction = \Yii::$app->db->beginTransaction();
 
                 try {
-                                  
+
                     if ($flag = $model->save(false)) {
                         foreach ($ordersItem as $orderItem) {
                             $orderItem->order_id = $model->id;
@@ -95,7 +95,7 @@ class OrdersController extends Controller
                     }
 
                     if ($flag) {
-                     
+
 
                         $transaction->commit();
                         return $this->redirect(['view', 'id' => $model->id]);
@@ -107,7 +107,7 @@ class OrdersController extends Controller
         }
 
 
-        
+
         return $this->render('create', [
             'model' => $model,
             'ordersItem' => (empty($ordersItem)) ? [new OrdersItem()] : $ordersItem
@@ -128,55 +128,65 @@ class OrdersController extends Controller
         $model = $this->findModel($id);
 
         $orderItems = $model->orderItems;
-        
+
         if ($model->load(Yii::$app->request->post())) {
             $oldIDs = ArrayHelper::map($orderItems, 'id', 'id');
-             $orderItems = Model::createMultiple(OrdersItem::classname(), $orderItems);
+            $orderItems = Model::createMultiple(OrdersItem::classname(), $orderItems);
             Model::loadMultiple($orderItems, Yii::$app->request->post());
-             $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($orderItems, 'id', 'id')));
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($orderItems, 'id', 'id')));
             // validate all models
             $valid = $model->validate();
             $valid = Model::validateMultiple($orderItems) && $valid;
-            
-            
-            
-            
-             if ($valid) {
-               $transaction = \Yii::$app->db->beginTransaction();
 
-               try {
 
-                   if ($flag = $model->save(false)) {
-                       foreach ($orderItems as $orderItem) {
-                           $orderItem->order_id = $model->id;
-                           if (! ($flag = $orderItem->save(false))) {
-                               $transaction->rollBack();
-                               break;
-                           }
-                       }
-                   }
 
-                   if ($flag) {
-                    
-           
 
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+
+                try {
+
+                    if ($flag = $model->save(false)) {
+                        foreach ($orderItems as $orderItem) {
+                            $orderItem->order_id = $model->id;
+                            if (! ($flag = $orderItem->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($flag) {
+                        $user= new Users();
+                        $user->phone = $model->phone;
+                        $user->other_phone = $model->other_phone;
+                        $user->email =null;
+                        $user->country_id = $model->country_id;
+                        $user->region_id = $model->region_id;
+                        $user->area_id = $model->area_id;
+                        $user->address = $model->address;
+                        if (!$user->save()){
+                            $transaction->rollBack();
+                            break;
+                        }
+                       
                        $transaction->commit();
                        return $this->redirect(['view', 'id' => $model->id]);
                    }
-               } catch (Exception $e) {
-                   $transaction->rollBack();
-               }
-           }
-            
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+
 
         }
-        
-        
+
+
         return $this->render('update', [
             'model' => $model,
             'orderItems' => (empty($orderItems)) ? [new OrdersItem()] : $orderItems
         ]);
-    
+
     }
 
     /**
