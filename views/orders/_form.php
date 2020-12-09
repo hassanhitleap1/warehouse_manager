@@ -82,7 +82,7 @@ if (!$model->isNewRecord) {
         </div>
 
         <div class="col-md-4">
-            <?= $form->field($model, 'discount')->textInput(['id'=>'discount']) ?>
+            <?= $form->field($model, 'discount')->textInput(['id'=>'discount','value' => 0]) ?>
             <?= $form->field($model, 'delivery_price')->textInput(['id'=>'delivery_price']) ?>
             <?= $form->field($model, 'total_price')->textInput(['id'=>'total_price']) ?>
             <?= $form->field($model, 'amount_required')->textInput(['id'=>'amount_required']) ?>
@@ -96,3 +96,31 @@ if (!$model->isNewRecord) {
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<script>
+    SITE_URL='';
+    $(document).on('change','#region_id',function (e) {
+       let url= SITE_URL+'index.php?r=region/get-price';
+       let data={
+           'region_id':$(this).val(),
+       }
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data:data,
+            success: function (json) {
+                delivery_price=json.data.delivery_price;
+               $('#delivery_price').val(delivery_price);
+            }
+        });
+    });
+
+    $(document).on('change','#discount',function (e) {
+      let total_price=$('#total_price').val();
+      let discount=$('#discount').val();
+      let amount_required=total_price-discount;
+        $('#amount_required').val(amount_required);
+    });
+
+
+</script>
