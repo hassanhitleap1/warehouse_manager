@@ -123,6 +123,13 @@ return [
     "Orders"=>"الطلبات",
     "Order_Id"=>"رقم الطلب",
     "Delivery_Date"=>"تاريخ التسليم",
-    "Delivery_Time"=>"وقت التسليم"
+    "Delivery_Time"=>"وقت التسليم",
+    "Discount"=>"مبلغ الخصم",
+    "Delivery_Price"=>"مبلغ التوصيل",
+    "Total_Price"=>"المبلغ كامل",
+    "Amount_Required"=>"المبلغ المطلوب",
+    "Create_Order"=>"انشاء طلب",
+    "Orders"=>"الطلبات",
+    "Product"=>"المنتج",
 
 ];

@@ -68,7 +68,7 @@ class OrdersSearch extends Orders
             'delivery_price' => $this->delivery_price,
             'discount' => $this->discount,
             'total_price' => $this->total_price,
-            'amount_required' => $this->amount_required
+            'amount_required' => $this->amount_required,
             'status_id' => $this->status_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

@@ -2,6 +2,7 @@
 
 namespace app\models\ordersitem;
 
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -30,9 +31,8 @@ class OrdersItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'product_id', 'quantity', 'created_at', 'updated_at'], 'required'],
+            [['order_id', 'product_id', 'quantity'], 'required'],
             [['product_id', 'quantity'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
             [['order_id'], 'string', 'max' => 255],
         ];
     }
@@ -44,11 +44,11 @@ class OrdersItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'order_id' => Yii::t('app', 'Order ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'order_id' => Yii::t('app', 'Order_ID'),
+            'product_id' => Yii::t('app', 'Product'),
             'quantity' => Yii::t('app', 'Quantity'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
@@ -60,4 +60,28 @@ class OrdersItem extends \yii\db\ActiveRecord
     {
         return new OrdersItemQuery(get_called_class());
     }
+
+       /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

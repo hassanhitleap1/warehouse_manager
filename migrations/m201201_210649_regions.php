@@ -9,19 +9,19 @@ class m201201_210649_regions extends Migration
 {
    
     public $data = [
-        ['name_ar' => 'عمان'],
-        ['name_ar' => 'اربد'],
-        ['name_ar' => 'الزرقاء'],
-        ['name_ar' => 'معان'],
-        ['name_ar' => 'المفرق'],
-        ['name_ar' => 'العقبة'],
-        ['name_ar' => 'مادبا'],
-        ['name_ar' => 'السلط'],
-        ['name_ar' => 'الكرك'],
-        ['name_ar' => 'الطفيلة'],
-        ['name_ar' => 'عجلون'],
-        ['name_ar' => 'جرش'],
-        ['name_ar' => 'البلقاء'],
+        ['name_ar' => 'عمان' ,'price_delivery'=>2],
+        ['name_ar' => 'اربد','price_delivery'=>4],
+        ['name_ar' => 'الزرقاء','price_delivery'=>4],
+        ['name_ar' => 'معان','price_delivery'=>4],
+        ['name_ar' => 'المفرق','price_delivery'=>4],
+        ['name_ar' => 'العقبة','price_delivery'=>4],
+        ['name_ar' => 'مادبا','price_delivery'=>4],
+        ['name_ar' => 'السلط','price_delivery'=>4],
+        ['name_ar' => 'الكرك','price_delivery'=>4],
+        ['name_ar' => 'الطفيلة','price_delivery'=>4],
+        ['name_ar' => 'عجلون','price_delivery'=>4],
+        ['name_ar' => 'جرش','price_delivery'=>4],
+        ['name_ar' => 'البلقاء','price_delivery'=>4],
     ];
     public function up()
     {
@@ -44,7 +44,7 @@ class m201201_210649_regions extends Migration
 
         Yii::$app->db
         ->createCommand()
-        ->batchInsert('regions', ['name_ar'], $this->data)
+        ->batchInsert('regions', ['name_ar','price_delivery'], $this->data)
         ->execute();
     }
 

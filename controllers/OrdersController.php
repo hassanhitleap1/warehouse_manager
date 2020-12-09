@@ -7,6 +7,7 @@ use Yii;
 use app\models\orders\Orders;
 use app\models\orders\OrdersSearch;
 use app\models\ordersitem\OrdersItem;
+use app\models\users\Users;
 use Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -165,10 +166,13 @@ class OrdersController extends Controller
                         $user->region_id = $model->region_id;
                         $user->area_id = $model->area_id;
                         $user->address = $model->address;
-                        if (!$user->save()){
+
+                        if (! ($flag = $user->save(false))) {
                             $transaction->rollBack();
-                            break;
+                           
                         }
+
+                        
                        
                        $transaction->commit();
                        return $this->redirect(['view', 'id' => $model->id]);

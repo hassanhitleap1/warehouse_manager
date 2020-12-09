@@ -97,30 +97,3 @@ if (!$model->isNewRecord) {
 
 </div>
 
-<script>
-    SITE_URL='';
-    $(document).on('change','#region_id',function (e) {
-       let url= SITE_URL+'index.php?r=region/get-price';
-       let data={
-           'region_id':$(this).val(),
-       }
-        $.ajax({
-            url: url,
-            type: 'GET',
-            data:data,
-            success: function (json) {
-                delivery_price=json.data.delivery_price;
-               $('#delivery_price').val(delivery_price);
-            }
-        });
-    });
-
-    $(document).on('change','#discount',function (e) {
-      let total_price=$('#total_price').val();
-      let discount=$('#discount').val();
-      let amount_required=total_price-discount;
-        $('#amount_required').val(amount_required);
-    });
-
-
-</script>

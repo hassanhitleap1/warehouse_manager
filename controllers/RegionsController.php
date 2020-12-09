@@ -57,6 +57,13 @@ class RegionsController extends Controller
         ]);
     }
 
+    public function actionGetPrice($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return ['data'=> $this->findModel($id)];
+      
+    }
+
     /**
      * Creates a new Regions model.
      * If creation is successful, the browser will be redirected to the 'view' page.

@@ -75,7 +75,7 @@ AppAsset::register($this);
             ];
 
             $menuItems[] = ['label' => Yii::t('app', 'Products'), 'url' => ['/products/index']];
-            $menuItems[] = ['label' => Yii::t('app', 'orders'), 'url' => ['/orders/index']];
+            $menuItems[] = ['label' => Yii::t('app', 'Orders'), 'url' => ['/orders/index']];
         } else {
 
             $menuItems[] = '<li>'
