@@ -17,7 +17,7 @@ class OrdersSearch extends Orders
     public function rules()
     {
         return [
-            [['id', 'user_id', 'country_id', 'region_id', 'area_id', 'status_id'], 'integer'],
+            [['id', 'user_id', 'country_id', 'region_id', 'area_id', 'status_id','delivery_price','discount','total_price','amount_required'], 'integer'],
             [['order_id', 'delivery_date', 'delivery_time', 'address', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -65,6 +65,10 @@ class OrdersSearch extends Orders
             'country_id' => $this->country_id,
             'region_id' => $this->region_id,
             'area_id' => $this->area_id,
+            'delivery_price' => $this->delivery_price,
+            'discount' => $this->discount,
+            'total_price' => $this->total_price,
+            'amount_required' => $this->amount_required
             'status_id' => $this->status_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
