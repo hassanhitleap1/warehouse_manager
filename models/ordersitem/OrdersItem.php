@@ -46,6 +46,7 @@ class OrdersItem extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'order_id' => Yii::t('app', 'Order_ID'),
             'product_id' => Yii::t('app', 'Product'),
+            'sub_product_id'=> Yii::t('app', 'Product'),
             'quantity' => Yii::t('app', 'Quantity'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),

@@ -44,20 +44,20 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'format' => 'raw',
                 'attribute' => 'category_id',
-                'value' =>  $model->category->name_ar,
+                'value' =>  $model['category']['name_ar'],
 
             ],
 
             [
                 'format' => 'raw',
                 'attribute' => 'supplier_id',
-                'value' =>  $model->supplier->name,
+                'value' =>  $model['supplier']['name'],
 
             ],
             [
                 'format' => 'raw',
                 'attribute' => 'unit_id',
-                'value' =>  $model->unit->name_ar, 
+                'value' =>  $model['unit']['name_ar'], 
             ],
             [
                 'format' => 'raw',

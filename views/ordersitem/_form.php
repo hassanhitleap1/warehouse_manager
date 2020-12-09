@@ -16,6 +16,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'product_id')->textInput() ?>
 
+    <?= $form->field($model, 'sub_product_id')->textInput() ?>
+
     <?= $form->field($model, 'quantity')->textInput() ?>
 
     <?= $form->field($model, 'created_at')->textInput() ?>

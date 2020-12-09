@@ -24,7 +24,9 @@
         "wbraganca/yii2-dynamicform": "*",
         "kartik-v/yii2-widget-fileinput": "^1.1",
         "nesbot/carbon": "^2.42",
-        "kartik-v/yii2-widget-timepicker": "*"
+        "kartik-v/yii2-widget-timepicker": "*",
+        "kartik-v/yii2-field-range": "dev-master",
+        "kartik-v/yii2-widget-activeform": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -20,6 +20,7 @@ class m201201_205712_orders_item extends Migration
             'id' => $this->primaryKey(),
             'order_id' => $this->string()->notNull(),
             'product_id'=> $this->integer()->notNull(),
+            'sub_product_id'=> $this->integer()->notNull(),
             'quantity'=> $this->smallInteger()->notNull(),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),

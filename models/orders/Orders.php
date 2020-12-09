@@ -30,6 +30,8 @@ class Orders extends \yii\db\ActiveRecord
     public $name;
     public $other_phone;
     public $address;
+    public $start;
+    public $end;
     /**
      * {@inheritdoc}
      */

@@ -1,8 +1,9 @@
 <?php
-
-use kartik\date\DatePicker;
+use kartik\field\FieldRange;
+use kartik\form\ActiveForm as FormActiveForm;
+use kartik\widgets\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+
 
     
     
@@ -14,7 +15,7 @@ use yii\widgets\ActiveForm;
 
 <div class="orders-search">
 
-    <?php $form = ActiveForm::begin([
+    <?php $form = FormActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
         'options' => [
@@ -22,43 +23,22 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
     
-    <?=  DatePicker::widget([
-    'model' => $model,
-    'attribute' => 'delivery_date',
-    'attribute2' => 'delivery_date',
-    'options' => ['placeholder' => 'Start date'],
-    'options2' => ['placeholder' => 'End date'],
-    'type' => DatePicker::TYPE_RANGE,
-    'form' => $form,
-    'pluginOptions' => [
-        'format' => 'yyyy-mm-dd',
-        'autoclose' => true,
-    ]
-    ]);?>
 
-    <?=  // echo  $form->field($model, 'id') ?>
+    <?=   FieldRange::widget([
+            'form' => $form,
+            'model' => $model,
+            'label' => 'Enter start and end points',
+            'attribute1' => 'start',
+            'attribute2' => 'end',
+            'type' => FieldRange::INPUT_TEXT,
+    ]);
+        ?>
 
-    <?=  // echo  $form->field($model, 'order_id') ?>
 
-    <?=  // echo  $form->field($model, 'user_id') ?>
 
-    <?=  // echo $form->field($model, 'delivery_date') ?>
 
-    <?=  // echo  $form->field($model, 'delivery_time') ?>
 
-    <?php // echo $form->field($model, 'country_id') ?>
-
-    <?php // echo $form->field($model, 'region_id') ?>
-
-    <?php // echo $form->field($model, 'area_id') ?>
-
-    <?php // echo $form->field($model, 'address') ?>
-
-    <?php // echo $form->field($model, 'status_id') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
+  
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

@@ -22,6 +22,7 @@ use yii\helpers\ArrayHelper;
             'formId' => 'dynamic-form',
             'formFields' => [
                 'product_id',
+                'sub_product_id',
                 'quantity',
             ],
         ]); ?>
@@ -52,7 +53,7 @@ use yii\helpers\ArrayHelper;
 
                             <div class="row">
                                
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
 
                                     <?= $form->field($orderItem,"[{$index}]product_id")->widget(Select2::classname(), [
                                             'data' =>  ArrayHelper::map(Products::find()->all(), 'id', 'name'),
@@ -62,7 +63,7 @@ use yii\helpers\ArrayHelper;
                                         ]); ?>  
 
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <?= $form->field($orderItem, "[{$index}]quantity")->textInput(['maxlength' => true])
                                         ->label(Yii::t('app', 'Type') . '  <span type="button" class=" tooltip-helper glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="' . Yii::t('app', 'Name_Course_Example') . '"></span>') ?>
                                 </div>
