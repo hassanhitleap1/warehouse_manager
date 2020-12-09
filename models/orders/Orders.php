@@ -44,8 +44,8 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'status_id','phone','other_phone','address'], 'required'],
-            [['user_id', 'country_id', 'region_id', 'area_id', 'status_id'], 'integer'],
+            [['order_id', 'status_id','phone','other_phone','address','delivery_price','discount','total_price','amount_required'], 'required'],
+            [['user_id', 'country_id', 'region_id', 'area_id', 'status_id','delivery_price','discount','total_price','amount_required'], 'integer'],
             [['delivery_date', 'delivery_time'], 'safe'],
             [['order_id'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 250],
@@ -72,6 +72,12 @@ class Orders extends \yii\db\ActiveRecord
             'other_phone' => Yii::t('app', 'Other_Phone'),
             'address'=> Yii::t('app', 'Address'),
             'name' => Yii::t('app', 'Name'),
+            
+             'delivery_price' => Yii::t('app', 'Delivery_Price'),
+              'discount' => Yii::t('app', 'Discount'),
+              'total_price' => Yii::t('app', 'Total_Price'),
+              'amount_required' => Yii::t('app', 'Amount_Required'),
+            
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
         ];
