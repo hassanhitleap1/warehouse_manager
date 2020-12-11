@@ -19,8 +19,15 @@ $(document).on('change','#region_id',function (e) {
    let amount_required=total_price-discount;
      $('#amount_required').val(amount_required);
  });
+ $(document).on('keyup','.count_sub_product',function (e) {
+     let count_sub_product=0;
+    $( '.count_sub_product' ).each(function( index, element  ) {
+        count_sub_product+= parseInt ($(element ).val());
+      });
+      $("#quantity").val(count_sub_product)
 
-
+});
+ 
  function getSiteUrl() {
     let site_url=window.location.host;
     if (site_url=='localhost:8080'){

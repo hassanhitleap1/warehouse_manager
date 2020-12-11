@@ -78,7 +78,7 @@ if (!$model->isNewRecord) {
                 ?>
             </div>
             <div class="col-md-4">
-                <?= $form->field($model, 'quantity')->textInput() ?>
+                <?= $form->field($model, 'quantity')->textInput(['id'=>'quantity']) ?>
                 <?= $form->field($model, 'warehouse_id')->widget(Select2::classname(), [
                         'data' =>  ArrayHelper::map(Warehouse::find()->all(), 'id', 'name'),
                         'language' => 'ar',

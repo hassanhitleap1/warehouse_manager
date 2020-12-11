@@ -131,5 +131,6 @@ return [
     "Create_Order"=>"انشاء طلب",
     "Orders"=>"الطلبات",
     "Product"=>"المنتج",
-
+    "Sub_Product"=>"المنتج الفرعي",
+    "Add_Sub_Product"=>"اضافة منتج فرعي",
 ];
