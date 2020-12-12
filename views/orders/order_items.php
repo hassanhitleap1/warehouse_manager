@@ -29,8 +29,8 @@ use yii\helpers\ArrayHelper;
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-envelope"></i> Address Book
-            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i> Add address</button>
+            <i class="fa fa-envelope"></i>
+            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i> <?=Yii::t('app','Add_Product')?> </button>
             <div class="clearfix"></div>
         </div>
         <div class="panel-body container-items"><!-- widgetContainer -->
@@ -41,6 +41,12 @@ use yii\helpers\ArrayHelper;
                         <div class="panel-heading">
                             <span class="panel-title-address">  : <?= ($index + 1) ?></span>
                             <button type="button" class="pull-right remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
+                            <div class="pull-left">
+                                <span><?=Yii::t('app','Quantity_All')?> : <span id="quantity_all_<?= ($index)?>"></span> </span>
+                                /
+                                <span><?=Yii::t('app','Quantity_Item')?> : <span id="quantity_item_<?= ($index)?>"></span>  </span>
+                            </div>
+                
                             <div class="clearfix"></div>
                         </div>
                         <div class="panel-body">
@@ -54,18 +60,21 @@ use yii\helpers\ArrayHelper;
                             <div class="row">
                                
                                 <div class="col-sm-4">
-
                                     <?= $form->field($orderItem,"[{$index}]product_id")->widget(Select2::classname(), [
                                             'data' =>  ArrayHelper::map(Products::find()->all(), 'id', 'name'),
                                             'language' => 'ar',
-                                            'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
+                                            'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'class'=>'product_id'],
                                         
                                         ]); ?>  
 
                                 </div>
                                 <div class="col-sm-4">
-                                    <?= $form->field($orderItem, "[{$index}]quantity")->textInput(['maxlength' => true])
-                                        ->label(Yii::t('app', 'Type') . '  <span type="button" class=" tooltip-helper glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="' . Yii::t('app', 'Name_Course_Example') . '"></span>') ?>
+                                     <?= $form->field($orderItem, "[{$index}]id")->dropDownList([])->label(Yii::t('app','Sub_Product_Id'))?>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <?= $form->field($orderItem, "[{$index}]quantity")->textInput([
+                                        'class'=>'form-control quantity_sub_product','type' => 'number','low'=> 1 ])?>
                                 </div>
                              
                             </div><!-- end:row -->  
@@ -74,9 +83,6 @@ use yii\helpers\ArrayHelper;
                         </div>
                     </div>
                 <?php endforeach; ?>
-
-
-
 
             </div>
         </div>

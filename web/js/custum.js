@@ -28,6 +28,48 @@ $(document).on('change','#region_id',function (e) {
 
 });
  
+
+
+$(document).on('change','.product_id',function (e) {
+    let url= `${SITE_URL}/index.php?r=sub-product-count/get-product-items&id=${$(this).val()}`;
+    let product_id_str=$(this).attr('id'); 
+    let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
+    index=index.replaceAll('-product_id', '');
+    index=index.trim()
+    console.log(index);
+
+     $.ajax({
+         url: url,
+         type: 'GET',
+         success: function (json) {
+            let html='';
+            let data=json.data;
+            let count_all=0
+            let quantity_item=0
+            data.forEach((element,index) => {
+                if(index==0){
+                    quantity_item+=element.count; 
+                }
+                count_all+=element.count;
+                html+=`<option value="${element.id}"> ${element.type}</option>`; 
+            });
+           
+            $("#quantity_item_"+index).text(quantity_item);
+            $("#ordersitem-"+index+"-quantity").attr('max',quantity_item);
+            $("#quantity_all_"+index).text(count_all);
+             $("#ordersitem-"+index+"-id").html(html);
+
+         }
+     });
+ });
+
+
+ $(document).on('keyup','.quantity_sub_product',function (e) {
+    alert($(this).val())
+
+});
+
+
  function getSiteUrl() {
     let site_url=window.location.host;
     if (site_url=='localhost:8080'){

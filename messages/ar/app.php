@@ -133,4 +133,8 @@ return [
     "Product"=>"المنتج",
     "Sub_Product"=>"المنتج الفرعي",
     "Add_Sub_Product"=>"اضافة منتج فرعي",
+    "Sub_Product_Id"=>"المنتج الفرعي",
+    "Add_Product"=>"اضافة منتج",
+    "Quantity_All"=>"العدد الكلي",
+    "Quantity_Item"=>"عدد الكلي للقطعة",
 ];

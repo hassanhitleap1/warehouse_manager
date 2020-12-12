@@ -57,6 +57,23 @@ class SubProductCountController extends Controller
         ]);
     }
 
+
+    
+    /**
+     * Displays a single SubProductCount model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionGetProductItems($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+         $data = SubProductCount::find()->where(['product_id'=>$id])->all();
+        return ['data'=> $data];
+      
+    }
+
+
     /**
      * Creates a new SubProductCount model.
      * If creation is successful, the browser will be redirected to the 'view' page.

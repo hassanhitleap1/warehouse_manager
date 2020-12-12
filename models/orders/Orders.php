@@ -32,6 +32,7 @@ class Orders extends \yii\db\ActiveRecord
     public $address;
     public $start;
     public $end;
+    public $sub_product_id;
     /**
      * {@inheritdoc}
      */
@@ -74,12 +75,11 @@ class Orders extends \yii\db\ActiveRecord
             'other_phone' => Yii::t('app', 'Other_Phone'),
             'address'=> Yii::t('app', 'Address'),
             'name' => Yii::t('app', 'Name'),
-            
-             'delivery_price' => Yii::t('app', 'Delivery_Price'),
-              'discount' => Yii::t('app', 'Discount'),
-              'total_price' => Yii::t('app', 'Total_Price'),
-              'amount_required' => Yii::t('app', 'Amount_Required'),
-            
+            'delivery_price' => Yii::t('app', 'Delivery_Price'),
+            'discount' => Yii::t('app', 'Discount'),
+            'total_price' => Yii::t('app', 'Total_Price'),
+            'amount_required' => Yii::t('app', 'Amount_Required'),
+            'sub_product_id'=> Yii::t('app', 'Sub_Product_Id'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
         ];
