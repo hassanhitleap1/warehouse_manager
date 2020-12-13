@@ -44,8 +44,12 @@ $(document).on('change','.product_id',function (e) {
          success: function (json) {
             let html='';
             let data=json.data;
-            let count_all=0
-            let quantity_item=0
+            let product= json.product;
+            let count_all=0;
+            let quantity_item=0;
+             
+            $(".selling_price").val(product.selling_price);
+             
             data.forEach((element,index) => {
                 if(index==0){
                     quantity_item+=element.count; 
@@ -58,6 +62,21 @@ $(document).on('change','.product_id',function (e) {
             $("#ordersitem-"+index+"-quantity").attr('max',quantity_item);
             $("#quantity_all_"+index).text(count_all);
              $("#ordersitem-"+index+"-id").html(html);
+             total_price=0;
+             $(".selling_price").each(function( index, element  ) {
+                total_price+= parseInt ($(element ).val());
+              });
+             count_items=$("#ordersquinttay").val();
+             
+             $("#total_price").val(total_price);
+             
+             let discount= $("#discount").val();
+             
+             let amount_required=total_price-discount;
+             
+             $("#amount_required").val(amount_required * count_items);
+             
+             
 
          }
      });
