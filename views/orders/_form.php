@@ -12,10 +12,12 @@ use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
 use kartik\time\TimePicker;
 $order_id = rand(1, 999999999999);
+$delivery_price=0;
 
 
 if (!$model->isNewRecord) {
     $order_id=$model->order_id;
+    $delivery_price=$model->delivery_price;
 }
 /* @var $this yii\web\View */
 /* @var $model app\models\orders\Orders */
@@ -83,7 +85,7 @@ if (!$model->isNewRecord) {
 
         <div class="col-md-4">
             <?= $form->field($model, 'discount')->textInput(['id'=>'discount','value' => 0]) ?>
-            <?= $form->field($model, 'delivery_price')->textInput(['id'=>'delivery_price']) ?>
+            <?= $form->field($model, 'delivery_price')->textInput(['id'=>'delivery_price','value'=>$delivery_price]) ?>
             <?= $form->field($model, 'total_price')->textInput(['id'=>'total_price']) ?>
             <?= $form->field($model, 'amount_required')->textInput(['id'=>'amount_required']) ?>
         </div>
