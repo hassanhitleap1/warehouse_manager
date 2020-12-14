@@ -49,7 +49,7 @@ use yii\bootstrap\Html;
                             <div class="row">
                                 <div class="col-sm-6">
                                     <?= $form->field($subProductCount, "[{$index}]type")->textInput(['maxlength' => true])
-                                        ->label(Yii::t('app', 'Type') . '  <span type="button" class=" tooltip-helper glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="' . Yii::t('app', 'Name_Course_Example') . '"></span>') ?>
+                                        ->label(Yii::t('app', 'Type')) ?>
                                 </div>
                                 <div class="col-sm-6">
                                     <?= $form->field($subProductCount, "[{$index}]count")->textInput(['maxlength' => true,'class'=>'form-control count_sub_product'])

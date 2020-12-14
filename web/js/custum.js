@@ -44,12 +44,14 @@ $(document).on('change','.product_id',function (e) {
          success: function (json) {
             let html='';
             let data=json.data;
+            console.log(json);
             let product= json.product;
             let count_all=0;
             let quantity_item=0;
             let price =product.selling_price; 
+            let count_sub_product=$("#ordersitem-"+index+"-quantity").val();
              
-            $(".selling_price").val(product.selling_price);
+            
              
             data.forEach((element,index) => {
                 if(index==0){
@@ -70,24 +72,37 @@ $(document).on('change','.product_id',function (e) {
                 total_price+= parseInt ($(element ).val());
               });
              count_items=$("#ordersquinttay").val();
-             
              $("#total_price").val(total_price);
-             
              let discount= $("#discount").val();
-             
              let amount_required=total_price-discount;
-             
-             $("#amount_required").val(amount_required * count_items);
-             
-             
+             $("#amount_required").val(product.selling_price * count_sub_product);
+
 
          }
      });
  });
 
 
+
+ 
+$(document).on('change','.sub_product_id',function (e) {
+    let url= `${SITE_URL}/index.php?r=sub-product-count/get-sub-product&id=${$(this).val()}`;
+    let product_id_str=$(this).attr('id'); 
+    let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
+    index=index.replaceAll('-product_id', '');
+    index=index.trim()
+     $.ajax({
+         url: url,
+         type: 'GET',
+         success: function (json) {    
+            $("#quantity_item_"+index).text(json.data.count);
+         }
+     });
+ });
+
  $(document).on('keyup','.quantity_sub_product',function (e) {
-  let quantity_sub_product =$(this).val();
+
+      let quantity_sub_product =$(this).val();
      let total_price=0;
      let quantity_sub_product_id_str=$(this).attr('id'); 
     let index=quantity_sub_product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
@@ -100,7 +115,7 @@ $(document).on('change','.product_id',function (e) {
      $(".price_item").each(function( index, element  ) {
            total_price+= parseInt ($(element ).val());
       });
-     $("#total_price").val(total_price);
+     $("#amount_required").val(total_price);
 
 });
 
