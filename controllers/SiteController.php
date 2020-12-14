@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\products\Products;
+use yii\data\Pagination;
 
 class SiteController extends Controller
 {
