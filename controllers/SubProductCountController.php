@@ -8,6 +8,7 @@ use app\models\subproductcount\SubProductCountSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\products\Products;
 
 /**
  * SubProductCountController implements the CRUD actions for SubProductCount model.
@@ -69,7 +70,8 @@ class SubProductCountController extends BaseController
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
          $data = SubProductCount::find()->where(['product_id'=>$id])->all();
-        return ['data'=> $data];
+         $product= Products::findOne($id);
+        return ['data'=> $data,'product'=>$product];
       
     }
 
