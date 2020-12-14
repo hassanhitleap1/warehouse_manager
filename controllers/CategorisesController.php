@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * CategorisesController implements the CRUD actions for Categorises model.
  */
-class CategorisesController extends Controller
+class CategorisesController extends BaseController 
 {
     /**
      * {@inheritdoc}
