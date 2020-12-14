@@ -58,7 +58,8 @@ use yii\helpers\ArrayHelper;
                             ?>
 
                             <div class="row">
-                               
+                               <input type="hidden" class="price" id="price_<?=$index?>" name="price" value="0">
+                                <input type="hidden" class="price_item_count" id="price_item_<?=$index?>" name="price_itme_count" value="0">
                                 <div class="col-sm-4">
                                     <?= $form->field($orderItem,"[{$index}]product_id")->widget(Select2::classname(), [
                                             'data' =>  ArrayHelper::map(Products::find()->all(), 'id', 'name'),
