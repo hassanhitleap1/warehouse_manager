@@ -119,13 +119,23 @@ class ProductsController extends Controller
                     }
 
                     if ($flag = $model->save(false)) {
-                        foreach ($subProductCounts as $subProductCount) {
-                            $subProductCount->product_id = $model->id;
-                            if (! ($flag = $subProductCount->save(false))) {
-                                $transaction->rollBack();
-                                break;
+                        if(count($subProductCounts)){
+                            foreach ($subProductCounts as $subProductCount) {
+                                $subProductCount->product_id = $model->id;
+                                if (! ($flag = $subProductCount->save(false))) {
+                                    $transaction->rollBack();
+                                    break;
+                                }
                             }
+                        
+                        }else{
+                            $subProductCount = new SubProductCount();
+                             $subProductCount->product_id = $model->id;
+                             $subProductCount->type=$model->name;
+                             $subProductCount->count=$model->quantity;
+                            $subProductCount->save();
                         }
+                    
                     }
 
                     if ($flag) {
