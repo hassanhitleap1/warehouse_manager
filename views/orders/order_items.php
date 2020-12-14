@@ -6,6 +6,7 @@ use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
+$quantity_item=1;
 
 ?>
 <div class="panel panel-default">
@@ -75,7 +76,7 @@ use yii\helpers\ArrayHelper;
 
                                 <div class="col-sm-4">
                                     <?= $form->field($orderItem, "[{$index}]quantity")->textInput([
-                                        'class'=>'form-control quantity_sub_product','type' => 'number','low'=> 1 ])?>
+                                        'class'=>'form-control quantity_sub_product','type' => 'number','low'=> 1 ,'value'=>$quantity_item])?>
                                 </div>
                              
                             </div><!-- end:row -->  
