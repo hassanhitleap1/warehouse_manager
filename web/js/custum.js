@@ -47,6 +47,7 @@ $(document).on('change','.product_id',function (e) {
             let product= json.product;
             let count_all=0;
             let quantity_item=0;
+            let price =product.selling_price; 
              
             $(".selling_price").val(product.selling_price);
              
@@ -62,6 +63,8 @@ $(document).on('change','.product_id',function (e) {
             $("#ordersitem-"+index+"-quantity").attr('max',quantity_item);
             $("#quantity_all_"+index).text(count_all);
              $("#ordersitem-"+index+"-id").html(html);
+             $("#price_"+index).val(price);
+              $("#price_item_"+index).val(price * 1);
              total_price=0;
              $(".selling_price").each(function( index, element  ) {
                 total_price+= parseInt ($(element ).val());
@@ -84,7 +87,20 @@ $(document).on('change','.product_id',function (e) {
 
 
  $(document).on('keyup','.quantity_sub_product',function (e) {
-    alert($(this).val())
+  let quantity_sub_product =$(this).val();
+     let total_price=0;
+     let quantity_sub_product_id_str=$(this).attr('id'); 
+    let index=quantity_sub_product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
+        index=index.replaceAll('-product_id', '');
+     let price= $("#price_"+index).val();
+     if(quantity_sub_product != '' && quantity_sub_product !='undefined'){
+         $("#price_item_"+index).val(price * quantity_sub_product);
+     }
+     
+     $(".price_item").each(function( index, element  ) {
+           total_price+= parseInt ($(element ).val());
+      });
+     $("#total_price").val(total_price);
 
 });
 
