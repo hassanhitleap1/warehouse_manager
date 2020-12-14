@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\products\Products;
 
 class SiteController extends Controller
 {
@@ -61,7 +62,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $query =    Products::find();
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->orderBy([
+                'created_at' => SORT_DESC //specify sort order ASC for ascending DESC for descending      
+            ])
+            ->all();
+          return $this->render('index',[
+            'models' => $models,
+            'pages' => $pages,
+        ]);
+     
     }
 
     /**
