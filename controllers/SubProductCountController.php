@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * SubProductCountController implements the CRUD actions for SubProductCount model.
  */
-class SubProductCountController extends Controller
+class SubProductCountController extends BaseController 
 {
     /**
      * {@inheritdoc}
