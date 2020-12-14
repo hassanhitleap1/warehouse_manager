@@ -65,6 +65,7 @@ if (!$model->isNewRecord) {
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'purchasing_price')->textInput() ?>
                 <?= $form->field($model, 'selling_price')->textInput() ?>
+                <?= $form->field($model, 'video_url')->textInput() ?>
                 <?= $form->field($model, 'category_id')->widget(Select2::classname(), [
                         'data' =>  ArrayHelper::map(Categorises::find()->all(), 'id', 'name_ar'),
                         'language' => 'ar',
