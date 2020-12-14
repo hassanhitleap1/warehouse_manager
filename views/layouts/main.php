@@ -43,7 +43,8 @@ AppAsset::register($this);
         if (Yii::$app->user->isGuest) {
             $menuItemsleft[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
        
-
+        } else {
+            
             $menuItems[] = [
                 'label' =>Yii::t('app', 'Countries') ,
                 'items' => [
@@ -76,7 +77,6 @@ AppAsset::register($this);
 
             $menuItems[] = ['label' => Yii::t('app', 'Products'), 'url' => ['/products/index']];
             $menuItems[] = ['label' => Yii::t('app', 'Orders'), 'url' => ['/orders/index']];
-        } else {
 
             $menuItems[] = '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
