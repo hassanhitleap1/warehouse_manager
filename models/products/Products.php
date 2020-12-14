@@ -50,6 +50,8 @@ class Products extends \yii\db\ActiveRecord
             [['purchasing_price', 'selling_price'], 'number'],
             [['quantity', 'category_id', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
             [['name', 'thumbnail'], 'string', 'max' => 255],
+             [['video_url'], 'string', 'max' => 500],
+            
         ];
     }
 
@@ -73,6 +75,7 @@ class Products extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
             "images_product"=>Yii::t('app', 'Images_Product'),
+            "video_url"=>Yii::t('app', 'Video_Url'),
         ];
     }
 
