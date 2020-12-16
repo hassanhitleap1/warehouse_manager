@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\orders\OrderForm;
 use Yii;
 use app\models\products\Products;
 use yii\web\Controller;
@@ -22,8 +23,14 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        $modelOrder= new OrderForm();
+        
+        if ($modelOrder->load(Yii::$app->request->post())) {
+
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'modelOrder'=>$modelOrder
         ]);
     }
 
