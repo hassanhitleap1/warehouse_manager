@@ -31,12 +31,12 @@ $(document).on('change','#region_id',function (e) {
 
 
 $(document).on('change','.product_id',function (e) {
+
     let url= `${SITE_URL}/index.php?r=sub-product-count/get-product-items&id=${$(this).val()}`;
     let product_id_str=$(this).attr('id'); 
     let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
     index=index.replaceAll('-product_id', '');
-    index=index.trim()
-    console.log(index);
+    index=index.trim();
 
      $.ajax({
          url: url,
@@ -50,9 +50,6 @@ $(document).on('change','.product_id',function (e) {
             let quantity_item=0;
             let price =product.selling_price; 
             let count_sub_product=$("#ordersitem-"+index+"-quantity").val();
-             
-            
-             
             data.forEach((element,index) => {
                 if(index==0){
                     quantity_item+=element.count; 
@@ -72,12 +69,18 @@ $(document).on('change','.product_id',function (e) {
                 total_price+= parseInt ($(element ).val());
               });
              count_items=$("#ordersquinttay").val();
-             $("#total_price").val(total_price);
+             
              let discount= $("#discount").val();
              let amount_required=total_price-discount;
-             $("#amount_required").val(product.selling_price * count_sub_product);
 
+             
+            //  $("#amount_required").val(product.selling_price * count_sub_product);
 
+             $(".price_item_count").each(function( index, element  ) {
+                total_price+= parseInt ($(element ).val());
+           });
+
+           $("#amount_required").val(total_price);
          }
      });
  });
@@ -90,31 +93,39 @@ $(document).on('change','.sub_product_id',function (e) {
     let product_id_str=$(this).attr('id'); 
     let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
     index=index.replaceAll('-product_id', '');
+    index=index.replaceAll('-id', '');
     index=index.trim()
      $.ajax({
          url: url,
          type: 'GET',
-         success: function (json) {    
-            $("#quantity_item_"+index).text(json.data.count);
+         success: function (json) { 
+             console.log(index);   
+            $("#quantity_item_"+index).text(json.data.sub_product.count);
          }
      });
  });
 
- $(document).on('keyup','.quantity_sub_product',function (e) {
+ $(document).on('change','.quantity_sub_product',function (e) {
 
       let quantity_sub_product =$(this).val();
+     
      let total_price=0;
      let quantity_sub_product_id_str=$(this).attr('id'); 
     let index=quantity_sub_product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
         index=index.replaceAll('-product_id', '');
+        index=index.replaceAll('-quantity', '');
      let price= $("#price_"+index).val();
+        
      if(quantity_sub_product != '' && quantity_sub_product !='undefined'){
+        
          $("#price_item_"+index).val(price * quantity_sub_product);
      }
      
-     $(".price_item").each(function( index, element  ) {
+     $(".price_item_count").each(function( index, element  ) {
+            console.log($(element ).val())
            total_price+= parseInt ($(element ).val());
       });
+
      $("#amount_required").val(total_price);
 
 });

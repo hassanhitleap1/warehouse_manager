@@ -98,12 +98,23 @@ $quantity_item=1;
 <script  type="text/javascript">
 
 $(".add-item").on("click", function(e) {
+    
     reload_js_select2();
+    jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
+        setTimeout(function(){ 
+            $("#ordersitem-"+(index+1)+"-quantity").val(1);
+            $("#price_item_0"+(index+1)).attr('id',"price_item_"+(index+1));
+            $("#price_0"+(index+1)).attr('id',"price_"+(index+1));
+            $("#quantity_all_0"+(index+1)).attr('id',"quantity_all_"+(index+1));
+            $("#quantity_item_0"+(index+1)).attr('id',"quantity_item_"+(index+1));
+        }, 1000);;
+        
+    });
 });
 
 jQuery(".dynamicform_wrapper").on("afterInsert", function(e, item) {
     jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
-        jQuery(this).html("Address: " + (index + 1))
+        jQuery(this).html("Address: " + (index + 1));
     });
 });
 

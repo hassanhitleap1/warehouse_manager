@@ -2,6 +2,7 @@
 
 namespace app\models\subproductcount;
 
+use app\models\products\Products;
 use Yii;
 
 /**
@@ -58,5 +59,11 @@ class SubProductCount extends \yii\db\ActiveRecord
     public static function find()
     {
         return new SubProductCountQuery(get_called_class());
+    }
+
+
+    public function getProduct()
+    {
+        return $this->hasOne(Products::className(), ['id' => 'product_id']);
     }
 }
