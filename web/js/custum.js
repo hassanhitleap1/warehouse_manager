@@ -29,6 +29,24 @@ $(document).on('change','#region_id',function (e) {
 });
  
 
+$(document).on('change','#delivery_price',function (e) {
+    let delivery_price= parseInt($(this).val());
+    
+    let discount= parseInt($("#discount").val());
+             
+    $(".price_item_count").each(function( index, element  ) {
+         console.log($(element ).val());
+        total_price+= parseInt ($(element ).val());
+   });
+
+   total_price+=delivery_price;
+
+   let amount_required=total_price-discount;
+
+   $("#amount_required").val(amount_required);
+   $('#total_price').val(total_price);
+});
+
 
 $(document).on('change','.product_id',function (e) {
 
@@ -48,10 +66,15 @@ $(document).on('change','.product_id',function (e) {
             let count_all=0;
             let quantity_item=0;
             let price =product.selling_price; 
-
-            $("#price_item_"+index).text(price);
-           
+            let delivery_price= parseInt( $("#delivery_price").val());
+            $("#price_items_"+index).text(price);
             let count_sub_product=$("#ordersitem-"+index+"-quantity").val();
+            let price_item_price_count=price * count_sub_product;
+
+            $("#price_item_"+index).val(price_item_price_count);
+
+            console.log("price_item_price_count",price_item_price_count);
+            console.log("index",index);
 
             data.forEach((element,index) => {
                 if(index==0){
@@ -64,9 +87,10 @@ $(document).on('change','.product_id',function (e) {
             $("#quantity_item_"+index).text(quantity_item);
             $("#ordersitem-"+index+"-quantity").attr('max',quantity_item);
             $("#quantity_all_"+index).text(count_all);
-             $("#ordersitem-"+index+"-id").html(html);
-             $("#price_"+index).val(price);
-              $("#price_item_"+index).val(price * 1);
+            $("#ordersitem-"+index+"-id").html(html);
+            $("#price_"+index).val(price);
+
+           
              total_price=0;
              $(".selling_price").each(function( index, element  ) {
                 total_price+= parseInt ($(element ).val());
@@ -74,16 +98,21 @@ $(document).on('change','.product_id',function (e) {
              count_items=$("#ordersquinttay").val();
              
              let discount= $("#discount").val();
-             let amount_required=total_price-discount;
-
              
-            //  $("#amount_required").val(product.selling_price * count_sub_product);
 
-             $(".price_item_count").each(function( index, element  ) {
+    
+
+            $(".price_item_count").each(function( index, element  ) {
+                 console.log($(element ).val());
                 total_price+= parseInt ($(element ).val());
            });
 
-           $("#amount_required").val(total_price);
+           total_price+=delivery_price;
+
+           let amount_required=total_price-discount;
+
+           $("#amount_required").val(amount_required);
+           $('#total_price').val(total_price);
          }
      });
  });
@@ -130,6 +159,8 @@ $(document).on('change','.sub_product_id',function (e) {
            total_price+= parseInt ($(element ).val());
       });
 
+      let amount_required=total_price-discount;
+      $("#total_price").val(total_price);
      $("#amount_required").val(total_price);
 
 });

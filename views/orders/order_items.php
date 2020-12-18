@@ -47,7 +47,7 @@ $quantity_item=1;
                                 /
                                 <span><?=Yii::t('app','Quantity_Item')?> : <span id="quantity_item_<?= ($index)?>"></span>  </span>
                                 /
-                                <span><?=Yii::t('app','Price')?> : <span class="price_item" id="price_item_<?= ($index)?>"></span>  </span>
+                                <span><?=Yii::t('app','Price')?> : <span class="price_item" id="price_items_<?= ($index)?>"></span>  </span>
                             </div>
                 
                             <div class="clearfix"></div>
@@ -107,6 +107,7 @@ $(".add-item").on("click", function(e) {
             $("#ordersitem-"+(index+1)+"-quantity").val(1);
             $("#price_item_0"+(index+1)).attr('id',"price_item_"+(index+1));
             $("#price_0"+(index+1)).attr('id',"price_"+(index+1));
+            $("#price_items_0"+(index+1)).attr('id',"price_items_"+(index+1));
             $("#quantity_all_0"+(index+1)).attr('id',"quantity_all_"+(index+1));
             $("#quantity_item_0"+(index+1)).attr('id',"quantity_item_"+(index+1));
         }, 1000);;

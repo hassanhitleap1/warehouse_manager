@@ -73,20 +73,24 @@ class OrdersController extends Controller
         $ordersItem = [new OrdersItem()];
 
         if ($model->load(Yii::$app->request->post())) {
-
+           
             $ordersItem = Model::createMultiple(OrdersItem::classname());
             Model::loadMultiple($ordersItem, Yii::$app->request->post());
 
             // validate all models
             $valid = $model->validate();
             $valid = Model::validateMultiple($ordersItem) && $valid;
+            
             if ($valid) {
                 $transaction = \Yii::$app->db->beginTransaction();
 
+               
                 try {
 
                     if ($flag = $model->save(false)) {
+                       
                         foreach ($ordersItem as $orderItem) {
+                            
                             $orderItem->order_id = $model->id;
                             if (! ($flag = $orderItem->save(false))) {
                                 $transaction->rollBack();
@@ -95,6 +99,7 @@ class OrdersController extends Controller
                         }
                     }
 
+                   
                     if ($flag) {
 
 

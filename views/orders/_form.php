@@ -2,6 +2,7 @@
 
 use app\models\area\Area;
 use app\models\countries\Countries;
+use app\models\orders\Orders;
 use app\models\regions\Regions;
 use app\models\status\Status;
 use Carbon\Carbon;
@@ -11,7 +12,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
 use kartik\time\TimePicker;
-$order_id = rand(1, 999999999999);
+$order_id = (string) Orders::find()->count() + 1 ;
 $delivery_price=0;
 
 
@@ -29,7 +30,7 @@ if (!$model->isNewRecord) {
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="row">
         <div class="col-md-4">
-            <?= $form->field($model, 'order_id')->textInput(['maxlength' => true,'value'=>$order_id,'disabled'=>true]) ?>
+            <?= $form->field($model, 'order_id')->textInput(['value'=>$order_id,'disabled'=>true]) ?>
             <?= $form->field($model, 'name')->textInput() ?>
             <?= $form->field($model, 'phone')->textInput() ?>
             <?= $form->field($model, 'other_phone')->textInput() ?>
