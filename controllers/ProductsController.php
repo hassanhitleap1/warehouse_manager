@@ -76,18 +76,20 @@ class ProductsController extends BaseController
        
 
         if ($model->load(Yii::$app->request->post())) {
-
+           
             $subProductCounts = Model::createMultiple(SubProductCount::classname());
             Model::loadMultiple($subProductCounts, Yii::$app->request->post());
         
              // validate all models
              $valid = $model->validate();
              $valid = Model::validateMultiple($subProductCounts) && $valid;
+            
              if ($valid) {
+                
                 $transaction = \Yii::$app->db->beginTransaction();
-
+                
                 try {
-                   
+                  
 
                     $file = UploadedFile::getInstance($model, 'thumbnail');
                     $images_product = UploadedFile::getInstances($model, 'images_product');
@@ -118,8 +120,10 @@ class ProductsController extends BaseController
                         }
                     }
 
+                  
                     if ($flag = $model->save(false)) {
-                        if(count($subProductCounts)){
+                    
+                        if(count($subProductCounts) > 1){
                             foreach ($subProductCounts as $subProductCount) {
                                 $subProductCount->product_id = $model->id;
                                 if (! ($flag = $subProductCount->save(false))) {
@@ -129,6 +133,7 @@ class ProductsController extends BaseController
                             }
                         
                         }else{
+                           
                             $subProductCount = new SubProductCount();
                              $subProductCount->product_id = $model->id;
                              $subProductCount->type=$model->name;
@@ -137,11 +142,10 @@ class ProductsController extends BaseController
                         }
                     
                     }
+                    
 
                     if ($flag) {
-                     
-            
-
+                    
                         $transaction->commit();
                         return $this->redirect(['view', 'id' => $model->id]);
                     }

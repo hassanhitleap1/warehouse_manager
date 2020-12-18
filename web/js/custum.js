@@ -142,3 +142,11 @@ $(document).on('change','.sub_product_id',function (e) {
     }
     return site_url+'/web';
 }
+
+
+
+
+
+$(document).on('change','.count_sub_product',function (e) {
+    $('#quantity').prop( "disabled", true );
+});
