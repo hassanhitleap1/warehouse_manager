@@ -44,12 +44,15 @@ $(document).on('change','.product_id',function (e) {
          success: function (json) {
             let html='';
             let data=json.data;
-            console.log(json);
             let product= json.product;
             let count_all=0;
             let quantity_item=0;
             let price =product.selling_price; 
+
+            $("#price_item_"+index).text(price);
+           
             let count_sub_product=$("#ordersitem-"+index+"-quantity").val();
+
             data.forEach((element,index) => {
                 if(index==0){
                     quantity_item+=element.count; 
@@ -101,6 +104,7 @@ $(document).on('change','.sub_product_id',function (e) {
          success: function (json) { 
              console.log(index);   
             $("#quantity_item_"+index).text(json.data.sub_product.count);
+            $("#ordersitem-"+index+"-quantity").attr('max',json.data.sub_product.count);
          }
      });
  });

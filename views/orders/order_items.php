@@ -46,6 +46,8 @@ $quantity_item=1;
                                 <span><?=Yii::t('app','Quantity_All')?> : <span id="quantity_all_<?= ($index)?>"></span> </span>
                                 /
                                 <span><?=Yii::t('app','Quantity_Item')?> : <span id="quantity_item_<?= ($index)?>"></span>  </span>
+                                /
+                                <span><?=Yii::t('app','Price')?> : <span class="price_item" id="price_item_<?= ($index)?>"></span>  </span>
                             </div>
                 
                             <div class="clearfix"></div>
