@@ -46,6 +46,18 @@ $this->params['breadcrumbs'][] = $this->title;
              
             [
                 'format' => 'raw',
+                'attribute' => 'order',
+                'value' => function($model){
+                    $order=' ';
+                    foreach($model['orderItems'] as $orderItems ){
+                        $order.= " ".Yii::t('app','Product')." ".$orderItems['product']['name'] ." ". Yii::t('app','Count')." ( ".$orderItems['quantity'] ." )"; 
+                    }
+                    return $order;
+                } ,
+
+            ],
+            [
+                'format' => 'raw',
                 'attribute' => 'country_id',
                 'value' =>  $model['country']['name_ar'],
 
@@ -86,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
            
             'created_at',
-            'updated_at',
+            // 'updated_at',
         ],
     ]) ?>
 

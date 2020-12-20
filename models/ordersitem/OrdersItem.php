@@ -2,6 +2,7 @@
 
 namespace app\models\ordersitem;
 
+use app\models\products\Products;
 use Carbon\Carbon;
 use Yii;
 
@@ -53,6 +54,10 @@ class OrdersItem extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getProduct()
+    {
+        return $this->hasOne(Products::className(), ['id' => 'product_id']);
+    } 
     /**
      * {@inheritdoc}
      * @return OrdersItemQuery the active query used by this AR class.
