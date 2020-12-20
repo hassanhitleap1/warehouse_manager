@@ -48,6 +48,33 @@ $(document).on('change','#delivery_price',function (e) {
 });
 
 
+
+
+function callculate_total_price(){
+    let total_price-0;
+     let delivery_price= parseInt( $("#delivery_price").val());
+    $(".price_item_count").each(function( index, element  ) {
+            total_price+= parseInt ($(element ).val());
+     });
+    
+    total_price+=delivery_price;
+     $("#total_price").val(total_price);
+    return total_price;
+    
+}
+
+function callculate_amount_required(){
+    let discount= parseInt($("#discount").val());
+    let delivery_price = ($('#delivery_price').val());
+    let total_price= callculate_total_price();
+    let amount_required=total_price-discount;
+    
+    $("#amount_required").val(amount_required);
+    return amount_required;
+    
+}
+
+
 $(document).on('change','.product_id',function (e) {
 
     let url= `${SITE_URL}/index.php?r=sub-product-count/get-product-items&id=${$(this).val()}`;
