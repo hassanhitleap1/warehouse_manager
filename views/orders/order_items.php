@@ -78,7 +78,7 @@ $quantity_item=1;
 
                                 <div class="col-sm-4">
                                     <?= $form->field($orderItem, "[{$index}]quantity")->textInput([
-                                        'class'=>'form-control quantity_sub_product','type' => 'number','low'=> 1 ,'value'=>$quantity_item])?>
+                                        'class'=>'form-control quantity_sub_product','type' => 'number','min'=> 1 ,'value'=>$quantity_item])?>
                                 </div>
                              
                             </div><!-- end:row -->  
