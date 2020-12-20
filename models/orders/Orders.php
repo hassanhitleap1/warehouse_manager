@@ -6,6 +6,8 @@ use app\models\area\Area;
 use app\models\regions\Regions;
 use Carbon\Carbon;
 use app\models\ordersitem\OrdersItem;
+use app\models\status\Status;
+use app\models\users\Users;
 use Yii;
 
 /**
@@ -145,8 +147,16 @@ class Orders extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Regions::className(), ['id' => 'region_id']);
     }
+    public function getStatus()
+    {
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
+    }
 
+    public function getUser()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'user_id']);
+    }
 
-
+    
 
 }

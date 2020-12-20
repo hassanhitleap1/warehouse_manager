@@ -32,13 +32,59 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'order_id',
             'user_id',
+               
+            [
+                'format' => 'raw',
+                'attribute' => 'user_id',
+                'value' => Yii::t('app','Name').": ". $model['user']['name'] ."  ".Yii::t('app','Phone')." : ".$model['user']['phone']."  ".Yii::t('app','Other_Phone')." : ".$model['user']['other_phone'] ,
+
+            ],
+            
             'delivery_date',
             'delivery_time',
-            'country_id',
-            'region_id',
-            'area_id',
+            
+             
+            [
+                'format' => 'raw',
+                'attribute' => 'country_id',
+                'value' =>  $model['country']['name_ar'],
+
+            ],
+           
+            
+             
+            [
+                'format' => 'raw',
+                'attribute' => 'region_id',
+                'value' =>  $model['region']['name_ar'],
+
+            ],
+           
+           
+            [
+                'format' => 'raw',
+                'attribute' => 'area_id',
+                'value' =>  $model['area']['name_ar'],
+
+            ],
+            
+             
+            [
+                'format' => 'raw',
+                'attribute' => 'status_id',
+                'value' =>  $model['status']['name_ar'],
+
+            ],
+           
             'address',
-            'status_id',
+            
+            [
+                'format' => 'raw',
+                'attribute' => 'status_id',
+                'value' =>  $model['status']['name_ar'],
+
+            ],
+           
             'created_at',
             'updated_at',
         ],
