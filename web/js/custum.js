@@ -18,6 +18,8 @@ $(document).on('change','#region_id',function (e) {
    let discount=$('#discount').val();
    let amount_required=total_price-discount;
      $('#amount_required').val(amount_required);
+     
+     callculate_amount_required();
  });
  $(document).on('keyup','.count_sub_product',function (e) {
      let count_sub_product=0;
@@ -45,6 +47,9 @@ $(document).on('change','#delivery_price',function (e) {
 
    $("#amount_required").val(amount_required);
    $('#total_price').val(total_price);
+    
+    
+     callculate_amount_required();
 });
 
 
@@ -140,6 +145,8 @@ $(document).on('change','.product_id',function (e) {
 
            $("#amount_required").val(amount_required);
            $('#total_price').val(total_price);
+             
+              callculate_amount_required();
          }
      });
  });
@@ -189,6 +196,7 @@ $(document).on('change','.sub_product_id',function (e) {
       let amount_required=total_price-discount;
       $("#total_price").val(total_price);
      $("#amount_required").val(total_price);
+      callculate_amount_required();
 
 });
 
