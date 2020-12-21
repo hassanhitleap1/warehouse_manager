@@ -19,7 +19,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-
+ <?= $content ?>
 </div>
 
 <footer class="footer">
