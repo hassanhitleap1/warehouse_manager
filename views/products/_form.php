@@ -29,20 +29,30 @@ if (!$model->isNewRecord) {
 
     
     $dataThumbnail = [
+      
+
+        'showCaption' => true,
+        'showRemove' => true,
+        'showUpload' => false,
         'initialPreview' => [
             Yii::getAlias('@web') . '/' . $model->thumbnail,
         ],
-        'initialPreviewAsData' => true,
+        'initialPreviewAsData' => false,
         'initialCaption' => Yii::getAlias('@web') . '/' . $model->thumbnail,
         'initialPreviewConfig' => [
             ['caption' => $model->name],
         ],
         'overwriteInitial' => false,
+     
 
     ];
 
 
     $dataImages = [
+        
+        'showCaption' => true,
+        'showRemove' => true,
+        'showUpload' => false,
         'initialPreview' => $images_path_product,
         'initialPreviewAsData' => true,
         'initialCaption' => Yii::getAlias('@web') . '/' . $model->thumbnail,
@@ -53,6 +63,20 @@ if (!$model->isNewRecord) {
 
     ];
 
+}else{
+    $dataThumbnail = [
+      
+       
+        'showCaption' => true,
+        'showRemove' => true,
+        'showUpload' => false
+    ];
+    $dataImages = [
+        
+        'showCaption' => true,
+        'showRemove' => true,
+        'showUpload' => false
+    ];
 }
 
 
@@ -72,7 +96,7 @@ if (!$model->isNewRecord) {
                         'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
                        
                     ]); ?>
-                <?= $form->field($model, 'thumbnail')->widget(FileInput::classname(), [
+                <?= $form->field($model, 'file')->widget(FileInput::classname(), [
                 'options' => ['accept' => 'image/*'],
                 'pluginOptions' => $dataThumbnail
                     ]);

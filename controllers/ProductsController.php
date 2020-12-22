@@ -91,7 +91,7 @@ class ProductsController extends BaseController
                 try {
                   
 
-                    $file = UploadedFile::getInstance($model, 'thumbnail');
+                    $file = UploadedFile::getInstance($model, 'file');
                     $images_product = UploadedFile::getInstances($model, 'images_product');
                     if (!is_null($file)) {
                         $folder_path = "products/$newId";
@@ -195,7 +195,7 @@ class ProductsController extends BaseController
                try {
                   
 
-                   $file = UploadedFile::getInstance($model, 'thumbnail');
+                   $file = UploadedFile::getInstance($model, 'file');
                    $images_product = UploadedFile::getInstances($model, 'images_product');
                    if (!is_null($file)) {
                        $folder_path = "products/$newId";

@@ -46,12 +46,13 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'purchasing_price', 'selling_price', 'category_id', 'warehouse_id'], 'required'],
+            [['name', 'purchasing_price', 'selling_price','category_id', 'warehouse_id'], 'required'],
             [['purchasing_price', 'selling_price'], 'number'],
             [['quantity', 'category_id', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
             [['name', 'thumbnail'], 'string', 'max' => 255],
              [['video_url'], 'string', 'max' => 500],
-            
+             [['file'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg,jpeg '],
+             
         ];
     }
 

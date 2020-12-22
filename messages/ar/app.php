@@ -138,5 +138,6 @@ return [
     "Quantity_All"=>"العدد الكلي",
     "Quantity_Item"=>"عدد الكلي للقطعة",
     "video_url"=>"رابط الفيديو",
-    "Price"=>"السعر"
+    "Price"=>"السعر",
+    "Video_Url"=>"رابط يوتيوب"
 ];
