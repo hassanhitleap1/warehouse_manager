@@ -61,6 +61,20 @@ class OrdersController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+    
+      /**
+     * Displays a single Orders model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionBill($id)
+    {
+        $this->layout = "empty";
+        return $this->render('bill', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
      * Creates a new Orders model.
