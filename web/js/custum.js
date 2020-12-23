@@ -13,6 +13,9 @@ $(document).on('change','#region_id',function (e) {
      });
  });
 
+
+
+
  $(document).on('change','#discount',function (e) {
    let total_price=0;
     let discount=0;
@@ -23,13 +26,24 @@ $(document).on('change','#region_id',function (e) {
      $('#amount_required').val(amount_required);
      
      callculate_amount_required();
+     profit_margin_fn();
  });
+
+
  $(document).on('keyup','.count_sub_product',function (e) {
      let count_sub_product=0;
     $( '.count_sub_product' ).each(function( index, element  ) {
         count_sub_product+= parseInt ($(element ).val());
       });
-      $("#quantity").val(count_sub_product)
+      $("#quantity").val(count_sub_product);
+
+    
+
+     
+
+
+
+      profit_margin_fn();
 
 });
  
@@ -53,18 +67,12 @@ $(document).on('change','#delivery_price',function (e) {
     
     
      
-    ();
+    
 });
 
 
 
-function profit_margin(){
-    let profit_margin=0;
-      $(".profits_margin").each(function( index, element  ) {
-                profit_margin+= parseInt ($(element ).val());
-          });
-    $('#profit_margin').val(profit_margin);
-}
+
 
 
 function callculate_total_price(){
@@ -148,9 +156,9 @@ $(document).on('change','.product_id',function (e) {
               });
              count_items=$("#ordersquinttay").val();
              
-             let discount= $("#discount").val();
+             let discount= parseInt($("#discount").val());
 
-             profit_margin();
+             profit_margin_fn();
               callculate_amount_required();
          }
      });
@@ -178,32 +186,34 @@ $(document).on('change','.sub_product_id',function (e) {
  });
 
  $(document).on('change','.quantity_sub_product',function (e) {
-
-      let quantity_sub_product =parseInt($(this).val());
-     
-     let total_price=0;
-     let quantity_sub_product_id_str=$(this).attr('id'); 
+    let quantity_sub_product =parseInt($(this).val());
+    let total_price=0;
+    let quantity_sub_product_id_str=$(this).attr('id'); 
     let index=quantity_sub_product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
         index=index.replaceAll('-product_id', '');
         index=index.replaceAll('-quantity', '');
-     let price= $("#price_"+index).val();
-         let profit_margin= parseInt($("#profit_margin_"+index).val());
-      
-     if(quantity_sub_product != '' && quantity_sub_product !='undefined'){
-         
+    let price= $("#price_"+index).val();
+    let profit_margin= parseInt($("#profit_margin_"+index).val());
+   
+ 
+    
+     if(quantity_sub_product != '' && quantity_sub_product !='undefined' && ! isNaN(quantity_sub_product )){
         $("#profits_margin_"+index).val(profit_margin*quantity_sub_product);
          $("#price_item_"+index).val(price * quantity_sub_product);
      }
      
      $(".price_item_count").each(function( index, element  ) {
-            console.log($(element ).val())
            total_price+= parseInt ($(element ).val());
       });
+
+   
+       
 
       let amount_required=total_price-discount;
       $("#total_price").val(total_price);
      $("#amount_required").val(total_price);
       callculate_amount_required();
+      profit_margin_fn();
 
 });
 
@@ -223,3 +233,16 @@ $(document).on('change','.sub_product_id',function (e) {
 $(document).on('change','.count_sub_product',function (e) {
     $('#quantity').prop( "disabled", true );
 });
+
+
+function profit_margin_fn(){
+    let profit_margin=0;
+    let discount=0;
+    discount=parseInt($("#discount").val());
+      $(".profits_margin").each(function( index, element  ) {
+                profit_margin+= parseInt ($(element ).val());
+          });
+
+          profit_margin-=discount;
+    $('#profit_margin').val(profit_margin);
+}
