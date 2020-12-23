@@ -35,6 +35,7 @@ class Orders extends \yii\db\ActiveRecord
     public $start;
     public $end;
     public $sub_product_id;
+    public $profit_margin;
     /**
      * {@inheritdoc}
      */
@@ -50,7 +51,7 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             [[ 'status_id','phone','other_phone','address','delivery_price','discount','total_price','amount_required'], 'required'],
-            [['user_id', 'country_id', 'region_id', 'area_id', 'status_id','delivery_price','discount','total_price','amount_required'], 'integer'],
+            [['user_id', 'country_id', 'region_id', 'area_id', 'status_id','delivery_price','discount','total_price','amount_required','profit_margin'], 'integer'],
             [['delivery_date', 'delivery_time'], 'safe'],
             [['order_id'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 250],
@@ -84,6 +85,7 @@ class Orders extends \yii\db\ActiveRecord
             'sub_product_id'=> Yii::t('app', 'Sub_Product_Id'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
+            'profit_margin'=> Yii::t('app', 'Profit_Margin'),
         ];
     }
 
