@@ -139,5 +139,6 @@ return [
     "Quantity_Item"=>"عدد الكلي للقطعة",
     "video_url"=>"رابط الفيديو",
     "Price"=>"السعر",
-    "Video_Url"=>"رابط يوتيوب"
+    "Video_Url"=>"رابط يوتيوب",
+    "Profit_Margin"=>"هامش الربح"
 ];
