@@ -60,7 +60,7 @@ $(document).on('change','#delivery_price',function (e) {
 
 function profit_margin(){
     let profit_margin=0;
-      $(".profit_margin").each(function( index, element  ) {
+      $(".profits_margin").each(function( index, element  ) {
                 profit_margin+= parseInt ($(element ).val());
           });
     $('#profit_margin').val(profit_margin);
@@ -139,6 +139,7 @@ $(document).on('change','.product_id',function (e) {
             $("#ordersitem-"+index+"-id").html(html);
             $("#price_"+index).val(price);
              $("#profit_margin_"+index).val(profit_margin);
+             $("#profits_margin_"+index).val(profit_margin);
 
            
              total_price=0;
@@ -178,7 +179,7 @@ $(document).on('change','.sub_product_id',function (e) {
 
  $(document).on('change','.quantity_sub_product',function (e) {
 
-      let quantity_sub_product =$(this).val();
+      let quantity_sub_product =parseInt($(this).val());
      
      let total_price=0;
      let quantity_sub_product_id_str=$(this).attr('id'); 
@@ -186,9 +187,11 @@ $(document).on('change','.sub_product_id',function (e) {
         index=index.replaceAll('-product_id', '');
         index=index.replaceAll('-quantity', '');
      let price= $("#price_"+index).val();
-        
+         let profit_margin= parseInt($("#profit_margin_"+index).val());
+      
      if(quantity_sub_product != '' && quantity_sub_product !='undefined'){
-        
+         
+        $("#profits_margin_"+index).val(profit_margin*quantity_sub_product);
          $("#price_item_"+index).val(price * quantity_sub_product);
      }
      
