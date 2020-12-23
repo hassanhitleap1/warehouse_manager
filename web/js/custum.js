@@ -14,9 +14,12 @@ $(document).on('change','#region_id',function (e) {
  });
 
  $(document).on('change','#discount',function (e) {
-   let total_price=$('#total_price').val();
-   let discount=$('#discount').val();
-   let amount_required=total_price-discount;
+   let total_price=0;
+    let discount=0;
+     let amount_required=0;
+     total_price=parseInt($('#total_price').val());
+     discount=parseInt($('#discount').val());
+    amount_required=total_price-discount;
      $('#amount_required').val(amount_required);
      
      callculate_amount_required();
@@ -49,7 +52,8 @@ $(document).on('change','#delivery_price',function (e) {
    $('#total_price').val(total_price);
     
     
-     callculate_amount_required();
+     
+    ();
 });
 
 
@@ -57,7 +61,8 @@ $(document).on('change','#delivery_price',function (e) {
 
 function callculate_total_price(){
     let total_price=0;
-     let delivery_price= parseInt( $("#delivery_price").val());
+    let delivery_price=0;
+     delivery_price= parseInt( $("#delivery_price").val());
     $(".price_item_count").each(function( index, element  ) {
             total_price+= parseInt ($(element ).val());
      });
@@ -69,10 +74,16 @@ function callculate_total_price(){
 }
 
 function callculate_amount_required(){
-    let discount= parseInt($("#discount").val());
-    let delivery_price =parseInt ($('#delivery_price').val());
-    let total_price= callculate_total_price();
-    let amount_required=total_price-discount+delivery_price;
+    
+    let discount= 0;
+    let delivery_price=0;
+    let total_price=0;
+    let amount_required=0;
+    
+        discount=parseInt($("#discount").val());
+         delivery_price =parseInt ($('#delivery_price').val());
+        total_price= callculate_total_price();
+        amount_required=total_price-discount+delivery_price;
     $("#amount_required").val(amount_required);
     return amount_required;
     
@@ -129,21 +140,7 @@ $(document).on('change','.product_id',function (e) {
              count_items=$("#ordersquinttay").val();
              
              let discount= $("#discount").val();
-             
 
-    
-
-            $(".price_item_count").each(function( index, element  ) {
-                 console.log($(element ).val());
-                total_price+= parseInt ($(element ).val());
-           });
-
-           total_price+=delivery_price;
-
-           let amount_required=total_price-discount;
-
-           $("#amount_required").val(amount_required);
-           $('#total_price').val(total_price);
              
               callculate_amount_required();
          }
