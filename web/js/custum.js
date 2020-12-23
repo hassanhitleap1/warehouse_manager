@@ -58,6 +58,14 @@ $(document).on('change','#delivery_price',function (e) {
 
 
 
+function profit_margin(){
+    let profit_margin=0;
+      $(".profit_margin").each(function( index, element  ) {
+                profit_margin+= parseInt ($(element ).val());
+          });
+    $('#profit_margin').val(profit_margin);
+}
+
 
 function callculate_total_price(){
     let total_price=0;
@@ -74,12 +82,10 @@ function callculate_total_price(){
 }
 
 function callculate_amount_required(){
-    
     let discount= 0;
     let delivery_price=0;
     let total_price=0;
     let amount_required=0;
-    
         discount=parseInt($("#discount").val());
          delivery_price =parseInt ($('#delivery_price').val());
         total_price= callculate_total_price();
@@ -109,6 +115,7 @@ $(document).on('change','.product_id',function (e) {
             let quantity_item=0;
             let price =product.selling_price; 
             let delivery_price= parseInt( $("#delivery_price").val());
+            let profit_margin = parseInt(product.selling_price) - parseInt(product.purchasing_price);
             $("#price_items_"+index).text(price);
             let count_sub_product=$("#ordersitem-"+index+"-quantity").val();
             let price_item_price_count=price * count_sub_product;
@@ -131,6 +138,7 @@ $(document).on('change','.product_id',function (e) {
             $("#quantity_all_"+index).text(count_all);
             $("#ordersitem-"+index+"-id").html(html);
             $("#price_"+index).val(price);
+             $("#profit_margin_"+index).val(profit_margin);
 
            
              total_price=0;
@@ -141,7 +149,7 @@ $(document).on('change','.product_id',function (e) {
              
              let discount= $("#discount").val();
 
-             
+             profit_margin();
               callculate_amount_required();
          }
      });
