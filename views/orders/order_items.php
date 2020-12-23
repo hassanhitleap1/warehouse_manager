@@ -63,7 +63,8 @@ $quantity_item=1;
                             <div class="row">
                                <input type="hidden" class="price" id="price_<?=$index?>" name="price" value="0">
                                 <input type="hidden" class="price_item_count" id="price_item_<?=$index?>" name="price_itme_count" value="0">
-                                  <input type="hidden" class="profit_margin" id="profit_margin_<?=$index?>" name="profit_margin" value="0">
+                                <input type="hidden" class="profit_margin" id="profit_margin_<?=$index?>" name="profit_margin" value="0">
+                                  <input type="hidden" class="profits_margin" id="profits_margin_<?=$index?>" name="profits_margin" value="0">
                                 <div class="col-sm-4">
                                     <?= $form->field($orderItem,"[{$index}]product_id")->widget(Select2::classname(), [
                                             'data' =>  ArrayHelper::map(Products::find()->all(), 'id', 'name'),
@@ -112,6 +113,7 @@ $(".add-item").on("click", function(e) {
             $("#quantity_all_0"+(index+1)).attr('id',"quantity_all_"+(index+1));
             $("#quantity_item_0"+(index+1)).attr('id',"quantity_item_"+(index+1));
             $("#profit_margin_0"+(index+1)).attr('id',"profit_margin_"+(index+1));
+            $("#profits_margin_0"+(index+1)).attr('id',"profits_margin_"+(index+1));
             
         }, 1000);;
         
