@@ -89,6 +89,7 @@ if (!$model->isNewRecord) {
             <?= $form->field($model, 'delivery_price')->textInput(['id'=>'delivery_price','value'=>$delivery_price]) ?>
             <?= $form->field($model, 'total_price')->textInput(['id'=>'total_price']) ?>
             <?= $form->field($model, 'amount_required')->textInput(['id'=>'amount_required']) ?>
+            <?= $form->field($model, 'profit_margin')->textInput(['id'=>'profit_margin','disabled'=>true]) ?>
         </div>
     </div>
 
