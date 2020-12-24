@@ -27,7 +27,7 @@ function callculate_all(){
      let amount_required=0;
      
   
-     if(! isNaN($('#total_price').val()){
+     if(! isNaN($('#total_price').val())){
         total_price=parseInt($('#total_price').val());
       }
                 
@@ -63,11 +63,11 @@ function callculate_all(){
 $(document).on('change','#delivery_price',function (e) {
     
     let delivery_price= 0;;
-     if(! isNaN($(this).val()){
+     if(! isNaN($(this).val())){
         delivery_price=parseInt($(this).val())
      }
     let discount= 0;
-    if(! isNaN($("#discount").val()){
+    if(! isNaN($("#discount").val())){
         discount=parseInt($("#discount").val());
     }
                
