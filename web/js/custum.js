@@ -31,7 +31,7 @@ function callculate_all(){
         total_price=parseInt($('#total_price').val());
       }
                 
-       if(! isNaN($('#discount').val()){
+       if(! isNaN($('#discount').val())){
               discount=parseInt($('#discount').val());
       }        
 
@@ -50,7 +50,7 @@ function callculate_all(){
         count_sub_product+= parseInt ($(element ).val());
       });
      
-     if(! isNaN($('#quantity').val()){
+     if(! isNaN($('#quantity').val())){
          $("#quantity").val(count_sub_product);
      }
      
