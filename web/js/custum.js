@@ -1,18 +1,23 @@
 let SITE_URL = getSiteUrl() ;
 $(document).on('change','#region_id',function (e) {
     let url= `${SITE_URL}/index.php?r=regions/get-price&id=${$(this).val()}`;
-   
      $.ajax({
          url: url,
          type: 'GET',
-        
          success: function (json) {
              delivery_price=json.data.price_delivery;
             $('#delivery_price').val(delivery_price);
+              callculate_all();
+             
          }
      });
  });
 
+
+function callculate_all(){
+    callculate_amount_required();
+     profit_margin_fn();
+}
 
 
 
@@ -20,38 +25,52 @@ $(document).on('change','#region_id',function (e) {
    let total_price=0;
     let discount=0;
      let amount_required=0;
-     total_price=parseInt($('#total_price').val());
-     discount=parseInt($('#discount').val());
-    amount_required=total_price-discount;
-     $('#amount_required').val(amount_required);
      
-     callculate_amount_required();
-     profit_margin_fn();
+  
+     if(! isNaN($('#total_price').val()){
+        total_price=parseInt($('#total_price').val());
+      }
+                
+       if(! isNaN($('#discount').val()){
+              discount=parseInt($('#discount').val());
+      }        
+
+    amount_required=total_price-discount;
+
+     $('#amount_required').val(amount_required);
+
+     callculate_all();
  });
 
 
  $(document).on('keyup','.count_sub_product',function (e) {
      let count_sub_product=0;
+     
     $( '.count_sub_product' ).each(function( index, element  ) {
         count_sub_product+= parseInt ($(element ).val());
       });
-      $("#quantity").val(count_sub_product);
-
-    
-
+     
+     if(! isNaN($('#quantity').val()){
+         $("#quantity").val(count_sub_product);
+     }
      
 
-
-
-      profit_margin_fn();
+    callculate_all();
 
 });
  
 
 $(document).on('change','#delivery_price',function (e) {
-    let delivery_price= parseInt($(this).val());
     
-    let discount= parseInt($("#discount").val());
+    let delivery_price= 0;;
+     if(! isNaN($(this).val()){
+        delivery_price=parseInt($(this).val())
+     }
+    let discount= 0;
+    if(! isNaN($("#discount").val()){
+        discount=parseInt($("#discount").val());
+    }
+               
              
     $(".price_item_count").each(function( index, element  ) {
          console.log($(element ).val());
@@ -65,7 +84,7 @@ $(document).on('change','#delivery_price',function (e) {
    $("#amount_required").val(amount_required);
    $('#total_price').val(total_price);
     
-    
+     callculate_all();
      
     
 });
