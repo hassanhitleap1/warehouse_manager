@@ -35,7 +35,7 @@ class Orders extends \yii\db\ActiveRecord
     public $start;
     public $end;
     public $sub_product_id;
-    public $profit_margin;
+
     /**
      * {@inheritdoc}
      */

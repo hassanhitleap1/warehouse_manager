@@ -7,6 +7,7 @@ use yii\db\Migration;
  */
 class m201201_210555_countries extends Migration
 {
+   
      
     public function up()
     {

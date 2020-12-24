@@ -29,6 +29,7 @@ class m201129_225724_orders extends Migration
             'delivery_price'=>$this->double()->defaultValue(0.0),
             "discount"=>$this->double()->defaultValue(0.0),
             "total_price"=>$this->double()->notNull(),
+            "profit_margin"=>$this->double()->notNull(),
             "amount_required"=>$this->double()->notNull(),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
