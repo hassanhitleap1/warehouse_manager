@@ -7,6 +7,17 @@ use yii\db\Migration;
  */
 class m201129_215529_status extends Migration
 {
+
+    public $data=[
+        ['name_en'=>'To be equipped','name_ar'=>'مطلوب تجهيزه'],
+        ['name_en'=>'to be ready','name_ar'=>'قيد التجهيز'],
+        ['name_en'=>'ready','name_ar'=>'تم تجهيزه'],
+        ['name_en'=>'to be deliverd','name_ar'=>'قيد التوصيل'],
+        ['name_en'=>'to be deliverd','name_ar'=>'تم توصيله'],
+        ['name_en'=>'canceled','name_ar'=>'ملغي'],
+        ['name_en'=>'delayed','name_ar'=>'مؤجل'],
+      
+    ];
     public function up()
     {
         $tableOptions = null;
@@ -22,6 +33,11 @@ class m201129_215529_status extends Migration
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);
+
+        Yii::$app->db
+        ->createCommand()
+        ->batchInsert('status', ['name_en','name_ar'], $this->data)
+        ->execute();
     }
 
     public function down()

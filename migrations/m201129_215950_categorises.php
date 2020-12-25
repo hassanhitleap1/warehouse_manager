@@ -7,6 +7,10 @@ use yii\db\Migration;
  */
 class m201129_215950_categorises extends Migration
 {
+    public $data=[
+        ['name_en'=>'Houseware','name_ar'=>'ادوات منزلية'],
+        ['name_en'=>'kitchen utensils','name_ar'=>'ادوات مطبخ'],
+    ];
     public function up()
     {
         $tableOptions = null;
@@ -22,6 +26,11 @@ class m201129_215950_categorises extends Migration
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);
+
+        Yii::$app->db
+        ->createCommand()
+        ->batchInsert('categorises', ['name_en','name_ar'], $this->data)
+        ->execute();
     }
 
     public function down()

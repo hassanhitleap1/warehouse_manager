@@ -7,6 +7,9 @@ use yii\db\Migration;
  */
 class m201129_215625_warehouse extends Migration
 {
+    public $data=[
+       ['name' =>"مستودع 1 "]
+    ];
     public function up()
     {
         $tableOptions = null;
@@ -22,6 +25,10 @@ class m201129_215625_warehouse extends Migration
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);
+        Yii::$app->db
+        ->createCommand()
+        ->batchInsert('warehouse', ['name'], $this->data)
+        ->execute();
     }
 
     public function down()

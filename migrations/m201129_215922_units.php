@@ -7,6 +7,13 @@ use yii\db\Migration;
  */
 class m201129_215922_units extends Migration
 {
+    
+    
+    public $data=[
+        ['name_en'=>'pisces','name_ar'=>'قطعة '],
+        ['name_en'=>'kilo','name_ar'=>'كيلو'],
+    ];
+
     public function up()
     {
         $tableOptions = null;
@@ -22,6 +29,11 @@ class m201129_215922_units extends Migration
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);
+
+        Yii::$app->db
+        ->createCommand()
+        ->batchInsert('units', ['name_en','name_ar'], $this->data)
+        ->execute();
     }
 
     public function down()
