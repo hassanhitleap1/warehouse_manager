@@ -23,30 +23,12 @@ function callculate_all(){
 
 
  $(document).on('change','#discount',function (e) {
-   let total_price=0;
-    let discount=0;
-     let amount_required=0;
-     
-  
-     if(! isNaN($('#total_price').val())){
-        total_price=parseInt($('#total_price').val());
-      }
-                
-       if(! isNaN($('#discount').val())){
-              discount=parseInt($('#discount').val());
-      }        
-
-    amount_required=total_price-discount;
-
-     $('#amount_required').val(amount_required);
-
      callculate_all();
  });
 
 
  $(document).on('keyup','.count_sub_product',function (e) {
      let count_sub_product=0;
-     
     $( '.count_sub_product' ).each(function( index, element  ) {
         count_sub_product+= parseInt ($(element ).val());
       });
@@ -54,46 +36,13 @@ function callculate_all(){
      if(! isNaN($('#quantity').val())){
          $("#quantity").val(count_sub_product);
      }
-     
-
     callculate_all();
-
 });
  
 
 $(document).on('change','#delivery_price',function (e) {
-    
-    let delivery_price= 0;;
-     if(! isNaN($(this).val())){
-        delivery_price=parseInt($(this).val())
-     }
-    let discount= 0;
-    if(! isNaN($("#discount").val())){
-        discount=parseInt($("#discount").val());
-    }
-               
-             
-    $(".price_item_count").each(function( index, element  ) {
-         console.log($(element ).val());
-        total_price+= parseInt ($(element ).val());
-   });
-
-   total_price+=delivery_price;
-
-   let amount_required=total_price-discount;
-
-   $("#amount_required").val(amount_required);
-   $('#total_price').val(total_price);
-    
-     callculate_all();
-     
-    
+     callculate_all();  
 });
-
-
-
-
-
 
 function callculate_total_price(){
     let total_price=0;
@@ -105,9 +54,7 @@ function callculate_total_price(){
     
     total_price+=delivery_price;
      $("#total_price").val(total_price);
-
     return total_price;
-    
 }
 
 
@@ -141,7 +88,7 @@ $(document).on('change','.product_id',function (e) {
             let count_all=0;
             let quantity_item=0;
             let price =product.selling_price; 
-            let delivery_price= parseInt( $("#delivery_price").val());
+            
             let profit_margin = parseInt(product.selling_price) - parseInt(product.purchasing_price);
             $("#price_items_"+index).text(price);
             let count_sub_product=$("#ordersitem-"+index+"-quantity").val();
@@ -168,13 +115,7 @@ $(document).on('change','.product_id',function (e) {
              $("#profit_margin_"+index).val(profit_margin);
              $("#profits_margin_"+index).val(profit_margin);
 
-           
-             total_price=0;
-             $(".selling_price").each(function( index, element  ) {
-                total_price+= parseInt ($(element ).val());
-              });
-             count_items=$("#ordersquinttay").val();
-             let discount= parseInt($("#discount").val());
+             
              callculate_all();
             
          }
@@ -229,8 +170,7 @@ $(document).on('change','.sub_product_id',function (e) {
       let amount_required=total_price-discount;
       $("#total_price").val(total_price);
      $("#amount_required").val(total_price);
-      callculate_amount_required();
-      profit_margin_fn();
+     callculate_all();
 
 });
 
@@ -245,7 +185,9 @@ $(document).on('change','.sub_product_id',function (e) {
 
 
 
-
+$(document).on('click','.remove-item',function (e) {
+    callculate_all();
+});
 
 $(document).on('change','.count_sub_product',function (e) {
     $('#quantity').prop( "disabled", true );
