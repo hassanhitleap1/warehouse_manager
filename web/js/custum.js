@@ -16,6 +16,7 @@ $(document).on('change','#region_id',function (e) {
 
 function callculate_all(){
     callculate_amount_required();
+    callculate_total_price();
      profit_margin_fn();
 }
 
@@ -104,19 +105,18 @@ function callculate_total_price(){
     
     total_price+=delivery_price;
      $("#total_price").val(total_price);
+
     return total_price;
     
 }
 
+
 function callculate_amount_required(){
-    let discount= 0;
-    let delivery_price=0;
-    let total_price=0;
-    let amount_required=0;
-        discount=parseInt($("#discount").val());
-         delivery_price =parseInt ($('#delivery_price').val());
-        total_price= callculate_total_price();
-        amount_required=total_price-discount+delivery_price;
+    let amount_required=0
+    $(".price_item_count").each(function( index, element  ) {
+        amount_required+= parseInt ($(element ).val());
+    });
+  
     $("#amount_required").val(amount_required);
     return amount_required;
     
@@ -174,11 +174,9 @@ $(document).on('change','.product_id',function (e) {
                 total_price+= parseInt ($(element ).val());
               });
              count_items=$("#ordersquinttay").val();
-             
              let discount= parseInt($("#discount").val());
-
-             profit_margin_fn();
-              callculate_amount_required();
+             callculate_all();
+            
          }
      });
  });
