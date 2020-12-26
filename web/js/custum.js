@@ -49,7 +49,22 @@ $(document).on('change','#delivery_price',function (e) {
 });
 
 function callculate_total_price(){
-    let total_price=0;
+
+    let total_price=0
+    $(".price_item_count").each(function( index, element  ) {
+        total_price+= parseInt ($(element ).val());
+    });
+  
+    $("#total_price").val(total_price);
+    return total_price;
+
+    
+}
+
+
+function callculate_amount_required(){
+
+    let amount_required=0;
     let delivery_price=0;
     let discount=0;
     if(!isNaN($("#discount").val())){
@@ -58,24 +73,15 @@ function callculate_total_price(){
      delivery_price= parseInt( $("#delivery_price").val());
      
     $(".price_item_count").each(function( index, element  ) {
-            total_price+= parseInt ($(element ).val());
+        amount_required+= parseInt ($(element ).val());
      });
     
-     total_price-=discount;
-    total_price+=delivery_price;
-     $("#total_price").val(total_price);
-    return total_price;
-}
-
-
-function callculate_amount_required(){
-    let amount_required=0
-    $(".price_item_count").each(function( index, element  ) {
-        amount_required+= parseInt ($(element ).val());
-    });
-  
-    $("#amount_required").val(amount_required);
+     amount_required-=discount;
+     amount_required+=delivery_price;
+     $("#amount_required").val(amount_required);
     return amount_required;
+
+    
     
 }
 
