@@ -22,8 +22,8 @@ class m201129_215625_warehouse extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string(32)->notNull(),
             'localtion'=> $this->string(32)->notNull(),
-            'created_at' => $this->dateTime()->notNull(),
-            'updated_at' => $this->dateTime()->notNull(),
+            'created_at' => $this->dateTime()->default(null),
+            'updated_at' => $this->dateTime()->default(null),
         ], $tableOptions);
         Yii::$app->db
         ->createCommand()

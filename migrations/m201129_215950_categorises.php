@@ -23,8 +23,8 @@ class m201129_215950_categorises extends Migration
             'id' => $this->primaryKey(),
             'name_en' => $this->string(32)->notNull(),
             'name_ar' => $this->string(32)->notNull(),
-            'created_at' => $this->dateTime()->notNull(),
-            'updated_at' => $this->dateTime()->notNull(),
+            'created_at' => $this->dateTime()->defaultValue(null),
+            'updated_at' => $this->dateTime()->defaultValue(null),
         ], $tableOptions);
 
         Yii::$app->db
