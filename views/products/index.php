@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'status',
             [
                 'attribute' => 'supplier_id',
-                'value' => 'supplier.name_ar',
+                'value' => 'supplier.name',
                     'filter' =>Select2::widget([
                     'name' => 'supplier_id',
                     "value"=>(isset($_GET['supplier_id']))?$_GET['supplier_id']:null,
