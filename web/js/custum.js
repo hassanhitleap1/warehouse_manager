@@ -26,6 +26,10 @@ function callculate_all(){
      callculate_all();
  });
 
+ $(document).on('keyup','#discount',function (e) {
+    callculate_all();
+});
+
 
  $(document).on('keyup','.count_sub_product',function (e) {
      let count_sub_product=0;
@@ -47,11 +51,17 @@ $(document).on('change','#delivery_price',function (e) {
 function callculate_total_price(){
     let total_price=0;
     let delivery_price=0;
+    let discount=0;
+    if(!isNaN($("#discount").val())){
+        discount= parseInt( $("#discount").val());
+    }
      delivery_price= parseInt( $("#delivery_price").val());
+     
     $(".price_item_count").each(function( index, element  ) {
             total_price+= parseInt ($(element ).val());
      });
     
+     total_price-=discount;
     total_price+=delivery_price;
      $("#total_price").val(total_price);
     return total_price;
