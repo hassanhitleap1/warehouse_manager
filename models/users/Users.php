@@ -43,9 +43,9 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['phone'], 'required'],
+            [['phone','name'], 'required'],
             [['status', 'country_id', 'region_id', 'area_id'], 'integer'],
-            [['username', 'email'], 'string', 'max' => 255],
+            [['username', 'email','name'], 'string', 'max' => 255],
             [['phone', 'other_phone', 'auth_key'], 'string', 'max' => 32],
             [['address'], 'string', 'max' => 250],
             [['email'], 'unique'],
@@ -63,6 +63,7 @@ class Users extends \yii\db\ActiveRecord
             'other_phone' => Yii::t('app', 'Other_Phone'),
             'email' => Yii::t('app', 'Email'),
             'status' => Yii::t('app', 'Status'),
+            'name' => Yii::t('app', 'Name'),
             'country_id' => Yii::t('app', 'Country'),
             'region_id' => Yii::t('app', 'Region'),
             'area_id' => Yii::t('app', 'Area'),

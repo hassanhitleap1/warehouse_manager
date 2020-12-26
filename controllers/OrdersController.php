@@ -94,15 +94,38 @@ class OrdersController extends Controller
             // validate all models
             $valid = $model->validate();
             $valid = Model::validateMultiple($ordersItem) && $valid;
-            
+         
+    
             if ($valid) {
                 $transaction = \Yii::$app->db->beginTransaction();
-
-               
+              
+                
                 try {
 
+                        
+                    $user= new Users();
+                    
+                    $user->phone = $model->phone;
+                    
+                    $user->other_phone = $model->other_phone;
+                 
+                    $user->email =null;
+                    $user->name = $model->name;;
+                   
+                    $user->country_id = ($model->country_id !='') ? $model->country_id :null  ;
+                    $user->region_id = ($model->region_id !='') ? $model->region_id :null  ;
+                    $user->area_id = ($model->area_id !='') ? $model->area_id :null  ;
+                    $user->address = $model->address;
+                  
+                    if(! $flag = $user->save(false)){
+                        print_r($user->errors);
+                        exit;
+                    };
+
+                    $model->user_id=$user->id;
+                 
                     if ($flag = $model->save(false)) {
-                       
+                        
                         foreach ($ordersItem as $orderItem) {
                             
                             $orderItem->order_id = $model->id;
@@ -115,8 +138,6 @@ class OrdersController extends Controller
 
                    
                     if ($flag) {
-
-
                         $transaction->commit();
                         return $this->redirect(['view', 'id' => $model->id]);
                     }

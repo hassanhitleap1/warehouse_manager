@@ -20,6 +20,7 @@ class m201129_214103_user extends Migration
             'id' => $this->primaryKey(),
             'username' => $this->string()->unique(),
             'phone' => $this->string(32)->notNull(),
+            'name'=> $this->string(255)->notNull(),
             'other_phone' => $this->string(32)->defaultValue(null),
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
