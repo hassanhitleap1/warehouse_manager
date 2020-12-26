@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'format' => 'raw',
                 'attribute' => 'warehouse_id',
-                'value' =>  $model->warehouse->name,
+                'value' =>  $model['warehouse']['name'],
             ],
             'created_at',
             'updated_at',
