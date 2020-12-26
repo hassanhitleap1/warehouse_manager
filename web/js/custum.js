@@ -152,13 +152,10 @@ $(document).on('change','.sub_product_id',function (e) {
         index=index.replaceAll('-quantity', '');
     let price= $("#price_"+index).val();
     let profit_margin= parseInt($("#profit_margin_"+index).val());
-   
- 
-    
-     if(quantity_sub_product != '' && quantity_sub_product !='undefined' && ! isNaN(quantity_sub_product )){
+    if(quantity_sub_product != '' && quantity_sub_product !='undefined' && ! isNaN(quantity_sub_product )){
         $("#profits_margin_"+index).val(profit_margin*quantity_sub_product);
          $("#price_item_"+index).val(price * quantity_sub_product);
-     }
+    }
      
      $(".price_item_count").each(function( index, element  ) {
            total_price+= parseInt ($(element ).val());
@@ -189,6 +186,9 @@ $(document).on('click','.remove-item',function (e) {
     callculate_all();
 });
 
+$(document).on('change','#area_id',function (e) {
+    callculate_all();
+});
 $(document).on('change','.count_sub_product',function (e) {
     $('#quantity').prop( "disabled", true );
 });
