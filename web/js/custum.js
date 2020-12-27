@@ -26,6 +26,13 @@ function callculate_all(){
      callculate_all();
  });
 
+ $(document).on('click','.print_invoice',function (e) {
+   
+    let path=$(this).attr("path_url");
+    open(path).print()
+});
+ 
+
  $(document).on('keyup','#discount',function (e) {
     callculate_all();
 });

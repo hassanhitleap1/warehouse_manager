@@ -120,9 +120,42 @@ $this->params['breadcrumbs'][] = $this->title;
             
             //'created_at',
             //'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {delete} {update}{bill}',  // the default buttons + your custom button
+                'buttons' => [
+                      'view' => function ($url, $model) 
+                        {
+                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                                        'title' => Yii::t('app', 'lead-view'),
+                                        'class' => ''
+                            ]);
+                        },
+    
+                        'update' => function ($url, $model) 
+                        {
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                                        'title' => Yii::t('app', 'lead-update'),
+                            ]);
+                        },
+                        'delete' => function ($url, $model)
+                        {
+                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                                        'title' => Yii::t('app', 'lead-delete'),
+                            ]);
+                        },
+                        'bill' => function ($url, $model) 
+                        {
+                            return Html::a('<span class="glyphicon glyphicon-print"></span>', '', [
+                                        'title' => Yii::t('app', 'lead-view'),
+                                        'class' => 'print_invoice',
+                                        'path_url'=>$url,
+                            ]);
+                        },
+                    
+                    ],
+                ],
+            ],
     ]); ?>
 
     <?php Pjax::end(); ?>

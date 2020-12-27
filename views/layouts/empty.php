@@ -1,6 +1,7 @@
 <?php
 
 use app\assets\AppAsset;
+use kartik\helpers\Html;
 
 AppAsset::register($this);
 ?>
