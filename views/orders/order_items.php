@@ -1,13 +1,13 @@
 <?php
 
 use app\models\products\Products;
-use app\models\productsimage\ProductsImage;
 use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
 $quantity_item=1;
-
+$products=ArrayHelper::map(Products::find()->all(), 'id', 'name');
+array_unshift($products,'-----');
 ?>
 <div class="panel panel-default">
     <div class="panel-body">
@@ -67,7 +67,7 @@ $quantity_item=1;
                                   <input type="hidden" class="profits_margin" id="profits_margin_<?=$index?>" name="profits_margin" value="0">
                                 <div class="col-sm-4">
                                     <?= $form->field($orderItem,"[{$index}]product_id")->widget(Select2::classname(), [
-                                            'data' =>  ArrayHelper::map(Products::find()->all(), 'id', 'name'),
+                                            'data' => $products,
                                             'language' => 'ar',
                                             'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'class'=>'product_id'],
                                         
