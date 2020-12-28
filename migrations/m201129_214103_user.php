@@ -18,21 +18,21 @@ class m201129_214103_user extends Migration
 
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
-            'username' => $this->string()->unique(),
-            'phone' => $this->string(32)->notNull(),
-            'name'=> $this->string(255)->notNull(),
+            'username' => $this->string()->unique()->defaultValue(null),
+            'phone' => $this->string(32)->notNull()->defaultValue(null),
+            'name'=> $this->string(255)->notNull()->defaultValue(null),
             'other_phone' => $this->string(32)->defaultValue(null),
-            'auth_key' => $this->string(32)->notNull(),
-            'password_hash' => $this->string()->notNull(),
-            'password_reset_token' => $this->string()->unique(),
-            'email' => $this->string()->unique(),
+            'auth_key' => $this->string(32)->notNull()->defaultValue(null),
+            'password_hash' => $this->string()->notNull()->defaultValue(null),
+            'password_reset_token' => $this->string()->unique()->defaultValue(null),
+            'email' => $this->string()->unique()->defaultValue(null),
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
             'country_id'=>$this->integer()->defaultValue(null),
             'region_id'=>$this->integer()->defaultValue(null),
             'area_id'=>$this->integer()->defaultValue(null),
             'address' => $this->string(250)->defaultValue(null),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer()->notNull()->defaultValue(null),
+            'updated_at' => $this->integer()->notNull()->defaultValue(null),
         ], $tableOptions);
     }
 
