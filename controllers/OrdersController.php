@@ -106,16 +106,20 @@ class OrdersController extends Controller
                     $user= new Users();
                     
                     $user->phone = $model->phone;
-                    
-                    $user->other_phone = $model->other_phone;
-                 
-                    $user->email =null;
-                    $user->name = $model->name;;
                    
+                    $user->other_phone = $model->other_phone;
+                    $user->name = $model->name;;
                     $user->country_id = ($model->country_id !='') ? $model->country_id :null  ;
                     $user->region_id = ($model->region_id !='') ? $model->region_id :null  ;
                     $user->area_id = ($model->area_id !='') ? $model->area_id :null  ;
                     $user->address = $model->address;
+                    $user->username=null;
+                    $user->email =null;
+                    $user->auth_key =null;
+                    $user->password_hash =null;
+                    $user->password_reset_token =null;
+                    $user->created_at=null;
+                    $user->updated_at=null;
                   
                     if(! $flag = $user->save(false)){
                         print_r($user->errors);
