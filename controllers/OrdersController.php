@@ -113,14 +113,7 @@ class OrdersController extends Controller
     
             if ($valid && $valid_user) {
                 $transaction = \Yii::$app->db->beginTransaction();
-              
-                
                 try {
-
-                        
-                   
-                    
-                   
                   
                     if(! $flag = $user->save(false)){
                         print_r($user->errors);
@@ -144,6 +137,8 @@ class OrdersController extends Controller
                    
                     if ($flag) {
                         $transaction->commit();
+                        print_r($user->errors);
+                        exit;
                         return $this->redirect(['view', 'id' => $model->id]);
                     }
                 } catch (Exception $e) {
