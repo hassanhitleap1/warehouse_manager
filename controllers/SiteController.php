@@ -140,4 +140,17 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    
+    
+    public function getStatistics(){
+       $statistics=Orders ::find()->select("count('profit_margin')");
+         $date=date('Y-m-d');
+        if(isset($_GET['date']) && $_GET['date'] !=''){
+            $date= $_GET['date'];
+        }
+           
+         $statistics= $statistics->andFilterWhere(['=', 'created_at', $date])->all();
+        
+        
+    }
 }
