@@ -110,16 +110,11 @@ class OrdersController extends Controller
             $user->created_at=null;
             $user->updated_at=null;
             $valid_user=$user->validate();
-    
+            $user->save();
+
             if ($valid && $valid_user) {
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
-                  
-                    if(! $flag = $user->save(false)){
-                        print_r($user->errors);
-                        exit;
-                    };
-
                     $model->user_id=$user->id;
                  
                     if ($flag = $model->save(false)) {
