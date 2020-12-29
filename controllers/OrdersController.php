@@ -116,6 +116,7 @@ class OrdersController extends Controller
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
                     $model->user_id=$user->id;
+                    $model->delivery_time= date("H:i", strtotime($model->delivery_time));
                  
                     if ($flag = $model->save(false)) {
                         
