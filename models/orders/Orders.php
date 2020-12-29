@@ -50,7 +50,7 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'status_id','phone','other_phone','name','address','delivery_price','discount','total_price','amount_required'], 'required'],
+            [[ 'order_id','status_id','phone','other_phone','name','address','delivery_price','discount','total_price','amount_required'], 'required'],
             [['user_id', 'country_id', 'region_id', 'area_id', 'status_id','delivery_price','discount','total_price','amount_required','profit_margin'], 'integer'],
             [['delivery_date', 'delivery_time'], 'safe'],
             [['name'],'string'],
