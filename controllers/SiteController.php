@@ -143,13 +143,27 @@ class SiteController extends Controller
     
     
     public function getStatistics(){
-       $statistics=Orders ::find()->select("count('profit_margin')");
+       $statistics_day=Orders ::find()->select("count('profit_margin')");
+        $statistics_week=Orders ::find()->select("count('profit_margin')");
+        $statistics_month=Orders ::find()->select("count('profit_margin')");
          $date=date('Y-m-d');
+        $month=date('Y-m-d');  
+         $week=date('Y-m-d');  
         if(isset($_GET['date']) && $_GET['date'] !=''){
             $date= $_GET['date'];
         }
            
-         $statistics= $statistics->andFilterWhere(['=', 'created_at', $date])->all();
+           if(isset($_GET['week']) && $_GET['week'] !=''){
+            $week= $_GET['week'];
+        }
+         if(isset($_GET['month']) && $_GET['month'] !=''){
+            $month= $_GET['month'];
+        }
+         $statistics_day= $statistics_day->andFilterWhere(['=', 'created_at', $date])->all();
+        
+          $statistics_week= $statistics_week->andFilterWhere(['=', 'created_at', $date])->all();
+        
+          $statistics_month= $statistics_month->andFilterWhere(['=', 'created_at', $date])->all();
         
         
     }
