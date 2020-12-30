@@ -109,10 +109,9 @@ class OrdersController extends Controller
             $user->password_reset_token =null;
             $user->created_at=null;
             $user->updated_at=null;
-            $valid_user=$user->validate();
-            $user->save();
-
-            if ($valid && $valid_user) {
+           
+            
+            if ($valid && $user->save()) {
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
                     $model->user_id=$user->id;
