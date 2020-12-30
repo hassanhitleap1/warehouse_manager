@@ -133,7 +133,7 @@ $(document).on('change','.product_id',function (e) {
             $("#quantity_item_"+index).text(quantity_item);
             $("#ordersitem-"+index+"-quantity").attr('max',quantity_item);
             $("#quantity_all_"+index).text(count_all);
-            $("#ordersitem-"+index+"-id").html(html);
+            $("#ordersitem-"+index+"-sub_product_id").html(html);
             $("#price_"+index).val(price);
              $("#profit_margin_"+index).val(profit_margin);
              $("#profits_margin_"+index).val(profit_margin);
