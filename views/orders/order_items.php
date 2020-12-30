@@ -75,7 +75,7 @@ array_unshift($products,'-----');
 
                                 </div>
                                 <div class="col-sm-4">
-                                     <?= $form->field($orderItem, "[{$index}]sub_product_id")->dropDownList([],['class'=>'form-control sub_product_id'])->label(Yii::t('app','Sub_Product_Id'))?>
+                                     <?= $form->field($orderItem, "[{$index}]id")->dropDownList([],['class'=>'form-control sub_product_id'])->label(Yii::t('app','Sub_Product_Id'))?>
                                 </div>
 
                                 <div class="col-sm-4">
