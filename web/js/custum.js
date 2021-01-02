@@ -121,7 +121,7 @@ $(document).on('change','.product_id',function (e) {
 
             console.log("price_item_price_count",price_item_price_count);
             console.log("index",index);
-
+            html=`<option value="">------</option>`; 
             data.forEach((element,index) => {
                 if(index==0){
                     quantity_item+=element.count; 
