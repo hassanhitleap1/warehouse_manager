@@ -31,7 +31,7 @@ class Orders extends \yii\db\ActiveRecord
     public $phone;
     public $name;
     public $other_phone;
-    public $address;
+    // public $address;
     public $start;
     public $end;
     public $sub_product_id;

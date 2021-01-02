@@ -101,3 +101,12 @@ if (!$model->isNewRecord) {
 
 </div>
 
+<script  type="text/javascript">
+
+$( document ).ready(function() {
+    // $( "#orders-order_id" ).prop( "disabled", true );
+    // $( "#profit_margin" ).prop( "disabled", true );
+    
+});
+
+</script>
