@@ -162,27 +162,33 @@ class OrdersController extends Controller
     {
         $model = $this->findModel($id);
 
-        $orderItems = $model->orderItems;
-
+        $ordersItem = $model->orderItems;
+        
         if ($model->load(Yii::$app->request->post())) {
-            $oldIDs = ArrayHelper::map($orderItems, 'id', 'id');
-            $orderItems = Model::createMultiple(OrdersItem::classname(), $orderItems);
-            Model::loadMultiple($orderItems, Yii::$app->request->post());
-            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($orderItems, 'id', 'id')));
+            $oldIDs = ArrayHelper::map($ordersItem, 'id', 'id');
+            $ordersItem = Model::createMultiple(OrdersItem::classname(), $ordersItem);
+            Model::loadMultiple($ordersItem, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($ordersItem, 'id', 'id')));
             // validate all models
             $valid = $model->validate();
-            $valid = Model::validateMultiple($orderItems) && $valid;
+            $valid = Model::validateMultiple($ordersItem) && $valid;
 
-
-
-
-            if ($valid) {
+            $user= Users::findOne($model->user_id);
+            $user->phone = $model->phone;
+            $user->other_phone = $model->other_phone;
+            $user->name = $model->name;;
+            $user->country_id = ($model->country_id !='') ? $model->country_id :null  ;
+            $user->region_id = ($model->region_id !='') ? $model->region_id :null  ;
+            $user->area_id = ($model->area_id !='') ? $model->area_id :null  ;
+            $user->address = $model->address;
+           
+            if ($valid && $user->save()) {
                 $transaction = \Yii::$app->db->beginTransaction();
 
                 try {
 
                     if ($flag = $model->save(false)) {
-                        foreach ($orderItems as $orderItem) {
+                        foreach ($ordersItem as $orderItem) {
                             $orderItem->order_id = $model->id;
                             if (! ($flag = $orderItem->save(false))) {
                                 $transaction->rollBack();
@@ -192,21 +198,7 @@ class OrdersController extends Controller
                     }
 
                     if ($flag) {
-                        $user= new Users();
-                        $user->phone = $model->phone;
-                        $user->other_phone = $model->other_phone;
-                        $user->email =null;
-                        $user->country_id = $model->country_id;
-                        $user->region_id = $model->region_id;
-                        $user->area_id = $model->area_id;
-                        $user->address = $model->address;
-
-                        if (! ($flag = $user->save(false))) {
-                            $transaction->rollBack();
-                           
-                        }
-
-                        
+                   
                        
                        $transaction->commit();
                        return $this->redirect(['view', 'id' => $model->id]);
@@ -222,7 +214,7 @@ class OrdersController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'orderItems' => (empty($orderItems)) ? [new OrdersItem()] : $orderItems
+            'ordersItem' => (empty($ordersItem)) ? [new OrdersItem()] : $ordersItem
         ]);
 
     }

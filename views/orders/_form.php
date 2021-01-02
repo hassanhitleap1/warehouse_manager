@@ -14,11 +14,18 @@ use kartik\date\DatePicker;
 use kartik\time\TimePicker;
 $order_id = (string) Orders::find()->count() + 1 ;
 $delivery_price=0;
-
-
+$name=null;
+$phone=null;
+$other_phone=null;
+$address=null;
 if (!$model->isNewRecord) {
     $order_id=$model->order_id;
     $delivery_price=$model->delivery_price;
+    $user=$model->user;
+    $name=$user->name;
+    $phone=$user->phone;
+    $other_phone=$user->other_phone;
+    $address=$user->address;
 }
 /* @var $this yii\web\View */
 /* @var $model app\models\orders\Orders */
@@ -31,10 +38,10 @@ if (!$model->isNewRecord) {
     <div class="row">
         <div class="col-md-4">
             <?= $form->field($model, 'order_id')->textInput(['value'=>$order_id]) ?>
-            <?= $form->field($model, 'name')->textInput() ?>
-            <?= $form->field($model, 'phone')->textInput() ?>
-            <?= $form->field($model, 'other_phone')->textInput() ?>
-            <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'name')->textInput(['value'=>$name]) ?>
+            <?= $form->field($model, 'phone')->textInput(['value'=>$phone]) ?>
+            <?= $form->field($model, 'other_phone')->textInput(['value'=>$other_phone]) ?>
+            <?= $form->field($model, 'address')->textInput(['maxlength' => true,['value'=>$address]]) ?>
             <?= $form->field($model, 'delivery_date')->widget(DatePicker::classname(), [
                 'options' => ['placeholder' => Yii::t('app', 'Enter_date')],
                 'value' => Carbon::now('Asia/Amman')->toDateString(),

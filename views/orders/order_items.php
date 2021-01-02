@@ -1,6 +1,8 @@
 <?php
 
+use app\models\ordersitem\OrdersItem;
 use app\models\products\Products;
+use app\models\subproductcount\SubProductCount;
 use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\bootstrap\Html;
@@ -8,6 +10,12 @@ use yii\helpers\ArrayHelper;
 $quantity_item=1;
 $products=ArrayHelper::map(Products::find()->all(), 'id', 'name');
 array_unshift($products,'-----');
+$product_items[0]=[];
+if (!$model->isNewRecord) {
+    foreach($ordersItem as $key=> $orderItem){
+        $product_items[$key]=ArrayHelper::map(SubProductCount::find()->where(['product_id'=>$orderItem->product_id])->all(), 'id', 'type');
+    }
+}
 ?>
 <div class="panel panel-default">
     <div class="panel-body">
@@ -75,7 +83,7 @@ array_unshift($products,'-----');
 
                                 </div>
                                 <div class="col-sm-4">
-                                     <?= $form->field($orderItem, "[{$index}]sub_product_id")->dropDownList([],['class'=>'form-control sub_product_id'])->label(Yii::t('app','Sub_Product_Id'))?>
+                                     <?= $form->field($orderItem, "[{$index}]sub_product_id")->dropDownList($product_items[$index],['class'=>'form-control sub_product_id'])->label(Yii::t('app','Sub_Product_Id'))?>
                                 </div>
 
                                 <div class="col-sm-4">
