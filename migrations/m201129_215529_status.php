@@ -9,13 +9,13 @@ class m201129_215529_status extends Migration
 {
 
     public $data=[
-        ['name_en'=>'To be equipped','name_ar'=>'مطلوب تجهيزه'],
-        ['name_en'=>'to be ready','name_ar'=>'قيد التجهيز'],
-        ['name_en'=>'ready','name_ar'=>'تم تجهيزه'],
-        ['name_en'=>'to be deliverd','name_ar'=>'قيد التوصيل'],
-        ['name_en'=>'to be deliverd','name_ar'=>'تم توصيله'],
-        ['name_en'=>'canceled','name_ar'=>'ملغي'],
-        ['name_en'=>'delayed','name_ar'=>'مؤجل'],
+        ['name_en'=>'To be equipped','name_ar'=>'مطلوب تجهيزه','color'=>''],
+        ['name_en'=>'to be ready','name_ar'=>'قيد التجهيز','color'=>''],
+        ['name_en'=>'ready','name_ar'=>'تم تجهيزه','color'=>''],
+        ['name_en'=>'to be deliverd','name_ar'=>'قيد التوصيل','color'=>''],
+        ['name_en'=>'to be deliverd','name_ar'=>'تم توصيله','color'=>''],
+        ['name_en'=>'canceled','name_ar'=>'ملغي','color'=>''],
+        ['name_en'=>'delayed','name_ar'=>'مؤجل','color'=>''],
       
     ];
     public function up()
@@ -30,13 +30,14 @@ class m201129_215529_status extends Migration
             'id' => $this->primaryKey(),
             'name_en' => $this->string(32)->notNull(),
             'name_ar' => $this->string(32)->notNull(),
+            'color' => $this->string(32)->notNull(),
             'created_at' => $this->dateTime()->defaultValue(null),
             'updated_at' => $this->dateTime()->defaultValue(null),
         ], $tableOptions);
 
         Yii::$app->db
         ->createCommand()
-        ->batchInsert('status', ['name_en','name_ar'], $this->data)
+        ->batchInsert('status', ['name_en','name_ar','color'], $this->data)
         ->execute();
     }
 

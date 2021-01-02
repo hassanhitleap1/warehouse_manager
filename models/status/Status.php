@@ -10,6 +10,7 @@ use Carbon\Carbon;
  * @property int $id
  * @property string $name_en
  * @property string $name_ar
+ * @property string $color
  * @property string $created_at
  * @property string $updated_at
  */
@@ -29,7 +30,7 @@ class Status extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name_en', 'name_ar'], 'required'],
+            [['name_en', 'name_ar','color'], 'required'],
             [['name_en', 'name_ar'], 'string', 'max' => 32],
         ];
     }
@@ -43,6 +44,7 @@ class Status extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name_en' => Yii::t('app', 'Name_En'),
             'name_ar' => Yii::t('app', 'Name_Ar'),
+            'color' => Yii::t('app', 'Color'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
         ];
