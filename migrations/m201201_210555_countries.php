@@ -8,6 +8,12 @@ use yii\db\Migration;
 class m201201_210555_countries extends Migration
 {
    public $countries=[
+    ['country_code'=>'JO',
+    'name_en'=>'Jordan',
+    'name_ar'=>'الأردن',
+    'nationality_en'=>'Jordanian',
+    'nationality_ar'=>'أردني',
+    ],
     ['country_code'=>'AF',
                     'name_en'=>'Afghanistan',
                     'name_ar'=>'أفغانستان',
@@ -668,12 +674,7 @@ class m201201_210555_countries extends Migration
                     'nationality_en'=>'Japanese',
                     'nationality_ar'=>'ياباني',
                     ],
-['country_code'=>'JO',
-                    'name_en'=>'Jordan',
-                    'name_ar'=>'الأردن',
-                    'nationality_en'=>'Jordanian',
-                    'nationality_ar'=>'أردني',
-                    ],
+
 ['country_code'=>'KZ',
                     'name_en'=>'Kazakhstan',
                     'name_ar'=>'كازاخستان',
