@@ -101,7 +101,9 @@ $this->params['breadcrumbs'][] = $this->title;
             
               [
                 'attribute' => 'status_id',
-                'value' => 'status.name_ar',
+                'value' => function($searchModel){
+                    return "<span style='color: white; background-color: ".$searchModel['status']['color'] ."'>"  . $searchModel['status']['name_ar'] .'<span/>';
+                },
                 'filter' =>Select2::widget([
                     'name' => 'category_id',
                     "value"=>(isset($_GET['status_id']))?$_GET['status_id']:null,
