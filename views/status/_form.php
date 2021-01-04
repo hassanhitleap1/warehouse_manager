@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\color\ColorInput;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\status\Status */
@@ -16,9 +16,9 @@ use kartik\color\ColorInput;
     <?= $form->field($model, 'name_en')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'name_ar')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'color')->widget(ColorInput::classname(), [
-        'options' => ['placeholder' => 'Select color ...'],
-    ]);?>
+    <?= $form->field($model, 'color', [
+    'template' => "{input}"
+    ])->input('color',['class'=>"input_class"]) ?>
 
 
     <div class="form-group">
