@@ -94,7 +94,9 @@ class OrdersController extends Controller
             // validate all models
             $valid = $model->validate();
             $valid = Model::validateMultiple($ordersItem) && $valid;
-            $user= new Users();
+            if(is_null($user = Users::find()->where(['phone'=> $model->phone])->one())){
+                 $user= new Users();
+            }
             $user->phone = $model->phone;
             $user->other_phone = $model->other_phone;
             $user->name = $model->name;;
