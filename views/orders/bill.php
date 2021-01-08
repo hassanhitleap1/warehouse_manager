@@ -18,14 +18,30 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             // 'id',
             'order_id',
-            'user_id',
+            // 'user_id',
                
             [
                 'format' => 'raw',
                 'attribute' => 'user_id',
-                'value' => Yii::t('app','Name').": ". $model['user']['name'] ."  ".Yii::t('app','Phone')." : ".$model['user']['phone']."  ".Yii::t('app','Other_Phone')." : ".$model['user']['other_phone'] ,
+                'label'=>Yii::t('app','Name'),
+                'value' => $model['user']['name']  ,
 
             ],
+            [
+                'format' => 'raw',
+                'attribute' => 'user_id',
+                'label'=>Yii::t('app','Phone'),
+                'value' => $model['user']['phone']  ,
+
+            ],
+            [
+                'format' => 'raw',
+                'attribute' => 'user_id',
+                'label'=>Yii::t('app','Other_Phone'),
+                'value' => $model['user']['other_phone']  ,
+
+            ],
+         
             
             'delivery_date',
             'delivery_time',
@@ -43,12 +59,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 } ,
 
             ],
-            [
-                'format' => 'raw',
-                'attribute' => 'country_id',
-                'value' =>  $model['country']['name_ar'],
+            // [
+            //     'format' => 'raw',
+            //     'attribute' => 'country_id',
+            //     'value' =>  $model['country']['name_ar'],
 
-            ],
+            // ],
            
             
              

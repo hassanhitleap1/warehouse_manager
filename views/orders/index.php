@@ -36,27 +36,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // 'id',
             'order_id',
-            'user_id',
+            [
+                    'attribute' => 'user_id',
+                    'value' => 'user.name',
+            ],
+            // 'user_id',
             'delivery_date',
             'delivery_time',
 //             'country_id',
             
-                 [
-                'attribute' => 'country_id',
-                'value' => 'country.name_ar',
-                'filter' =>Select2::widget([
-                    'name' => 'category_id',
-                    "value"=>(isset($_GET['country_id']))?$_GET['country_id']:null,
-                    'data' => ArrayHelper::map(Countries::find()->all(), 'id', 'name_ar'),
-                    'options' => [
-                        'placeholder' => 'Select  ...',
-                        'multiple' => false
-                    ],
-                ]),
+            //      [
+            //     'attribute' => 'country_id',
+            //     'value' => 'country.name_ar',
+            //     'filter' =>Select2::widget([
+            //         'name' => 'category_id',
+            //         "value"=>(isset($_GET['country_id']))?$_GET['country_id']:null,
+            //         'data' => ArrayHelper::map(Countries::find()->all(), 'id', 'name_ar'),
+            //         'options' => [
+            //             'placeholder' => 'Select  ...',
+            //             'multiple' => false
+            //         ],
+            //     ]),
 
-                'format' => 'html',
+            //     'format' => 'html',
 
-            ],
+            // ],
             
 //             'region_id',
             
@@ -120,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
             
             
-            //'created_at',
+            'created_at',
             //'updated_at',
             [
                 'class' => 'yii\grid\ActionColumn',

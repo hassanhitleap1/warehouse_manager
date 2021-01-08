@@ -55,11 +55,11 @@ class OrdersSearch extends Orders
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        $query->joinWith('user');
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
+            // 'user_id' => $this->user_id,
             'delivery_date' => $this->delivery_date,
             'delivery_time' => $this->delivery_time,
             'country_id' => $this->country_id,
@@ -75,6 +75,7 @@ class OrdersSearch extends Orders
         ]);
 
         $query->andFilterWhere(['like', 'order_id', $this->order_id])
+            ->andFilterWhere(['like', 'user.name', $this->user_id])
             ->andFilterWhere(['like', 'address', $this->address]);
 
         return $dataProvider;
