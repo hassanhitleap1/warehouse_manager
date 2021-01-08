@@ -76,7 +76,8 @@ class OrdersSearch extends Orders
 
         $query->andFilterWhere(['like', 'order_id', $this->order_id])
             ->andFilterWhere(['like', 'user.name', $this->user_id])
-            ->andFilterWhere(['like', 'address', $this->address]);
+            ->andFilterWhere(['like', 'user.name', $this->user_id])
+            ->andFilterWhere(['like', 'user.address', $this->address]);
 
         return $dataProvider;
     }
