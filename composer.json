@@ -28,7 +28,8 @@
         "nesbot/carbon": "^2.42",
         "kartik-v/yii2-widget-timepicker": "*",
         "kartik-v/yii2-field-range": "dev-master",
-        "kartik-v/yii2-widget-activeform": "@dev"
+        "kartik-v/yii2-widget-activeform": "@dev",
+        "kartik-v/yii2-grid": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
