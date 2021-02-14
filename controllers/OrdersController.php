@@ -124,9 +124,14 @@ class OrdersController extends Controller
                         foreach ($ordersItem as $orderItem) {
                             
                             $orderItem->order_id = $model->id;
+                            
                             if (! ($flag = $orderItem->save(false))) {
                                 $transaction->rollBack();
                                 break;
+                            }else{
+                                $orderItemModel=OrderItems::find()->where(['sub_product_id'=>$orderItem->sub_product_id])->one();
+                                $orderItemModel->quantity-=>$orderItem->quantity;
+                                $orderItemModel->save();
                             }
                         }
                     }
