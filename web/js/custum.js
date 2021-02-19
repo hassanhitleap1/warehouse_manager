@@ -166,7 +166,7 @@ $(document).on('change','.sub_product_id',function (e) {
      });
  });
 
- $(document).on('change','.quantity_sub_product',function (e) {
+ $(document).on('change keypress blur keyup','.quantity_sub_product',function (e) {
     let quantity_sub_product =parseInt($(this).val());
     let total_price=0;
     let quantity_sub_product_id_str=$(this).attr('id'); 
