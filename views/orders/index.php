@@ -4,8 +4,6 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use app\models\area\Area;
-use app\models\countries\Countries;
-use app\models\regions\Regions;
 use app\models\status\Status;
 
 use kartik\select2\Select2;

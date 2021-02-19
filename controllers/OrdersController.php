@@ -7,6 +7,8 @@ use Yii;
 use app\models\orders\Orders;
 use app\models\orders\OrdersSearch;
 use app\models\ordersitem\OrdersItem;
+use app\models\products\Products;
+use app\models\subproductcount\SubProductCount;
 use app\models\users\Users;
 use Exception;
 use yii\web\Controller;
@@ -115,12 +117,14 @@ class OrdersController extends Controller
             
             if ($valid && $user->save()) {
                 $transaction = \Yii::$app->db->beginTransaction();
+
+                $model->user_id=$user->id;
+                $model->delivery_time= date("H:i", strtotime($model->delivery_time));
+             
+               
                 try {
-                    $model->user_id=$user->id;
-                    $model->delivery_time= date("H:i", strtotime($model->delivery_time));
-                 
                     if ($flag = $model->save(false)) {
-                        
+                    
                         foreach ($ordersItem as $orderItem) {
                             
                             $orderItem->order_id = $model->id;
@@ -129,9 +133,13 @@ class OrdersController extends Controller
                                 $transaction->rollBack();
                                 break;
                             }else{
-                                $orderItemModel=OrderItems::find()->where(['sub_product_id'=>$orderItem->sub_product_id])->one();
-                                $orderItemModel->quantity-=>$orderItem->quantity;
+                              
+                                $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                                $orderItemModel->count=$orderItemModel->count-$orderItem->quantity;
                                 $orderItemModel->save();
+                                $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
+                                $productModel->quantity=$productModel->quantity-$orderItem->quantity;
+                                $productModel->save();
                             }
                         }
                     }
