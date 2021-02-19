@@ -32,6 +32,14 @@ class Products extends \yii\db\ActiveRecord
 
     public $file;
     public $images_product;
+    
+    const To_Be_Equipped=1;
+    const To_Be_Ready=2;
+    const Ready=3;
+    const Connecting=4; 
+    const To_Be_Deliverd=5;
+    const Canceled=6;
+    const Delayed=7;
     /**
      * {@inheritdoc}
      */

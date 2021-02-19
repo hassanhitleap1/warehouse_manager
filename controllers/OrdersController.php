@@ -133,13 +133,16 @@ class OrdersController extends Controller
                                 $transaction->rollBack();
                                 break;
                             }else{
-                              
-                                $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
-                                $orderItemModel->count=$orderItemModel->count-$orderItem->quantity;
-                                $orderItemModel->save();
-                                $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
-                                $productModel->quantity=$productModel->quantity-$orderItem->quantity;
-                                $productModel->save();
+
+                                if($model->status_id!=Products::To_Be_Equipped && $model->status_id!=Products::To_Be_Ready ){
+                                    $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                                    $orderItemModel->count=$orderItemModel->count-$orderItem->quantity;
+                                    $orderItemModel->save();
+                                    $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
+                                    $productModel->quantity=$productModel->quantity-$orderItem->quantity;
+                                    $productModel->save();
+                                }
+                                
                             }
                         }
                     }
