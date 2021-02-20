@@ -11,9 +11,18 @@ $quantity_item=1;
 $products=ArrayHelper::map(Products::find()->all(), 'id', 'name');
 array_unshift($products,'-----');
 $product_items[0]=[];
+$price[0]=0;
+$price_item_count[0]=0;
+$profit_margin[0]=0;
+$profits_margin[0]=0;
+
 if (!$model->isNewRecord) {
     foreach($ordersItem as $key=> $orderItem){
         $product_items[$key]=ArrayHelper::map(SubProductCount::find()->where(['product_id'=>$orderItem->product_id])->all(), 'id', 'type');
+        $price[$key]=$orderItem->price;
+        $price_item_count[$key]=$orderItem->price_item_count;
+        $profit_margin[$key]=$orderItem->profit_margin;
+        $profits_margin[$key]=$orderItem->profits_margin;
     }
 }
 ?>
@@ -69,10 +78,11 @@ if (!$model->isNewRecord) {
                             ?>
 
                             <div class="row">
-                               <input type="hidden" class="price" id="price_<?=$index?>" name="price" value="0">
-                                <input type="hidden" class="price_item_count" id="price_item_<?=$index?>" name="price_itme_count" value="0">
-                                <input type="hidden" class="profit_margin" id="profit_margin_<?=$index?>" name="profit_margin" value="0">
-                                  <input type="hidden" class="profits_margin" id="profits_margin_<?=$index?>" name="profits_margin" value="0">
+                                <?=$form->field($model, "[{$index}]price")->hiddenInput(['id'=> "price_$index",'value'=>$price[$index]])->label(false);?>
+                                <?=$form->field($model, "[{$index}]price_item_count")->hiddenInput(['id'=> "price_item_$index", 'value'=>$price_item_count[$index]  ])->label(false);?>
+                                <?=$form->field($model, "[{$index}]profit_margin")->hiddenInput(['id'=> "profit_margin_$index",'value'=>$profit_margin[$index]])->label(false);?>
+                                <?=$form->field($model, "[{$index}]profits_margin")->hiddenInput(['id'=> "profits_margin_$index",'value'=>$profits_margin[$index]])->label(false);?>
+
                                 <div class="col-sm-4">
                                     <?= $form->field($orderItem,"[{$index}]product_id")->widget(Select2::classname(), [
                                             'data' => $products,
