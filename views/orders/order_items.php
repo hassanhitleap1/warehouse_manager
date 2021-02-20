@@ -9,7 +9,7 @@ use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
 $quantity_item=1;
 $products=ArrayHelper::map(Products::find()->all(), 'id', 'name');
-array_unshift($products,'-----');
+$products[0]='-----';
 $product_items[0]=[];
 $price[0]=0;
 $price_item_count[0]=0;
