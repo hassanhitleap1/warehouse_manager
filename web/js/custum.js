@@ -77,11 +77,13 @@ function callculate_amount_required(){
     if(!isNaN($("#discount").val())){
         discount= parseInt( $("#discount").val());
     }
+    
      delivery_price= parseInt( $("#delivery_price").val());
      
     $(".price_item_count").each(function( index, element  ) {
         amount_required+= parseInt ($(element ).val());
      });
+     
     
      amount_required-=discount;
      amount_required+=delivery_price;
@@ -154,12 +156,15 @@ $(document).on('change','.sub_product_id',function (e) {
     let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
     index=index.replaceAll('-product_id', '');
     index=index.replaceAll('-id', '');
+    index = index.replaceAll('-sub_product_id', '');
+    console.log(index);  
     index=index.trim()
      $.ajax({
          url: url,
          type: 'GET',
          success: function (json) { 
-             console.log(index);   
+             console.log(index);  
+             console.log(json.data.sub_product.count);   
             $("#quantity_item_"+index).text(json.data.sub_product.count);
             $("#ordersitem-"+index+"-quantity").attr('max',json.data.sub_product.count);
          }
