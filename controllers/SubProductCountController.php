@@ -69,10 +69,9 @@ class SubProductCountController extends BaseController
      */
     public function actionGetProductItems($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-         $data = SubProductCount::find()->where(['product_id'=>$id])->all();
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;  
          $product= Products::findOne($id);
-        return ['data'=> $data,'product'=>$product];
+        return ['data'=> $product->subProductCount,'product'=>$product];
       
     }
 
@@ -80,9 +79,7 @@ class SubProductCountController extends BaseController
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $data=[];
-        // $model= SubProductCount::find()->where(['id'=>$id])->one();
         $product=Products::findOne($id);
-    
         $data['sub_product']= $product->subProductCount;
         $data['product']= $product;
         return ['data'=> $data];
@@ -98,11 +95,9 @@ class SubProductCountController extends BaseController
     public function actionCreate()
     {
         $model = new SubProductCount();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);
