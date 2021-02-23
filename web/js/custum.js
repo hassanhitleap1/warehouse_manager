@@ -107,7 +107,8 @@ $(document).on('change','.product_id',function (e) {
              let product=json.product;
             options_sub_product(data,index);
             header_product_card(product.quantity,data[0].count,product.purchasing_price,index);
-            callculate_total_price();
+            set_value_heddin(data,product,index);
+            callculate_all();
          }
      });
  });
@@ -149,10 +150,7 @@ $(document).on('change','.sub_product_id',function (e) {
      
      $(".price_item_count").each(function( index, element  ) {
            total_price+= parseInt ($(element ).val());
-      });
-
-   
-       
+      });       
 
       let amount_required=total_price-discount;
       $("#total_price").val(total_price);
@@ -209,4 +207,13 @@ function options_sub_product(data,html_id){
     $("#quantity_item_"+index).text(quantity_item);
     $("#quantity_all_"+index).text(quantity);
     $("#price_items_"+index).text(price);
+}
+
+function set_value_heddin(data,product,index){
+    $("#price_item_"+index).val(product.selling_price);
+    $("#price_"+index).val(product.selling_price);
+    let quantity=($("#ordersitem-"+index+"-quantity").val()!=undefined)?$("#ordersitem-"+index+"-quantity").val():-1;
+    let profit_margin= product.selling_price= product.purchasing_price;
+    $("#profit_margin_"+index).val(profit_margin);
+    $("#profits_margin_"+index).val(quantity*profit_margin);
 }
