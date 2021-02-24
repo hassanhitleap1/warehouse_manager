@@ -31,6 +31,7 @@ class m201129_225724_orders extends Migration
             "total_price"=>$this->double()->notNull(),
             "profit_margin"=>$this->double()->notNull(),
             "amount_required"=>$this->double()->notNull(),
+            "note"=>$this->text()->defaultValue(null),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);

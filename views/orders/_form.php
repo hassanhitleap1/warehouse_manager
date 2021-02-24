@@ -18,6 +18,7 @@ $name=null;
 $phone=null;
 $other_phone=null;
 $address=null;
+$name_in_facebook=null;
 if (!$model->isNewRecord) {
     $order_id=$model->order_id;
     $delivery_price=$model->delivery_price;
@@ -26,6 +27,7 @@ if (!$model->isNewRecord) {
     $phone=$user->phone;
     $other_phone=$user->other_phone;
     $address=$user->address;
+    $name_in_facebook=$user->name_in_facebook;
 }
 /* @var $this yii\web\View */
 /* @var $model app\models\orders\Orders */
@@ -39,6 +41,7 @@ if (!$model->isNewRecord) {
         <div class="col-md-4">
             <?= $form->field($model, 'order_id')->textInput(['value'=>$order_id]) ?>
             <?= $form->field($model, 'name')->textInput(['value'=>$name]) ?>
+            <?= $form->field($model, 'name_in_facebook')->textInput(['value'=>$name]) ?>
             <?= $form->field($model, 'phone')->textInput(['value'=>$phone]) ?>
             <?= $form->field($model, 'other_phone')->textInput(['value'=>$other_phone]) ?>
             <?= $form->field($model, 'address')->textInput(['maxlength' => true,['value'=>$address]]) ?>
@@ -97,6 +100,7 @@ if (!$model->isNewRecord) {
             <?= $form->field($model, 'total_price')->textInput(['id'=>'total_price']) ?>
             <?= $form->field($model, 'amount_required')->textInput(['id'=>'amount_required']) ?>
             <?= $form->field($model, 'profit_margin')->textInput(['id'=>'profit_margin']) ?>
+            <?= $form->field($model, 'note')->textarea(['rows' => '6']) ?>
         </div>
     </div>
 

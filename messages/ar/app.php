@@ -140,5 +140,7 @@ return [
     "video_url"=>"رابط الفيديو",
     "Price"=>"السعر",
     "Video_Url"=>"رابط يوتيوب",
-    "Profit_Margin"=>"هامش الربح"
+    "Profit_Margin"=>"هامش الربح",
+    "Name_In_Facebook"=>"الاسم على الفيسبوك",
+    "Note"=>"ملاحظة",
 ];

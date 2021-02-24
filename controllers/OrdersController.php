@@ -109,6 +109,7 @@ class OrdersController extends Controller
             $user->username=null;
             $user->email =null;
             $user->auth_key =null;
+            $user->name_in_facebook =$model->name_in_facebook;
             $user->password_hash =null;
             $user->password_reset_token =null;
             $user->created_at=null;
