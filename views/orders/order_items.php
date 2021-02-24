@@ -82,10 +82,10 @@ if (!$model->isNewRecord) {
                             ?>
 
                             <div class="row">
-                                <?=$form->field($model, "[{$index}]price")->hiddenInput(['class'=>"price",'id'=> "price_$index",'value'=>$price[$index]])->label(false);?>
-                                <?=$form->field($model, "[{$index}]price_item_count")->hiddenInput(['class'=>"price_item_count",'id'=> "price_item_$index", 'value'=>$price_item_count[$index]  ])->label(false);?>
-                                <?=$form->field($model, "[{$index}]profit_margin")->hiddenInput(['class'=>"profit_margin",'id'=> "profit_margin_$index",'value'=>$profit_margin[$index]])->label(false);?>
-                                <?=$form->field($model, "[{$index}]profits_margin")->hiddenInput(['class'=>"profits_margin",'id'=> "profits_margin_$index",'value'=>$profits_margin[$index]])->label(false);?>
+                                <?=$form->field($orderItem, "[{$index}]price")->hiddenInput(['class'=>"price",'id'=> "price_$index",'value'=>$price[$index]])->label(false);?>
+                                <?=$form->field($orderItem, "[{$index}]price_item_count")->hiddenInput(['class'=>"price_item_count",'id'=> "price_item_$index", 'value'=>$price_item_count[$index]  ])->label(false);?>
+                                <?=$form->field($orderItem, "[{$index}]profit_margin")->hiddenInput(['class'=>"profit_margin",'id'=> "profit_margin_$index",'value'=>$profit_margin[$index]])->label(false);?>
+                                <?=$form->field($orderItem, "[{$index}]profits_margin")->hiddenInput(['class'=>"profits_margin",'id'=> "profits_margin_$index",'value'=>$profits_margin[$index]])->label(false);?>
 
                                 <div class="col-sm-4">
                                     <?= $form->field($orderItem,"[{$index}]product_id")->widget(Select2::classname(), [

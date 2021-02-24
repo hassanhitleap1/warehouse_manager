@@ -32,9 +32,10 @@ class OrdersItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'sub_product_id','product_id', 'quantity'], 'required'],
-            [['product_id', 'quantity'], 'integer'],
+            [[ 'sub_product_id','product_id','quantity'], 'required'],
+            [['product_id', 'quantity','price','price_item_count','profit_margin','profits_margin'], 'integer'],
             [['order_id'], 'string', 'max' => 255],
+         
         ];
     }
 
@@ -49,6 +50,10 @@ class OrdersItem extends \yii\db\ActiveRecord
             'product_id' => Yii::t('app', 'Product'),
             'sub_product_id'=> Yii::t('app', 'Product'),
             'quantity' => Yii::t('app', 'Quantity'),
+            'price' => Yii::t('app', 'Quantity'),
+            'price_item_count'=>Yii::t('app', 'Price_Item_Count'),
+            'profit_margin'=>Yii::t('app', 'Profit_Margin'),
+            'profits_margin'=>Yii::t('app', 'Profits_Margin'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
         ];
@@ -73,7 +78,9 @@ class OrdersItem extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         $today=Carbon::now("Asia/Amman");
+
         if (parent::beforeSave($insert)) {
+           
             // Place your custom code here
             if ($this->isNewRecord) {
                 $this->created_at = $today;

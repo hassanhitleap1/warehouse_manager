@@ -129,7 +129,7 @@ class OrdersController extends Controller
                         foreach ($ordersItem as $orderItem) {
                             
                             $orderItem->order_id = $model->id;
-                            
+                           
                             if (! ($flag = $orderItem->save(false))) {
                                 $transaction->rollBack();
                                 break;
