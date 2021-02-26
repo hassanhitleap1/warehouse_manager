@@ -19,6 +19,7 @@ $profits_margin[0]=0;
 if (!$model->isNewRecord) {
     foreach($ordersItem as $key=> $orderItem){
         $product_items[$key]=ArrayHelper::map(SubProductCount::find()->where(['product_id'=>$orderItem->product_id])->all(), 'id', 'type');
+        $product_items[$key][0]='-----';
         $price[$key]=$orderItem->price;
         $price_item_count[$key]=$orderItem->price_item_count;
         $profit_margin[$key]=$orderItem->profit_margin;
@@ -128,6 +129,7 @@ $(".add-item").on("click", function(e) {
     reload_js_select2();
     jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
         setTimeout(function(){ 
+            
             $("#ordersitem-"+(index+1)+"-quantity").val(1);
             $("#price_item_0"+(index+1)).attr('id',"price_item_"+(index+1));
             $("#price_0"+(index+1)).attr('id',"price_"+(index+1));
@@ -136,8 +138,16 @@ $(".add-item").on("click", function(e) {
             $("#quantity_item_0"+(index+1)).attr('id',"quantity_item_"+(index+1));
             $("#profit_margin_0"+(index+1)).attr('id',"profit_margin_"+(index+1));
             $("#profits_margin_0"+(index+1)).attr('id',"profits_margin_"+(index+1));
+            $("#ordersitem-"+(index+1)+"-sub_product_id option[value='0']").attr('selected', 'selected');
+            $("#ordersitem-"+(index+1)+"-product_id option[value='0']").attr('selected', 'selected');
+            $("#ordersitem-"+(index+1)+"-product_id option[value='0']").trigger('change');
             
-        }, 1000);;
+
+            $("#price_"+(index+1)).value(0);
+            $("#price_item_"+(index+1)).value(0);
+            $("#profit_margin_"+(index+1)).value(0);
+            $("#profits_margin_"+(index+1)).value(0);
+        }, 1000);
         
     });
 });
