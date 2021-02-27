@@ -29,7 +29,8 @@
         "kartik-v/yii2-widget-timepicker": "*",
         "kartik-v/yii2-field-range": "dev-master",
         "kartik-v/yii2-widget-activeform": "@dev",
-        "kartik-v/yii2-grid": "@dev"
+        "kartik-v/yii2-grid": "@dev",
+        "yiisoft/yii2-bootstrap4": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
