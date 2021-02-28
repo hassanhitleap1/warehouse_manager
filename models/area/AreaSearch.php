@@ -43,9 +43,16 @@ class AreaSearch extends Area
         $query = Area::find();
 
         // add conditions that should always apply here
+        $perPage=10;
+        if(isset($_GET['per-page'])){
+            $perPage=$_GET['per-page'];
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => $perPage,
+            ],
         ]);
 
         $this->load($params);
