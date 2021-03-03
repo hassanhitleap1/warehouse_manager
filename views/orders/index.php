@@ -92,7 +92,7 @@ $columns = [
 
 
         [
-            //'class' => 'kartik\grid\EditableColumn',
+            'class' => 'kartik\grid\EditableColumn',
             'attribute'=>'status_id', 
             'vAlign'=>'middle',
             'width'=>'250px',
@@ -111,6 +111,7 @@ $columns = [
             'filterInputOptions'=>['placeholder'=>'select status'],
             'format'=>'html',
             'visible'=>true,
+            'editableOptions'=> ['formOptions' => ['action' => ['/orders/change-status','id'=>$model->id]]]
         ],
 
         [

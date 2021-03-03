@@ -252,6 +252,21 @@ class OrdersController extends Controller
         return $this->redirect(['index']);
     }
 
+
+
+
+    public function actionChangeStatus($id){
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post())) {
+            var_dump($model->status_id);
+            exit;
+            $model->status_id=$model->status_id;
+            
+        }
+
+
+    }
     /**
      * Finds the Orders model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
