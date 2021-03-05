@@ -8,6 +8,7 @@ use yii\helpers\Html;
 use app\models\users\Users;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
+use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 $users=Users::find()->orderBy('name')->asArray()->all();
 /* @var $this yii\web\View */
@@ -111,7 +112,25 @@ $columns = [
             'filterInputOptions'=>['placeholder'=>'select status'],
             'format'=>'html',
             'visible'=>true,
-            'editableOptions'=> ['formOptions' => ['action' => ['/orders/change-status','id'=>$model->id]]]
+            'editableOptions'=> function ($model, $key, $index) {
+                return [
+                    'header'=>'status', 
+                    'size'=>'md',
+                    'formOptions'=>['action' => ['/orders/change-status','id'=>$model->id]],
+                    'beforeInput' => function ($form, $widget) use ($model, $index) {
+                        echo $form->field($model, 'status_id')->widget(Select2::classname(), [
+                            'data' =>  ArrayHelper::map(Status::find()->all(), 'id', 'name_ar'),
+                            'language' => 'ar',
+                            'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'id'=>'status_id'],
+            
+                        ]);
+                    },
+                    
+                    
+                ];
+            },
+            
+           
         ],
 
         [

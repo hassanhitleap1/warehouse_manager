@@ -259,10 +259,8 @@ class OrdersController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            var_dump($model->status_id);
-            exit;
             $model->status_id=$model->status_id;
-            
+            $model->save(false);
         }
 
 
