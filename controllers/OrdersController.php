@@ -257,11 +257,8 @@ class OrdersController extends Controller
 
     public function actionChangeStatus($id){
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post())) {
-            var_dump($model);
-            exit;
-            $model->status_id=$model->status_id;
+            $model->status_id=$_POST["Orders"][$_GET['index']]["status_id"];
             $model->save(false);
         }
 

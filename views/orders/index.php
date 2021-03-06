@@ -17,6 +17,7 @@ $users=Users::find()->orderBy('name')->asArray()->all();
 
 $this->title = Yii::t('app', 'Orders');
 $this->params['breadcrumbs'][] = $this->title;
+$status=ArrayHelper::map(Status::find()->all(), 'id', 'name_ar');
 
 
 $columns = [
@@ -112,20 +113,13 @@ $columns = [
             'filterInputOptions'=>['placeholder'=>'select status'],
             'format'=>'html',
             'visible'=>true,
-            'editableOptions'=> function ($model, $key, $index) {
+            'editableOptions'=> function ($model, $key, $index,$form) {
                 return [
-                    'header'=>'Name', 
+                    'header'=>'status', 
                     'size'=>'md',
-                    'formOptions'=>['action' => ['/orders/change-status']],
-                    'beforeInput' => function ($form, $widget) use ($model, $index) {
-                        echo $form->field($model, 'status_id')->widget(Select2::classname(), [
-                            'data' =>  ArrayHelper::map(Status::find()->all(), 'id', 'name_ar'),
-                            'language' => 'ar',
-                            'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'id'=>'status_id'],
-            
-                        ]);
-                    },
-                    
+                    'inputType' => 'dropDownList',
+                    'data'=>ArrayHelper::map(Status::find()->all(), 'id', 'name_ar'),
+                    'formOptions'=>['action' => ['/orders/change-status','id'=>$model->id,'index'=>$index]],
                     
                 ];
             },
