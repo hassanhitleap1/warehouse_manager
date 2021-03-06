@@ -114,9 +114,9 @@ $columns = [
             'visible'=>true,
             'editableOptions'=> function ($model, $key, $index) {
                 return [
-                    'header'=>'status', 
+                    'header'=>'Name', 
                     'size'=>'md',
-                    'formOptions'=>['action' => ['/orders/change-status','id'=>$model->id]],
+                    'formOptions'=>['action' => ['/orders/change-status']],
                     'beforeInput' => function ($form, $widget) use ($model, $index) {
                         echo $form->field($model, 'status_id')->widget(Select2::classname(), [
                             'data' =>  ArrayHelper::map(Status::find()->all(), 'id', 'name_ar'),
