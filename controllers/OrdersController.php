@@ -258,8 +258,13 @@ class OrdersController extends Controller
     public function actionChangeStatus($id){
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post())) {
-            $model->status_id=$_POST["Orders"][$_GET['index']]["status_id"];
+            $status_id=$_POST["Orders"][$_GET['index']]["status_id"];;
+            $model->status_id=$status_id;
             $model->save(false);
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return [ 'output' => $model->status->name_ar];
+         
+          
         }
 
 
