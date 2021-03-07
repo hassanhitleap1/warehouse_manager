@@ -259,8 +259,101 @@ class OrdersController extends Controller
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post())) {
             $status_id=$_POST["Orders"][$_GET['index']]["status_id"];;
+           
+           
+          switch ($status_id) {
+            case 1:
+            case 2:
+            case 3:  
+                  
+                  switch ($model->status_id) {
+                    case 1:
+                    case 2:
+                    case 3:  
+                      // nothing to do 
+                    case 4:
+                        $ordersItem= $model->ordersItem;
+                        foreach ($ordersItem as $orderItem) {
+                            $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                            $orderItemModel->count=$orderItemModel->count-$orderItem->quantity;
+                            $orderItemModel->save();
+                            $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
+                            $productModel->quantity=$productModel->quantity-$orderItem->quantity;
+                            $productModel->save();
+                        }
+                    case 6:
+                     case 7:
+                    // nothings
+                 }
+                  
+                  
+                  
+            case 4:
+                  
+                   switch ($model->status_id) {
+                    case 1:
+                    case 2:
+                    case 3:  
+                      // nothing to do 
+                        $ordersItem= $model->ordersItem;
+                        foreach ($ordersItem as $orderItem) {
+                            $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                            $orderItemModel->count=$orderItemModel->count+$orderItem->quantity;
+                            $orderItemModel->save();
+                            $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
+                            $productModel->quantity=$productModel->quantity+$orderItem->quantity;
+                            $productModel->save();
+                        }
+                    case 4:
+                     // nothogs habedn 
+                    case 6:
+                     case 7:
+                        $ordersItem= $model->ordersItem;
+                        foreach ($ordersItem as $orderItem) {
+                            $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                            $orderItemModel->count=$orderItemModel->count+$orderItem->quantity;
+                            $orderItemModel->save();
+                            $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
+                            $productModel->quantity=$productModel->quantity+$orderItem->quantity;
+                            $productModel->save();
+                        }
+                 }
+                  
+                  
+                  
+           
+            case 6:
+             case 7:
+                  
+         switch ($model->status_id) {
+                    case 1:
+                    case 2:
+                    case 3:  
+                        // nothigs
+                    case 4:
+                       $ordersItem= $model->ordersItem;
+                        foreach ($ordersItem as $orderItem) {
+                            $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                            $orderItemModel->count=$orderItemModel->count-$orderItem->quantity;
+                            $orderItemModel->save();
+                            $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
+                            $productModel->quantity=$productModel->quantity-$orderItem->quantity;
+                            $productModel->save();
+                        }
+                    case 6:
+                     case 7:
+                     // nothgs 
+                 }
+                  
+                  
+                  
+               
+        }
+            
             $model->status_id=$status_id;
             $model->save(false);
+
+            
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return [ 'output' => $model->status->name_ar];
          
