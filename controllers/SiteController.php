@@ -79,6 +79,25 @@ class SiteController extends Controller
      
     }
 
+    
+        /**
+     * Displays homepage.
+     *
+     * @return string
+     */
+    public function actionDashboard()
+    {
+        
+        $models =    Orders::find()->select(['id', 'martion'])->where('YEAR(cerated_at)=:year', [':year' => date('y')])
+            ->where('MONTH(cerated_at)=:month', [':month' => date('m')]) ->all();
+          return $this->render('index',[
+            'models' => $models,
+       
+        ]);
+     
+    }
+    
+    
     /**
      * Login action.
      *
