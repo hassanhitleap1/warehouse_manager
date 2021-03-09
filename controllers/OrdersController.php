@@ -180,6 +180,7 @@ class OrdersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $starus_id=$model->status_id;
 
         $ordersItem = $model->orderItems;
         
@@ -193,14 +194,19 @@ class OrdersController extends Controller
             $valid = Model::validateMultiple($ordersItem) && $valid;
 
             $user= Users::findOne($model->user_id);
-            $user->phone = $model->phone;
+             $user->phone = $model->phone;
             $user->other_phone = $model->other_phone;
             $user->name = $model->name;;
             $user->country_id = ($model->country_id !='') ? $model->country_id :null  ;
             $user->region_id = ($model->region_id !='') ? $model->region_id :null  ;
             $user->area_id = ($model->area_id !='') ? $model->area_id :null  ;
             $user->address = $model->address;
-           
+            $user->username=null;
+            $user->email =null;
+            $user->auth_key =null;
+            $user->name_in_facebook =$model->name_in_facebook;
+          
+          
             if ($valid && $user->save()) {
                 $transaction = \Yii::$app->db->beginTransaction();
 
@@ -209,9 +215,65 @@ class OrdersController extends Controller
                     if ($flag = $model->save(false)) {
                         foreach ($ordersItem as $orderItem) {
                             $orderItem->order_id = $model->id;
-                            if (! ($flag = $orderItem->save(false))) {
+                           if (! ($flag = $orderItem->save(false))) {
                                 $transaction->rollBack();
                                 break;
+                            }else{
+                               if($starus_id != $model->status_id){
+                               
+                                          switch ($status_id) {
+                case 1: case 2: case 3:  
+                    if($model->status_id==4){
+                        $ordersItem= $model->orderItems;
+                        foreach ($ordersItem as $orderItem) {
+                            $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                            $orderItemModel->count=$orderItemModel->count-$orderItem->quantity;
+                            $orderItemModel->save();
+                            $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
+                            $productModel->quantity=$productModel->quantity-$orderItem->quantity;
+                            $productModel->save();
+                        }
+                    }
+                case 4:
+                    if($model->status_id <= 3){
+                        $ordersItem= $model->orderItems;
+                        foreach ($ordersItem as $orderItem) {
+                            $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                            $orderItemModel->count=$orderItemModel->count+$orderItem->quantity;
+                            $orderItemModel->save();
+                            $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
+                            $productModel->quantity=$productModel->quantity+$orderItem->quantity;
+                            $productModel->save();
+                        } 
+                    }elseif($model->status_id==6 || $model->status_id==7 ){
+                        $ordersItem= $model->orderItems;
+                        foreach ($ordersItem as $orderItem) {
+                            $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                            $orderItemModel->count=$orderItemModel->count+$orderItem->quantity;
+                            $orderItemModel->save();
+                            $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
+                            $productModel->quantity=$productModel->quantity+$orderItem->quantity;
+                            $productModel->save();
+                        }
+                    }
+                    
+                case 6: case 7:
+                    if($model->status_id==4){
+                        $ordersItem= $model->orderItems;
+                        foreach ($ordersItem as $orderItem) {
+                            $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                            $orderItemModel->count=$orderItemModel->count-$orderItem->quantity;
+                            $orderItemModel->save();
+                            $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
+                            $productModel->quantity=$productModel->quantity-$orderItem->quantity;
+                            $productModel->save();
+                        }
+                    }                   
+                }
+                                   
+                               }
+                           
+                                
                             }
                         }
                     }
