@@ -16,8 +16,11 @@ class m201129_215529_status extends Migration
         ['name_en'=>'to be deliverd','name_ar'=>'تم توصيله','color'=>'#237923'],
         ['name_en'=>'canceled','name_ar'=>'ملغي','color'=>'#eb0017'],
         ['name_en'=>'delayed','name_ar'=>'مؤجل','color'=>'#292fca'],
+        ['name_en'=>'Payment has been received','name_ar'=>'تم استلام المبلغ','color'=>'#292fca'],
+        ['name_en'=>'The canceled request has been received','name_ar'=>'تم استلام الطلب الملغي','color'=>'#292fca'],
       
     ];
+    
     public function up()
     {
         $tableOptions = null;
