@@ -10,7 +10,6 @@ class m201129_215529_status extends Migration
 
     public $data=[
         ['name_en'=>'To be equipped','name_ar'=>'مطلوب تجهيزه','color'=>'#237923'],
-        ['name_en'=>'to be ready','name_ar'=>'قيد التجهيز','color'=>'#237923'],
         ['name_en'=>'ready','name_ar'=>'تم تجهيزه','color'=>'#237923'],
         ['name_en'=>'Connecting','name_ar'=>'قيد التوصيل','color'=>'#237923'],
         ['name_en'=>'to be deliverd','name_ar'=>'تم توصيله','color'=>'#237923'],

@@ -22,46 +22,12 @@ $status=ArrayHelper::map(Status::find()->all(), 'id', 'name_ar');
 
 $columns = [
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
+
+
         'order_id',
+
         [
-            'attribute'=>'user_id', 
-            'vAlign'=>'middle',
-            'width'=>'250px',
-            'value'=>function ($model, $key, $index, $widget) { 
-                return Html::a($model->user->name, '#', [
-                    'title'=>'View author detail', 
-                    'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
-                ]);
-            },
-            'filterType'=>GridView::FILTER_SELECT2,
-            'filter'=>ArrayHelper::map($users, 'id', 'name'), 
-            'filterWidgetOptions'=>[
-                'pluginOptions'=>['allowClear'=>true],
-            ],
-            'filterInputOptions'=>['placeholder'=>'select user'],
-            'format'=>'raw',
-            'visible'=>true,
-        ],  
-        [
-            'attribute'=>'phone', 
-            'vAlign'=>'middle',
-            'width'=>'250px',
-            'value'=>function ($model, $key, $index, $widget) { 
-                return Html::a($model->user->phone, '#', [
-                    'title'=>'View author detail', 
-                    'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
-                ]);
-            },
-         
-            'filterWidgetOptions'=>[
-                'pluginOptions'=>['allowClear'=>true],
-            ],
-       
-            'format'=>'raw',
-            'visible'=>true,
-        ],   
-        [
-            'attribute'=>'delivery_date',
+            'attribute'=>'created_at',
             'filterType'=>GridView::FILTER_DATE,
             'format'=>'raw',
             'width'=>'170px',
@@ -71,19 +37,82 @@ $columns = [
             'visible'=>true,
         ],
 
-
         [
-            'attribute'=>'country_id', 
+            'attribute'=>'user_id', 
             'vAlign'=>'middle',
             'width'=>'250px',
             'value'=>function ($model, $key, $index, $widget) { 
-                return Html::a($model->country->name_ar, '#', [
+                return $model->user->name;
+            },
+
+             //'filterType'=>GridView::FILTER_SELECT2,
+            // 'filter'=>ArrayHelper::map($users, 'id', 'name'), 
+
+            'filterWidgetOptions'=>[
+                'pluginOptions'=>['allowClear'=>true],
+            ],
+       
+            'format'=>'raw',
+            'visible'=>true,
+        ],  
+        [
+            'attribute'=>'phone', 
+            'vAlign'=>'middle',
+            'width'=>'250px',
+            'value'=>function ($model, $key, $index, $widget) { 
+                return $model->user->phone;
+            },
+         
+            'filterWidgetOptions'=>[
+                'pluginOptions'=>['allowClear'=>true],
+            ],
+       
+            'format'=>'raw',
+            'visible'=>true,
+        ],   
+        // [
+        //     'attribute'=>'delivery_date',
+        //     'filterType'=>GridView::FILTER_DATE,
+        //     'format'=>'raw',
+        //     'width'=>'170px',
+        //     'filterWidgetOptions'=>[
+        //         'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        //     ],
+        //     'visible'=>true,
+        // ],
+
+
+        // [
+        //     'attribute'=>'country_id', 
+        //     'vAlign'=>'middle',
+        //     'width'=>'250px',
+        //     'value'=>function ($model, $key, $index, $widget) { 
+        //         return Html::a($model->country->name_ar, '#', [
+        //             'title'=>'View author detail', 
+        //             'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+        //         ]);
+        //     },
+        //     'filterType'=>GridView::FILTER_SELECT2,
+        //     'filter'=>ArrayHelper::map(Countries::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
+        //     'filterWidgetOptions'=>[
+        //         'pluginOptions'=>['allowClear'=>true],
+        //     ],
+        //     'filterInputOptions'=>['placeholder'=>'select user'],
+        //     'format'=>'raw',
+        //     'visible'=>true,
+        // ],
+        [
+            'attribute'=>'region_id', 
+            'vAlign'=>'middle',
+            'width'=>'250px',
+            'value'=>function ($model, $key, $index, $widget) { 
+                return Html::a($model->region->name_ar, '#', [
                     'title'=>'View author detail', 
                     'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
                 ]);
             },
             'filterType'=>GridView::FILTER_SELECT2,
-            'filter'=>ArrayHelper::map(Countries::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
+            'filter'=>ArrayHelper::map(Regions::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
             'filterWidgetOptions'=>[
                 'pluginOptions'=>['allowClear'=>true],
             ],
@@ -91,7 +120,7 @@ $columns = [
             'format'=>'raw',
             'visible'=>true,
         ],
-
+        'address',
 
         [
             'class' => 'kartik\grid\EditableColumn',
@@ -127,59 +156,32 @@ $columns = [
             
            
         ],
+        'amount_required',
+    
+        // [  
+        //     'attribute'=>'area_id', 
+        //     'vAlign'=>'middle',
+        //     'width'=>'250px',
+        //     'value'=>function ($model, $key, $index, $widget) { 
+        //         return Html::a($model['area']['name_ar'], '#', [
+        //             'title'=>'View author detail', 
+        //             'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+        //         ]);
+        //     },
+        //     'filterType'=>GridView::FILTER_SELECT2,
+        //     'filter'=>ArrayHelper::map(Area::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
+        //     'filterWidgetOptions'=>[
+        //         'pluginOptions'=>['allowClear'=>true],
+        //     ],
+        //     'filterInputOptions'=>['placeholder'=>'select user'],
+        //     'format'=>'raw',
+        //     'visible'=>true,
+        // ], 
 
-        [
-            'attribute'=>'region_id', 
-            'vAlign'=>'middle',
-            'width'=>'250px',
-            'value'=>function ($model, $key, $index, $widget) { 
-                return Html::a($model->region->name_ar, '#', [
-                    'title'=>'View author detail', 
-                    'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
-                ]);
-            },
-            'filterType'=>GridView::FILTER_SELECT2,
-            'filter'=>ArrayHelper::map(Regions::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
-            'filterWidgetOptions'=>[
-                'pluginOptions'=>['allowClear'=>true],
-            ],
-            'filterInputOptions'=>['placeholder'=>'select user'],
-            'format'=>'raw',
-            'visible'=>true,
-        ],
-        [  
-            'attribute'=>'area_id', 
-            'vAlign'=>'middle',
-            'width'=>'250px',
-            'value'=>function ($model, $key, $index, $widget) { 
-                return Html::a($model['area']['name_ar'], '#', [
-                    'title'=>'View author detail', 
-                    'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
-                ]);
-            },
-            'filterType'=>GridView::FILTER_SELECT2,
-            'filter'=>ArrayHelper::map(Area::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
-            'filterWidgetOptions'=>[
-                'pluginOptions'=>['allowClear'=>true],
-            ],
-            'filterInputOptions'=>['placeholder'=>'select user'],
-            'format'=>'raw',
-            'visible'=>true,
-        ], 
-
-        'address',
+        
 
 
-        [
-            'attribute'=>'created_at',
-            'filterType'=>GridView::FILTER_DATE,
-            'format'=>'raw',
-            'width'=>'170px',
-            'filterWidgetOptions'=>[
-                'pluginOptions'=>['format'=>'yyyy-mm-dd']
-            ],
-            'visible'=>true,
-        ],
+    
 
     [
         'class'=>'kartik\grid\ActionColumn',

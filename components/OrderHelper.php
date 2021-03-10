@@ -15,20 +15,41 @@ class OrderHelper extends BaseObject
    public static function management_stock_product($model,$status_id){
        
         $ordersItem= $model->orderItems;
-
+           
             if($model->status_id != $status_id){
-                if($status_id <= 3){
-                    if($model->status_id== 4 || $model->status_id == 5 || $model->status_id == 8){
-                        self::stock_minus($ordersItem);
-                    }
-                }elseif($status_id==4 || $status_id==5){
-                    if($model->status_id <= 3 || $model->status_id = 6){
-                        self::stock_plus($ordersItem);
-                    }
-                }elseif($status_id==8){
-                    if($model->status_id== 4 || $model->status_id == 5 || $model->status_id ==6 || $model->status_id ==7){
-                        self::stock_plus($ordersItem); 
-                    }
+                switch ($status_id) {
+                    case 1: 
+                        switch ($model->status_id) {
+                            case 2:  case 3: case 4:  case 7: 
+                                self::stock_minus($ordersItem);
+                            break;   
+                        }    
+                    break;
+                    case 2: 
+                        switch ($model->status_id) {
+                            case 1:  case 8:  
+                                self::stock_plus($ordersItem);
+                                break;   
+                        } 
+
+                         break;   
+
+                    case 3: case 4:   case 5:   case 6:   case 7: 
+                        switch ($model->status_id) {
+                             case 8: 
+                                self::stock_minus($ordersItem);
+                                break;   
+                        } 
+                        break;   
+                    case 8: 
+                        switch ($model->status_id) {
+                            case 2: case 3: case 4: 
+                               self::stock_minus($ordersItem);
+                               break;   
+                       }
+
+                        break; 
+                      
                     
                 }
             }
