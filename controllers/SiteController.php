@@ -88,11 +88,11 @@ class SiteController extends Controller
     public function actionDashboard()
     {
         
-        $models =    Orders::find()->select(['id', 'martion'])->where('YEAR(cerated_at)=:year', [':year' => date('y')])
-            ->where('MONTH(cerated_at)=:month', [':month' => date('m')]) ->all();
-          return $this->render('index',[
+        $models =    Orders::find()->select(['id', 'martion'])
+            ->where('YEAR(cerated_at)=:year', [':year' => date('y')])
+            ->andWhere('MONTH(cerated_at)=:month', [':month' => date('m')]) ->all();
+          return $this->render('dashboard',[
             'models' => $models,
-       
         ]);
      
     }
