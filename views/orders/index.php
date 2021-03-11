@@ -70,37 +70,35 @@ $columns = [
             'format'=>'raw',
             'visible'=>true,
         ],   
-        // [
-        //     'attribute'=>'delivery_date',
-        //     'filterType'=>GridView::FILTER_DATE,
-        //     'format'=>'raw',
-        //     'width'=>'170px',
-        //     'filterWidgetOptions'=>[
-        //         'pluginOptions'=>['format'=>'yyyy-mm-dd']
-        //     ],
-        //     'visible'=>true,
-        // ],
-
-
-        // [
-        //     'attribute'=>'country_id', 
-        //     'vAlign'=>'middle',
-        //     'width'=>'250px',
-        //     'value'=>function ($model, $key, $index, $widget) { 
-        //         return Html::a($model->country->name_ar, '#', [
-        //             'title'=>'View author detail', 
-        //             'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
-        //         ]);
-        //     },
-        //     'filterType'=>GridView::FILTER_SELECT2,
-        //     'filter'=>ArrayHelper::map(Countries::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
-        //     'filterWidgetOptions'=>[
-        //         'pluginOptions'=>['allowClear'=>true],
-        //     ],
-        //     'filterInputOptions'=>['placeholder'=>'select user'],
-        //     'format'=>'raw',
-        //     'visible'=>true,
-        // ],
+         [
+             'attribute'=>'delivery_date',
+             'filterType'=>GridView::FILTER_DATE,
+             'format'=>'raw',
+             'width'=>'170px',
+             'filterWidgetOptions'=>[
+                 'pluginOptions'=>['format'=>'yyyy-mm-dd']
+             ],
+             'visible'=>true,
+         ],
+         [
+             'attribute'=>'country_id',
+             'vAlign'=>'middle',
+             'width'=>'250px',
+             'value'=>function ($model, $key, $index, $widget) {
+                 return Html::a($model->country->name_ar, '#', [
+                     'title'=>'View author detail',
+                     'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                 ]);
+             },
+             'filterType'=>GridView::FILTER_SELECT2,
+             'filter'=>ArrayHelper::map(Countries::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'),
+             'filterWidgetOptions'=>[
+                 'pluginOptions'=>['allowClear'=>true],
+             ],
+             'filterInputOptions'=>['placeholder'=>'select user'],
+             'format'=>'raw',
+             'visible'=>true,
+         ],
         [
             'attribute'=>'region_id', 
             'vAlign'=>'middle',
@@ -157,6 +155,32 @@ $columns = [
            
         ],
         'amount_required',
+        'total_price',
+        [
+            'attribute'=>'order',
+            'vAlign'=>'middle',
+            'width'=>'250px',
+            'value'=>function ($model, $key, $index, $widget) {
+                $orderItemString='';
+                foreach ($model->orderItems as $orderItem){
+                    $type='';
+                    if($orderItem->product->subProductCount->count() < 1){
+                        $type=$orderItem->subProduct->type;
+                    }
+                    $orderItemString.= ' ' .$orderItem->product->name .' '.$type.' ( '.$orderItem->quantity .' ) </br>';
+                }
+                return $model->orderItems;
+            },
+
+            'filterWidgetOptions'=>[
+                'pluginOptions'=>['allowClear'=>true],
+            ],
+
+            'format'=>'html',
+            'visible'=>true,
+        ],
+        'delivery_price',
+        'discount',
     
         // [  
         //     'attribute'=>'area_id', 

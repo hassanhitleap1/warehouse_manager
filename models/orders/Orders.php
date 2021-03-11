@@ -36,6 +36,7 @@ class Orders extends \yii\db\ActiveRecord
     public $end;
     public $sub_product_id;
     public $name_in_facebook;
+    public $order;
 
     /**
      * {@inheritdoc}
@@ -90,6 +91,7 @@ class Orders extends \yii\db\ActiveRecord
             'profit_margin'=> Yii::t('app', 'Profit_Margin'),
             'note'=> Yii::t('app', 'Note'),
             'name_in_facebook'=>Yii::t('app', 'Name_In_Facebook'),
+            'order'=>Yii::t('app', 'order'),
         ];
     }
 

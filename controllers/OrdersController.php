@@ -88,61 +88,31 @@ class OrdersController extends Controller
     {
         $model = new Orders();
         $ordersItem = [new OrdersItem()];
-
         if ($model->load(Yii::$app->request->post())) {
-           
             $ordersItem = Model::createMultiple(OrdersItem::classname());
             Model::loadMultiple($ordersItem, Yii::$app->request->post());
-
-            // validate all models
             $valid = $model->validate();
             $valid = Model::validateMultiple($ordersItem) && $valid;
             if(is_null($user = Users::find()->where(['phone'=> $model->phone])->one())){
-                 $user= new Users();
+                $user= new Users();
             }
-            $user->phone = $model->phone;
-            $user->other_phone = $model->other_phone;
-            $user->name = $model->name;;
-            $user->country_id = ($model->country_id !='') ? $model->country_id :null  ;
-            $user->region_id = ($model->region_id !='') ? $model->region_id :null  ;
-            $user->area_id = ($model->area_id !='') ? $model->area_id :null  ;
-            $user->address = $model->address;
-            $user->username=null;
-            $user->email =null;
-            $user->auth_key =null;
-            $user->name_in_facebook =$model->name_in_facebook;
-            $user->password_hash =null;
-            $user->password_reset_token =null;
-            $user->created_at=null;
-            $user->updated_at=null;
-           
-            
+            $user=$this->set_value_user($user,$model);
+
             if ($valid && $user->save()) {
                 $transaction = \Yii::$app->db->beginTransaction();
-
                 $model->user_id=$user->id;
                 $model->delivery_time= date("H:i", strtotime($model->delivery_time));
-             
-               
                 try {
                     if ($flag = $model->save(false)) {
-                    
                         foreach ($ordersItem as $orderItem) {
-                            
                             $orderItem->order_id = $model->id;
-                           
                             if (! ($flag = $orderItem->save(false))) {
                                 $transaction->rollBack();
                                 break;
                             }else{
-
-                                if($model->status_id!=Products::To_Be_Equipped && $model->status_id!=Products::To_Be_Ready ){
+                                if($model->status_id < 2 ){
                                     $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
-                                    $orderItemModel->count=$orderItemModel->count-$orderItem->quantity;
-                                    $orderItemModel->save();
-                                    $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
-                                    $productModel->quantity=$productModel->quantity-$orderItem->quantity;
-                                    $productModel->save();
+                                    OrderHelper::stock_minus($orderItemModel);
                                 }
                                 
                             }
@@ -160,8 +130,6 @@ class OrdersController extends Controller
                 }
             }
         }
-
-
 
         return $this->render('create', [
             'model' => $model,
@@ -182,7 +150,6 @@ class OrdersController extends Controller
     {
         $model = $this->findModel($id);
         $status_id=$model->status_id;
-
         $ordersItem = $model->orderItems;
         
         if ($model->load(Yii::$app->request->post())) {
@@ -193,27 +160,13 @@ class OrdersController extends Controller
             // validate all models
             $valid = $model->validate();
             $valid = Model::validateMultiple($ordersItem) && $valid;
-
             $user= Users::findOne($model->user_id);
-             $user->phone = $model->phone;
-            $user->other_phone = $model->other_phone;
-            $user->name = $model->name;;
-            $user->country_id = ($model->country_id !='') ? $model->country_id :null  ;
-            $user->region_id = ($model->region_id !='') ? $model->region_id :null  ;
-            $user->area_id = ($model->area_id !='') ? $model->area_id :null  ;
-            $user->address = $model->address;
-            $user->username=null;
-            $user->email =null;
-            $user->auth_key =null;
-            $user->name_in_facebook =$model->name_in_facebook;
-          
-          
+            $user=$this->set_value_user($user,$model);
             if ($valid && $user->save()) 
             {
                 $transaction = \Yii::$app->db->beginTransaction();
                 try 
                 {
-
                     if ($flag = $model->save(false)) 
                     {
                         foreach ($ordersItem as $orderItem) 
@@ -272,21 +225,14 @@ class OrdersController extends Controller
 
     public function actionChangeStatus($id){
         $model = $this->findModel($id);
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         if ($model->load(Yii::$app->request->post())) 
         {
             $status_id=$_POST["Orders"][$_GET['index']]["status_id"];
-
-
-            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-           if($status_id==$model->status_id){
-                return [ 'output' => $model->status->name_ar];
-           }else{
-             OrderHelper::management_stock_product($model,$status_id);
+           if($status_id !=$model->status_id){
+               OrderHelper::management_stock_product($model,$status_id);
            }
 
-            
-            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return [ 'output' => $model->status->name_ar];
         }
           
@@ -307,5 +253,25 @@ class OrdersController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    private function set_value_user($user ,$model){
+        $user->phone = $model->phone;
+        $user->other_phone = $model->other_phone;
+        $user->name = $model->name;;
+        $user->country_id = ($model->country_id !='') ? $model->country_id :null  ;
+        $user->region_id = ($model->region_id !='') ? $model->region_id :null  ;
+        $user->area_id = ($model->area_id !='') ? $model->area_id :null  ;
+        $user->address = $model->address;
+        $user->username=null;
+        $user->email =null;
+        $user->auth_key =null;
+        $user->name_in_facebook =$model->name_in_facebook;
+        $user->password_hash =null;
+        $user->password_reset_token =null;
+        $user->created_at=null;
+        $user->updated_at=null;
+
+        return $user;
     }
 }
