@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\subproductcount\SubProductCountSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Sub Product Counts');
+$this->title = Yii::t('app', 'SubProductCount');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sub-product-count-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Sub Product Count'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create_SubProductCount'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -27,10 +27,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            // 'id',
             'type',
             'count',
-            'product_id',
+            [
+                
+                'attribute' => 'product_id',
+                'value'=>function ($searchModel) {
+                    return $searchModel->product->name;
+                },
+                
+            ],
+           
             'created_at',
             //'updated_at',
 

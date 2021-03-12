@@ -143,4 +143,6 @@ return [
     "Profit_Margin"=>"هامش الربح",
     "Name_In_Facebook"=>"الاسم على الفيسبوك",
     "Note"=>"ملاحظة",
+    'SubProductCount'=>"افرع المنتج",
+    'Create_SubProductCount'=>"انشاء فرع منتج"
 ];

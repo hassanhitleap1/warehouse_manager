@@ -17,8 +17,8 @@ class SubProductCountSearch extends SubProductCount
     public function rules()
     {
         return [
-            [['id', 'count', 'product_id'], 'integer'],
-            [['type', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'count'], 'integer'],
+            [['type', 'product_id','created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -48,7 +48,9 @@ class SubProductCountSearch extends SubProductCount
             'query' => $query,
         ]);
 
+  
         $this->load($params);
+        $query->joinWith('product');
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -56,16 +58,20 @@ class SubProductCountSearch extends SubProductCount
             return $dataProvider;
         }
 
+        if(isset($_GET['product_id'])){
+            $query->andWhere(['product_id'=>$_GET['product_id']]); 
+        }
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'count' => $this->count,
-            'product_id' => $this->product_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'type', $this->type]);
+        $query->andFilterWhere(['like', 'type', $this->type])
+                ->andFilterWhere(['like', 'products.name', $this->product_id]);
 
         return $dataProvider;
     }

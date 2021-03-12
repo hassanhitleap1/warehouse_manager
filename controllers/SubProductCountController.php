@@ -5,11 +5,9 @@ namespace app\controllers;
 use Yii;
 use app\models\subproductcount\SubProductCount;
 use app\models\subproductcount\SubProductCountSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\products\Products;
-use yii\helpers\Json;
 
 /**
  * SubProductCountController implements the CRUD actions for SubProductCount model.
@@ -95,7 +93,11 @@ class SubProductCountController extends BaseController
     public function actionCreate()
     {
         $model = new SubProductCount();
+      
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $modelProduct =Products::findOne($model->product_id);
+            $modelProduct->quantity=$modelProduct->quantity+$model->count;
+            $modelProduct->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('create', [
@@ -113,8 +115,11 @@ class SubProductCountController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $count_befor=$model->count;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $modelProduct =Products::findOne($model->product_id);
+            $modelProduct->quantity=$modelProduct->quantity- $count_befor +$model->count ;
+            $modelProduct->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\subproductcount\SubProductCount */
 
-$this->title = Yii::t('app', 'Create Sub Product Count');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sub Product Counts'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Create_SubProductCount');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'SubProductCount'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sub-product-count-create">

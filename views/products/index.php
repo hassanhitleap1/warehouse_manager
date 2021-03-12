@@ -36,13 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             // 'id',
             [
-                'label'=>'bla',
-                'format' => 'name',
+                
+                'attribute' => 'name',
                 'value'=>function ($searchModel) {
-                    return Html::a($searchModel->name ,['sub-product-count/index','product_id'=>$searchModel->id]);
+                    return Html::a($searchModel['name'] ,['sub-product-count/index','product_id'=>$searchModel->id]);
                 },
+                'format'=>'html'
             ],
-            'name',
+           
             
             [
                 'attribute'=>'thumbnail',
