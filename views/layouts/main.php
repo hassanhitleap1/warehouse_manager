@@ -44,7 +44,7 @@ AppAsset::register($this);
             $menuItemsleft[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
        
         } else {
-            
+            $menuItems[] = ['label' => Yii::t('app', 'Dashboard'), 'url' => ['/site/dashboard']];
             $menuItems[] = [
                 'label' =>Yii::t('app', 'Countries') ,
                 'items' => [

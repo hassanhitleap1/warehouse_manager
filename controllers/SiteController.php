@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\orders\Orders;
 use app\models\products\Products;
 use yii\data\Pagination;
 
@@ -87,10 +88,10 @@ class SiteController extends Controller
      */
     public function actionDashboard()
     {
-        
-        $models =    Orders::find()->select(['id', 'martion'])
-            ->where('YEAR(cerated_at)=:year', [':year' => date('y')])
-            ->andWhere('MONTH(cerated_at)=:month', [':month' => date('m')]) ->all();
+      
+        $models = Orders::find()->select(['id', 'profit_margin'])
+            ->where('YEAR(created_at)=:year', [':year' => date('y')])
+            ->andWhere('MONTH(created_at)=:month', [':month' => date('m')]) ->all();
           return $this->render('dashboard',[
             'models' => $models,
         ]);
