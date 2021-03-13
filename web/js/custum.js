@@ -123,6 +123,7 @@ $(document).on('change','.sub_product_id',function (e) {
     let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
     index=index.replaceAll('-product_id', '');
     index=index.replaceAll('-id', '');
+    index=index.replaceAll('-sub_product_id', '');
     index=index.trim()
      $.ajax({
          url: url,
