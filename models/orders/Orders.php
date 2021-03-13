@@ -3,6 +3,7 @@
 namespace app\models\orders;
 
 use app\models\area\Area;
+use app\models\countries\Countries;
 use app\models\regions\Regions;
 use Carbon\Carbon;
 use app\models\ordersitem\OrdersItem;
@@ -148,7 +149,7 @@ class Orders extends \yii\db\ActiveRecord
 
     public function getCountry()
     {
-        return $this->hasOne(Regions::className(), ['id' => 'country_id']);
+        return $this->hasOne(Countries::className(), ['id' => 'country_id']);
     }
 
 

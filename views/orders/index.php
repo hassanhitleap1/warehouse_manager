@@ -88,10 +88,7 @@ $columns = [
              'vAlign'=>'middle',
              'width'=>'250px',
              'value'=>function ($model, $key, $index, $widget) {
-                 return Html::a($model->country->name_ar, '#', [
-                     'title'=>'View author detail',
-                     'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
-                 ]);
+                 return $model->country->name_ar;
              },
              'filterType'=>GridView::FILTER_SELECT2,
              'filter'=>ArrayHelper::map(Countries::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'),
@@ -126,11 +123,8 @@ $columns = [
             'vAlign'=>'middle',
             'width'=>'250px',
             'value'=>function ($model, $key, $index, $widget) { 
-                    
-                return Html::a($model->status->name_ar, '#', [
-                    'title'=>'View author detail', 
-                    'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
-                ]);
+                    return $model->status->name_ar;
+               
             },
             'filterType'=>GridView::FILTER_SELECT2,
             'filter'=>ArrayHelper::map(Status::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
@@ -187,10 +181,7 @@ $columns = [
             'vAlign'=>'middle',
             'width'=>'250px',
             'value'=>function ($model, $key, $index, $widget) { 
-                return Html::a($model['area']['name_ar'], '#', [
-                    'title'=>'View author detail', 
-                    'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
-                ]);
+                return $model['area']['name_ar'];
             },
             'filterType'=>GridView::FILTER_SELECT2,
             'filter'=>ArrayHelper::map(Area::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
