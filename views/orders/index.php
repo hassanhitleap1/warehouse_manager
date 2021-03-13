@@ -107,10 +107,7 @@ $columns = [
             'vAlign'=>'middle',
             'width'=>'250px',
             'value'=>function ($model, $key, $index, $widget) { 
-                return Html::a($model->region->name_ar, '#', [
-                    'title'=>'View author detail', 
-                    'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
-                ]);
+                return $model->region->name_ar;
             },
             'filterType'=>GridView::FILTER_SELECT2,
             'filter'=>ArrayHelper::map(Regions::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
