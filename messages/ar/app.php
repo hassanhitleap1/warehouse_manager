@@ -129,7 +129,7 @@ return [
     "Total_Price"=>"المبلغ كامل",
     "Amount_Required"=>"المبلغ المطلوب",
     "Create_Order"=>"انشاء طلب",
-    "Orders"=>"الطلبات",
+    "Order"=>"الطلب",
     "Product"=>"المنتج",
     "Sub_Product"=>"المنتج الفرعي",
     "Add_Sub_Product"=>"اضافة منتج فرعي",
@@ -144,5 +144,6 @@ return [
     "Name_In_Facebook"=>"الاسم على الفيسبوك",
     "Note"=>"ملاحظة",
     'SubProductCount'=>"افرع المنتج",
-    'Create_SubProductCount'=>"انشاء فرع منتج"
+    'Create_SubProductCount'=>"انشاء فرع منتج",
+    "Number"=>"عدد"
 ];

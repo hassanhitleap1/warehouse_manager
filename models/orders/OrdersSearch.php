@@ -63,7 +63,7 @@ class OrdersSearch extends Orders
             'delivery_date' => $this->delivery_date,
             'delivery_time' => $this->delivery_time,
             'country_id' => $this->country_id,
-            'region_id' => $this->region_id,
+            'orders.region_id' => $this->region_id,
             'area_id' => $this->area_id,
             'delivery_price' => $this->delivery_price,
             'discount' => $this->discount,

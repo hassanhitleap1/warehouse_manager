@@ -53,7 +53,8 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             [[ 'order_id','status_id','phone','name','address','delivery_price','discount','total_price','amount_required'], 'required'],
-            [['user_id', 'country_id', 'region_id', 'area_id', 'status_id','delivery_price','discount','total_price','amount_required','profit_margin'], 'integer'],
+            [['user_id', 'country_id', 'region_id', 'area_id', 'status_id'], 'integer'],
+            [['discount','total_price','delivery_price','amount_required','profit_margin'],'double'],
             [['delivery_date', 'delivery_time'], 'safe'],
             [['name','note'],'string'],
             [['order_id'], 'string', 'max' => 255],

@@ -35,6 +35,9 @@ $columns = [
                 'pluginOptions'=>['format'=>'yyyy-mm-dd']
             ],
             'visible'=>true,
+            'value'=>function ($model, $key, $index, $widget) { 
+                return  date('Y-m-d', strtotime($model->created_at));
+            },
         ],
 
         [
@@ -159,17 +162,17 @@ $columns = [
         [
             'attribute'=>'order',
             'vAlign'=>'middle',
-            'width'=>'250px',
+            'width'=>'300px',
             'value'=>function ($model, $key, $index, $widget) {
                 $orderItemString='';
                 foreach ($model->orderItems as $orderItem){
                     $type='';
-                    if($orderItem->product->subProductCount->count() < 1){
+                    if(count($orderItem->product->subProductCount) < 1){
                         $type=$orderItem->subProduct->type;
                     }
-                    $orderItemString.= ' ' .$orderItem->product->name .' '.$type.' ( '.$orderItem->quantity .' ) </br>';
+                    $orderItemString.= ' ' .$orderItem->product->name .' '.$type.' '.Yii::t('app','Number').' ( '.$orderItem->quantity .' ) </br>';
                 }
-                return $model->orderItems;
+                return $orderItemString ;
             },
 
             'filterWidgetOptions'=>[

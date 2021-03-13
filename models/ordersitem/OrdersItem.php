@@ -5,6 +5,7 @@ namespace app\models\ordersitem;
 use app\models\products\Products;
 use app\models\subproductcount\SubProductCount;
 use Carbon\Carbon;
+use Carbon\CarProductbon;
 use Yii;
 
 /**
@@ -34,7 +35,8 @@ class OrdersItem extends \yii\db\ActiveRecord
     {
         return [
             [[ 'sub_product_id','product_id','quantity'], 'required'],
-            [['product_id', 'quantity','price','price_item_count','profit_margin','profits_margin'], 'integer'],
+            [['product_id', 'quantity','price_item_count'], 'integer'],
+            [['price','profit_margin','profits_margin'],'double'],
             [['order_id'], 'string', 'max' => 255],
          
         ];

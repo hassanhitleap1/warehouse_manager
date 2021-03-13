@@ -91,3 +91,13 @@ jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
 
 $this->registerJs($js);
 ?>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script  type="text/javascript">
+
+$(".remove-item").on("click", function(e) {
+
+    callculate_count_sub_product();
+});
+
+</script>

@@ -19,6 +19,7 @@ $phone=null;
 $other_phone=null;
 $address=null;
 $name_in_facebook=null;
+$delivery_date=date("Y-m-d", strtotime('tomorrow'));
 if (!$model->isNewRecord) {
     $order_id=$model->order_id;
     $delivery_price=$model->delivery_price;
@@ -28,6 +29,7 @@ if (!$model->isNewRecord) {
     $other_phone=$user->other_phone;
     $address=$user->address;
     $name_in_facebook=$user->name_in_facebook;
+    $delivery_date=$model->delivery_date;
 }
 /* @var $this yii\web\View */
 /* @var $model app\models\orders\Orders */
@@ -46,8 +48,8 @@ if (!$model->isNewRecord) {
             <?= $form->field($model, 'other_phone')->textInput(['value'=>$other_phone]) ?>
             <?= $form->field($model, 'address')->textInput(['maxlength' => true,['value'=>$address]]) ?>
             <?= $form->field($model, 'delivery_date')->widget(DatePicker::classname(), [
-                'options' => ['placeholder' => Yii::t('app', 'Enter_date')],
-                'value' => Carbon::now('Asia/Amman')->toDateString(),
+                'options' => ['value' => $delivery_date],
+                'value' => $delivery_date,
 
                 'type' => DatePicker::TYPE_COMPONENT_APPEND,
                 // 'value'=>Carbon::now('Asia/Amman')->toDateString(),
@@ -66,13 +68,13 @@ if (!$model->isNewRecord) {
             <?= $form->field($model, 'status_id')->widget(Select2::classname(), [
                 'data' =>  ArrayHelper::map(Status::find()->all(), 'id', 'name_ar'),
                 'language' => 'ar',
-                'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'id'=>'status_id'],
+               
 
             ]); ?>
             <?= $form->field($model, 'country_id')->widget(Select2::classname(), [
                 'data' =>  ArrayHelper::map(Countries::find()->all(), 'id', 'name_ar'),
                 'language' => 'ar',
-                'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'id'=>'country_id'],
+                
 
             ]); ?>
             <?= $form->field($model, 'region_id')->widget(Select2::classname(), [
