@@ -182,25 +182,25 @@ $columns = [
         'delivery_price',
         'discount',
     
-        // [  
-        //     'attribute'=>'area_id', 
-        //     'vAlign'=>'middle',
-        //     'width'=>'250px',
-        //     'value'=>function ($model, $key, $index, $widget) { 
-        //         return Html::a($model['area']['name_ar'], '#', [
-        //             'title'=>'View author detail', 
-        //             'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
-        //         ]);
-        //     },
-        //     'filterType'=>GridView::FILTER_SELECT2,
-        //     'filter'=>ArrayHelper::map(Area::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
-        //     'filterWidgetOptions'=>[
-        //         'pluginOptions'=>['allowClear'=>true],
-        //     ],
-        //     'filterInputOptions'=>['placeholder'=>'select user'],
-        //     'format'=>'raw',
-        //     'visible'=>true,
-        // ], 
+        [  
+            'attribute'=>'area_id', 
+            'vAlign'=>'middle',
+            'width'=>'250px',
+            'value'=>function ($model, $key, $index, $widget) { 
+                return Html::a($model['area']['name_ar'], '#', [
+                    'title'=>'View author detail', 
+                    'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                ]);
+            },
+            'filterType'=>GridView::FILTER_SELECT2,
+            'filter'=>ArrayHelper::map(Area::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
+            'filterWidgetOptions'=>[
+                'pluginOptions'=>['allowClear'=>true],
+            ],
+            
+            'format'=>'raw',
+            'visible'=>true,
+        ], 
 
         
 
