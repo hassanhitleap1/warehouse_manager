@@ -89,10 +89,11 @@ class SiteController extends Controller
     public function actionDashboard()
     {
 
-        // SELECT count(*) FROM `orders` GROUP BY YEAR(`created_at`), MONTH(`created_at`),DAY(`created_at`);
+        // SELECT count(*) ,count(`profit_margin`) FROM `orders` GROUP BY YEAR(`created_at`), MONTH(`created_at`),DAY(`created_at`)
         $models = Orders::find()->select(['id', 'profit_margin'])
             ->where('YEAR(created_at)=:year', [':year' => date('y')])
             ->andWhere('MONTH(created_at)=:month', [':month' => date('m')]) ->all();
+
           return $this->render('dashboard',[
             'models' => $models,
         ]);
