@@ -115,6 +115,11 @@ class OrdersController extends Controller
                                 break;
                             }
                         }
+
+                        if($model->status_id == 7){
+                            OrderHelper::stock_plus($ordersItem);   
+                        }
+                                            
                     }
 
                    

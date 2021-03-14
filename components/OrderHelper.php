@@ -6,8 +6,7 @@ use Yii;
 use yii\base\BaseObject;
 use app\models\subproductcount\SubProductCount;
 use app\models\products\Products;
-use app\models\ordersitem\OrdersItem;
-use yii\helpers\ArrayHelper;
+
 
 class OrderHelper extends BaseObject
 {
@@ -16,7 +15,7 @@ class OrderHelper extends BaseObject
        
         $ordersItem= $model->orderItems;
            
-            if($model->status_id != $status_id){
+            if($model->status_id != $status_id ){
                 switch ($status_id) {
                     case 1: 
                         switch ($model->status_id) {
