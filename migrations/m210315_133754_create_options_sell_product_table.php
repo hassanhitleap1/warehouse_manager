@@ -18,9 +18,8 @@ class m210315_133754_create_options_sell_product_table extends Migration
 
         $this->createTable('{{%options_sell_product}}', [
             'id' => $this->primaryKey(),
-            'type'=> $this->string(50)->notNull(),
+            'type'=> $this->char(2)->notNull(),
             'number' => $this->smallInteger()->notNull(),
-            'logical_comparison'=>$this->char(2)->notNull(),
             'text'=> $this->string(500)->notNull(),
             'product_id' => $this->integer()->notNull(),
             'created_at' => $this->dateTime()->defaultValue(null),
