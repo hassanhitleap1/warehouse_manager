@@ -17,11 +17,11 @@ class m201129_215853_suppliers extends Migration
 
         $this->createTable('{{%suppliers}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(100)->unique(),
-            'phone' => $this->string(32)->notNull(),
-            'other_phone' => $this->string(32)->defaultValue(null),
-            'site' => $this->string(32)->defaultValue(null),
-            'location' => $this->string(254)->defaultValue(null),
+            'name' => $this->string(250)->unique(),
+            'phone' => $this->string(250)->notNull(),
+            'other_phone' => $this->string(250)->defaultValue(null),
+            'site' => $this->string(250)->defaultValue(null),
+            'location' => $this->string(250)->defaultValue(null),
             'email' => $this->string()->unique(),
             'country_id'=>$this->integer()->defaultValue(null),
             'region_id'=>$this->integer()->defaultValue(null),

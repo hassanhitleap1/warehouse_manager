@@ -249,8 +249,8 @@ class m201201_210658_area extends Migration
 
         $this->createTable('{{%area}}', [
             'id' => $this->primaryKey(),
-            'name_ar'=> $this->string()->notNull(),
-            'name_en' => $this->string()->defaultValue(null),
+            'name_ar'=> $this->string(250)->notNull(),
+            'name_en' => $this->string(250)->defaultValue(null),
             'region_id'=> $this->integer()->defaultValue(1),
             'created_at' => $this->dateTime()->defaultValue(null),
             'updated_at' => $this->dateTime()->defaultValue(null),

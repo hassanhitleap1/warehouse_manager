@@ -24,8 +24,8 @@ class m201129_215922_units extends Migration
 
         $this->createTable('{{%units}}', [
             'id' => $this->primaryKey(),
-            'name_en' => $this->string(32)->notNull(),
-            'name_ar' => $this->string(32)->notNull(),
+            'name_en' => $this->string(250)->notNull(),
+            'name_ar' => $this->string(250)->notNull(),
             'created_at' => $this->dateTime()->defaultValue(null),
             'updated_at' => $this->dateTime()->defaultValue(null),
         ], $tableOptions);

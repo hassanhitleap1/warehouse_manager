@@ -30,9 +30,9 @@ class m201129_215529_status extends Migration
 
         $this->createTable('{{%status}}', [
             'id' => $this->primaryKey(),
-            'name_en' => $this->string(32)->notNull(),
-            'name_ar' => $this->string(32)->notNull(),
-            'color' => $this->string(32)->notNull(),
+            'name_en' => $this->string(250)->notNull(),
+            'name_ar' => $this->string(250)->notNull(),
+            'color' => $this->string(250)->notNull(),
             'created_at' => $this->dateTime()->defaultValue(null),
             'updated_at' => $this->dateTime()->defaultValue(null),
         ], $tableOptions);

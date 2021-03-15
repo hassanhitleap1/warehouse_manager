@@ -17,7 +17,7 @@ class m201204_005239_sub_product_count extends Migration
 
         $this->createTable('{{%sub_product_count}}', [
             'id' => $this->primaryKey(),
-            'type'=> $this->string()->notNull(),
+            'type'=> $this->string(250)->notNull(),
             'count' => $this->smallInteger()->notNull(),
             'product_id'=> $this->integer()->notNull(),
             'created_at' => $this->dateTime()->defaultValue(null),

@@ -33,8 +33,8 @@ class m201201_210649_regions extends Migration
 
         $this->createTable('{{%regions}}', [
             'id' => $this->primaryKey(),
-            'name_en' => $this->string()->defaultValue(null),
-            'name_ar'=> $this->string()->notNull(),
+            'name_en' => $this->string(250)->defaultValue(null),
+            'name_ar'=> $this->string(250)->notNull(),
             'price_delivery'=>$this->double()->defaultValue(null),
             'country_id'=> $this->integer()->notNull()->defaultValue(1),
             'created_at' => $this->dateTime()->defaultValue(null),

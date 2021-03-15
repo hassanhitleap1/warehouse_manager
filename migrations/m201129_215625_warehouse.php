@@ -20,8 +20,8 @@ class m201129_215625_warehouse extends Migration
 
         $this->createTable('{{%warehouse}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(32)->notNull(),
-            'localtion'=> $this->string(32)->defaultValue(null),
+            'name' => $this->string(250)->notNull(),
+            'localtion'=> $this->string(250)->defaultValue(null),
             'created_at' => $this->dateTime()->defaultValue(null),
             'updated_at' => $this->dateTime()->defaultValue(null),
         ], $tableOptions);
