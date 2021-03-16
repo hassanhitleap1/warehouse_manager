@@ -121,7 +121,7 @@ $columns = [
             'class' => 'kartik\grid\EditableColumn',
             'attribute'=>'status_id', 
             'vAlign'=>'middle',
-            'width'=>'250px',
+            'width'=>'150px',
             'value'=>function ($model, $key, $index, $widget) { 
                     return $model->status->name_ar;
                
@@ -153,7 +153,7 @@ $columns = [
         [
             'attribute'=>'order',
             'vAlign'=>'middle',
-            'width'=>'300px',
+            'width'=>'350px',
             'value'=>function ($model, $key, $index, $widget) {
                 $orderItemString='';
                 foreach ($model->orderItems as $orderItem){
