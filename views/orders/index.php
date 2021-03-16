@@ -121,12 +121,12 @@ $columns = [
             'class' => 'kartik\grid\EditableColumn',
             'attribute'=>'status_id', 
             'vAlign'=>'middle',
-            'width'=>'150px',
+            'width'=>'250px',
             'value'=>function ($model, $key, $index, $widget) { 
                     return $model->status->name_ar;
                
             },
-            'filterType'=>GridView::FILTER_SELECT2,
+            // 'filterType'=>GridView::FILTER_SELECT2,
             'filter'=>ArrayHelper::map(Status::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
             'filterWidgetOptions'=>[
                 'pluginOptions'=>['allowClear'=>true],
@@ -153,7 +153,7 @@ $columns = [
         [
             'attribute'=>'order',
             'vAlign'=>'middle',
-            'width'=>'350px',
+            'width'=>'300px',
             'value'=>function ($model, $key, $index, $widget) {
                 $orderItemString='';
                 foreach ($model->orderItems as $orderItem){
