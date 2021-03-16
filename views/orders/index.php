@@ -173,8 +173,26 @@ $columns = [
             'format'=>'html',
             'visible'=>true,
         ],
-        'delivery_price',
-        'discount',
+        //'delivery_price',
+        // 'discount',
+
+        [  
+            'attribute'=>'delivery_price', 
+            'vAlign'=>'middle',
+            'width'=>'50px',
+            'value'=>'delivery_price',
+            'format'=>'raw',
+            'visible'=>true,
+        ],
+
+        [  
+            'attribute'=>'discount', 
+            'vAlign'=>'middle',
+            'width'=>'50px',
+            'value'=>'discount',
+            'format'=>'raw',
+            'visible'=>true,
+        ],
     
         [  
             'attribute'=>'area_id', 
