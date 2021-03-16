@@ -30,7 +30,7 @@ $columns = [
             'attribute'=>'created_at',
             'filterType'=>GridView::FILTER_DATE,
             'format'=>'raw',
-            'width'=>'170px',
+            'width'=>'100px',
             'filterWidgetOptions'=>[
                 'pluginOptions'=>['format'=>'yyyy-mm-dd']
             ],
@@ -43,7 +43,7 @@ $columns = [
         [
             'attribute'=>'user_id', 
             'vAlign'=>'middle',
-            'width'=>'250px',
+            'width'=>'100px',
             'value'=>function ($model, $key, $index, $widget) { 
                 return $model->user->name;
             },
@@ -61,7 +61,7 @@ $columns = [
         [
             'attribute'=>'phone', 
             'vAlign'=>'middle',
-            'width'=>'250px',
+            'width'=>'100px',
             'value'=>function ($model, $key, $index, $widget) { 
                 return $model->user->phone;
             },
@@ -77,7 +77,7 @@ $columns = [
              'attribute'=>'delivery_date',
              'filterType'=>GridView::FILTER_DATE,
              'format'=>'raw',
-             'width'=>'170px',
+             'width'=>'100px',
              'filterWidgetOptions'=>[
                  'pluginOptions'=>['format'=>'yyyy-mm-dd']
              ],
@@ -102,7 +102,7 @@ $columns = [
         [
             'attribute'=>'region_id', 
             'vAlign'=>'middle',
-            'width'=>'250px',
+            'width'=>'100px',
             'value'=>function ($model, $key, $index, $widget) { 
                 return $model->region->name_ar;
             },
@@ -121,7 +121,7 @@ $columns = [
             'class' => 'kartik\grid\EditableColumn',
             'attribute'=>'status_id', 
             'vAlign'=>'middle',
-            'width'=>'250px',
+            'width'=>'100px',
             'value'=>function ($model, $key, $index, $widget) { 
                     return $model->status->name_ar;
                
@@ -153,7 +153,7 @@ $columns = [
         [
             'attribute'=>'order',
             'vAlign'=>'middle',
-            'width'=>'300px',
+            'width'=>'350px',
             'value'=>function ($model, $key, $index, $widget) {
                 $orderItemString='';
                 foreach ($model->orderItems as $orderItem){
@@ -179,7 +179,7 @@ $columns = [
         [  
             'attribute'=>'area_id', 
             'vAlign'=>'middle',
-            'width'=>'250px',
+            'width'=>'100px',
             'value'=>function ($model, $key, $index, $widget) { 
                 return $model['area']['name_ar'];
             },
