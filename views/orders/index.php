@@ -148,12 +148,28 @@ $columns = [
             
            
         ],
-        'amount_required',
-        'total_price',
+        // 'amount_required',
+        [  
+            'attribute'=>'amount_required', 
+            'vAlign'=>'middle',
+            'width'=>'50px',
+            'value'=>'amount_required',
+            'format'=>'raw',
+            'visible'=>true,
+        ],
+        // 'total_price',
+        [  
+            'attribute'=>'total_price', 
+            'vAlign'=>'middle',
+            'width'=>'50px',
+            'value'=>'total_price',
+            'format'=>'raw',
+            'visible'=>true,
+        ],
         [
             'attribute'=>'order',
             'vAlign'=>'middle',
-            'width'=>'350px',
+            'width'=>'450px',
             'value'=>function ($model, $key, $index, $widget) {
                 $orderItemString='';
                 foreach ($model->orderItems as $orderItem){
@@ -197,7 +213,7 @@ $columns = [
         [  
             'attribute'=>'area_id', 
             'vAlign'=>'middle',
-            'width'=>'100px',
+            'width'=>'50px',
             'value'=>function ($model, $key, $index, $widget) { 
                 return $model['area']['name_ar'];
             },
