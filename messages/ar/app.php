@@ -70,7 +70,7 @@ return [
     "Must_Be_Login"=>"يجب عليك تسجيل الدخول",
  
     "Country"=>"البلد",
-    "Region"=>"المحافظة أو المقاطعة",
+    "Region"=>"المحافظة",
     "Plz_Select"=>"ارجو التحديد",
     "Yor_Applayed"=>"لقد تقدمت لهذه الوظيفة",
     "Successfuly_Applay"=>"تم التقديم بنجاح",
