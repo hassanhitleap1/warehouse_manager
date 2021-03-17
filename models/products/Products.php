@@ -40,6 +40,8 @@ class Products extends \yii\db\ActiveRecord
     const To_Be_Deliverd=5;
     const Canceled=6;
     const Delayed=7;
+    const TYPE_DROP_DAWNLIST=1;
+    const TYPE_CHOOSE_BOX=2;    
     /**
      * {@inheritdoc}
      */
@@ -56,10 +58,10 @@ class Products extends \yii\db\ActiveRecord
         return [
             [['name', 'purchasing_price', 'selling_price','category_id', 'warehouse_id'], 'required'],
             [['purchasing_price', 'selling_price'], 'number'],
-            [['quantity', 'category_id', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
+            [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
             [['name', 'thumbnail'], 'string', 'max' => 255],
              [['video_url'], 'string', 'max' => 500],
-             [['file'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg,jpeg '],
+             [['file'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg,jpeg'],
              
         ];
     }
@@ -84,6 +86,7 @@ class Products extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
             "images_product"=>Yii::t('app', 'Images_Product'),
+            "type_options"=>Yii::t('app', 'Type_Options'),
             "video_url"=>Yii::t('app', 'Video_Url'),
         ];
     }
