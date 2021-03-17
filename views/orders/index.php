@@ -106,7 +106,7 @@ $columns = [
             'value'=>function ($model, $key, $index, $widget) { 
                 return $model->region->name_ar;
             },
-            'filterType'=>GridView::FILTER_SELECT2,
+            // 'filterType'=>GridView::FILTER_SELECT2,
             'filter'=>ArrayHelper::map(Regions::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 
             'filterWidgetOptions'=>[
                 'pluginOptions'=>['allowClear'=>true],
