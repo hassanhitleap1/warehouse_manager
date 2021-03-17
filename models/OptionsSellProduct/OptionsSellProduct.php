@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "options_sell_product".
  *
  * @property int $id
- * @property string $type
  * @property int $number
  * @property string $text
  * @property int $product_id
@@ -31,7 +30,7 @@ class OptionsSellProduct extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'number', 'text', 'product_id'], 'required'],
+            [['number', 'text', 'product_id'], 'required'],
             [['number', 'product_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['type'], 'string', 'max' => 2],
@@ -46,7 +45,6 @@ class OptionsSellProduct extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'type' => Yii::t('app', 'Type'),
             'number' => Yii::t('app', 'Number'),
             'text' => Yii::t('app', 'Text'),
             'product_id' => Yii::t('app', 'Product ID'),

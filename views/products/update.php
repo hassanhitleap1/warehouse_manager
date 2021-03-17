@@ -16,7 +16,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <?= $this->render('_form', [
         'model' => $model,
-        'subProductCounts'=>$subProductCounts
+        'subProductCounts'=>$subProductCounts,
+        'type_options'=>$type_options
     ]) ?>
 
 </div>

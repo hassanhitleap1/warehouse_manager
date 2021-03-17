@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 use app\models\Model;
+use app\models\OptionsSellProduct\OptionsSellProduct;
 use Yii;
 use app\models\products\Products;
 use app\models\products\ProductsSearch;
@@ -72,17 +73,20 @@ class ProductsController extends BaseController
     {
         $model = new Products();
         $subProductCounts = [new SubProductCount()];
+        $type_options = [new OptionsSellProduct()];
         $newId = Products::find()->max('id') + 1;
        
 
         if ($model->load(Yii::$app->request->post())) {
            
             $subProductCounts = Model::createMultiple(SubProductCount::classname());
+            $type_options= Model::createMultiple(OptionsSellProduct::classname());
             Model::loadMultiple($subProductCounts, Yii::$app->request->post());
+            Model::loadMultiple($type_options, Yii::$app->request->post());
         
              // validate all models
              $valid = $model->validate();
-             $valid = Model::validateMultiple($subProductCounts) && $valid;
+             $valid =  Model::validateMultiple($type_options) &&  Model::validateMultiple($subProductCounts) && $valid;
             
              if ($valid) {
                 
@@ -140,6 +144,14 @@ class ProductsController extends BaseController
                              $subProductCount->count=$model->quantity;
                             $subProductCount->save();
                         }
+
+                        foreach ($type_options as $type_option) {
+                            $type_option->product_id = $model->id;
+                            if (! ($flag = $type_option->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
                     
                     }
                     
@@ -159,7 +171,8 @@ class ProductsController extends BaseController
         
         return $this->render('create', [
             'model' => $model,
-            'subProductCounts' => (empty($subProductCounts)) ? [new SubProductCount] : $subProductCounts
+            'subProductCounts' => (empty($subProductCounts)) ? [new SubProductCount] : $subProductCounts,
+            'type_options' => (empty($type_options)) ? [new OptionsSellProduct] : $type_options,
         ]);
 
    
@@ -178,16 +191,23 @@ class ProductsController extends BaseController
         $newId=$id;
         
         $modelSubProductCount = $model->subProductCount;
+        $type_options = $model->typeOptions;
 
         if ($model->load(Yii::$app->request->post())) {
             $oldIDs = ArrayHelper::map($modelSubProductCount, 'id', 'id');
+            $type_options_old_ids = ArrayHelper::map($type_options, 'id', 'id');
+
             $modelSubProductCount = Model::createMultiple(SubProductCount::classname(), $modelSubProductCount);
             Model::loadMultiple($modelSubProductCount, Yii::$app->request->post());
 
+            $type_options = Model::createMultiple(OptionsSellProduct::classname(), $type_options);
+            Model::loadMultiple($type_options, Yii::$app->request->post());
+
             $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelSubProductCount, 'id', 'id')));
+            $deleted_ids_type_options = array_diff($oldIDs, array_filter(ArrayHelper::map($type_options, 'id', 'id')));
             // validate all models
             $valid = $model->validate();
-            $valid = Model::validateMultiple($modelSubProductCount) && $valid;
+            $valid = Model::validateMultiple($type_options) &&  Model::validateMultiple($modelSubProductCount) && $valid;
 
             if ($valid) {
                $transaction = \Yii::$app->db->beginTransaction();
@@ -232,6 +252,15 @@ class ProductsController extends BaseController
                                break;
                            }
                        }
+
+                       foreach ($type_options as $type_option) {
+                        $type_option->product_id = $model->id;
+                        if (! ($flag = $type_option->save(false))) {
+                            $transaction->rollBack();
+                            break;
+                        }
+                    }
+
                    }
 
                    if ($flag) {
@@ -253,7 +282,8 @@ class ProductsController extends BaseController
 
         return $this->render('update', [
             'model' => $model,
-            'subProductCounts' => (empty($modelSubProductCount)) ? [new SubProductCount] : $modelSubProductCount
+            'subProductCounts' => (empty($modelSubProductCount)) ? [new SubProductCount] : $modelSubProductCount,
+            'type_options' => (empty($type_options)) ? [new OptionsSellProduct] : $type_options
         ]);
     }
 

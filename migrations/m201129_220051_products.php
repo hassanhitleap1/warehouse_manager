@@ -28,6 +28,7 @@ class m201129_220051_products extends Migration
             'unit_id'=>$this->integer()->defaultValue(null),
             'warehouse_id'=>$this->integer()->notNull(),
             'video_url'=>$this->string(500)->defaultValue(null),
+            'type_options'=> $this->smallInteger()->defaultValue(null),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);

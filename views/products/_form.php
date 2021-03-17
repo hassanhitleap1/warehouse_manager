@@ -1,6 +1,7 @@
 <?php
 
 use app\models\categorises\Categorises;
+use app\models\products\Products;
 use app\models\suppliers\Suppliers;
 use app\models\units\Units;
 use app\models\warehouse\Warehouse;
@@ -96,6 +97,8 @@ if (!$model->isNewRecord) {
                         'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
                        
                     ]); ?>
+
+                <?= $form->field($model, 'type_options')->dropDownList([Products::TYPE_DROP_DAWNLIST=>"dropdown list",Products::TYPE_CHOOSE_BOX=>"choose box"]) ?>   
                 <?= $form->field($model, 'file')->widget(FileInput::classname(), [
                 'options' => ['accept' => 'image/*'],
                 'pluginOptions' => $dataThumbnail
@@ -133,6 +136,9 @@ if (!$model->isNewRecord) {
             <div class="col-md-4">
                 <div class="row">
                     <?php include('sub_product_count.php') ?>
+                </div>
+                <div class="row">
+                    <?php include('type_options.php') ?>
                 </div>
 
             </div>

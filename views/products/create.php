@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'subProductCounts'=>$subProductCounts
+        'subProductCounts'=>$subProductCounts,
+        'type_options'=>$type_options
     ]) ?>
 
 </div>
