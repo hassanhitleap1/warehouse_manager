@@ -47,13 +47,17 @@ use yii\bootstrap\Html;
                             ?>
 
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <?= $form->field($type_option, "[{$index}]number")->textInput(['maxlength' => true])
                                         ->label(Yii::t('app', 'Number')) ?>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <?= $form->field($type_option, "[{$index}]text")->textInput(['maxlength' => true,'class'=>'form-control'])
                                         ->label(Yii::t('app', 'Text'))  ?>
+                                </div>
+                                <div class="col-sm-4">
+                                    <?= $form->field($type_option, "[{$index}]price")->textInput(['maxlength' => true,'class'=>'form-control'])
+                                        ->label(Yii::t('app', 'Price'))  ?>
                                 </div>
                              
                             </div><!-- end:row -->  

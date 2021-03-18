@@ -2,6 +2,7 @@
 
 namespace app\models\OptionsSellProduct;
 
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -30,10 +31,9 @@ class OptionsSellProduct extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['number', 'text', 'product_id'], 'required'],
+            [['number', 'text', 'product_id','price'], 'required'],
+            [['price'], 'double'],
             [['number', 'product_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['type'], 'string', 'max' => 2],
             [['text'], 'string', 'max' => 500],
         ];
     }
@@ -47,12 +47,33 @@ class OptionsSellProduct extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'number' => Yii::t('app', 'Number'),
             'text' => Yii::t('app', 'Text'),
-            'product_id' => Yii::t('app', 'Product ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'product_id' => Yii::t('app', 'Product'),
+            'price' => Yii::t('app', 'Price'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
+
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * {@inheritdoc}
      * @return OptionsSellProductQuery the active query used by this AR class.

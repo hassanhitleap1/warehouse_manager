@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\products;
+namespace app\models\OptionsSellProduct;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -17,8 +17,8 @@ class OptionsSellProductSearch extends OptionsSellProduct
     public function rules()
     {
         return [
-            [['id', 'number', 'product_id'], 'integer'],
-            [['type', 'text', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'number','price', 'product_id'], 'integer'],
+            [['text', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -61,11 +61,12 @@ class OptionsSellProductSearch extends OptionsSellProduct
             'id' => $this->id,
             'number' => $this->number,
             'product_id' => $this->product_id,
+            'price' => $this->price,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'type', $this->type])
+        $query
             ->andFilterWhere(['like', 'text', $this->text]);
 
         return $dataProvider;
