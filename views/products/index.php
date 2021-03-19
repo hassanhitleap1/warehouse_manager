@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use app\models\categorises\Categorises;
 use app\models\suppliers\Suppliers;
-use app\models\units\Units;
+//use app\models\units\Units;
 use app\models\warehouse\Warehouse;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
@@ -89,28 +89,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]),
 
                 'format' => 'html',
-                
+
 
             ],
            
-            [
-                'attribute' => 'unit_id',
-                'value' => 'unit.name_ar',
-                
-                 'filter' =>Select2::widget([
-                    'name' => 'unit_id',
-                    "value"=>(isset($_GET['unit_id']))?$_GET['unit_id']:null,
-                    'data' => ArrayHelper::map(Units::find()->all(), 'id', 'name_ar'),
-                    'options' => [
-                        'placeholder' => 'Select  ...',
-                        'multiple' => false
-                    ],
-                ]),
-
-                'format' => 'html',
-                
-
-            ],
+//            [
+//                'attribute' => 'unit_id',
+//                'value' => 'unit.name_ar',
+//
+//                 'filter' =>Select2::widget([
+//                    'name' => 'unit_id',
+//                    "value"=>(isset($_GET['unit_id']))?$_GET['unit_id']:null,
+//                    'data' => ArrayHelper::map(Units::find()->all(), 'id', 'name_ar'),
+//                    'options' => [
+//                        'placeholder' => 'Select  ...',
+//                        'multiple' => false
+//                    ],
+//                ]),
+//
+//                'format' => 'html',
+//
+//
+//            ],
            
             [
                 'attribute' => 'warehouse_id',
@@ -153,15 +153,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     {
                         foreach ($searchModel->typeOptions as $type_option)
                         {
-                            $str.=$type_option->text .'</br>' ;
+                            $str.=$type_option->text .'  <br />' ;
                         }
                     }
 
                     return    Html::a($str,['options-sell-product/index','product_id'=>$searchModel->id]);;
                 },
                 'format' => 'html',
+                'headerOptions' => ['style' => 'width:20%'],
             ],
-            'created_at',
+//            'created_at',
             //'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
