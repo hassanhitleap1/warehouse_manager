@@ -144,6 +144,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'html',
             ],
+
+            [
+                'attribute' =>'type_options',
+                'value'=>function($searchModel){
+                    $str='';
+                    if(count($searchModel->typeOptions ))
+                    {
+                        foreach ($searchModel->typeOptions as $type_option)
+                        {
+                            $str.=$type_option->text .'</br>' ;
+                        }
+                    }
+
+                    return    Html::a($str,['options-sell-product/index','product_id'=>$searchModel->id]);;
+                },
+                'format' => 'html',
+            ],
             'created_at',
             //'updated_at',
 

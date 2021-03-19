@@ -56,6 +56,9 @@ class OptionsSellProductSearch extends OptionsSellProduct
             return $dataProvider;
         }
 
+        if(isset($_GET['product_id'])){
+            $query->andWhere(['product_id'=>$_GET['product_id']]);
+        }
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,

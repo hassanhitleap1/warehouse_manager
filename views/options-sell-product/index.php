@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'number',
             'text',
             'product.name',
+
             //'created_at',
             //'updated_at',
 
