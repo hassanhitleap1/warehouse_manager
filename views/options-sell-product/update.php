@@ -5,10 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\OptionsSellProduct\OptionsSellProduct */
 
-$this->title = Yii::t('app', 'Update Options Sell Product: {name}', [
-    'name' => $model->id,
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Options Sell Products'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Options_Sell_Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>

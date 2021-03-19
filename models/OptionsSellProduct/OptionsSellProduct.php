@@ -2,6 +2,7 @@
 
 namespace app\models\OptionsSellProduct;
 
+use app\models\products\Products;
 use Carbon\Carbon;
 use Yii;
 
@@ -74,6 +75,12 @@ class OptionsSellProduct extends \yii\db\ActiveRecord
             return false;
         }
     }
+
+    public function getProduct()
+    {
+        return $this->hasOne(Products::className(), ['id' => 'product_id']);
+    }
+
     /**
      * {@inheritdoc}
      * @return OptionsSellProductQuery the active query used by this AR class.

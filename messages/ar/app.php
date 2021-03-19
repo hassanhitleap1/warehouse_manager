@@ -147,5 +147,7 @@ return [
     'Create_SubProductCount'=>"انشاء فرع منتج",
     "Number"=>"عدد",
     "Text"=>"نص",
-    "Type_Options"=>"خيارت المنتج"
+    "Type_Options"=>"خيارت المنتج",
+    "Options_Sell_Products"=>"خيارات بيع المنتجات",
+    "Create_Options_Sell_Products"=>" اضافة خيارات بيع المنتجات",
 ];

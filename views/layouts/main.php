@@ -80,6 +80,8 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => Yii::t('app', 'Products'), 'url' => ['/products/index']],
                     ['label' => Yii::t('app', 'SubProductCount'), 'url' => ['/sub-product-count/index']],
+                    ['label' => Yii::t('app', 'Type_Options'), 'url' => ['/options-sell-product/index']],
+
                  
                 ],
             ];
