@@ -64,6 +64,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout='app';
         $query =    Products::find();
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
