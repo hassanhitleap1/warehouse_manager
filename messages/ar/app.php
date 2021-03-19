@@ -145,5 +145,7 @@ return [
     "Note"=>"ملاحظة",
     'SubProductCount'=>"افرع المنتج",
     'Create_SubProductCount'=>"انشاء فرع منتج",
-    "Number"=>"عدد"
+    "Number"=>"عدد",
+    "Text"=>"نص",
+    "Type_Options"=>"خيارت المنتج"
 ];

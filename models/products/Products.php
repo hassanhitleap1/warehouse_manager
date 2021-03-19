@@ -3,6 +3,7 @@
 namespace app\models\products;
 
 use app\models\categorises\Categorises;
+use app\models\OptionsSellProduct\OptionsSellProduct;
 use app\models\productsimage\ProductsImage;
 use app\models\subproductcount\SubProductCount;
 use app\models\suppliers\Suppliers;
@@ -99,6 +100,13 @@ class Products extends \yii\db\ActiveRecord
         return $this->hasMany(SubProductCount::className(), ['product_id' => 'id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTypeOptions()
+    {
+        return $this->hasMany(OptionsSellProduct::className(), ['product_id' => 'id']);
+    }
       /**
      * @return \yii\db\ActiveQuery
      */

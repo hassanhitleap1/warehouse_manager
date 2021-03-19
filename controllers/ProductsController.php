@@ -86,9 +86,14 @@ class ProductsController extends BaseController
         
              // validate all models
              $valid = $model->validate();
-             $valid =  Model::validateMultiple($type_options) &&  Model::validateMultiple($subProductCounts) && $valid;
-            
+             $valid =    Model::validateMultiple($subProductCounts) && $valid;
+            $valid =Model::validateMultiple($type_options) && $valid;
+            $valid =boolval($valid);
+//            var_dump( );
+//            var_dump( $type_options[0]->getErrors());
+//            exit;
              if ($valid) {
+
                 
                 $transaction = \Yii::$app->db->beginTransaction();
                 

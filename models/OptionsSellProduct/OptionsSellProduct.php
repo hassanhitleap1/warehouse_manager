@@ -31,7 +31,7 @@ class OptionsSellProduct extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['number', 'text', 'product_id','price'], 'required'],
+            [['number', 'text','price'], 'required'],
             [['price'], 'double'],
             [['number', 'product_id'], 'integer'],
             [['text'], 'string', 'max' => 500],
