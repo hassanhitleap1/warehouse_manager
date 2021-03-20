@@ -150,4 +150,6 @@ return [
     "Type_Options"=>"خيارت المنتج",
     "Options_Sell_Products"=>"خيارات بيع المنتجات",
     "Create_Options_Sell_Products"=>" اضافة خيارات بيع المنتجات",
+    "More_Info"=>"تفاصيل أكثر",
+    "Order_Now"=>"اطلبها الان"
 ];

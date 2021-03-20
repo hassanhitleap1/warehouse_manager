@@ -15,11 +15,11 @@ use yii\data\Pagination;
 
 class SiteController extends Controller
 {
-    public function __construct($id, $module, $config = [])
-    {
-        parent::__construct($id, $module, $config);
-        $this->layout='app';
-    }
+//    public function __construct($id, $module, $config = [])
+//    {
+//        parent::__construct($id, $module, $config);
+//        $this->layout='app';
+//    }
 
     /**
      * {@inheritdoc}
@@ -70,7 +70,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout='app';
+//        $this->layout='app';
         $query =    Products::find();
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);

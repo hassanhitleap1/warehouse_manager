@@ -121,3 +121,33 @@ a.desc:after {
     margin-right: auto;
     width: 100%;
   }
+
+.product-name {
+   text-align: center;
+    font-size: large;
+    text-decoration: none;
+    background-color: #468834 !important;
+    border-color: #468834 !important ;
+    color: white;
+}
+.btn-green{
+    color: #fff;
+    background-color: #3c763d;
+    border-color: #3c763d;
+}
+.responsive-img{
+    width: 100%;
+    height: 50%;
+}
+
+@media only screen and (min-width: 768px) {
+    .responsive-img{
+        width: 600px;
+        height: 50%;
+    }
+}
+
+.form-order{
+    font-size: large;
+}
+
