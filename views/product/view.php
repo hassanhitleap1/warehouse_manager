@@ -1,5 +1,6 @@
 <?php
 
+use app\models\products\Products;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 $this->title = $model->name;
@@ -36,7 +37,25 @@ $this->title = $model->name;
         <?= $form->field($modelOrder, 'phone')->textInput(['required'=>true]) ?>
         <?= $form->field($modelOrder, 'other_phone')->textInput([]) ?>
         <?= $form->field($modelOrder, 'address')->textInput(['required'=>true]) ?>
-
+        <?php if($model->type_options==Products::TYPE_CHOOSE_BOX):?>
+            <?php foreach ($model->typeOptions as $type_option):?>
+                <div class="radio">
+                    <label><input type="radio" name="optradio" checked value="<?=$type_option->text?>"><?=$type_option->text?></label>
+                </div>
+            <?php endforeach;?>
+            <?php foreach ($model->typeOptions as $type_option):?>
+                <div class="radio">
+                    <label><input type="radio" name="optradio" checked value="<?=$type_option->text?>"><?=$type_option->text?></label>
+                </div>
+            <?php endforeach;?>
+        
+        <?php endif;?>
+        <?php if($model->type_options==Products::TYPE_DROP_DAWNLIST):?>
+            <div class="form-group">
+                <label for="usr">Name:</label>
+                <input type="text" class="form-control" id="usr">
+            </div>
+        <?php endif;?>
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Order_Now') .' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block']) ?>
         </div>
