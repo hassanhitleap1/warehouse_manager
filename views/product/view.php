@@ -31,7 +31,7 @@ $this->title = $model->name;
 
     <div class="row form-order " style="margin-top: 10px">
 
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin(['id'=>"order_landig"]); ?>
 
         <?= $form->field($modelOrder, 'name')->textInput(['maxlength' => true ,'required'=>true]) ?>
         <?= $form->field($modelOrder, 'phone')->textInput(['required'=>true]) ?>
@@ -40,27 +40,43 @@ $this->title = $model->name;
         <?php if($model->type_options==Products::TYPE_CHOOSE_BOX):?>
             <?php foreach ($model->typeOptions as $type_option):?>
                 <div class="radio">
-                    <label><input type="radio" name="optradio" checked value="<?=$type_option->text?>"><?=$type_option->text?></label>
+                    <label><input type="radio" name="optradio" checked value="<?=$type_option->id?>"><?=$type_option->text?></label>
                 </div>
             <?php endforeach;?>
             <?php foreach ($model->typeOptions as $type_option):?>
                 <div class="radio">
-                    <label><input type="radio" name="optradio" checked value="<?=$type_option->text?>"><?=$type_option->text?></label>
+                    <label><input type="radio" name="optradio" checked value="<?=$type_option->id?>"><?=$type_option->text?></label>
                 </div>
             <?php endforeach;?>
         
         <?php endif;?>
         <?php if($model->type_options==Products::TYPE_DROP_DAWNLIST):?>
             <div class="form-group">
-                <label for="usr">Name:</label>
-                <input type="text" class="form-control" id="usr">
+                <label for="exampleFormControlSelect1">Example select</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <?php foreach ($model->typeOptions as $type_option):?>
+                        <option value="<?=$type_option->id?>"><?=$type_option->text?> (<?=$type_option->price?> )</option>
+                    <?php endforeach;?>
+                      
+                </select>
             </div>
         <?php endif;?>
-        <div class="form-group">
+        <div class="form-group ">
             <?= Html::submitButton(Yii::t('app', 'Order_Now') .' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block']) ?>
         </div>
 
     <?php ActiveForm::end(); ?>
     </div>
-    
+  
+   
+        
 </div>
+
+
+    <div class="row productmainbtn" style="display: block;">
+        <div class="col-md-12">
+            <a href="#orderfrmm" id="ordernow" class="btn btn-green btn-lg btn-block" style="width:100%"><i class="glyphicon glyphicon-shopping-cart"></i> <?=Yii::t('app', 'Order_Now')?> </a>
+        </div>
+    </div>
+
+  

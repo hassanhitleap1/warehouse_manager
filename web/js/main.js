@@ -470,3 +470,11 @@ function reload_js_select2(){
     };
 
 }
+
+
+
+
+$('#ordernow').click(function(event) {
+    event.preventDefault();
+  $.scrollTo($('#order_landig'), 1000);
+});

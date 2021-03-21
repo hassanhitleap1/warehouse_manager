@@ -145,9 +145,25 @@ a.desc:after {
         width: 600px;
         height: 50%;
     }
+  
 }
 
+@media only screen and (max-width: 768px) {
+    .productmainbtn {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        z-index: 999999;
+    }
+}
 .form-order{
     font-size: large;
+}
+
+.productmainbtn {
+    position: fixed;
+    width: 80%;
+    bottom: 0;
+    z-index: 999999;
 }
 
