@@ -97,7 +97,7 @@ if (!$model->isNewRecord) {
                         'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
                        
                     ]); ?>
-
+               <?= $form->field($model, 'description')->textarea(['rows' => '6']) ?>      
                 <?= $form->field($model, 'type_options')->dropDownList([Products::TYPE_DROP_DAWNLIST=>"dropdown list",Products::TYPE_CHOOSE_BOX=>"choose box"]) ?>   
                 <?= $form->field($model, 'file')->widget(FileInput::classname(), [
                 'options' => ['accept' => 'image/*'],

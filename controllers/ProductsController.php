@@ -269,9 +269,8 @@ class ProductsController extends BaseController
                    }
 
                    if ($flag) {
-                    
-           
-
+                        print_r($model->getErrors());
+                        exit;
                        $transaction->commit();
                        return $this->redirect(['view', 'id' => $model->id]);
                    }

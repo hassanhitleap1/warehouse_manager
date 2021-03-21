@@ -18,7 +18,7 @@ class ProductsSearch extends Products
     {
         return [
             [['id', 'quantity', 'category_id', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
-            [['name', 'thumbnail','video_url', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'thumbnail','video_url', 'description','created_at', 'updated_at'], 'safe'],
             [['purchasing_price', 'selling_price'], 'number'],
         ];
     }
@@ -74,6 +74,7 @@ class ProductsSearch extends Products
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'video_url', $this->video_url])
+            ->andFilterWhere(['like', 'description', $this->video_url])
             ->andFilterWhere(['like', 'thumbnail', $this->thumbnail]);
 
         return $dataProvider;

@@ -10,18 +10,18 @@ class m201201_210649_regions extends Migration
    
     public $data = [
         ['name_ar' => 'عمان' ,'price_delivery'=>2],
-        ['name_ar' => 'اربد','price_delivery'=>4],
-        ['name_ar' => 'الزرقاء','price_delivery'=>4],
-        ['name_ar' => 'معان','price_delivery'=>4],
-        ['name_ar' => 'المفرق','price_delivery'=>4],
-        ['name_ar' => 'العقبة','price_delivery'=>4],
-        ['name_ar' => 'مادبا','price_delivery'=>4],
-        ['name_ar' => 'السلط','price_delivery'=>4],
-        ['name_ar' => 'الكرك','price_delivery'=>4],
-        ['name_ar' => 'الطفيلة','price_delivery'=>4],
-        ['name_ar' => 'عجلون','price_delivery'=>4],
-        ['name_ar' => 'جرش','price_delivery'=>4],
-        ['name_ar' => 'البلقاء','price_delivery'=>4],
+        ['name_ar' => 'اربد','price_delivery'=>2],
+        ['name_ar' => 'الزرقاء','price_delivery'=>2],
+        ['name_ar' => 'معان','price_delivery'=>2],
+        ['name_ar' => 'المفرق','price_delivery'=>2],
+        ['name_ar' => 'العقبة','price_delivery'=>2],
+        ['name_ar' => 'مادبا','price_delivery'=>2],
+        ['name_ar' => 'السلط','price_delivery'=>2],
+        ['name_ar' => 'الكرك','price_delivery'=>2],
+        ['name_ar' => 'الطفيلة','price_delivery'=>2],
+        ['name_ar' => 'عجلون','price_delivery'=>2],
+        ['name_ar' => 'جرش','price_delivery'=>2],
+        ['name_ar' => 'البلقاء','price_delivery'=>2],
     ];
     public function up()
     {

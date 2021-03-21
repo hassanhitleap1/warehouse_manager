@@ -62,6 +62,7 @@ class Products extends \yii\db\ActiveRecord
             [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
             [['name', 'thumbnail'], 'string', 'max' => 255],
              [['video_url'], 'string', 'max' => 500],
+             [['description'], 'string'],
              [['file'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg,jpeg'],
              
         ];
@@ -89,6 +90,7 @@ class Products extends \yii\db\ActiveRecord
             "images_product"=>Yii::t('app', 'Images_Product'),
             "type_options"=>Yii::t('app', 'Type_Options'),
             "video_url"=>Yii::t('app', 'Video_Url'),
+            "description"=>Yii::t('app', 'Description'),
         ];
     }
 

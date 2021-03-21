@@ -18,6 +18,7 @@ class m201129_220051_products extends Migration
         $this->createTable('{{%products}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
+            'description'=> $this->text()->defaultValue(null),
             'thumbnail'=> $this->string(255)->notNull(),
             'purchasing_price'=> $this->double()->notNull(),
             'selling_price'=> $this->double()->notNull(),
