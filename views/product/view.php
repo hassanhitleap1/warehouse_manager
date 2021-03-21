@@ -36,7 +36,7 @@ $this->title = $model->name;
         <?= $form->field($modelOrder, 'phone')->textInput(['required'=>true]) ?>
         <?= $form->field($modelOrder, 'other_phone')->textInput([]) ?>
         <?= $form->field($modelOrder, 'address')->textInput(['required'=>true]) ?>
-        
+
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Order_Now') .' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block']) ?>
         </div>
