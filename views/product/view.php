@@ -15,7 +15,7 @@ $this->title = $model->name;
     <div class="row">
         <?php foreach($model->imagesProduct as $img):?>
             <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-            <?= Html::img($img->path,['width'=>'300','height'=>'200'])?>
+            <?= Html::img($img->path,['class'=>'thumbnail responsive-img','width'=>'100','height'=>'500'])?>
             </div>
         <?php endforeach;?>
     </div>
