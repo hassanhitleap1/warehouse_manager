@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 $this->title = $model->name;
 ?>
 
-<div class="container">
+<div class="container" >
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
                 <?= Html::img($model->thumbnail,['class'=>'thumbnail responsive-img','width'=>'100','height'=>'500'])?>
@@ -62,7 +62,7 @@ $this->title = $model->name;
             </div>
         <?php endif;?>
         <div class="form-group ">
-            <?= Html::submitButton(Yii::t('app', 'Order_Now') .' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Order_Now') .' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block','id'=>'send_order']) ?>
         </div>
 
     <?php ActiveForm::end(); ?>
@@ -72,10 +72,9 @@ $this->title = $model->name;
         
 </div>
 
-
     <div class="row productmainbtn" style="display: block;">
         <div class="col-md-12">
-            <a href="#orderfrmm" id="ordernow" class="btn btn-green btn-lg btn-block" style="width:100%"><i class="glyphicon glyphicon-shopping-cart"></i> <?=Yii::t('app', 'Order_Now')?> </a>
+            <a href="#" id="ordernow" class="btn btn-green btn-lg btn-block" style="width:100%"><i class="glyphicon glyphicon-shopping-cart"></i> <?=Yii::t('app', 'Order_Now')?> </a>
         </div>
     </div>
 
