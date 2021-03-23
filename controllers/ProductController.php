@@ -26,6 +26,24 @@ class ProductController extends Controller
         $modelOrder= new OrderForm();
         
         if ($modelOrder->load(Yii::$app->request->post())) {
+          $product=Products::findOne($id);
+          $next_order=Orders::find()->max('id') + 1;
+          $order_model=new Orders;
+          $order_model->order_id= $next_order;
+          $today=Carbon::now("Asia/Amman");
+          $order_model->delivery_time=$today->toTimeString();
+          $order_model->country_id=1;
+          $order_model->region_id=$modelOrder->region_id;
+          $order_model->address=$modelOrder->address;
+          $order_model->status_id=1
+          $order_model->delivery_price =2;
+          $order_model=discount=0;
+          
+          $order_model->total_price =$_POST['total_price']
+          $order_model->profit_margin=  $_POST['total_price'] - ($product->purchasing_price * $_POST[count'])  
+        $order_model->amount_required=$_POST['total_price'];
+        
+          
 
         }
         return $this->render('view', [
