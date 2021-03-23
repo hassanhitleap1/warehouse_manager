@@ -2,7 +2,10 @@
 
 namespace app\controllers;
 
+use app\components\OrderHelper;
 use app\models\orders\OrderForm;
+use app\models\users\Users;
+use Carbon\Carbon;
 use Yii;
 use app\models\products\Products;
 use yii\web\Controller;
@@ -35,15 +38,19 @@ class ProductController extends Controller
           $order_model->country_id=1;
           $order_model->region_id=$modelOrder->region_id;
           $order_model->address=$modelOrder->address;
-          $order_model->status_id=1
+          $order_model->status_id=1;
           $order_model->delivery_price =2;
-          $order_model=discount=0;
-          
-          $order_model->total_price =$_POST['total_price']
-          $order_model->profit_margin=  $_POST['total_price'] - ($product->purchasing_price * $_POST[count'])  
-        $order_model->amount_required=$_POST['total_price'];
-        
-          
+          $order_model->discount=0;
+          $order_model->total_price =$_POST['total_price'];
+          $order_model->profit_margin=  $_POST['total_price'] - ($product->purchasing_price * $_POST['count']);
+          $order_model->amount_required=$_POST['total_price'];
+          if(is_null($user = Users::find()->where(['phone'=> $modelOrder->phone])->one())){
+                $user= new Users();
+
+          }
+            $user=$this->set_value_user($user,$order_model);
+          $orderItemModel=$order_model->orderItemModel;
+          OrderHelper::stock_minus($orderItemModel);
 
         }
         return $this->render('view', [
