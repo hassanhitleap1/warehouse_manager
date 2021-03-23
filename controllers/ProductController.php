@@ -48,7 +48,8 @@ class ProductController extends Controller
                 $user= new Users();
 
           }
-            $user=$this->set_value_user($user,$order_model);
+          $user=$this->set_value_user($user,$order_model);
+          $user->save();
           $orderItemModel=$order_model->orderItemModel;
           OrderHelper::stock_minus($orderItemModel);
 
