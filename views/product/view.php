@@ -37,6 +37,37 @@ $this->title = $model->name;
         <?= $form->field($modelOrder, 'phone')->textInput(['required'=>true]) ?>
         <?= $form->field($modelOrder, 'other_phone')->textInput([]) ?>
         <?= $form->field($modelOrder, 'address')->textInput(['required'=>true]) ?>
+        <?php if($model->subProductCount > 1):?>
+
+            <?php if($model->type_options==Products::TYPE_CHOOSE_BOX):?>
+                <?php foreach ($model->subProductCount as $subProductCount):?>
+                <div class="radio">
+                    <label><input type="radio" name="optradio" checked value="<?=$subProductCount->id?>"><?=$subProductCount->type?></label>
+                </div>
+                <?php endforeach;?>
+                <?php foreach ($model->subProductCount as $type_option):?>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio" checked value="<?=$subProductCount->id?>"><?=$subProductCount->type?></label>
+                    </div>
+                <?php endforeach;?>
+            <?php endif;?>
+
+        <?php else:?>
+
+        <?php foreach ($model->subProductCount as $subProductCount):?>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Example select</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <?php foreach ($model->subProductCount as $subProductCount):?>
+                        <option value="<?=$model->id?>"><?=$subProductCount->type?> </option>
+                    <?php endforeach;?>
+
+                </select>
+            </div>
+        <?php endforeach;?>
+
+        <?php endif;?>
+
         <?php if($model->type_options==Products::TYPE_CHOOSE_BOX):?>
             <?php foreach ($model->typeOptions as $type_option):?>
                 <div class="radio">
@@ -47,8 +78,7 @@ $this->title = $model->name;
                 <div class="radio">
                     <label><input type="radio" name="optradio" checked value="<?=$type_option->id?>"><?=$type_option->text?></label>
                 </div>
-            <?php endforeach;?>
-        
+
         <?php endif;?>
         <?php if($model->type_options==Products::TYPE_DROP_DAWNLIST):?>
             <div class="form-group">
