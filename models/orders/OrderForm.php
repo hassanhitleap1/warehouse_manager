@@ -22,6 +22,22 @@ class  OrderForm extends Model{
     public $typeoption;
     public $type;
   
+
+
+
+       /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [[ 'phone','name'], 'required'],
+            [[ 'region_id','typeoption','type'], 'integer'],
+            [['name','note','address'],'string'],
+           
+        ];
+    }
+
   
     /**
      * {@inheritdoc}

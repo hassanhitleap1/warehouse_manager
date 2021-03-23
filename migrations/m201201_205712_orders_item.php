@@ -18,7 +18,7 @@ class m201201_205712_orders_item extends Migration
 
         $this->createTable('{{%orders_item}}', [
             'id' => $this->primaryKey(),
-            'order_id' => $this->string()->notNull(),
+            'order_id' => $this->integer()->notNull(),
             'product_id'=> $this->integer()->notNull(),
             'sub_product_id'=> $this->integer()->notNull(),
             'price'=> $this->double()->defaultValue(0.0),

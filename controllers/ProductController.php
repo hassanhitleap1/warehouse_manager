@@ -36,17 +36,22 @@ class ProductController extends Controller
             $product=Products::findOne($id);
             $next_order=Orders::find()->max('id') + 1;
             $region=Regions::findOne($modelOrder->region_id);
-            $typeoption=OptionsSellProduct::find($modelOrder->typeoption);
+        
+            $typeoption=OptionsSellProduct::findOne($modelOrder->typeoption);
             $today=Carbon::now("Asia/Amman");
             $delivery_price=$region->price_delivery;
             $discount=($typeoption->number *$product->selling_price) - $typeoption->price;
             $profit_margin= $typeoption->price-($typeoption->number *$product->purchasing_price) ;
             $order_model=new Orders;
-            $order_model->order_id= $next_order;
+            $order_model->order_id = (string) $next_order;
             $order_model->delivery_time=$today->addDay(1);
             $order_model->country_id=1;
             $order_model->region_id=$modelOrder->region_id;
-        //   $order_model->address=$modelOrder->address;
+            $order_model->phone=$modelOrder->phone;
+            $order_model->name=$modelOrder->name;
+            $order_model->other_phone=$modelOrder->other_phone;
+            $order_model->address=is_null($modelOrder->address)?$region->name_ar:$modelOrder->address;
+        
             $order_model->status_id=Products::To_Be_Equipped;
             $order_model->delivery_price =$delivery_price;
             $order_model->discount= $discount;
@@ -58,9 +63,9 @@ class ProductController extends Controller
             if(is_null($user = Users::find()->where(['phone'=> $modelOrder->phone])->one())){
                 $user= new Users();
             }
-            $user=$this->set_value_user($user,$order_model);
-            $user->save();
+
             $order_model->save();
+            $user=$this->set_value_user($user,$order_model);
             $orderItemModel=new OrdersItem;
             $orderItemModel->order_id = $order_model->id;
             $orderItemModel->product_id=$id;
@@ -71,9 +76,10 @@ class ProductController extends Controller
             $orderItemModel->quantity=$typeoption->number ;
             $orderItemModel->save();
             
-    
         
         }
+
+        
         return $this->render('view', [
             'model' => $this->findModel($id),
             'modelOrder'=>$modelOrder
