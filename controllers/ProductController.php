@@ -3,11 +3,15 @@
 namespace app\controllers;
 
 use app\components\OrderHelper;
+use app\models\OptionsSellProduct\OptionsSellProduct;
 use app\models\orders\OrderForm;
+use app\models\orders\Orders;
+use app\models\ordersitem\OrdersItem;
 use app\models\users\Users;
 use Carbon\Carbon;
 use Yii;
 use app\models\products\Products;
+use app\models\regions\Regions;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -29,30 +33,46 @@ class ProductController extends Controller
         $modelOrder= new OrderForm();
         
         if ($modelOrder->load(Yii::$app->request->post())) {
-          $product=Products::findOne($id);
-          $next_order=Orders::find()->max('id') + 1;
-          $order_model=new Orders;
-          $order_model->order_id= $next_order;
-          $today=Carbon::now("Asia/Amman");
-          $order_model->delivery_time=$today->toTimeString();
-          $order_model->country_id=1;
-          $order_model->region_id=$modelOrder->region_id;
-          $order_model->address=$modelOrder->address;
-          $order_model->status_id=1;
-          $order_model->delivery_price =2;
-          $order_model->discount=0;
-          $order_model->total_price =$_POST['total_price'];
-          $order_model->profit_margin=  $_POST['total_price'] - ($product->purchasing_price * $_POST['count']);
-          $order_model->amount_required=$_POST['total_price'];
-          if(is_null($user = Users::find()->where(['phone'=> $modelOrder->phone])->one())){
+            $product=Products::findOne($id);
+            $next_order=Orders::find()->max('id') + 1;
+            $region=Regions::findOne($modelOrder->region_id);
+            $typeoption=OptionsSellProduct::find($modelOrder->typeoption);
+            $today=Carbon::now("Asia/Amman");
+            $delivery_price=$region->price_delivery;
+            $discount=($typeoption->number *$product->selling_price) - $typeoption->price;
+            $profit_margin= $typeoption->price-($typeoption->number *$product->purchasing_price) ;
+            $order_model=new Orders;
+            $order_model->order_id= $next_order;
+            $order_model->delivery_time=$today->addDay(1);
+            $order_model->country_id=1;
+            $order_model->region_id=$modelOrder->region_id;
+        //   $order_model->address=$modelOrder->address;
+            $order_model->status_id=Products::To_Be_Equipped;
+            $order_model->delivery_price =$delivery_price;
+            $order_model->discount= $discount;
+            $order_model->total_price=$delivery_price+$typeoption->price;
+    
+            $order_model->profit_margin=  $profit_margin;
+            $order_model->amount_required=$delivery_price+$typeoption->price;
+
+            if(is_null($user = Users::find()->where(['phone'=> $modelOrder->phone])->one())){
                 $user= new Users();
-
-          }
-          $user=$this->set_value_user($user,$order_model);
-          $user->save();
-          $orderItemModel=$order_model->orderItemModel;
-          OrderHelper::stock_minus($orderItemModel);
-
+            }
+            $user=$this->set_value_user($user,$order_model);
+            $user->save();
+            $order_model->save();
+            $orderItemModel=new OrdersItem;
+            $orderItemModel->order_id = $order_model->id;
+            $orderItemModel->product_id=$id;
+            $orderItemModel->sub_product_id=$modelOrder->type;
+            $orderItemModel->price=$product->selling_price;
+            $orderItemModel->price_item_count=$product->selling_price * $typeoption->number ;
+            $orderItemModel->profits_margin=$profit_margin;
+            $orderItemModel->quantity=$typeoption->number ;
+            $orderItemModel->save();
+            
+    
+        
         }
         return $this->render('view', [
             'model' => $this->findModel($id),
