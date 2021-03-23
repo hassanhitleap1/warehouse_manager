@@ -69,4 +69,25 @@ class ProductController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
+    
+    
+       private function set_value_user($user ,$model){
+        $user->phone = $model->phone;
+        $user->other_phone = $model->other_phone;
+        $user->name = $model->name;;
+        $user->country_id = ($model->country_id !='') ? $model->country_id :null  ;
+        $user->region_id = ($model->region_id !='') ? $model->region_id :null  ;
+        $user->area_id = ($model->area_id !='') ? $model->area_id :null  ;
+        $user->address = $model->address;
+        $user->username=null;
+        $user->email =null;
+        $user->auth_key =null;
+        $user->name_in_facebook =$model->name_in_facebook;
+        $user->password_hash =null;
+        $user->password_reset_token =null;
+        $user->created_at=null;
+        $user->updated_at=null;
+
+        return $user;
+    }
 }
