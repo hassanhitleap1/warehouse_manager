@@ -19,6 +19,8 @@ class  OrderForm extends Model{
    public $delivery_price=0;
     public $country_id;
     public $region_id;
+    public $typeoption;
+    public $type;
   
   
     /**
@@ -48,6 +50,8 @@ class  OrderForm extends Model{
             'sub_product_id'=> Yii::t('app', 'Sub_Product_Id'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
+            "typeoption"=>Yii::t('app', 'Choose_Offer'), 
+            "type"=>Yii::t('app', 'Choose_Type'),
         ];
     }
 

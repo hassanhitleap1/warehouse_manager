@@ -3,7 +3,7 @@
 use app\models\products\Products;
 use app\models\regions\Regions;
 use kartik\select2\Select2;
-
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 $regions_model=Regions::find()->all();
@@ -56,39 +56,18 @@ $this->title = $model->name;
       
 
         <?php if($model->subProductCount > 1):?>
-                <div class="form-group">
-                    <label for="type"><?=Yii::t('app','Choose_Type')?></label>
-                    <select name="OrderForm[type]" class="form-control" id="type">
-                        <?php foreach ($model->subProductCount as $subProductCount):?>
-                            <option value="<?=$model->id?>"><?=$subProductCount->type?> </option>
-                        <?php endforeach;?>
 
-                    </select>
-                </div>
-          
+            <?= $form->field($modelOrder, 'type')->dropDownList(ArrayHelper::map($model->subProductCount,'id','type')) ?>
+
         <?php else:?>
-            <input type="hidden" name="OrderForm[type]"  value="<?=$model->subProductCount[0]->id?>"/>
+           <?= $form->field($model, 'type')->hiddenInput(['value'=> $model->subProductCount[0]->id])->label(false);?>
+          
         <?php endif;?>
 
         <?php if($model->type_options==Products::TYPE_CHOOSE_BOX):?>
-            <label for="typeoption"><?=Yii::t('app','Choose_Offer')?></label>
-            <?php foreach ($model->typeOptions as $type_option):?>
-                <div class="radio">
-                    <label><input type="radio" name="OrderForm[typeoption]" checked value="<?=$type_option->id?>"><?=$type_option->text?></label>
-                </div>
-            <?php endforeach;?>
-           
+            <?= $form->field($modelOrder, 'typeoption')->radioList(ArrayHelper::map($model->typeOptions,'id','text'))?>       
         <?php else:?>
-            <div class="form-group">
-                <label for="typeoption"><?=Yii::t('app','Choose_Offer')?></label>
-                <select class="form-control" name="OrderForm[typeoption]" id="typeoption">
-                    <?php foreach ($model->typeOptions as $type_option):?>
-                        <option value="<?=$type_option->id?>"><?=$type_option->text?> (<?=$type_option->price?> )</option>
-                    <?php endforeach;?>
-                      
-                </select>
-            </div>
-           
+            <?= $form->field($modelOrder, 'typeoption')->dropDownList(ArrayHelper::map($model->typeOptions,'id','text')) ?>
         <?php endif;?>
         <div class="form-group ">
             <?= Html::submitButton(Yii::t('app', 'Order_Now') .' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block','id'=>'send_order']) ?>
