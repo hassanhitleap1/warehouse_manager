@@ -19,6 +19,7 @@ $this->title = $model->name;
 <div class="container" >
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                <?= $model->thumbnail;?>
                 <?= Html::img($model->thumbnail,['class'=>'thumbnail responsive-img','width'=>'100','height'=>'500'])?>
             </div>
         </div>
