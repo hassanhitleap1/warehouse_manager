@@ -1,6 +1,7 @@
 html,
 body {
     height: 100%;
+    font: normal normal 16px/1.4 'DroidArabicKufi-Regular', sans-serif, Arial;
 }
 
 .wrap {
@@ -173,7 +174,7 @@ a.desc:after {
     max-width: 300px;
     margin: auto;
     text-align: center;
-    font-family: arial;
+    font: normal normal 16px/1.4 'DroidArabicKufi-Regular', sans-serif, Arial;
   }
   
   .price {
@@ -186,13 +187,18 @@ a.desc:after {
     outline: 0;
     padding: 12px;
     color: white;
-    background-color: #000;
+    background-color: #2b7321;
     text-align: center;
     cursor: pointer;
     width: 100%;
     font-size: 18px;
+    font: normal normal 16px/1.4 'DroidArabicKufi-Regular', sans-serif, Arial;
   }
   
   .card a:hover {
     opacity: 0.7;
+  }
+
+  body{
+    font: normal normal 16px/1.4 'DroidArabicKufi-Regular', sans-serif, Arial;
   }
