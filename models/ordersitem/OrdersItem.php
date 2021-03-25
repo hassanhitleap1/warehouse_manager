@@ -34,8 +34,8 @@ class OrdersItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'sub_product_id','product_id','quantity','order_id'], 'required'],
-            [['product_id', 'quantity','price_item_count'], 'integer'],
+            [[ 'sub_product_id','product_id','quantity'], 'required'],
+            [['product_id','order_id', 'quantity','price_item_count'], 'integer'],
             [['price','profit_margin','profits_margin'],'double'],
          
          

@@ -19,7 +19,7 @@ $phone=null;
 $other_phone=null;
 $address=null;
 $name_in_facebook=null;
-$delivery_date=date("Y-m-d", strtotime('tomorrow'));
+$delivery_date=null;
 if (!$model->isNewRecord) {
     $order_id=$model->order_id;
     $delivery_price=$model->delivery_price;
@@ -29,7 +29,7 @@ if (!$model->isNewRecord) {
     $other_phone=$user->other_phone;
     $address=$user->address;
     $name_in_facebook=$user->name_in_facebook;
-    $delivery_date=$model->delivery_date;
+    $delivery_date=Carbon::parse($model->delivery_date)->toDateString();
 }
 /* @var $this yii\web\View */
 /* @var $model app\models\orders\Orders */

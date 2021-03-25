@@ -58,7 +58,6 @@ class Orders extends \yii\db\ActiveRecord
             [['discount','total_price','delivery_price','amount_required','profit_margin'],'double'],
             [['delivery_date', 'delivery_time'], 'safe'],
             [['name','note'],'string'],
-            [['order_id'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 250],
         ];
     }
