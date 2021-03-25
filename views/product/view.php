@@ -16,13 +16,7 @@ $this->title = $model->name;
 
 ?>
 
-<script type="javascript">
-    Swal.fire(
-        <?= '  dsds'; ?>,
-        <?= 'ddsd' ?>,
-        'success'
-    );
-</script>
+
 
 <?php if (Yii::$app->session->has('message')) : ?>
     <script type="javascript">
