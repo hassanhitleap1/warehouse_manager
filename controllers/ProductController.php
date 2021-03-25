@@ -64,36 +64,27 @@ class ProductController extends Controller
             }
 
             $transaction = \Yii::$app->db->beginTransaction();
-            try{
-                $order_model->save();
-                $user=$this->set_value_user($user,$order_model);
-                $orderItemModel=new OrdersItem;
-                $orderItemModel->order_id = $order_model->id;
-                $orderItemModel->product_id=$id;
-                $orderItemModel->sub_product_id=$modelOrder->type;
-                $orderItemModel->price=$product->selling_price;
-                $orderItemModel->price_item_count=$product->selling_price * $typeoption->number ;
-                $orderItemModel->profits_margin=$profit_margin;
-                $orderItemModel->quantity=$typeoption->number ;
-                if(!($orderItemModel->save(true) && $user->save(false)) ){
-                    $transaction->rollBack();
-                    return $this->render('view', [
-                        'model' => $this->findModel($id),
-                        'modelOrder'=>$modelOrder
-                    ]);
-                }
 
-                Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
-            }catch (\Exception $exception){
-
-            }
+            $order_model->save();
+            $user=$this->set_value_user($user,$order_model);
+            $orderItemModel=new OrdersItem;
+            $orderItemModel->order_id = $order_model->id;
+            $orderItemModel->product_id=$id;
+            $orderItemModel->sub_product_id=$modelOrder->type;
+            $orderItemModel->price=$product->selling_price;
+            $orderItemModel->price_item_count=$product->selling_price * $typeoption->number ;
+            $orderItemModel->profits_margin=$profit_margin;
+            $orderItemModel->quantity=$typeoption->number ;
+            $user->save(false);
+            $orderItemModel->save(true);
+            
 
 
+            Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
 
+         
 
-
-
-        
+          
         }
 
         

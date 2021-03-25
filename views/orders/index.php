@@ -45,7 +45,7 @@ $columns = [
             'vAlign'=>'middle',
             'width'=>'100px',
             'value'=>function ($model, $key, $index, $widget) { 
-                return $model->user->name;
+                return $model['user']['name'];
             },
 
              //'filterType'=>GridView::FILTER_SELECT2,
@@ -63,7 +63,7 @@ $columns = [
             'vAlign'=>'middle',
             'width'=>'100px',
             'value'=>function ($model, $key, $index, $widget) { 
-                return $model->user->phone;
+                return $model['user']['phone'];
             },
          
             'filterWidgetOptions'=>[
@@ -88,7 +88,7 @@ $columns = [
              'vAlign'=>'middle',
              'width'=>'250px',
              'value'=>function ($model, $key, $index, $widget) {
-                 return $model->country->name_ar;
+                 return $model['country']['name_ar'];
              },
              'filterType'=>GridView::FILTER_SELECT2,
              'filter'=>ArrayHelper::map(Countries::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'),
@@ -104,7 +104,7 @@ $columns = [
             'vAlign'=>'middle',
             'width'=>'100px',
             'value'=>function ($model, $key, $index, $widget) { 
-                return $model->region->name_ar;
+                return $model['region']['name_ar'];
             },
             // 'filterType'=>GridView::FILTER_SELECT2,
             'filter'=>ArrayHelper::map(Regions::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'), 

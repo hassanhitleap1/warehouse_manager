@@ -11,25 +11,11 @@ $regions=[];
 foreach($regions_model as $key => $value){
     $regions[$value->id]=$value->name_ar ." ( ".$value->price_delivery ." )"; 
 }
-
 $this->title = $model->name;
-
 ?>
 
 
 
-<?php if (Yii::$app->session->has('message')) : ?>
-    <script type="javascript">
-        Swal.fire(
-            "<?= Yii::$app->session->get('message'); ?>",
-            "<?= Yii::$app->session->get('message'); ?>",
-            'success'
-        );
-    </script>
-
-
-    <?php Yii::$app->session->remove('message'); ?>
-<?php endif; ?>
 
 
 <div class="container" >
@@ -65,12 +51,7 @@ $this->title = $model->name;
         <?= $form->field($modelOrder, 'phone')->textInput(['required'=>true]) ?>
         <?= $form->field($modelOrder, 'other_phone')->textInput([]) ?>
    
-        <?= $form->field($modelOrder, 'region_id')->widget(Select2::classname(), [
-                'data' =>$regions,  
-                'language' => 'en',
-             
-
-            ]); ?>
+        <?= $form->field($modelOrder, 'region_id')->dropDownList($regions); ?>
       
 
         <?php if($model->subProductCount > 1):?>
@@ -109,3 +90,15 @@ $this->title = $model->name;
 </div>
 
    
+<?php if (Yii::$app->session->has('message')) : ?>
+    <script  type="text/javascript">
+        setTimeout(function(){ 
+            Swal.fire('<?= Yii::$app->session->get('message'); ?>');
+        }, 1000);
+       
+   
+    </script>
+
+
+    <?php Yii::$app->session->remove('message'); ?>
+<?php endif; ?>

@@ -28,6 +28,7 @@ MainAsset::register($this);
 
 <div class="wrap">
 <?php
+
         $menuItemsleft=[];
         $menuItems=[];
 

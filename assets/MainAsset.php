@@ -21,12 +21,12 @@ class MainAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        'js/googleapis/jquery/3.5.1/jquery.min.js',
-        'js/sweetalert2/main.js'
+       
     ];
     public $js = [
         'js/main.js',
-        'js/custum.js'
+        'js/sweetalert2/main.js',
+        'js/googleapis/jquery/3.5.1/jquery.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
