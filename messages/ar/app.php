@@ -154,4 +154,5 @@ return [
     "Order_Now"=>"اطلبها الان",
     "Choose_Offer"=>"اختر العرض المناسب لك",
     "Choose_Type"=>"اختار النوع",
+    "Successful_Purchase"=>"تم الشراء بنجاح",
 ];

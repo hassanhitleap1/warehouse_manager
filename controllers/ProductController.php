@@ -75,7 +75,7 @@ class ProductController extends Controller
             $orderItemModel->profits_margin=$profit_margin;
             $orderItemModel->quantity=$typeoption->number ;
             $orderItemModel->save();
-            
+            Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
         
         }
 

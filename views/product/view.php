@@ -16,6 +16,28 @@ $this->title = $model->name;
 
 ?>
 
+<script type="javascript">
+    Swal.fire(
+        <?= '  dsds'; ?>,
+        <?= 'ddsd' ?>,
+        'success'
+    );
+</script>
+
+<?php if (Yii::$app->session->has('message')) : ?>
+    <script type="javascript">
+        Swal.fire(
+            <?= Yii::$app->session->get('message'); ?>,
+            <?= Yii::$app->session->get('message'); ?>,
+            'success'
+        );
+    </script>
+
+
+    <?php Yii::$app->session->remove('message'); ?>
+<?php endif; ?>
+
+
 <div class="container" >
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
