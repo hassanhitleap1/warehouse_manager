@@ -12,7 +12,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
 use kartik\time\TimePicker;
-$order_id = (string) Orders::find()->count() + 1 ;
+$order_id =  Orders::find()->count() + 1 ;
 $delivery_price=0;
 $name=null;
 $phone=null;
