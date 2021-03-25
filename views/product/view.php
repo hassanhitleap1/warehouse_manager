@@ -86,9 +86,10 @@ $this->title = $model->name;
    
         
 </div>
-
-    <div class="row productmainbtn" style="display: block;">
-        <div class="col-md-12">
-            <a href="#" id="ordernow" class="btn btn-green btn-lg btn-block" style="width:100%"><i class="glyphicon glyphicon-shopping-cart"></i> <?=Yii::t('app', 'Order_Now')?> </a>
-        </div>
+<div class="row productmainbtn" style="display: block;">
+    <div class="col-md-12">
+        <a href="#" id="ordernow" class="btn btn-green btn-lg btn-block" style="width:100%"><i class="glyphicon glyphicon-shopping-cart"></i> <?=Yii::t('app', 'Order_Now')?> </a>
     </div>
+</div>
+
+   
