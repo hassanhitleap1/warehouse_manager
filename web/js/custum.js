@@ -219,3 +219,39 @@ function set_value_heddin(data,product,index){
     $("#profit_margin_"+index).val(profit_margin);
     $("#profits_margin_"+index).val(quantity*profit_margin);
 }
+
+
+$(document).ready(function () {
+    $("#ordernow").click(function() {
+        $('html, body').animate({
+            scrollTop: $("#order_landig").offset().top 
+        }, 600);
+        $( ".productmainbtn" ).fadeOut( "slow", function() {
+            // Animation complete.
+          });
+        return false;
+    }); 
+});
+
+var order_landig_top=1;
+
+window.onscroll = function() {fade_in_out_button()};
+
+function fade_in_out_button() {
+    order_landig_top=$("#order_landig").offset().top - window.pageYOffset - 150
+    if(order_landig_top < document.documentElement.scrollTop){
+        $( ".productmainbtn" ).fadeOut( "slow", function() {
+            // Animation complete.
+          });
+    }else{
+        $( ".productmainbtn" ).fadeIn( "slow", function() {
+            // Animation complete.
+          });
+    }
+ 
+    
+  
+    console.log(order_landig_top ,document.documentElement.scrollTop,window.pageYOffset)
+   
+}
+  
