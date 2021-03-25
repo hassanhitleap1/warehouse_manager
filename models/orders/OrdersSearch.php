@@ -60,17 +60,17 @@ class OrdersSearch extends Orders
         $query->andFilterWhere([
             'id' => $this->id,
             // 'user_id' => $this->user_id,
-            'delivery_date' => $this->delivery_date,
-            'delivery_time' => $this->delivery_time,
+            'orders.delivery_date' => $this->delivery_date,
+            'orders.delivery_time' => $this->delivery_time,
             'orders.country_id' => $this->country_id,
             'orders.region_id' => $this->region_id,
             'orders.area_id' => $this->area_id,
-            'delivery_price' => $this->delivery_price,
-            'discount' => $this->discount,
-            'total_price' => $this->total_price,
-            'amount_required' => $this->amount_required,
-            'status_id' => $this->status_id,
-            'created_at' => $this->created_at,
+            'orders.delivery_price' => $this->delivery_price,
+            'orders.discount' => $this->discount,
+            'orders.total_price' => $this->total_price,
+            'orders.amount_required' => $this->amount_required,
+            'orders.status_id' => $this->status_id,
+            'orders.created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
@@ -78,7 +78,7 @@ class OrdersSearch extends Orders
             ->andFilterWhere(['like', 'user.name', $this->user_id])
             ->andFilterWhere(['like', 'user.phone', $this->phone])
             ->andFilterWhere(['like', 'address', $this->address]);
-
+            $query->orderBy(['orders.id' => SORT_DESC]);;
         return $dataProvider;
     }
 }
