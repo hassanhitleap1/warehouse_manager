@@ -21,8 +21,8 @@ $this->title = $model->name;
 <?php if (Yii::$app->session->has('message')) : ?>
     <script type="javascript">
         Swal.fire(
-            <?= Yii::$app->session->get('message'); ?>,
-            <?= Yii::$app->session->get('message'); ?>,
+            "<?= Yii::$app->session->get('message'); ?>",
+            "<?= Yii::$app->session->get('message'); ?>",
             'success'
         );
     </script>
