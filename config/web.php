@@ -21,21 +21,21 @@ $config = [
                 ],
             ],
         ],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'enableStrictParsing' => false,
-            'rules' => [
-                    'posts/<year:\d{4}>/<category>' => 'post/index',
-                    'posts' => 'post/index',
-                    'post/<id:\d+>' => 'post/view',
+//         'urlManager' => [
+//             'enablePrettyUrl' => true,
+//             'showScriptName' => false,
+//             'enableStrictParsing' => false,
+//             'rules' => [
+//                     'posts/<year:\d{4}>/<category>' => 'post/index',
+//                     'posts' => 'post/index',
+//                     'post/<id:\d+>' => 'post/view',
 
-//                    'posts' => 'post/index',
-//                    'post/<id:\d+>' => 'post/view',
+// //                    'posts' => 'post/index',
+// //                    'post/<id:\d+>' => 'post/view',
 
 
-            ],
-        ],
+//             ],
+//         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'IjRtIuj8nnX773QduboRRd1VXr8KkSic',
@@ -102,7 +102,7 @@ $config = [
     'params' => $params,
 ];
 
-if (YII_ENV_PROD) { // YII_ENV_DEV
+if (YII_ENV_DEV) { // YII_ENV_DEV YII_ENV_PROD
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [

@@ -19,15 +19,15 @@ $this->title = $model->name;
 <div class="container" >
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-                <?= $model->thumbnail;?>
-                <?= Html::img($model->thumbnail,['class'=>'thumbnail responsive-img','width'=>'100','height'=>'500'])?>
+               
+                <?= Html::img('/'.$model->thumbnail,['class'=>'thumbnail responsive-img','width'=>'100','height'=>'500'])?>
             </div>
         </div>
     <div class="row">
         <?php foreach($model->imagesProduct as $img):?>
-            <?= $img->path?>
+            
             <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-            <?= Html::img($img->path,['class'=>'thumbnail responsive-img','width'=>'100','height'=>'500'])?>
+            <?= Html::img('/'.$img->path,['class'=>'thumbnail responsive-img','width'=>'100','height'=>'500'])?>
             </div>
         <?php endforeach;?>
     </div>
@@ -67,8 +67,13 @@ $this->title = $model->name;
         <?php endif;?>
 
         <?php if($model->type_options==Products::TYPE_CHOOSE_BOX):?>
-            <?= $form->field($modelOrder, 'typeoption')->radioList(ArrayHelper::map($model->typeOptions,'id','text'))?>       
+            
+            <?= $form->field($modelOrder, 'typeoption')->radioList(ArrayHelper::map($model->typeOptions,'id','text'),['style'=>'display: grid;'])?>  
+            
         <?php else:?>
+            
+            
+           
             <?= $form->field($modelOrder, 'typeoption')->dropDownList(ArrayHelper::map($model->typeOptions,'id','text')) ?>
         <?php endif;?>
         <div class="form-group ">
@@ -87,5 +92,3 @@ $this->title = $model->name;
             <a href="#" id="ordernow" class="btn btn-green btn-lg btn-block" style="width:100%"><i class="glyphicon glyphicon-shopping-cart"></i> <?=Yii::t('app', 'Order_Now')?> </a>
         </div>
     </div>
-
-  

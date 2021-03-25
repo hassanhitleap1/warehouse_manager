@@ -9,7 +9,6 @@ use app\models\products\ProductsSearch;
 use app\models\productsimage\ProductsImage;
 use app\models\subproductcount\SubProductCount;
 use Exception;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
