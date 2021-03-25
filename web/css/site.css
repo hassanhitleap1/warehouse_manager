@@ -196,7 +196,8 @@ a.desc:after {
   }
   
   .card a:hover {
-    opacity: 0.7;
+    opacity: 0.6;
+    color: white;
   }
 
   body{
