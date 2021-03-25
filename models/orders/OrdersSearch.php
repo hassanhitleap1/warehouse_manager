@@ -60,6 +60,7 @@ class OrdersSearch extends Orders
         $query->andFilterWhere([
             'id' => $this->id,
             // 'user_id' => $this->user_id,
+            'orders.order_id' => $this->order_id,
             'orders.delivery_date' => $this->delivery_date,
             'orders.delivery_time' => $this->delivery_time,
             'orders.country_id' => $this->country_id,
@@ -74,8 +75,7 @@ class OrdersSearch extends Orders
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'order_id', $this->order_id])
-            ->andFilterWhere(['like', 'user.name', $this->user_id])
+        $query->andFilterWhere(['like', 'user.name', $this->user_id])
             ->andFilterWhere(['like', 'user.phone', $this->phone])
             ->andFilterWhere(['like', 'address', $this->address]);
             $query->orderBy(['orders.id' => SORT_DESC]);;
