@@ -43,7 +43,7 @@ if (!$model->isNewRecord) {
         'initialPreviewConfig' => [
             ['caption' => $model->name],
         ],
-        'overwriteInitial' => false,
+        'overwriteInitial'=>true
      
 
     ];
@@ -60,7 +60,7 @@ if (!$model->isNewRecord) {
         'initialPreviewConfig' => [
             ['caption' => $model->name],
         ],
-        'overwriteInitial' => false,
+        'overwriteInitial'=>true
 
     ];
 

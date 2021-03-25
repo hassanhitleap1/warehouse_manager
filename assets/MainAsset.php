@@ -25,6 +25,7 @@ class MainAsset extends AssetBundle
     ];
     public $js = [
         'js/main.js',
+        'js/custum.js',
         'js/sweetalert2/main.js',
      
     ];

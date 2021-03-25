@@ -87,9 +87,13 @@ class ProductsController extends BaseController
              $valid =    Model::validateMultiple($subProductCounts) && $valid;
             $valid =Model::validateMultiple($type_options) && $valid;
             $valid =boolval($valid);
-//            var_dump( );
-//            var_dump( $type_options[0]->getErrors());
-//            exit;
+            // var_dump($model->getErrors());
+            // var_dump($model);
+            // var_dump($type_options);
+            // var_dump($subProductCount->getErrors());
+            // var_dump($type_options[0]->getErrors());
+            // exit;
+       
              if ($valid) {
 
                 
@@ -160,14 +164,29 @@ class ProductsController extends BaseController
                     
 
                     if ($flag) {
+                        // var_dump($model->getErrors());
+                        // var_dump($subProductCount->getErrors());
+                        // var_dump($type_options[0]->getErrors());
+                        // exit;
                     
                         $transaction->commit();
                         return $this->redirect(['view', 'id' => $model->id]);
                     }
                 } catch (Exception $e) {
                     $transaction->rollBack();
+
+                    // var_dump($model->getErrors());
+                    // var_dump($subProductCount->getErrors());
+                    // var_dump($type_options[0]->getErrors());
+                    // exit;
                 }
             }
+            // var_dump($model->getErrors());
+            // var_dump($model);
+            // var_dump($type_options);
+            // // var_dump($subProductCount->getErrors());
+            // var_dump($type_options[0]->getErrors());
+            // exit;
         }
 
 
