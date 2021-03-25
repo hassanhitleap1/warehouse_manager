@@ -51,7 +51,6 @@ class ProductController extends Controller
             $order_model->name=$modelOrder->name;
             $order_model->other_phone=$modelOrder->other_phone;
             $order_model->address=is_null($modelOrder->address)?$region->name_ar:$modelOrder->address;
-        
             $order_model->status_id=Products::To_Be_Equipped;
             $order_model->delivery_price =$delivery_price;
             $order_model->discount= $discount;
@@ -64,18 +63,36 @@ class ProductController extends Controller
                 $user= new Users();
             }
 
-            $order_model->save();
-            $user=$this->set_value_user($user,$order_model);
-            $orderItemModel=new OrdersItem;
-            $orderItemModel->order_id = $order_model->id;
-            $orderItemModel->product_id=$id;
-            $orderItemModel->sub_product_id=$modelOrder->type;
-            $orderItemModel->price=$product->selling_price;
-            $orderItemModel->price_item_count=$product->selling_price * $typeoption->number ;
-            $orderItemModel->profits_margin=$profit_margin;
-            $orderItemModel->quantity=$typeoption->number ;
-            $orderItemModel->save();
-            Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
+            $transaction = \Yii::$app->db->beginTransaction();
+            try{
+                $order_model->save();
+                $user=$this->set_value_user($user,$order_model);
+                $orderItemModel=new OrdersItem;
+                $orderItemModel->order_id = $order_model->id;
+                $orderItemModel->product_id=$id;
+                $orderItemModel->sub_product_id=$modelOrder->type;
+                $orderItemModel->price=$product->selling_price;
+                $orderItemModel->price_item_count=$product->selling_price * $typeoption->number ;
+                $orderItemModel->profits_margin=$profit_margin;
+                $orderItemModel->quantity=$typeoption->number ;
+                if(!($orderItemModel->save(true) && $user->save(false)) ){
+                    $transaction->rollBack();
+                    return $this->render('view', [
+                        'model' => $this->findModel($id),
+                        'modelOrder'=>$modelOrder
+                    ]);
+                }
+
+                Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
+            }catch (\Exception $exception){
+
+            }
+
+
+
+
+
+
         
         }
 

@@ -74,7 +74,6 @@ class ProductsController extends BaseController
         $subProductCounts = [new SubProductCount()];
         $type_options = [new OptionsSellProduct()];
         $newId = Products::find()->max('id') + 1;
-       
 
         if ($model->load(Yii::$app->request->post())) {
            
