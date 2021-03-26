@@ -19,6 +19,7 @@ use yii\bootstrap\Html;
             'formFields' => [
                 'number',
                 'text',
+                'price'
             ],
         ]); ?>
 
