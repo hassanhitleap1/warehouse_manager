@@ -16,6 +16,7 @@ return [
     'Reset'=>'ريست',
     'Create_Area'=>'انشاء مطقة',
     'Areas'=>'المناطق',
+    "Description"=>"الوصف",
     'Governorates'=>'المحافظات',
     'Create_Governorate'=>'انشاء محافظة',
     'Nationalities'=>'الجنسيات',
