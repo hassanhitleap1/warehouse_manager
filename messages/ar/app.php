@@ -24,6 +24,7 @@ return [
     'Delete'=>'حذف',
     'Email'=>'البريد الاليكتروني',
     'Username'=>'اسم المستخدم',
+    "RememberMe"=>"تذكرني",
     'Password'=>'كلمة السر',
     'Remember_Me'=>'تذكرني',
     'Conf_Password'=>'تاكيد كلمة السر',
@@ -42,11 +43,9 @@ return [
     'User_ID'=>'اسم المستخدم',
     "About"=>"عنا",
     "Social"=>"مواقع تواصل اجتماعي",
-
     "Updated_At"=>"تاريخ التحديث",
     "Name_full"=>"الاسم من اربع مقاطع",
     "Courses"=>"الدورات",
-   
     "From"=>"من",
     "To"=>"الى",
     "Plz_Select_Year"=>"ارجو تحديد السنة",
@@ -55,20 +54,13 @@ return [
     "IF_Exist"=>"ان وجد",
     "My_Request"=>"طلبي",
     "Successfuly_Message_Update"=>"تم تعديل بنجاح ",
-   
     "Successfully_Change_Password"=>"تم تغير كلمة السر بنجاح",
     "And"=>"و",
-    
- 
     "Status"=>"الحالة",
-    
     "Update_Area"=>"تعديل منطقة",
     "Update_Category"=>"تعديل الصنف",
     "Create_Degrees"=>"انشاء شهادة",
-  
-
     "Must_Be_Login"=>"يجب عليك تسجيل الدخول",
- 
     "Country"=>"البلد",
     "Region"=>"المحافظة",
     "Plz_Select"=>"ارجو التحديد",
