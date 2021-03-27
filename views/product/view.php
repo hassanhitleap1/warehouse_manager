@@ -14,25 +14,37 @@ foreach ($regions_model as $key => $value) {
 }
 $this->title = $model->name;
 ?>
-
 <div class="card-single">
     <div class="container-fliud">
         <div class="wrapper row">
             <div class="preview col-md-6">
-
                 <div class="preview-pic tab-content">
-                    <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" /></div>
-                    <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252" /></div>
-                    <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
-                    <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
-                    <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252" /></div>
+                <div class="tab-pane active" id="pic-1">
+                        <?= Html::img('/'.$model->thumbnail)?>
+               
+                </div>
+
+                    <?php foreach($model->imagesProduct as $key=> $img):?>
+                        <div class="tab-pane" id="pic-<?=$key + 2 ?>">
+                            <?= Html::img('/'.$img->path)?>
+                        </div>
+                    
+                    <?php endforeach;?>
                 </div>
                 <ul class="preview-thumbnail nav nav-tabs">
-                    <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-                    <li><a data-target="#pic-2" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-                    <li><a data-target="#pic-3" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-                    <li><a data-target="#pic-4" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-                    <li><a data-target="#pic-5" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+                    <li class="active">
+                            <a data-target="#pic-1" data-toggle="tab">
+                            <?= Html::img('/'.$model->thumbnail)?>
+                            </a>
+                    </li>
+
+                    <?php foreach($model->imagesProduct as $key=> $img):?>
+                        <li>
+                            <a data-target="#pic-<?=$key + 2 ?>" data-toggle="tab">
+                                <?= Html::img('/'.$img->path)?>
+                            </a>
+                        </li>
+                    <?php endforeach;?>
                 </ul>
 
             </div>
@@ -41,7 +53,15 @@ $this->title = $model->name;
 
                 <p class="product-description"><?= $model->purchasing_price ?>.</p>
                 <h4 class="price"><?= Yii::t('app', 'Price') ?> : <span>$<?= $model->purchasing_price ?></span></h4>
-                <?php $form = ActiveForm::begin(['id' => "order_landig"]); ?>
+              
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="<?= str_replace('watch?v=', 'embed/', $model->video_url) ?>" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper row">
+            <div class="preview col-md-12">
+            <?php $form = ActiveForm::begin(['id' => "order_landig"]); ?>
                 <div class="row">
                     <div class="col-md-6">
                         <?= $form->field($modelOrder, 'name')->textInput(['maxlength' => true, 'required' => true]) ?>
@@ -83,24 +103,21 @@ $this->title = $model->name;
                     </div>
                 </div>
                 <?php ActiveForm::end(); ?>
-            </div>
-        </div>
 
-        <div class="wrapper row">
-            <div class="preview col-md-6">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="<?= str_replace('watch?v=', 'embed/', $model->video_url) ?>" allowfullscreen></iframe>
-                </div>
+
+                
 
             </div>
         </div>
     </div>
 </div>
-<style>
-    /*# sourceMappingURL=style.css.map */
-</style>
 
 
+<div class="row productmainbtn" style="display: block;">
+    <div class="col-md-12">
+        <a href="#" id="ordernow" class="btn btn-green btn-lg btn-block" style="width:100%"><i class="glyphicon glyphicon-shopping-cart"></i> <?=Yii::t('app', 'Order_Now')?> </a>
+    </div>
+</div>
 
 <?php if (Yii::$app->session->has('message')) : ?>
     <script type="text/javascript">

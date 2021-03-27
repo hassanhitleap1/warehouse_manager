@@ -224,7 +224,7 @@ function set_value_heddin(data,product,index){
 $(document).ready(function () {
     $("#ordernow").click(function() {
         $('html, body').animate({
-            scrollTop: $("#order_landig").offset().top 
+            scrollTop: $("#order_landig").offset().top - 50
         }, 600);
         $( ".productmainbtn" ).fadeOut( "slow", function() {
             // Animation complete.
@@ -238,7 +238,7 @@ var order_landig_top=1;
 window.onscroll = function() {fade_in_out_button()};
 
 function fade_in_out_button() {
-    order_landig_top=$("#order_landig").offset().top - window.pageYOffset - 150
+    order_landig_top=$("#order_landig").offset().top - window.pageYOffset - 120
     if(order_landig_top < document.documentElement.scrollTop){
         $( ".productmainbtn" ).fadeOut( "slow", function() {
             // Animation complete.
