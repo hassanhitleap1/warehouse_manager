@@ -255,3 +255,29 @@ function fade_in_out_button() {
    
 }
   
+
+
+// View an image.
+
+window.addEventListener('DOMContentLoaded', function () {
+    
+    var galley = document.getElementById('galley');
+    var viewer = new Viewer(galley, {
+        url: 'data-original',
+        title: function (image) {
+            return image.alt + ' (' + (this.index + 1) + '/' + this.length + ')';
+        },
+    });
+
+    var galley2 = document.getElementById('pic-1');
+    var viewer2 = new Viewer(galley2, {
+        url: 'data-original',
+        title: function (image) {
+            return image.alt + ' (' + (this.index + 1) + '/' + this.length + ')';
+        },
+    });
+
+
+
+});
+
