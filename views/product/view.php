@@ -17,14 +17,17 @@ $this->title = $model->name;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.9.0/viewer.min.js" integrity="sha512-0goo56vbVLOJt9J6TMouBm2uE+iPssyO+70sdrT+J5Xbb5LsdYs31Mvj4+LntfPuV+VlK0jcvcinWQG5Hs3pOg==" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.9.0/viewer.css" integrity="sha512-HHYZlJVYgHVdz/pMWo63/ya7zc22sdXeqtNzv4Oz76V3gh7R+xPqbjNUp/NRmf0R85J++Yg6R0Kkmz+TGYHz8g==" crossorigin="anonymous" />
 
-
+<?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span>', ['site/index'], ['class' => 'btn btn-green pull-left']) ?>
 
 <div class="card-single">
+
+
+
     <div class="container-fliud">
         <div class="wrapper row">
             <div class="preview col-md-6">
                 <div class="preview-pic tab-content">
-                    
+
                     <div class="tab-pane active" id="pic-1">
                         <?= Html::img($model->thumbnail, ['data-original' => $model->thumbnail]) ?>
                     </div>
