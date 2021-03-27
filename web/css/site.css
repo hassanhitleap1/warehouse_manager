@@ -420,3 +420,36 @@ a.desc:after {
             transform: scale(1);
         }
     }
+
+
+
+
+  /* nav bar   */
+
+  
+.navbar-inverse {
+    background-color: #fff !important;
+    border-color: #131313
+}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    color: black !important;
+    background-color: #dad2d2 !important;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: black !important;
+}
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:hover {
+    color: #000;
+    background-color: transparent;
+}
+.navbar-toggle{
+    background: black !important;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #fbfafa;
+}
+
+.navbar-inverse .btn-link:hover, .navbar-inverse .btn-link:focus {
+    color: #1f1e1e !important;
+}
