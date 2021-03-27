@@ -20,13 +20,13 @@ $this->title = $model->name;
             <div class="preview col-md-6">
                 <div class="preview-pic tab-content">
                 <div class="tab-pane active" id="pic-1">
-                        <?= Html::img('/'.$model->thumbnail)?>
+                        <?= Html::img($model->thumbnail)?>
                
                 </div>
 
                     <?php foreach($model->imagesProduct as $key=> $img):?>
                         <div class="tab-pane" id="pic-<?=$key + 2 ?>">
-                            <?= Html::img('/'.$img->path)?>
+                            <?= Html::img($img->path)?>
                         </div>
                     
                     <?php endforeach;?>
@@ -34,14 +34,14 @@ $this->title = $model->name;
                 <ul class="preview-thumbnail nav nav-tabs">
                     <li class="active">
                             <a data-target="#pic-1" data-toggle="tab">
-                            <?= Html::img('/'.$model->thumbnail)?>
+                            <?= Html::img($model->thumbnail)?>
                             </a>
                     </li>
 
                     <?php foreach($model->imagesProduct as $key=> $img):?>
                         <li>
                             <a data-target="#pic-<?=$key + 2 ?>" data-toggle="tab">
-                                <?= Html::img('/'.$img->path)?>
+                                <?= Html::img($img->path)?>
                             </a>
                         </li>
                     <?php endforeach;?>
