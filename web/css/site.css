@@ -139,6 +139,7 @@ a.desc:after {
 .btn-green:hover{
     color: white;
 }
+
 .responsive-img{
     width: 100%;
     height: 50%;
@@ -158,6 +159,9 @@ a.desc:after {
         width: 100%;
         bottom: 0;
         z-index: 999999;
+    }
+    #ordernow{
+        margin-right: 15%;
     }
 }
 .form-order{
