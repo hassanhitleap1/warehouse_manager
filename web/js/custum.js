@@ -243,19 +243,26 @@ window.onscroll = function() {fade_in_out_button()};
 let page=2;
 
 $(window).scroll(function() {
-    if($(window).scrollTop() == $(document).height() - $(window).height()) {
-        
-         var url=`${SITE_URL}/index.php?r=product/load-more&page=${page}`;
-
-           show_loader();
-           $.ajax({url: url,
-             success: function(result){
-                appaend_products(result)
-                 hide_loader();
-                 page++;
-                console.log(result);   
-             }});
-           
+    let full_path=window.location.href;
+    var splitstring =full_path.split("?");
+    console.log("splitstring",splitstring[1])
+    if(splitstring[1] ==undefined || splitstring[1]=='r=site/index'){
+        if($(window).scrollTop() == $(document).height() - $(window).height()) 
+        {
+             var url=`${SITE_URL}/index.php?r=product/load-more&page=${page}`;
+               show_loader();
+    
+               $.ajax({
+                    url: url,
+                    success: function(result){
+                        appaend_products(result)
+                        hide_loader();
+                        page++;
+                    
+                    }
+                });
+               
+        }
     }
 });
 

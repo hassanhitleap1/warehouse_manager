@@ -58,7 +58,7 @@ $this->title = $model->name;
                 </div>
             </div>
             <div class="details col-md-6">
-                <h3 class="product-title"><?= $this->title ?></h3>
+                <h5 class="product-title"><?= $this->title ?></h5>
 
                 <p class="product-description"><?= $model->purchasing_price ?>.</p>
                 <h4 class="price"><?= Yii::t('app', 'Price') ?> : <span>$<?= $model->purchasing_price ?></span></h4>
@@ -123,7 +123,7 @@ $this->title = $model->name;
         <div class="row">
             <div class="row">
                 <div class="col-md-9">
-                    <h3> <?=Yii::t('app','Product_Suggested');?></h3>
+                    <h5> <?=Yii::t('app','Product_Suggested');?></h5>
                 </div>
                 <div class="col-md-3">
                     <!-- Controls -->
@@ -143,7 +143,7 @@ $this->title = $model->name;
                                 <div class="col-sm-6 col-xs-6">
                                     <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[0]->id?>'">
                                         <?= Html::img($product_suggested[0]->thumbnail, ['style' => 'width:100%']) ?>
-                                        <h1><?= $product_suggested[0]->name ?></h1>
+                                        <h5><?= $product_suggested[0]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[0]->selling_price ?></p>
                                         <p><?= $product_suggested[0]->description ?>.</p>
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[0]->id], ['class' => 'btn  btn-green']); ?></p>
@@ -155,7 +155,7 @@ $this->title = $model->name;
                                 <div class="col-sm-6 col-xs-6">
                                     <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[1]->id?>'">
                                         <?= Html::img($product_suggested[1]->thumbnail, ['style' => 'width:100%']) ?>
-                                        <h1><?= $product_suggested[1]->name ?></h1>
+                                        <h5><?= $product_suggested[1]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[1]->selling_price ?></p>
                                         <p><?= $product_suggested[1]->description ?>.</p>
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[1]->id], ['class' => 'btn  btn-green']); ?></p>
@@ -172,7 +172,7 @@ $this->title = $model->name;
                                 <div class="col-sm-6 col-xs-6">
                                     <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[2]->id?>'">
                                         <?= Html::img($product_suggested[2]->thumbnail, ['style' => 'width:100%']) ?>
-                                        <h1><?= $product_suggested[2]->name ?></h1>
+                                        <h5><?= $product_suggested[2]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[2]->selling_price ?></p>
                                         <p><?= $product_suggested[2]->description ?>.</p>
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[2]->id], ['class' => 'btn  btn-green']); ?></p>
@@ -184,7 +184,7 @@ $this->title = $model->name;
                                 <div class="col-sm-6 col-xs-6">
                                     <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[3]->id?>'">
                                         <?= Html::img($product_suggested[3]->thumbnail, ['style' => 'width:100%']) ?>
-                                        <h1><?= $product_suggested[3]->name ?></h1>
+                                        <h5><?= $product_suggested[3]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[3]->selling_price ?></p>
                                         <p><?= $product_suggested[2]->description ?>.</p>
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[3]->id], ['class' => 'btn  btn-green']); ?></p>
