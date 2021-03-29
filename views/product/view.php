@@ -140,12 +140,12 @@ $this->title = $model->name;
                     <div class="item active">
                         <div class="row">
 
-                                <?php if($product_suggested->count()):?>
+                                <?php if(count($product_suggested)):?>
                                     <?php $i=1;?>
                                     <?php foreach ($product_suggested as $suggested):?>
-                                            <?php if($i <= 3){
-                                                break;
-                                            }?>
+                                            <?php
+                                             if($i >= 3){break;}
+                                            ?>
                                             <div class="col-sm-6 col-xs-6">
                                                 <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$model->id?>'">
                                                             <?= Html::img($model->thumbnail, ['style' => 'width:100%']) ?>
@@ -166,12 +166,13 @@ $this->title = $model->name;
                     </div>
                     <div class="item">
                         <div class="row">
-                            <?php if($product_suggested->count()):?>
+
+                            <?php if(count($product_suggested)):?>
                                 <?php $i=1;?>
                                 <?php foreach ($product_suggested as $suggested):?>
-                                    <?php if($i <= 3){
-                                        break;
-                                    }?>
+                                    <?php
+                                        if($i <= 3){break;}
+                                    ?>
                                     <div class="col-sm-6 col-xs-6">
                                         <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$model->id?>'">
                                             <?= Html::img($model->thumbnail, ['style' => 'width:100%']) ?>
