@@ -237,45 +237,120 @@ var order_landig_top=1;
 
 window.onscroll = function() {fade_in_out_button()};
 
-function fade_in_out_button() {
-    order_landig_top=$("#order_landig").offset().top - window.pageYOffset - 120
-    if(order_landig_top < document.documentElement.scrollTop){
-        $( ".productmainbtn" ).fadeOut( "slow", function() {
-            // Animation complete.
-          });
-    }else{
-        $( ".productmainbtn" ).fadeIn( "slow", function() {
-            // Animation complete.
-          });
+
+
+
+let page=2;
+
+$(window).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+        
+         var url=`${SITE_URL}/index.php?r=product/load-more&page=${page}`;
+
+           show_loader();
+           $.ajax({url: url,
+             success: function(result){
+                appaend_products(result)
+                 hide_loader();
+                 page++;
+                console.log(result);   
+             }});
+           
     }
+});
+
+function appaend_products(result){
+
+    let content="";
+    var path='';
+    var image_path='';
+    result.forEach(function(product) {
+        path=`'${SITE_URL}/index.php?r=product/view&id=${product.id}'`;
+        image_path=SITE_URL+'/'+product.thumbnail;
+        content+='<div class="col-md-4"> \n'+
+        '<div class="card" onclick="window.location.href ='+path+'"> \n'+
+            '<img src="'+SITE_URL+'/'+product.thumbnail+'"   alt="" style="width:100%;" />\n'+
+            '<h1>'+product.name+' </h1> \n'+
+            '<p class="price"> $ '+product.selling_price+'</p>\n'+
+            '<p >'+product.description+'</p>\n'+
+            '<p><a hrf="'+path+'" class="btn  btn-green"> تفاصيل أكثر  <span class="glyphicon glyphicon-eye-open" ></span> </a>\n'+
+            '</p> \n'+
+        '</div>\n'+
+        '</div>';
+
+
+       
+
+		
+    });
+
+
+
+
+    console.log(content);
+    $("#list-products").append(content);
+
+}
+
+
+
+function fade_in_out_button() {
+    try{
+
+        order_landig_top=$("#order_landig").offset().top - window.pageYOffset - 120
+        if(order_landig_top < document.documentElement.scrollTop){
+            $( ".productmainbtn" ).fadeOut( "slow", function() {
+                // Animation complete.
+              });
+        }else{
+            $( ".productmainbtn" ).fadeIn( "slow", function() {
+                // Animation complete.
+              });
+        }
+
+        console.log(order_landig_top ,document.documentElement.scrollTop,window.pageYOffset)
+    }catch(error){
+
+    }
+  
  
     
   
-    console.log(order_landig_top ,document.documentElement.scrollTop,window.pageYOffset)
+   
    
 }
   
+function show_loader(){
+ $(".loader").show();
+}
+function hide_loader(){
+    $(".loader").hide();
 
+}
 
 // View an image.
 
 window.addEventListener('DOMContentLoaded', function () {
+    try{
+        var galley = document.getElementById('galley');
+        var viewer = new Viewer(galley, {
+            url: 'data-original',
+            title: function (image) {
+                return image.alt + ' (' + (this.index + 1) + '/' + this.length + ')';
+            },
+        });
     
-    var galley = document.getElementById('galley');
-    var viewer = new Viewer(galley, {
-        url: 'data-original',
-        title: function (image) {
-            return image.alt + ' (' + (this.index + 1) + '/' + this.length + ')';
-        },
-    });
+        var galley2 = document.getElementById('pic-1');
+        var viewer2 = new Viewer(galley2, {
+            url: 'data-original',
+            title: function (image) {
+                return image.alt + ' (' + (this.index + 1) + '/' + this.length + ')';
+            },
+        });
+    }catch(error){
 
-    var galley2 = document.getElementById('pic-1');
-    var viewer2 = new Viewer(galley2, {
-        url: 'data-original',
-        title: function (image) {
-            return image.alt + ' (' + (this.index + 1) + '/' + this.length + ')';
-        },
-    });
+    }
+   
 
 
 

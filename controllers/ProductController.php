@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Yii;
 use app\models\products\Products;
 use app\models\regions\Regions;
+use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -112,7 +113,7 @@ class ProductController extends Controller
     }
     
     
-       private function set_value_user($user ,$model){
+    private function set_value_user($user ,$model){
         $user->phone = $model->phone;
         $user->other_phone = $model->other_phone;
         $user->name = $model->name;;
@@ -131,4 +132,25 @@ class ProductController extends Controller
 
         return $user;
     }
+
+
+
+    public function actionLoadMore(){  
+        $query =    Products::find();
+        $countQuery = clone $query;
+        $page=$_GET['page'];
+        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $offset= ($page-1) *$pages->limit;
+        $models = $query->offset($offset)
+            ->limit($pages->limit)
+            ->orderBy([
+                'created_at' => SORT_DESC //specify sort order ASC for ascending DESC for descending      
+            ])
+            ->all();
+
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return $models;
+    }
+
+
 }

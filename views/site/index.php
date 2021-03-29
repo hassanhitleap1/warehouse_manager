@@ -11,7 +11,7 @@ use yii\helpers\Url;
 ?>
 <div class="container">
 
-	<div class="row">
+	<div class="row" id="list-products">
 		<?php foreach ($models as  $key => $model) : ?>
 
 			<div class="col-md-4">
@@ -26,9 +26,5 @@ use yii\helpers\Url;
 			</div>
 		<?php endforeach; ?>
 	</div>
-	<div class="row">
-		<?= LinkPager::widget([
-			'pagination' => $pages,
-		]); ?>
-	</div>
+
 </div>

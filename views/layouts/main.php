@@ -27,9 +27,9 @@ MainAsset::register($this);
 
 <body>
     <?php $this->beginBody() ?>
-
+    
     <div class="wrap">
-
+    
         <?php
 
         $menuItemsleft = [];
@@ -113,12 +113,14 @@ MainAsset::register($this);
         NavBar::end();
         ?>
 
+
         <div class="container">
+        <div class="loader"></div>
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
             <?= Alert::widget() ?>
-            <div class="loader"></div>
+           
             <?= $content ?>
         </div>
     </div>
