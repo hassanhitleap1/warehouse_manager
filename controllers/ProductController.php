@@ -31,7 +31,7 @@ class ProductController extends Controller
     public function actionView($id)
     {
         $modelOrder= new OrderForm();
-        
+        $product_suggested=Products::find()->limit(4)->all();
         if ($modelOrder->load(Yii::$app->request->post())) {
             $product=Products::findOne($id);
             $next_order=Orders::find()->max('id') + 1;
@@ -90,7 +90,9 @@ class ProductController extends Controller
         
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'modelOrder'=>$modelOrder
+            'modelOrder'=>$modelOrder,
+            'product_suggested'=>$product_suggested
+
         ]);
     }
 
