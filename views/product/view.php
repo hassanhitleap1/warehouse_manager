@@ -322,7 +322,5 @@ $this->title = $model->name;
             Swal.fire('<?= Yii::$app->session->get('message'); ?>');
         }, 1000);
     </script>
-
-
     <?php Yii::$app->session->remove('message'); ?>
 <?php endif; ?>
