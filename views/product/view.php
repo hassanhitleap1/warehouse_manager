@@ -139,52 +139,57 @@ $this->title = $model->name;
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="row">
+                            <?php if(isset($product_suggested[0])):?>
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[0]->id?>'">
+                                        <?= Html::img($product_suggested[0]->thumbnail, ['style' => 'width:100%']) ?>
+                                        <h1><?= $product_suggested[0]->name ?></h1>
+                                        <p class="price">$<?= $product_suggested[0]->selling_price ?></p>
+                                        <p><?= $product_suggested[0]->description ?>.</p>
+                                        <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[0]->id], ['class' => 'btn  btn-green']); ?></p>
+                                    </div>
+                                </div>
+                            <?php endif;?>
 
-                                <?php if(count($product_suggested)):?>
-                                    <?php $i=1;?>
-                                    <?php foreach ($product_suggested as $suggested):?>
-                                            <?php
-                                             if($i >= 3){break;}
-                                            ?>
-                                            <div class="col-sm-6 col-xs-6">
-                                                <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$model->id?>'">
-                                                            <?= Html::img($model->thumbnail, ['style' => 'width:100%']) ?>
-                                                            <h1><?= $model->name ?></h1>
-                                                            <p class="price">$<?= $model->selling_price ?></p>
-                                                            <p><?= $model->description ?>.</p>
-                                                            <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $model->id], ['class' => 'btn  btn-green']); ?></p>
-                                                        </div>
-                                            </div>
-
-                                        <?php $i++;?>
-                                    <?php endforeach;?>
-                                <?php endif;?>
-
-
+                            <?php if(isset($product_suggested[1])):?>
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[1]->id?>'">
+                                        <?= Html::img($product_suggested[1]->thumbnail, ['style' => 'width:100%']) ?>
+                                        <h1><?= $product_suggested[1]->name ?></h1>
+                                        <p class="price">$<?= $product_suggested[1]->selling_price ?></p>
+                                        <p><?= $product_suggested[1]->description ?>.</p>
+                                        <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[1]->id], ['class' => 'btn  btn-green']); ?></p>
+                                    </div>
+                                </div>
+                            <?php endif;?>
 
                         </div>
                     </div>
+
                     <div class="item">
                         <div class="row">
-
-                            <?php if(count($product_suggested)):?>
-                                <?php $i=1;?>
-                                <?php foreach ($product_suggested as $suggested):?>
-                                    <?php
-                                        if($i <= 3){break;}
-                                    ?>
-                                    <div class="col-sm-6 col-xs-6">
-                                        <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$model->id?>'">
-                                            <?= Html::img($model->thumbnail, ['style' => 'width:100%']) ?>
-                                            <h1><?= $model->name ?></h1>
-                                            <p class="price">$<?= $model->selling_price ?></p>
-                                            <p><?= $model->description ?>.</p>
-                                            <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $model->id], ['class' => 'btn  btn-green']); ?></p>
-                                        </div>
+                            <?php if(isset($product_suggested[2])):?>
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[2]->id?>'">
+                                        <?= Html::img($product_suggested[2]->thumbnail, ['style' => 'width:100%']) ?>
+                                        <h1><?= $product_suggested[2]->name ?></h1>
+                                        <p class="price">$<?= $product_suggested[2]->selling_price ?></p>
+                                        <p><?= $product_suggested[2]->description ?>.</p>
+                                        <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[2]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
+                                </div>
+                            <?php endif;?>
 
-                                    <?php $i++;?>
-                                <?php endforeach;?>
+                            <?php if(isset($product_suggested[3])):?>
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[3]->id?>'">
+                                        <?= Html::img($product_suggested[3]->thumbnail, ['style' => 'width:100%']) ?>
+                                        <h1><?= $product_suggested[3]->name ?></h1>
+                                        <p class="price">$<?= $product_suggested[3]->selling_price ?></p>
+                                        <p><?= $product_suggested[2]->description ?>.</p>
+                                        <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[3]->id], ['class' => 'btn  btn-green']); ?></p>
+                                    </div>
+                                </div>
                             <?php endif;?>
                         </div>
                     </div>
