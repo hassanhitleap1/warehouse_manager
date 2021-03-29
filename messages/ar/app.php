@@ -149,4 +149,5 @@ return [
     "Choose_Type"=>"اختار النوع",
     "Successful_Purchase"=>"تم الشراء بنجاح",
     "Product_Suggested"=>"منتجات مقترحة",
+    "Error"=>"حدث خطأ",
 ];
