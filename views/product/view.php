@@ -123,8 +123,7 @@ $this->title = $model->name;
         <div class="row">
             <div class="row">
                 <div class="col-md-9">
-                    <h3>
-                        Carousel Product Cart Slider</h3>
+                    <h3> <?=Yii::t('app','Product_Suggested');?></h3>
                 </div>
                 <div class="col-md-3">
                     <!-- Controls -->
@@ -140,242 +139,45 @@ $this->title = $model->name;
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="row">
-                            <div class="col-sm-12 col-xs-12">
-                                <div class="col-item">
-                                    <div class="photo">
-                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
-                                    </div>
-                                    <div class="info">
-                                        <div class="row">
-                                            <div class="price col-md-6">
-                                                <h5>
-                                                    Sample Product</h5>
-                                                <h5 class="price-text-color">
-                                                    $199.99</h5>
-                                            </div>
-                                            <div class="rating hidden-sm col-md-6">
-                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="separator clear-left">
-                                            <p class="btn-add">
-                                                <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
-                                            <p class="btn-details">
-                                                <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
-                                        </div>
-                                        <div class="clearfix">
-                                        </div>
-                                    </div>
+                            <div class="col-sm-6 col-xs-6">
+                                <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$model->id?>'">
+                                    <?= Html::img($model->thumbnail, ['style' => 'width:100%']) ?>
+                                    <h1><?= $model->name ?></h1>
+                                    <p class="price">$<?= $model->selling_price ?></p>
+                                    <p><?= $model->description ?>.</p>
+                                    <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $model->id], ['class' => 'btn  btn-green']); ?></p>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-xs-12">
-                                <div class="col-item">
-                                    <div class="photo">
-                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
-                                    </div>
-                                    <div class="info">
-                                        <div class="row">
-                                            <div class="price col-md-6">
-                                                <h5>
-                                                    Product Example</h5>
-                                                <h5 class="price-text-color">
-                                                    $249.99</h5>
-                                            </div>
-                                            <div class="rating hidden-sm col-md-6">
-                                            </div>
-                                        </div>
-                                        <div class="separator clear-left">
-                                            <p class="btn-add">
-                                                <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
-                                            <p class="btn-details">
-                                                <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
-                                        </div>
-                                        <div class="clearfix">
-                                        </div>
-                                    </div>
+                            <div class="col-sm-6 col-xs-6">
+                                <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$model->id?>'">
+                                    <?= Html::img($model->thumbnail, ['style' => 'width:100%']) ?>
+                                    <h1><?= $model->name ?></h1>
+                                    <p class="price">$<?= $model->selling_price ?></p>
+                                    <p><?= $model->description ?>.</p>
+                                    <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $model->id], ['class' => 'btn  btn-green']); ?></p>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-xs-12">
-                                <div class="col-item">
-                                    <div class="photo">
-                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
-                                    </div>
-                                    <div class="info">
-                                        <div class="row">
-                                            <div class="price col-md-6">
-                                                <h5>
-                                                    Next Sample Product</h5>
-                                                <h5 class="price-text-color">
-                                                    $149.99</h5>
-                                            </div>
-                                            <div class="rating hidden-sm col-md-6">
-                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="separator clear-left">
-                                            <p class="btn-add">
-                                                <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
-                                            <p class="btn-details">
-                                                <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
-                                        </div>
-                                        <div class="clearfix">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-xs-12">
-                                <div class="col-item">
-                                    <div class="photo">
-                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
-                                    </div>
-                                    <div class="info">
-                                        <div class="row">
-                                            <div class="price col-md-6">
-                                                <h5>
-                                                    Sample Product</h5>
-                                                <h5 class="price-text-color">
-                                                    $199.99</h5>
-                                            </div>
-                                            <div class="rating hidden-sm col-md-6">
-                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="separator clear-left">
-                                            <p class="btn-add">
-                                                <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
-                                            <p class="btn-details">
-                                                <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
-                                        </div>
-                                        <div class="clearfix">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="item">
                         <div class="row">
-                            <div class="col-sm-3 col-xs-12">
-                                <div class="col-item">
-                                    <div class="photo">
-                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
-                                    </div>
-                                    <div class="info">
-                                        <div class="row">
-                                            <div class="price col-md-6">
-                                                <h5>
-                                                    Product with Variants</h5>
-                                                <h5 class="price-text-color">
-                                                    $199.99</h5>
-                                            </div>
-                                            <div class="rating hidden-sm col-md-6">
-                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="separator clear-left">
-                                            <p class="btn-add">
-                                                <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
-                                            <p class="btn-details">
-                                                <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
-                                        </div>
-                                        <div class="clearfix">
-                                        </div>
-                                    </div>
+                            <div class="col-sm-6 col-xs-6">
+                                <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$model->id?>'">
+                                    <?= Html::img($model->thumbnail, ['style' => 'width:100%']) ?>
+                                    <h1><?= $model->name ?></h1>
+                                    <p class="price">$<?= $model->selling_price ?></p>
+                                    <p><?= $model->description ?>.</p>
+                                    <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $model->id], ['class' => 'btn  btn-green']); ?></p>
                                 </div>
                             </div>
-                            <div class="col-sm-3 col-xs-12">
-                                <div class="col-item">
-                                    <div class="photo">
-                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
-                                    </div>
-                                    <div class="info">
-                                        <div class="row">
-                                            <div class="price col-md-6">
-                                                <h5>
-                                                    Grouped Product</h5>
-                                                <h5 class="price-text-color">
-                                                    $249.99</h5>
-                                            </div>
-                                            <div class="rating hidden-sm col-md-6">
-                                            </div>
-                                        </div>
-                                        <div class="separator clear-left">
-                                            <p class="btn-add">
-                                                <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
-                                            <p class="btn-details">
-                                                <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
-                                        </div>
-                                        <div class="clearfix">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-12">
-                                <div class="col-item">
-                                    <div class="photo">
-                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
-                                    </div>
-                                    <div class="info">
-                                        <div class="row">
-                                            <div class="price col-md-6">
-                                                <h5>
-                                                    Product with Variants</h5>
-                                                <h5 class="price-text-color">
-                                                    $149.99</h5>
-                                            </div>
-                                            <div class="rating hidden-sm col-md-6">
-                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="separator clear-left">
-                                            <p class="btn-add">
-                                                <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
-                                            <p class="btn-details">
-                                                <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
-                                        </div>
-                                        <div class="clearfix">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-12">
-                                <div class="col-item">
-                                    <div class="photo">
-                                        <img src="http://placehold.it/350x260" class="img-responsive" alt="a" />
-                                    </div>
-                                    <div class="info">
-                                        <div class="row">
-                                            <div class="price col-md-6">
-                                                <h5>
-                                                    Product with Variants</h5>
-                                                <h5 class="price-text-color">
-                                                    $199.99</h5>
-                                            </div>
-                                            <div class="rating hidden-sm col-md-6">
-                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                </i><i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="separator clear-left">
-                                            <p class="btn-add">
-                                                <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a></p>
-                                            <p class="btn-details">
-                                                <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a></p>
-                                        </div>
-                                        <div class="clearfix">
-                                        </div>
-                                    </div>
+                            <div class="col-sm-6 col-xs-6">
+                                <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$model->id?>'">
+                                    <?= Html::img($model->thumbnail, ['style' => 'width:100%']) ?>
+                                    <h1><?= $model->name ?></h1>
+                                    <p class="price">$<?= $model->selling_price ?></p>
+                                    <p><?= $model->description ?>.</p>
+                                    <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $model->id], ['class' => 'btn  btn-green']); ?></p>
                                 </div>
                             </div>
                         </div>
@@ -383,9 +185,6 @@ $this->title = $model->name;
                 </div>
             </div>
         </div>
-
-
-
 
     </div>
 </div>
