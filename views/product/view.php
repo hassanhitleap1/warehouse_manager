@@ -141,7 +141,7 @@ $this->title = $model->name;
                         <div class="row">
                             <?php if(isset($product_suggested[0])):?>
                                 <div class="col-sm-6 col-xs-6">
-                                    <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[0]->id?>'">
+                                    <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[0]->id?>'">
                                         <?= Html::img($product_suggested[0]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[0]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[0]->selling_price ?></p>
@@ -153,7 +153,7 @@ $this->title = $model->name;
 
                             <?php if(isset($product_suggested[1])):?>
                                 <div class="col-sm-6 col-xs-6">
-                                    <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[1]->id?>'">
+                                    <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[1]->id?>'">
                                         <?= Html::img($product_suggested[1]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[1]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[1]->selling_price ?></p>
@@ -170,7 +170,7 @@ $this->title = $model->name;
                         <div class="row">
                             <?php if(isset($product_suggested[2])):?>
                                 <div class="col-sm-6 col-xs-6">
-                                    <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[2]->id?>'">
+                                    <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[2]->id?>'">
                                         <?= Html::img($product_suggested[2]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[2]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[2]->selling_price ?></p>
@@ -182,7 +182,7 @@ $this->title = $model->name;
 
                             <?php if(isset($product_suggested[3])):?>
                                 <div class="col-sm-6 col-xs-6">
-                                    <div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[3]->id?>'">
+                                    <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[3]->id?>'">
                                         <?= Html::img($product_suggested[3]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[3]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[3]->selling_price ?></p>

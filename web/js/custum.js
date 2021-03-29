@@ -246,7 +246,7 @@ $(window).scroll(function() {
     let full_path=window.location.href;
     var splitstring =full_path.split("?");
     console.log("splitstring",splitstring[1])
-    if(splitstring[1] ==undefined || splitstring[1]=='r=site/index'){
+    if(splitstring[1] ==undefined || splitstring[1]=='r=site/index' ||  splitstring[1]=='r=site%2Findex'){
         if($(window).scrollTop() == $(document).height() - $(window).height()) 
         {
              var url=`${SITE_URL}/index.php?r=product/load-more&page=${page}`;

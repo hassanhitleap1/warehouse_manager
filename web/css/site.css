@@ -184,9 +184,15 @@ a.desc:after {
     text-align: center;
     font: normal normal 16px/1.4 'DroidArabicKufi-Regular', sans-serif, Arial;
   }
-  
+  .card.card-sugested > p{
+    font-size: small;
+  }
+
+  .card.card-sugested > p >a{
+    font-size: small;
+  }
   .price {
-    color: grey;
+    color: #2b7321;
     font-size: 22px;
   }
   
@@ -604,6 +610,7 @@ a.desc:after {
 
   
 }
+
 
 /* Safari */
 @-webkit-keyframes spin {
