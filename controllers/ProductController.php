@@ -37,7 +37,6 @@ class ProductController extends Controller
             $product=Products::findOne($id);
             $next_order=Orders::find()->max('id') + 1;
             $region=Regions::findOne($modelOrder->region_id);
-        
             $typeoption=OptionsSellProduct::findOne($modelOrder->typeoption);
             $today=Carbon::now("Asia/Amman");
             $delivery_price=$region->price_delivery;
@@ -76,7 +75,8 @@ class ProductController extends Controller
                 $orderItemModel->price_item_count=$product->selling_price * $typeoption->number ;
                 $orderItemModel->profits_margin=$profit_margin;
                 $orderItemModel->quantity=$typeoption->number ;
-                if($user->save(false) && $orderItemModel->save(true)){
+                if(($user->save() && $orderItemModel->save())){
+                    $transaction->commit();
                     Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
                 }else{
                     Yii::$app->session->set('message', Yii::t('app', 'Error'));
