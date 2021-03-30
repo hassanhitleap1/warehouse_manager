@@ -59,13 +59,14 @@ class ProductController extends Controller
             $order_model->profit_margin=  $profit_margin;
             $order_model->amount_required=$delivery_price+$typeoption->price;
 
-            if(is_null($user = Users::find()->where(['phone'=> $modelOrder->phone])->one())){
-                $user= new Users();
-            }
-
+            
             $transaction = \Yii::$app->db->beginTransaction();
 
             if ($flag = $order_model->save()) {
+                $user = Users::find()->where(['phone'=> $modelOrder->phone])->one();
+                if(is_null($user)){
+                    $user= new Users();
+                }    
                 $user=$this->set_value_user($user,$order_model);
                 $orderItemModel=new OrdersItem;
                 $orderItemModel->order_id = $order_model->id;
@@ -75,7 +76,8 @@ class ProductController extends Controller
                 $orderItemModel->price_item_count=$product->selling_price * $typeoption->number ;
                 $orderItemModel->profits_margin=$profit_margin;
                 $orderItemModel->quantity=$typeoption->number ;
-                if(($user->save() && $orderItemModel->save())){
+                $order_model->user_id=$user->id;
+                if(($user->save() && $orderItemModel->save() && $order_model->save())){
                     $transaction->commit();
                     Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
                 }else{
@@ -127,8 +129,8 @@ class ProductController extends Controller
         $user->name_in_facebook =$model->name_in_facebook;
         $user->password_hash =null;
         $user->password_reset_token =null;
-        $user->created_at=null;
-        $user->updated_at=null;
+        // $user->created_at=null;
+        // $user->updated_at=null;
 
         return $user;
     }
