@@ -72,12 +72,12 @@ class OrdersSearch extends Orders
             'orders.amount_required' => $this->amount_required,
             'orders.status_id' => $this->status_id,
             'orders.created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'orders.updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'user.name', $this->user_id])
             ->andFilterWhere(['like', 'user.phone', $this->phone])
-            ->andFilterWhere(['like', 'address', $this->address]);
+            ->andFilterWhere(['like', 'orders.address', $this->address]);
             $query->orderBy(['orders.id' => SORT_DESC]);;
         return $dataProvider;
     }
