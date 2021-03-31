@@ -24,7 +24,7 @@ use yii\bootstrap\Html;
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-envelope"></i> 
+            
             <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i><?= Yii::t('app','Add_Sub_Product')?></button>
             <div class="clearfix"></div>
         </div>

@@ -25,7 +25,7 @@ use yii\bootstrap\Html;
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-envelope"></i> 
+         
             <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i><?= Yii::t('app','Type_Options')?></button>
             <div class="clearfix"></div>
         </div>
@@ -89,7 +89,7 @@ jQuery(".dynamicform_wrapper_type_options").on("afterInsert", function(e, item) 
 
 jQuery(".dynamicform_wrapper_type_options").on("afterDelete", function(e) {
     jQuery(".dynamicform_wrapper_type_options .panel-title-type-options").each(function(index) {
-        jQuery(this).html("'.Yii::t('app','Type_Options') .': " + (index + 1))
+        jQuery(this).html("'.Yii::t('app','Type_Options') .': " + (index - 1))
     });
 });
 ';

@@ -87,12 +87,23 @@ class ProductsController extends BaseController
              $valid =    Model::validateMultiple($subProductCounts) && $valid;
             $valid =Model::validateMultiple($type_options) && $valid;
             $valid =boolval($valid);
+
+            // foreach ($type_options as $key => $type_option) {
+            //     var_dump($type_option->getErrors());
+            // }
+
+            // var_dump($_POST);
+            // foreach ($subProductCounts as $key => $subProductCount) {
+            //     var_dump($subProductCount->getErrors());
+            // }
+            // var_dump($model->getErrors());
+            // exit;
            // var_dump($type_options[0]->getErrors());
             // var_dump($model->getErrors());
             // var_dump($type_options);
             // var_dump($subProductCounts[0]->getErrors());
             // var_dump($type_options[0]->getErrors());
-            //exit;
+            exit;
        
              if ($valid) {
 
