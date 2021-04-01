@@ -103,7 +103,7 @@ class ProductsController extends BaseController
             // var_dump($type_options);
             // var_dump($subProductCounts[0]->getErrors());
             // var_dump($type_options[0]->getErrors());
-            exit;
+
        
              if ($valid) {
 

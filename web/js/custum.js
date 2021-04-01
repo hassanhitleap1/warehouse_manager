@@ -8,7 +8,7 @@ $(document).on('change','#region_id',function (e) {
              delivery_price=json.data.price_delivery;
             $('#delivery_price').val(delivery_price);
               callculate_all();
-             
+
          }
      });
  });
@@ -27,11 +27,11 @@ function callculate_all(){
  });
 
  $(document).on('click','.print_invoice',function (e) {
-   
+
     let path=$(this).attr("path_url");
     open(path).print()
 });
- 
+
 
  $(document).on('keyup','#discount',function (e) {
     callculate_all();
@@ -41,7 +41,7 @@ function callculate_all(){
  $(document).on('keyup','.count_sub_product',function (e) {
     callculate_count_sub_product();
 });
- 
+
 function callculate_count_sub_product(){
     let count_sub_product=0;
     $( '.count_sub_product' ).each(function( index, element  ) {
@@ -53,7 +53,7 @@ function callculate_count_sub_product(){
 }
 
 $(document).on('change','#delivery_price',function (e) {
-     callculate_all();  
+     callculate_all();
 });
 
 function callculate_total_price(){
@@ -61,16 +61,15 @@ function callculate_total_price(){
     $(".price_item_count").each(function( index, element  ) {
         total_price+= parseFloat ($(element ).val());
     });
-  
+
     $("#total_price").val(total_price);
     return total_price;
 
-    
+
 }
 
 
 function callculate_amount_required(){
-
     let amount_required=0;
     let delivery_price=0;
     let discount=0;
@@ -78,25 +77,25 @@ function callculate_amount_required(){
         discount= parseFloat( $("#discount").val());
     }
      delivery_price= parseFloat( $("#delivery_price").val());
-     
+
     $(".price_item_count").each(function( index, element  ) {
         amount_required+= parseFloat ($(element ).val());
      });
-    
+
      amount_required-=discount;
      amount_required+=delivery_price;
      $("#amount_required").val(amount_required);
     return amount_required;
 
-    
-    
+
+
 }
 
 
 
 $(document).on('change','.product_id',function (e) {
     let url= `${SITE_URL}/index.php?r=sub-product-count/get-product-items&id=${$(this).val()}`;
-    let product_id_str=$(this).attr('id'); 
+    let product_id_str=$(this).attr('id');
     let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
     index=index.replaceAll('-product_id', '');
     index=index.trim();
@@ -116,10 +115,10 @@ $(document).on('change','.product_id',function (e) {
 
 
 
- 
+
 $(document).on('change','.sub_product_id',function (e) {
     let url= `${SITE_URL}/index.php?r=sub-product-count/get-sub-product&id=${$(this).val()}`;
-    let product_id_str=$(this).attr('id'); 
+    let product_id_str=$(this).attr('id');
     let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
     index=index.replaceAll('-product_id', '');
     index=index.replaceAll('-id', '');
@@ -128,8 +127,8 @@ $(document).on('change','.sub_product_id',function (e) {
      $.ajax({
          url: url,
          type: 'GET',
-         success: function (json) { 
-             console.log(index);   
+         success: function (json) {
+             console.log(index);
             $("#quantity_item_"+index).text(json.data.sub_product.count);
             $("#ordersitem-"+index+"-quantity").attr('max',json.data.sub_product.count);
          }
@@ -139,7 +138,7 @@ $(document).on('change','.sub_product_id',function (e) {
  $(document).on('change keypress blur keyup','.quantity_sub_product',function (e) {
     let quantity_sub_product =parseInt($(this).val());
     let total_price=0;
-    let quantity_sub_product_id_str=$(this).attr('id'); 
+    let quantity_sub_product_id_str=$(this).attr('id');
     let index=quantity_sub_product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
         index=index.replaceAll('-product_id', '');
         index=index.replaceAll('-quantity', '');
@@ -149,10 +148,10 @@ $(document).on('change','.sub_product_id',function (e) {
         $("#profits_margin_"+index).val(profit_margin*quantity_sub_product);
          $("#price_item_"+index).val(price * quantity_sub_product);
     }
-     
+
      $(".price_item_count").each(function( index, element  ) {
            total_price+= parseFloat ($(element ).val());
-      });       
+      });
 
       let amount_required=total_price-discount;
       $("#total_price").val(total_price);
@@ -197,9 +196,9 @@ function profit_margin_fn(){
 }
 
 function options_sub_product(data,html_id){
-    let  html=`<option value="">------</option>`; 
+    let  html=`<option value="">------</option>`;
      data.forEach((element,index) => {
-          html+=`<option value="${element.id}"> ${element.type}</option>`; 
+          html+=`<option value="${element.id}"> ${element.type}</option>`;
      });
      let selector="#ordersitem-"+html_id+"-sub_product_id";
      $(selector).html(html);
@@ -230,7 +229,7 @@ $(document).ready(function () {
             // Animation complete.
           });
         return false;
-    }); 
+    });
 });
 
 var order_landig_top=1;
@@ -247,21 +246,21 @@ $(window).scroll(function() {
     var splitstring =full_path.split("?");
     console.log("splitstring",splitstring[1])
     if(splitstring[1] ==undefined || splitstring[1]=='r=site/index' ||  splitstring[1]=='r=site%2Findex'){
-        if($(window).scrollTop() == $(document).height() - $(window).height()) 
+        if($(window).scrollTop() == $(document).height() - $(window).height())
         {
              var url=`${SITE_URL}/index.php?r=product/load-more&page=${page}`;
                show_loader();
-    
+
                $.ajax({
                     url: url,
                     success: function(result){
                         appaend_products(result)
                         hide_loader();
                         page++;
-                    
+
                     }
                 });
-               
+
         }
     }
 });
@@ -286,9 +285,9 @@ function appaend_products(result){
         '</div>';
 
 
-       
 
-		
+
+
     });
 
 
@@ -319,14 +318,14 @@ function fade_in_out_button() {
     }catch(error){
 
     }
-  
- 
-    
-  
-   
-   
+
+
+
+
+
+
 }
-  
+
 function show_loader(){
  $(".loader").show();
 }
@@ -346,7 +345,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 return image.alt + ' (' + (this.index + 1) + '/' + this.length + ')';
             },
         });
-    
+
         var galley2 = document.getElementById('pic-1');
         var viewer2 = new Viewer(galley2, {
             url: 'data-original',
@@ -357,7 +356,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }catch(error){
 
     }
-   
+
 
 
 
