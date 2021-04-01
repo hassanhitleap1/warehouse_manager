@@ -9,7 +9,7 @@ use yii\bootstrap\Html;
         <?php DynamicFormWidget::begin([
             'widgetContainer' => 'dynamicform_wrapper_sub_product_counts', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
             'widgetBody' => '.container-items_sub_product_counts', // required: css class selector
-            'widgetItem' => '.item', // required: css class
+            'widgetItem' => '.item-sub-product-count', // required: css class
             'limit' => 15, // the maximum times, an element can be cloned (default 999)
              'min' => 1                                                                                                                                                                                                                                                                                             , // 0 or 1 (default 1)
             'insertButton' => '.add-item', // css class
@@ -31,7 +31,7 @@ use yii\bootstrap\Html;
         <div class="panel-body container-items_sub_product_counts"><!-- widgetContainer -->
                 <!-- widgetContainer -->
                 <?php foreach ($subProductCounts as $index => $subProductCount) : ?>
-                    <div class="item panel panel-default">
+                    <div class="item-sub-product-count panel panel-default">
                         <!-- widgetBody -->
                         <div class="panel-heading">
                             <span class="panel-title-_sub_product_counts">  : <?= ($index + 1) ?></span>
