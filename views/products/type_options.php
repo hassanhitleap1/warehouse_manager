@@ -48,15 +48,15 @@ use yii\bootstrap\Html;
                             ?>
 
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <?= $form->field($type_option, "[{$in}]number")->textInput(['maxlength' => true])
                                         ->label(Yii::t('app', 'Number')) ?>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-8">
                                     <?= $form->field($type_option, "[{$in}]text")->textInput(['maxlength' => true,'class'=>'form-control'])
                                         ->label(Yii::t('app', 'Text'))  ?>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <?= $form->field($type_option, "[{$in}]price")->textInput(['maxlength' => true,'class'=>'form-control'])
                                         ->label(Yii::t('app', 'Price'))  ?>
                                 </div>
