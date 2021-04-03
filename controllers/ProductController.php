@@ -32,7 +32,7 @@ class ProductController extends Controller
     public function actionView($id)
     {
         $modelOrder= new OrderForm();
-        $product_suggested=Products::find()->limit(4)->all();
+        $product_suggested=Products::find()->where(['!=','id',$id])->limit(4)->all();
         if ($modelOrder->load(Yii::$app->request->post())) {
             $product=Products::findOne($id);
             $next_order=Orders::find()->max('id') + 1;
@@ -79,6 +79,7 @@ class ProductController extends Controller
                 $order_model->user_id=$user->id;
                 if(($user->save() && $orderItemModel->save() && $order_model->save())){
                     $transaction->commit();
+                    
                     return $this->render('success', [
                         'model' => $order_model,
                         'product_suggested'=>$product_suggested
