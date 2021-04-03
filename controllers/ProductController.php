@@ -79,7 +79,12 @@ class ProductController extends Controller
                 $order_model->user_id=$user->id;
                 if(($user->save() && $orderItemModel->save() && $order_model->save())){
                     $transaction->commit();
-                    Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
+                    return $this->render('success', [
+                        'model' => $order_model,
+                        'product_suggested'=>$product_suggested
+            
+                    ]);
+                  //  Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
                 }else{
                     Yii::$app->session->set('message', Yii::t('app', 'Error'));
                     $transaction->rollBack();

@@ -13,7 +13,7 @@ use yii\helpers\Html;
 </div>
 <div class="row">
 <h1>
-<?= Yii::t('app','Order_Price_Total') . ' '. $model->price ." JOD";?>
+<?= Yii::t('app','Order_Price_Total') . ' '. $model->total_price ." JOD";?>
 </h1>
 </p>
 </div>
