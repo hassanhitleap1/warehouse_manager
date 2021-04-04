@@ -232,6 +232,21 @@ $(document).ready(function () {
     });
 });
 
+
+$(document).ready(function () {
+    setTimeout(function() {
+        $(".form-group").each(function( index,element ) {
+            if($(this).hasClass("has-error")){
+                $("#ordernow").click();
+            }
+          });
+    }, 1000);
+
+
+   
+});
+
+
 var order_landig_top=1;
 
 window.onscroll = function() {fade_in_out_button()};

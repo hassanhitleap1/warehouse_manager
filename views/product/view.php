@@ -209,6 +209,8 @@ $this->title = $model->name;
     </div>
 </div>
 
+
+ 
 <?php if (Yii::$app->session->has('message')) : ?>
     <script type="text/javascript">
         setTimeout(function() {

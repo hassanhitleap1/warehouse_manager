@@ -33,7 +33,7 @@ class ProductController extends Controller
     {
         $modelOrder= new OrderForm();
         $product_suggested=Products::find()->where(['!=','id',$id])->limit(4)->all();
-        if ($modelOrder->load(Yii::$app->request->post())) {
+        if ($modelOrder->load(Yii::$app->request->post())&&  $modelOrder->validate()) {
             $product=Products::findOne($id);
             $next_order=Orders::find()->max('id') + 1;
             $region=Regions::findOne($modelOrder->region_id);
