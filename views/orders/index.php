@@ -2,15 +2,14 @@
 
 use app\models\area\Area;
 use app\models\countries\Countries;
-use app\models\orders\Orders;
 use app\models\regions\Regions;
 use app\models\status\Status;
 use yii\helpers\Html;
 use app\models\users\Users;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
-use yii\helpers\ArrayHelper;
 
+use yii\helpers\ArrayHelper;
 $users=Users::find()->orderBy('name')->asArray()->all();
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\orders\OrdersSearch */
@@ -157,6 +156,7 @@ $columns = [
             'value'=>'amount_required',
             'format'=>'raw',
             'visible'=>true,
+            'pageSummary'=>true
         ],
         // 'total_price',
         [  
@@ -166,6 +166,7 @@ $columns = [
             'value'=>'total_price',
             'format'=>'raw',
             'visible'=>true,
+            'pageSummary'=>true
         ],
         [
             'attribute'=>'order',
@@ -200,8 +201,7 @@ $columns = [
             'value'=>'delivery_price',
             'format'=>'raw',
             'visible'=>true,
-            // 'footer' => Orders::getTotal($dataProvider->models, 'delivery_price'),  
-            // ['class' => 'kv-table-footer']  
+            'pageSummary'=>true
         ],
 
         [  
@@ -211,6 +211,7 @@ $columns = [
             'value'=>'discount',
             'format'=>'raw',
             'visible'=>true,
+            'pageSummary'=>true
         ],
     
         [  
@@ -259,7 +260,7 @@ $columns = [
             'heading'=>'<h3 class="panel-title">'.$this->title.'</h3>',
             'before'=>'{dynagrid}' .  Html::a(Yii::t('app', 'Create_Order'), ['create'], ['class' => 'btn btn-success'])
            ],
-
+           'showPageSummary'=>true,
     ],
     
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
