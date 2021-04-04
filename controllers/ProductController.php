@@ -57,7 +57,7 @@ class ProductController extends Controller
             $order_model->total_price=$delivery_price+$typeoption->price;
     
             $order_model->profit_margin=  $profit_margin;
-            $order_model->amount_required=$order_model->total_price-$delivery_price-$discount;
+            $order_model->amount_required=$order_model->total_price-$delivery_price;
 
             
             $transaction = \Yii::$app->db->beginTransaction();

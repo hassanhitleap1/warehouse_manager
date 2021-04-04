@@ -2,14 +2,15 @@
 
 use app\models\area\Area;
 use app\models\countries\Countries;
+use app\models\orders\Orders;
 use app\models\regions\Regions;
 use app\models\status\Status;
 use yii\helpers\Html;
 use app\models\users\Users;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
-use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
+
 $users=Users::find()->orderBy('name')->asArray()->all();
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\orders\OrdersSearch */
@@ -199,6 +200,8 @@ $columns = [
             'value'=>'delivery_price',
             'format'=>'raw',
             'visible'=>true,
+            // 'footer' => Orders::getTotal($dataProvider->models, 'delivery_price'),  
+            // ['class' => 'kv-table-footer']  
         ],
 
         [  
