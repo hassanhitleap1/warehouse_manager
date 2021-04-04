@@ -71,7 +71,7 @@ class OrdersSearch extends Orders
             'orders.total_price' => $this->total_price,
             'orders.amount_required' => $this->amount_required,
             'orders.status_id' => $this->status_id,
-            'orders.created_at' => $this->created_at,
+            'DATE(orders.created_at)' => $this->created_at,
             'orders.updated_at' => $this->updated_at,
         ]);
 
