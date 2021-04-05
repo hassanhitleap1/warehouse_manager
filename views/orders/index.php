@@ -176,7 +176,7 @@ $columns = [
                 $orderItemString='';
                 foreach ($model->orderItems as $orderItem){
                     $type='';
-                    if(count($orderItem->product->subProductCount) < 1){
+                    if(count($orderItem->product->subProductCount) > 1){
                         $type=$orderItem->subProduct->type;
                     }
                     $orderItemString.= ' ' .$orderItem->product->name .' '.$type.' '.Yii::t('app','Number').' ( '.$orderItem->quantity .' ) </br>';
