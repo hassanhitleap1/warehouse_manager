@@ -178,9 +178,7 @@ $(document).on('click','.remove-item',function (e) {
 $(document).on('change','#area_id',function (e) {
     callculate_all();
 });
-$(document).on('change','.count_sub_product',function (e) {
-    $('#quantity').prop( "disabled", true );
-});
+
 
 
 function profit_margin_fn(){

@@ -48,7 +48,7 @@ MainAsset::register($this);
         if (Yii::$app->user->isGuest) {
             $menuItemsleft[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
         } else {
-            $menuItems[] = ['label' => Yii::t('app', 'Dashboard'), 'url' => ['/site/dashboard']];
+            $menuItems[] = ['label' => Yii::t('app', 'Dashboard'), 'url' => ['/dashboard/index']];
             $menuItems[] = [
                 'label' => Yii::t('app', 'Countries'),
                 'items' => [
