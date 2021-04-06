@@ -375,3 +375,49 @@ window.addEventListener('DOMContentLoaded', function () {
 
 });
 
+
+
+
+var myVar;
+
+function myFunction() {
+  myVar = setTimeout(function(){ 
+    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+    width=600,height=300,left=100,top=100`;
+    let url =`${SITE_URL}/index.php?r=orders/bill&id=${1}`;
+         openWindow = window.open(url, "_blank", params);  
+    }, 3000);
+}
+
+function myStopFunction() {
+  clearTimeout(myVar);
+}
+
+
+function openLinksPrints(){
+    ides=[1,2,3];
+    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+    width=600,height=300,left=100,top=100`;
+    let url ='';
+    var  openWindow=[];
+    for (i = 0; i < ides.length; i++) {
+        setTimeout(function() { 
+            url =`${SITE_URL}/index.php?r=orders/bill&id=${ides[i]}`;
+            openWindow[ides[i]] = window.open(url, "_blank", params); 
+            
+        }, 1000);  
+        
+        
+            
+    }
+    for (i = 0; i < ides.length; i++) {
+        setTimeout(function() { 
+            openWindow[ides[i]].close();
+        }, 3000);   
+    }
+
+   
+
+
+
+}
