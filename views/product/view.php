@@ -76,12 +76,12 @@ $this->title = $model->name;
                         <?= $form->field($modelOrder, 'name')->textInput(['maxlength' => true, 'required' => true]) ?>
                     </div>
                     <div class="col-md-6">
-                        <?= $form->field($modelOrder, 'phone')->textInput(['required' => true]) ?>
+                        <?= $form->field($modelOrder, 'phone')->textInput(['required' => true,'placeholder' => "07xxxxxxxx"]) ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($modelOrder, 'other_phone')->textInput([]) ?>
+                        <?= $form->field($modelOrder, 'other_phone')->textInput(['placeholder' => "07xxxxxxxx"]) ?>
                     </div>
                     <div class="col-md-6">
                         <?= $form->field($modelOrder, 'region_id')->dropDownList($regions); ?>
@@ -209,6 +209,8 @@ $this->title = $model->name;
     </div>
 </div>
 
+
+ 
 <?php if (Yii::$app->session->has('message')) : ?>
     <script type="text/javascript">
         setTimeout(function() {

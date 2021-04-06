@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use app\models\users\Users;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
-use kartik\select2\Select2;
+
 use yii\helpers\ArrayHelper;
 $users=Users::find()->orderBy('name')->asArray()->all();
 /* @var $this yii\web\View */
@@ -156,6 +156,7 @@ $columns = [
             'value'=>'amount_required',
             'format'=>'raw',
             'visible'=>true,
+            'pageSummary'=>true
         ],
         // 'total_price',
         [  
@@ -165,6 +166,7 @@ $columns = [
             'value'=>'total_price',
             'format'=>'raw',
             'visible'=>true,
+            'pageSummary'=>true
         ],
         [
             'attribute'=>'order',
@@ -174,7 +176,7 @@ $columns = [
                 $orderItemString='';
                 foreach ($model->orderItems as $orderItem){
                     $type='';
-                    if(count($orderItem->product->subProductCount) < 1){
+                    if(count($orderItem->product->subProductCount) > 1){
                         $type=$orderItem->subProduct->type;
                     }
                     $orderItemString.= ' ' .$orderItem->product->name .' '.$type.' '.Yii::t('app','Number').' ( '.$orderItem->quantity .' ) </br>';
@@ -199,6 +201,7 @@ $columns = [
             'value'=>'delivery_price',
             'format'=>'raw',
             'visible'=>true,
+            'pageSummary'=>true
         ],
 
         [  
@@ -208,6 +211,7 @@ $columns = [
             'value'=>'discount',
             'format'=>'raw',
             'visible'=>true,
+            'pageSummary'=>true
         ],
     
         [  
@@ -256,7 +260,7 @@ $columns = [
             'heading'=>'<h3 class="panel-title">'.$this->title.'</h3>',
             'before'=>'{dynagrid}' .  Html::a(Yii::t('app', 'Create_Order'), ['create'], ['class' => 'btn btn-success'])
            ],
-
+           'showPageSummary'=>true,
     ],
     
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important

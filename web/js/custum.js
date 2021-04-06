@@ -178,9 +178,7 @@ $(document).on('click','.remove-item',function (e) {
 $(document).on('change','#area_id',function (e) {
     callculate_all();
 });
-$(document).on('change','.count_sub_product',function (e) {
-    $('#quantity').prop( "disabled", true );
-});
+
 
 
 function profit_margin_fn(){
@@ -231,6 +229,21 @@ $(document).ready(function () {
         return false;
     });
 });
+
+
+$(document).ready(function () {
+    setTimeout(function() {
+        $(".form-group").each(function( index,element ) {
+            if($(this).hasClass("has-error")){
+                $("#ordernow").click();
+            }
+          });
+    }, 1000);
+
+
+   
+});
+
 
 var order_landig_top=1;
 

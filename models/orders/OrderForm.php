@@ -33,12 +33,21 @@ class  OrderForm extends Model{
         return [
             [[ 'phone','name'], 'required'],
             [[ 'region_id','typeoption','type'], 'integer'],
-            [['name','note','address'],'string'],
+            [['name','address'],'string'],
+            [['phone','other_phone'], 'isJordanPhone'],
            
         ];
     }
 
   
+
+    public function isJordanPhone($attribute)
+    {
+        if (!preg_match('/^(079|078|077)[0-9]{7}$/', $this->$attribute)) {
+            $this->addError($attribute, Yii::t('app','Check_Phone'));
+        }
+    }
+
     /**
      * {@inheritdoc}
      */

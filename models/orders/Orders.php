@@ -167,5 +167,17 @@ class Orders extends \yii\db\ActiveRecord
     }
 
     
+    /**
+     * get total
+     */
+    public static function getTotal($provider, $fieldName)
+    {
+        $total = 0;
 
+        foreach ($provider as $item) {
+            $total += $item[$fieldName];
+        }
+
+        return $total;
+    }
 }

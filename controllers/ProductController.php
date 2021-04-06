@@ -32,8 +32,8 @@ class ProductController extends Controller
     public function actionView($id)
     {
         $modelOrder= new OrderForm();
-        $product_suggested=Products::find()->limit(4)->all();
-        if ($modelOrder->load(Yii::$app->request->post())) {
+        $product_suggested=Products::find()->where(['!=','id',$id])->limit(4)->all();
+        if ($modelOrder->load(Yii::$app->request->post())&&  $modelOrder->validate()) {
             $product=Products::findOne($id);
             $next_order=Orders::find()->max('id') + 1;
             $region=Regions::findOne($modelOrder->region_id);
@@ -57,7 +57,7 @@ class ProductController extends Controller
             $order_model->total_price=$delivery_price+$typeoption->price;
     
             $order_model->profit_margin=  $profit_margin;
-            $order_model->amount_required=$delivery_price+$typeoption->price;
+            $order_model->amount_required=$order_model->total_price-$delivery_price;
 
             
             $transaction = \Yii::$app->db->beginTransaction();
@@ -79,7 +79,13 @@ class ProductController extends Controller
                 $order_model->user_id=$user->id;
                 if(($user->save() && $orderItemModel->save() && $order_model->save())){
                     $transaction->commit();
-                    Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
+                    
+                    return $this->render('success', [
+                        'model' => $order_model,
+                        'product_suggested'=>$product_suggested
+            
+                    ]);
+                  //  Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
                 }else{
                     Yii::$app->session->set('message', Yii::t('app', 'Error'));
                     $transaction->rollBack();

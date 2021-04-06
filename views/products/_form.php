@@ -85,46 +85,83 @@ if (!$model->isNewRecord) {
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <div class="container">
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
-        <div class="row">
-            <div class="col-md-4">
+        
+    <div class="row">
+            <div class="col-md-2">
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+            </div>
+            <div class="col-md-2">
                 <?= $form->field($model, 'purchasing_price')->textInput() ?>
+            </div>
+            <div class="col-md-2">
                 <?= $form->field($model, 'selling_price')->textInput() ?>
+            </div>
+            <div class="col-md-2">
                 <?= $form->field($model, 'video_url')->textInput() ?>
-                <?= $form->field($model, 'category_id')->widget(Select2::classname(), [
+            </div>
+            <div class="col-md-2">
+            <?= $form->field($model, 'category_id')->widget(Select2::classname(), [
                         'data' =>  ArrayHelper::map(Categorises::find()->all(), 'id', 'name_ar'),
                         'language' => 'ar',
                         'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
                        
                     ]); ?>
-               <?= $form->field($model, 'description')->textarea(['rows' => '6']) ?>      
-                <?= $form->field($model, 'type_options')->dropDownList([Products::TYPE_DROP_DAWNLIST=>"dropdown list",Products::TYPE_CHOOSE_BOX=>"choose box"]) ?>   
-                <?= $form->field($model, 'file')->widget(FileInput::classname(), [
+            </div>
+            <div class="col-md-2">
+            <?= $form->field($model, 'warehouse_id')->widget(Select2::classname(), [
+                        'data' =>  ArrayHelper::map(Warehouse::find()->all(), 'id', 'name'),
+                        'language' => 'ar',
+                        'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
+                       
+                    ]); ?>  
+            </div>
+    </div>
+    <div class="row">
+            <div class="col-md-3">
+            <?= $form->field($model, 'type_options')->dropDownList([Products::TYPE_DROP_DAWNLIST=>"dropdown list",Products::TYPE_CHOOSE_BOX=>"choose box"]) ?>
+            </div>
+            <div class="col-md-3">
+            <?= $form->field($model, 'supplier_id')->widget(Select2::classname(), [
+                        'data' =>  ArrayHelper::map(Suppliers::find()->all(), 'id', 'name'),
+                        'language' => 'ar',
+                        'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
+                       
+                    ]); ?>
+            </div>
+            <div class="col-md-3">
+            <?= $form->field($model, 'quantity')->textInput(['id'=>'quantity']) ?>
+            </div>
+            <div class="col-md-3">
+            <?= $form->field($model, 'unit_id')->widget(Select2::classname(), [
+                        'data' =>  ArrayHelper::map(Units::find()->all(), 'id', 'name_en'),
+                        'language' => 'ar',
+                        'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
+                       
+                    ]); ?>    
+           
+            </div>
+    </div>
+
+    <div class="row">
+            <div class="col-md-6">
+                <?php include('type_options.php') ?>
+            </div>
+            <div class="col-md-6">
+            <?php include('sub_product_count.php') ?>
+            </div>
+         
+            
+    </div>
+        <div class="row">
+            <div class="col-md-4">
+            <?= $form->field($model, 'file')->widget(FileInput::classname(), [
                 'options' => ['accept' => 'image/*'],
                 'pluginOptions' => $dataThumbnail
                     ]);
                 ?>
             </div>
             <div class="col-md-4">
-                <?= $form->field($model, 'quantity')->textInput(['id'=>'quantity']) ?>
-                <?= $form->field($model, 'warehouse_id')->widget(Select2::classname(), [
-                        'data' =>  ArrayHelper::map(Warehouse::find()->all(), 'id', 'name'),
-                        'language' => 'ar',
-                        'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
-                       
-                    ]); ?>  
-                <?= $form->field($model, 'supplier_id')->widget(Select2::classname(), [
-                        'data' =>  ArrayHelper::map(Suppliers::find()->all(), 'id', 'name'),
-                        'language' => 'ar',
-                        'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
-                       
-                    ]); ?>
-                <?= $form->field($model, 'unit_id')->widget(Select2::classname(), [
-                        'data' =>  ArrayHelper::map(Units::find()->all(), 'id', 'name_en'),
-                        'language' => 'ar',
-                        'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
-                       
-                    ]); ?>    
 
             <?= $form->field($model, 'images_product[]')->widget(FileInput::classname(), [
                             'options' => ['accept' => 'image/*', 'multiple' => true],
@@ -132,16 +169,13 @@ if (!$model->isNewRecord) {
                         ]);
             ?>
             </div>
-            
             <div class="col-md-4">
-                <div class="row">
-                    <?php include('sub_product_count.php') ?>
-                </div>
-                <div class="row">
-                    <?php include('type_options.php') ?>
-                </div>
+                <?= $form->field($model, 'description')->textarea(['rows' => '6']) ?> 
 
             </div>
+            
+            
+           
             
         </div>   
 

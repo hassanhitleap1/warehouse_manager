@@ -77,6 +77,9 @@ class ProductsSearch extends Products
             ->andFilterWhere(['like', 'description', $this->video_url])
             ->andFilterWhere(['like', 'thumbnail', $this->thumbnail]);
 
+        $query->orderBy(['id' => SORT_DESC]);;
+
+
         return $dataProvider;
     }
 }
