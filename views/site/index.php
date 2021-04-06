@@ -20,7 +20,7 @@ use yii\helpers\Url;
 					<?= Html::img($model->thumbnail, ['style' => 'width:100%']) ?>
 					<h1><?= $model->name ?></h1>
 					<p class="price">$<?= $model->selling_price ?></p>
-					<p><?= $model->description ?>.</p>
+<!--					<p>--><?//= $model->description ?><!--.</p>-->
 					<p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $model->id], ['class' => 'btn  btn-green']); ?></p>
 				</div>
 			</div>
