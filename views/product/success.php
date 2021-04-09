@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+$this->title = Yii::t('app','Successfuly_Applay');
 
 ?>
 <div class="row">
