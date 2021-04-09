@@ -2,7 +2,7 @@
 
 use app\models\products\Products;
 use app\models\regions\Regions;
-
+use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -90,7 +90,12 @@ $this->title = $model->name;
                         <?= $form->field($modelOrder, 'other_phone')->textInput(['placeholder' => "07xxxxxxxx"]) ?>
                     </div>
                     <div class="col-md-6">
-                        <?= $form->field($modelOrder, 'region_id')->dropDownList($regions); ?>
+                    <?= $form->field($modelOrder, 'region_id')->widget(Select2::classname(), [
+                        'data' =>  $regions,
+                        'language' => 'ar',
+        
+                        ]); ?>
+                       
                     </div>
                 </div>
 
