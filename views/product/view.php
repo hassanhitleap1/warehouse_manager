@@ -2,7 +2,7 @@
 
 use app\models\products\Products;
 use app\models\regions\Regions;
-use kartik\select2\Select2;
+
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 $regions_model = Regions::find()->all();
 $regions = [];
 foreach ($regions_model as $key => $value) {
-    $regions[$value->id] = $value->name_ar . " ( " . $value->price_delivery . " )";
+    $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
 }
 $this->title = $model->name;
 ?>
@@ -60,13 +60,19 @@ $this->title = $model->name;
             <div class="details col-md-6">
                 <h5 class="product-title"><?= $this->title ?></h5>
 
-                <p class="product-description"><?= $model->purchasing_price ?>.</p>
-                <h4 class="price"><?= Yii::t('app', 'Price') ?> : <span>$<?= $model->purchasing_price ?></span></h4>
+                <p class="product-description"><?= $model->description ?> .</p>
+                <h4 class="price"><?= Yii::t('app', 'Price') ?> : <span><?= $model->purchasing_price ?> JOD</span></h4>
 
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="<?= str_replace('watch?v=', 'embed/', $model->video_url) ?>" allowfullscreen></iframe>
                 </div>
             </div>
+        </div>
+        <div class="wrapper row" style="margin-top: 10px;">
+            <div class="col-md-12">
+            <p> <strong style="color:red;"><?=Yii::t('app','Delivery_Price_Added')?> </strong> </p>
+            </div>
+            
         </div>
         <div class="wrapper row">
             <div class="preview col-md-12">
@@ -145,7 +151,7 @@ $this->title = $model->name;
                                         <?= Html::img($product_suggested[0]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[0]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[0]->selling_price ?></p>
-                                        <p><?= $product_suggested[0]->description ?>.</p>
+                                       
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[0]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
                                 </div>
@@ -157,7 +163,7 @@ $this->title = $model->name;
                                         <?= Html::img($product_suggested[1]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[1]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[1]->selling_price ?></p>
-                                        <p><?= $product_suggested[1]->description ?>.</p>
+                                        
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[1]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
                                 </div>
@@ -174,7 +180,7 @@ $this->title = $model->name;
                                         <?= Html::img($product_suggested[2]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[2]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[2]->selling_price ?></p>
-                                        <p><?= $product_suggested[2]->description ?>.</p>
+                                  
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[2]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
                                 </div>
@@ -186,7 +192,7 @@ $this->title = $model->name;
                                         <?= Html::img($product_suggested[3]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[3]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[3]->selling_price ?></p>
-                                        <p><?= $product_suggested[2]->description ?>.</p>
+                                        
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[3]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
                                 </div>

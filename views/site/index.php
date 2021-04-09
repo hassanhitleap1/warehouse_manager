@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'روند';
+$this->title = Yii::$app->name;
 
 use yii\widgets\LinkPager;
 use yii\helpers\Html;
@@ -19,8 +19,8 @@ use yii\helpers\Url;
 				<div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$model->id?>'">
 					<?= Html::img($model->thumbnail, ['style' => 'width:100%']) ?>
 					<h1><?= $model->name ?></h1>
-					<p class="price">$<?= $model->selling_price ?></p>
-<!--					<p>--><?//= $model->description ?><!--.</p>-->
+					<p class="price"><?= $model->selling_price ?> JOD</p>
+
 					<p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $model->id], ['class' => 'btn  btn-green']); ?></p>
 				</div>
 			</div>
