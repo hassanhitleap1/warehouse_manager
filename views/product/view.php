@@ -105,7 +105,7 @@ $this->title = $model->name;
                             <?= $form->field($modelOrder, 'type')->dropDownList(ArrayHelper::map($model->subProductCount, 'id', 'type')) ?>
                         </div>
                     <?php else : ?>
-                        <?= $form->field($model, 'type')->hiddenInput(['value' => $model->subProductCount[0]->id])->label(false); ?>
+                        <?= $form->field($modelOrder, 'type')->hiddenInput(['value' => $model->subProductCount[0]->id])->label(false); ?>
 
                     <?php endif; ?>
 
