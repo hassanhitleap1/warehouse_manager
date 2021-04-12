@@ -376,48 +376,19 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 
+var var_timer_invoice = setInterval(timer_invoice, 7000);
 
-
-var myVar;
-
-function myFunction() {
-  myVar = setTimeout(function(){ 
+function timer_invoice() {
     let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
     width=600,height=300,left=100,top=100`;
     let url =`${SITE_URL}/index.php?r=orders/bill&id=${1}`;
-         openWindow = window.open(url, "_blank", params);  
-    }, 3000);
+    news = window.open("", "NewsWindow", params);
+    news.document.write("<p>The 'NewsWindow' will only appearing for 3 seconds.</p>");
+    tmot = setTimeout(function(){window.open(url, "NewsWindow")},1000);
+    tmot = setTimeout(function(){news.close()}, 5000);
 }
 
-function myStopFunction() {
-  clearTimeout(myVar);
+function stop_timer_invoice() {
+    clearInterval(var_timer_invoice);
 }
-
-
-function openLinksPrints(){
-    ides=[1,2,3];
-    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-    width=600,height=300,left=100,top=100`;
-    let url ='';
-    var  openWindow=[];
-    for (i = 0; i < ides.length; i++) {
-        setTimeout(function() { 
-            url =`${SITE_URL}/index.php?r=orders/bill&id=${ides[i]}`;
-            openWindow[ides[i]] = window.open(url, "_blank", params); 
-            
-        }, 1000);  
-        
-        
-            
-    }
-    for (i = 0; i < ides.length; i++) {
-        setTimeout(function() { 
-            openWindow[ides[i]].close();
-        }, 3000);   
-    }
-
-   
-
-
-
-}
+//myTimer();
