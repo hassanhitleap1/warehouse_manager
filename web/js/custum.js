@@ -376,19 +376,19 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 
-var var_timer_invoice = setInterval(timer_invoice, 7000);
+// var var_timer_invoice = setInterval(timer_invoice, 7000);
 
-function timer_invoice() {
-    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-    width=600,height=300,left=100,top=100`;
-    let url =`${SITE_URL}/index.php?r=orders/bill&id=${1}`;
-    news = window.open("", "NewsWindow", params);
-    news.document.write("<p>The 'NewsWindow' will only appearing for 3 seconds.</p>");
-    tmot = setTimeout(function(){window.open(url, "NewsWindow")},1000);
-    tmot = setTimeout(function(){news.close()}, 5000);
-}
+// function timer_invoice() {
+//     let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+//     width=600,height=300,left=100,top=100`;
+//     let url =`${SITE_URL}/index.php?r=orders/bill&id=${1}`;
+//     news = window.open("", "NewsWindow", params);
+//     news.document.write("<p>The 'NewsWindow' will only appearing for 3 seconds.</p>");
+//     tmot = setTimeout(function(){window.open(url, "NewsWindow")},1000);
+//     tmot = setTimeout(function(){news.close()}, 5000);
+// }
 
-function stop_timer_invoice() {
-    clearInterval(var_timer_invoice);
-}
+// function stop_timer_invoice() {
+//     clearInterval(var_timer_invoice);
+// }
 //myTimer();
