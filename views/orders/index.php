@@ -268,7 +268,7 @@ $columns = [
         'filterModel'=>$searchModel,
         'panel'=>[
             'heading'=>'<h3 class="panel-title">'.$this->title.'</h3>',
-            'before'=>'{dynagrid}' .  Html::a(Yii::t('app', 'Create_Order'), ['create'], ['class' => 'btn btn-success']) ."  ". "<Button id='print_all_invoice' class='btn btn-success'>".Yii::t('app', 'Print_All_Invoice')."</Button></Button>"
+            'before'=>'{dynagrid}' .  Html::a(Yii::t('app', 'Create_Order'), ['create'], ['class' => 'btn btn-success']) ."  ". "<Button id='print_all_invoice' class='btn btn-success'>". Yii::t('app', 'Print_All_Invoice')."</Button>"
            ],
            'showPageSummary'=>true,
     ],

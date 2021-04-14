@@ -377,25 +377,34 @@ window.addEventListener('DOMContentLoaded', function () {
 
 });
 
+let ides=[];
 
 $(document).on('click','#print_all_invoice',function (e) {
-alert('')
+    ides=[];
+    $('input[type=checkbox]').each(function () {
+        if (this.checked) {
+            ides.push($(this).val())  
+        }
+    });
+     each_invoice(ides);
 });
 
 
-// var var_timer_invoice = setInterval(timer_invoice, 7000);
+function each_invoice(ides){
+    for(let i=0;i<ides.length;i++){
+        setTimeout(function() {
+            timer_invoice(ides[i]);
+         }, 7000 * i)
+     }     
+}
 
-// function timer_invoice() {
-//     let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-//     width=600,height=300,left=100,top=100`;
-//     let url =`${SITE_URL}/index.php?r=orders/bill&id=${1}`;
-//     news = window.open("", "NewsWindow", params);
-//     news.document.write("<p>The 'NewsWindow' will only appearing for 3 seconds.</p>");
-//     tmot = setTimeout(function(){window.open(url, "NewsWindow")},1000);
-//     tmot = setTimeout(function(){news.close()}, 5000);
-// }
+function timer_invoice(id) {
+    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+    width=600,height=300,left=100,top=100`;
+    let url =`${SITE_URL}/index.php?r=orders/bill&id=${id}`;
+    news = window.open(url, "NewsWindow", params);
+    tmot = setTimeout(function(){news.close()}, 4000);
+   
+}
 
-// function stop_timer_invoice() {
-//     clearInterval(var_timer_invoice);
-// }
-//myTimer();
+
