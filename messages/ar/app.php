@@ -157,6 +157,8 @@ return [
     'Check_Phone'=>'تاكد من ان الهاتف مكتوب بشكل صحيح',
     "Dashboard"=>"لوحة التحكم",
     'Delivery_Price_Added'=>"يضاف سعر التوصيل",
-    "Need_Product"=>"اريد"
+    "Need_Product"=>"اريد",
+    'Delivery_Fees'=>"مصاريف التوصيل",
+    'Total_Amount'=>'المبلغ الإجمالي',
 
 ];
