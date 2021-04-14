@@ -77,7 +77,8 @@ class ProductController extends Controller
                 $orderItemModel->profits_margin=$profit_margin;
                 $orderItemModel->quantity=$typeoption->number ;
                 $order_model->user_id=$user->id;
-                if(($user->save() && $orderItemModel->save() && $order_model->save())){
+                $order_model->save();
+                if(($user->save() && $orderItemModel->save())){
                     $transaction->commit();
                     
                     return $this->render('success', [
