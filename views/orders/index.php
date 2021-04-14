@@ -4,6 +4,7 @@ use app\models\area\Area;
 use app\models\countries\Countries;
 use app\models\regions\Regions;
 use app\models\status\Status;
+use yii\bootstrap\Button;
 use yii\helpers\Html;
 use app\models\users\Users;
 use kartik\dynagrid\DynaGrid;
@@ -267,7 +268,7 @@ $columns = [
         'filterModel'=>$searchModel,
         'panel'=>[
             'heading'=>'<h3 class="panel-title">'.$this->title.'</h3>',
-            'before'=>'{dynagrid}' .  Html::a(Yii::t('app', 'Create_Order'), ['create'], ['class' => 'btn btn-success'])
+            'before'=>'{dynagrid}' .  Html::a(Yii::t('app', 'Create_Order'), ['create'], ['class' => 'btn btn-success']) ."  ". "<Button id='print_all_invoice' class='btn btn-success'>".Yii::t('app', 'Print_All_Invoice')."</Button></Button>"
            ],
            'showPageSummary'=>true,
     ],

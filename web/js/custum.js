@@ -135,6 +135,8 @@ $(document).on('change','.sub_product_id',function (e) {
      });
  });
 
+
+
  $(document).on('change keypress blur keyup','.quantity_sub_product',function (e) {
     let quantity_sub_product =parseInt($(this).val());
     let total_price=0;
@@ -373,6 +375,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
+});
+
+
+$(document).on('click','#print_all_invoice',function (e) {
+alert('')
 });
 
 
