@@ -21,7 +21,13 @@ $status=ArrayHelper::map(Status::find()->all(), 'id', 'name_ar');
 
 
 $columns = [
-    ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
+
+
+            [
+                    'class'=>'kartik\grid\SerialColumn',
+                    'order'=>DynaGrid::ORDER_FIX_LEFT,
+
+            ],
 
 
         'order_id',
@@ -229,18 +235,21 @@ $columns = [
             
             'format'=>'raw',
             'visible'=>true,
-        ], 
+        ],
+        [
+                    'class' => 'kartik\grid\ActionColumn',
+                    'dropdown'=>false,
+                    'order'=>DynaGrid::ORDER_FIX_RIGHT,
+                    'template'=>'{view},{update},{delete},{bill}',
+                    'buttons'=>[
+                          'bill' => function ($url, $model) {
+                            return Html::a('<span class="glyphicon glyphicon-align-center"></span>', $url, [
+                                    'title' => Yii::t('yii', 'Invoice'),
+                            ]);
+                          }
+                      ]
+        ],
 
-        
-
-
-    
-
-    [
-        'class'=>'kartik\grid\ActionColumn',
-        'dropdown'=>false,
-        'order'=>DynaGrid::ORDER_FIX_RIGHT
-    ],
     ['class'=>'kartik\grid\CheckboxColumn',  'order'=>DynaGrid::ORDER_FIX_RIGHT],
 ];
 

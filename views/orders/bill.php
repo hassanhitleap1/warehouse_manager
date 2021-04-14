@@ -55,17 +55,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="row">
                     <div class="col-sm-6">
                         <div>
-                            <span class="text-sm text-grey-m2 align-middle">To:</span>
-                            <span class="text-600 text-110 text-blue align-middle"><?= $model->user->name ;?></span>
+                            <span class="text-sm text-grey-m2 align-middle"><?=Yii::t('app', 'To')?>:</span>
+                            <span class="text-600 text-110 text-blue align-middle"><?= $model['user']['name'] ;?></span>
                         </div>
                         <div class="text-grey-m2">
                             <div class="my-1">
                                 <?= $model->region->name_ar ;?>
                             </div>
                             <div class="my-1">
-                                <?= $model->user->address ;?>
+                                <?=  $model['user']['address'];?>
                             </div>
-                            <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i> <b class="text-600"> <?= $model->user->phone ;?></b></div>
+                            <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i> <b class="text-600"> <?= $model['user']['phone'] ;?></b></div>
                         </div>
                     </div>
                     <!-- /.col -->
@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <hr class="d-sm-none" />
                         <div class="text-grey-m2">
                             <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
-                                Invoice
+                                <?=Yii::t('app', 'Invoice')?>
                             </div>
 
                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90"><?= Yii::t('app','ID') ;?>:</span> #<?= $model->id ;?></div>

@@ -160,5 +160,9 @@ return [
     "Need_Product"=>"اريد",
     'Delivery_Fees'=>"مصاريف التوصيل",
     'Total_Amount'=>'المبلغ الإجمالي',
+    "Invoice"=>"فاتورة",
+    'Name_Product'=>"اسم المنتج",
+    'ID'=>"رقم ",
+    "SubTotal"=>"المجموع الفرعي",
 
 ];
