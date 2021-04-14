@@ -402,8 +402,9 @@ function timer_invoice(id) {
     let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
     width=600,height=300,left=100,top=100`;
     let url =`${SITE_URL}/index.php?r=orders/bill&id=${id}`;
-    news = window.open(url, "NewsWindow", params);
-    tmot = setTimeout(function(){news.close()}, 4000);
+    tab = window.open(url, "NewsWindow", params);
+    // tab.print();
+    tmot = setTimeout(function(){tab.close()}, 4000);
    
 }
 
