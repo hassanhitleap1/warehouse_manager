@@ -13,27 +13,26 @@ $this->title = $model->id;
     </div>
     <hr />
     <div class="row">
-        <div class="page-header">
-            <h1 class="page-title">
-                <?=Yii::t('app', 'Invoice')?>
+        <p style="margin-right: 10px;">
+        <?=Yii::t('app', 'Invoice')?>
                 <strong class="page-info">
-                    <i class="fa fa-angle-double-right text-80"></i>
                     <?=Yii::t('app', 'ID')?> : #<?= $model->id ;?>
                 </strong>
-            </h1>
-        </div>
+        </p>
+        
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-6">
      
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><strong><?=Yii::t('app', 'To')?> : <?= $model['user']['name'] ;?> </strong></li>
+                <li class="list-group-item"><strong><?=Yii::t('app', 'Phone')?> : <?= $model['user']['phone'] ;?> </strong></li>
                 <li  class="list-group-item"><strong><?=Yii::t('app', 'Area')?> : <?= $model['region']['name_ar'] ;?> </strong></li>
                 <li  class="list-group-item"><strong><?=Yii::t('app', 'Address')?> : <?= $model['user']['address'] ;?> </strong></li>
             </ul>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-6">
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><strong><?=Yii::t('app', 'ID')?> : <?= $model['user']['name'] ;?> </strong></li>
@@ -46,8 +45,8 @@ $this->title = $model->id;
     <hr />
     <div class="row">
         <div class="col-md-12">
-            <table class="table ">
-                <thead>
+            <table class="table  table-hover">
+                <thead class="table-header">
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col"><?= Yii::t('app','Name_Product') ;?></th>
@@ -71,11 +70,12 @@ $this->title = $model->id;
             </table>
         </div>
     </div>
+    <hr />
     <div class="row">
         <div class="col-md-offset-1 container footer-s">
-            <p><strong><?= Yii::t('app','Delivery_Fees')?> <?= $delivery_fees?> Jd  </strong></p>
-            <p><strong> <?= Yii::t('app','SubTotal')?> <?= $SubTotal?> JD </strong></p>
-            <p><strong> <?= Yii::t('app','Total_Amount')?>  <?= $SubTotal+$delivery_fees?> </strong></p>
+            <p><strong><?= Yii::t('app','Delivery_Fees')?> : <?= $delivery_fees?> Jd  </strong></p>
+            <p><strong> <?= Yii::t('app','SubTotal')?>  : <?= $SubTotal?> JD </strong></p>
+            <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $SubTotal+$delivery_fees?> </strong></p>
         </div>
         
     
