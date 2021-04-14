@@ -1,278 +1,85 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\DetailView;
-
-/* @var $this yii\web\View */
-/* @var $model app\models\orders\Orders */
+use Carbon\Carbon;
+use kartik\helpers\Html;
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+
 ?>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-<div class="page-content container">
-    <div class="page-header text-blue-d2">
-        <h1 class="page-title text-secondary-d1">
-            <?=Yii::t('app', 'Invoice')?>
-            <small class="page-info">
-                <i class="fa fa-angle-double-right text-80"></i>
-                <?=Yii::t('app', 'ID')?> : #<?= $model->id ;?>
-            </small>
-        </h1>
-
-        <div class="page-tools">
-            <div class="action-buttons">
-                <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print">
-                    <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
-                    Print
-                </a>
-                <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="PDF">
-                    <i class="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
-                    Export
-                </a>
-            </div>
+<div class="container">
+    <div class="row">
+        <h1  class="text-center" ><?= Yii::$app->name ?> <?= Html::img('@web/images/logo.png', ['class' => 'logo'])?></h1>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="page-header">
+            <h1 class="page-title">
+                <?=Yii::t('app', 'Invoice')?>
+                <strong class="page-info">
+                    <i class="fa fa-angle-double-right text-80"></i>
+                    <?=Yii::t('app', 'ID')?> : #<?= $model->id ;?>
+                </strong>
+            </h1>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+     
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong><?=Yii::t('app', 'To')?> : <?= $model['user']['name'] ;?> </strong></li>
+                <li  class="list-group-item"><strong><?=Yii::t('app', 'Area')?> : <?= $model['region']['name_ar'] ;?> </strong></li>
+                <li  class="list-group-item"><strong><?=Yii::t('app', 'Address')?> : <?= $model['user']['address'] ;?> </strong></li>
+            </ul>
+        </div>
 
-    <div class="container px-0">
-        <div class="row mt-4">
-            <div class="col-12 col-lg-10 offset-lg-1">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="text-center text-150">
-                            <i class="fa fa-book fa-2x text-success-m2 mr-1"></i>
-                            <span class="text-default-d3"> <?= Yii::$app->name ?></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- .row -->
+        <div class="col-md-6">
 
-                <hr class="row brc-default-l1 mx-n1 mb-4" />
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div>
-                            <span class="text-sm text-grey-m2 align-middle"><?=Yii::t('app', 'To')?>:</span>
-                            <span class="text-600 text-110 text-blue align-middle"><?= $model['user']['name'] ;?></span>
-                        </div>
-                        <div class="text-grey-m2">
-                            <div class="my-1">
-                                <?= $model->region->name_ar ;?>
-                            </div>
-                            <div class="my-1">
-                                <?=  $model['user']['address'];?>
-                            </div>
-                            <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i> <b class="text-600"> <?= $model['user']['phone'] ;?></b></div>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-
-                    <div class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
-                        <hr class="d-sm-none" />
-                        <div class="text-grey-m2">
-                            <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
-                                <?=Yii::t('app', 'Invoice')?>
-                            </div>
-
-                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90"><?= Yii::t('app','ID') ;?>:</span> #<?= $model->id ;?></div>
-
-                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90"><?= Yii::t('app','Created_At') ;?>:</span> <?= $model->created_at ;?></div>
-
-                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90"><?= Yii::t('app','Status') ;?>:</span> <span class="badge badge-warning badge-pill px-25"><?= $model->status->name_ar ;?></span></div>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                </div>
-
-                <div class="mt-4">
-                    <div class="row text-600 text-white bgc-default-tp1 py-25">
-
-                        <div class="d-none d-sm-block col-1">#</div>
-                        <div class="col-9 col-sm-5"><?= Yii::t('app','Name_Product') ;?></div>
-                        <div class="d-none d-sm-block col-4 col-sm-2"><?= Yii::t('app','Quantity') ;?></div>
-                        <div class="col-2"><?= Yii::t('app','Price') ;?></div>
-                    </div>
-                    <div class="text-95 text-secondary-d3">
-                        <?php $SubTotal=0; $delivery_fees=2;?>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong><?=Yii::t('app', 'ID')?> : <?= $model['user']['name'] ;?> </strong></li>
+                <li  class="list-group-item"><strong><?=Yii::t('app', 'Status')?> : <?= $model->status->name_ar ;?></strong></li>
+                <li  class="list-group-item"><strong><?=Yii::t('app', 'Created_At')?> : <?= Carbon::parse( $model->created_at )->toDateString() ;?> </strong></li>
+            </ul>
+        </div>
+        
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table ">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= Yii::t('app','Name_Product') ;?></th>
+                    <th scope="col"><?= Yii::t('app','Quantity') ;?></th>
+                    <th scope="col"><?= Yii::t('app','Price') ;?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $SubTotal=0; $delivery_fees=2;?>
                         <?php foreach ($model->orderItems as  $key =>  $item):?>
                             <?php $SubTotal+=$item->profits_margin;?>
-                            <div class="row mb-2 mb-sm-0 py-25">
-                                <div class="d-none d-sm-block col-1"><?= $key+1 ?></div>
-                                <div class="col-9 col-sm-5"><?= $item->product->name ;?></div>
-                                <div class="d-none d-sm-block col-2"><?= $item->quantity ;?></div>
-                                <div class="col-2 text-secondary-d2"> <?= $item->profits_margin ;?> jd</div>
-                            </div>
+                            <tr>
+                                <th scope="row"><?= $key+1 ?></th>
+                                <td><?= $item->product->name ;?></td>
+                                <td><?= $item->quantity ;?></td>
+                                <td><?= $item->profits_margin ;?> jd</td>
+                            </tr>
                         <?php endforeach;?>
 
-                    </div>
-
-                    <div class="row border-b-2 brc-default-l2"></div>
-
-
-                    <div class="row mt-3">
-                        <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
-
-                        </div>
-
-                        <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
-                            <div class="row my-2">
-                                <div class="col-7 text-right">
-                                    <?= Yii::t('app','SubTotal')?>
-                                </div>
-                                <div class="col-5">
-                                    <span class="text-120 text-secondary-d1"><?= $SubTotal?> JD</span>
-                                </div>
-                            </div>
-
-                            <div class="row my-2">
-                                <div class="col-7 text-right">
-                                    <?= Yii::t('app','Delivery_Fees')?>
-                                </div>
-                                <div class="col-5">
-                                    <span class="text-110 text-secondary-d1"><?= $delivery_fees?> Jd</span>
-                                </div>
-                            </div>
-
-                            <div class="row my-2 align-items-center bgc-primary-l3 p-2">
-                                <div class="col-7 text-right">
-                                    <?= Yii::t('app','Total_Amount')?>
-                                </div>
-                                <div class="col-5">
-                                    <span class="text-150 text-success-d3 opacity-2"><?= $SubTotal+$delivery_fees?> </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr />
-
-
-                </div>
-            </div>
+                </tbody>
+            </table>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-1 container footer-s">
+            <p><strong><?= Yii::t('app','Delivery_Fees')?> <?= $delivery_fees?> Jd  </strong></p>
+            <p><strong> <?= Yii::t('app','SubTotal')?> <?= $SubTotal?> JD </strong></p>
+            <p><strong> <?= Yii::t('app','Total_Amount')?>  <?= $SubTotal+$delivery_fees?> </strong></p>
+        </div>
+        
+    
     </div>
 </div>
 
-<style>
 
-    body{
-        margin-top:20px;
-        color: #484b51;
-    }
-    .text-secondary-d1 {
-        color: #728299!important;
-    }
-    .page-header {
-        margin: 0 0 1rem;
-        padding-bottom: 1rem;
-        padding-top: .5rem;
-        border-bottom: 1px dotted #e2e2e2;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
-        -ms-flex-align: center;
-        align-items: center;
-    }
-    .page-title {
-        padding: 0;
-        margin: 0;
-        font-size: 1.75rem;
-        font-weight: 300;
-    }
-    .brc-default-l1 {
-        border-color: #dce9f0!important;
-    }
-
-    .ml-n1, .mx-n1 {
-        margin-left: -.25rem!important;
-    }
-    .mr-n1, .mx-n1 {
-        margin-right: -.25rem!important;
-    }
-    .mb-4, .my-4 {
-        margin-bottom: 1.5rem!important;
-    }
-
-    hr {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        border: 0;
-        border-top: 1px solid rgba(0,0,0,.1);
-    }
-
-    .text-grey-m2 {
-        color: #888a8d!important;
-    }
-
-    .text-success-m2 {
-        color: #86bd68!important;
-    }
-
-    .font-bolder, .text-600 {
-        font-weight: 600!important;
-    }
-
-    .text-110 {
-        font-size: 110%!important;
-    }
-    .text-blue {
-        color: #478fcc!important;
-    }
-    .pb-25, .py-25 {
-        padding-bottom: .75rem!important;
-    }
-
-    .pt-25, .py-25 {
-        padding-top: .75rem!important;
-    }
-    .bgc-default-tp1 {
-        background-color: rgba(121,169,197,.92)!important;
-    }
-    .bgc-default-l4, .bgc-h-default-l4:hover {
-        background-color: #f3f8fa!important;
-    }
-    .page-header .page-tools {
-        -ms-flex-item-align: end;
-        align-self: flex-end;
-    }
-
-    .btn-light {
-        color: #757984;
-        background-color: #f5f6f9;
-        border-color: #dddfe4;
-    }
-    .w-2 {
-        width: 1rem;
-    }
-
-    .text-120 {
-        font-size: 120%!important;
-    }
-    .text-primary-m1 {
-        color: #4087d4!important;
-    }
-
-    .text-danger-m1 {
-        color: #dd4949!important;
-    }
-    .text-blue-m2 {
-        color: #68a3d5!important;
-    }
-    .text-150 {
-        font-size: 150%!important;
-    }
-    .text-60 {
-        font-size: 60%!important;
-    }
-    .text-grey-m1 {
-        color: #7b7d81!important;
-    }
-    .align-bottom {
-        vertical-align: bottom!important;
-    }
-
-</style>
