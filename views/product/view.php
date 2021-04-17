@@ -102,15 +102,15 @@ $this->title = $model->name;
                        
                     </div>
                 </div>
+             
 
                 <div class="row">
-                    <?php if ($model->subProductCount > 1) : ?>
+                    <?php if (count($model->subProductCount) >= 2 ) : ?>
                         <div class="col-md-6">
                             <?= $form->field($modelOrder, 'type')->dropDownList(ArrayHelper::map($model->subProductCount, 'id', 'type')) ?>
                         </div>
                     <?php else : ?>
                         <?= $form->field($modelOrder, 'type')->hiddenInput(['value' => $model->subProductCount[0]->id])->label(false); ?>
-
                     <?php endif; ?>
 
                     <div class="col-md-6">
