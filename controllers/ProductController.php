@@ -80,13 +80,9 @@ class ProductController extends Controller
                 $order_model->save();
                 if(($user->save() && $orderItemModel->save())){
                     $transaction->commit();
-                    
-                    return $this->render('success', [
-                        'model' => $order_model,
-                        'product_suggested'=>$product_suggested
-            
-                    ]);
-                  //  Yii::$app->session->set('message', Yii::t('app', 'Successful_Purchase'));
+                    Yii::$app->session->set('order_model', $order_model );
+                    Yii::$app->session->set('id', $id );
+                    return $this->redirect(['product/thanks']);
                 }else{
                     Yii::$app->session->set('message', Yii::t('app', 'Error'));
                     $transaction->rollBack();
@@ -103,6 +99,21 @@ class ProductController extends Controller
         ]);
     }
 
+
+    public function actionThanks(){
+        $order_model =Yii::$app->session->get('order_model');
+        $id =Yii::$app->session->get('id');
+        
+         Yii::$app->session->remove('order_model');
+         Yii::$app->session->remove('id');
+        $product_suggested=Products::find()->where(['!=','id',$id])->limit(4)->all();
+        return $this->render('thanks', [
+            'model' => $order_model,
+            'product_suggested'=>$product_suggested
+
+        ]);
+
+    }
 
 
     /**
