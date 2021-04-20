@@ -103,9 +103,7 @@ class ProductController extends Controller
     public function actionThanks(){
         $order_model =Yii::$app->session->get('order_model');
         $id =Yii::$app->session->get('id');
-        
-         Yii::$app->session->remove('order_model');
-         Yii::$app->session->remove('id');
+    
         $product_suggested=Products::find()->where(['!=','id',$id])->limit(4)->all();
         return $this->render('thanks', [
             'model' => $order_model,
