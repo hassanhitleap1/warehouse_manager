@@ -61,7 +61,7 @@ $this->title = $model->name;
                 <h5 class="product-title"><?= $this->title ?></h5>
 
                 <p class="product-description"><?= $model->description ?> .</p>
-                <h4 class="price"><?= Yii::t('app', 'Price') ?> : <span><?= $model->purchasing_price ?> JOD</span></h4>
+                <h4 class="price"><?= Yii::t('app', 'Price') ?> : <span><?= $model->selling_price ?> JOD</span></h4>
 
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="<?= str_replace('watch?v=', 'embed/', $model->video_url) ?>" allowfullscreen></iframe>
