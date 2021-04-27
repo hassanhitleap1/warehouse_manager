@@ -1,6 +1,7 @@
 <?php
 namespace app\models\orders;
 
+use app\components\OrderHelper;
 use Yii;
 use yii\base\Model;
 
@@ -39,6 +40,18 @@ class  OrderForm extends Model{
         ];
     }
 
+
+    public function beforeValidate()
+    {
+        if (parent::beforeValidate()) {
+            $this->phone= OrderHelper::faTOen($this->phone);
+            if(!is_null($this->other_phone)){
+                $this->other_phone= OrderHelper::faTOen($this->other_phone);
+            }
+            return true;
+        }
+        return false;
+    }
   
 
     public function isJordanPhone($attribute)
