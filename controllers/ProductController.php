@@ -62,12 +62,14 @@ class ProductController extends Controller
             
             $transaction = \Yii::$app->db->beginTransaction();
 
-            if ($flag = $order_model->save()) {
-                $user = Users::find()->where(['phone'=> $modelOrder->phone])->one();
-                if(is_null($user)){
-                    $user= new Users();
+            if ($order_model->save()) {
+                $userModel = Users::find()->where(['phone'=> $modelOrder->phone])->one();
+                if(is_null($userModel)){
+                    $userModel= new Users();
                 }    
-                $user=$this->set_value_user($user,$order_model);
+                $user=$this->set_value_user($userModel,$order_model);
+                
+                $user->save();
                 $orderItemModel=new OrdersItem;
                 $orderItemModel->order_id = $order_model->id;
                 $orderItemModel->product_id=$id;
@@ -77,8 +79,8 @@ class ProductController extends Controller
                 $orderItemModel->profits_margin=$profit_margin;
                 $orderItemModel->quantity=$typeoption->number ;
                 $order_model->user_id=$user->id;
-                $order_model->save();
-                if(($user->save() && $orderItemModel->save())){
+                $order_model->save(false);
+                if($orderItemModel->save()){
                     $transaction->commit();
                     Yii::$app->session->set('order_model', $order_model );
                     Yii::$app->session->set('id', $id );
@@ -138,11 +140,11 @@ class ProductController extends Controller
         $user->country_id = ($model->country_id !='') ? $model->country_id :null  ;
         $user->region_id = ($model->region_id !='') ? $model->region_id :null  ;
         $user->area_id = ($model->area_id !='') ? $model->area_id :null  ;
-        $user->address = $model->address;
+        $user->address =($model->address !='') ? $model->address :null  ; 
         $user->username=null;
         $user->email =null;
         $user->auth_key =null;
-        $user->name_in_facebook =$model->name_in_facebook;
+        $user->name_in_facebook = ($model->name_in_facebook !='') ? $model->name_in_facebook :null  ; $model->name_in_facebook;
         $user->password_hash =null;
         $user->password_reset_token =null;
         // $user->created_at=null;
