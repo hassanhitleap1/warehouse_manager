@@ -19,16 +19,20 @@ class OrderHelper extends BaseObject
                 switch ($status_id) {
                     case 1: 
                         switch ($model->status_id) {
-                            case 2:  case 3: case 4:  case 7: 
+                            case
+                             2:  case 3: case 4:  case 7: 
                                 self::stock_minus($ordersItem);
                             break;   
                         }    
                     break;
                     case 2: 
                         switch ($model->status_id) {
-                            case 1:  case 8:  
+                            case 8:  
                                 self::stock_plus($ordersItem);
-                                break;   
+                                break;  
+                            case 1:   
+                                self::stock_minus($ordersItem);
+                                break;  
                         } 
 
                          break;   
@@ -48,6 +52,12 @@ class OrderHelper extends BaseObject
                        }
 
                         break; 
+                        case 9:   
+                            switch ($model->status_id) {
+                                case 2: case 3: case 4: 
+                                   self::stock_minus($ordersItem);
+                                   break;   
+                           }  
                       
                     
                 }
