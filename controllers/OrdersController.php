@@ -277,4 +277,13 @@ class OrdersController extends Controller
 
         return $user;
     }
+
+
+
+    public function actionSetStatus($id)
+    {
+        $model=$this->findModel($id);
+        $status=OrderHelper::get_status($model->status_id);
+        return $this->renderAjax('set_status',['status'=>$status]);
+    }
 }
