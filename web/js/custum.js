@@ -182,6 +182,13 @@ $(document).on('change','#area_id',function (e) {
 });
 
 
+$(document).on('click', '.modelbutton', function(){
+    url=$(this).attr('value');
+    $('#model').load(url).modal({ show: true });;
+});
+
+
+
 
 function profit_margin_fn(){
     let profit_margin=0;
