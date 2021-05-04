@@ -5,6 +5,7 @@ use app\models\countries\Countries;
 use app\models\regions\Regions;
 use app\models\status\Status;
 use yii\bootstrap\Button;
+use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use app\models\users\Users;
 use kartik\dynagrid\DynaGrid;
@@ -278,5 +279,20 @@ $columns = [
    
     
     ?>
+
+
+
+    <?php
+    Modal::begin([
+        'header'=>'<h4 id="modalHeader">send sms</h4>',
+        'id'=>'model',
+        'class'=>'',
+        'size'=>'model-lg'
+    ]);
+    echo '<div id="modelcontent"></div>';
+    Modal::end();
+    ?>
+
+
 
 </div>
