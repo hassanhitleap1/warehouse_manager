@@ -283,6 +283,6 @@ class OrdersController extends Controller
     {
         $model=$this->findModel($id);
         $status=OrderHelper::get_status($model->status_id);
-        return $this->renderAjax('set_status',['status'=>$status]);
+        return $this->renderAjax('set_status',['model'=> $model]);
     }
 }

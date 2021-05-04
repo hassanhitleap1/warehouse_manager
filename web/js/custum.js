@@ -182,8 +182,13 @@ $(document).on('change','#area_id',function (e) {
 });
 
 
-$(document).on('click', '.modelbutton', function(){
-    url=$(this).attr('value');
+
+
+$(document).on('click', '.modelbutton', function (e) {
+    e.preventDefault();
+    url = $(this).attr('href');
+    
+
     $('#model').load(url).modal({ show: true });;
 });
 
