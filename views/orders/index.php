@@ -56,8 +56,7 @@ $columns = [
                 return $model['user']['name'];
             },
 
-             //'filterType'=>GridView::FILTER_SELECT2,
-            // 'filter'=>ArrayHelper::map($users, 'id', 'name'), 
+
 
             'filterWidgetOptions'=>[
                 'pluginOptions'=>['allowClear'=>true],
@@ -71,7 +70,8 @@ $columns = [
             'vAlign'=>'middle',
             'width'=>'100px',
             'value'=>function ($model, $key, $index, $widget) { 
-                return $model['user']['phone'];
+                return '<a href="tel:'. $model['user']['phone'].'">'.$model['user']['phone'].'</a>';
+                 
             },
          
             'filterWidgetOptions'=>[
@@ -156,7 +156,7 @@ $columns = [
             
            
         ],
-        // 'amount_required',
+       
         [  
             'attribute'=>'amount_required', 
             'vAlign'=>'middle',
