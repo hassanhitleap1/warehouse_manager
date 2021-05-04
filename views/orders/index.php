@@ -126,12 +126,13 @@ $columns = [
         'address',
 
         [
-            'class' => 'kartik\grid\EditableColumn',
+            // 'class' => 'kartik\grid\EditableColumn',
             'attribute'=>'status_id', 
             'vAlign'=>'middle',
             'width'=>'100px',
             'value'=>function ($model, $key, $index, $widget) { 
-                    return $model->status->name_ar;
+                return Html::a($model->status->name_ar, ['orders/']);
+                return $model->status->name_ar;
                
             },
             // 'filterType'=>GridView::FILTER_SELECT2,
@@ -142,17 +143,17 @@ $columns = [
             'filterInputOptions'=>['placeholder'=>'select status'],
             'format'=>'html',
             'visible'=>true,
-            'editableOptions'=> function ($model, $key, $index,$form) {
-                return [
-                    'header'=>'status', 
-                    'size'=>'md',
-                    'inputType' => 'dropDownList',
-                    'data'=>ArrayHelper::map(Status::find()->all(), 'id', 'name_ar'),
-                    'formOptions'=>['action' => ['/orders/change-status','id'=>$model->id,'index'=>$index]],
+            // 'editableOptions'=> function ($model, $key, $index,$form) {
+            //     return [
+            //         'header'=>'status', 
+            //         'size'=>'md',
+            //         'inputType' => 'dropDownList',
+            //         'data'=>ArrayHelper::map(Status::find()->all(), 'id', 'name_ar'),
+            //         'formOptions'=>['action' => ['/orders/change-status','id'=>$model->id,'index'=>$index]],
                     
-                ];
+            //     ];
                 
-            },
+            // },
             
            
         ],
