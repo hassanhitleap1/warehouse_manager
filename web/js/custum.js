@@ -201,10 +201,10 @@ $(document).on('click', '.change-status', function(e){
     let url= `${SITE_URL}/index.php?r=orders/change-status&id=${id}&status_id=${status_id}`;
     $.ajax({
         url: url,
-        type: 'POST',
+        type: 'GET',
         success: function (json) {
             if(json.code==201){
-                $("#column_status_"+id).text(name_status);
+                $(".column_status_"+id).text(name_status);
                 $('#model').modal('hide');
             }else {
                 alert("sumthing  error");

@@ -129,7 +129,7 @@ $columns = [
         'vAlign' => 'middle',
         'width' => '100px',
         'value' => function ($model, $key, $index, $widget) {
-            return Html::a($model->status->name_ar, ['orders/set-status', 'id' => $model->id], ['class' => 'modelbutton']);
+            return Html::a($model->status->name_ar, ['orders/set-status', 'id' => $model->id], ['class' => 'modelbutton column_status_'.$model->id]);
             return $model->status->name_ar;
         },
         // 'filterType'=>GridView::FILTER_SELECT2,
