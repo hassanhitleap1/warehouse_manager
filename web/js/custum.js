@@ -184,16 +184,35 @@ $(document).on('change','#area_id',function (e) {
 
 
 
-$(document).on('click', '.modelbutton', function (e) {
+
+$(document).on('click', '.modelbutton', function(e){
     e.preventDefault();
     url = $(this).attr('href');
-    
-
-    $('#model').load(url).modal({ show: true });;
+    $('#model').modal('show')
+        .find('#modelContent')
+        .load(url);
 });
 
+$(document).on('click', '.change-status', function(e){
+    e.preventDefault();
+    var id= $(this).attr("att_id");
+    var status_id= $(this).attr("att_status_id");
+    var name_status= $(this).attr("name_status");
+    let url= `${SITE_URL}/index.php?r=orders/change-status&id=${$(this).val()}&status_id=${status_id}`;
+    $.ajax({
+        url: url,
+        type: 'POST',
+        success: function (json) {
+            if(json.code==201){
+                $("#column_status_"+id).text(name_status);
+                $('#model').modal('hide');
+            }else {
+                alert("sumthing  error");
+            }
+        }
+    });
 
-
+});
 
 function profit_margin_fn(){
     let profit_margin=0;

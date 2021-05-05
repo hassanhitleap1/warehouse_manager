@@ -4,13 +4,11 @@ use app\models\area\Area;
 use app\models\countries\Countries;
 use app\models\regions\Regions;
 use app\models\status\Status;
-use yii\bootstrap\Button;
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use app\models\users\Users;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
-
 use yii\helpers\ArrayHelper;
 
 $users = Users::find()->orderBy('name')->asArray()->all();
