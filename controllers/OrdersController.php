@@ -280,4 +280,22 @@ class OrdersController extends Controller
         $status=OrderHelper::get_status($model->status_id);
         return $this->renderAjax('set_status',['model'=> $model,'status'=>$status]);
     }
+
+
+
+    public function actionExportPdf(){
+        $html='<h1>مرحبا!</h1>';
+        $mpdf =  new \Mpdf\Mpdf();
+        $mpdf->autoScriptToLang = true;
+        $mpdf->autoLangToFont = true;
+        $mpdf->SetDirectionality('rtl');
+        $mpdf->WriteHTML($html);
+        $mpdf->AddPageByArray(array(
+            'orientation' => '',
+        ));
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+        exit;
+
+    }
 }

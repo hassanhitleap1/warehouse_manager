@@ -32,7 +32,8 @@
         "kartik-v/yii2-grid": "@dev",
         "yiisoft/yii2-bootstrap4": "^2.0",
         "kartik-v/yii2-dynagrid": "@dev",
-        "kartik-v/yii2-editable": "@dev"
+        "kartik-v/yii2-editable": "@dev",
+        "mpdf/mpdf": "^8.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
