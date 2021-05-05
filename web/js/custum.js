@@ -198,7 +198,7 @@ $(document).on('click', '.change-status', function(e){
     var id= $(this).attr("att_id");
     var status_id= $(this).attr("att_status_id");
     var name_status= $(this).attr("name_status");
-    let url= `${SITE_URL}/index.php?r=orders/change-status&id=${$(this).val()}&status_id=${status_id}`;
+    let url= `${SITE_URL}/index.php?r=orders/change-status&id=${id}&status_id=${status_id}`;
     $.ajax({
         url: url,
         type: 'POST',
