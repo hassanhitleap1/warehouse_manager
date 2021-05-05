@@ -229,11 +229,8 @@ class OrdersController extends Controller
         $model = $this->findModel($id);
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $status_id=$_GET['status_id'];
-            OrderHelper::management_stock_product($model,$status_id);
-
-            return ['code'=>201];
-        
-        
+        OrderHelper::management_stock_product($model,$status_id);
+         return ['code'=>201];  
     }
     /**
      * Finds the Orders model based on its primary key value.

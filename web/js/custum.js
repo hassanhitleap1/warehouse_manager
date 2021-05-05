@@ -193,6 +193,10 @@ $(document).on('click', '.modelbutton', function(e){
         .load(url);
 });
 
+$('#model').on('hidden.bs.modal', function () {
+    $('#modelContent').html("");
+});
+
 $(document).on('click', '.change-status', function(e){
     e.preventDefault();
     var id= $(this).attr("att_id");
@@ -206,6 +210,8 @@ $(document).on('click', '.change-status', function(e){
             if(json.code==201){
                 $(".column_status_"+id).text(name_status);
                 $('#model').modal('hide');
+                $('#modelContent').html("");
+
             }else {
                 alert("sumthing  error");
             }
