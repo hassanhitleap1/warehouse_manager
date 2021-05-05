@@ -164,6 +164,7 @@ return [
     'Name_Product'=>"اسم المنتج",
     'ID'=>"رقم ",
     "SubTotal"=>"المجموع الفرعي",
-    "Print_All_Invoice"=>"طباعة لالفواتير"
+    "Print_All_Invoice"=>"طباعة لالفواتير",
+    "Export_PDF"=>"استخراج ملف pdf",
 
 ];

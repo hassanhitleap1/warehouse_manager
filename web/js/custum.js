@@ -427,6 +427,26 @@ $(document).on('click','#print_all_invoice',function (e) {
 });
 
 
+$(document).on('click','#export_pdf',function (e) {
+    ides=[];
+    let string_id="";
+    $('input[type=checkbox]').each(function () {
+        if (this.checked) {
+            string_id+=`${$(this).val()},`;
+            ides.push($(this).val())  
+        }
+    });
+
+    if(ides.length==0){
+        alert("select orders")
+    }
+    string_id=string_id.slice(0, -1)
+    let url= `${SITE_URL}/index.php?r=pdf/export-pdf&string_id=${string_id}`;
+    window.open(url);
+    
+});
+
+
 function each_invoice(ides){
     for(let i=0;i<ides.length;i++){
         setTimeout(function() {
