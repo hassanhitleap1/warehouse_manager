@@ -27,9 +27,7 @@ class MainAsset extends AssetBundle
     public $js = [
         'js/main.js',
         'js/custum.js',
-        'js/sweetalert2/main.js',
-        'js/swiper/swiper-bundle.min.js',
-     
+        'js/sweetalert2/main.js', 
     ];
     public $depends = [
         'yii\web\YiiAsset',

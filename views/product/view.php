@@ -227,6 +227,8 @@ $this->title = $model->name;
     </script>
     <?php Yii::$app->session->remove('message'); ?>
 <?php endif; ?>
+<!-- Swiper JS -->
+<script src="<?php echo Yii::$app->request->baseUrl; ?>/js/swiper/swiper-bundle.min.js"></script>
 
 <!-- Initialize Swiper -->
 <script>
