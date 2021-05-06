@@ -441,7 +441,7 @@ $(document).on('click','#export_pdf',function (e) {
         alert("select orders")
     }
     string_id=string_id.slice(0, -1)
-    let url= `${SITE_URL}/index.php?r=pdf/export-pdf&string_id=${string_id}`;
+    let url= `${SITE_URL}/index.php?r=orders/export-pdf&string_id=${string_id}`;
     window.open(url);
     
 });
