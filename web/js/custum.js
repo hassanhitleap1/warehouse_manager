@@ -193,19 +193,25 @@ $(document).on('click', '.modelbutton', function(e){
         .load(url);
 });
 
+$('#model').on('hidden.bs.modal', function () {
+    $('#modelContent').html("");
+});
+
 $(document).on('click', '.change-status', function(e){
     e.preventDefault();
     var id= $(this).attr("att_id");
     var status_id= $(this).attr("att_status_id");
     var name_status= $(this).attr("name_status");
-    let url= `${SITE_URL}/index.php?r=orders/change-status&id=${$(this).val()}&status_id=${status_id}`;
+    let url= `${SITE_URL}/index.php?r=orders/change-status&id=${id}&status_id=${status_id}`;
     $.ajax({
         url: url,
-        type: 'POST',
+        type: 'GET',
         success: function (json) {
             if(json.code==201){
-                $("#column_status_"+id).text(name_status);
+                $(".column_status_"+id).text(name_status);
                 $('#model').modal('hide');
+                $('#modelContent').html("");
+
             }else {
                 alert("sumthing  error");
             }
@@ -418,6 +424,26 @@ $(document).on('click','#print_all_invoice',function (e) {
         }
     });
      each_invoice(ides);
+});
+
+
+$(document).on('click','#export_pdf',function (e) {
+    ides=[];
+    let string_id="";
+    $('input[type=checkbox]').each(function () {
+        if (this.checked) {
+            string_id+=`${$(this).val()},`;
+            ides.push($(this).val())  
+        }
+    });
+
+    if(ides.length==0){
+        alert("select orders")
+    }
+    string_id=string_id.slice(0, -1)
+    let url= `${SITE_URL}/index.php?r=pdf/export-pdf&string_id=${string_id}`;
+    window.open(url);
+    
 });
 
 
