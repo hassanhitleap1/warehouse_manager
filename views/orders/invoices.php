@@ -5,9 +5,69 @@ use kartik\helpers\Html;
 $this->title = "invoices";
 ?>
 
+<style>
+    .invoice{
+        height: 50vh;
+    }
+    body{
+        color: #000;
+        font-size: 15px;
+    }
+    * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        direction: rtl;
+    }
+
+    .subpage {
+        padding: 0px;
+        /*border: 5px red solid;*/
+        height: 256mm;
+        /*outline: 2cm #FFEAEA solid;*/
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    @media print {
+        .repeated-container{
+            height: 100vh;
+        }
+        .invoice{
+            height: 48vh;
+        }
+        .page {
+            margin: 0;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+        }
+    }
+
+    th{
+        font-weight: normal;
+    }
+    td{
+        font-weight: normal;
+        text-align: center;
+    }
+
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th
+    {
+        padding: 6px;
+    }
+</style>
+
+
 <div class="container">
-    <?php foreach ($models as $model): ?>
-        <div class="invoice">
+    <?php foreach ($models as $key_model => $model): ?>
+        <div class="invoice ">
             <div class="row">
                 <h1  class="text-center" ><?= Yii::$app->name ?> <?= Html::img('@web/images/logo.png', ['class' => 'logo'])?></h1>
             </div>
