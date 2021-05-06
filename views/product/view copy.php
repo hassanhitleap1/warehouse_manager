@@ -32,12 +32,6 @@ $this->title = $model->name;
                         <?= Html::img($model->thumbnail, ['data-original' => $model->thumbnail]) ?>
                     </div>
 
-                    <?php foreach ($model->imagesProduct as $key => $img) : ?>
-                        <div class="tab-pane" id="pic-<?= $key + 2 ?>">
-                            <?= Html::img($img->path, ['data-original' => $img->path]) ?>
-                        </div>
-
-                    <?php endforeach; ?>
 
                 </div>
                 <div id="galley">

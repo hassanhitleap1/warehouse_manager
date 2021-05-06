@@ -19,50 +19,37 @@ $this->title = $model->name;
 
 <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span>', ['site/index'], ['class' => 'btn btn-green pull-left']) ?>
 
+
 <div class="card-single">
-
-
-
     <div class="container-fliud">
         <div class="wrapper row">
             <div class="preview col-md-6">
                 <div class="preview-pic tab-content">
 
-                    <div class="tab-pane active" id="pic-1">
-                        <?= Html::img($model->thumbnail, ['data-original' => $model->thumbnail]) ?>
-                    </div>
-
-                    <?php foreach ($model->imagesProduct as $key => $img) : ?>
-                        <div class="tab-pane" id="pic-<?= $key + 2 ?>">
-                            <?= Html::img($img->path, ['data-original' => $img->path]) ?>
+                    <div class="swiper-container mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                            <?= Html::img($model->thumbnail, ['data-original' => $model->thumbnail]) ?>
+                            </div>
+                            <?php foreach ($model->imagesProduct as $key => $img) : ?>
+                                <div class="swiper-slide">
+                                <?= Html::img($img->path, ['data-original' => $img->path]) ?>
+                                </div>
+                            <?php endforeach; ?>
+                            
+                    
+                        </div>
+                        <div class="swiper-pagination"></div>
                         </div>
 
-                    <?php endforeach; ?>
-
                 </div>
-                <div id="galley">
-                    <ul class="preview-thumbnail nav nav-tabs pictures">
-                        <li class="active">
-                            <a data-target="#pic-1" data-toggle="tab">
-                                <?= Html::img($model->thumbnail, ['data-original' => $model->thumbnail]) ?>
-                            </a>
-                        </li>
-                        <?php foreach ($model->imagesProduct as $key => $img) : ?>
-                            <li>
-                                <a data-target="#pic-<?= $key + 2 ?>" data-toggle="tab">
-                                    <?= Html::img($img->path, ['data-original' => $img->path]) ?>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
+                
             </div>
             <div class="details col-md-6">
                 <h5 class="product-title"><?= $this->title ?></h5>
 
                 <p class="product-description"><?= $model->description ?> .</p>
-                <h4 class="price"><?= Yii::t('app', 'Price') ?> : <span><?= $model->selling_price ?> JOD</span></h4>
-
+                
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="<?= str_replace('watch?v=', 'embed/', $model->video_url) ?>" allowfullscreen></iframe>
                 </div>
@@ -240,3 +227,12 @@ $this->title = $model->name;
     </script>
     <?php Yii::$app->session->remove('message'); ?>
 <?php endif; ?>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
+</script>
