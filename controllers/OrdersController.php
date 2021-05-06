@@ -280,18 +280,13 @@ class OrdersController extends Controller
 
 
     public function actionExportPdf(){
-        $html='<h1>مرحبا!</h1>';
-        $mpdf =  new \Mpdf\Mpdf();
-        $mpdf->autoScriptToLang = true;
-        $mpdf->autoLangToFont = true;
-        $mpdf->SetDirectionality('rtl');
-        $mpdf->WriteHTML($html);
-        $mpdf->AddPageByArray(array(
-            'orientation' => '',
-        ));
-        $mpdf->WriteHTML($html);
-        $mpdf->Output();
-        exit;
+        $string_id=$_GET['string_id'];
+        $ides = explode(",", $string_id);
+        $models=Orders::find()->where(['in','id',$ides])->all();
+        $this->layout = "empty";
+        return $this->render('invoices', [
+            'models' => $models,
+        ]);
 
     }
 }
