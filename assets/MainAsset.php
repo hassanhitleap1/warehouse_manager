@@ -21,12 +21,14 @@ class MainAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/swiper/swiper-bundle.min.css',
        
     ];
     public $js = [
         'js/main.js',
         'js/custum.js',
         'js/sweetalert2/main.js',
+        'js/swiper/swiper-bundle.min.js',
      
     ];
     public $depends = [
