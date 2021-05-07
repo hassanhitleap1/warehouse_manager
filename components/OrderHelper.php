@@ -16,51 +16,60 @@ class OrderHelper extends BaseObject
         $ordersItem= $model->orderItems;
            
             if($model->status_id != $status_id ){
-                switch ($status_id) {
-                    case 1: 
-                        switch ($model->status_id) {
-                            case
-                             2:  case 3: case 4:  case 7: 
-                                self::stock_minus($ordersItem);
-                            break;   
-                        }    
-                    break;
+                
+                switch($model->status_id){
+  
                     case 2: 
-                        switch ($model->status_id) {
-                            case 8:  
+                        //  don't any things 
+                        switch($status_id){
+                            case 3 : case 4 : 
+                                self::stock_minus($ordersItem);
+                                break;
+                        }
+                       break; 
+
+                    case 3 :
+                        switch($status_id){
+                            case 6 : 
                                 self::stock_plus($ordersItem);
-                                break;  
-                            case 1:   
-                                self::stock_minus($ordersItem);
-                                break;  
-                        } 
-
-                         break;   
-
-                    case 3: case 4:   case 5:   case 6:   case 7: 
-                        switch ($model->status_id) {
-                             case 8: 
-                                self::stock_minus($ordersItem);
-                                break;   
+                                break;
+                        }
+                        break;  
+                        
+                    case 7 :
+                        switch($status_id){
+                            case 13 : 
+                                self::stock_plus($ordersItem);
+                                break;
                         } 
                         break;   
-                    case 8: 
-                        switch ($model->status_id) {
-                            case 2: case 3: case 4: 
-                               self::stock_minus($ordersItem);
-                               break;   
-                       }
-
+                    case 8 :
+                        switch($status_id){
+                                case 6 : 
+                                    self::stock_plus($ordersItem);
+                                    break;
+                            } 
                         break; 
-                        case 9:   
-                            switch ($model->status_id) {
-                                case 2: case 3: case 4: 
-                                   self::stock_minus($ordersItem);
-                                   break;   
-                           }  
-                      
-                    
+                    case 9 :
+                        //  don't any things 
+                        break; 
+                    case 10 :
+                        switch($status_id){
+                            case 3 : 
+                                self::stock_minus($ordersItem);
+                                break;
+                        } 
+                        break;  
+                    case 11 :
+                        switch($status_id){
+                            case 13 : 
+                                self::stock_plus($ordersItem);
+                                break;
+                            } 
+                        break; 
+                                                          
                 }
+
             }
 
             $model->status_id=$status_id;
@@ -109,7 +118,7 @@ class OrderHelper extends BaseObject
                 $status=Status::find()->where(['in', 'id', [3,4,6,8] ])->all();
             break;  
             case 3: //  تم تجهيزه
-                $status=Status::find()->where(['in', 'id', [4,6,10] ])->all();
+                $status=Status::find()->where(['in', 'id', [4,6] ])->all();
             break; 
             case 4: //  قيد التوصيل
                 $status=Status::find()->where(['in', 'id', [5,7,9,11] ])->all();
@@ -119,19 +128,22 @@ class OrderHelper extends BaseObject
                 $status=Status::find()->where(['in', 'id', [12] ])->all();
             break; 
             case 6: // ملغي من الشركة
+                $status=Status::find()->all();
+            break; 
+            case 7: // ملغي من الشركة
                 $status=Status::find()->where(['in', 'id', [13] ])->all();
-            break;   
+            break;     
             case 8: // مؤجل
-                $status=Status::find()->where(['in', 'id', [4] ])->all();
+                $status=Status::find()->where(['in', 'id', [4,6] ])->all();
             break; 
             case 9: // مؤجل من الشركة
-                $status=Status::find()->where(['in', 'id', [5,7,10] ])->all();
+                $status=Status::find()->where(['in', 'id', [5,7,11] ])->all();
             break; 
             case 10: // لا يرد
-                $status=Status::find()->where(['in', 'id', [2,6] ])->all();
+                $status=Status::find()->where(['in', 'id', [2,3,6] ])->all();
             break; 
             case 11: // لا يرد
-                $status=Status::find()->where(['in', 'id', [13] ])->all();
+                $status=Status::find()->where(['in', 'id', [5,13] ])->all();
             break; 
             case 12: // تم استلام المبلغ
                 $status=Status::find()->all();
