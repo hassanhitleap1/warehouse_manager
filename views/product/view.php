@@ -102,7 +102,11 @@ $this->title = $model->name;
 
                     <div class="col-md-6">
                         <?php if ($model->type_options == Products::TYPE_CHOOSE_BOX) : ?>
-                            <?= $form->field($modelOrder, 'typeoption')->radioList(ArrayHelper::map($model->typeOptions, 'id', 'text'), ['style' => 'display: grid;']) ?>
+                            <?php 
+                              $typeOptions= ArrayHelper::map($model->typeOptions, 'id', 'text');
+                              $modelOrder->typeoption = 1; 
+                            ?>
+                            <?= $form->field($modelOrder, 'typeoption')->radioList($typeOptions, ['style' => 'display: grid;']) ?>
                         <?php else : ?>
                             <?= $form->field($modelOrder, 'typeoption')->dropDownList(ArrayHelper::map($model->typeOptions, 'id', 'text')) ?>
                         <?php endif; ?>
