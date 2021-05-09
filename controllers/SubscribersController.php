@@ -5,14 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\Subscribers\Subscribers;
 use app\models\subscribers\SubscribersSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * SubscribersController implements the CRUD actions for Subscribers model.
  */
-class SubscribersController extends Controller
+class SubscribersController extends BaseController
 {
     /**
      * {@inheritdoc}
@@ -74,6 +73,34 @@ class SubscribersController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionImport()
+    {
+        $model = new SubscribersImport();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+             $model->file = UploadedFile::getInstance($model, 'file');
+           $file='uploads/' . $this->file->baseName . '.' . $this->file->extension;
+            $this->file->saveAs($file);
+            $xlsx = \SimpleXLSX::parse('files/'.$file);
+            $user=[];
+            foreach( $xlsx->rows() as $key => $r ) {
+                if($key > 0){
+                    $user[]=[$xlsx[0]  ,$xlsx[1] ,$xlsx[3]];
+                }
+            }
+            Yii::$app->db
+                ->createCommand()
+                ->batchInsert('subscribers', ['first_name','last_name','email'],$user)
+                ->execute();
+        }
+
+        return $this->render('import', [
+            'model' => $model,
+        ]);
+    }
+
+
 
     /**
      * Updates an existing Subscribers model.

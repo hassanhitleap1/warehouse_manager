@@ -166,5 +166,6 @@ return [
     "SubTotal"=>"المجموع الفرعي",
     "Print_All_Invoice"=>"طباعة لالفواتير",
     "Export_PDF"=>"استخراج ملف pdf",
+    "Import"=>"ادراج"
 
 ];

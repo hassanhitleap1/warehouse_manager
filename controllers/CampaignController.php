@@ -87,6 +87,12 @@ class CampaignController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $groups=$_POST['groups'];
+            foreach ($groups as $group){
+                $group['campaign_id']=$model->id;
+                $group['groups_subscribe_id']=$model->subscribe;
+
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
