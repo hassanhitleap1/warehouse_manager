@@ -32,7 +32,7 @@ class ProductController extends Controller
     public function actionView($id)
     {
         $modelOrder= new OrderForm();
-        $product_suggested=Products::find()->where(['!=','id',$id])->limit(4)->all();
+        $product_suggested=Products::find()->where(['!=','id',$id])->where(['!=','quantity',0])->limit(4)->all();
         if ($modelOrder->load(Yii::$app->request->post())&&  $modelOrder->validate()) {
             $product=Products::findOne($id);
             $next_order=Orders::find()->max('id') + 1;
@@ -106,7 +106,7 @@ class ProductController extends Controller
         $order_model =Yii::$app->session->get('order_model');
         $id =Yii::$app->session->get('id');
     
-        $product_suggested=Products::find()->where(['!=','id',$id])->limit(4)->all();
+        $product_suggested=Products::find()->where(['!=','id',$id])->where(['!=','quantity',0])->limit(4)->all();
         return $this->render('thanks', [
             'model' => $order_model,
             'product_suggested'=>$product_suggested
@@ -156,7 +156,7 @@ class ProductController extends Controller
 
 
     public function actionLoadMore(){  
-        $query =    Products::find();
+        $query =    Products::find()->where(['!=','quantity',0]);
         $countQuery = clone $query;
         $page=$_GET['page'];
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
