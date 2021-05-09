@@ -35,7 +35,8 @@
         "kartik-v/yii2-editable": "@dev",
         "mpdf/mpdf": "^8.0",
         "kartik-v/yii2-editors": "@dev",
-        "kartik-v/yii2-icons": "@dev"
+        "kartik-v/yii2-icons": "@dev",
+        "coderius/yii2-pell-widget": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

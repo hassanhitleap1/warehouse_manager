@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fcbf99eaa6fa0ca7a9fe1c896106a8da",
+    "content-hash": "99744fd3b107640b15043a1f454f5b36",
     "packages": [
         {
             "name": "airani/yii2-bootstrap-rtl",
@@ -246,6 +246,63 @@
                 "markdown-extra"
             ],
             "time": "2018-03-26T11:24:36+00:00"
+        },
+        {
+            "name": "coderius/yii2-pell-widget",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coderius/yii2-pell-widget.git",
+                "reference": "d1293c05a55332bccf08e9604da4d0c568a9a698"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coderius/yii2-pell-widget/zipball/d1293c05a55332bccf08e9604da4d0c568a9a698",
+                "reference": "d1293c05a55332bccf08e9604da4d0c568a9a698",
+                "shasum": ""
+            },
+            "require": {
+                "npm-asset/pell": "~1.0",
+                "yiisoft/yii2": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "coderius\\pell\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Serg Coderius",
+                    "email": "sunrise4fun@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Pell content editor widget for Yii2.",
+            "homepage": "https://github.com/jaredreich/pell",
+            "keywords": [
+                "coderius",
+                "editor",
+                "extension",
+                "pell",
+                "widget",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2019-11-18T15:34:34+00:00"
         },
         {
             "name": "components/flag-icon-css",
@@ -1670,6 +1727,18 @@
             "dist": {
                 "type": "tar",
                 "url": "https://registry.npmjs.org/bootstrap/-/bootstrap-4.6.0.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/pell",
+            "version": "1.0.6",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/pell/-/pell-1.0.6.tgz"
             },
             "type": "npm-asset",
             "license": [

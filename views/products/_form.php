@@ -10,11 +10,7 @@ use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\editors\Summernote;
-
-// on your view layout file
-use kartik\icons\FontAwesomeAsset;
-FontAwesomeAsset::register($this);
+use coderius\pell\Pell;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\products\Products */
@@ -153,18 +149,18 @@ if (!$model->isNewRecord) {
             </div>
             <div class="col-md-6">
             <?php include('sub_product_count.php') ?>
-            </div>
-         
-            
+            </div>   
     </div>
+  
         <div class="row">
             <div class="col-md-4">
-            <?= $form->field($model, 'file')->widget(FileInput::classname(), [
-                'options' => ['accept' => 'image/*'],
-                'pluginOptions' => $dataThumbnail
-                    ]);
-                ?>
+                <?= $form->field($model, 'file')->widget(FileInput::classname(), [
+                    'options' => ['accept' => 'image/*'],
+                    'pluginOptions' => $dataThumbnail
+                        ]);
+                    ?>
             </div>
+        
             <div class="col-md-4">
 
             <?= $form->field($model, 'images_product[]')->widget(FileInput::classname(), [
@@ -174,10 +170,10 @@ if (!$model->isNewRecord) {
             ?>
             </div>
             <div class="col-md-4">
-                <?= $form->field($model, 'description')->widget(Summernote::class, [
-                'options' => ['placeholder' => 'Edit your description here...']
-                ]); ?>
+              
+                <?= $form->field($model, 'description')->widget(Pell::className(), []);?>
             </div>
+            
             
             
            
