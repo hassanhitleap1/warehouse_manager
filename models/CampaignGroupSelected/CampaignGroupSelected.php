@@ -2,6 +2,7 @@
 
 namespace app\models\CampaignGroupSelected;
 
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -31,7 +32,7 @@ class CampaignGroupSelected extends \yii\db\ActiveRecord
         return [
             [['campaign_id', 'groups_subscribe_id'], 'required'],
             [['campaign_id', 'groups_subscribe_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+
         ];
     }
 
@@ -44,11 +45,33 @@ class CampaignGroupSelected extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'campaign_id' => Yii::t('app', 'Campaign ID'),
             'groups_subscribe_id' => Yii::t('app', 'Groups Subscribe ID'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * {@inheritdoc}
      * @return CampaignGroupSelectedQuery the active query used by this AR class.

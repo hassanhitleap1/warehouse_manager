@@ -2,6 +2,7 @@
 
 namespace app\models\GroupsSubscribe;
 
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -29,7 +30,6 @@ class GroupsSubscribe extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -42,11 +42,34 @@ class GroupsSubscribe extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * {@inheritdoc}
      * @return GroupsSubscribeQuery the active query used by this AR class.
