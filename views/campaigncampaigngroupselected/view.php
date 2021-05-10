@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\campaign\Campaign */
+/* @var $model app\models\campaigncampaigngroupselected\CampaignGroupSelected */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Campaigns'), 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Campaign Group Selecteds'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="campaign-view">
+<div class="campaign-group-selected-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
-            'start_date',
+            'campaign_id',
+            'groups_subscribe_id',
             'created_at',
             'updated_at',
         ],

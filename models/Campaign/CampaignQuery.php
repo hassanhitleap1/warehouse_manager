@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\Campaign;
+namespace app\models\campaign;
 
 /**
  * This is the ActiveQuery class for [[Campaign]].

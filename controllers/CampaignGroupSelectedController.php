@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\CampaignGroupSelected\CampaignGroupSelected;
-use app\models\CampaignGroupSelected\CampaignGroupSelectedSearch;
+use app\models\campaigncampaigngroupselected\CampaignGroupSelected;
+use app\models\campaigncampaigngroupselected\CampaignGroupSelectedSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

@@ -4,17 +4,17 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\campaign\Campaign */
+/* @var $model app\models\campaigncampaigngroupselected\CampaignGroupSelected */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="campaign-form">
+<div class="campaign-group-selected-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'campaign_id')->textInput() ?>
 
-    <?= $form->field($model, 'start_date')->textInput() ?>
+    <?= $form->field($model, 'groups_subscribe_id')->textInput() ?>
 
     <?= $form->field($model, 'created_at')->textInput() ?>
 

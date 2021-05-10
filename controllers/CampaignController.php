@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Campaign\Campaign;
-use app\models\CampaignGroupSelected\CampaignSearch;
+use app\models\campaign\Campaign;
+use app\models\campaign\CampaignSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -87,12 +87,6 @@ class CampaignController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $groups=$_POST['groups'];
-            foreach ($groups as $group){
-                $group['campaign_id']=$model->id;
-                $group['groups_subscribe_id']=$model->subscribe;
-
-            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

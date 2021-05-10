@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\campaign\CampaignSearch */
+/* @var $searchModel app\models\campaigncampaigngroupselected\CampaignGroupSelectedSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Campaigns');
+$this->title = Yii::t('app', 'Campaign Group Selecteds');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="campaign-index">
+<div class="campaign-group-selected-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Campaign'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Campaign Group Selected'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'name',
-            'start_date',
+            'campaign_id',
+            'groups_subscribe_id',
             'created_at',
             'updated_at',
 

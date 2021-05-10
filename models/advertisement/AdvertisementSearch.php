@@ -1,15 +1,15 @@
 <?php
 
-namespace app\models\groupssubscribe;
+namespace app\models\advertisement;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\groupssubscribe\GroupsSubscribe;
+use app\models\advertisement\Advertisement;
 
 /**
- * GroupsSubscribeSearch represents the model behind the search form of `app\models\groupssubscribe\GroupsSubscribe`.
+ * AdvertisementSearch represents the model behind the search form of `app\models\advertisement\Advertisement`.
  */
-class GroupsSubscribeSearch extends GroupsSubscribe
+class AdvertisementSearch extends Advertisement
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class GroupsSubscribeSearch extends GroupsSubscribe
     {
         return [
             [['id'], 'integer'],
-            [['name', 'created_at', 'updated_at'], 'safe'],
+            [['title', 'body', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class GroupsSubscribeSearch extends GroupsSubscribe
      */
     public function search($params)
     {
-        $query = GroupsSubscribe::find();
+        $query = Advertisement::find();
 
         // add conditions that should always apply here
 
@@ -63,7 +63,8 @@ class GroupsSubscribeSearch extends GroupsSubscribe
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'body', $this->body]);
 
         return $dataProvider;
     }

@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\campaign\CampaignSearch */
+/* @var $model app\models\campaigncampaigngroupselected\CampaignGroupSelectedSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="campaign-search">
+<div class="campaign-group-selected-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -20,9 +20,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'campaign_id') ?>
 
-    <?= $form->field($model, 'start_date') ?>
+    <?= $form->field($model, 'groups_subscribe_id') ?>
 
     <?= $form->field($model, 'created_at') ?>
 

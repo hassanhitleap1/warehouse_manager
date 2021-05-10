@@ -1,8 +1,7 @@
 <?php
 
-namespace app\models\Campaign;
+namespace app\models\campaign;
 
-use Carbon\Carbon;
 use Yii;
 
 /**
@@ -31,7 +30,7 @@ class Campaign extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['start_date'], 'safe'],
+            [['start_date', 'created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 100],
         ];
     }
@@ -50,28 +49,6 @@ class Campaign extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function beforeSave($insert)
-    {
-        $today=Carbon::now("Asia/Amman");
-        if (parent::beforeSave($insert)) {
-            // Place your custom code here
-            if ($this->isNewRecord) {
-                $this->created_at = $today;
-                $this->updated_at = $today;
-
-
-            } else {
-                $this->updated_at =$today;
-            }
-
-            return true;
-        } else {
-            return false;
-        }
-    }
     /**
      * {@inheritdoc}
      * @return CampaignQuery the active query used by this AR class.

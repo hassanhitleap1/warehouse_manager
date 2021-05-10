@@ -1,13 +1,13 @@
 <?php
 
-namespace app\models\groupssubscribe;
+namespace app\models\campaigncampaigngroupselected;
 
 /**
- * This is the ActiveQuery class for [[GroupsSubscribe]].
+ * This is the ActiveQuery class for [[CampaignGroupSelected]].
  *
- * @see GroupsSubscribe
+ * @see CampaignGroupSelected
  */
-class GroupsSubscribeQuery extends \yii\db\ActiveQuery
+class CampaignGroupSelectedQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class GroupsSubscribeQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return GroupsSubscribe[]|array
+     * @return CampaignGroupSelected[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class GroupsSubscribeQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return GroupsSubscribe|array|null
+     * @return CampaignGroupSelected|array|null
      */
     public function one($db = null)
     {

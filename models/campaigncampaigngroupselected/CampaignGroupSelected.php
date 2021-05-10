@@ -1,25 +1,26 @@
 <?php
 
-namespace app\models\groupssubscribe;
+namespace app\models\campaigncampaigngroupselected;
 
 use Yii;
 
 /**
- * This is the model class for table "{{%groups_subscribe}}".
+ * This is the model class for table "{{%campaign_group_selected}}".
  *
  * @property int $id
- * @property string $name
+ * @property int $campaign_id
+ * @property int $groups_subscribe_id
  * @property string|null $created_at
  * @property string|null $updated_at
  */
-class GroupsSubscribe extends \yii\db\ActiveRecord
+class CampaignGroupSelected extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%groups_subscribe}}';
+        return '{{%campaign_group_selected}}';
     }
 
     /**
@@ -28,9 +29,9 @@ class GroupsSubscribe extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['campaign_id', 'groups_subscribe_id'], 'required'],
+            [['campaign_id', 'groups_subscribe_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name'], 'string', 'max' => 255],
         ];
     }
 
@@ -41,7 +42,8 @@ class GroupsSubscribe extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'campaign_id' => Yii::t('app', 'Campaign ID'),
+            'groups_subscribe_id' => Yii::t('app', 'Groups Subscribe ID'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
@@ -49,10 +51,10 @@ class GroupsSubscribe extends \yii\db\ActiveRecord
 
     /**
      * {@inheritdoc}
-     * @return GroupsSubscribeQuery the active query used by this AR class.
+     * @return CampaignGroupSelectedQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new GroupsSubscribeQuery(get_called_class());
+        return new CampaignGroupSelectedQuery(get_called_class());
     }
 }

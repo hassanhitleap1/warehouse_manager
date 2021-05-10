@@ -1,27 +1,27 @@
 <?php
 
-namespace app\models\warehouse;
+namespace app\models\advertisement;
 
 use Carbon\Carbon;
 use Yii;
 
 /**
- * This is the model class for table "{{%warehouse}}".
+ * This is the model class for table "{{%advertisement}}".
  *
  * @property int $id
- * @property string $name
- * @property string $localtion
- * @property string $created_at
- * @property string $updated_at
+ * @property string $title
+ * @property string $body
+ * @property string|null $created_at
+ * @property string|null $updated_at
  */
-class Warehouse extends \yii\db\ActiveRecord
+class Advertisement extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%warehouse}}';
+        return '{{%advertisement}}';
     }
 
     /**
@@ -30,9 +30,10 @@ class Warehouse extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'localtion'], 'required'],
-        
-            [['name', 'localtion'], 'string', 'max' => 32],
+            [['title', 'body'], 'required'],
+            [['body'], 'string'],
+            [['created_at', 'updated_at'], 'safe'],
+            [['title'], 'string', 'max' => 400],
         ];
     }
 
@@ -43,24 +44,15 @@ class Warehouse extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'localtion' => Yii::t('app', 'Localtion'),
+            'title' => Yii::t('app', 'Title'),
+            'body' => Yii::t('app', 'Body'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
+
     /**
-     * {@inheritdoc}
-     * @return WarehouseQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new WarehouseQuery(get_called_class());
-    }
-
-
-              /**
      * @inheritdoc
      */
     public function beforeSave($insert)
@@ -79,5 +71,13 @@ class Warehouse extends \yii\db\ActiveRecord
         } else {
             return false;
         }
+    }
+    /**
+     * {@inheritdoc}
+     * @return AdvertisementQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new AdvertisementQuery(get_called_class());
     }
 }

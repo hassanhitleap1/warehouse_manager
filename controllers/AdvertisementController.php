@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\groupssubscribe\GroupsSubscribe;
-use app\models\groupssubscribe\GroupsSubscribeSearch;
+use app\models\advertisement\Advertisement;
+use app\models\advertisement\AdvertisementSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * GroupsSubscribeController implements the CRUD actions for GroupsSubscribe model.
+ * AdvertisementController implements the CRUD actions for Advertisement model.
  */
-class GroupsSubscribeController extends Controller
+class AdvertisementController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class GroupsSubscribeController extends Controller
     }
 
     /**
-     * Lists all GroupsSubscribe models.
+     * Lists all Advertisement models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new GroupsSubscribeSearch();
+        $searchModel = new AdvertisementSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class GroupsSubscribeController extends Controller
     }
 
     /**
-     * Displays a single GroupsSubscribe model.
+     * Displays a single Advertisement model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class GroupsSubscribeController extends Controller
     }
 
     /**
-     * Creates a new GroupsSubscribe model.
+     * Creates a new Advertisement model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new GroupsSubscribe();
+        $model = new Advertisement();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class GroupsSubscribeController extends Controller
     }
 
     /**
-     * Updates an existing GroupsSubscribe model.
+     * Updates an existing Advertisement model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class GroupsSubscribeController extends Controller
     }
 
     /**
-     * Deletes an existing GroupsSubscribe model.
+     * Deletes an existing Advertisement model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class GroupsSubscribeController extends Controller
     }
 
     /**
-     * Finds the GroupsSubscribe model based on its primary key value.
+     * Finds the Advertisement model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return GroupsSubscribe the loaded model
+     * @return Advertisement the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = GroupsSubscribe::findOne($id)) !== null) {
+        if (($model = Advertisement::findOne($id)) !== null) {
             return $model;
         }
 

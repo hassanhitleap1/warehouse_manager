@@ -1,15 +1,15 @@
 <?php
 
-namespace app\models\groupssubscribe;
+namespace app\models\campaigncampaigngroupselected;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\groupssubscribe\GroupsSubscribe;
+use app\models\campaigncampaigngroupselected\CampaignGroupSelected;
 
 /**
- * GroupsSubscribeSearch represents the model behind the search form of `app\models\groupssubscribe\GroupsSubscribe`.
+ * CampaignGroupSelectedSearch represents the model behind the search form of `app\models\campaigncampaigngroupselected\CampaignGroupSelected`.
  */
-class GroupsSubscribeSearch extends GroupsSubscribe
+class CampaignGroupSelectedSearch extends CampaignGroupSelected
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class GroupsSubscribeSearch extends GroupsSubscribe
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'campaign_id', 'groups_subscribe_id'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class GroupsSubscribeSearch extends GroupsSubscribe
      */
     public function search($params)
     {
-        $query = GroupsSubscribe::find();
+        $query = CampaignGroupSelected::find();
 
         // add conditions that should always apply here
 
@@ -59,11 +59,11 @@ class GroupsSubscribeSearch extends GroupsSubscribe
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'campaign_id' => $this->campaign_id,
+            'groups_subscribe_id' => $this->groups_subscribe_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

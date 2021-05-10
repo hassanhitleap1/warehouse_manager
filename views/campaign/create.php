@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Campaign\Campaign */
+/* @var $model app\models\campaign\Campaign */
 
 $this->title = Yii::t('app', 'Create Campaign');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Campaigns'), 'url' => ['index']];

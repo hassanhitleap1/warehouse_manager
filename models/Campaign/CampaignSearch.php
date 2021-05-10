@@ -1,15 +1,15 @@
 <?php
 
-namespace app\models\groupssubscribe;
+namespace app\models\campaign;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\groupssubscribe\GroupsSubscribe;
+use app\models\campaign\Campaign;
 
 /**
- * GroupsSubscribeSearch represents the model behind the search form of `app\models\groupssubscribe\GroupsSubscribe`.
+ * CampaignSearch represents the model behind the search form of `app\models\campaign\Campaign`.
  */
-class GroupsSubscribeSearch extends GroupsSubscribe
+class CampaignSearch extends Campaign
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class GroupsSubscribeSearch extends GroupsSubscribe
     {
         return [
             [['id'], 'integer'],
-            [['name', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'start_date', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class GroupsSubscribeSearch extends GroupsSubscribe
      */
     public function search($params)
     {
-        $query = GroupsSubscribe::find();
+        $query = Campaign::find();
 
         // add conditions that should always apply here
 
@@ -59,6 +59,7 @@ class GroupsSubscribeSearch extends GroupsSubscribe
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'start_date' => $this->start_date,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
