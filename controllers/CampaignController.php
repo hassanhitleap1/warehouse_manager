@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\CampaignGroupSelected\CampaignGroupSelected;
+use Carbon\Carbon;
 use Yii;
 use app\models\campaign\Campaign;
 use app\models\campaign\CampaignSearch;
@@ -66,7 +68,30 @@ class CampaignController extends Controller
     {
         $model = new Campaign();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+                $model->save();
+                $inserted=[];
+                $today=Carbon::now("Asia/Amman");
+                foreach ($model->campaign_group_selected  as $selected){
+                    $inserted[]=[
+                        'campaign_id'=>$model->id,
+                        'groups_subscribe_id'=>$selected,
+                        'created_at'=>$today
+                    ] ;
+                }
+
+                Yii::$app->db
+                    ->createCommand()
+                    ->batchInsert('campaign_group_selected', ['campaign_id','groups_subscribe_id','created_at'], $inserted)
+                    ->execute();
+                $transaction->commit();
+            }catch (\Exception $exception){
+
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -86,7 +111,30 @@ class CampaignController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $transaction = \Yii::$app->db->beginTransaction();
+            CampaignGroupSelected::find()->where(['=','campaign_id',$model->id])->delete();
+            try {
+                $model->save();
+                $inserted=[];
+                $today=Carbon::now("Asia/Amman");
+                foreach ($model->campaign_group_selected  as $selected){
+                    $inserted[]=[
+                        'campaign_id'=>$model->id,
+                        'groups_subscribe_id'=>$selected,
+                        'created_at'=>$today
+                    ] ;
+                }
+
+                Yii::$app->db
+                    ->createCommand()
+                    ->batchInsert('campaign_group_selected', ['campaign_id','groups_subscribe_id','created_at'], $inserted)
+                    ->execute();
+                $transaction->commit();
+            }catch (\Exception $exception){
+
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
