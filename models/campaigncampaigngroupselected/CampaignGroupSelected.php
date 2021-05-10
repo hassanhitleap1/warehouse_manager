@@ -2,6 +2,7 @@
 
 namespace app\models\campaigncampaigngroupselected;
 
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -49,6 +50,27 @@ class CampaignGroupSelected extends \yii\db\ActiveRecord
         ];
     }
 
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * {@inheritdoc}
      * @return CampaignGroupSelectedQuery the active query used by this AR class.
