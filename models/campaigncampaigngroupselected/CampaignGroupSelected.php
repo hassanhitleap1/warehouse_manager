@@ -32,7 +32,6 @@ class CampaignGroupSelected extends \yii\db\ActiveRecord
         return [
             [['campaign_id', 'groups_subscribe_id'], 'required'],
             [['campaign_id', 'groups_subscribe_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
         ];
     }
 

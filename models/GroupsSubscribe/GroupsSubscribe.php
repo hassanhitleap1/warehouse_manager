@@ -29,7 +29,7 @@ class GroupsSubscribe extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+
             [['name'], 'string', 'max' => 255],
         ];
     }

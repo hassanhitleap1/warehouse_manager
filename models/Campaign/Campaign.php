@@ -16,6 +16,7 @@ use Yii;
  */
 class Campaign extends \yii\db\ActiveRecord
 {
+    public  $campaign_group_selected;
     /**
      * {@inheritdoc}
      */
@@ -31,7 +32,7 @@ class Campaign extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['start_date', 'created_at', 'updated_at'], 'safe'],
+            [['start_date'], 'safe'],
             [['name'], 'string', 'max' => 100],
         ];
     }

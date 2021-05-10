@@ -32,7 +32,6 @@ class Advertisement extends \yii\db\ActiveRecord
         return [
             [['title', 'body'], 'required'],
             [['body'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
             [['title'], 'string', 'max' => 400],
         ];
     }
