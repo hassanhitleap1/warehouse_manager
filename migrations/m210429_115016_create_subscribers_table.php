@@ -20,6 +20,7 @@ class m210429_115016_create_subscribers_table extends Migration
             'first_name'=>$this->string(100)->defaultValue(null),
             'last_name'=>$this->string(100)->defaultValue(null),
             'email'=>$this->string(100)->notNull(),
+            'group_subscribe_id'=>$this->integer()->notNull(),
             'created_at' => $this->dateTime()->defaultValue(null),
             'updated_at' => $this->dateTime()->defaultValue(null),
         ], $tableOptions);

@@ -3,10 +3,11 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%campaign}}`.
+ * Class m210510_112249_cerate_advertisement_table
  */
-class m210429_115244_create_campaign_table extends Migration
+class m210510_112249_cerate_advertisement_table extends Migration
 {
+
 
     public function up()
     {
@@ -15,11 +16,10 @@ class m210429_115244_create_campaign_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%campaign}}', [
+        $this->createTable('{{%advertisement}}', [
             'id' => $this->primaryKey(),
-            'name'=>$this->string(100)->notNull(),
-            'start_date'=>$this->dateTime()->defaultValue(null),
-            'adv_id'=>$this->integer()->notNull(),
+            'title'=>$this->string(400)->notNull(),
+            'body'=>$this->text()->notNull(),
             'created_at' => $this->dateTime()->defaultValue(null),
             'updated_at' => $this->dateTime()->defaultValue(null),
         ], $tableOptions);
@@ -27,8 +27,7 @@ class m210429_115244_create_campaign_table extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%campaign}}');
+        $this->dropTable('{{%advertisement}}');
     }
-
 
 }
