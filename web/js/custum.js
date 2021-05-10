@@ -465,4 +465,7 @@ function timer_invoice(id) {
    
 }
 
-
+/*
+var keys = $("#kv-grid-demo").yiiGridView("getSelectedRows").length;
+ alert(keys > 0 ? "Downloaded " + keys + " selected books to your account." : "No rows selected for download.");
+ */

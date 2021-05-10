@@ -55,6 +55,15 @@ class OrdersSearch extends Orders
             // $query->where('0=1');
             return $dataProvider;
         }
+
+        if(isset($_GET['string_id'])){
+            $string_id=$_GET['string_id'];
+           $ides = explode(",", $string_id);
+           $query->where(['in','orders.id',$ides]);
+        }
+
+
+
         $query->joinWith('user');
         // grid filtering conditions
         $query->andFilterWhere([
