@@ -104,7 +104,7 @@ $this->title = $model->name;
                         <?php if ($model->type_options == Products::TYPE_CHOOSE_BOX) : ?>
                             <?php 
                               $typeOptions= ArrayHelper::map($model->typeOptions, 'id', 'text');
-                              $modelOrder->typeoption = 1; 
+                              $modelOrder->typeoption = array_key_first($typeOptions);; 
                             ?>
                             <?= $form->field($modelOrder, 'typeoption')->radioList($typeOptions, ['style' => 'display: grid;']) ?>
                         <?php else : ?>
