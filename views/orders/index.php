@@ -267,8 +267,11 @@ $columns = [
             'filterModel' => $searchModel,
             'panel' => [
                 'heading' => '<h3 class="panel-title">' . $this->title . '</h3>',
-                'before' => '{dynagrid}' .  Html::a(Yii::t('app', 'Create_Order'), ['create'], ['class' => 'btn btn-success']) . "  " . "<Button id='print_all_invoice' class='btn btn-success'>" . Yii::t('app', 'Print_All_Invoice') . "</Button>" . "  " . "<Button id='export_pdf' class='btn btn-success'>" . Yii::t('app', 'Export_PDF') . "</Button>"
-            ],
+                'before' => '{dynagrid}' .  Html::a( "<span class='glyphicon glyphicon-plus' > </span>", ['create'], ['class' => 'btn btn-success' ,'title'=>Yii::t('app', 'Create_Order')]) . 
+                "<button id='print_all_invoice' class='btn btn-success' title='" . Yii::t('app', 'Print_All_Invoice') . "' > <span    class='glyphicon glyphicon-print' > </span> </button>".
+                "<button id='export_pdf' class='btn btn-success' title='" . Yii::t('app', 'Export_PDF') . "' > <span   class='glyphicon glyphicon-file' > </span> </button>".
+                "<button id='change_status' class='btn btn-success' title='" . Yii::t('app', 'Change_Status') . "' > <span   class='glyphicon glyphicon-screenshot' > </span> </button>".
+                "<button id='delete_orders' class='btn btn-success' title='" . Yii::t('app', 'Delete_Orders') . "' > <span   class='glyphicon glyphicon-trash' > </span> </button>"            ],
             'showPageSummary' => true,
         ],
 
