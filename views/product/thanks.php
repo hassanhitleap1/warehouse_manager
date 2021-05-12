@@ -123,12 +123,13 @@ $this->title = Yii::t('app','Successfuly_Applay');
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '{your-pixel-id-goes-here}');
+    fbq('init', <?=Yii::$app->params['facebook_id']?>);
     fbq('track', 'Purchase', {currency: "USD", value: 10.00});
 </script>
 
   <!-- Snap Pixel Code -->
   <script type='text/javascript'>
+  
         (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
         {a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
         a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
@@ -136,8 +137,8 @@ $this->title = Yii::t('app','Successfuly_Applay');
         u.parentNode.insertBefore(r,u);})(window,document,
         'https://sc-static.net/scevent.min.js');
 
-        snaptr('init', '6ea08b95-a6d5-43b0-baaf-ec8c8a44a74c', {
-        'user_email': '__INSERT_USER_EMAIL__'
+        snaptr('init',<?=Yii::$app->params['sanpchat_id']?>, {
+        'user_email': <?=Yii::$app->params['sanpchat_email']?>
         });
 
         snaptr('track','PURCHASE'); 
