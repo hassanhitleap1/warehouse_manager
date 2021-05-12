@@ -114,8 +114,7 @@ $this->title = Yii::t('app','Successfuly_Applay');
 
 
 
-
-<script type="text/javascript">
+        <script type="text/javascript">
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -125,7 +124,7 @@ $this->title = Yii::t('app','Successfuly_Applay');
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', <?=Yii::$app->params['facebook_id']?>);
+    fbq('init', '<?=Yii::$app->params['facebook_id']?>');
     fbq('track', 'Purchase', {currency: "USD", value: 10.00});
 </script>
 
@@ -139,8 +138,8 @@ $this->title = Yii::t('app','Successfuly_Applay');
         u.parentNode.insertBefore(r,u);})(window,document,
         'https://sc-static.net/scevent.min.js');
 
-        snaptr('init',<?=Yii::$app->params['sanpchat_id']?>, {
-        'user_email': <?=Yii::$app->params['sanpchat_email']?>
+        snaptr('init','<?=Yii::$app->params['sanpchat_id']?>', {
+        'user_email': '<?=Yii::$app->params['sanpchat_email']?>'
         });
 
         snaptr('track','PURCHASE'); 
