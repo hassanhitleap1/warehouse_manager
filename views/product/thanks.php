@@ -127,3 +127,21 @@ $this->title = Yii::t('app','Successfuly_Applay');
     fbq('track', 'Purchase', {currency: "USD", value: 10.00});
 </script>
 
+  <!-- Snap Pixel Code -->
+  <script type='text/javascript'>
+        (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
+        {a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
+        a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
+        r.src=n;var u=t.getElementsByTagName(s)[0];
+        u.parentNode.insertBefore(r,u);})(window,document,
+        'https://sc-static.net/scevent.min.js');
+
+        snaptr('init', '6ea08b95-a6d5-43b0-baaf-ec8c8a44a74c', {
+        'user_email': '__INSERT_USER_EMAIL__'
+        });
+
+        snaptr('track','PURCHASE'); 
+
+    </script>
+    <!-- End Snap Pixel Code -->
+
