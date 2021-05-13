@@ -57,12 +57,12 @@ $this->title = $model->id;
                 <tbody>
                     <?php $SubTotal=0; $delivery_fees=2;?>
                         <?php foreach ($model->orderItems as  $key =>  $item):?>
-                            <?php $SubTotal+=$item->profits_margin;?>
+                            <?php $SubTotal+=($item->profits_margin * $item->quantity );?>
                             <tr>
                                 <th scope="row"><?= $key+1 ?></th>
                                 <td><?= $item->product->name ;?></td>
                                 <td><?= $item->quantity ;?></td>
-                                <td><?= $item->profits_margin ;?> jd</td>
+                                <td><?= ($item->profits_margin * $item->quantity ) ;?> jd</td>
                             </tr>
                         <?php endforeach;?>
 
