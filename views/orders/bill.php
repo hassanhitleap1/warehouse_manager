@@ -57,12 +57,12 @@ $this->title = $model->id;
                 <tbody>
                     <?php $SubTotal=0; $delivery_fees=2;?>
                         <?php foreach ($model->orderItems as  $key =>  $item):?>
-                            <?php $SubTotal+=($item->profits_margin * $item->quantity );?>
+                            <?php $SubTotal+=$item->price_item_count ;?>
                             <tr>
                                 <th scope="row"><?= $key+1 ?></th>
                                 <td><?= $item->product->name ;?></td>
                                 <td><?= $item->quantity ;?></td>
-                                <td><?= ($item->profits_margin * $item->quantity ) ;?> jd</td>
+                                <td><?= ($item->price_item_count  ) ;?> jd</td>
                             </tr>
                         <?php endforeach;?>
 
@@ -74,8 +74,7 @@ $this->title = $model->id;
     <div class="row">
         <div class="col-md-offset-1 container footer-s">
             <p><strong><?= Yii::t('app','Delivery_Fees')?> : <?= $delivery_fees?> Jd  </strong></p>
-            <p><strong> <?= Yii::t('app','SubTotal')?>  : <?= $SubTotal?> JD </strong></p>
-            <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $SubTotal+$delivery_fees?> </strong></p>
+            <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $SubTotal+$delivery_fees?>JD </strong></p>
         </div>
         
     

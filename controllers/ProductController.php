@@ -41,7 +41,7 @@ class ProductController extends Controller
             $today=Carbon::now("Asia/Amman");
             $delivery_price=$region->price_delivery;
             $discount=($typeoption->number *$product->selling_price) - $typeoption->price;
-            $profit_margin= $typeoption->price-($typeoption->number *$product->purchasing_price) ;
+            $profit_margin= $typeoption->price- $product->purchasing_price ;
             $order_model=new Orders;
             $order_model->order_id = (string) $next_order;
             $order_model->delivery_time=$today->addDay(1);
@@ -51,12 +51,12 @@ class ProductController extends Controller
             $order_model->name=$modelOrder->name;
             $order_model->other_phone=$modelOrder->other_phone;
             $order_model->address=is_null($modelOrder->address)?$region->name_ar:$modelOrder->address;
-            $order_model->status_id=Products::To_Be_Equipped;
+            $order_model->status_id=1;
             $order_model->delivery_price =$delivery_price;
             $order_model->discount= $discount;
             $order_model->total_price=$delivery_price+$typeoption->price;
     
-            $order_model->profit_margin=  $profit_margin;
+            $order_model->profit_margin=  $profit_margin ;
             $order_model->amount_required=$order_model->total_price-$delivery_price;
 
             
@@ -75,8 +75,10 @@ class ProductController extends Controller
                 $orderItemModel->product_id=$id;
                 $orderItemModel->sub_product_id=$modelOrder->type;
                 $orderItemModel->price=$product->selling_price;
-                $orderItemModel->price_item_count=$product->selling_price * $typeoption->number ;
-                $orderItemModel->profits_margin=$profit_margin;
+                $orderItemModel->price_item_count=$typeoption->price ;
+            
+                $orderItemModel->profits_margin=$profit_margin * $typeoption->number;
+                $orderItemModel->profit_margin=$profit_margin;
                 $orderItemModel->quantity=$typeoption->number ;
                 $order_model->user_id=$user->id;
                 $order_model->save(false);
