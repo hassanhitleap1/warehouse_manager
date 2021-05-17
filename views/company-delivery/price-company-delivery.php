@@ -17,8 +17,7 @@ use yii\bootstrap\Html;
             'model' => $prices_delivery[0],
             'formId' => 'dynamic-form',
             'formFields' => [
-                'number',
-                'text',
+                'region_id',
                 'price'
             ],
         ]); ?>
@@ -49,17 +48,14 @@ use yii\bootstrap\Html;
 
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <?= $form->field($price_delivery, "[{$in}]number")->textInput(['maxlength' => true])
-                                        ->label(Yii::t('app', 'Number')) ?>
+                                    <?= $form->field($price_delivery, "[{$in}]region_id")->textInput(['maxlength' => true])
+                                        ->label(Yii::t('app', 'Region')) ?>
                                 </div>
                                 <div class="col-sm-8">
-                                    <?= $form->field($price_delivery, "[{$in}]text")->textInput(['maxlength' => true,'class'=>'form-control'])
-                                        ->label(Yii::t('app', 'Text'))  ?>
-                                </div>
-                                <div class="col-sm-2">
                                     <?= $form->field($price_delivery, "[{$in}]price")->textInput(['maxlength' => true,'class'=>'form-control'])
                                         ->label(Yii::t('app', 'Price'))  ?>
                                 </div>
+                                
                              
                             </div><!-- end:row -->  
 
