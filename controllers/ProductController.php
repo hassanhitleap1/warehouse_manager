@@ -41,7 +41,7 @@ class ProductController extends Controller
             $today=Carbon::now("Asia/Amman");
             $delivery_price=$region->price_delivery;
             $discount=($typeoption->number *$product->selling_price) - $typeoption->price;
-            $profit_margin= $typeoption->price- $product->purchasing_price ;
+            $profit_margin= $typeoption->price  -  ($product->purchasing_price * $typeoption->number) ;
             $order_model=new Orders;
             $order_model->order_id = (string) $next_order;
             $order_model->delivery_time=$today->addDay(1);
