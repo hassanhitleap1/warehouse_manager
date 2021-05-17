@@ -33,6 +33,7 @@ class m201129_225724_orders extends Migration
             "amount_required"=>$this->double()->notNull(),
             "note"=>$this->text()->defaultValue(null),
             'shipping_id' => $this->smallInteger()->defaultValue(null),
+            'company_delivery_id'=> $this->integer()->defaultValue(1),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);

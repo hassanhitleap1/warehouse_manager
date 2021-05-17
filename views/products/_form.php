@@ -1,6 +1,7 @@
 <?php
 
 use app\models\categorises\Categorises;
+use app\models\companydelivery\CompanyDelivery;
 use app\models\products\Products;
 use app\models\suppliers\Suppliers;
 use app\models\units\Units;
@@ -129,17 +130,22 @@ if (!$model->isNewRecord) {
                        
                     ]); ?>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
             <?= $form->field($model, 'quantity')->textInput(['id'=>'quantity']) ?>
             </div>
-            <div class="col-md-3">
-            <?= $form->field($model, 'unit_id')->widget(Select2::classname(), [
+            <div class="col-md-2">
+                <?= $form->field($model, 'unit_id')->widget(Select2::classname(), [
                         'data' =>  ArrayHelper::map(Units::find()->all(), 'id', 'name_en'),
                         'language' => 'ar',
                         'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
                        
-                    ]); ?>    
-           
+                    ]); ?>
+            </div>
+            <div class="col-md-2">
+                <?= $form->field($model, 'company_delivery_id')->widget(Select2::classname(), [
+                    'data' =>  ArrayHelper::map(CompanyDelivery::find()->all(), 'id', 'name'),
+                    'language' => 'ar',
+                ]); ?>
             </div>
     </div>
 
