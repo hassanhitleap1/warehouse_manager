@@ -166,6 +166,8 @@ return [
     "SubTotal"=>"المجموع الفرعي",
     "Print_All_Invoice"=>"طباعة لالفواتير",
     "Export_PDF"=>"استخراج ملف pdf",
-    "Import"=>"ادراج"
+    "Import"=>"ادراج",
+    'Company_Delivery'=>'شركات التوصيل',
+    'Price_Company_Delivery'=>'سعر توصيل الشركة',
 
 ];

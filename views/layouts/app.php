@@ -115,6 +115,8 @@ MainAsset::register($this);
                     ['label' => Yii::t('app', 'Units'), 'url' => ['/units/index']],
                     ['label' => Yii::t('app', 'Status'), 'url' => ['/status/index']],
                     ['label' => Yii::t('app', 'Warehouse'), 'url' => ['/warehouse/index']],
+                    ['label' => Yii::t('app', 'Company_Delivery'), 'url' => ['/company-delivery/index']],
+                    ['label' => Yii::t('app', 'Price_Company_Delivery'), 'url' => ['/price-company-delivery/index']],
 
                 ],
             ];

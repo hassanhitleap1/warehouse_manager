@@ -2,6 +2,7 @@
 
 namespace app\models\companydelivery;
 
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -31,7 +32,6 @@ class CompanyDelivery extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 250],
             [['address'], 'string', 'max' => 300],
             [['phone'], 'string', 'max' => 25],
@@ -60,5 +60,29 @@ class CompanyDelivery extends \yii\db\ActiveRecord
     public static function find()
     {
         return new CompanyDeliveryQuery(get_called_class());
+    }
+
+
+           /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

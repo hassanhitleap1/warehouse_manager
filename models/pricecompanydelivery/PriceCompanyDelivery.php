@@ -2,6 +2,7 @@
 
 namespace app\models\pricecompanydelivery;
 
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -33,7 +34,7 @@ class PriceCompanyDelivery extends \yii\db\ActiveRecord
             [['region_id', 'company_delivery_id'], 'integer'],
             [['price'], 'required'],
             [['price'], 'number'],
-            [['created_at', 'updated_at'], 'safe'],
+    
         ];
     }
 
@@ -44,11 +45,11 @@ class PriceCompanyDelivery extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'region_id' => Yii::t('app', 'Region ID'),
-            'company_delivery_id' => Yii::t('app', 'Company Delivery ID'),
+            'region_id' => Yii::t('app', 'Region'),
+            'company_delivery_id' => Yii::t('app', 'Company_Delivery'),
             'price' => Yii::t('app', 'Price'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'created_at' => Yii::t('app', 'Created_At'),
+            'updated_at' => Yii::t('app', 'Updated_At'),
         ];
     }
 
@@ -59,5 +60,28 @@ class PriceCompanyDelivery extends \yii\db\ActiveRecord
     public static function find()
     {
         return new PrQuery(get_called_class());
+    }
+
+           /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        $today=Carbon::now("Asia/Amman");
+        if (parent::beforeSave($insert)) {
+            // Place your custom code here
+            if ($this->isNewRecord) {
+                $this->created_at = $today;
+                $this->updated_at = $today;
+
+
+            } else {
+                $this->updated_at =$today;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
