@@ -184,6 +184,14 @@ $(document).on('change','#area_id',function (e) {
 
 
 
+$(document).on('click', '.fast_order', function(e){
+    e.preventDefault();
+    url = $(this).attr('href');
+    $('#model').modal('show')
+        .find('#modelContent')
+        .load(url);
+});
+
 
 $(document).on('click', '.modelbutton', function(e){
     e.preventDefault();

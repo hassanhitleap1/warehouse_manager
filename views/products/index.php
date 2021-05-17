@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -165,10 +166,34 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'created_at',
             //'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [   'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {fast_order}' ,
+                'buttons'=>[
+                    'fast_order' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $url, [
+                            'title' => Yii::t('app', 'fast_order'),
+                            'class'=>'fast_order'
+                        ]);
+
+                    }
+                ]
+            ],
         ],
     ]); ?>
 
     <?php Pjax::end(); ?>
 
+
+    <?php
+
+    Modal::begin([
+        'id'     => 'model',
+        'size'   => 'model-lg',
+    ]);
+
+    echo "<div id='modelContent'></div>";
+
+    Modal::end();
+
+    ?>
 </div>
