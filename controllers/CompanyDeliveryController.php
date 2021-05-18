@@ -7,6 +7,7 @@ use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use Yii;
 use app\models\companydelivery\CompanyDelivery;
 use app\models\companydelivery\CompanyDeliverySearch;
+use app\models\regions\Regions;
 use Exception;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -70,6 +71,8 @@ class CompanyDeliveryController extends Controller
     {
         $model = new CompanyDelivery();
         $prices_delivery = [new PriceCompanyDelivery()];
+
+        
         if ($model->load(Yii::$app->request->post()) ) {
             $prices_delivery= Model::createMultiple(PriceCompanyDelivery::classname());
             Model::loadMultiple($prices_delivery, Yii::$app->request->post());
@@ -120,7 +123,8 @@ class CompanyDeliveryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $prices_delivery=$model->prices_delivery;
+        $prices_delivery=$model->priceCompanyDelivery;
+        
         if ($model->load(Yii::$app->request->post()) ) {
             $oldIDs = ArrayHelper::map($prices_delivery, 'id', 'id');
             $prices_delivery = Model::createMultiple(PriceCompanyDelivery::classname(), $prices_delivery);
