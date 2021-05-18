@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\Model;
+use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use Yii;
 use app\models\companydelivery\CompanyDelivery;
 use app\models\companydelivery\CompanyDeliverySearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,13 +68,44 @@ class CompanyDeliveryController extends Controller
     public function actionCreate()
     {
         $model = new CompanyDelivery();
+        $prices_delivery = [new PriceCompanyDeliveryController()];
+        if ($model->load(Yii::$app->request->post()) ) {
+            $prices_delivery= Model::createMultiple(PriceCompanyDeliveryController::classname());
+            Model::loadMultiple($prices_delivery, Yii::$app->request->post());
+            // validate all models
+            $valid = $model->validate();
+            $valid =    Model::validateMultiple($prices_delivery) && $valid;
+            $valid =boolval($valid);
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        foreach ($prices_delivery as $price_delivery) {
+                            $price_delivery->product_id = $model->id;
+                            if (! ($flag = $price_delivery->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                }catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+
+            }
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'prices_delivery' => (empty($prices_delivery)) ? [new PriceCompanyDeliveryController] : $prices_delivery,
         ]);
     }
 
@@ -85,13 +119,49 @@ class CompanyDeliveryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $prices_delivery=$model->prices_delivery;
+        if ($model->load(Yii::$app->request->post()) ) {
+            $oldIDs = ArrayHelper::map($prices_delivery, 'id', 'id');
+            $prices_delivery = Model::createMultiple(PriceCompanyDelivery::classname(), $prices_delivery);
+            Model::loadMultiple($prices_delivery, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($prices_delivery, 'id', 'id')));
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($prices_delivery)  && $valid;
+            $valid = boolval($valid);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+
+                    if ($flag = $model->save(false)) {
+                        foreach ($prices_delivery as $price_delivery) {
+                            $price_delivery->product_id = $model->id;
+                            if (!($flag = $price_delivery->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                    }
+                }
+
+
+
+                    if ($flag) {
+
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+
+
+                }catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+
         }
 
+    }
         return $this->render('update', [
             'model' => $model,
+            'prices_delivery' => (empty($prices_delivery)) ? [new PriceCompanyDelivery()] : $prices_delivery
         ]);
     }
 
