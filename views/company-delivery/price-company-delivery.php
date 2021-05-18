@@ -81,3 +81,14 @@ $regions=ArrayHelper::map(Regions::find()->all(), 'id', 'name_ar');
 
 
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script  type="text/javascript">
+
+$(".add-item").on("click", function(e) {
+    reload_js_select2();
+    ;
+    setTimeout(function(){   $(".kv-plugin-loading").css("display","none"); }, 1000);
+    ;
+});
+
+</script>
