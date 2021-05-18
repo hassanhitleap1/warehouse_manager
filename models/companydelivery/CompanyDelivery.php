@@ -2,6 +2,7 @@
 
 namespace app\models\companydelivery;
 
+use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use Carbon\Carbon;
 use Yii;
 
@@ -63,6 +64,13 @@ class CompanyDelivery extends \yii\db\ActiveRecord
     }
 
 
+        /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPriceCompanyDelivery()
+    {
+        return $this->hasMany(PriceCompanyDelivery::className(), ['company_delivery_id' => 'id']);
+    }
            /**
      * @inheritdoc
      */
