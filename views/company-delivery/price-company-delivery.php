@@ -2,7 +2,10 @@
 
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\bootstrap\Html;
-
+use app\models\regions\Regions;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
+$regions=ArrayHelper::map(Regions::find()->all(), 'id', 'name_ar');
 ?>
 <div class="panel panel-default">
     <div class="panel-body">
@@ -47,11 +50,15 @@ use yii\bootstrap\Html;
                             ?>
 
                             <div class="row">
-                                <div class="col-sm-2">
-                                    <?= $form->field($price_delivery, "[{$in}]region_id")->textInput(['maxlength' => true])
-                                        ->label(Yii::t('app', 'Region')) ?>
+                                <div class="col-sm-6">
+                                    <?= $form->field($price_delivery, "[{$in}]region_id")->widget(Select2::classname(), [
+                                                'data' =>  $regions,
+                                                'language' => 'ar',
+                                                'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'id'=>'region_id'],
+
+                                            ]); ?>
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-6">
                                     <?= $form->field($price_delivery, "[{$in}]price")->textInput(['maxlength' => true,'class'=>'form-control'])
                                         ->label(Yii::t('app', 'Price'))  ?>
                                 </div>

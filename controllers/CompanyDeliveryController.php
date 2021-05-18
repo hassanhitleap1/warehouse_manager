@@ -7,6 +7,7 @@ use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use Yii;
 use app\models\companydelivery\CompanyDelivery;
 use app\models\companydelivery\CompanyDeliverySearch;
+use Exception;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -68,9 +69,9 @@ class CompanyDeliveryController extends Controller
     public function actionCreate()
     {
         $model = new CompanyDelivery();
-        $prices_delivery = [new PriceCompanyDeliveryController()];
+        $prices_delivery = [new PriceCompanyDelivery()];
         if ($model->load(Yii::$app->request->post()) ) {
-            $prices_delivery= Model::createMultiple(PriceCompanyDeliveryController::classname());
+            $prices_delivery= Model::createMultiple(PriceCompanyDelivery::classname());
             Model::loadMultiple($prices_delivery, Yii::$app->request->post());
             // validate all models
             $valid = $model->validate();
@@ -81,7 +82,7 @@ class CompanyDeliveryController extends Controller
                 try {
                     if ($flag = $model->save(false)) {
                         foreach ($prices_delivery as $price_delivery) {
-                            $price_delivery->product_id = $model->id;
+                            $price_delivery->company_delivery_id = $model->id;
                             if (! ($flag = $price_delivery->save(false))) {
                                 $transaction->rollBack();
                                 break;
@@ -105,7 +106,7 @@ class CompanyDeliveryController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'prices_delivery' => (empty($prices_delivery)) ? [new PriceCompanyDeliveryController] : $prices_delivery,
+            'prices_delivery' => (empty($prices_delivery)) ? [new PriceCompanyDelivery] : $prices_delivery,
         ]);
     }
 
@@ -135,7 +136,7 @@ class CompanyDeliveryController extends Controller
 
                     if ($flag = $model->save(false)) {
                         foreach ($prices_delivery as $price_delivery) {
-                            $price_delivery->product_id = $model->id;
+                            $price_delivery->company_delivery_id = $model->id;
                             if (!($flag = $price_delivery->save(false))) {
                                 $transaction->rollBack();
                                 break;
