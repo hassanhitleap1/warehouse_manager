@@ -7,6 +7,7 @@ use app\models\OptionsSellProduct\OptionsSellProduct;
 use app\models\orders\OrderForm;
 use app\models\orders\Orders;
 use app\models\ordersitem\OrdersItem;
+use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use app\models\users\Users;
 use Carbon\Carbon;
 use Yii;
@@ -39,7 +40,19 @@ class ProductController extends Controller
             $region=Regions::findOne($modelOrder->region_id);
             $typeoption=OptionsSellProduct::findOne($modelOrder->typeoption);
             $today=Carbon::now("Asia/Amman");
-            $delivery_price=$region->price_delivery;
+            if(is_null($product->company_delivery_id)){
+                $model_del=PriceCompanyDelivery::find()->where(['company_delivery_id','=',$product->company_delivery_id])
+                    ->andWhere(['region_id','=',$product->region_id])->one();
+                if(is_null($model_del)){
+                    $delivery_price=$model_del->price;
+                }else{
+                    $delivery_price=$region->price_delivery;
+                }
+
+            }else{
+                $delivery_price=$region->price_delivery;
+            }
+
             $discount=($typeoption->number *$product->selling_price) - $typeoption->price;
             $profit_margin= $typeoption->price  -  ($product->purchasing_price * $typeoption->number) ;
             $order_model=new Orders;
