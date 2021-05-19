@@ -5,6 +5,15 @@ use yii\widgets\ActiveForm;
 
 ?>
 
+<?php if (Yii::$app->session->has('message')) : ?>
+    <?= Alert::widget([
+    'options' => [
+    'class' => 'alert-info',
+    ],
+    'body' => Yii::$app->session->get('message'),
+    ]);?>
+<?php Yii::$app->session->remove('message') ?>
+<?php endif; ?>
 <div class="advertisement-form">
 
     <?php $form = ActiveForm::begin(); ?>
