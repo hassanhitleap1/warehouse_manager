@@ -1,6 +1,7 @@
 <?php
 
 use app\models\area\Area;
+use app\models\companydelivery\CompanyDelivery;
 use app\models\countries\Countries;
 use app\models\orders\Orders;
 use app\models\regions\Regions;
@@ -88,6 +89,10 @@ if (!$model->isNewRecord) {
                 'language' => 'ar',
                 'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'id'=>'area_id'],
 
+            ]); ?>
+            <?= $form->field($model, 'company_delivery_id')->widget(Select2::classname(), [
+                'data' =>  ArrayHelper::map(CompanyDelivery::find()->all(), 'id', 'name'),
+                'language' => 'ar',
             ]); ?>
         </div>
         <div class="col-md-4">
