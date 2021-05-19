@@ -56,6 +56,9 @@ class SettingsController extends BaseController
             $string.="];\n ?>";
 
             file_put_contents($parh, $string);
+
+
+            
             // set session save
             Yii::$app->session->set('message', 'successfuly update' );
         }
