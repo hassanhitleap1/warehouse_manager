@@ -169,5 +169,13 @@ return [
     "Import"=>"ادراج",
     'Company_Delivery'=>'شركات التوصيل',
     'Price_Company_Delivery'=>'سعر توصيل الشركة',
+    'adminEmail'=>'adminEmail',
+    'senderEmail'=>'senderEmail',
+    'senderName'=>'senderName',
+    'bsDependencyEnabled'=>'bsDependencyEnabled',
+    'facebook_id'=>'facebook id',
+    'sanpchat_id'=>'sanpchat id',
+    'sanpchat_email'=>'sanpchat email',
+    'tiktok_id'=>'tiktok id',
 
 ];

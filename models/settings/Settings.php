@@ -1,12 +1,11 @@
-
 <?php
-
+namespace app\models\settings;
 
 use yii\base\Model;
 
 class Settings extends Model
 {
-    public $adminEmail;
+    public $params=[];
     public $senderEmail;
     public $senderName;
     public $bsDependencyEnabled;
@@ -24,7 +23,7 @@ class Settings extends Model
     public function rules()
     {
         return [
-            [['adminEmail', 'senderEmail', 'senderName', 'bsDependencyEnabled','facebook_id','sanpchat_id','sanpchat_email','tiktok_id','company_delivery'], 'required'],
+            [['adminEmail', 'senderEmail', 'senderName', 'bsDependencyEnabled', 'phone','facebook_id','sanpchat_id','sanpchat_email','tiktok_id','company_delivery'], 'required'],
         ];
     }
 
@@ -43,7 +42,8 @@ class Settings extends Model
             'sanpchat_id' => Yii::t('app', 'sanpchat_id'),
             'sanpchat_email' => Yii::t('app', 'sanpchat_email'),
             'tiktok_id' => Yii::t('app', 'tiktok_id'),
-            'company_delivery' => Yii::t('app', 'company_delivery'),
+            'phone'=> Yii::t('app', 'Phone'),
+            'company_delivery' => Yii::t('app', 'Company_Delivery'),
         ];
     }
 }
