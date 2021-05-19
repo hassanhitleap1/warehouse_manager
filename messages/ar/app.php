@@ -178,5 +178,7 @@ return [
     'sanpchat_email'=>'sanpchat email',
     'tiktok_id'=>'tiktok id',
     'Settings'=>'الاعدادات',
+    'Create_Company_Delivery'=>'انشاء شركة توصيل',
+    'Company_Deliveries'=>'شركات النوصيل',
 
 ];

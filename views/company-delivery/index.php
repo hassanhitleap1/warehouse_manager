@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\companydelivery\CompanyDeliverySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Company Deliveries');
+$this->title = Yii::t('app', 'Company_Deliveries');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="company-delivery-index">
