@@ -7,12 +7,9 @@ use yii\widgets\ActiveForm;
 ?>
 
 <?php if (Yii::$app->session->has('message')) : ?>
-    <?= Alert::widget([
-        'options' => [
-        'class' => 'alert-info',
-        ],
-        'body' => Yii::$app->session->get('message'),
-    ]);?>
+    <div class="alert alert-success">
+        <strong>Success!</strong> <?= Yii::$app->session->get('message') ?>
+    </div>
 <?php Yii::$app->session->remove('message') ?>
 <?php endif; ?>
 <div class="advertisement-form">

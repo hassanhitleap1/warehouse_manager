@@ -7,6 +7,7 @@ use yii\base\Model;
 class Settings extends Model
 {
     public $params=[];
+    public $adminEmail;
     public $senderEmail;
     public $senderName;
     public $bsDependencyEnabled;
