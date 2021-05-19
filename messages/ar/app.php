@@ -177,5 +177,6 @@ return [
     'sanpchat_id'=>'sanpchat id',
     'sanpchat_email'=>'sanpchat email',
     'tiktok_id'=>'tiktok id',
+    'Settings'=>'الاعدادات',
 
 ];

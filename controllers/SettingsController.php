@@ -2,8 +2,9 @@
 
 namespace app\controllers;
 
-use app\models\settings\Settings;
 use Yii;
+use app\models\settings\Settings;
+
 use yii\filters\VerbFilter;
 
 /**

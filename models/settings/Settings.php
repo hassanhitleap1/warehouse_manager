@@ -1,6 +1,7 @@
 <?php
 namespace app\models\settings;
 
+use Yii;
 use yii\base\Model;
 
 class Settings extends Model
