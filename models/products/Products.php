@@ -59,7 +59,7 @@ class Products extends \yii\db\ActiveRecord
         return [
             [['name','quantity', 'purchasing_price', 'selling_price','category_id', 'warehouse_id'], 'required'],
             [['purchasing_price', 'selling_price'], 'double'],
-            [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
+            [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id','company_delivery_id'], 'integer'],
             [['name'], 'string', 'max' => 255],
              [['video_url','thumbnail'], 'string', 'max' => 500],
              [['description'], 'string'],
@@ -91,6 +91,7 @@ class Products extends \yii\db\ActiveRecord
             "type_options"=>Yii::t('app', 'Type_Options'),
             "video_url"=>Yii::t('app', 'Video_Url'),
             "description"=>Yii::t('app', 'Description'),
+            'company_delivery_id'=>Yii::t('app', 'Company Delivery'),
         ];
     }
 

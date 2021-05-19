@@ -145,6 +145,7 @@ if (!$model->isNewRecord) {
                 <?= $form->field($model, 'company_delivery_id')->widget(Select2::classname(), [
                     'data' =>  ArrayHelper::map(CompanyDelivery::find()->all(), 'id', 'name'),
                     'language' => 'ar',
+                    'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
                 ]); ?>
             </div>
     </div>

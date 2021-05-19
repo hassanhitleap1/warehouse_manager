@@ -7,7 +7,6 @@ use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use Yii;
 use app\models\companydelivery\CompanyDelivery;
 use app\models\companydelivery\CompanyDeliverySearch;
-use app\models\regions\Regions;
 use Exception;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -180,7 +179,7 @@ class CompanyDeliveryController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        PriceCompanyDelivery::find()->where(['company_delivery_id','=',$id])->delete();
         return $this->redirect(['index']);
     }
 

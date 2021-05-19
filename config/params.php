@@ -10,6 +10,7 @@
 //     'sanpchat_id'=> '6ea08b95-a6d5-43b0-baaf-ec8c8a44a74c',
 //     'sanpchat_email'=>'mohammedkiwan99@gmail.com',
 //     'tiktok_id'=>'C2ENV27MU8Q03RAJ1NU0',
+//      'company_delivery'=>1,
 
 // ];
 
@@ -24,5 +25,6 @@ return [
     'sanpchat_id'=> '',
     'sanpchat_email'=>'',
     'tiktok_id'=>'',
+    'company_delivery'=>1,
 
 ];

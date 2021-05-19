@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="company-delivery-form">
 
-    <?php $form = ActiveForm::begin(['id' => 'dynamic-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
         
     <div class="row">
         <div class="col-md-4">
