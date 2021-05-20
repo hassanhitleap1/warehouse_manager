@@ -422,6 +422,7 @@ class ProductsController extends BaseController
             }
         }
         return $this->renderAjax('faster_order',[
+            'model' => $this->findModel($id),
            'modelOrder'=>$modelOrder
         ]);
     }

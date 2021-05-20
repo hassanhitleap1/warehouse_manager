@@ -167,9 +167,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
 
             [   'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {fast_order}' ,
+                'template' => '{view} {update} {delete} {faster-order}' ,
                 'buttons'=>[
-                    'fast_order' => function ($url, $model) {
+                    'faster-order' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $url, [
                             'title' => Yii::t('app', 'fast_order'),
                             'class'=>'fast_order'
