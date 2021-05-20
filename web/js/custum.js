@@ -228,6 +228,33 @@ $(document).on('click', '.change-status', function(e){
 
 });
 
+
+$(document).on('click', '.change-status-all', function(e){
+    e.preventDefault();
+    var id_string= $(this).attr("att_id_string");
+    var status_id= $(this).attr("att_status_id");
+    var name_status= $(this).attr("name_status");
+    let url= `${SITE_URL}/index.php?r=orders/change-status-all&status_id=${status_id}&id_string=${id_string}`;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (json) {
+            if(json.code==201){
+                json.data.forEach(order => {
+                    $(".column_status_"+order.id).text(name_status);
+                })
+                $('#model').modal('hide');
+                $('#modelContent').html("");
+
+            }else {
+                alert("sumthing  error");
+            }
+        }
+    });
+
+});
+
+
 function profit_margin_fn(){
     let profit_margin=0;
     let discount=0;
@@ -452,6 +479,60 @@ $(document).on('click','#export_pdf',function (e) {
     let url= `${SITE_URL}/index.php?r=orders/export-pdf&string_id=${string_id}`;
     window.open(url);
     
+});
+
+
+$(document).on('click','#change_status',function (e) {
+    ides=[];
+    let string_id="";
+    $('input[type=checkbox]').each(function () {
+        if (this.checked) {
+            string_id+=`${$(this).val()},`;
+            ides.push($(this).val())
+        }
+    });
+    if(ides.length==0){
+        alert("select orders");
+        return ;
+    }
+    string_id=string_id.slice(0, -1);
+    let url= `${SITE_URL}/index.php?r=orders/change-status-selected&string_id=${string_id}`;
+
+    $('#model').modal('show')
+        .find('#modelContent')
+        .load(url);
+
+});
+
+$(document).on('click','#delete_orders',function (e) {
+    ides=[];
+    let string_id="";
+    $('input[type=checkbox]').each(function () {
+        if (this.checked) {
+            string_id+=`${$(this).val()},`;
+            ides.push($(this).val())
+        }
+    });
+
+    if(ides.length==0){
+        alert("select orders");
+    }
+    string_id=string_id.slice(0, -1)
+    let url= `${SITE_URL}/index.php?r=orders/delete-order-selected&string_id=${string_id}`;
+
+    var r = confirm("do yo want delete all selected !");
+    if (r == true) {
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            success: function (json) {
+                location.reload();
+            }
+        });
+
+    }
+
 });
 
 
