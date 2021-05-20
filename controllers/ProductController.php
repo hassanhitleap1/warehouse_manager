@@ -40,7 +40,7 @@ class ProductController extends Controller
             $region=Regions::findOne($modelOrder->region_id);
             $typeoption=OptionsSellProduct::findOne($modelOrder->typeoption);
             $today=Carbon::now("Asia/Amman");
-            if(is_null($product->company_delivery_id)){
+            if(! is_null($product->company_delivery_id)){
                 $model_del=PriceCompanyDelivery::find()->where(['company_delivery_id','=',$product->company_delivery_id])
                     ->andWhere(['region_id','=',$product->region_id])->one();
                 if(is_null($model_del)){
