@@ -181,6 +181,7 @@ return [
     'Create_Company_Delivery'=>'انشاء شركة توصيل',
     'Company_Deliveries'=>'شركات النوصيل',
     'Logo'=>'Logo',
+    'Create_Company_Delivery'=>'انشاء شركة توصيل'
 
 
 ];
