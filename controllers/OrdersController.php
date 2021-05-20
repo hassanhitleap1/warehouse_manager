@@ -227,12 +227,12 @@ class OrdersController extends Controller
     }
 
 
-    public function actionDeletedSelected(){
+    public function actionDeleteOrderSelected(){
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $string_id=$_GET['string_id'];
         $ides = explode(",", $string_id);
-        Orders::find()->where(['in','id',$ides])->deleteAll();
-        OrdersItem::find()->where(['in','order_id',$ides])->deleteAll();
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        Orders::deleteAll(['in','id',$ides]);
+        OrdersItem::deleteAll(['in','order_id',$ides]);
         return ['code'=>201,'data'=>$ides];
     }
 
@@ -246,7 +246,7 @@ class OrdersController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        OrdersItem::find()->where(['=','order_id',$id])->deleteAll();
+        OrdersItem::deleteAll(['=','order_id',$id]);
         return $this->redirect(['index']);
     }
 
