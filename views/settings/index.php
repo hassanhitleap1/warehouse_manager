@@ -1,10 +1,27 @@
 <?php
 
 use app\models\companydelivery\CompanyDelivery;
+use kartik\file\FileInput;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
+$dataThumbnail = [
+    'showCaption' => true,
+    'showRemove' => true,
+    'showUpload' => false,
+    'initialPreview' => [
+        Yii::getAlias('@web') . '/images/logo.png',
+    ],
+    'initialPreviewAsData' => false,
+    'initialCaption' => Yii::getAlias('@web') .  '/images/logo.png',
+    'initialPreviewConfig' => [
+        ['caption' => 'logo'],
+    ],
+    'overwriteInitial'=>true
+
+];
 
 ?>
 
@@ -39,6 +56,16 @@ use yii\widgets\ActiveForm;
             
             </div>
         </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <?= $form->field($model, 'logo')->widget(FileInput::classname(), [
+                        'options' => ['accept' => 'image/png'],
+                        'pluginOptions' => $dataThumbnail
+                    ]);
+                    ?>
+
+                </div>
+            </div>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

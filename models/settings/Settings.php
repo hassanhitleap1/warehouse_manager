@@ -17,6 +17,7 @@ class Settings extends Model
     public $sanpchat_email;
     public $tiktok_id;
     public $company_delivery;
+    public $logo;
 
 
     /**
@@ -26,6 +27,7 @@ class Settings extends Model
     {
         return [
             [['adminEmail', 'senderEmail', 'senderName', 'bsDependencyEnabled', 'phone','facebook_id','sanpchat_id','sanpchat_email','tiktok_id','company_delivery'], 'required'],
+            [['logo'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png'],
         ];
     }
 
@@ -46,6 +48,7 @@ class Settings extends Model
             'tiktok_id' => Yii::t('app', 'tiktok_id'),
             'phone'=> Yii::t('app', 'Phone'),
             'company_delivery' => Yii::t('app', 'Company_Delivery'),
+            'logo' => Yii::t('app', 'Logo'),
         ];
     }
 }

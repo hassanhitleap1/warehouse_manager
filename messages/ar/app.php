@@ -180,5 +180,7 @@ return [
     'Settings'=>'الاعدادات',
     'Create_Company_Delivery'=>'انشاء شركة توصيل',
     'Company_Deliveries'=>'شركات النوصيل',
+    'Logo'=>'Logo',
+
 
 ];

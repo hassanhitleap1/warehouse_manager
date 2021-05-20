@@ -6,6 +6,7 @@ use Yii;
 use app\models\settings\Settings;
 
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CategorisesController implements the CRUD actions for Categorises model.
@@ -47,6 +48,11 @@ class SettingsController extends BaseController
             $params['sanpchat_email'] = $model->sanpchat_email;
             $params['tiktok_id'] = $model->tiktok_id;
             $params['company_delivery'] = $model->company_delivery;
+            $file = UploadedFile::getInstance($model, 'logo');
+            if (!is_null($file)) {
+                $path="images/logo" . "." . $file->extension;
+                $file->saveAs($path);
+            }
 
             $parh="../config/params.php";
             $string="<?php \n return [ \n";
