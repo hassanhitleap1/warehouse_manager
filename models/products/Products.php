@@ -91,7 +91,7 @@ class Products extends \yii\db\ActiveRecord
             "type_options"=>Yii::t('app', 'Type_Options'),
             "video_url"=>Yii::t('app', 'Video_Url'),
             "description"=>Yii::t('app', 'Description'),
-            'company_delivery_id'=>Yii::t('app', 'Company Delivery'),
+            'company_delivery_id'=>Yii::t('app', 'Company_Delivery'),
         ];
     }
 
