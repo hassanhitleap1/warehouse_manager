@@ -234,15 +234,20 @@ $(document).on('click', '.change-status-all', function(e){
     var id_string= $(this).attr("att_id_string");
     var status_id= $(this).attr("att_id_string");
     var name_status= $(this).attr("name_status");
-    let url= `${SITE_URL}/index.php?r=orders/change-status-selected&status_id=${status_id}&string_id=${id_string}`;
+    let url= `${SITE_URL}/index.php?r=orders/change-status-selected&name_status=${name_status}&status_id=${status_id}&string_id=${id_string}`;
     $.ajax({
         url: url,
         type: 'GET',
         success: function (json) {
+          
             if(json.code==201){
-                json.data.forEach(order => {
-                    $(".column_status_"+order.id).text(name_status);
-                })
+                
+            $.each(json.data, function( index, value ) {
+                console.log("value",value);
+                console.log("name_status",name_status);
+                $(".column_status_"+value.id).text(name_status);
+            });
+                
                 $('#model').modal('hide');
                 $('#modelContent').html("");
 

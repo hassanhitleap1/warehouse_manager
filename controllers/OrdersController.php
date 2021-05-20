@@ -221,7 +221,7 @@ class OrdersController extends Controller
         foreach($models as $key =>$model){
             $status_id=$_GET['status_id'];
             $status_name=OrderHelper::management_stock_product($model,$status_id);
-            $data=['id'=>$model->id,'status_id'=>$status_id,'status_name'=>$status_name];
+            $data[]=['id'=>$model->id,'status_id'=>$status_id,'status_name'=>$status_name];
         }
         return ['code'=>201,'data'=>$data];
     }
