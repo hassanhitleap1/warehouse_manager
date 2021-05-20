@@ -209,6 +209,32 @@ class OrdersController extends Controller
 
     }
 
+
+
+    public function actionChangeStatusSelected(){
+        $string_id=$_GET['string_id'];
+        $ides = explode(",", $string_id);
+        $models=Orders::find()->where(['in','id',$ides])->all();
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $data=[];
+        foreach($models as $key =>$model){
+            $status_id=$_GET['status_id'];
+            $status_name=OrderHelper::management_stock_product($model,$status_id);
+            $data=['id'=>$model->id,'status_id'=>$status_id,'status_name'=>$status_name];
+        }
+        return ['code'=>201,'data'=>$data];
+    }
+
+
+    public function actionDeletedSelected(){
+        $string_id=$_GET['string_id'];
+        $ides = explode(",", $string_id);
+        Orders::find()->where(['in','id',$ides])->deleteAll();
+        OrdersItem::find()->where(['in','order_id',$ides])->deleteAll();
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return ['code'=>201,'data'=>$ides];
+    }
+
     /**
      * Deletes an existing Orders model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -219,7 +245,7 @@ class OrdersController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        OrdersItem::find()->where(['=','order_id',$id])->deleteAll();
         return $this->redirect(['index']);
     }
 
