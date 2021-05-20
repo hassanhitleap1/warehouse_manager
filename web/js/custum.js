@@ -232,9 +232,9 @@ $(document).on('click', '.change-status', function(e){
 $(document).on('click', '.change-status-all', function(e){
     e.preventDefault();
     var id_string= $(this).attr("att_id_string");
-    var status_id= $(this).attr("att_status_id");
+    var status_id= $(this).attr("att_id_string");
     var name_status= $(this).attr("name_status");
-    let url= `${SITE_URL}/index.php?r=orders/change-status-all&status_id=${status_id}&id_string=${id_string}`;
+    let url= `${SITE_URL}/index.php?r=orders/change-status-selected&status_id=${status_id}&string_id=${id_string}`;
     $.ajax({
         url: url,
         type: 'GET',
@@ -496,7 +496,7 @@ $(document).on('click','#change_status',function (e) {
         return ;
     }
     string_id=string_id.slice(0, -1);
-    let url= `${SITE_URL}/index.php?r=orders/change-status-selected&string_id=${string_id}`;
+    let url= `${SITE_URL}/index.php?r=orders/set-status-selected&string_id=${string_id}`;
 
     $('#model').modal('show')
         .find('#modelContent')

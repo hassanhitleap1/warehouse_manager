@@ -308,8 +308,9 @@ class OrdersController extends Controller
 
     public function actionSetStatusSelected()
     {
+        $string_id=$_GET['string_id'];
         $status= $status=Status::find()->all();
-        return $this->renderAjax('set_status_all',['status'=>$status]);
+        return $this->renderAjax('set_status_all',['status'=>$status,'string_id'=>$string_id]);
     }
 
 
