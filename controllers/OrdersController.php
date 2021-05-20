@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\components\OrderHelper;
 use app\models\Model;
+use app\models\status\Status;
 use Yii;
 use app\models\orders\Orders;
 use app\models\orders\OrdersSearch;
@@ -304,6 +305,12 @@ class OrdersController extends Controller
         return $this->renderAjax('set_status',['model'=> $model,'status'=>$status]);
     }
 
+
+    public function actionSetStatusSelected()
+    {
+        $status= $status=Status::find()->all();
+        return $this->renderAjax('set_status_all',['status'=>$status]);
+    }
 
 
     public function actionExportPdf(){
