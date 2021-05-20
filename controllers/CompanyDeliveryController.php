@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Model;
 use app\models\pricecompanydelivery\PriceCompanyDelivery;
+use app\models\regions\Regions;
 use Yii;
 use app\models\companydelivery\CompanyDelivery;
 use app\models\companydelivery\CompanyDeliverySearch;
@@ -66,12 +67,10 @@ class CompanyDeliveryController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+   /* public function actionCreate()
     {
         $model = new CompanyDelivery();
         $prices_delivery = [new PriceCompanyDelivery()];
-
-        
         if ($model->load(Yii::$app->request->post()) ) {
             $prices_delivery= Model::createMultiple(PriceCompanyDelivery::classname());
             Model::loadMultiple($prices_delivery, Yii::$app->request->post());
@@ -110,6 +109,63 @@ class CompanyDeliveryController extends Controller
             'model' => $model,
             'prices_delivery' => (empty($prices_delivery)) ? [new PriceCompanyDelivery] : $prices_delivery,
         ]);
+    }*/
+
+
+    public function actionCreate()
+    {
+        $model = new CompanyDelivery();
+        $prices_delivery = [new PriceCompanyDelivery()];
+        $regionsModel=Regions::find()->all();
+        $next_id=1;
+        $i=0;
+        foreach ($regionsModel as $region){
+            $prices_delivery[$i]= new PriceCompanyDelivery();
+            $prices_delivery[$i]->region_id=$region->id;
+            $prices_delivery[$i]->company_delivery_id=$next_id;
+            $prices_delivery[$i]->price=$region->price_delivery;
+            $i++;
+        }
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            $prices_delivery= Model::createMultiple(PriceCompanyDelivery::classname());
+            Model::loadMultiple($prices_delivery, Yii::$app->request->post());
+            // validate all models
+            $valid = $model->validate();
+            $valid =    Model::validateMultiple($prices_delivery) && $valid;
+            $valid =boolval($valid);
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        foreach ($prices_delivery as $price_delivery) {
+                            $price_delivery->company_delivery_id = $model->id;
+                            if (! ($flag = $price_delivery->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+
+
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                }catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+
+            }
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+            'prices_delivery' => (empty($prices_delivery)) ? [new PriceCompanyDelivery] : $prices_delivery,
+            'regionsModel'=>$regionsModel
+        ]);
     }
 
     /**
@@ -123,7 +179,7 @@ class CompanyDeliveryController extends Controller
     {
         $model = $this->findModel($id);
         $prices_delivery=$model->priceCompanyDelivery;
-        
+        $regionsModel=Regions::find()->all();
         if ($model->load(Yii::$app->request->post()) ) {
             $oldIDs = ArrayHelper::map($prices_delivery, 'id', 'id');
             $prices_delivery = Model::createMultiple(PriceCompanyDelivery::classname(), $prices_delivery);
@@ -165,7 +221,8 @@ class CompanyDeliveryController extends Controller
     }
         return $this->render('update', [
             'model' => $model,
-            'prices_delivery' => (empty($prices_delivery)) ? [new PriceCompanyDelivery()] : $prices_delivery
+            'prices_delivery' => (empty($prices_delivery)) ? [new PriceCompanyDelivery()] : $prices_delivery,
+            'regionsModel'=>$regionsModel
         ]);
     }
 
