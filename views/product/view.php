@@ -1,5 +1,6 @@
 <?php
 
+use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use app\models\products\Products;
 use app\models\regions\Regions;
 use kartik\select2\Select2;
@@ -9,9 +10,21 @@ use yii\widgets\ActiveForm;
 
 $regions_model = Regions::find()->all();
 $regions = [];
-foreach ($regions_model as $key => $value) {
-    $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
+if(is_null($model->company_delivery_id)){
+    foreach ($regions_model as $key => $value) {
+        $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
+    }
+}else{
+    $price_company_delivery=PriceCompanyDelivery::find()
+    ->where(['=','company_delivery_id',$model->company_delivery_id])->asArray()->all();
+    print_r( $price_company_delivery);
+    exit;
+    foreach ($regions_model as $key => $value) {
+        $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
+    } 
 }
+
+
 $this->title = $model->name;
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.9.0/viewer.min.js" integrity="sha512-0goo56vbVLOJt9J6TMouBm2uE+iPssyO+70sdrT+J5Xbb5LsdYs31Mvj4+LntfPuV+VlK0jcvcinWQG5Hs3pOg==" crossorigin="anonymous"></script>
