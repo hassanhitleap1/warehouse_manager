@@ -57,6 +57,6 @@ class PdfController extends BaseController
 
 
     public function actionView($id){
-        return view('view',['id'=>$id]);
+        return $this->render('view',['id'=>$id]);
     }
 }
