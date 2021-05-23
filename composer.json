@@ -38,7 +38,8 @@
         "kartik-v/yii2-icons": "@dev",
         "coderius/yii2-pell-widget": "~1.0",
         "kartik-v/yii2-export": "*",
-        "kartik-v/yii2-date-range": "dev-master"
+        "kartik-v/yii2-date-range": "dev-master",
+        "endroid/qrcode": "^3.9"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
