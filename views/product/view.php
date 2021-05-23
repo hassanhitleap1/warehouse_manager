@@ -1,6 +1,5 @@
 <?php
 
-use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use app\models\products\Products;
 use app\models\regions\Regions;
 use kartik\select2\Select2;
@@ -15,12 +14,9 @@ if(is_null($model->company_delivery_id)){
         $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
     }
 }else{
-    $price_company_delivery=PriceCompanyDelivery::find()
-    ->where(['=','company_delivery_id',$model->company_delivery_id])->asArray()->all();
-    print_r( $price_company_delivery);
-    exit;
+    Regions::find()->leftJoin('price_company_delivery','price_company_delivery.price_company_delivery = regions.id and company_delivery_id='.$model->company_delivery_id.' limit 1')->all();
     foreach ($regions_model as $key => $value) {
-        $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
+        $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price . " )";
     } 
 }
 
