@@ -11,6 +11,24 @@ use app\models\orders\Orders;
  */
 class OrdersSearch extends Orders
 {
+
+    public $createTimeRange;
+    public $createTimeStart;
+    public $createTimeEnd;
+
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => DateRangeBehavior::className(),
+                'attribute' => 'createTimeRange',
+                'dateStartAttribute' => 'createTimeStart',
+                'dateEndAttribute' => 'createTimeEnd',
+            ]
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -19,6 +37,7 @@ class OrdersSearch extends Orders
         return [
             [['id', 'country_id', 'region_id', 'area_id', 'status_id','delivery_price','discount','total_price','amount_required'], 'integer'],
             [['order_id', 'delivery_date','user_id', 'delivery_time', 'address', 'phone','created_at', 'updated_at'], 'safe'],
+            [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
         ];
     }
 
@@ -84,10 +103,16 @@ class OrdersSearch extends Orders
             'orders.updated_at' => $this->updated_at,
         ]);
 
+
+        $query->andFilterWhere(['>=', 'created_at', $this->createTimeStart])
+            ->andFilterWhere(['<', 'created_at', $this->createTimeEnd]);
+
+
         $query->andFilterWhere(['like', 'user.name', $this->user_id])
             ->andFilterWhere(['like', 'user.phone', $this->phone])
             ->andFilterWhere(['like', 'orders.address', $this->address]);
             $query->orderBy(['orders.id' => SORT_DESC]);;
+
         return $dataProvider;
     }
 }

@@ -3,6 +3,7 @@ use kartik\field\FieldRange;
 use kartik\form\ActiveForm as FormActiveForm;
 use kartik\widgets\ActiveForm;
 use yii\helpers\Html;
+use kartik\daterange\DateRangePicker;
 
 
     
@@ -22,7 +23,23 @@ use yii\helpers\Html;
             'data-pjax' => 1
         ],
     ]); ?>
-    
+
+
+    <?php
+    echo DateRangePicker::widget([
+        'model'=>$model,
+        'attribute'=>'datetime_range',
+        'convertFormat'=>true,
+        'pluginOptions'=>[
+            'timePicker'=>true,
+            'timePickerIncrement'=>30,
+            'locale'=>[
+                'format'=>'Y-m-d h:i A'
+            ]
+        ]
+    ]);
+
+    ?>
 
     <?=   FieldRange::widget([
             'form' => $form,
