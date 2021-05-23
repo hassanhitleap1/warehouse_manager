@@ -54,4 +54,9 @@ class PdfController extends BaseController
         exit;
 
     }
+
+
+    public function actionView($id){
+        return view('view',['id'=>$id]);
+    }
 }
