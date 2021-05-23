@@ -14,7 +14,7 @@ if(is_null($model->company_delivery_id)){
         $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
     }
 }else{
-    Regions::find()->leftJoin('price_company_delivery','price_company_delivery.price_company_delivery = regions.id and company_delivery_id='.$model->company_delivery_id.' limit 1')->all();
+    Regions::find()->leftJoin('price_company_delivery','price_company_delivery.price_company_delivery = regions.id and price_company_delivery.company_delivery_id='.$model->company_delivery_id.' limit 1')->all();
     foreach ($regions_model as $key => $value) {
         $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price . " )";
     } 
