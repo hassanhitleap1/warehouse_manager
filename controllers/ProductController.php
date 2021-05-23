@@ -41,12 +41,15 @@ class ProductController extends Controller
             $typeoption=OptionsSellProduct::findOne($modelOrder->typeoption);
             $today=Carbon::now("Asia/Amman");
             if(! is_null($product->company_delivery_id)){
-                $model_del=PriceCompanyDelivery::find()->where(['company_delivery_id','=',$product->company_delivery_id])
-                    ->andWhere(['region_id','=',$product->region_id])->one();
+                $model_del=PriceCompanyDelivery::find()
+                    ->where(['=','company_delivery_id',$product->company_delivery_id])
+                    ->andWhere(['=','region_id',$region->id])->one();
+                   
                 if(is_null($model_del)){
-                    $delivery_price=$model_del->price;
-                }else{
                     $delivery_price=$region->price_delivery;
+                }else{
+                    $delivery_price=$model_del->price;
+                    
                 }
 
             }else{
