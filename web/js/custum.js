@@ -565,6 +565,28 @@ var keys = $("#kv-grid-demo").yiiGridView("getSelectedRows").length;
  */
 
 
+
+$(document).on('click','#send_fast_order',function (event) {
+    event.preventDefault(); // stopping submitting
+    var data = $(".fast-order-form").serializeArray();
+    var url = $(".fast-order-form").attr('action');
+
+    $.ajax({
+        url: url,
+        type: 'post',
+        dataType: 'json',
+        data: data
+    })
+        .done(function(response) {
+            if (response.data.success == true) {
+                alert("Wow you commented");
+            }
+        })
+        .fail(function() {
+            console.log("error");
+        });
+
+});
 jQuery(document).ready(function($) {
     $(".fast-order-form").submit(function(event) {
         event.preventDefault(); // stopping submitting

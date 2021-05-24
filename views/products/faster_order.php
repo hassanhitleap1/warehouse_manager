@@ -110,7 +110,7 @@ $this->title = $model->name;
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <?= Html::submitButton(Yii::t('app', 'Order_Now') . ' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block', 'id' => 'send_order']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Order_Now') . ' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block', 'id' => 'send_fast_order']) ?>
                     </div>
                 </div>
                 <?php ActiveForm::end(); ?>
