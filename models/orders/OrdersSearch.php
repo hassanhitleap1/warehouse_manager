@@ -16,6 +16,7 @@ class OrdersSearch extends Orders
     public $createTimeRange;
     public $createTimeStart;
     public $createTimeEnd;
+    public $datetime_range;
 
 
     public function behaviors()

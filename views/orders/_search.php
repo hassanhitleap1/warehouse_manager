@@ -1,9 +1,9 @@
 <?php
-use kartik\field\FieldRange;
-use kartik\form\ActiveForm as FormActiveForm;
-use kartik\widgets\ActiveForm;
-use yii\helpers\Html;
+
 use kartik\daterange\DateRangePicker;
+
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 
 
@@ -17,7 +17,7 @@ use kartik\daterange\DateRangePicker;
 
 <div class="orders-search">
 
-    <?php $form = FormActiveForm::begin([
+    <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
         'options' => [
@@ -26,8 +26,7 @@ use kartik\daterange\DateRangePicker;
     ]); ?>
 
 
-    <?php
-    echo DateRangePicker::widget([
+    <?= DateRangePicker::widget([
         'model'=>$model,
         'attribute'=>'datetime_range',
         'convertFormat'=>true,
@@ -42,15 +41,7 @@ use kartik\daterange\DateRangePicker;
 
     ?>
 
-    <?=   FieldRange::widget([
-            'form' => $form,
-            'model' => $model,
-            'label' => 'Enter start and end points',
-            'attribute1' => 'start',
-            'attribute2' => 'end',
-            'type' => FieldRange::INPUT_TEXT,
-    ]);
-        ?>
+
 
 
 

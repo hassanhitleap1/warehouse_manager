@@ -258,6 +258,8 @@ $columns = [
 
 ?>
 <div class="orders-index">
+
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
     <?= DynaGrid::widget([
         'columns' => $columns,
         'storage' => DynaGrid::TYPE_COOKIE,
