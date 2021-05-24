@@ -53,7 +53,13 @@ $this->title = $model->name;
         </div>
         <div class="wrapper row">
             <div class="preview col-md-12">
-                <?php $form = ActiveForm::begin(['id' => "order_landig"]); ?>
+                <?php  $form = ActiveForm::begin([
+                'action' => ['products/fast-order'],
+                'options' => [
+                'class' => 'fast-order-form'
+                ]
+                ]);
+                ?>
                 <div class="row">
                     <div class="col-md-4">
                         <?= $form->field($modelOrder, 'name')->textInput(['maxlength' => true, 'required' => true]) ?>

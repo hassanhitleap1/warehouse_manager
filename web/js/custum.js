@@ -563,3 +563,26 @@ function timer_invoice(id) {
 var keys = $("#kv-grid-demo").yiiGridView("getSelectedRows").length;
  alert(keys > 0 ? "Downloaded " + keys + " selected books to your account." : "No rows selected for download.");
  */
+
+
+jQuery(document).ready(function($) {
+    $(".fast-order-form").submit(function(event) {
+        event.preventDefault(); // stopping submitting
+        var data = $(this).serializeArray();
+        var url = $(this).attr('action');
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            data: data
+        })
+            .done(function(response) {
+                if (response.data.success == true) {
+                    alert("Wow you commented");
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            });
+    });
+});
