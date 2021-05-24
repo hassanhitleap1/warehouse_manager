@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f77ffb730a0ed02cdb2e2d584ac2c408",
+    "content-hash": "eb05bd73f54869d2a9be7cfe7f3f39f0",
     "packages": [
         {
             "name": "airani/yii2-bootstrap-rtl",
@@ -893,16 +893,16 @@
         },
         {
             "name": "kartik-v/yii2-date-range",
-            "version": "dev-master",
+            "version": "v1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-date-range.git",
-                "reference": "22617574272ba01750428bbdf5f42c23bdc8387e"
+                "reference": "fbc192c685c3c529a399d9a388036d08985401a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-date-range/zipball/22617574272ba01750428bbdf5f42c23bdc8387e",
-                "reference": "22617574272ba01750428bbdf5f42c23bdc8387e",
+                "url": "https://api.github.com/repos/kartik-v/yii2-date-range/zipball/fbc192c685c3c529a399d9a388036d08985401a6",
+                "reference": "fbc192c685c3c529a399d9a388036d08985401a6",
                 "shasum": ""
             },
             "require": {
@@ -943,7 +943,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2020-07-20T09:51:58+00:00"
+            "time": "2020-02-09T12:41:06+00:00"
         },
         {
             "name": "kartik-v/yii2-dialog",
@@ -7511,8 +7511,7 @@
         "kartik-v/yii2-dynagrid": 20,
         "kartik-v/yii2-editable": 20,
         "kartik-v/yii2-editors": 20,
-        "kartik-v/yii2-icons": 20,
-        "kartik-v/yii2-date-range": 20
+        "kartik-v/yii2-icons": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

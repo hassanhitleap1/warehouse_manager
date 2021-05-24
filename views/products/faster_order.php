@@ -53,7 +53,13 @@ $this->title = $model->name;
         </div>
         <div class="wrapper row">
             <div class="preview col-md-12">
-                <?php $form = ActiveForm::begin(['id' => "order_landig"]); ?>
+                <?php  $form = ActiveForm::begin([
+                'action' => ['products/fast-order'],
+                'options' => [
+                'class' => 'fast-order-form'
+                ]
+                ]);
+                ?>
                 <div class="row">
                     <div class="col-md-4">
                         <?= $form->field($modelOrder, 'name')->textInput(['maxlength' => true, 'required' => true]) ?>
@@ -104,7 +110,7 @@ $this->title = $model->name;
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <?= Html::submitButton(Yii::t('app', 'Order_Now') . ' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block', 'id' => 'send_order']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Order_Now') . ' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block', 'id' => 'send_fast_order']) ?>
                     </div>
                 </div>
                 <?php ActiveForm::end(); ?>

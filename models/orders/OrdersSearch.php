@@ -5,6 +5,7 @@ namespace app\models\orders;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\orders\Orders;
+use kartik\daterange\DateRangeBehavior;
 
 /**
  * OrdersSearch represents the model behind the search form of `app\models\orders\Orders`.
@@ -12,22 +13,10 @@ use app\models\orders\Orders;
 class OrdersSearch extends Orders
 {
 
-    public $createTimeRange;
-    public $createTimeStart;
-    public $createTimeEnd;
 
 
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => DateRangeBehavior::className(),
-                'attribute' => 'createTimeRange',
-                'dateStartAttribute' => 'createTimeStart',
-                'dateEndAttribute' => 'createTimeEnd',
-            ]
-        ];
-    }
+
+
 
     /**
      * {@inheritdoc}
@@ -37,7 +26,7 @@ class OrdersSearch extends Orders
         return [
             [['id', 'country_id', 'region_id', 'area_id', 'status_id','delivery_price','discount','total_price','amount_required'], 'integer'],
             [['order_id', 'delivery_date','user_id', 'delivery_time', 'address', 'phone','created_at', 'updated_at'], 'safe'],
-            [['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
+
         ];
     }
 
@@ -99,13 +88,13 @@ class OrdersSearch extends Orders
             'orders.total_price' => $this->total_price,
             'orders.amount_required' => $this->amount_required,
             'orders.status_id' => $this->status_id,
-            'DATE(orders.created_at)' => $this->created_at,
-            'orders.updated_at' => $this->updated_at,
+//            'DATE(orders.created_at)' => $this->created_at,
+//            'orders.updated_at' => $this->updated_at,
         ]);
 
 
-        $query->andFilterWhere(['>=', 'created_at', $this->createTimeStart])
-            ->andFilterWhere(['<', 'created_at', $this->createTimeEnd]);
+        $query->andFilterWhere(['>=', 'orders.created_at', $this->created_at])
+            ->andFilterWhere(['<', 'orders.created_at', $this->created_at]);
 
 
         $query->andFilterWhere(['like', 'user.name', $this->user_id])
