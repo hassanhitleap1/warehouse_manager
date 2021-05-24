@@ -7,8 +7,6 @@ use yii\widgets\ActiveForm;
 
 
 
-    
-    
 
 /* @var $this yii\web\View */
 /* @var $model app\models\orders\OrdersSearch */
@@ -28,13 +26,13 @@ use yii\widgets\ActiveForm;
 
     <?= DateRangePicker::widget([
         'model'=>$model,
-        'attribute'=>'datetime_range',
+        'attribute'=>'created_at',
         'convertFormat'=>true,
         'pluginOptions'=>[
             'timePicker'=>true,
             'timePickerIncrement'=>30,
             'locale'=>[
-                'format'=>'Y-m-d h:i A'
+                'format'=>'Y-m-d'
             ]
         ]
     ]);
