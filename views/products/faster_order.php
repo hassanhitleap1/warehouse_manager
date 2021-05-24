@@ -1,5 +1,6 @@
 <?php
 
+use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use app\models\products\Products;
 use app\models\regions\Regions;
 use kartik\select2\Select2;
@@ -9,8 +10,23 @@ use yii\widgets\ActiveForm;
 
 $regions_model = Regions::find()->all();
 $regions = [];
-foreach ($regions_model as $key => $value) {
-    $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
+if(is_null($model->company_delivery_id)){
+
+    foreach ($regions_model as $key => $value) {
+        $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
+    }
+    
+}else{
+
+    $price_company_delivery=PriceCompanyDelivery::find()
+    ->select(['regions.*','price_company_delivery.*'])
+    ->leftJoin('regions', 'regions.id=price_company_delivery.region_id')
+    ->where(['=','price_company_delivery.company_delivery_id',$model->company_delivery_id])->asArray()->all();
+    foreach ($price_company_delivery as $key => $value) {
+        $regions[$value['region_id']] = $value['name_ar'] . " ".Yii::t('app','Delivery_Price')." ( " . $value['price'] . " )";
+      
+    } 
+ 
 }
 $this->title = $model->name;
 ?>
