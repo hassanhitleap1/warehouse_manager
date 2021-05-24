@@ -92,7 +92,7 @@ class Orders extends \yii\db\ActiveRecord
             'profit_margin'=> Yii::t('app', 'Profit_Margin'),
             'note'=> Yii::t('app', 'Note'),
             'name_in_facebook'=>Yii::t('app', 'Name_In_Facebook'),
-            'order'=>Yii::t('app', 'Order'),
+            'order'=>Yii::t('app', 'Orders'),
         ];
     }
 

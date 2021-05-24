@@ -122,7 +122,7 @@ return [
     "Total_Price"=>"المبلغ كامل",
     "Amount_Required"=>"المبلغ المطلوب",
     "Create_Order"=>"انشاء طلب",
-    "Order"=>"<<  <<<  الطلب >>>  >>>",
+    "Orders"=>"<<  <<<  الطلب >>>  >>>",
     "Product"=>"المنتج",
     "Sub_Product"=>"المنتج الفرعي",
     "Add_Sub_Product"=>"اضافة منتج فرعي",
