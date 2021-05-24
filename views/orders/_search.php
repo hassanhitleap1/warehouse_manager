@@ -7,7 +7,6 @@ use yii\widgets\ActiveForm;
 
 
 
-
 /* @var $this yii\web\View */
 /* @var $model app\models\orders\OrdersSearch */
 /* @var $form yii\widgets\ActiveForm */
@@ -26,6 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= DateRangePicker::widget([
         'model'=>$model,
+        'language' => 'en',
         'attribute'=>'created_at',
         'convertFormat'=>true,
         'pluginOptions'=>[
