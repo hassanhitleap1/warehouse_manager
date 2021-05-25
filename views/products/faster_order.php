@@ -35,38 +35,7 @@ $this->title = $model->name;
 
 <div class="card-single">
     <div class="container-fliud">
-        <div class="wrapper row">
-            <div class="preview col-md-6">
-                <div class="preview-pic tab-content">
-
-                    <div class="swiper-container mySwiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <?= Html::img($model->thumbnail, ['data-original' => $model->thumbnail]) ?>
-                            </div>
-                            <?php foreach ($model->imagesProduct as $key => $img) : ?>
-                                <div class="swiper-slide">
-                                    <?= Html::img($img->path, ['data-original' => $img->path]) ?>
-                                </div>
-                            <?php endforeach; ?>
-
-
-                        </div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="details col-md-6">
-                <h5 class="product-title"><?= $this->title ?></h5>
-            </div>
-        </div>
-        <div class="wrapper row" style="margin-top: 10px;">
-            <div class="col-md-12">
-                <p> <strong style="color:red;"><?=Yii::t('app','Delivery_Price_Added')?> </strong> </p>
-            </div>
-        </div>
+       <h1><?= $model->name?></h1>
         <div class="wrapper row">
             <div class="preview col-md-12">
                 <?php  $form = ActiveForm::begin([
