@@ -35,13 +35,15 @@ $this->title = $model->name;
 
 <div class="card-single">
     <div class="container-fliud">
-       <h1><?= $model->name?></h1>
+       <h1><?= $model->name?> <?=$model->id?></h1>
+       <div class="row"><div class="alert alert-danger" id="div_errors" style="display: none;"></div></div>
         <div class="wrapper row">
             <div class="preview col-md-12">
                 <?php  $form = ActiveForm::begin([
-                'action' => ['products/fast-order'],
+                'action' => ['products/save-fast-order' ],
                 'options' => [
-                'class' => 'fast-order-form'
+                'class' => 'fast-order-form',
+                'att_id'=>$model->id
                 ]
                 ]);
                 ?>

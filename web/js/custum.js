@@ -569,7 +569,8 @@ var keys = $("#kv-grid-demo").yiiGridView("getSelectedRows").length;
 $(document).on('click','#send_fast_order',function (event) {
     event.preventDefault(); // stopping submitting
     var data = $(".fast-order-form").serializeArray();
-    var url = $(".fast-order-form").attr('action');
+    var id= $(".fast-order-form").attr('att_id');
+    var url = $(".fast-order-form").attr('action')+"&id="+id;
 
     $.ajax({
         url: url,
@@ -579,7 +580,24 @@ $(document).on('click','#send_fast_order',function (event) {
     })
         .done(function(response) {
             if (response.data.success == true) {
-                alert("Wow you commented");
+                Swal.fire('success add order');
+                $.each($('input[type=text]'), function( key, value ) {
+                   $(this).val("");
+                });
+
+                $("#div_errors").fadeOut(); 
+                 $("#div_errors").html("");
+            }else{
+                var string_error="";
+                var errors=response.data.errors;
+                $( errors).each(function( index,error ) {
+                    $.each( error, function( key, value ) {
+                        string_error+=value[0]+"<br />";
+                      });
+
+                  });
+                  $("#div_errors").fadeIn(); 
+                 $("#div_errors").html(string_error);
             }
         })
         .fail(function() {
