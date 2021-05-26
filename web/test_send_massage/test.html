@@ -6,57 +6,20 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="main.js"></script>
+    
 </head>
 <body>
 <script>
     let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
     width=600,height=300,left=100,top=100`;
-    let url =`https://www.google.com/`;
-    myWindow = window.open(url, "NewsWindow", params);
-    console.log( myWindow.focus());
+    let url =`https://web.whatsapp.com/send/?phone=962799263494&text=I%27m+api+msg+hello+dddd+friend+dddd&app_absent=0`;
+    // myWindow = window.open(url, "NewsWindow", params);
 
-    setTimeout(function(){
-        myWindow.document.write("<p>This is 'myWindow'</p>");   // Text in the new window
-        myWindow.opener.document.write("<p>This is the source window!</p>");  // Text in the window that created the new window
-    }, 300 );
-    send_handle();
-    function send_handle(){
+    // myWindow.focus();
+    
 
-        let num=document.getElementById("number").value;
-
-        let msg= document.getElementById("msg").value;
-
-        let name= document.getElementById("name").value;
-
-        var win = window.open(`https://wa.me/${num}?text=I%27m%20api%20msg%20hello%20${name}%20friend%20${msg}`, '_blank');
-        // win.focus();
-    }
-
-    // $link = document.createElement("<link href='bigViewport.css' rel='stylsheet' type='text\\/css' \\/>");
-    // document.getElementsByTagName('head')[0].appendChild($link);
-
-
-    //tab.document.write("<link href='bigViewport.css' rel='stylsheet' type='text\\/css' \\/>");
-    // window.addEventListener('beforeunload', function (e) {
-    //     // Cancel the event
-    //     e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-    //     // Chrome requires returnValue to be set
-    //     e.returnValue = '';
-    //     for (var i=0;i<1147;i++){
-    //         console.log(i);
-    //     }
-    //
-    // });
-
-    // var inputs = document.getElementsByTagName('input');
-    // for(var i = 0; i < inputs.length; i++) {
-    //     if(inputs[i].type.toLowerCase() == 'text') {
-    //         alert(inputs[i].value);
-    //     }
-    // }
-
-    // tab.print();
-    //tmot = setTimeout(function(){tab.close()}, 4000);
+  
 </script>
 </body>
 </html>
