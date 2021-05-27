@@ -21,6 +21,7 @@ class MainAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/orders.css',
         'css/swiper/swiper-bundle.min.css',
        
     ];

@@ -13,8 +13,11 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="orders-search">
-
-    <?php $form = ActiveForm::begin([
+    <div class="container">
+    <div class="row">
+     <div class="col-md-8 col-offset-md-4">
+    
+     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
         'options' => [
@@ -38,13 +41,6 @@ use yii\widgets\ActiveForm;
     ]);
 
     ?>
-
-
-
-
-
-
-
   
 
     <div class="form-group">
@@ -54,4 +50,10 @@ use yii\widgets\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
+    </div>
+    </div>
+
+    </div>
+
+  
 </div>

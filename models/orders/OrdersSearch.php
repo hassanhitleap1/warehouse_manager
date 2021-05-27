@@ -92,9 +92,13 @@ class OrdersSearch extends Orders
 //            'orders.updated_at' => $this->updated_at,
         ]);
 
-
-        $query->andFilterWhere(['>=', 'orders.created_at', $this->created_at])
-            ->andFilterWhere(['<', 'orders.created_at', $this->created_at]);
+      
+        if(!is_null($this->created_at) && $this->created_at !=''){
+            $arr_date=explode(' - ',$this->created_at);
+            $query->andFilterWhere(['>=', 'DATE(orders.created_at)', $arr_date[0]])
+            ->andFilterWhere(['<=', 'DATE(orders.created_at)', $arr_date[1]]);
+        }
+       
 
 
         $query->andFilterWhere(['like', 'user.name', $this->user_id])
