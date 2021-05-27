@@ -19,7 +19,7 @@ use yii\helpers\Url;
 				<div class="card" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$model->id?>'">
 					<?= Html::img($model->thumbnail, ['style' => 'width:100%']) ?>
 					<h1><?= $model->name ?></h1>
-					<p class="price"><?= $model->selling_price ?> JOD</p>
+				
 
 					<p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $model->id], ['class' => 'btn  btn-green']); ?></p>
 				</div>

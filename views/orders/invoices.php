@@ -57,7 +57,7 @@ $this->title = "invoices";
                             <th scope="col">#</th>
                             <th scope="col"><?= Yii::t('app','Name_Product') ;?></th>
                             <th scope="col"><?= Yii::t('app','Quantity') ;?></th>
-                            <th scope="col"><?= Yii::t('app','Price') ;?></th>
+                            
                         </tr>
                         </thead>
                         <tbody>
@@ -68,7 +68,7 @@ $this->title = "invoices";
                                 <th scope="row"><?= $key+1 ?></th>
                                 <td><?= $item->product->name ;?></td>
                                 <td><?= $item->quantity ;?></td>
-                                <td><?= ($item->price_item_count ) ;?> JD</td>
+                               
                             </tr>
                         <?php endforeach;?>
 
@@ -79,7 +79,7 @@ $this->title = "invoices";
         
             <div class="row">
                 <div class="col-md-offset-1 container footer-s">
-                    <p><strong><?= Yii::t('app','Delivery_Fees')?> : <?= $delivery_fees?> JD  </strong></p>
+                   
                   
                     <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $SubTotal+$delivery_fees?> JD  </strong></p>
                 </div>

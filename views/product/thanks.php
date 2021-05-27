@@ -59,7 +59,7 @@ $this->title = Yii::t('app','Successfuly_Applay');
                                     <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[0]->id?>'">
                                         <?= Html::img($product_suggested[0]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[0]->name ?></h5>
-                                        <p class="price">$<?= $product_suggested[0]->selling_price ?></p>
+                                        
                                         <p><?= $product_suggested[0]->description ?>.</p>
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[0]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
@@ -71,7 +71,7 @@ $this->title = Yii::t('app','Successfuly_Applay');
                                     <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[1]->id?>'">
                                         <?= Html::img($product_suggested[1]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[1]->name ?></h5>
-                                        <p class="price">$<?= $product_suggested[1]->selling_price ?></p>
+                                     
                                         <p><?= $product_suggested[1]->description ?>.</p>
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[1]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
@@ -88,7 +88,7 @@ $this->title = Yii::t('app','Successfuly_Applay');
                                     <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[2]->id?>'">
                                         <?= Html::img($product_suggested[2]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[2]->name ?></h5>
-                                        <p class="price">$<?= $product_suggested[2]->selling_price ?></p>
+                                       
                                         <p><?= $product_suggested[2]->description ?>.</p>
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[2]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
@@ -100,7 +100,7 @@ $this->title = Yii::t('app','Successfuly_Applay');
                                     <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[3]->id?>'">
                                         <?= Html::img($product_suggested[3]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[3]->name ?></h5>
-                                        <p class="price">$<?= $product_suggested[3]->selling_price ?></p>
+                                       
                                         <p><?= $product_suggested[2]->description ?>.</p>
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[3]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
