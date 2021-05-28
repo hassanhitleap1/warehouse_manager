@@ -1,6 +1,8 @@
 <?php
 
 namespace app\controllers;
+
+use app\components\OrderHelper;
 use app\models\Model;
 use app\models\OptionsSellProduct\OptionsSellProduct;
 use app\models\orders\OrderForm;
@@ -383,9 +385,9 @@ class ProductsController extends BaseController
                 $region=Regions::findOne($modelOrder->region_id);
                 $typeoption=OptionsSellProduct::findOne($modelOrder->typeoption);
                 $today=Carbon::now("Asia/Amman");
-                $delivery_price=$region->price_delivery;
-                $discount=($typeoption->number *$product->selling_price) - $typeoption->price;
-                $profit_margin= $typeoption->price  -  ($product->purchasing_price * $typeoption->number) ;
+                $delivery_price=OrderHelper::delivery_price($region,$product);
+                $discount=OrderHelper::get_discount($typeoption,$product);
+                $profit_margin=OrderHelper::profit_margin($typeoption,$product);
                 $order_model=new Orders;
                 $order_model->order_id = (string) $next_order;
                 $order_model->delivery_time=$today->addDay(1);
@@ -400,14 +402,14 @@ class ProductsController extends BaseController
                 $order_model->discount= $discount;
                 $order_model->total_price=$delivery_price+$typeoption->price;
                 $order_model->profit_margin=  $profit_margin ;
-                $order_model->amount_required=$order_model->total_price-$delivery_price;
+                $order_model->amount_required=OrderHelper::amount_required($order_model, $delivery_price);
                 $transaction = \Yii::$app->db->beginTransaction();
                 if ($order_model->save()) {
                     $userModel = Users::find()->where(['phone'=> $modelOrder->phone])->one();
                     if(is_null($userModel)){
                         $userModel= new Users();
-                    }
-                    $user=$this->set_value_user($userModel,$order_model);
+                    }    
+                    $user=OrderHelper::set_value_user($userModel,$order_model);
                     $user->save();
                     $orderItemModel=new OrdersItem;
                     $orderItemModel->order_id = $order_model->id;
@@ -415,12 +417,11 @@ class ProductsController extends BaseController
                     $orderItemModel->sub_product_id=$modelOrder->type;
                     $orderItemModel->price=$product->selling_price;
                     $orderItemModel->price_item_count=$typeoption->price ;
-                    $orderItemModel->profits_margin=$profit_margin * $typeoption->number;
-                    $orderItemModel->profit_margin=$profit_margin;
+                    $orderItemModel->profits_margin= $profit_margin;
+                    $orderItemModel->profit_margin= ($profit_margin / $typeoption->number);
                     $orderItemModel->quantity=$typeoption->number ;
                     $order_model->user_id=$user->id;
                     $order_model->save(false);
-
                     if($orderItemModel->save()){
                         $transaction->commit();
                         return [
