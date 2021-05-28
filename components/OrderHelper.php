@@ -89,6 +89,7 @@ class OrderHelper extends BaseObject
 
     public static function delivery_price($region,$product){
         if(! is_null($product->company_delivery_id)){
+            
             $model_del=PriceCompanyDelivery::find()
                 ->where(['=','company_delivery_id',$product->company_delivery_id])
                 ->andWhere(['=','region_id',$region->id])->one();
@@ -99,10 +100,11 @@ class OrderHelper extends BaseObject
                 $delivery_price=$model_del->price;
                 
             }
-
+        
         }else{
             $delivery_price=$region->price_delivery;
         }
+
 
         return $delivery_price;
         

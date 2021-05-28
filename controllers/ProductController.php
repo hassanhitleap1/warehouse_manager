@@ -40,8 +40,10 @@ class ProductController extends Controller
             $region=Regions::findOne($modelOrder->region_id);
             $typeoption=OptionsSellProduct::findOne($modelOrder->typeoption);
             $today=Carbon::now("Asia/Amman");
-
+          
             $delivery_price=OrderHelper::delivery_price($region,$product);
+
+           
             $discount=OrderHelper::get_discount($typeoption,$product);
             $profit_margin=OrderHelper::profit_margin($typeoption,$product);
 
@@ -62,7 +64,7 @@ class ProductController extends Controller
             $order_model->profit_margin=  $profit_margin ;
             $order_model->amount_required=OrderHelper::amount_required($order_model, $delivery_price);
 
-    
+          
             $transaction = \Yii::$app->db->beginTransaction();
 
             if ($order_model->save()) {

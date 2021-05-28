@@ -61,7 +61,7 @@ $this->title = "invoices";
                         </tr>
                         </thead>
                         <tbody>
-                        <?php $SubTotal=0; $delivery_fees=2;?>
+                        <?php $SubTotal=0; ?>
                         <?php foreach ($model->orderItems as  $key =>  $item):?>
                             <?php $SubTotal+=$item->price_item_count ;?>
                             <tr>
@@ -81,7 +81,7 @@ $this->title = "invoices";
                 <div class="col-md-offset-1 container footer-s">
                    
                   
-                    <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $SubTotal+$delivery_fees?> JD  </strong></p>
+                    <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $SubTotal+ $model->delivery_price?> JD  </strong></p>
                 </div>
 
 
