@@ -83,8 +83,8 @@ class OrderHelper extends BaseObject
        return ($typeoption->number *$product->selling_price) - $typeoption->price;
    }
 
-   public static function profit_margin($typeoption,$product){
-    return $typeoption->price  -  ($product->purchasing_price * $typeoption->number) ;
+    public static function profit_margin($typeoption,$product){
+     return $typeoption->price  -  ($product->purchasing_price * $typeoption->number) ;
     }
 
     public static function delivery_price($region,$product){

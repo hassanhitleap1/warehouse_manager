@@ -82,8 +82,8 @@ class ProductController extends Controller
                 $orderItemModel->price=$product->selling_price;
                 $orderItemModel->price_item_count=$typeoption->price ;
             
-                $orderItemModel->profits_margin=$profit_margin * $typeoption->number;
-                $orderItemModel->profit_margin=$profit_margin;
+                $orderItemModel->profits_margin= $profit_margin;
+                $orderItemModel->profit_margin= ($profit_margin / $typeoption->number);
                 $orderItemModel->quantity=$typeoption->number ;
                 $order_model->user_id=$user->id;
                 $order_model->save(false);
