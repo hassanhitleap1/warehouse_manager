@@ -2,6 +2,7 @@
 
 namespace  app\components;
 
+use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use Yii;
 use yii\base\BaseObject;
 use app\models\subproductcount\SubProductCount;
@@ -78,8 +79,38 @@ class OrderHelper extends BaseObject
    }    
 
 
+   public static function get_discount($typeoption,$product){
+       return ($typeoption->number *$product->selling_price) - $typeoption->price;
+   }
 
+   public static function profit_margin($typeoption,$product){
+    return $typeoption->price  -  ($product->purchasing_price * $typeoption->number) ;
+    }
 
+    public static function delivery_price($region,$product){
+        if(! is_null($product->company_delivery_id)){
+            $model_del=PriceCompanyDelivery::find()
+                ->where(['=','company_delivery_id',$product->company_delivery_id])
+                ->andWhere(['=','region_id',$region->id])->one();
+               
+            if(is_null($model_del)){
+                $delivery_price=$region->price_delivery;
+            }else{
+                $delivery_price=$model_del->price;
+                
+            }
+
+        }else{
+            $delivery_price=$region->price_delivery;
+        }
+
+        return $delivery_price;
+        
+    }
+
+    public static function amount_required($order_model, $delivery_price){
+        return $order_model->total_price-$delivery_price;
+    }
 
    public static function stock_plus($ordersItem){
         foreach ($ordersItem as $orderItem) {

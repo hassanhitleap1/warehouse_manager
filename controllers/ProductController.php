@@ -40,24 +40,11 @@ class ProductController extends Controller
             $region=Regions::findOne($modelOrder->region_id);
             $typeoption=OptionsSellProduct::findOne($modelOrder->typeoption);
             $today=Carbon::now("Asia/Amman");
-            if(! is_null($product->company_delivery_id)){
-                $model_del=PriceCompanyDelivery::find()
-                    ->where(['=','company_delivery_id',$product->company_delivery_id])
-                    ->andWhere(['=','region_id',$region->id])->one();
-                   
-                if(is_null($model_del)){
-                    $delivery_price=$region->price_delivery;
-                }else{
-                    $delivery_price=$model_del->price;
-                    
-                }
 
-            }else{
-                $delivery_price=$region->price_delivery;
-            }
+            $delivery_price=OrderHelper::delivery_price($region,$product);
+            $discount=OrderHelper::get_discount($typeoption,$product);
+            $profit_margin=OrderHelper::profit_margin($typeoption,$product);
 
-            $discount=($typeoption->number *$product->selling_price) - $typeoption->price;
-            $profit_margin= $typeoption->price  -  ($product->purchasing_price * $typeoption->number) ;
             $order_model=new Orders;
             $order_model->order_id = (string) $next_order;
             $order_model->delivery_time=$today->addDay(1);
@@ -73,9 +60,9 @@ class ProductController extends Controller
             $order_model->total_price=$delivery_price+$typeoption->price;
     
             $order_model->profit_margin=  $profit_margin ;
-            $order_model->amount_required=$order_model->total_price-$delivery_price;
+            $order_model->amount_required=OrderHelper::amount_required($order_model, $delivery_price);
 
-            
+    
             $transaction = \Yii::$app->db->beginTransaction();
 
             if ($order_model->save()) {
