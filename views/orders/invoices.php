@@ -34,18 +34,16 @@ $this->title = "invoices";
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><strong><?=Yii::t('app', 'To')?> : <?= $model['user']['name'] ;?> </strong></li>
-                        <li class="list-group-item"><strong><?=Yii::t('app', 'Phone')?> : <?= $model['user']['phone'] ;?> </strong></li>
-                        <li  class="list-group-item"><strong><?=Yii::t('app', 'Area')?> : <?= $model['region']['name_ar'] ;?> </strong></li>
-                        <li  class="list-group-item"><strong><?=Yii::t('app', 'Address')?> : <?= $model['user']['address'] ;?> </strong></li>
+                    <li class="list-group-item"><strong><?=Yii::t('app', 'To')?> : <?= $model['user']['name'] ;?> </strong></li>
+                <li class="list-group-item"><strong><?=Yii::t('app', 'Phone')?> : <?= $model['user']['phone'] ;?> </strong></li>
+                <li  class="list-group-item"><strong><?=Yii::t('app', 'Area')?> : <?= $model['region']['name_ar'] ;?> </strong></li>
                     </ul>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><strong><?=Yii::t('app', 'ID')?> : <?= $model['user']['name'] ;?> </strong></li>
-                        <li  class="list-group-item"><strong><?=Yii::t('app', 'Status')?> : <?= $model->status->name_ar ;?></strong></li>
-                        <li  class="list-group-item"><strong><?=Yii::t('app', 'Created_At')?> : <?= Carbon::parse( $model->created_at )->toDateString() ;?> </strong></li>
+                    <li  class="list-group-item"><strong><?=Yii::t('app', 'Address')?> : <?= $model['address'] ;?> </strong></li>
+                <li  class="list-group-item"><strong><?=Yii::t('app', 'Created_At')?> : <?= Carbon::parse( $model->created_at )->toDateString() ;?> </strong></li>
                     </ul>
                 </div>
             </div>
@@ -81,7 +79,7 @@ $this->title = "invoices";
                 <div class="col-md-offset-1 container footer-s">
                    
                   
-                    <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $SubTotal+ $model->delivery_price?> JD  </strong></p>
+                    <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $model->total_price?> JD  </strong></p>
                 </div>
 
 
