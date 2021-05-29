@@ -32,7 +32,7 @@ class  OrderForm extends Model{
     public function rules()
     {
         return [
-            [[ 'phone','name'], 'required'],
+            [[ 'phone','name','address'], 'required'],
             [[ 'region_id','typeoption','type'], 'integer'],
             [['name','address'],'string'],
             [['phone','other_phone'], 'isJordanPhone'],
