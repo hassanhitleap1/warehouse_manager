@@ -82,7 +82,7 @@ class OrdersSearch extends Orders
             'orders.delivery_time' => $this->delivery_time,
             'orders.country_id' => $this->country_id,
             'orders.region_id' => $this->region_id,
-            'orders.area_id' => $this->area_id,
+            // 'orders.area_id' => $this->area_id,
             'orders.delivery_price' => $this->delivery_price,
             'orders.discount' => $this->discount,
             'orders.total_price' => $this->total_price,
@@ -91,7 +91,7 @@ class OrdersSearch extends Orders
 //            'DATE(orders.created_at)' => $this->created_at,
 //            'orders.updated_at' => $this->updated_at,
         ]);
-
+      
       
         if(!is_null($this->created_at) && $this->created_at !=''){
             $arr_date=explode(' - ',$this->created_at);
@@ -106,6 +106,8 @@ class OrdersSearch extends Orders
             ->andFilterWhere(['like', 'orders.address', $this->address]);
             $query->orderBy(['orders.id' => SORT_DESC]);;
 
+        // echo $query->createCommand()->getRawSql();
+        // exit;
         return $dataProvider;
     }
 }
