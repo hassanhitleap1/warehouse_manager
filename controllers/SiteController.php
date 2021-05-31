@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -12,6 +13,7 @@ use app\models\ContactForm;
 use app\models\orders\Orders;
 use app\models\products\Products;
 use yii\data\Pagination;
+use Da\QrCode\QrCode;
 
 class SiteController extends Controller
 {
@@ -20,7 +22,7 @@ class SiteController extends Controller
 //        parent::__construct($id, $module, $config);
 //        $this->layout='app';
 //    }
-
+    public $qrCode;
     /**
      * {@inheritdoc}
      */
@@ -71,6 +73,20 @@ class SiteController extends Controller
     public function actionIndex()
     {
 //        $this->layout='app';
+        $this->qrCode = new QrCode();
+        $this->qrCode
+            ->setText($this->qr_text)
+            ->setSize(300)
+            ->setPadding(10)
+            ->setErrorCorrection('high')
+            ->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0])
+            ->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0])
+            ->setLabel('Scan the code')
+            ->setLabelFontSize(16)
+            ->setImageType(QrCode::IMAGE_TYPE_PNG)
+        ;
+
+        exit();
         $query =    Products::find();
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
