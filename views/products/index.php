@@ -135,10 +135,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'quantity',
                 'value' => function ($searchModel) {
                     $str="العدد الكلي " . $searchModel->quantity;  
-                    foreach($searchModel->subProductCount as $subProductCount){
-                        $str.="<br />".$subProductCount->type ." ".$subProductCount->count ;
-                        
+                    if(count($searchModel->subProductCount) > 1){
+                        foreach($searchModel->subProductCount as $subProductCount){
+                            $str.="<br />".$subProductCount->type ." ".$subProductCount->count ;
+                            
+                        }
                     }
+                   
                 
                     return  $str;
     

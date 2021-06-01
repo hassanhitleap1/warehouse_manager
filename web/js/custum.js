@@ -478,7 +478,8 @@ $(document).on('click','#export_pdf',function (e) {
     });
 
     if(ides.length==0){
-        alert("select orders")
+        alert("select orders");
+        return;
     }
     string_id=string_id.slice(0, -1)
     let url= `${SITE_URL}/index.php?r=orders/export-pdf&string_id=${string_id}`;
@@ -521,6 +522,7 @@ $(document).on('click','#delete_orders',function (e) {
 
     if(ides.length==0){
         alert("select orders");
+        return;
     }
     string_id=string_id.slice(0, -1)
     let url= `${SITE_URL}/index.php?r=orders/delete-order-selected&string_id=${string_id}`;
