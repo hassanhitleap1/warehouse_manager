@@ -258,9 +258,7 @@ $columns = [
 
 ?>
 <div class="orders-index">
-<div class="container">
-<h3><?=$this->title?></h3>
-</div>
+
    
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
     <?= DynaGrid::widget([

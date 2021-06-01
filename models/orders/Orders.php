@@ -93,6 +93,7 @@ class Orders extends \yii\db\ActiveRecord
             'note'=> Yii::t('app', 'Note'),
             'name_in_facebook'=>Yii::t('app', 'Name_In_Facebook'),
             'order'=>Yii::t('app', 'Orders'),
+            'search_string'=>Yii::t('app', 'Search'),
         ];
     }
 

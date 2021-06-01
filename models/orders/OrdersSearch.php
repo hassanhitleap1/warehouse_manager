@@ -13,10 +13,7 @@ use kartik\daterange\DateRangeBehavior;
 class OrdersSearch extends Orders
 {
 
-
-
-
-
+    public $search_string;
 
     /**
      * {@inheritdoc}
@@ -25,7 +22,7 @@ class OrdersSearch extends Orders
     {
         return [
             [['id', 'country_id', 'region_id', 'area_id', 'status_id','delivery_price','discount','total_price','amount_required'], 'integer'],
-            [['order_id', 'delivery_date','user_id', 'delivery_time', 'address', 'phone','created_at', 'updated_at'], 'safe'],
+            [['order_id', 'search_string','delivery_date','user_id', 'delivery_time', 'address', 'phone','created_at', 'updated_at'], 'safe'],
 
         ];
     }
@@ -100,6 +97,12 @@ class OrdersSearch extends Orders
         }
        
 
+        $query->andFilterWhere ( [ 'OR' ,
+            [ 'like' , 'user.name' , $this->search_string ],
+            [ 'like' , 'user.phone' , $this->search_string ],
+            [ 'like' , 'orders.address' , $this->search_string ],
+        ]);
+        
 
         $query->andFilterWhere(['like', 'user.name', $this->user_id])
             ->andFilterWhere(['like', 'user.phone', $this->phone])
