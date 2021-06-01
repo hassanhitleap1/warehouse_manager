@@ -7,6 +7,24 @@ $this->title = $model->id;
 
 ?>
 
+<style>
+    .invoice{
+        height: 100vh;
+        /*font-size: 14px;*/
+
+    }
+
+    @media print {
+        .invoice{
+            height: 100vh;
+            /*font-size: 14px;*/
+        }
+
+    }
+
+
+</style>
+
 <div class="container">
     <div class="row">
         <h1  class="text-center" ><?= Yii::$app->name ?> <?= Html::img('@web/images/logo.png', ['class' => 'logo'])?></h1>
