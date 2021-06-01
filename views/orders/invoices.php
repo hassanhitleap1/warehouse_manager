@@ -7,16 +7,15 @@ $this->title = "invoices";
 
 <style>
     .invoice{
-        height: 48vh;
-        font-size: 14px;
-        
+        height: 50vh;
+        /*font-size: 14px;*/
+
     }
 
-   
     @media print {
         .invoice{
-            height: 48vh;
-            font-size: 14px;
+            height: 50vh;
+            /*font-size: 14px;*/
         }
       
     }
