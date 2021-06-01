@@ -2,6 +2,8 @@
 
 use Carbon\Carbon;
 use kartik\helpers\Html;
+use yii\helpers\Url;
+
 $this->title = "invoices";
 ?>
 
@@ -75,12 +77,13 @@ $this->title = "invoices";
             </div>
         
             <div class="row">
-                <div class="col-md-offset-1 container footer-s">
-                   
-                  
+                <div class="col-md-offset-1 col-md-4 container footer-s">
                     <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $model->total_price?> JD  </strong></p>
                 </div>
-
+                <div class="col-md-6">
+                    <?php  $data = Url::toRoute(['orders/bill', 'id' => $model->id])?>
+                    <?= '<img src="'.(new \chillerlan\QRCode\QRCode())->render($data).'" alt="QR Code" />';?>
+                </div>
 
             </div>
         </div>
