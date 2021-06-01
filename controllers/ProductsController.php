@@ -271,12 +271,15 @@ class ProductsController extends BaseController
 
 
                         $folder_path = "products/$newId";
+                        FileHelper::removeDirectory("$folder_path/images");
 
                         FileHelper::createDirectory(
                             "$folder_path/images",
                             $mode = 0775,
                             $recursive = true
                         );
+                        
+                        ProductsImage::deleteAll(['=','product_id',$id]);
                         if (count($images_product)) {
                             foreach ($images_product as $key => $image_product) {
                                 $modelImagesProduct = new  ProductsImage();
