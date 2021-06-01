@@ -73,8 +73,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout='empty';
-        return $this->render('test');
+        // $this->layout='empty';
+        // return $this->render('test');
         $query =    Products::find();
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);

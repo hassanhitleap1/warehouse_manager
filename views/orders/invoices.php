@@ -5,6 +5,9 @@ use kartik\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = "invoices";
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$public_path=$protocol.$_SERVER['HTTP_HOST'];
+            
 ?>
 
 <style>
@@ -13,11 +16,22 @@ $this->title = "invoices";
         /*font-size: 14px;*/
 
     }
+    .img-qr-code{
+        float: left;
+        width: 100px;
+        height: 100px;
+    }
 
     @media print {
         .invoice{
             height: 50vh;
             /*font-size: 14px;*/
+        }
+
+        .img-qr-code{
+           float: left;
+           width: 100px;
+           height: 100px;
         }
       
     }
@@ -77,12 +91,12 @@ $this->title = "invoices";
             </div>
         
             <div class="row">
-                <div class="col-md-offset-1 col-md-4 container footer-s">
+                <div class="col-md-6">
                     <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $model->total_price?> JD  </strong></p>
                 </div>
                 <div class="col-md-6">
-                    <?php  $data = Url::toRoute(['orders/bill', 'id' => $model->id])?>
-                    <?= '<img src="'.(new \chillerlan\QRCode\QRCode())->render($data).'" alt="QR Code" />';?>
+                    <?php  $data = $public_path.Url::toRoute(['orders/bill', 'id' => $model->id])?>
+                    <?= '<img class="img-qr-code" src="'.(new \chillerlan\QRCode\QRCode())->render($data).'" alt="QR Code" />';?>
                 </div>
 
             </div>

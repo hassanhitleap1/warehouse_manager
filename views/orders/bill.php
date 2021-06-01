@@ -14,14 +14,21 @@ $this->title = $model->id;
         /*font-size: 14px;*/
 
     }
+    .img-qr-code{
+        float: left;
+    }
 
     @media print {
         .invoice{
             height: 100vh;
             /*font-size: 14px;*/
         }
+        .img-qr-code{
+        float: left;
+    }
 
     }
+    
 
 
 </style>
@@ -88,13 +95,19 @@ $this->title = $model->id;
     </div>
     <hr />
     <div class="row">
-        <div class="col-md-offset-1  col-md-4 container footer-s">
+        <div class="col-md-6 col-sm-6 col-xs-6">
             <p><strong><?= Yii::t('app','Delivery_Fees')?> : <?= $model->delivery_price?> Jd  </strong></p>
             <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $model->total_price?>JD </strong></p>
         </div>
-        <div class="col-md-6">
-            <?php  $data = Url::toRoute(['orders/bill', 'id' => $model->id])?>
-           <?= '<img src="'.(new \chillerlan\QRCode\QRCode())->render($data).'" alt="QR Code" />';?>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <?php  
+             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+             $public_path=$protocol.$_SERVER['HTTP_HOST'];
+            
+            $data = $public_path. Url::toRoute(['orders/bill', 'id' => $model->id])
+            
+            ?>
+           <?= '<img  class="img-qr-code" src="'.(new \chillerlan\QRCode\QRCode())->render($data).'" alt="QR Code" />';?>
         </div>
     
     </div>
