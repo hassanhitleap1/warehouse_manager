@@ -39,9 +39,7 @@
         "coderius/yii2-pell-widget": "~1.0",
         "kartik-v/yii2-export": "*",
         "kartik-v/yii2-date-range": "*",
-        "endroid/qrcode": "^3.9",
-        "endroid/qr-code": "^3.9",
-        "khanamiryan/qrcode-detector-decoder": "1.0.5.1"
+        "chillerlan/php-qrcode": "^3.4"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
