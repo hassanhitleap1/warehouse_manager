@@ -101,7 +101,7 @@ $this->title = Yii::t('app','Successfuly_Applay');
                                         <?= Html::img($product_suggested[3]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[3]->name ?></h5>
                                         <p class="price">$<?= $product_suggested[3]->selling_price ?></p>
-                                        <p><?= $product_suggested[2]->description ?>.</p>
+                                        <p><?= $product_suggested[3]->description ?>.</p>
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[3]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
                                 </div>
