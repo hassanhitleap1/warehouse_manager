@@ -141,8 +141,12 @@ class OrderHelper extends BaseObject
             $orderItemModel->save();
             $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
             $productModel->quantity=$productModel->quantity+$orderItem->quantity;
+            $sub_product_count=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+            $sub_product_count->count= (int)$sub_product_count->count + (int) $orderItem->quantity;
+            $sub_product_count->save();
             $productModel->save();
         }
+
    }
 
    public static function stock_minus($ordersItem){
@@ -152,7 +156,11 @@ class OrderHelper extends BaseObject
             $orderItemModel->save();
             $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
             $productModel->quantity=$productModel->quantity-$orderItem->quantity;
+            $sub_product_count=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+            $sub_product_count->count=(int) $sub_product_count->count - (int) $orderItem->quantity;
+            $sub_product_count->save();
             $productModel->save();
+
         }
     }
 
