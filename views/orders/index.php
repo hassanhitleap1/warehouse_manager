@@ -278,7 +278,8 @@ $columns = [
             'showPageSummary' => true,
         ],
 
-        'options' => ['id' => 'dynagrid-1'] // a unique identifier is important
+        'options' => ['id' => 'dynagrid'], // a unique identifier is important
+        
     ]);
 
 

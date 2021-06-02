@@ -468,14 +468,10 @@ $(document).on('click','#print_all_invoice',function (e) {
 
 
 $(document).on('click','#export_pdf',function (e) {
+    let selected=get_seletcted();
     ides=[];
-    let string_id="";
-    $('input[type=checkbox]').each(function () {
-        if (this.checked) {
-            string_id+=`${$(this).val()},`;
-            ides.push($(this).val())  
-        }
-    });
+    let string_id=selected.string_id;
+    ides=selected.ides;
 
     if(ides.length==0){
         alert("select orders");
@@ -489,14 +485,10 @@ $(document).on('click','#export_pdf',function (e) {
 
 
 $(document).on('click','#change_status',function (e) {
+    let selected=get_seletcted();
     ides=[];
-    let string_id="";
-    $('input[type=checkbox]').each(function () {
-        if (this.checked) {
-            string_id+=`${$(this).val()},`;
-            ides.push($(this).val())
-        }
-    });
+    let string_id=selected.string_id;
+    ides=selected.ides;
     if(ides.length==0){
         alert("select orders");
         return ;
@@ -509,17 +501,28 @@ $(document).on('click','#change_status',function (e) {
         .load(url);
 
 });
-
-$(document).on('click','#delete_orders',function (e) {
-    ides=[];
+function get_seletcted(){
+    let idses=[];
     let string_id="";
     $('input[type=checkbox]').each(function () {
         if (this.checked) {
-            string_id+=`${$(this).val()},`;
-            ides.push($(this).val())
+            if(!$(this).hasClass('select-on-check-all')){
+                string_id+=`${$(this).val()},`;
+                idses.push($(this).val());
+            }
         }
-    });
+    }); 
+    
+    return { 'ides':idses, 'string_id':string_id };
+}
 
+
+$(document).on('click','#delete_orders',function (e) {
+
+    let selected=get_seletcted();
+    ides=[];
+    let string_id=selected.string_id;
+    ides=selected.ides;
     if(ides.length==0){
         alert("select orders");
         return;
