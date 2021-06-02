@@ -76,10 +76,22 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
                         <tbody>
                         <?php $SubTotal=0; ?>
                         <?php foreach ($model->orderItems as  $key =>  $item):?>
-                            <?php $SubTotal+=$item->price_item_count ;?>
+                            <?php $SubTotal+=$item->price_item_count ;
+                            
+                            $orderItemString = '';
+                            foreach ($model->orderItems as $orderItem) {
+                                $type = '';
+                                if (count($orderItem->product->subProductCount) > 1) {
+                                    $type = $orderItem->subProduct->type;
+                                }
+                                $orderItemString .= ' ' . $orderItem->product->name . ' ' . $type . ' ' . Yii::t('app', 'Number') . ' ( ' . $orderItem->quantity . ' ) </br>';
+                            }
+                        
+                            
+                            ?>
                             <tr>
                                 <th scope="row"><?= $key+1 ?></th>
-                                <td><?= $item->product->name ;?></td>
+                                <td><?= $orderItemString ;?></td>
                                 <td><?= $item->quantity ;?></td>
                                
                             </tr>
