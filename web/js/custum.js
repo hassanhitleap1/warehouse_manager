@@ -232,7 +232,7 @@ $(document).on('click', '.change-status', function(e){
 $(document).on('click', '.change-status-all', function(e){
     e.preventDefault();
     var id_string= $(this).attr("att_id_string");
-    var status_id= $(this).attr("att_id_string");
+    var status_id= $(this).attr("att_status_id");
     var name_status= $(this).attr("name_status");
     let url= `${SITE_URL}/index.php?r=orders/change-status-selected&name_status=${name_status}&status_id=${status_id}&string_id=${id_string}`;
     $.ajax({
