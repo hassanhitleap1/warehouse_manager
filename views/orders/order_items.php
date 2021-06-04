@@ -7,6 +7,7 @@ use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
+use kartik\touchspin\TouchSpin;
 $quantity_item=1;
 $products=ArrayHelper::map(Products::find()->all(), 'id', 'name');
 $products[0]='-----';
@@ -27,6 +28,9 @@ if (!$model->isNewRecord) {
     }
 }
 ?>
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+
 <div class="panel panel-default">
     <div class="panel-body">
         <?php DynamicFormWidget::begin([
@@ -52,7 +56,6 @@ if (!$model->isNewRecord) {
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-envelope"></i>
             <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i> <?=Yii::t('app','Add_Product')?> </button>
             <div class="clearfix"></div>
         </div>
@@ -95,15 +98,30 @@ if (!$model->isNewRecord) {
                                             'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'class'=>'product_id'],
                                         
                                         ]); ?>  
-
                                 </div>
                                 <div class="col-sm-4">
                                      <?= $form->field($orderItem, "[{$index}]sub_product_id")->dropDownList($product_items[$index],['class'=>'form-control sub_product_id'])->label(Yii::t('app','Sub_Product_Id'))?>
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <?= $form->field($orderItem, "[{$index}]quantity")->textInput([
-                                        'class'=>'form-control quantity_sub_product','type' => 'number','min'=> 1 ,'value'=>$quantity_item])?>
+                                    <?= 
+                               
+                                     $form->field($orderItem, "[{$index}]quantity")->widget(TouchSpin::classname(), [
+                                        'options' => ['placeholder' => 'Adjust ...'],
+                                        'pluginOptions' => [
+                                            'min' => 0,
+                                            'max' => 100,
+                                            'initval'=>$quantity_item,
+                                            'buttonup_class' => 'btn btn-primary', 
+                                            'buttondown_class' => 'btn btn-info', 
+                                            'buttonup_txt' => '<i class="glyphicon glyphicon-plus-sign"></i>', 
+                                            'buttondown_txt' => '<i class="glyphicon glyphicon-minus-sign"></i>'
+                                        ]
+                                    ]);
+                                    
+                                    
+                                    ?>
+                                   
                                 </div>
                              
                             </div><!-- end:row -->  

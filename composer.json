@@ -39,7 +39,8 @@
         "coderius/yii2-pell-widget": "~1.0",
         "kartik-v/yii2-export": "*",
         "kartik-v/yii2-date-range": "*",
-        "chillerlan/php-qrcode": "^3.4"
+        "chillerlan/php-qrcode": "^3.4",
+        "kartik-v/yii2-widget-touchspin": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
