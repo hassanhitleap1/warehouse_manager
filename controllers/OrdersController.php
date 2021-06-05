@@ -90,6 +90,8 @@ class OrdersController extends Controller
         $model = new Orders();
         $ordersItem = [new OrdersItem()];
         if ($model->load(Yii::$app->request->post())) {
+            $order_id =  Orders::find()->count() + 1 ;
+            $model->order_id=$order_id;
             $ordersItem = Model::createMultiple(OrdersItem::classname());
             Model::loadMultiple($ordersItem, Yii::$app->request->post());
             $valid = $model->validate();
