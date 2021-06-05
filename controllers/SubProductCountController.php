@@ -77,12 +77,10 @@ class SubProductCountController extends BaseController
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $data=[];
-       
         $model=SubProductCount::findOne($id);
         $data['sub_product']= $model;
         $data['product']= $model->product;
-        return ['data'=> $data];
-      
+        return ['data'=> $data]; 
     }
 
 

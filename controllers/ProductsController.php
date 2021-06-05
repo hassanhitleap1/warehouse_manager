@@ -489,4 +489,21 @@ class ProductsController extends BaseController
 
         return $user;
     }
+
+
+
+  /**
+     * Displays a single SubProductCount model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionGetProduct($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;  
+         $product= $this->findModel($id);
+        return ['data'=> $product->subProductCount,'product'=>$product];
+      
+    }
+
 }

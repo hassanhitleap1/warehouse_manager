@@ -68,11 +68,11 @@ if (!$model->isNewRecord) {
                             <span class="panel-title-address">  : <?= ($index + 1) ?></span>
                             <button type="button" class="pull-right remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
                             <div class="pull-left">
-                                <span><?=Yii::t('app','Quantity_All')?> : <span id="quantity_all_<?= ($index)?>"></span> </span>
+                                <span><?=Yii::t('app','Quantity_All')?> : <span class="span_quantity_all" id="quantity_all_<?= ($index)?>"></span> </span>
                                 /
-                                <span><?=Yii::t('app','Quantity_Item')?> : <span id="quantity_item_<?= ($index)?>"></span>  </span>
+                                <span><?=Yii::t('app','Quantity_Item')?> : <span  class="span_quantity_item" id="quantity_item_<?= ($index)?>"></span>  </span>
                                 /
-                                <span><?=Yii::t('app','Price')?> : <span class="price_item" id="price_items_<?= ($index)?>"></span>  </span>
+                                <span><?=Yii::t('app','Price')?> : <span class="price_item span_price_items" id="price_items_<?= ($index)?>"></span>  </span>
                             </div>
                 
                             <div class="clearfix"></div>
@@ -104,21 +104,18 @@ if (!$model->isNewRecord) {
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <?= 
-                               
-                                     $form->field($orderItem, "[{$index}]quantity")->widget(TouchSpin::classname(), [
-                                      
+                                    <?= $form->field($orderItem, "[{$index}]quantity")->widget(TouchSpin::classname(), [
+                                      'options' => ['class' => 'quantity_sub_product'],
                                         'pluginOptions' => [
                                             'min' => 0,
                                             'max' => 100,
                                             'initval'=>$quantity_item,
                                             'buttonup_class' => 'btn btn-primary', 
                                             'buttondown_class' => 'btn btn-info', 
-                                            'buttonup_txt' => '<i class="glyphicon glyphicon-plus-sign"></i>', 
-                                            'buttondown_txt' => '<i class="glyphicon glyphicon-minus-sign"></i>'
+                                            'buttonup_txt' => '<i class="glyphicon glyphicon-plus-sign "></i>', 
+                                            'buttondown_txt' => '<i class="glyphicon glyphicon-minus-sign "></i>'
                                         ]
                                     ]);
-                                    
                                     
                                     ?>
                                    

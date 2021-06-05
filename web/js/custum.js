@@ -60,68 +60,33 @@ function callculate_amount_required(){
         discount= parseFloat( $("#discount").val());
     }
      delivery_price= parseFloat( $("#delivery_price").val());
-
     $(".price_item_count").each(function( index, element  ) {
         amount_required+= parseFloat ($(element ).val());
      });
-
      amount_required-=discount;
      amount_required+=delivery_price;
      $("#amount_required").val(amount_required);
     return amount_required;
 
-
-
 }
 
-
-
 $(document).on('change','.product_id',function (e) {
-    let url= `${SITE_URL}/index.php?r=sub-product-count/get-product-items&id=${$(this).val()}`;
-    let product_id_str=$(this).attr('id');
-    let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
-    index=index.replaceAll('-product_id', '');
-    index=index.trim();
-     $.ajax({
-         url: url,
-         type: 'GET',
-         success: function (json) {
-             let data=json.data;
-             let product=json.product;
-            options_sub_product(data,index);
-            header_product_card(product.quantity,data[0].count,product.purchasing_price,index);
-            set_value_heddin(data,product,index);
-            callculate_all();
-         }
-     });
+    get_product(this);
  });
-
 
 
 
 $(document).on('change','.sub_product_id',function (e) {
-    let url= `${SITE_URL}/index.php?r=sub-product-count/get-sub-product&id=${$(this).val()}`;
-    let product_id_str=$(this).attr('id');
-    let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
-    index=index.replaceAll('-product_id', '');
-    index=index.replaceAll('-id', '');
-    index=index.replaceAll('-sub_product_id', '');
-    index=index.trim()
-     $.ajax({
-         url: url,
-         type: 'GET',
-         success: function (json) {
-             console.log(index);
-            $("#quantity_item_"+index).text(json.data.sub_product.count);
-            $("#ordersitem-"+index+"-quantity").attr('max',json.data.sub_product.count);
-         }
-     });
+    get_sub_product(this);
  });
 
 
 
+
  $(document).on('change keypress blur keyup','.quantity_sub_product',function (e) {
+     
     let quantity_sub_product =parseInt($(this).val());
+    console.log(quantity_sub_product);
     let total_price=0;
     let quantity_sub_product_id_str=$(this).attr('id');
     let index=quantity_sub_product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
@@ -641,3 +606,43 @@ function get_price_delivery(){
     callculate_total_price();
      profit_margin_fn();
 }
+
+function get_product(_this){
+    let product_id_str=$(_this).attr('id');
+    let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
+    index=index.replaceAll('-product_id', '');
+    index=index.trim();
+    let url= `${SITE_URL}/index.php?r=products/get-product&id=${$(_this).val()}`;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (json) {
+            let data=json.data;
+            let product=json.product;
+           options_sub_product(data,index);
+           header_product_card(product.quantity,data[0].count,product.purchasing_price,index);
+           set_value_heddin(data,product,index);
+           callculate_all();
+        }
+    });
+}
+
+
+function get_sub_product(_this){
+    let url= `${SITE_URL}/index.php?r=sub-product-count/get-sub-product&id=${$(_this).val()}`;
+    let product_id_str=$(_this).attr('id');
+    let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
+    index=index.replaceAll('-product_id', '');
+    index=index.replaceAll('-id', '');
+    index=index.replaceAll('-sub_product_id', '');
+    index=index.trim()
+     $.ajax({
+         url: url,
+         type: 'GET',
+         success: function (json) {
+             console.log(index);
+            $("#quantity_item_"+index).text(json.data.sub_product.count);
+            $("#ordersitem-"+index+"-quantity").attr('max',json.data.sub_product.count);
+         }
+     });
+ }
