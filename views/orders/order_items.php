@@ -107,7 +107,7 @@ if (!$model->isNewRecord) {
                                     <?= 
                                
                                      $form->field($orderItem, "[{$index}]quantity")->widget(TouchSpin::classname(), [
-                                        'options' => ['placeholder' => 'Adjust ...'],
+                                      
                                         'pluginOptions' => [
                                             'min' => 0,
                                             'max' => 100,

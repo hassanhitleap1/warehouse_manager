@@ -1,24 +1,8 @@
 let SITE_URL = getSiteUrl() ;
-$(document).on('change','#region_id',function (e) {
-    let url= `${SITE_URL}/index.php?r=regions/get-price&id=${$(this).val()}`;
-     $.ajax({
-         url: url,
-         type: 'GET',
-         success: function (json) {
-             delivery_price=json.data.price_delivery;
-            $('#delivery_price').val(delivery_price);
-              callculate_all();
 
-         }
-     });
+$(document).on('change','#region_id,#company_delivery_id',function (e) {
+     get_price_delivery();
  });
-
-
-function callculate_all(){
-    callculate_amount_required();
-    callculate_total_price();
-     profit_margin_fn();
-}
 
 
 
@@ -27,7 +11,6 @@ function callculate_all(){
  });
 
  $(document).on('click','.print_invoice',function (e) {
-
     let path=$(this).attr("path_url");
     open(path).print()
 });
@@ -631,3 +614,30 @@ jQuery(document).ready(function($) {
             });
     });
 });
+
+
+function get_price_delivery(){
+    let company_delivery_id=$("#company_delivery_id").val();  
+    let region_id=  $("#region_id").val();
+    if(region_id==''){
+        alert("ارجو تحديد المحافظة")
+        return;
+    }
+    let url= `${SITE_URL}/index.php?r=regions/get-price&id=${region_id}&company_delivery_id=${company_delivery_id}`;
+     $.ajax({
+         url: url,
+         type: 'GET',
+         success: function (json) {
+             delivery_price=json.data.price_delivery;
+            $('#delivery_price').val(delivery_price);
+              callculate_all();
+
+         }
+     });
+ }
+
+ function callculate_all(){
+    callculate_amount_required();
+    callculate_total_price();
+     profit_margin_fn();
+}

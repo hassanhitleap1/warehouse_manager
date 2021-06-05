@@ -94,6 +94,7 @@ class Orders extends \yii\db\ActiveRecord
             'name_in_facebook'=>Yii::t('app', 'Name_In_Facebook'),
             'order'=>Yii::t('app', 'Orders'),
             'search_string'=>Yii::t('app', 'Search'),
+            'company_delivery_id'=>Yii::t('app', 'Company_Delivery'),
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use Yii;
 use app\models\regions\Regions;
 use app\models\regions\RegionsSearch;
@@ -60,7 +61,17 @@ class RegionsController extends BaseController
     public function actionGetPrice($id)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        return ['data'=> $this->findModel($id)];
+        if(isset($_GET['company_delivery_id'])&& $_GET['company_delivery_id'] !=''){
+            $price_delivery_model=PriceCompanyDelivery::find()->where(['=','region_id',$id])
+                ->where(['=','company_delivery_id',$_GET['company_delivery_id']])
+                ->one();
+            $price_delivery=$price_delivery_model->price;
+        }else{
+            $price_delivery_model=$this->findModel($id);
+            $price_delivery=$price_delivery_model->price_delivery;
+        }
+        
+        return ['data'=> ['price_delivery'=> $price_delivery]];
       
     }
 
