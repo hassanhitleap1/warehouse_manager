@@ -40,19 +40,7 @@ $(document).on('change','#delivery_price',function (e) {
 });
 
 function callculate_total_price(){
-    let total_price=0
-    $(".price_item_count").each(function( index, element  ) {
-        total_price+= parseFloat ($(element ).val());
-    });
-
-    $("#total_price").val(total_price);
-    return total_price;
-
-
-}
-
-
-function callculate_amount_required(){
+   
     let amount_required=0;
     let delivery_price=0;
     let discount=0;
@@ -65,8 +53,24 @@ function callculate_amount_required(){
      });
      amount_required-=discount;
      amount_required+=delivery_price;
-     $("#amount_required").val(amount_required);
+     $("#total_price").val(amount_required);
     return amount_required;
+
+}
+
+
+function callculate_amount_required(){
+
+    let total_price=0
+    $(".price_item_count").each(function( index, element  ) {
+        total_price+= parseFloat ($(element ).val());
+    });
+
+    $("#amount_required").val(total_price);
+    return total_price;
+
+
+   
 
 }
 
@@ -242,15 +246,14 @@ function options_sub_product(data, _this){
     $("#price_items_"+index).text(price);
 }
 
-function set_value_heddin(data,product,index,_this){
-    $(_this).closest(".panel-default").find(".span_quantity_all").text();
-
-    // $("#price_item_"+index).val(product.selling_price);
-    // $("#price_"+index).val(product.selling_price);
-    // let quantity=($("#ordersitem-"+index+"-quantity").val()!=undefined)?$("#ordersitem-"+index+"-quantity").val():-1;
-    // let profit_margin= product.selling_price - product.purchasing_price;
-    // $("#profit_margin_"+index).val(profit_margin);
-    // $("#profits_margin_"+index).val(quantity*profit_margin);
+function set_value_heddin(data,product,_this){
+    $(_this).closest(".row").find(".price").val(product.selling_price);
+    $(_this).closest(".row").find(".price_item_count").val(product.selling_price);
+    let quantity=$(_this).closest(".row").find(".quantity_sub_product").val();
+    let profit_margin= product.selling_price - product.purchasing_price;
+    let discount=$("#discount").val();
+    $(_this).closest(".row").find(".profit_margin").val(quantity*profit_margin-discount);
+    $(_this).closest(".row").find(".profits_margin").val((quantity*profit_margin)-discount);
 }
 
 
@@ -630,7 +633,7 @@ function get_product(_this){
             let product=json.product;
            options_sub_product(data,_this);
            header_product_card(product.quantity,data[0].count,product.purchasing_price,index);
-           set_value_heddin(data,product,index,_this);
+           set_value_heddin(data,product,_this);
            callculate_all();
         }
     });
