@@ -74,25 +74,18 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
                         </tr>
                         </thead>
                         <tbody>
-                        <?php $SubTotal=0; ?>
-                        <?php foreach ($model->orderItems as  $key =>  $item):?>
-                            <?php $SubTotal+=$item->price_item_count ;
-                            
-                            $orderItemString = '';
-                            foreach ($model->orderItems as $orderItem) {
-                                $type = '';
-                                if (count($orderItem->product->subProductCount) > 1) {
-                                    $type = $orderItem->subProduct->type;
-                                }
-                                $orderItemString .= ' ' . $orderItem->product->name . ' ' . $type . ' ' . Yii::t('app', 'Number') . ' ( ' . $orderItem->quantity . ' ) </br>';
+                        <?php $SubTotal=0; $orderItemString = '';?>
+                        <?php foreach ($model->orderItems as  $key =>  $orderItem):?>
+                            <?php  $SubTotal+=$orderItem->price_item_count ;  $type = '';
+                            if (count($orderItem->product->subProductCount) > 1) {
+                                $type = $orderItem->subProduct->type;
                             }
-                        
-                            
+                            $orderItemString .= ' ' . $orderItem->product->name . ' ' . $type . ' ' . Yii::t('app', 'Number') . ' ( ' . $orderItem->quantity . ' ) ';
                             ?>
                             <tr>
                                 <th scope="row"><?= $key+1 ?></th>
                                 <td><?= $orderItemString ;?></td>
-                                <td><?= $item->quantity ;?></td>
+                                <td><?= $orderItem->quantity ;?></td>
                                
                             </tr>
                         <?php endforeach;?>
