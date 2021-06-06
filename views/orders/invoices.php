@@ -13,7 +13,7 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
 <style>
     .invoice{
         height: 50vh;
-        /*font-size: 14px;*/
+        font-size: 14px;
 
     }
     .img-qr-code{
@@ -21,8 +21,14 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
         width: 100px;
         height: 100px;
     }
+    .container{
+            font-size: 15px;
+        }
 
     @media print {
+        .container{
+            font-size: 15px;
+        }
         .invoice{
             height: 50vh;
             /*font-size: 14px;*/
@@ -44,20 +50,20 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
     <?php foreach ($models as $key_model => $model): ?>
         <div class="invoice">
             <div class="row">
-                <h1  class="text-center" ><?= Yii::$app->name ?> <?= Html::img('@web/images/logo.png', ['class' => 'logo'])?></h1>
+                <h2  class="text-center" ><?= Yii::$app->name ?> <?= Html::img('@web/images/logo.png', ['class' => 'logo'])?></h2>
             </div>
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <ul class="list-group list-group-flush">
                     <li class="list-group-item"><strong><?=Yii::t('app', 'To')?> : <?= $model['user']['name'] ;?> </strong></li>
                 <li class="list-group-item"><strong><?=Yii::t('app', 'Phone')?> : <?= $model['user']['phone'] ;?> </strong></li>
-                <li  class="list-group-item"><strong><?=Yii::t('app', 'Area')?> : <?= $model['region']['name_ar'] ;?> </strong></li>
+              
                     </ul>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <ul class="list-group list-group-flush">
-                    <li  class="list-group-item"><strong><?=Yii::t('app', 'Address')?> : <?= $model['address'] ;?> </strong></li>
+                    <li  class="list-group-item"> <strong><?=Yii::t('app', 'Area')?> : <?= $model['region']['name_ar'] ;?> </strong> &nbsp &nbsp \ &nbsp &nbsp<strong><?=Yii::t('app', 'Address')?> : <?= $model['address'] ;?> </strong></li>
                 <li  class="list-group-item"><strong><?=Yii::t('app', 'Created_At')?> : <?= Carbon::parse( $model->created_at )->toDateString() ;?> </strong></li>
                     </ul>
                 </div>
@@ -94,7 +100,6 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
                     </table>
                 </div>
             </div>
-        
             <div class="row">
                 <div class="col-md-6">
                     <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $model->total_price?> JD  </strong></p>
