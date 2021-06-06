@@ -400,7 +400,7 @@ class ProductsController extends BaseController
                 $order_model->name=$modelOrder->name;
                 $order_model->other_phone=$modelOrder->other_phone;
                 $order_model->address=is_null($modelOrder->address)?$region->name_ar:$modelOrder->address;
-                $order_model->status_id=1;
+                $order_model->status_id=2;
                 $order_model->delivery_price =$delivery_price;
                 $order_model->discount= $discount;
                 $order_model->total_price=$delivery_price+$typeoption->price;
