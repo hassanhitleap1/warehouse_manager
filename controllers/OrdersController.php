@@ -92,6 +92,7 @@ class OrdersController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $order_id =  Orders::find()->count() + 1 ;
             $model->order_id=$order_id;
+            $model->status_id=2;
             $ordersItem = Model::createMultiple(OrdersItem::classname());
             Model::loadMultiple($ordersItem, Yii::$app->request->post());
             $valid = $model->validate();

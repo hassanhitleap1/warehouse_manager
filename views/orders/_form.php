@@ -46,11 +46,7 @@ if (!$model->isNewRecord) {
             <?= $form->field($model, 'phone')->textInput(['value'=>$phone]) ?>
             <?= $form->field($model, 'other_phone')->textInput(['value'=>$other_phone]) ?>
             <?= $form->field($model, 'address')->textInput(['maxlength' => true,['value'=>$address]]) ?>
-          
-            <?= $form->field($model, 'status_id')->widget(Select2::classname(), [
-                'data' =>  ArrayHelper::map(Status::find()->all(), 'id', 'name_ar'),
-                'language' => 'ar',
-            ]); ?>
+
 
             <?= $form->field($model, 'region_id')->widget(Select2::classname(), [
                 'data' =>  ArrayHelper::map(Regions::find()->all(), 'id', 'name_ar'),
