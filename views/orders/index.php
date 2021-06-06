@@ -182,10 +182,10 @@ $columns = [
             $orderItemString = '';
             foreach ($model->orderItems as $orderItem) {
                 $type = '';
-                if (count($orderItem->product->subProductCount) > 1) {
+                if (isset($orderItem->product->subProductCount)&& count($orderItem->product->subProductCount) > 1) {
                     $type = $orderItem->subProduct->type;
                 }
-                $orderItemString .= ' ' . $orderItem->product->name . ' ' . $type . ' ' . Yii::t('app', 'Number') . ' ( ' . $orderItem->quantity . ' ) </br>';
+                $orderItemString .= ' ' . $orderItem['product']['name'] . ' ' . $type . ' ' . Yii::t('app', 'Number') . ' ( ' . $orderItem->quantity . ' ) </br>';
             }
             return $orderItemString;
         },
@@ -278,7 +278,7 @@ $columns = [
             'showPageSummary' => true,
         ],
 
-        'options' => ['id' => 'dynagrid'], // a unique identifier is important
+        'options' => ['id' => 'dynagrid'],  // a unique identifier is important
         
     ]);
 
