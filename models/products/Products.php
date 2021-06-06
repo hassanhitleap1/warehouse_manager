@@ -59,7 +59,7 @@ class Products extends \yii\db\ActiveRecord
         return [
             [['name','quantity', 'purchasing_price', 'selling_price','category_id', 'warehouse_id'], 'required'],
             [['purchasing_price', 'selling_price'], 'double'],
-            [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id','company_delivery_id'], 'integer'],
+            [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id','company_delivery_id','quantity_come'], 'integer'],
             [['name'], 'string', 'max' => 255],
              [['video_url','thumbnail'], 'string', 'max' => 500],
              [['description'], 'string'],
@@ -80,6 +80,7 @@ class Products extends \yii\db\ActiveRecord
             'purchasing_price' => Yii::t('app', 'Purchasing_Price'),
             'selling_price' => Yii::t('app', 'Selling_Price'),
             'quantity' => Yii::t('app', 'Quantity'),
+            'quantity_come'=> Yii::t('app', 'Quantity'),
             'category_id' => Yii::t('app', 'Category'),
             'status' => Yii::t('app', 'Status'),
             'supplier_id' => Yii::t('app', 'Supplier'),

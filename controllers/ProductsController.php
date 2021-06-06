@@ -89,7 +89,7 @@ class ProductsController extends BaseController
             $type_options= Model::createMultiple(OptionsSellProduct::classname());
             Model::loadMultiple($subProductCounts, Yii::$app->request->post());
             Model::loadMultiple($type_options, Yii::$app->request->post());
-        
+            $model->quantity_come=$model->quantity;
              // validate all models
              $valid = $model->validate();
              $valid =    Model::validateMultiple($subProductCounts) && $valid;

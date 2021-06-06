@@ -17,7 +17,7 @@ class ProductsSearch extends Products
     public function rules()
     {
         return [
-            [['id', 'quantity', 'category_id', 'status', 'supplier_id', 'unit_id', 'warehouse_id'], 'integer'],
+            [['id', 'quantity', 'category_id', 'status', 'supplier_id', 'unit_id', 'warehouse_id','quantity_come'], 'integer'],
             [['name', 'thumbnail','video_url', 'description','created_at', 'updated_at'], 'safe'],
             [['purchasing_price', 'selling_price'], 'number'],
         ];
@@ -63,6 +63,7 @@ class ProductsSearch extends Products
             'purchasing_price' => $this->purchasing_price,
             'selling_price' => $this->selling_price,
             'quantity' => $this->quantity,
+            'quantity_come'=> $this->quantity_come,
             'category_id' => $this->category_id,
             'status' => $this->status,
             'supplier_id' => $this->supplier_id,

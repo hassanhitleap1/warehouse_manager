@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'purchasing_price',
             'selling_price',
-            'quantity',
+            'quantity_come',
             [
                 'attribute' => 'category_id',
                 'value' => 'category.name_ar',

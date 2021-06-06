@@ -23,6 +23,7 @@ class m201129_220051_products extends Migration
             'purchasing_price'=> $this->double()->notNull(),
             'selling_price'=> $this->double()->notNull(),
             'quantity'=> $this->integer()->notNull()->defaultValue(1),
+            'quantity_come'=> $this->integer()->notNull()->defaultValue(0),
             'category_id'=> $this->integer()->notNull(),
             'status' => $this->smallInteger()->notNull()->defaultValue(1),
             'supplier_id'=>$this->integer()->defaultValue(null),
