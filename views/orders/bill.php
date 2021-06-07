@@ -81,10 +81,10 @@ $this->title = $model->id;
                     <?php $SubTotal=0; $orderItemString = '';?>
                         <?php foreach ($model->orderItems as  $key =>  $orderItem):?>
                                 <?php  $SubTotal+=$orderItem->price_item_count ;  $type = '';
-                                    if (count($orderItem->product->subProductCount) > 1) {
+                                    if ( isset($orderItem->product->subProductCount) &&  count($orderItem->product->subProductCount) > 1) {
                                         $type = $orderItem->subProduct->type;
                                     }
-                                    $orderItemString .= ' ' . $orderItem->product->name . ' ' . $type . ' ' . Yii::t('app', 'Number') . ' ( ' . $orderItem->quantity . ' ) ';
+                                    $orderItemString .= ' ' . $orderItem['product']['name'] . ' ' . $type . ' ' . Yii::t('app', 'Number') . ' ( ' . $orderItem->quantity . ' ) ';
                                 ?>
                             <tr>
                                 <th scope="row"><?= $key+1 ?></th>
