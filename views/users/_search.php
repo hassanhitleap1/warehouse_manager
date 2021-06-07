@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\users\UsersSearch */
+/* @var $model app\models\products\UsersSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -24,15 +24,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'phone') ?>
 
+    <?= $form->field($model, 'name') ?>
+
     <?= $form->field($model, 'other_phone') ?>
 
-    <?= $form->field($model, 'auth_key') ?>
+    <?php // echo $form->field($model, 'auth_key') ?>
 
     <?php // echo $form->field($model, 'password_hash') ?>
 
     <?php // echo $form->field($model, 'password_reset_token') ?>
 
     <?php // echo $form->field($model, 'email') ?>
+
+    <?php // echo $form->field($model, 'type') ?>
 
     <?php // echo $form->field($model, 'status') ?>
 
@@ -43,6 +47,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'area_id') ?>
 
     <?php // echo $form->field($model, 'address') ?>
+
+    <?php // echo $form->field($model, 'name_in_facebook') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

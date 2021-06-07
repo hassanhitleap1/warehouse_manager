@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\users\UsersSearch */
+/* @var $searchModel app\models\products\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Users');
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create_User'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Users'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -27,25 +27,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'name',
+            'id',
+            'username',
             'phone',
+            'name',
             'other_phone',
-            'email:email',
+            //'auth_key',
+            //'password_hash',
+            //'password_reset_token',
+            //'email:email',
+            //'type',
             //'status',
-            [
-                'attribute'=>"country_id",
-                'value'=>'country.name_ar'
-            ],
-
-            [
-                'attribute'=>"region_id",
-                'value'=>'region.name_ar'
-            ],
-            [
-                'attribute'=>"area_id",
-                'value'=>'area.name_ar'
-            ],
-            'address',
+            //'country_id',
+            //'region_id',
+            //'area_id',
+            //'address',
+            //'name_in_facebook',
             //'created_at',
             //'updated_at',
 
