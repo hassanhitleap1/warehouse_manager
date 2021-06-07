@@ -26,6 +26,7 @@ class m201129_214103_user extends Migration
             'password_hash' => $this->string()->notNull()->defaultValue(null),
             'password_reset_token' => $this->string()->unique()->defaultValue(null),
             'email' => $this->string()->unique()->defaultValue(null),
+            'type'=>$this->smallInteger()->defaultValue(2),
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
             'country_id'=>$this->integer()->defaultValue(null),
             'region_id'=>$this->integer()->defaultValue(null),
@@ -35,6 +36,13 @@ class m201129_214103_user extends Migration
             'created_at' => $this->integer()->notNull()->defaultValue(null),
             'updated_at' => $this->integer()->notNull()->defaultValue(null),
         ], $tableOptions);
+        $data=[
+            ['username'=>'admin','name'=>'admin','type'=>1,'password_hash'=>Yii::$app->security->generatePasswordHash("admin")]
+        ];
+        Yii::$app->db
+            ->createCommand()
+            ->batchInsert('user', ['username','name','type','password_hash'], $data)
+            ->execute();
     }
 
     public function down()
