@@ -55,6 +55,25 @@ function init() {
     getMessage();
 }
 
+
+function get_data(str_search) {
+    var arr=str_search.split('string_id=');
+    var string_id=arr[1];
+    var SITE_URL="http://anatfran-store.com";
+    SITE_URL="http://localhost:8080";
+    var url=`${SITE_URL}/index.php?r=whatsapp/get&string_id=${string_id}`;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (json) {
+
+            console.log(json)
+        }
+    });
+
+}
+
+
 function checkVisit(){
     chrome.storage.local.get(['no_of_visit', 'rate_us'], function (result) {
         if(result.no_of_visit === undefined){
@@ -65,8 +84,8 @@ function checkVisit(){
             chrome.tabs.query({active: true, lastFocusedWindow: true}, function (tabs) {
                 var url = tabs[0].url;
                 if (url !== "https://web.whatsapp.com" && url !== "https://web.whatsapp.com/"){
-                     window.open("https://web.whatsapp.com", "_blank");
-
+                    get_data(url);
+                     // window.open("https://web.whatsapp.com", "_blank");
                 }else{
                     chrome.storage.local.set({no_of_visit: result.no_of_visit + 1});
                     if((result.no_of_visit > 5) && (result.rate_us === undefined)) {

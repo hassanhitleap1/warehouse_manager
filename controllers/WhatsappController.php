@@ -10,7 +10,39 @@ use yii\web\Controller;
 
 class WhatsappController extends Controller
 {
-        public function actionGetMassges(){
+        public $enableCsrfValidation = false;
+
+//        public function behaviors()
+//        {
+//            $behaviors = parent::behaviors();
+//            $behaviors['corsFilter'] = [
+//                'class' => \yii\filters\Cors::className(),
+//                'cors' => [
+//                    'Origin'                           => "*",
+//                    'Access-Control-Request-Method'    => ['POST', 'GET'],
+//                    'Access-Control-Allow-Credentials' => true,
+//                    'Access-Control-Max-Age'           => 3600,
+//                ],
+//            ];
+//
+//            return $behaviors;
+//        }
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
+            'cors' => [
+                'Origin'                           => "*",
+                'Access-Control-Request-Method'    => ['POST', 'GET'],
+                'Access-Control-Allow-Credentials' => true,
+                'Access-Control-Max-Age'           => 3600,
+            ],
+        ];
+        return $behaviors;
+    }
+
+        public function actionGet(){
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             $string_id=$_GET['string_id'];
             $ides = explode(",", $string_id);
