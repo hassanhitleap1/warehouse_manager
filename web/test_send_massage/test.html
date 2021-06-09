@@ -11,13 +11,27 @@
 </head>
 <body>
 <script>
-    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-    width=600,height=300,left=100,top=100`;
-    let url =`https://web.whatsapp.com/send/?phone=962799263494&text=I%27m+api+msg+hello+dddd+friend+dddd&app_absent=0`;
-    // myWindow = window.open(url, "NewsWindow", params);
+    let str_tab = 'http://anatfran-store.com/web/index.php?r=orders/export-pdf&string_id=39,38,37';
+    var arrgs=str_tab.split('string_id=');
+    var string_id=arrgs[1];
+    SITE_URL="http://anatfran-store.com";
+    let url= `${SITE_URL}/index.php?r=whatsapp/get-massage&string_id=${string_id}`;
+    console.log(url);
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                for (const orders in this.data) {
+                    console.log(`${orders.number}: ${orders[property]} `);
+                }
+            }
+        };
+        xhttp.open("GET",url, true);
+        xhttp.send();
+    }
 
-    // myWindow.focus();
-    
+    loadDoc();
+
 
   
 </script>
