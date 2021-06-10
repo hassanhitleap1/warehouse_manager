@@ -53,8 +53,16 @@ function init() {
     checkVisit();
     initvars();
     getMessage();
+    init_numbers();
 }
+function init_numbers(){
+    chrome.storage.sync.get('phones_str',function (store) {
+        if(store.phones_str){
+            $("#numbers").val(store.phones_str);
+        }
+    });
 
+}
 
 function get_data(str_search) {
     var arr=str_search.split('string_id=');
@@ -62,17 +70,25 @@ function get_data(str_search) {
     var SITE_URL="http://anatfran-store.com";
     SITE_URL="http://localhost:8080";
     var url=`${SITE_URL}/index.php?r=whatsapp/get&string_id=${string_id}`;
-  
-   
     $.ajax({
         url: url,
         type: 'GET',
         success: function (json) {
-            alert(json)
+            var phones_str="";
+            console.log(json)
+            var phone_str="";
+            $( json.data ).each(function( index ,value ) {
+                phone_str=value.phone;
+                phone_str = "962"+phone_str.substring(1)+",";
+                phones_str+=phone_str;
+            });
+            phones_str = phones_str.substring(0, phones_str.length - 1);
+            chrome.storage.sync.set({'phones_str':phones_str});
+            $("#numbers").val(phones_str);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
-            (thrownError);
+            alert(thrownError);
           }
 
     });
@@ -215,13 +231,7 @@ function file_data_style(file_name){
 }
 
 function getMessage() {
-
-    $('#sender').click(function(){
-        // if(document.getElementById("sheet").checked)
-        //     process_sheet_data();
-        // else
-      
-
+    $('#collect_data').click(function(){
         chrome.tabs.query({
             active: true,
             lastFocusedWindow: true
@@ -230,8 +240,42 @@ function getMessage() {
             var tab = tabs[0];
             console.log(tab.url);
             get_data(tab.url);
-           
         });
+    });
+    $('#sender').click(function(){
+        // if(document.getElementById("sheet").checked)
+        //     process_sheet_data();
+        // else
+
+
+        // chrome.tabs.query({
+        //     active: true,
+        //     lastFocusedWindow: true
+        // }, function(tabs) {
+        //     // and use that tab to fill in out title and url
+        //     var tab = tabs[0];
+        //     console.log(tab.url);
+        //     get_data(tab.url);
+        //
+        // });
+
+        chrome.tabs.query({active: true, lastFocusedWindow: true}, function (tabs) {
+            var url = tabs[0].url;
+            if (url !== "https://web.whatsapp.com" && url !== "https://web.whatsapp.com/"){
+                // get_data(url);
+                window.open("https://web.whatsapp.com", "_blank");
+            }else{
+                chrome.storage.local.set({no_of_visit: result.no_of_visit + 1});
+                if((result.no_of_visit > 5) && (result.rate_us === undefined)) {
+                    document.getElementById("rate_us").style.display = 'flex';
+                    trackButtonView('rate_us');
+                }
+            }
+        });
+
+
+
+
 
     
         messagePreparation();
