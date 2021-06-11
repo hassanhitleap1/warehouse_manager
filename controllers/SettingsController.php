@@ -62,7 +62,8 @@ class SettingsController extends BaseController
                 $string.="'$key' => '$param', \n";
             }
             $string.="];\n ?>";
-
+            // echo $string;
+            // exit;
             file_put_contents($parh, $string);
 
 

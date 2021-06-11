@@ -29,6 +29,7 @@ class Settings extends Model
     {
         return [
             [['adminEmail', 'massage_whatsapp','name_of_store','senderEmail', 'senderName', 'bsDependencyEnabled', 'phone','facebook_id','sanpchat_id','sanpchat_email','tiktok_id','company_delivery'], 'required'],
+            [['massage_whatsapp','name_of_store'],'string'],
             [['logo'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png'],
         ];
     }
