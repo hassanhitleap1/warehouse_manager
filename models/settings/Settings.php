@@ -18,6 +18,8 @@ class Settings extends Model
     public $tiktok_id;
     public $company_delivery;
     public $logo;
+    public $massage_whatsapp;
+    public $name_of_store;
 
 
     /**
@@ -26,7 +28,7 @@ class Settings extends Model
     public function rules()
     {
         return [
-            [['adminEmail', 'senderEmail', 'senderName', 'bsDependencyEnabled', 'phone','facebook_id','sanpchat_id','sanpchat_email','tiktok_id','company_delivery'], 'required'],
+            [['adminEmail', 'massage_whatsapp','name_of_store','senderEmail', 'senderName', 'bsDependencyEnabled', 'phone','facebook_id','sanpchat_id','sanpchat_email','tiktok_id','company_delivery'], 'required'],
             [['logo'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png'],
         ];
     }
@@ -38,6 +40,8 @@ class Settings extends Model
     public function attributeLabels()
     {
         return [
+            'name_of_store'=> Yii::t('app', 'Name_Of_Store'),
+            'massage_whatsapp'=> Yii::t('app', 'Massage_Whatsapp'),
             'adminEmail' => Yii::t('app', 'adminEmail'),
             'senderEmail' => Yii::t('app', 'senderEmail'),
             'senderName' => Yii::t('app', 'senderName'),

@@ -11,11 +11,13 @@
 //     'sanpchat_email'=>'mohammedkiwan99@gmail.com',
 //     'tiktok_id'=>'C2ENV27MU8Q03RAJ1NU0',
 //      'company_delivery'=>1,
-
+//      'name_of_store'=>"انا طفران",
+//        'massage_whatsapp'=>"شكرا لطلبكم من name_of_store",
 // ];
 
 
 return [
+    'name_of_store'=>"انا طفران",
     'adminEmail' => 'admin@example.com',
     'senderEmail' => 'noreply@example.com',
     'senderName' => 'Example.com mailer',
@@ -26,5 +28,6 @@ return [
     'sanpchat_email'=>'',
     'tiktok_id'=>'',
     'company_delivery'=>1,
+    'massage_whatsapp'=>"شكرا لطلبكم من name_of_store",
 
 ];

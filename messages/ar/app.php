@@ -186,7 +186,9 @@ return [
     "Old_Password"=>"كلمة سر قديمة",
     "New_Password"=>"كلمة السر الجديدة",
     "Confirm_Pass"=>"اكد المرور",
-    "Succ_Mess_Pass"=>"تم تغير كلمة السر بنجاح"
+    "Succ_Mess_Pass"=>"تم تغير كلمة السر بنجاح",
+    "Name_Of_Store"=>"اسم المتجر",
+    "Massage_Whatsapp"=>"رسالة الوتس اب",
 
 
 ];
