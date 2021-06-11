@@ -57,11 +57,18 @@ class WhatsappController extends Controller
                     }
                     $orderItemString .= ' ' . $orderItem['product']['name'] . ' ' . $type . ' ' . Yii::t('app', 'Number') . ' ( ' . $orderItem->quantity . ' ) </br>';
                 }
+              
 
+                $letters = array('name_of_store','order' ,'price');
+                $fruit   = array(Yii::$app->params['name_of_store'], $orderItemString,$order->amount_required);
+                $text    = Yii::$app->params['massage_whatsapp'];
+                $massage  = str_replace($letters, $fruit, $text);
+                
                 $data[]=[
                     'order_str'=>$orderItemString,
                     'phone'=> $order['user']['phone'],
                     'name'=>$order['user']['name'],
+                    'massge'=>$massage
                 ];
 
             }
