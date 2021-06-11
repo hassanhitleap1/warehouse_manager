@@ -64,11 +64,21 @@ function init_numbers(){
 
 }
 
+function getSiteUrl(str_search) {
+    var n = str_search.includes("localhost:8080");
+    if(n){
+        site_url="http://localhost:8080";
+    }else{
+       var args=str_search.split("web");
+       site_url=args[0]+'/web';
+    }
+    return site_url;
+}
+
 function get_data(str_search) {
+    var SITE_URL=getSiteUrl(str_search);
     var arr=str_search.split('string_id=');
     var string_id=arr[1];
-    var SITE_URL="http://anatfran-store.com";
-    SITE_URL="http://localhost:8080";
     var url=`${SITE_URL}/index.php?r=whatsapp/get&string_id=${string_id}`;
     $.ajax({
         url: url,
