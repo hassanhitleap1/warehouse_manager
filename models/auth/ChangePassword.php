@@ -34,5 +34,21 @@ class ChangePassword extends Model
             $this->addError($attribute, Yii::t('app', 'Is_Not_Old'));
         }
     }
+
+
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+           
+            'old_password' => Yii::t('app', 'Old_Password'),
+            'new_password' => Yii::t('app', 'New_Password'),
+            'confirm_pass' => Yii::t('app', 'Confirm_Pass'),
+           
+        ];
+    }
 }
 
