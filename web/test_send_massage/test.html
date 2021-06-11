@@ -11,26 +11,13 @@
 </head>
 <body>
 <script>
-    let str_tab = 'http://anatfran-store.com/web/index.php?r=orders/export-pdf&string_id=39,38,37';
-    var arrgs=str_tab.split('string_id=');
-    var string_id=arrgs[1];
-    SITE_URL="http://anatfran-store.com";
-    let url= `${SITE_URL}/index.php?r=whatsapp/get-massage&string_id=${string_id}`;
-    console.log(url);
-    function loadDoc() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                for (const orders in this.data) {
-                    console.log(`${orders.number}: ${orders[property]} `);
-                }
-            }
-        };
-        xhttp.open("GET",url, true);
-        xhttp.send();
-    }
+    var str_search="http://anatfran-store.com/web/?r=orders/export-pdf&string_id=55,54,53,52,51";
+   // var n = str_search.search("localhost:8080");
+    
 
-    loadDoc();
+    
+
+    
 
 
   
