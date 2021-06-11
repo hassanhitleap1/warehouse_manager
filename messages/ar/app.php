@@ -181,7 +181,12 @@ return [
     'Create_Company_Delivery'=>'انشاء شركة توصيل',
     'Company_Deliveries'=>'شركات النوصيل',
     'Logo'=>'Logo',
-    'Create_Company_Delivery'=>'انشاء شركة توصيل'
+    'Create_Company_Delivery'=>'انشاء شركة توصيل',
+    "Change_Password"=>"تغير كلمة السر",
+    "Old_Password"=>"كلمة سر قديمة",
+    "New_Password"=>"كلمة السر الجديدة",
+    "Confirm_Pass"=>"اكد المرور",
+    "Succ_Mess_Pass"=>"تم تغير كلمة السر بنجاح"
 
 
 ];
