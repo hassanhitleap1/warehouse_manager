@@ -139,7 +139,9 @@ function checkVisit(){
 };
 
 function sendMessageToBackground(message) {
+
     chrome.tabs.query({active: true, currentWindow: true},function(tabs) {
+     
         chrome.tabs.sendMessage(tabs[0].id, message);
     });
 }
@@ -161,7 +163,17 @@ function messagePreparation() {
     var time_gap = document.querySelector("#time_gap").value;
     var customization = $("#customization").is(":checked");
     var time_gap = parseInt(time_gap);
-    var numbers = numbers_str.replace(/\n/g, ",").split(",");
+    // var numbers = numbers_str.replace(/\n/g, ",").split(",");
+    var numbers=[];
+    chrome.storage.sync.get('json_api',function (store) {
+        if(store.json_api){
+            $( store.json_api ).each(function( index ,value ) {
+                numbers.push(value.phone);
+            });
+        }
+        console.log("numbers",numbers);
+    });
+
     if(!numbers_str || !message) {
         if(!numbers_str)
             show_error("Numbers can't be blank");
