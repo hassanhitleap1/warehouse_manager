@@ -182,7 +182,7 @@ function messagePreparation() {
         return;
     }
     console.log("sendMessageToBackground",{type: 'number_message',numbers: numbers, messages: messages, time_gap: time_gap, csv_data: csv_data, customization: customization})
-    sendMessageToBackground({type: 'number_message',numbers: numbers, messages: messages, time_gap: time_gap, csv_data: csv_data, customization: customization});
+    sendMessageToBackground({type: 'number_message',numbers: numbers, message: message, time_gap: time_gap, csv_data: csv_data, customization: customization});
 }
 
 function processExcel(data) {
