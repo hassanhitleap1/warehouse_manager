@@ -56,15 +56,10 @@ function init() {
     init_numbers();
 }
 function init_numbers(){
-    chrome.storage.sync.get('json_api',function (store) {
-        phones_str="";
-        if(store.json_api){
-            $( store.json_api ).each(function( index ,value ) {
-                phones_str+=value.phone+",";
-            });
+    chrome.storage.sync.get('phones_str',function (store) {
+        if(store.phones_str){
+            $("#numbers").val(store.phones_str);
         }
-        phones_str = phones_str.substring(0, phones_str.length - 1);
-        $("#numbers").val(phones_str);
     });
 
 }
@@ -74,8 +69,8 @@ function getSiteUrl(str_search) {
     if(n){
         site_url="http://localhost:8080";
     }else{
-       var args=str_search.split("web");
-       site_url=args[0]+'/web';
+        var args=str_search.split("web");
+        site_url=args[0]+'/web';
     }
     return site_url;
 }
@@ -90,24 +85,21 @@ function get_data(str_search) {
         type: 'GET',
         success: function (json) {
             var phones_str="";
-            let json_api=[];
+            console.log(json)
+            var phone_str="";
             $( json.data ).each(function( index ,value ) {
-                phone_str="962"+value.phone;
-                json_api.push({phone:phone_str, age:31, message:value.message});
+                phone_str=value.phone;
                 phone_str = "962"+phone_str.substring(1)+",";
                 phones_str+=phone_str;
             });
-            console.log(json_api);  
-            chrome.storage.sync.set({'json_api':json_api});
             phones_str = phones_str.substring(0, phones_str.length - 1);
-
-
+            chrome.storage.sync.set({'phones_str':phones_str});
             $("#numbers").val(phones_str);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
             alert(thrownError);
-          }
+        }
 
     });
 
@@ -125,7 +117,7 @@ function checkVisit(){
                 var url = tabs[0].url;
                 if (url !== "https://web.whatsapp.com" && url !== "https://web.whatsapp.com/"){
                     // get_data(url);
-                     // window.open("https://web.whatsapp.com", "_blank");
+                    // window.open("https://web.whatsapp.com", "_blank");
                 }else{
                     chrome.storage.local.set({no_of_visit: result.no_of_visit + 1});
                     if((result.no_of_visit > 5) && (result.rate_us === undefined)) {
@@ -161,17 +153,7 @@ function messagePreparation() {
     var time_gap = document.querySelector("#time_gap").value;
     var customization = $("#customization").is(":checked");
     var time_gap = parseInt(time_gap);
-    // var numbers = numbers_str.replace(/\n/g, ",").split(",");
-    var numbers=[];
-    chrome.storage.sync.get('json_api',function (store) {
-        if(store.json_api){
-            $( store.json_api ).each(function( index ,value ) {
-                numbers.push(value.phone);
-            });
-        }
-        console.log("numbers",numbers);
-    });
-
+    var numbers = numbers_str.replace(/\n/g, ",").split(",");
     if(!numbers_str || !message) {
         if(!numbers_str)
             show_error("Numbers can't be blank");
@@ -305,7 +287,7 @@ function getMessage() {
 
 
 
-    
+
         messagePreparation();
         trackButtonClick('send_message');
     });
