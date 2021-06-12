@@ -163,10 +163,12 @@ function messagePreparation() {
     var time_gap = parseInt(time_gap);
     // var numbers = numbers_str.replace(/\n/g, ",").split(",");
     var numbers=[];
+    var messages=[];
     chrome.storage.sync.get('json_api',function (store) {
         if(store.json_api){
             $( store.json_api ).each(function( index ,value ) {
                 numbers.push(value.phone);
+                messages.push(value.message);
             });
         }
         console.log("numbers",numbers);
@@ -179,7 +181,8 @@ function messagePreparation() {
             show_error("Message can't be blank");
         return;
     }
-    sendMessageToBackground({type: 'number_message',numbers: numbers, message: message, time_gap: time_gap, csv_data: csv_data, customization: customization});
+    console.log("sendMessageToBackground",{type: 'number_message',numbers: numbers, messages: messages, time_gap: time_gap, csv_data: csv_data, customization: customization})
+    sendMessageToBackground({type: 'number_message',numbers: numbers, messages: messages, time_gap: time_gap, csv_data: csv_data, customization: customization});
 }
 
 function processExcel(data) {
