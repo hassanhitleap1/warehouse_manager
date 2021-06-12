@@ -68,7 +68,7 @@ class WhatsappController extends Controller
                     'order_str'=>$orderItemString,
                     'phone'=> $order['user']['phone'],
                     'name'=>$order['user']['name'],
-                    'massge'=>$massage
+                    'message'=>$massage
                 ];
 
             }

@@ -56,10 +56,15 @@ function init() {
     init_numbers();
 }
 function init_numbers(){
-    chrome.storage.sync.get('phones_str',function (store) {
-        if(store.phones_str){
-            $("#numbers").val(store.phones_str);
+    chrome.storage.sync.get('json_api',function (store) {
+        phones_str="";
+        if(store.json_api){
+            $( store.json_api ).each(function( index ,value ) {
+                phones_str+=value.phone+",";
+            });
         }
+        phones_str = phones_str.substring(0, phones_str.length - 1);
+        $("#numbers").val(phones_str);
     });
 
 }
@@ -85,15 +90,17 @@ function get_data(str_search) {
         type: 'GET',
         success: function (json) {
             var phones_str="";
-            console.log(json)
-            var phone_str="";
+            let json_api=[];
             $( json.data ).each(function( index ,value ) {
-                phone_str=value.phone;
+                phone_str="962"+value.phone;
+                json_api.push({phone:phone_str, age:31, message:value.message});
                 phone_str = "962"+phone_str.substring(1)+",";
                 phones_str+=phone_str;
             });
+            chrome.storage.sync.set({'json_api':json_api});
             phones_str = phones_str.substring(0, phones_str.length - 1);
-            chrome.storage.sync.set({'phones_str':phones_str});
+
+
             $("#numbers").val(phones_str);
         },
         error: function (xhr, ajaxOptions, thrownError) {
