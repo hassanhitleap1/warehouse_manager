@@ -97,7 +97,7 @@ function get_data(str_search) {
                 phone_str = "962"+phone_str.substring(1)+",";
                 phones_str+=phone_str;
             });
-            console.log(json_api);
+            console.log(json_api);  
             chrome.storage.sync.set({'json_api':json_api});
             phones_str = phones_str.substring(0, phones_str.length - 1);
 
