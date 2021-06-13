@@ -38,6 +38,7 @@ class SettingsController extends BaseController
         $model = new Settings();
         $params=Yii::$app->params;
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
             $params['adminEmail'] = $model->adminEmail;
             $params['senderEmail'] = $model->senderEmail;
             $params['senderName'] = $model->senderName;
@@ -48,8 +49,11 @@ class SettingsController extends BaseController
             $params['sanpchat_email'] = $model->sanpchat_email;
             $params['tiktok_id'] = $model->tiktok_id;
             $params['company_delivery'] = $model->company_delivery;
-            $param['massage_whatsapp']= $model->massage_whatsapp;
-            $param['name_of_store']= $model->name_of_store;
+            $params['massage_whatsapp']= $model->massage_whatsapp;
+            $params['name_of_store']= $model->name_of_store;
+
+
+
             $file = UploadedFile::getInstance($model, 'logo');
             if (!is_null($file)) {
                 $path="images/logo" . "." . $file->extension;
