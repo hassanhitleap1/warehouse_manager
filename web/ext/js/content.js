@@ -63,6 +63,19 @@ async function help() {
     messageBox = document.querySelectorAll("[contenteditable='true']")[1], event = document.createEvent("UIEvents"), messageBox.innerHTML = message.replace(/ /gm, " "), event.initUIEvent("input", !0, !0, window, 1), messageBox.dispatchEvent(event);
 }
 
+async function get_messages(message, csv_data) {
+    var messages = [];
+
+    chrome.storage.sync.get('json_api',function (store) {
+        if(store.json_api){
+            $( store.json_api ).each(function( index ,value ) {
+                messages.push(value.message);
+            });
+        }
+    });
+    return messages;
+}
+
 async function setMessages(message, csv_data) {
     var messages = [];
     for (var i = 1; i < csv_data.length; i++) {
@@ -83,9 +96,14 @@ async function messanger(numbers, message, time_gap, csv_data, customization) {
     notifications_hash['title'] = 'Your messages are being sent';
     notifications_hash['message'] = '';
     sendChromeMessage(notifications_hash);
-    if(customization) {
-        var messages = await setMessages(message, csv_data);
-    }
+
+    // comment by hasan
+    // if(customization) {
+    //     var messages = await setMessages(message, csv_data);
+    // }
+    // wite by hasan new function
+    var messages= await get_messages();
+
     for (let i = 0; i < numbers.length; i++) {
         console.log(stop);
         if(stop) {
@@ -93,9 +111,12 @@ async function messanger(numbers, message, time_gap, csv_data, customization) {
             break;
         }
         var number = numbers[i];
+       message=messages[i];
         number = number.replace(/\D/g, '');
-        if(customization)
-            message = messages[i];
+        // commint by hassan
+        // if(customization)
+        //     message = messages[i];
+
         var a = null;
         if (number.length < 10) {
             rows.push([numbers[i], 'Invalid Number']);
@@ -124,6 +145,10 @@ async function messanger(numbers, message, time_gap, csv_data, customization) {
             await sendAttachment(number);
         }
     }
+
+    chrome.storage.sync.set({'json_api':[]});
+
+
     media_attached = false;
     notifications_hash['type'] = 'send_notification';
     notifications_hash['title'] = 'Your messages are sent';

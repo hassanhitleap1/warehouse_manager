@@ -91,13 +91,13 @@ function get_data(str_search) {
         success: function (json) {
             var phones_str="";
             let json_api=[];
+            var phone="";
             $( json.data ).each(function( index ,value ) {
-                phone_str="962"+value.phone;
+                phone=value.phone;
+                phone_str="962"+phone.substring(1);
                 json_api.push({phone:phone_str, age:31, message:value.message});
-                phone_str = "962"+phone_str.substring(1)+",";
-                phones_str+=phone_str;
+                phones_str+=phone_str+",";
             });
-            console.log(json_api);
             chrome.storage.sync.set({'json_api':json_api});
             phones_str = phones_str.substring(0, phones_str.length - 1);
 
@@ -171,7 +171,7 @@ function messagePreparation() {
                 messages.push(value.message);
             });
         }
-        console.log("numbers",numbers);
+
     });
 
     if(!numbers_str || !message) {
