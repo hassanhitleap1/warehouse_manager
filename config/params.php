@@ -28,6 +28,6 @@ return [
     'sanpchat_email'=>'',
     'tiktok_id'=>'',
     'company_delivery'=>1,
-    'massage_whatsapp'=>"شكرا لطلبكم من name_of_store",
+    'massage_whatsapp'=>"شكرا لطلبك من name_of_store لقد طلبت order بسعر price ",
 
 ];
