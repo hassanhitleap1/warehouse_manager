@@ -136,9 +136,9 @@ class OrderHelper extends BaseObject
 
    public static function stock_plus($ordersItem){
         foreach ($ordersItem as $orderItem) {
-            $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
-            $orderItemModel->count=$orderItemModel->count+$orderItem->quantity;
-            $orderItemModel->save();
+            // $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+            // $orderItemModel->count=$orderItemModel->count+$orderItem->quantity;
+            // $orderItemModel->save();
             $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
             $productModel->quantity=$productModel->quantity+$orderItem->quantity;
             $sub_product_count=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
@@ -151,9 +151,9 @@ class OrderHelper extends BaseObject
 
    public static function stock_minus($ordersItem){
         foreach ($ordersItem as $orderItem) {
-            $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
-            $orderItemModel->count=$orderItemModel->count-$orderItem->quantity;
-            $orderItemModel->save();
+            // $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+            // $orderItemModel->count=$orderItemModel->count-$orderItem->quantity;
+            // $orderItemModel->save();
             $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
             $productModel->quantity=$productModel->quantity-$orderItem->quantity;
             $sub_product_count=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
