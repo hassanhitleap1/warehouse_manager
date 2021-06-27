@@ -197,6 +197,7 @@ $columns = [
         'format' => 'html',
         'visible' => true,
     ],
+    'note',
     //'delivery_price',
     // 'discount',
 
