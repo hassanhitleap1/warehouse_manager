@@ -10,6 +10,7 @@ use app\models\users\Users;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
+$total=0;
 
 $users = Users::find()->orderBy('name')->asArray()->all();
 /* @var $this yii\web\View */
@@ -159,7 +160,9 @@ $columns = [
         'attribute' => 'amount_required',
         'vAlign' => 'middle',
         'width' => '50px',
-        'value' => 'amount_required',
+        'value' => function ($model, $key, $index, $widget) use($total){
+            return (in_array( $model->status_id,[6,7 ,13])) ? - $model->amount_required  :$model->amount_required ;
+        },
         'format' => 'raw',
         'visible' => true,
         'pageSummary' => true
@@ -169,7 +172,9 @@ $columns = [
         'attribute' => 'total_price',
         'vAlign' => 'middle',
         'width' => '50px',
-        'value' => 'total_price',
+        'value' => function ($model, $key, $index, $widget) use($total){
+            return (in_array( $model->total_price,[6,7 ,13])) ? - $model->total_price  :$model->total_price ;
+        },
         'format' => 'raw',
         'visible' => true,
         'pageSummary' => true
@@ -287,7 +292,7 @@ $columns = [
     ?>
 
 
-
+    <h1><?=$total ?></h1>
     <?php
 
     Modal::begin([
