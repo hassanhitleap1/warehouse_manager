@@ -172,32 +172,30 @@ class OrdersController extends Controller
             if ($valid && $user->save()) 
             {
                 $transaction = \Yii::$app->db->beginTransaction();
-                try 
-                {
-                    if ($flag = $model->save(false)) 
-                    {
-                        foreach ($ordersItem as $orderItem) 
-                        {
+                try {
+                    if ($flag = $model->save(false)) {
+                        foreach ($ordersItem as $orderItem) {
                             $orderItem->order_id = $model->id;
-                           if (! ($flag = $orderItem->save(false))) 
-                           {
+                            if (! ($flag = $orderItem->save(false))) {
+                              
                                 $transaction->rollBack();
                                 break;
                             }
-                            else
-                            {
-                                OrderHelper::management_stock_product($model,$status_id);
-                            }
                         }
+
+                                            
                     }
 
-                    if ($flag) 
-                    {
-                       $transaction->commit();
-                       return $this->redirect(['view', 'id' => $model->id]);
-                   }
+                   
+                    if ($flag) {
+                        $transaction->commit();
+                      
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
                 } catch (Exception $e) 
                 {
+                    print_r($e);
+                    exit;
                     $transaction->rollBack();
                 }
             }
