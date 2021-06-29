@@ -1,5 +1,37 @@
 let SITE_URL = getSiteUrl() ;
 
+function get_price_delivery(){
+    let company_delivery_id=$("#company_delivery_id").val();
+    let region_id=  $("#region_id").val();
+    if(region_id==''){
+        alert("ارجو تحديد المحافظة")
+        return;
+    }
+    let url= `${SITE_URL}/index.php?r=regions/get-price&id=${region_id}&company_delivery_id=${company_delivery_id}`;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (json) {
+            delivery_price=json.data.price_delivery;
+            $('#delivery_price').val(delivery_price);
+            callculate_all();
+
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(document).on('change','#region_id,#company_delivery_id',function (e) {
      get_price_delivery();
  });
@@ -40,7 +72,6 @@ $(document).on('change','#delivery_price',function (e) {
 });
 
 function callculate_total_price(){
-   
     let amount_required=0;
     let delivery_price=0;
     let discount=0;
@@ -88,16 +119,8 @@ $(document).on('change','.sub_product_id',function (e) {
 
 
  $(document).on('change keypress blur keyup','.quantity_sub_product',function (e) {
+
     let quantity_sub_product =parseInt($(this).val());
-    //let max = parseInt($(this).attr("max"));
-    // if(quantity_sub_product > max){
-    //     $(this).closest(".form-group").removeClass("has-success");
-    //     $(this).closest(".form-group").addClass("has-error");
-    //     $(this).closest(".form-group").find(".help-block").text(`max is  ${max}`);
-    //     return;
-    // }
-    
- 
     let total_price=0;
     let quantity_sub_product_id_str=$(this).attr('id');
     let index=quantity_sub_product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
@@ -247,13 +270,16 @@ function options_sub_product(data, _this){
 }
 
 function set_value_heddin(data,product,_this){
+
     $(_this).closest(".row").find(".price").val(product.selling_price);
+    console.log("product.selling_price",product.selling_price)
     $(_this).closest(".row").find(".price_item_count").val(product.selling_price);
     let quantity=$(_this).closest(".row").find(".quantity_sub_product").val();
     let profit_margin= product.selling_price - product.purchasing_price;
     let discount=$("#discount").val();
     $(_this).closest(".row").find(".profit_margin").val(quantity*profit_margin-discount);
     $(_this).closest(".row").find(".profits_margin").val((quantity*profit_margin)-discount);
+    $(_this).closest(".row").find(".quantity_sub_product").val(1);
 }
 
 
@@ -593,25 +619,7 @@ jQuery(document).ready(function($) {
 });
 
 
-function get_price_delivery(){
-    let company_delivery_id=$("#company_delivery_id").val();  
-    let region_id=  $("#region_id").val();
-    if(region_id==''){
-        alert("ارجو تحديد المحافظة")
-        return;
-    }
-    let url= `${SITE_URL}/index.php?r=regions/get-price&id=${region_id}&company_delivery_id=${company_delivery_id}`;
-     $.ajax({
-         url: url,
-         type: 'GET',
-         success: function (json) {
-             delivery_price=json.data.price_delivery;
-            $('#delivery_price').val(delivery_price);
-              callculate_all();
 
-         }
-     });
- }
 
  function callculate_all(){
     callculate_amount_required();
@@ -621,10 +629,12 @@ function get_price_delivery(){
 
 function get_product(_this){
     let product_id_str=$(_this).attr('id');
+
     let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
     index=index.replaceAll('-product_id', '');
     index=index.trim();
     let url= `${SITE_URL}/index.php?r=products/get-product&id=${$(_this).val()}`;
+
     $.ajax({
         url: url,
         type: 'GET',
