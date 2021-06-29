@@ -2,6 +2,8 @@
 
 namespace app\models\orders;
 
+use app\models\ordersitem\OrdersItem;
+use app\models\products\Products;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\orders\Orders;
@@ -14,7 +16,7 @@ class OrdersSearch extends Orders
 {
 
     public $search_string;
-    public $products_id ;
+
     /**
      * {@inheritdoc}
      */
@@ -46,8 +48,9 @@ class OrdersSearch extends Orders
     public function search($params)
     {
         $query = Orders::find();
-//        var_dump($this->products_id);
-//        exit();
+
+
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -68,6 +71,12 @@ class OrdersSearch extends Orders
            $query->where(['in','orders.id',$ides]);
         }
 
+
+
+        if(isset($_GET["OrdersSearch"]["products_id"])){
+            $subQuery = OrdersItem::find()->select(['order_id'])->where(['in' ,'orders_item.product_id', $_GET["OrdersSearch"]["products_id"]]);
+            $query->andWhere(['IN', 'orders.id', $subQuery]);
+        }
 
 
         $query->joinWith('user');

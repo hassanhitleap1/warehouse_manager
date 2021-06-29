@@ -39,6 +39,7 @@ class Orders extends \yii\db\ActiveRecord
     public $sub_product_id;
     public $name_in_facebook;
     public $order;
+    public $products_id=[] ;
 
     /**
      * {@inheritdoc}
