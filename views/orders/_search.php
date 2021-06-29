@@ -16,8 +16,8 @@ $products=ArrayHelper::map(Products::find()->orderBy(['id' => SORT_DESC])->all()
 ?>
 
 <div class="orders-search">
-    <div class="container">
-        <div class="row">
+
+        <div class="row" style="margin:10px">
             <?php $form = ActiveForm::begin([
                 'action' => ['index'],
                 'method' => 'get',
@@ -26,7 +26,7 @@ $products=ArrayHelper::map(Products::find()->orderBy(['id' => SORT_DESC])->all()
                     ],
                 ]); ?>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label class="control-label"><?=Yii::t('app','Created_At')?></label>
                 <?= DateRangePicker::widget([
                     'model'=>$model,
@@ -44,11 +44,11 @@ $products=ArrayHelper::map(Products::find()->orderBy(['id' => SORT_DESC])->all()
 
                 ?>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <?= $form->field($model, 'search_string') ?>
             </div>
-            <div class="col-md-2">
-                <?= $form->field($model,"product_id")->widget(Select2::classname(), [
+            <div class="col-md-4">
+                <?= $form->field($model,"products_id")->widget(Select2::classname(), [
                     'data' => $products,
                     'language' => 'ar',
                     'options' => ['multiple' => true,'placeholder' =>Yii::t('app',"Plz_Select"),'class'=>'product_id'],
@@ -57,11 +57,11 @@ $products=ArrayHelper::map(Products::find()->orderBy(['id' => SORT_DESC])->all()
 
             </div>
 
-            <div class="col-md-2 " style="margin-top: 27px;">
+            <div class="col-md-1" style="margin-top: 27px;">
             
                 <div class="form-group">
                     <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-                    <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+
                 </div>
 
             </div>
@@ -74,7 +74,7 @@ $products=ArrayHelper::map(Products::find()->orderBy(['id' => SORT_DESC])->all()
     
     </div>
 
-    </div>
+
 
   
 </div>

@@ -10,7 +10,7 @@ use app\models\users\Users;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
-$total=0;
+
 
 $users = Users::find()->orderBy('name')->asArray()->all();
 /* @var $this yii\web\View */
@@ -36,12 +36,8 @@ $columns = [
 
     [
         'attribute' => 'created_at',
-        'filterType' => GridView::FILTER_DATE,
         'format' => 'raw',
         'width' => '100px',
-        'filterWidgetOptions' => [
-            'pluginOptions' => ['format' => 'yyyy-mm-dd']
-        ],
         'visible' => true,
         'value' => function ($model, $key, $index, $widget) {
             return  date('Y-m-d', strtotime($model->created_at));
@@ -160,7 +156,7 @@ $columns = [
         'attribute' => 'amount_required',
         'vAlign' => 'middle',
         'width' => '50px',
-        'value' => function ($model, $key, $index, $widget) use($total){
+        'value' => function ($model, $key, $index, $widget) {
             return (in_array( $model->status_id,[6,7 ,13])) ? - $model->amount_required  :$model->amount_required ;
         },
         'format' => 'raw',
@@ -172,7 +168,7 @@ $columns = [
         'attribute' => 'total_price',
         'vAlign' => 'middle',
         'width' => '50px',
-        'value' => function ($model, $key, $index, $widget) use($total){
+        'value' => function ($model, $key, $index, $widget) {
             return (in_array( $model->total_price,[6,7 ,13])) ? - $model->total_price  :$model->total_price ;
         },
         'format' => 'raw',
@@ -292,7 +288,7 @@ $columns = [
     ?>
 
 
-    <h1><?=$total ?></h1>
+
     <?php
 
     Modal::begin([

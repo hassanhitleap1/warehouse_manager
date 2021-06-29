@@ -14,15 +14,15 @@ class OrdersSearch extends Orders
 {
 
     public $search_string;
-
+    public $products_id ;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'country_id', 'region_id', 'area_id', 'status_id','delivery_price','discount','total_price','amount_required'], 'integer'],
-            [['order_id', 'search_string','delivery_date','user_id', 'delivery_time', 'address', 'phone','created_at', 'updated_at'], 'safe'],
+            [['id', 'country_id', 'region_id','area_id', 'status_id','delivery_price','discount','total_price','amount_required'], 'integer'],
+            [['order_id', 'search_string','delivery_date','user_id', 'delivery_time', 'address', 'phone','created_at', 'updated_at','products_id'], 'safe'],
 
         ];
     }
@@ -46,7 +46,8 @@ class OrdersSearch extends Orders
     public function search($params)
     {
         $query = Orders::find();
-
+//        var_dump($this->products_id);
+//        exit();
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
