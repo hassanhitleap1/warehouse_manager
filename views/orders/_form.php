@@ -92,5 +92,13 @@ $( document ).ready(function() {
     // $( "#profit_margin" ).prop( "disabled", true );
     
 });
+$(document).on('focus','input',function (event) {
+    if(!$(this).attr("data-krajee-touchspin")){
+        $(this).css({"box-sizing":"border-box","z-index":10000000,"width":"200%",'position':"relative"});
+    }
+});
+$(document).on('focusout','input',function (event) {
+    $(this).removeAttr("style");
+});
 
 </script>
