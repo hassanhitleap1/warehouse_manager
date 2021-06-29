@@ -9,7 +9,7 @@ use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
 use kartik\touchspin\TouchSpin;
 $quantity_item=1;
-$products=ArrayHelper::map(Products::find()->all(), 'id', 'name');
+$products=ArrayHelper::map(Products::find()->orderBy(['id' => SORT_DESC])->all(), 'id', 'name');
 $products[0]='-----';
 $product_items[0]=[];
 $price[0]=0;
