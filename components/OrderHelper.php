@@ -204,7 +204,7 @@ class OrderHelper extends BaseObject
                 $status=Status::find()->where(['in', 'id', [2,3,6] ])->all();
             break; 
             case 11: // لا يرد
-                $status=Status::find()->where(['in', 'id', [5,13] ])->all();
+                $status=Status::find()->where(['in', 'id', [5,7,13] ])->all();
             break; 
             case 12: // تم استلام المبلغ
                 $status=Status::find()->all();
