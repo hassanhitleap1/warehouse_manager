@@ -12,29 +12,21 @@ function get_price_delivery(){
         url: url,
         type: 'GET',
         success: function (json) {
-            delivery_price=json.data.price_delivery;
+            delivery_price= parseInt(json.data.price_delivery);
             $('#delivery_price').val(delivery_price);
             callculate_all();
-
         }
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 $(document).on('change','#region_id,#company_delivery_id',function (e) {
      get_price_delivery();
  });
+
+
+
+
+
 
 
 
@@ -84,8 +76,8 @@ function callculate_total_price(){
      });
      amount_required-=discount;
      amount_required+=delivery_price;
+
      $("#total_price").val(amount_required);
-    return amount_required;
 
 }
 
@@ -95,13 +87,12 @@ function callculate_amount_required(){
     let total_price=0
     $(".price_item_count").each(function( index, element  ) {
         total_price+= parseFloat ($(element ).val());
+
     });
 
     $("#amount_required").val(total_price);
-    return total_price;
 
 
-   
 
 }
 
@@ -122,25 +113,16 @@ $(document).on('change','.sub_product_id',function (e) {
 
     let quantity_sub_product =parseInt($(this).val());
     let total_price=0;
-    let quantity_sub_product_id_str=$(this).attr('id');
-    let index=quantity_sub_product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
-        index=index.replaceAll('-product_id', '');
-        index=index.replaceAll('-quantity', '');
-    let price= $("#price_"+index).val();
-    let profit_margin= parseFloat($("#profit_margin_"+index).val());
+     let price= parseFloat($(this).closest(".row").find(".price").val());
+    let profit_margin= parseFloat($(this).closest(".row").find(".profit_margin").val());
+     $(this).closest(".row").find(".price_item_count").val(price *quantity_sub_product);
     if(quantity_sub_product != '' && quantity_sub_product !='undefined' && ! isNaN(quantity_sub_product )){
-        $("#profits_margin_"+index).val(profit_margin*quantity_sub_product);
-         $("#price_item_"+index).val(price * quantity_sub_product);
+        $(this).closest(".row").find(".profits_margin").val( (profit_margin*quantity_sub_product ).toFixed(2) );
+        $(this).closest(".row").find(".price_item").val(price * quantity_sub_product);
     }
+   callculate_all();
 
-     $(".price_item_count").each(function( index, element  ) {
-           total_price+= parseFloat ($(element ).val());
-      });
 
-      let amount_required=total_price-discount;
-      $("#total_price").val(total_price);
-     $("#amount_required").val(total_price);
-     callculate_all();
 
 });
 
@@ -245,41 +227,47 @@ $(document).on('click', '.change-status-all', function(e){
 function profit_margin_fn(){
     let profit_margin=0;
     let discount=0;
-    discount=parseFloat($("#discount").val());
+        discount=parseFloat($("#discount").val());
       $(".profits_margin").each(function( index, element  ) {
-                profit_margin+= parseFloat ($(element ).val());
-          });
+          profit_margin+= parseFloat ($(element ).val());
+      });
 
-          profit_margin-=discount;
+      profit_margin-=discount;
     $('#profit_margin').val(profit_margin);
 }
 
 function options_sub_product(data, _this){
     let  html=`<option value="">------</option>`;
+    let selected=0
      data.forEach((element,index) => {
           html+=`<option value="${element.id}"> ${element.type}</option>`;
+         selected=element.id;
      });
      $(_this).closest(".row").find(".sub_product_id").html(html);
-    //  $(selector).html(html);
+    $(_this).closest(".row").find(`.sub_product_id option[value='${selected}']`).attr('selected', 'selected');
+    $(_this).closest(".row").find(`.sub_product_id option[value='${selected}']`).attr('selected', 'selected');
+    $(_this).closest(".row").find(`.sub_product_id option[value='${selected}']`).trigger('change');
+
  }
 
- function header_product_card(quantity,quantity_item,price,index){
-    $("#quantity_item_"+index).text(quantity_item);
-    $("#quantity_all_"+index).text(quantity);
-    $("#price_items_"+index).text(price);
+ function header_product_card(quantity,quantity_item,price,_this){
+     $(_this).closest(".item").find(".span_quantity_all").text(quantity);
+     $(_this).closest(".item").find(".span_quantity_item").text(quantity_item);
+     $(_this).closest(".item").find(".span_price_items").text(price);
 }
 
 function set_value_heddin(data,product,_this){
-
     $(_this).closest(".row").find(".price").val(product.selling_price);
-    console.log("product.selling_price",product.selling_price)
-    $(_this).closest(".row").find(".price_item_count").val(product.selling_price);
-    let quantity=$(_this).closest(".row").find(".quantity_sub_product").val();
+    let quantity= parseInt($(_this).closest(".row").find(".quantity_sub_product").val());
     let profit_margin= product.selling_price - product.purchasing_price;
-    let discount=$("#discount").val();
-    $(_this).closest(".row").find(".profit_margin").val(quantity*profit_margin-discount);
-    $(_this).closest(".row").find(".profits_margin").val((quantity*profit_margin)-discount);
-    $(_this).closest(".row").find(".quantity_sub_product").val(1);
+    let discount=0;
+    if($("#discount").val() != "" && $("#discount").val() != undefined){
+        discount = parseInt($("#discount").val()) ;
+    }
+    $(_this).closest(".row").find(".price_item_count").val(product.selling_price * quantity);
+    let profits_margin=(quantity*profit_margin)-discount;
+    $(_this).closest(".row").find(".profits_margin").val(profits_margin);
+    $(_this).closest(".row").find(".profit_margin").val((profit_margin/quantity).toFixed(2));
 }
 
 
@@ -629,12 +617,7 @@ jQuery(document).ready(function($) {
 
 function get_product(_this){
     let product_id_str=$(_this).attr('id');
-
-    let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
-    index=index.replaceAll('-product_id', '');
-    index=index.trim();
     let url= `${SITE_URL}/index.php?r=products/get-product&id=${$(_this).val()}`;
-
     $.ajax({
         url: url,
         type: 'GET',
@@ -642,7 +625,7 @@ function get_product(_this){
             let data=json.data;
             let product=json.product;
            options_sub_product(data,_this);
-           header_product_card(product.quantity,data[0].count,product.purchasing_price,index);
+           header_product_card(product.quantity,data[0].count,product.purchasing_price ,_this);
            set_value_heddin(data,product,_this);
            callculate_all();
         }
@@ -653,19 +636,13 @@ function get_product(_this){
 function get_sub_product(_this){
     let url= `${SITE_URL}/index.php?r=sub-product-count/get-sub-product&id=${$(_this).val()}`;
     let product_id_str=$(_this).attr('id');
-    let index=product_id_str.replaceAll('ordersitem-', '') ;//ordersitem-0-product_id
-    index=index.replaceAll('-product_id', '');
-    index=index.replaceAll('-id', '');
-    index=index.replaceAll('-sub_product_id', '');
-    index=index.trim()
      $.ajax({
          url: url,
          type: 'GET',
          success: function (json) {
-             console.log(index);
             $(_this).closest(".row").find(".quantity_sub_product").attr("max",json.data.sub_product.count);
-            $("#quantity_item_"+index).text(json.data.sub_product.count);
-            $("#ordersitem-"+index+"-quantity").attr('max',json.data.sub_product.count);
+             $(_this).closest(".item").find("span_quantity_item").text(json.data.sub_product.count);
+
          }
      });
  }

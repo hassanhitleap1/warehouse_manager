@@ -68,11 +68,11 @@ if (!$model->isNewRecord) {
                             <span class="panel-title-address">  : <?= ($index + 1) ?></span>
                             <button type="button" class="pull-right remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
                             <div class="pull-left">
-                                <span><?=Yii::t('app','Quantity_All')?> : <span class="span_quantity_all" id="quantity_all_<?= ($index)?>"></span> </span>
+                                <span><?=Yii::t('app','Quantity_All')?> : <span class="span_quantity_all"></span> </span>
                                 /
-                                <span><?=Yii::t('app','Quantity_Item')?> : <span  class="span_quantity_item" id="quantity_item_<?= ($index)?>"></span>  </span>
+                                <span><?=Yii::t('app','Quantity_Item')?> : <span  class="span_quantity_item" ></span>  </span>
                                 /
-                                <span><?=Yii::t('app','Price')?> : <span class="price_item span_price_items" id="price_items_<?= ($index)?>"></span>  </span>
+                                <span><?=Yii::t('app','Price')?> : <span class="span_price_items" ></span>  </span>
                             </div>
                 
                             <div class="clearfix"></div>
@@ -86,10 +86,10 @@ if (!$model->isNewRecord) {
                             ?>
 
                             <div class="row">
-                                <?=$form->field($orderItem, "[{$index}]price")->hiddenInput(['class'=>"price",'id'=> "price_$index",'value'=>$price[$index]])->label(false);?>
-                                <?=$form->field($orderItem, "[{$index}]price_item_count")->hiddenInput(['class'=>"price_item_count",'id'=> "price_item_$index", 'value'=>$price_item_count[$index]  ])->label(false);?>
-                                <?=$form->field($orderItem, "[{$index}]profit_margin")->hiddenInput(['class'=>"profit_margin",'id'=> "profit_margin_$index",'value'=>$profit_margin[$index]])->label(false);?>
-                                <?=$form->field($orderItem, "[{$index}]profits_margin")->hiddenInput(['class'=>"profits_margin",'id'=> "profits_margin_$index",'value'=>$profits_margin[$index]])->label(false);?>
+                                <?=$form->field($orderItem, "[{$index}]price")->hiddenInput(['class'=>"price",'value'=>$price[$index]])->label(false);?>
+                                <?=$form->field($orderItem, "[{$index}]price_item_count")->hiddenInput(['class'=>"price_item_count", 'value'=>$price_item_count[$index]  ])->label(false);?>
+                                <?=$form->field($orderItem, "[{$index}]profit_margin")->hiddenInput(['class'=>"profit_margin",'value'=>$profit_margin[$index]])->label(false);?>
+                                <?=$form->field($orderItem, "[{$index}]profits_margin")->hiddenInput(['class'=>"profits_margin",'value'=>$profits_margin[$index]])->label(false);?>
 
                                 <div class="col-sm-4">
                                     <?= $form->field($orderItem,"[{$index}]product_id")->widget(Select2::classname(), [
@@ -144,26 +144,19 @@ $(".add-item").on("click", function(e) {
     reload_js_select2();
     jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
         setTimeout(function(){
-            index= $('.container-items .item ').length;
-            $("#ordersitem-"+(index+1)+"-quantity").val(1);
-            $("#price_item_0"+(index+1)).attr('id',"price_item_"+(index+1));
-            $("#price_0"+(index+1)).attr('id',"price_"+(index+1));
-            $("#price_items_0"+(index+1)).attr('id',"price_items_"+(index+1));
-            $("#quantity_all_0"+(index+1)).attr('id',"quantity_all_"+(index+1));
-            $("#quantity_item_0"+(index+1)).attr('id',"quantity_item_"+(index+1));
-            $("#profit_margin_0"+(index+1)).attr('id',"profit_margin_"+(index+1));
-            $("#profits_margin_0"+(index+1)).attr('id',"profits_margin_"+(index+1));
-            $("#ordersitem-"+(index+1)+"-sub_product_id option[value='0']").attr('selected', 'selected');
-            $("#ordersitem-"+(index+1)+"-product_id option[value='0']").attr('selected', 'selected');
-            $("#ordersitem-"+(index+1)+"-product_id option[value='0']").trigger('change');
-            try {
-                $("#price_"+(index+1)).value(0);
-                $("#price_item_"+(index+1)).value(0);
-                $("#profit_margin_"+(index+1)).value(0);
-                $("#profits_margin_"+(index+1)).value(0);
-            }catch (e) {
-                console.log(e)
-            }
+            $('.container-items .item:last-child').find(".product_id option[value='0']").attr('selected', 'selected');
+            $('.container-items .item:last-child').find(".product_id option[value='0']").attr('selected', 'selected');
+            $('.container-items .item:last-child').find(".product_id option[value='0']").trigger('change');
+            $('.container-items .item:last-child').find(".sub_product_id option[value='0']").attr('selected', 'selected');
+            $('.container-items .item:last-child').find(".sub_product_id option[value='0']").attr('selected', 'selected');
+            $('.container-items .item:last-child').find(".sub_product_id option[value='0']").trigger('change');
+            $('.container-items .item:last-child').find(".quantity_sub_product").val(0);
+            $('.container-items .item:last-child').find(".price").val(0);
+            $('.container-items .item:last-child').find(".price_item_count").val(0);
+            $('.container-items .item:last-child').find(".profit_margin").val(0);
+            $('.container-items .item:last-child').find(".profits_margin").val(0);
+
+            $('.container-items .item:last-child').find(".quantity_sub_product").val(1);
 
         }, 1000);
         
