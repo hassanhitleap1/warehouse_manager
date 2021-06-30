@@ -67,7 +67,7 @@ function callculate_total_price(){
     let amount_required=0;
     let delivery_price=0;
     let discount=0;
-    if(!isNaN($("#discount").val())){
+    if(isNaN($("#discount").val())){
         discount= parseFloat( $("#discount").val());
     }
      delivery_price= parseFloat( $("#delivery_price").val());
@@ -84,13 +84,20 @@ function callculate_total_price(){
 
 function callculate_amount_required(){
 
-    let total_price=0
+    let total_price=0;
     $(".price_item_count").each(function( index, element  ) {
         total_price+= parseFloat ($(element ).val());
 
     });
+    let discount=0;
 
-    $("#amount_required").val(total_price);
+    if(!isNaN($("#discount").val()) && $("#discount").val() !=""  ){
+        discount=parseFloat($("#discount").val());
+    }
+
+
+
+    $("#amount_required").val(total_price - discount);
 
 
 
@@ -227,13 +234,15 @@ $(document).on('click', '.change-status-all', function(e){
 function profit_margin_fn(){
     let profit_margin=0;
     let discount=0;
+    if(isNaN($("#discount").val())){
         discount=parseFloat($("#discount").val());
+    }
       $(".profits_margin").each(function( index, element  ) {
           profit_margin+= parseFloat ($(element ).val());
       });
 
       profit_margin-=discount;
-    $('#profit_margin').val(profit_margin);
+    $('#profit_margin').val((profit_margin).toFixed(2));
 }
 
 function options_sub_product(data, _this){
@@ -610,9 +619,9 @@ jQuery(document).ready(function($) {
 
 
  function callculate_all(){
+     profit_margin_fn();
     callculate_amount_required();
     callculate_total_price();
-     profit_margin_fn();
 }
 
 function get_product(_this){
@@ -625,7 +634,7 @@ function get_product(_this){
             let data=json.data;
             let product=json.product;
            options_sub_product(data,_this);
-           header_product_card(product.quantity,data[0].count,product.purchasing_price ,_this);
+           header_product_card(product.quantity,data[0].count,product.selling_price ,_this);
            set_value_heddin(data,product,_this);
            callculate_all();
         }
