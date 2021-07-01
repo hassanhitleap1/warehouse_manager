@@ -506,4 +506,15 @@ class ProductsController extends BaseController
       
     }
 
+
+
+    public function actionSearch()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $search=$_GET["q"];
+        $products =    Products::find()->andFilterWhere(['like', 'name', $search])->andFilterWhere(['like', 'description', $search])->orderBy(['id' => SORT_DESC])->all();
+        return ["total_count"=>count($products),"incomplete_results"=>false,'items'=> $products];
+
+    }
+
 }

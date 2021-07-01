@@ -113,6 +113,10 @@ class ProductController extends Controller
     }
 
 
+
+    public function actionTest(){
+        return $this->render('test');
+    }
     /**
      * Finds the Area model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -167,6 +171,17 @@ class ProductController extends Controller
 
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return $models;
+    }
+
+
+
+    public function actionSearch()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $search=$_GET["q"];
+        $products =    Products::find()->FilterWhere(['like', 'name', $search])->orderBy(['id' => SORT_DESC])->all();
+        return ['data'=> $products];
+
     }
 
 
