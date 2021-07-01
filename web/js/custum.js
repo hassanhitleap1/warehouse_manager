@@ -67,8 +67,8 @@ function callculate_total_price(){
     let amount_required=0;
     let delivery_price=0;
     let discount=0;
-    if(isNaN($("#discount").val())){
-        discount= parseFloat( $("#discount").val());
+    if(!isNaN($("#discount").val()) && $("#discount").val() !=""  ){
+        discount=parseFloat($("#discount").val());
     }
      delivery_price= parseFloat( $("#delivery_price").val());
     $(".price_item_count").each(function( index, element  ) {
