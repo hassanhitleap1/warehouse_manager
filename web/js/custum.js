@@ -234,14 +234,15 @@ $(document).on('click', '.change-status-all', function(e){
 function profit_margin_fn(){
     let profit_margin=0;
     let discount=0;
-    if(isNaN($("#discount").val())){
+    console.log( $("#discount").val())
+    if(!isNaN($("#discount").val()) && $("#discount").val() !=""  ){
         discount=parseFloat($("#discount").val());
     }
       $(".profits_margin").each(function( index, element  ) {
           profit_margin+= parseFloat ($(element ).val());
       });
-
-      profit_margin-=discount;
+    console.log("(profit_margin).toFixed(2)",(profit_margin).toFixed(2))
+      profit_margin=profit_margin - discount;
     $('#profit_margin').val((profit_margin).toFixed(2));
 }
 
@@ -619,9 +620,9 @@ jQuery(document).ready(function($) {
 
 
  function callculate_all(){
-     profit_margin_fn();
     callculate_amount_required();
     callculate_total_price();
+     profit_margin_fn();
 }
 
 function get_product(_this){
