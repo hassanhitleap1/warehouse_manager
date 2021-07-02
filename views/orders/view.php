@@ -110,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' =>  $model['status']['name_ar'],
 
             ],
-           
+           'discount',
             'created_at',
             // 'updated_at',
         ],

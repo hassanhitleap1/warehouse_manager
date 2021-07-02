@@ -19,6 +19,7 @@ $name=null;
 $phone=null;
 $other_phone=null;
 $address=null;
+$discount=0;
 
 
 if (!$model->isNewRecord) {
@@ -28,6 +29,7 @@ if (!$model->isNewRecord) {
     $phone=$user->phone;
     $other_phone=$user->other_phone;
     $address=$user->address;
+    $discount=$model->discount;
 
 }
 /* @var $this yii\web\View */
@@ -67,7 +69,7 @@ if (!$model->isNewRecord) {
         </div>
 
         <div class="col-md-3">
-            <?= $form->field($model, 'discount')->textInput(['id'=>'discount','value' => 0]) ?>
+            <?= $form->field($model, 'discount')->textInput(['id'=>'discount','value' => $discount]) ?>
             <?= $form->field($model, 'delivery_price')->textInput(['id'=>'delivery_price','value'=>$delivery_price]) ?>
             <?= $form->field($model, 'amount_required')->textInput(['id'=>'amount_required']) ?>
             <?= $form->field($model, 'total_price')->textInput(['id'=>'total_price']) ?>
