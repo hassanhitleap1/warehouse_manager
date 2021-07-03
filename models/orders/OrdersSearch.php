@@ -72,8 +72,8 @@ class OrdersSearch extends Orders
         }
 
 
-
-        if(isset($_GET["OrdersSearch"]["products_id"])){
+        
+        if(isset($_GET["OrdersSearch"]["products_id"]) && $_GET["OrdersSearch"]["products_id"] !="" ){
             $subQuery = OrdersItem::find()->select(['order_id'])->where(['in' ,'orders_item.product_id', $_GET["OrdersSearch"]["products_id"]]);
             $query->andWhere(['IN', 'orders.id', $subQuery]);
         }
@@ -119,8 +119,10 @@ class OrdersSearch extends Orders
             ->andFilterWhere(['like', 'orders.address', $this->address]);
             $query->orderBy(['orders.id' => SORT_DESC]);;
 
-        // echo $query->createCommand()->getRawSql();
-        // exit;
+            //  echo $query->createCommand()->getRawSql();
+       // exit;
+       
+
         return $dataProvider;
     }
 }
