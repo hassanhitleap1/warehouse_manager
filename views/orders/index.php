@@ -256,13 +256,20 @@ $columns = [
 ];
 
 
-
+$session = Yii::$app->session;
 
 ?>
 <div class="orders-index">
 
    
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?php  if($session->has('message')):?>
+        <div class="alert alert-success"> <?= $session->get("message") ?> </div>
+        <?php  $session->remove('message');?>
+
+    <?php endif; ?>
+
     <?= DynaGrid::widget([
         'columns' => $columns,
         'storage' => DynaGrid::TYPE_COOKIE,

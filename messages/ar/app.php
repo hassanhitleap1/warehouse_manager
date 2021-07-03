@@ -189,6 +189,7 @@ return [
     "Succ_Mess_Pass"=>"تم تغير كلمة السر بنجاح",
     "Name_Of_Store"=>"اسم المتجر",
     "Massage_Whatsapp"=>"رسالة الوتس اب",
-
+    "Successfuly_Update_Order"=>"تم تعديل الطلب بنجاح",
+    "Successfuly_Create_Order"=>"تم اضافة الطلب بنجاح"
 
 ];

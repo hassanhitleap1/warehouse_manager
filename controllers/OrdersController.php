@@ -130,7 +130,10 @@ class OrdersController extends Controller
                     if ($flag) {
                         $transaction->commit();
                       
-                        return $this->redirect(['view', 'id' => $model->id]);
+                        $session = Yii::$app->session;
+                        $session->set('message', Yii::t('app','Successfuly_Create_Order'));
+
+                        return $this->redirect(['create']);
                     }
                 } catch (Exception $e) {
                     $transaction->rollBack();
@@ -189,8 +192,10 @@ class OrdersController extends Controller
                    
                     if ($flag) {
                         $transaction->commit();
+                        $session = Yii::$app->session;
+                        $session->set('message', Yii::t('app','Successfuly_Update_Order'));
                       
-                        return $this->redirect(['view', 'id' => $model->id]);
+                        return $this->redirect(['index']);
                     }
                 } catch (Exception $e) 
                 {
