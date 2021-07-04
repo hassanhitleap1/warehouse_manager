@@ -190,6 +190,12 @@ return [
     "Name_Of_Store"=>"اسم المتجر",
     "Massage_Whatsapp"=>"رسالة الوتس اب",
     "Successfuly_Update_Order"=>"تم تعديل الطلب بنجاح",
-    "Successfuly_Create_Order"=>"تم اضافة الطلب بنجاح"
+    "Successfuly_Create_Order"=>"تم اضافة الطلب بنجاح",
+    "The_Sales"=>"المبيعات",
+    "The_Outlay"=>"المصاريف",
+    "Best_Seller"=>"الافضل مبيعا",
+    "The_Orders"=>"الطلبات",
+
+
 
 ];

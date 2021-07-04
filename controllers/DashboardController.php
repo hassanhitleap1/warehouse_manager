@@ -86,6 +86,9 @@ class  DashboardController extends BaseController {
         ]);
     }
 
+    public function actionSales(){
+
+    }
 
 
     
