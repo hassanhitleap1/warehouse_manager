@@ -16,7 +16,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="site-about">
+    <div class="row" >
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">عدد طلبات اليوم</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">عدد القطع</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">مربح اليوم</div>
+            </div>
+        </div>
 
+    </div>
     <div class="row" >
 
             <div class="col-md-4">
