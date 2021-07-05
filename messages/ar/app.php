@@ -193,7 +193,7 @@ return [
     "Successfuly_Create_Order"=>"تم اضافة الطلب بنجاح",
     "The_Sales"=>"المبيعات",
     "The_Outlay"=>"المصاريف",
-    "Best_Seller"=>"الافضل مبيعا",
+    "Best_Seller"=>"الافضل مبيع",
     "The_Orders"=>"الطلبات",
 
 
