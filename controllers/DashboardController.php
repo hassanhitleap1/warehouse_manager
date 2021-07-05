@@ -32,7 +32,8 @@ class  DashboardController extends BaseController {
     public function actionIndex()
     {
         $date=date('Y-m-d');
-        $orders = Orders::find()->select(['count(*) as count_order', 'sum(amount_required) as total_sales' ,'sum(profit_margin)  as profit_margin'])
+        $orders = Orders::find()->select(['count(*) as count_order', 'sum(amount_required) as total_sales' ,'sum(profit_margin)  as profit_margin',
+            '(select count(quantity) from orders_item where orders_item.orders_item = orders.id ) as quantity'])
             ->andWhere('date(created_at) >= :date', [':date' => $date])
             ->groupBy(['DAY(`created_at`)'])
             ->asArray()->all();
