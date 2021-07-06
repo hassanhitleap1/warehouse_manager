@@ -19,24 +19,21 @@ $this->params['breadcrumbs'][] = $this->title;
         <table class="table table-striped">
             <thead>
             <tr>
-                <th><?= Yii::t('app','Product');?></th>
-                <th><?= Yii::t('app','Type');?></th>
                 <th><?= Yii::t('app','Count');?></th>
-                <th><?= Yii::t('app','The_Sales');?></th>
                 <th><?= Yii::t('app','Profit_Margin');?></th>
+                <th><?= Yii::t('app','Quantity');?></th>
+                <th><?= Yii::t('app','Date');?></th>
             </tr>
             </thead>
             <tbody>
             <?php foreach($profits_day_model as $profit_day_model):?>
                 <tr>
-                    <th><?= $order["name"]?></th>
-                    <th><?= $order["type"]?></th>
-                    <th><?= $order["count_quantity"]?></th>
-                    <th><?= $order["total_sales"]?> JD</th>
-                    <th><?= $order["profits_margin"]?> JD</th>
-
+                    <th><?= $profit_day_model["count_order"]?></th>
+                    <th><?= $profit_day_model["profit_margin"]?></th>
+                    <th><?= $profit_day_model["quantity"]?></th>
+                    <th><?= $profit_day_model["month"]?>/<?= $profit_day_model["day"]?></th>
                 </tr>
-                <tr>
+
             <?php endforeach;?>
 
             </tbody>
@@ -47,24 +44,20 @@ $this->params['breadcrumbs'][] = $this->title;
         <table class="table table-striped">
             <thead>
             <tr>
-                <th><?= Yii::t('app','Product');?></th>
-                <th><?= Yii::t('app','Type');?></th>
                 <th><?= Yii::t('app','Count');?></th>
-                <th><?= Yii::t('app','The_Sales');?></th>
                 <th><?= Yii::t('app','Profit_Margin');?></th>
+                <th><?= Yii::t('app','Quantity');?></th>
+                <th><?= Yii::t('app','Month');?></th>
             </tr>
             </thead>
             <tbody>
             <?php foreach($profits_month_model as $profit_month_model):?>
-            <tr>
-                <th><?= $order["name"]?></th>
-                <th><?= $order["type"]?></th>
-                <th><?= $order["count_quantity"]?></th>
-                <th><?= $order["total_sales"]?> JD</th>
-                <th><?= $order["profits_margin"]?> JD</th>
-
-            </tr>
-            <tr>
+                    <tr>
+                        <th><?= $profit_month_model["count_order"]?></th>
+                        <th><?= $profit_month_model["profit_margin"]?></th>
+                        <th><?= $profit_month_model["quantity"]?></th>
+                        <th><?= $profit_month_model["month"]?></th>
+                    </tr>
                 <?php endforeach;?>
 
             </tbody>
