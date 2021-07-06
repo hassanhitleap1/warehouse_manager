@@ -87,6 +87,25 @@ class  DashboardController extends BaseController {
     }
 
 
+    public function actionProduct(){
+        $product_id=-1;
+        $models = OrdersItem::find()->select([
+            'count(orders_item.quantity) as count_quantity',
+            'sum(price_item_count) as total_sales' ,
+            'sum(profits_margin)  as profits_margin',
+            'products.name',
+            'sub_product_count.type'])
+            ->join('inner JOIN', 'products', 'products.id = orders_item.product_id')
+            ->join('inner JOIN', 'sub_product_count', 'sub_product_count.id = orders_item.sub_product_id')
+            ->where(["product_id",$product_id])
+            ->orderBy(['profits_margin'=>SORT_DESC])
+            ->asArray()->limit(30)->all();
+
+
+        return $this->render('product',[
+            'models'=>$models
+        ]);
+    }
 
     public function actionOrders(){
 
