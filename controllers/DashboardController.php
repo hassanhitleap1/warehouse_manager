@@ -70,7 +70,8 @@ class  DashboardController extends BaseController {
              ->join('inner JOIN', 'orders_item', 'orders_item.order_id = orders.id')
              ->andWhere('YEAR(orders.created_at)=:year', [':year' => date('Y')])
             ->andWhere('MONTH(orders.created_at)=:month', [':month' => date('m')])
-            ->groupBy(['DAY(`orders`.`created_at`)','orders.id'])
+            ->groupBy(['DAY(`orders`.`created_at`)'])
+            ->orderBy(['orders.created_at'=>SORT_DESC])
             ->asArray()->all();
             
         $profits_month_model = Orders::find()->select([
@@ -81,7 +82,8 @@ class  DashboardController extends BaseController {
         ])
         ->join('inner JOIN', 'orders_item', 'orders_item.order_id = orders.id')
         ->andWhere('YEAR(orders.created_at)=:year', [':year' => date('Y')])
-            ->groupBy(['MONTH(orders.created_at)','orders.id'])
+            ->groupBy(['MONTH(orders.created_at)'])
+            ->orderBy(['orders.created_at'=>SORT_DESC])
             ->asArray()->all();
 
 
