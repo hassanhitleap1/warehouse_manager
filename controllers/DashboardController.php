@@ -62,21 +62,26 @@ class  DashboardController extends BaseController {
         }
         $profits_day_model = Orders::find()->select([
              'count(*) as count_order',
-             'sum(profit_margin)  as profit_margin',
-             'MONTH(`created_at`) as month',
-             'count(quantity) as quantity',
-             'DAY(`created_at`) as day'
-             ])->andWhere('YEAR(created_at)=:year', [':year' => date('Y')])
-            ->andWhere('MONTH(created_at)=:month', [':month' => date('m')])
-            ->groupBy(['DAY(`created_at`)'])
+             'sum(orders.profit_margin)  as profit_margin',
+             'MONTH(`orders`.`created_at`) as month',
+             'count(orders_item.quantity) as quantity',
+             'DAY(orders.created_at) as day'
+             ])
+             ->join('inner JOIN', 'orders_item', 'orders_item.order_id = orders.id')
+             ->andWhere('YEAR(orders.created_at)=:year', [':year' => date('Y')])
+            ->andWhere('MONTH(orders.created_at)=:month', [':month' => date('m')])
+            ->groupBy(['DAY(`orders`.`created_at`)','orders.id'])
             ->asArray()->all();
+            
         $profits_month_model = Orders::find()->select([
             'count(*) as count_order',
-            'sum(profit_margin)  as profit_margin',
-            'MONTH(`created_at`) as month',
-            'count(quantity) as quantity'
-        ])->andWhere('YEAR(created_at)=:year', [':year' => date('Y')])
-            ->groupBy(['MONTH(`created_at`)'])
+            'sum(orders.profit_margin)  as profit_margin',
+            'MONTH(orders.created_at) as month',
+            'count(orders_item.quantity) as quantity'
+        ])
+        ->join('inner JOIN', 'orders_item', 'orders_item.order_id = orders.id')
+        ->andWhere('YEAR(orders.created_at)=:year', [':year' => date('Y')])
+            ->groupBy(['MONTH(orders.created_at)','orders.id'])
             ->asArray()->all();
 
 
