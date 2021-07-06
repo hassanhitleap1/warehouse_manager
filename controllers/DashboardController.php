@@ -80,10 +80,6 @@ class  DashboardController extends BaseController {
             ->asArray()->all();
 
 
-
-
-
-
         return $this->render('sales',[
             'profits_day_model'=>$profits_day_model,
             'profits_month_model'=>$profits_month_model,
