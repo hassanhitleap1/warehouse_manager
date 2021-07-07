@@ -85,10 +85,6 @@ $data_profits_month_model=[];
 
 </div>
 
-<div>
-  <canvas id="myChart"></canvas>
-</div>
-
 
 <script>
 
