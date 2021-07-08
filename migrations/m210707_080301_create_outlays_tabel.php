@@ -20,6 +20,7 @@ class m210707_080301_create_outlays_tabel extends Migration
         $this->createTable('{{%outlays}}', [
             'id' => $this->primaryKey(),
             'title' => $this->string(250)->notNull(),
+            "value"=> $this->double()->notNull(),
             "type"=> $this->integer()->notNull(),
             'product_id'=>$this->integer()->defaultValue(null),
             'created_at' => $this->dateTime()->defaultValue(null),

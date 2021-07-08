@@ -31,9 +31,9 @@ class Outlays extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'type'], 'required'],
+            [['title', 'type','value'], 'required'],
             [['type', 'product_id'], 'integer'],
-            
+            [['value'], 'double'],
             [['title'], 'string', 'max' => 255],
         ];
     }
@@ -47,6 +47,7 @@ class Outlays extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'type' => 'Type',
+            'value'=>'value',
             'product_id' => 'Product',
             'created_at' => 'Created_At',
             'updated_at' => 'Updated_At',
