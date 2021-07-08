@@ -161,7 +161,7 @@ class OrdersController extends Controller
         $model = $this->findModel($id);
         $status_id=$model->status_id;
         $ordersItem = $model->orderItems;
-        
+
         if ($model->load(Yii::$app->request->post())) {
             $oldIDs = ArrayHelper::map($ordersItem, 'id', 'id');
             $ordersItem = Model::createMultiple(OrdersItem::classname(), $ordersItem);
@@ -176,11 +176,12 @@ class OrdersController extends Controller
             {
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
+                    OrdersItem::deleteAll(['=','order_id',$id]);
                     if ($flag = $model->save(false)) {
                         foreach ($ordersItem as $orderItem) {
                             $orderItem->order_id = $model->id;
                             if (! ($flag = $orderItem->save(false))) {
-                              
+
                                 $transaction->rollBack();
                                 break;
                             }
