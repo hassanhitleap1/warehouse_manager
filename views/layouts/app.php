@@ -119,6 +119,8 @@ MainAsset::register($this);
                     ['label' => Yii::t('app', 'Price_Company_Delivery'), 'url' => ['/price-company-delivery/index']],
                     ['label' => Yii::t('app', 'Settings'), 'url' => ['/settings/index']],
                     ['label' => Yii::t('app', 'Change_Password'), 'url' => ['/change-password/index']],
+                    ['label' => Yii::t('app', 'Outlays'), 'url' => ['/outlays/index']],
+                    ['label' => Yii::t('app', 'Type_Outlay'), 'url' => ['/type-outlay/index']],
 
                 ],
             ];
