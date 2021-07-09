@@ -176,7 +176,7 @@ class OrdersController extends Controller
             {
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
-                    OrdersItem::deleteAll(['=','order_id',$id]);
+                    //OrdersItem::deleteAll(['=','order_id',$id]);
                     if ($flag = $model->save(false)) {
                         foreach ($ordersItem as $orderItem) {
                             $orderItem->order_id = $model->id;
