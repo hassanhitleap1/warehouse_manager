@@ -17,24 +17,35 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <div class="row" >
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="panel panel-default">
                 <div class="panel-body"> <?= $orders["count_order"]?>  عدد طلبات اليوم</div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="panel panel-default">
                 <div class="panel-body"> <?= $orders["total_sales"]?>  مبيعات اليوم</div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="panel panel-default">
                 <div class="panel-body"> <?= $orders["quantity"]?>  عدد القطع</div>
             </div>
         </div>
-        <div class="col-md-3">
+        
+        <div class="col-md-2">
             <div class="panel panel-default">
-                <div class="panel-body"> <?= $orders["profit_margin"]?>  مربح اليوم</div>
+                <div class="panel-body"> <?= $orders["outlays"]?>  النفقات</div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body"> <?= $orders["profit_margin"] ?>    المرابح</div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body"> <?= $orders["profit_margin"] - $orders["outlays"]?>   صافي المرابح</div>
             </div>
         </div>
 
