@@ -40,7 +40,8 @@
         "kartik-v/yii2-export": "*",
         "kartik-v/yii2-date-range": "*",
         "chillerlan/php-qrcode": "^3.4",
-        "kartik-v/yii2-widget-touchspin": "*"
+        "kartik-v/yii2-widget-touchspin": "*",
+        "c006/yii2-submit-spinner": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
