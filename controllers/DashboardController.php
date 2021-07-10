@@ -66,9 +66,11 @@ class  DashboardController extends BaseController {
              'sum(orders.profit_margin)  as profit_margin',
              'MONTH(`orders`.`created_at`) as month',
              'count(orders_item.quantity) as quantity',
-             'DAY(orders.created_at) as day'
+             'DAY(orders.created_at) as day',
+             'sum(outlays.value)  as outlays',
              ])
              ->join('inner JOIN', 'orders_item', 'orders_item.order_id = orders.id')
+             ->join('left JOIN', 'outlays', 'Date(outlays.created_at) = Date(orders.created_at)')
              ->andWhere('YEAR(orders.created_at)=:year', [':year' => date('Y')])
             ->andWhere('MONTH(orders.created_at)=:month', [':month' => date('m')])
             ->groupBy(['DAY(`orders`.`created_at`)'])
@@ -79,9 +81,11 @@ class  DashboardController extends BaseController {
             'count(*) as count_order',
             'sum(orders.profit_margin)  as profit_margin',
             'MONTH(orders.created_at) as month',
-            'count(orders_item.quantity) as quantity'
+            'count(orders_item.quantity) as quantity',
+            'sum(outlays.value)  as outlays',
         ])
         ->join('inner JOIN', 'orders_item', 'orders_item.order_id = orders.id')
+        ->join('left JOIN', 'outlays', 'Date(outlays.created_at) = Date(orders.created_at)')
         ->andWhere('YEAR(orders.created_at)=:year', [':year' => date('Y')])
             ->groupBy(['MONTH(orders.created_at)'])
             ->orderBy(['orders.created_at'=>SORT_ASC])

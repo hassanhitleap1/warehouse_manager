@@ -26,20 +26,26 @@ $data_profits_month_model=[];
                 <tr>
                     <th><?= Yii::t('app','Count');?></th>
                     <th><?= Yii::t('app','Profit_Margin');?></th>
+                    <th><?= Yii::t('app','Outlays');?></th>
+                    <th><?= Yii::t('app','Total');?>   <?= Yii::t('app','Profit_Margin');?></th>
                     <th><?= Yii::t('app','Quantity');?></th>
                     <th><?= Yii::t('app','Date');?></th>
+                    
+                    
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach($profits_day_model as $profit_day_model):?>
                     <tr>
                         <th><?= $profit_day_model["count_order"]?></th>
-                        <th><?= $profit_day_model["profit_margin"]?></th>
+                        <th><?= $profit_day_model["profit_margin"]?> jd</th>
+                        <th><?= $profit_day_model["outlays"]?> jd</th>
+                        <th><?=$profit_day_model["profit_margin"] - $profit_day_model["outlays"] ?> jd</th>
                         <th><?= $profit_day_model["quantity"]?></th>
                         <th><?= $profit_day_model["month"]?>/<?= $profit_day_model["day"]?></th>
                     </tr>
                     <?php 
-                    $data_profits_day_model[]=$profit_day_model["profit_margin"];
+                    $data_profits_day_model[]=$profit_day_model["profit_margin"] - $profit_day_model["outlays"];
                     $label_profits_day_model[]=$profit_day_model["month"] ."/". $profit_day_model["day"];?>
                 <?php endforeach;?>
 
@@ -57,6 +63,8 @@ $data_profits_month_model=[];
                 <tr>
                     <th><?= Yii::t('app','Count');?></th>
                     <th><?= Yii::t('app','Profit_Margin');?></th>
+                    <th><?= Yii::t('app','Outlays');?></th>
+                    <th><?= Yii::t('app','Total');?>   <?= Yii::t('app','Profit_Margin');?></th>
                     <th><?= Yii::t('app','Quantity');?></th>
                     <th><?= Yii::t('app','Month');?></th>
                 </tr>
@@ -65,13 +73,16 @@ $data_profits_month_model=[];
                 <?php foreach($profits_month_model as $profit_month_model):?>
                         <tr>
                             <th><?= $profit_month_model["count_order"]?></th>
-                            <th><?= $profit_month_model["profit_margin"]?></th>
+                            <th><?= $profit_month_model["profit_margin"]?> jd</th>
+                            <th><?= $profit_month_model["outlays"]  ?> jd</th>
+                            <th><?= $profit_month_model["profit_margin"]-$profit_month_model["outlays"]?> jd</th>
+
                             <th><?= $profit_month_model["quantity"]?></th>
                             <th><?= $profit_month_model["month"]?></th>
                         </tr>
                             <?php 
                             $label_profits_month_model[]= $profit_month_model["month"];
-                            $data_profits_month_model[]=$profit_month_model["profit_margin"];
+                            $data_profits_month_model[]=$profit_month_model["profit_margin"]- $profit_month_model["outlays"];
                             ?>
                     <?php endforeach;?>
                     
