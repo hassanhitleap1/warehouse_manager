@@ -84,7 +84,7 @@ $this->title = $model->id;
                                     if ( isset($orderItem->product->subProductCount) &&  count($orderItem->product->subProductCount) > 1) {
                                         $type = $orderItem->subProduct->type;
                                     }
-                                    $orderItemString .= ' ' . $orderItem['product']['name'] . ' ' . $type . ' ' . Yii::t('app', 'Number') . ' ( ' . $orderItem->quantity . ' ) ';
+                                    $orderItemString = ' ' . $orderItem['product']['name'] . ' ' . $type . ' ' . Yii::t('app', 'Number') . ' ( ' . $orderItem->quantity . ' ) ';
                                 ?>
                             <tr>
                                 <th scope="row"><?= $key+1 ?></th>
