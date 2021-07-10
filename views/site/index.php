@@ -3,11 +3,7 @@
 /* @var $this yii\web\View */
 
 $this->title = Yii::$app->name;
-
-use yii\widgets\LinkPager;
 use yii\helpers\Html;
-use yii\helpers\Url;
-
 ?>
 <div class="container">
 
