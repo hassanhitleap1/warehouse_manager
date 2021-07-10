@@ -196,9 +196,10 @@ return [
     "Best_Seller"=>"الافضل مبيع",
     "The_Orders"=>"الطلبات",
     "Outlays"=>"النفقات",
-    "Create_Outlays"=>"انشاؤ نفقة",
+    "Create_Outlay"=>"انشاء نفقة",
     "Create_Type_Outlay"=>"انشاء نوع مصروف",
     "Type_Outlay"=>"نوع المصروق",
+    "Value"=>"القيمة"
 
 
 

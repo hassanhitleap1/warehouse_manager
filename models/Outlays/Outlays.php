@@ -2,6 +2,8 @@
 
 namespace app\models\Outlays;
 
+use app\models\products\Products;
+use app\models\TypeOutlay\TypeOutlay;
 use Carbon\Carbon;
 use Yii;
 
@@ -44,17 +46,27 @@ class Outlays extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'type' => 'Type',
-            'value'=>'value',
-            'product_id' => 'Product',
-            'created_at' => 'Created_At',
-            'updated_at' => 'Updated_At',
+            'id' =>Yii::t('app',"ID") ,
+            'title' =>Yii::t('app',"Title") ,
+            'type' => Yii::t('app',"Type"),
+            'value'=>Yii::t('app',"Value"),
+            'product_id' =>Yii::t('app',"Product") ,
+            'created_at' => Yii::t('app',"Created_At"),
+            'updated_at' => Yii::t('app',"Updated_At"),
         ];
     }
 
 
+
+    
+    public function getProduct()
+    {
+        return $this->hasOne(Products::className(), ['id' => 'product_id']);
+    }
+
+    public function getTypeoulay(){
+        return $this->hasOne(TypeOutlay::className(),['id' => 'type']);
+    }
       /**
      * @inheritdoc
      */

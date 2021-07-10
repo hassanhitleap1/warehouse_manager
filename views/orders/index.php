@@ -169,7 +169,7 @@ $columns = [
         'vAlign' => 'middle',
         'width' => '50px',
         'value' => function ($model, $key, $index, $widget) {
-            return (in_array( $model->total_price,[6,7 ,13])) ? - $model->total_price  :$model->total_price ;
+            return $model->total_price ;
         },
         'format' => 'raw',
         'visible' => true,
