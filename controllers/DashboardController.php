@@ -35,16 +35,24 @@ class  DashboardController extends BaseController {
     {
         
         $date=date('Y-m-d');
-        $orders = Orders::find()->select(['count(*) as count_order', 
+
+            $orders = Orders::find()->select(['count(*) as count_order',
             'sum(orders.amount_required) as total_sales' ,
-            'sum(orders.profit_margin)  as profit_margin',
-            'sum(outlays.value)  as outlays',
-            "(select count(orders_item.quantity) from orders_item where date(orders.created_at) = '$date' ) as quantity"])
+
+            "(SELECT sum(profits_margin) FROM `orders_item` 
+                    where date(orders_item.created_at) ='$date')  as 
+             profit_margin",
+
+             "(SELECT sum(quantity) FROM `orders_item` 
+                    where date(orders_item.created_at) ='$date')  as 
+                    quantity",
+             "(SELECT sum(value) FROM `outlays` 
+                    where date(outlays.created_at) ='$date')  as 
+                    outlays",       
+            ])
             ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
-            ->join('left JOIN', 'outlays', 'Date(outlays.created_at) = Date(orders.created_at)')
             ->groupBy(['DAY(orders.created_at)'])
             ->asArray()->one();
-
      
           return $this->render('index',[
             'orders'=>$orders,
