@@ -62,6 +62,7 @@ class  DashboardController extends BaseController {
 
     public function actionSales(){
 
+        $year=date('Y');
         if(date('m') < 7 ){
             $month=date('m');
         }else{
@@ -87,8 +88,7 @@ class  DashboardController extends BaseController {
             ->andWhere('MONTH(orders.created_at)=:month', [':month' => date('m')])
             ->groupBy(['DAY(`orders`.`created_at`)'])
             ->orderBy(['orders.created_at'=>SORT_ASC])
-            ->asArray()->all();
-            
+            ->asArray()->all();            
         $profits_month_model = Orders::find()->select([
             'count(*) as count_order',
             'sum(orders.profit_margin)  as profit_margin',
