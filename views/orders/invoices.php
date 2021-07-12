@@ -33,7 +33,11 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
             height: 50vh;
             /*font-size: 14px;*/
         }
-
+        .number{
+           direction: rtl ; /* Reset to default */
+           display: inline-block;
+ 
+        }
         .img-qr-code{
            float: left;
            width: 100px;
@@ -56,7 +60,7 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <ul class="list-group list-group-flush">
                     <li class="list-group-item"><strong><?=Yii::t('app', 'To')?> : <?= $model['user']['name'] ;?> </strong></li>
-                <li class="list-group-item"><strong class="phone"><?=Yii::t('app', 'Phone')?> : <?= $model['user']['phone'] ;?> </strong></li>
+                <li class="list-group-item"><strong class="phone"><?=Yii::t('app', 'Phone')?> : <span class="number"> <?= $model['user']['phone'] ;?> </span></strong></li>
               
                     </ul>
                 </div>

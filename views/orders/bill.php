@@ -24,10 +24,18 @@ $this->title = $model->id;
             /*font-size: 14px;*/
         }
         .img-qr-code{
-        float: left;
-    }
+            float: left;
+            
+        }
+        .number{
+           direction: rtl ; /* Reset to default */
+           display: inline-block;
+ 
+        }
 
     }
+    
+    
     
 
 
@@ -52,7 +60,7 @@ $this->title = $model->id;
      
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><strong><?=Yii::t('app', 'To')?> : <?= $model['user']['name'] ;?> </strong></li>
-                <li class="list-group-item"><strong><?=Yii::t('app', 'Phone')?> : <?= $model['user']['phone'] ;?> </strong></li>
+                <li class="list-group-item "><strong><?=Yii::t('app', 'Phone')?> : <span class="number"> <?=$model['user']['phone'] ;?> </span></strong></li>
                 <li  class="list-group-item"><strong><?=Yii::t('app', 'Area')?> : <?= $model['region']['name_ar'] ;?> </strong></li>
             </ul>
         </div>
