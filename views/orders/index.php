@@ -38,7 +38,7 @@ $columns = [
         'attribute' => 'created_at',
         'format' => 'raw',
         'width' => '100px',
-        'contentOptions' => ['class' => 'skip-export'],
+        // 'contentOptions' => ['class' => 'skip-export'],
         'visible' => true,
         'value' => function ($model, $key, $index, $widget) {
             return  date('Y-m-d', strtotime($model->created_at));
