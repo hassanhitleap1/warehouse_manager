@@ -127,13 +127,38 @@ class  DashboardController extends BaseController {
 
         $profits_month_model = Orders::find()->select([
             'count(*) as count_order',
-            'sum(orders.profit_margin)  as profit_margin',
+            'orders.created_at',
             'MONTH(orders.created_at) as month',
-            'count(orders_item.quantity) as quantity',
-            'sum(outlays.value)  as outlays',
+            // 'sum(orders.profit_margin)  as profit_margin',
+
+            "(SELECT SUM(orders_item.profits_margin) FROM `orders_item`
+                    inner join orders as ord on  ord.id = orders_item.order_id
+                    WHERE 
+                    YEAR(orders_item.created_at) = YEAR(`orders`.`created_at`) and
+                    MONTH(orders_item.created_at) = MONTH(`orders`.`created_at`)
+                    and
+                    orders.status_id not in (6,7,8,9,10,11,13)  ) 
+                    as
+                    profit_margin",
+
+
+                    "(SELECT SUM(orders_item.quantity) FROM `orders_item`
+                    inner join orders as ord on  ord.id = orders_item.order_id
+                    WHERE 
+                    YEAR(orders_item.created_at) = YEAR(`orders`.`created_at`) and
+                    MONTH(orders_item.created_at) = MONTH(`orders`.`created_at`)
+                    and
+                    orders.status_id not in (6,7,8,9,10,11,13)  ) 
+                    as
+                    quantity",
+
+                    "(SELECT sum(value) FROM `outlays` 
+                    where 
+                    YEAR(outlays.created_at) = YEAR(`orders`.`created_at`) and 
+                    MONTH(outlays.created_at) = MONTH(`orders`.`created_at`))  as 
+                    outlays",
         ])
-        ->join('inner JOIN', 'orders_item', 'orders_item.order_id = orders.id')
-        ->join('left JOIN', 'outlays', 'Date(outlays.created_at) = Date(orders.created_at)')
+
         ->andWhere('YEAR(orders.created_at)=:year', [':year' => date('Y')])
             ->groupBy(['MONTH(orders.created_at)'])
             ->orderBy(['orders.created_at'=>SORT_ASC])
