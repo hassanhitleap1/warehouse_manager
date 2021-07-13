@@ -40,17 +40,22 @@ class  DashboardController extends BaseController {
             'sum(orders.amount_required) as total_sales' ,
 
             "(SELECT sum(profits_margin) FROM `orders_item` 
-                    where date(orders_item.created_at) ='$date')  as 
+                    inner join orders on  orders.id = orders_item.order_id
+                    where date(orders_item.created_at) ='$date' and 
+                            orders.status_id in (1,2,3,4)  )  as 
              profit_margin",
-
+             
              "(SELECT sum(quantity) FROM `orders_item` 
-                    where date(orders_item.created_at) ='$date')  as 
+                     inner join orders on  orders.id = orders_item.order_id
+                    where date(orders_item.created_at) ='$date' and
+                    orders.status_id in (1,2,3,4) )  as 
                     quantity",
              "(SELECT sum(value) FROM `outlays` 
                     where date(outlays.created_at) ='$date')  as 
                     outlays",       
             ])
             ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
+            ->andWhere(['in','orders.status_id', [1,2,3,4]])
             ->groupBy(['DAY(orders.created_at)'])
             ->asArray()->one();
      
