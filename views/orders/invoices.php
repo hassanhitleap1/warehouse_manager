@@ -18,8 +18,8 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
     }
     .img-qr-code{
         float: left;
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         margin-top: -22px;
     }
     .container{
@@ -28,7 +28,7 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
 
     @media print {
         .container{
-            font-size: 15px;
+            font-size: 10px;
         }
         .invoice{
             height: 50vh;
@@ -41,8 +41,8 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
         }
         .img-qr-code{
            float: left;
-           width: 100px;
-           height: 100px;
+           width: 70px;
+        height: 70px;
            margin-top: -22px;
         }
       
