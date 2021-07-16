@@ -199,7 +199,8 @@ return [
     "Create_Outlay"=>"انشاء نفقة",
     "Create_Type_Outlay"=>"انشاء نوع مصروف",
     "Type_Outlay"=>"نوع المصروق",
-    "Value"=>"القيمة"
+    "Value"=>"القيمة",
+    "Date"=>"تاريخ"
 
 
 

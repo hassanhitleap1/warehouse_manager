@@ -18,8 +18,9 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
     }
     .img-qr-code{
         float: left;
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
+        margin-top: -22px;
     }
     .container{
             font-size: 15px;
@@ -42,6 +43,7 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
            float: left;
            width: 100px;
            height: 100px;
+           margin-top: -22px;
         }
       
     }
@@ -68,7 +70,7 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <ul class="list-group list-group-flush">
                     <li  class="list-group-item"> <strong><?=Yii::t('app', 'Area')?> : <?= $model['region']['name_ar'] ;?> </strong> &nbsp &nbsp \ &nbsp &nbsp<strong><?=Yii::t('app', 'Address')?> : <?= $model['address'] ;?> </strong></li>
-                <li  class="list-group-item"><strong><?=Yii::t('app', 'Created_At')?> : <?= Carbon::parse( $model->created_at )->toDateString() ;?> </strong></li>
+                <li  class="list-group-item"><strong><?=Yii::t('app', 'Date')?> : <?= Carbon::now("Asia/Amman")->toDateString() ;?> </strong></li>
                     </ul>
                 </div>
             </div>
@@ -105,10 +107,16 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-2">
                     <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $model->total_price?> JD  </strong></p>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <?php if(!is_null($model->note) && $model->note != "" ): ?>
+                        
+                        <strong> <?=Yii::t("app",'Note');?> :-  <?= $model->note ;?></strong>
+                      <?php endif;?>  
+                </div>
+                <div class="col-md-4">
                     <?php  $data = $public_path.Url::toRoute(['orders/bill', 'id' => $model->id])?>
                     <?= '<img class="img-qr-code" src="'.(new \chillerlan\QRCode\QRCode())->render($data).'" alt="QR Code" />';?>
                 </div>
