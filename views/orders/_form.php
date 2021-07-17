@@ -80,7 +80,7 @@ if (!$model->isNewRecord) {
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Save'), ["id"=>"submitform",'class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
@@ -89,11 +89,33 @@ if (!$model->isNewRecord) {
 
 <script  type="text/javascript">
 
+
 $( document ).ready(function() {
-    // $( "#orders-order_id" ).prop( "disabled", true );
-    // $( "#profit_margin" ).prop( "disabled", true );
     
-});
+    $(document).on('click','#submitform',function (e) {
+          e.preventDefault();
+            $('#submitform').attr('disabled','disabled');
+            $("#dynamic-form").submit();
+            setTimeout(function(){ 
+                var form = $("#dynamic-form");
+                if(form.find('.has-error').length) {
+                    hide_loader();
+                    $('#submitform').prop('disabled',false);
+                    return false;
+
+                }else{
+                    show_loader();
+                    $('#submitform').prop('disabled',true);
+                }
+            
+            }, 
+            1000);
+            
+        });
+    
+});  
+
+
 $(document).on('focus','input',function (event) {
     if(!$(this).attr("data-krajee-touchspin")){
         $(this).css({"box-sizing":"border-box","z-index":10000000,"width":"200%",'position':"relative"});
