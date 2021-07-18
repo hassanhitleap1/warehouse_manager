@@ -659,3 +659,39 @@ function get_sub_product(_this){
 
 
 
+
+
+ $( document ).ready(function() {
+    
+    $(document).on('click','#send_order',function (e) {
+          e.preventDefault();
+
+          var $btn = $(this);
+          $btn.button('loading');
+         
+            $('#send_order').attr('disabled','disabled');
+            $btn.button('loading');
+            $("#order_landig").submit();
+            setTimeout(function(){ 
+                var form = $("#order_landig");
+                if(form.find('.has-error').length) {
+                    hide_loader();
+                    $('#send_order').prop('disabled',false);
+                    $btn.button('reset');
+                    return false;
+
+                }else{
+                   hide_loader();
+                    $('#send_order').prop('disabled',true);
+                    $btn.button('reset');
+                }
+            
+            }, 
+            1000);
+            
+        });
+    
+});  
+
+
+ 
