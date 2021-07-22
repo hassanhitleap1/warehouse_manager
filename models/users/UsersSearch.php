@@ -17,7 +17,7 @@ class UsersSearch extends Users
     public function rules()
     {
         return [
-            [['id', 'status', 'country_id', 'region_id', 'area_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'status', 'country_id', 'region_id', 'area_id', 'created_at', 'updated_at','type'], 'integer'],
             [['username', 'phone', 'other_phone', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'address'], 'safe'],
         ];
     }
@@ -63,6 +63,7 @@ class UsersSearch extends Users
             'country_id' => $this->country_id,
             'region_id' => $this->region_id,
             'area_id' => $this->area_id,
+            'type'=> $this->area_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);

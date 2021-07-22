@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\users\Users;
 use app\models\products\UsersSearch;
+use app\models\users\UsersSearch as UsersUsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,7 +36,8 @@ class UsersController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new UsersSearch();
+       
+        $searchModel = new UsersUsersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -66,8 +68,11 @@ class UsersController extends Controller
     {
         $model = new Users();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->password_hash=Yii::$app->security->generatePasswordHash($model->password);
+            if( $model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
@@ -86,8 +91,12 @@ class UsersController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->password_hash=Yii::$app->security->generatePasswordHash($model->password);
+            if( $model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+          
         }
 
         return $this->render('update', [

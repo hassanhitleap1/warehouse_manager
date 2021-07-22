@@ -29,6 +29,7 @@ use Yii;
  */
 class Users extends \yii\db\ActiveRecord
 {
+    public $password;
     /**
      * {@inheritdoc}
      */
@@ -44,11 +45,11 @@ class Users extends \yii\db\ActiveRecord
     {
         return [
             [['phone','name'], 'required'],
-            [['status', 'country_id', 'region_id', 'area_id'], 'integer'],
+            [['status', 'country_id', 'region_id', 'area_id','type'], 'integer'],
             [['username', 'email','name'], 'string', 'max' => 255],
             [['phone', 'other_phone', 'auth_key'], 'string', 'max' => 32],
             [['address'], 'string', 'max' => 250],
-            [['email'], 'unique'],
+            [['email','username'], 'unique'],
         ];
     }
 
@@ -68,8 +69,10 @@ class Users extends \yii\db\ActiveRecord
             'region_id' => Yii::t('app', 'Region'),
             'area_id' => Yii::t('app', 'Area'),
             'address' => Yii::t('app', 'Address'),
+            'type'=> Yii::t('app', 'Type'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
+            'password'=> Yii::t('app', 'Password'),
         ];
     }
 

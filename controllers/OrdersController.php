@@ -10,6 +10,7 @@ use app\models\orders\Orders;
 use app\models\orders\OrdersSearch;
 use app\models\ordersitem\OrdersItem;
 use app\models\subproductcount\SubProductCount;
+use app\models\User;
 use app\models\users\Users;
 use Exception;
 use yii\web\Controller;
@@ -252,8 +253,11 @@ class OrdersController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-        OrdersItem::deleteAll(['=','order_id',$id]);
+        if(Yii::$app->user->identity->type == User::SUPER_ADMIN){
+            $this->findModel($id)->delete();
+            OrdersItem::deleteAll(['=','order_id',$id]);
+        }
+       
         return $this->redirect(['index']);
     }
 

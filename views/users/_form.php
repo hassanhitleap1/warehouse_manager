@@ -1,5 +1,6 @@
 <?php
 
+use app\models\User;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -11,28 +12,44 @@ use yii\widgets\ActiveForm;
 <div class="users-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-md-3">
+            <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-3">
+            <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-3">
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-3">
+        <?= $form->field($model, 'other_phone')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    </div>
 
-    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+  
+    <div class="row">
+       
+        <div class="col-md-3">
+            <?= $form->field($model, 'password')->passwordInput() ?>
+        </div>
+        <div class="col-md-3">
+            <?= $form->field($model, 'type')->dropDownList(
+            [User::USER=>Yii::t("app",'User'),User::DATA_ENTERY=>Yii::t("app",'Data_Entry')],        
+           
+            ); ?>
+        </div>
+    </div>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    
 
-    <?= $form->field($model, 'other_phone')->textInput(['maxlength' => true]) ?>
+    
 
-    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
+    
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+   
 
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'country_id')->textInput() ?>
-
-    <?= $form->field($model, 'region_id')->textInput() ?>
-
-    <?= $form->field($model, 'area_id')->textInput() ?>
-
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

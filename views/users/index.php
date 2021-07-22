@@ -27,11 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            // 'id',
             'username',
             'phone',
             'name',
             'other_phone',
+            'type',
             //'auth_key',
             //'password_hash',
             //'password_reset_token',
