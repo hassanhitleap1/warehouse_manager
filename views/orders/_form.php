@@ -74,7 +74,7 @@ if (!$model->isNewRecord) {
             <?= $form->field($model, 'amount_required')->textInput(['id'=>'amount_required']) ?>
             <?= $form->field($model, 'total_price')->textInput(['id'=>'total_price']) ?>
            
-            <?= $form->field($model, 'profit_margin')->textInput(['id'=>'profit_margin']) ?>
+            <?= $form->field($model, 'profit_margin')->hiddenInput(['id'=>'profit_margin'])->label(false); ?>
             <?= $form->field($model, 'note')->textarea(['rows' => '6']) ?>
         </div>
     </div>

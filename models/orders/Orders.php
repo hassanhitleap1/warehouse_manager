@@ -61,6 +61,7 @@ class Orders extends \yii\db\ActiveRecord
             [['delivery_date', 'delivery_time'], 'safe'],
             [['name','note'],'string'],
             [['address'], 'string', 'max' => 250],
+            [['phone','other_phone'], 'isJordanPhone'],
         ];
     }
 
@@ -151,6 +152,13 @@ class Orders extends \yii\db\ActiveRecord
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function isJordanPhone($attribute)
+    {
+        if (!preg_match('/^(079|078|077)[0-9]{7}$/', $this->$attribute)) {
+            $this->addError($attribute, Yii::t('app','Check_Phone'));
         }
     }
 
