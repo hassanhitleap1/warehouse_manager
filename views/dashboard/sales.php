@@ -10,9 +10,11 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app','Dashboard'), 'url' =>
 $this->params['breadcrumbs'][] = $this->title;
 $label_profits_day_model=[];
 $data_profits_day_model=[];
+$data_orders_day_model=[];
 
 $label_profits_month_model=[];
 $data_profits_month_model=[];
+$data_orders_month_model=[];
 
 ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,7 +22,7 @@ $data_profits_month_model=[];
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -43,8 +45,11 @@ $data_profits_month_model=[];
                         <th><?= $profit_day_model["month"]?>/<?= $profit_day_model["day"]?></th>
                     </tr>
                     <?php 
-                    $data_profits_day_model[]= round($profit_day_model["profit_margin"] - $profit_day_model["outlays"],2);
-                    $label_profits_day_model[]=$profit_day_model["month"] ."/". $profit_day_model["day"];?>
+                        $data_profits_day_model[]= round($profit_day_model["profit_margin"] - $profit_day_model["outlays"],2);
+                        $label_profits_day_model[]=$profit_day_model["month"] ."/". $profit_day_model["day"];
+                        $data_orders_day_model[]= $profit_day_model["count_order"];
+                    ?>
+
                 <?php endforeach;?>
 
                 </tbody>
@@ -53,9 +58,12 @@ $data_profits_month_model=[];
         <div class="col-md-6">
             <canvas id="profits_day_model"></canvas>
         </div>
+        <div class="col-md-6">
+            <canvas id="orders_day_model"></canvas>
+        </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -79,8 +87,9 @@ $data_profits_month_model=[];
                             <th><?= $profit_month_model["month"]?></th>
                         </tr>
                             <?php 
-                            $label_profits_month_model[]= $profit_month_model["month"];
-                            $data_profits_month_model[]= round($profit_month_model["profit_margin"]- $profit_month_model["outlays"],2);
+                                $label_profits_month_model[]= $profit_month_model["month"];
+                                $data_profits_month_model[]= round($profit_month_model["profit_margin"]- $profit_month_model["outlays"],2);
+                                $data_orders_month_model[]= $profit_month_model["count_order"];
                             ?>
                     <?php endforeach;?>
                     
@@ -89,6 +98,9 @@ $data_profits_month_model=[];
         </div>
         <div class="col-md-6">
             <canvas id="profits_month_model"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="orders_month_model"></canvas>
         </div>
     </div>
 
@@ -118,6 +130,26 @@ new Chart(
   );
 
 
+var  data = {
+    labels: label_profits_day_model,
+    datasets: [{
+        label: 'عدد الطلبات',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: <?=json_encode($data_orders_day_model)?> ,
+    }]
+};
+var  config = {
+    type: 'line',
+    data,
+    options: {}
+};
+new Chart(
+    document.getElementById('orders_day_model'),
+    config
+);
+
+
 var label_profits_month_model = <?=json_encode($label_profits_month_model)?>;
 
 
@@ -141,6 +173,28 @@ var config = {
     document.getElementById('profits_month_model'),
     config
   );
+
+
+var data = {
+    labels: label_profits_month_model,
+    datasets: [{
+        label: 'الطلبات الشهري',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: <?=json_encode($data_orders_month_model)?> ,
+    }]
+};
+
+var config = {
+    type: 'line',
+    data,
+    options: {}
+};
+
+new Chart(
+    document.getElementById('orders_month_model'),
+    config
+);
 
 
 </script>
