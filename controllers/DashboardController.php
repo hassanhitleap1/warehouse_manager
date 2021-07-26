@@ -84,7 +84,7 @@ class  DashboardController extends BaseController {
         $profits_day_model = Orders::find()->select([
              'count(*) as count_order',
             "orders.created_at",
-             'MONTH(`orders`.`created_at`) as month',
+            'MONTH(`orders`.`created_at`) as month',
             "(SELECT SUM(orders_item.quantity) FROM `orders_item`
                     inner join orders as ord on  ord.id = orders_item.order_id
                     WHERE 
@@ -108,8 +108,7 @@ class  DashboardController extends BaseController {
              "(SELECT sum(value) FROM `outlays` 
                     where 
                     date(outlays.created_at) = date(`orders`.`created_at`) and 
-                    MONTH(outlays.created_at) = MONTH(`orders`.`created_at`)
-                    and
+                    MONTH(outlays.created_at) = MONTH(`orders`.`created_at`) and
                     DAY(outlays.created_at) = DAY(`orders`.`created_at`))  as 
                     outlays",
              

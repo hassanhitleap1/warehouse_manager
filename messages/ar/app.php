@@ -200,7 +200,9 @@ return [
     "Create_Type_Outlay"=>"انشاء نوع مصروف",
     "Type_Outlay"=>"نوع المصروق",
     "Value"=>"القيمة",
-    "Date"=>"تاريخ"
+    "Date"=>"تاريخ",
+    "Count_Orders"=>"عدد الطلبات",
+    "Month"=>"الشهر"
 
 
 
