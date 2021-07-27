@@ -32,15 +32,15 @@ $data=[];
           <th><?= $order["name"]?></th>
           <th><?= $order["type"]?></th>
           <th><?= $order["count_quantity"]?></th>
-          <th><?= $order["total_sales"]?> JD</th>
-          <th><?= $order["profits_margin"]?> JD</th>
+          <th><?= round( $order["total_sales"],2)?> JD</th>
+          <th><?= round( $order["profits_margin"] ,2)?> JD</th>
         
         </tr>
         <tr>
         <?php 
         
         $label[]=$order["name"];
-        $data[]=$order["profits_margin"];
+        $data[]=round($order["profits_margin"] ,2);
         ?>
       <?php endforeach;?> 
         
