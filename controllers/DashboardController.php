@@ -265,19 +265,18 @@ class  DashboardController extends BaseController {
         }else{
             $day = date('d', strtotime(date('Y-m-d'). ' -7 day'));
         }
+        $date_day = date('Y-m-d', strtotime(date('Y-m-d'). ' -7 day'));
+        $date_month = date('Y-m-d', strtotime(date('Y-m-d'). ' -7 month'));
 
         // SELECT count(*) ,count(`profit_margin`) FROM `orders` GROUP BY YEAR(`created_at`), MONTH(`created_at`),DAY(`created_at`)
-        $outlays_day_model = Outlays::find()->select([ 'sum(value)  as outlays','MONTH(`created_at`) as month','DAY(`created_at`) as day'])
-            ->andWhere('YEAR(created_at)=:year', [':year' => date('Y')])
-            ->andWhere('MONTH(created_at)=:month', [':month' => date('m')])
-            ->andWhere('DAY(created_at) >= :day', [':day' => $day])
-            ->groupBy(['YEAR(`created_at`)', ' MONTH(`created_at`)','DAY(`created_at`)'])
+        $outlays_day_model = Outlays::find()->select([ 'sum(value)  as outlays','date(`created_at`) as created_at'])
+            ->andWhere('Date(created_at) >= :date', [':date' => $date_day])
+            ->groupBy(['date(`created_at`)'])
             ->asArray()->all();
 
         $outlays_month_model = Outlays::find()->select([ 'sum(value)  as outlays','MONTH(`created_at`) as month'])
-            ->andWhere('YEAR(created_at)=:year', [':year' => date('Y')])
-            ->andWhere('MONTH(created_at)>= :month', [':month' => $month])
-            ->groupBy(['YEAR(`created_at`)', ' MONTH(`created_at`)'])
+            ->andWhere('Date(created_at) >= :date', [':date' => $date_day])
+            ->groupBy([' MONTH(`created_at`)'])
             ->asArray()->all();
 
 
