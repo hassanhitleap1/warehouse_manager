@@ -1050,17 +1050,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-editors.git",
-                "reference": "86d6d0bd2dbcee05c9c816c221c23674f8abaa6d"
+                "reference": "9bffed40c4bbf8fc1818f234bad631b38373e9aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-editors/zipball/86d6d0bd2dbcee05c9c816c221c23674f8abaa6d",
-                "reference": "86d6d0bd2dbcee05c9c816c221c23674f8abaa6d",
+                "url": "https://api.github.com/repos/kartik-v/yii2-editors/zipball/9bffed40c4bbf8fc1818f234bad631b38373e9aa",
+                "reference": "9bffed40c4bbf8fc1818f234bad631b38373e9aa",
                 "shasum": ""
             },
             "require": {
                 "kartik-v/yii2-krajee-base": ">=2.0.0"
             },
+            "default-branch": true,
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
@@ -1100,7 +1101,11 @@
                 "wysiwyg",
                 "yii2"
             ],
-            "time": "2021-01-10T05:00:51+00:00"
+            "support": {
+                "issues": "https://github.com/kartik-v/yii2-editors/issues",
+                "source": "https://github.com/kartik-v/yii2-editors/tree/master"
+            },
+            "time": "2021-05-31T05:53:06+00:00"
         },
         {
             "name": "kartik-v/yii2-export",
@@ -7268,5 +7273,6 @@
     "platform": {
         "php": ">=5.6.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

@@ -11,7 +11,7 @@ use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use coderius\pell\Pell;
+use kartik\editors\Summernote;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\products\Products */
@@ -84,6 +84,7 @@ if (!$model->isNewRecord) {
 
 ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 <div class="container">
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
         
@@ -168,24 +169,28 @@ if (!$model->isNewRecord) {
                     ?>
             </div>
         
-            <div class="col-md-4">
 
-            <?= $form->field($model, 'images_product[]')->widget(FileInput::classname(), [
-                            'options' => ['accept' => 'image/*', 'multiple' => true],
-                            'pluginOptions' => $dataImages
-                        ]);
-            ?>
-            </div>
-            <div class="col-md-4">
-              
-                <?= $form->field($model, 'description')->widget(Pell::className(), []);?>
+            <div class="col-md-8">
+                <?= $form->field($model, 'description')->widget(Summernote::class, [
+                        'options' => ['placeholder' => 'Edit your blog content here...']
+                    ]);?>
             </div>
             
             
             
            
             
-        </div>   
+        </div>
+        <div class="row " style="margin-top: 10px" >
+            <div class="col-md-12" >
+
+            <?= $form->field($model, 'images_product[]')->widget(FileInput::classname(), [
+                'options' => ['accept' => 'image/*', 'multiple' => true],
+                'pluginOptions' => $dataImages
+            ]);
+            ?>
+        </div>
+        </div>
 
    
     <div class="form-group">
