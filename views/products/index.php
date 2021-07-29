@@ -55,9 +55,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'html',
             ],
-            'purchasing_price',
-            'selling_price',
-            'quantity_come',
+            [
+                'attribute'=>'purchasing_price',
+                'value' => function ($searchModel) {
+                    return    Html::a( $searchModel->quantity_come,['products/change-purchasing-price','product_id'=>$searchModel->id ],["class"=>"fast_order"]);;
+                },
+                'format' => 'html',
+            ],
+
+            [
+                'attribute'=>'selling_price',
+                'value' => function ($searchModel) {
+                    return    Html::a( $searchModel->quantity_come,['products/change-selling-price','product_id'=>$searchModel->id ],["class"=>"fast_order"]);;
+                },
+                'format' => 'html',
+            ],
+            [
+                'attribute'=>'quantity_come',
+                'value' => function ($searchModel) {
+                    return    Html::a( $searchModel->quantity_come,['products/change-quantity-come','product_id'=>$searchModel->id ],["class"=>"fast_order"]);;
+                },
+                'format' => 'html',
+            ],
             [
                 'attribute' => 'category_id',
                 'value' => 'category.name_ar',
@@ -130,7 +149,8 @@ $this->params['breadcrumbs'][] = $this->title;
 //
 //
 //            ],
-          
+
+
             [
                 'attribute'=>'quantity',
                 'value' => function ($searchModel) {
@@ -141,9 +161,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             
                         }
                     }
-                   
-                
-                    return  $str;
+
+                    return    Html::a( $str,['products/change-total','product_id'=>$searchModel->id ],["class"=>"fast_order"]);;
+
     
                 },
                 'format' => 'html',
