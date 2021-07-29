@@ -75,24 +75,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ],
            
-            // 'status',
-            [
-                'attribute' => 'supplier_id',
-                'value' => 'supplier.name',
-                    'filter' =>Select2::widget([
-                    'name' => 'supplier_id',
-                    "value"=>(isset($_GET['supplier_id']))?$_GET['supplier_id']:null,
-                    'data' => ArrayHelper::map(Suppliers::find()->all(), 'id', 'name'),
-                    'options' => [
-                        'placeholder' => 'Select  ...',
-                        'multiple' => false
-                    ],
-                ]),
-
-                'format' => 'html',
-
-
-            ],
+//            'status',
+//            [
+//                'attribute' => 'supplier_id',
+//                'value' => 'supplier.name',
+//                    'filter' =>Select2::widget([
+//                    'name' => 'supplier_id',
+//                    "value"=>(isset($_GET['supplier_id']))?$_GET['supplier_id']:null,
+//                    'data' => ArrayHelper::map(Suppliers::find()->all(), 'id', 'name'),
+//                    'options' => [
+//                        'placeholder' => 'Select  ...',
+//                        'multiple' => false
+//                    ],
+//                ]),
+//
+//                'format' => 'html',
+//
+//
+//            ],
            
 //            [
 //                'attribute' => 'unit_id',
@@ -113,23 +113,23 @@ $this->params['breadcrumbs'][] = $this->title;
 //
 //            ],
            
-            [
-                'attribute' => 'warehouse_id',
-                'value' => 'warehouse.name',
-                'filter' =>Select2::widget([
-                    'name' => 'warehouse_id',
-                    "value"=>(isset($_GET['warehouse_id']))?$_GET['warehouse_id']:null,
-                    'data' => ArrayHelper::map(Warehouse::find()->all(), 'id', 'name'),
-                    'options' => [
-                        'placeholder' => 'Select  ...',
-                        'multiple' => false
-                    ],
-                ]),
-
-                'format' => 'html',
-                
-
-            ],
+//            [
+//                'attribute' => 'warehouse_id',
+//                'value' => 'warehouse.name',
+//                'filter' =>Select2::widget([
+//                    'name' => 'warehouse_id',
+//                    "value"=>(isset($_GET['warehouse_id']))?$_GET['warehouse_id']:null,
+//                    'data' => ArrayHelper::map(Warehouse::find()->all(), 'id', 'name'),
+//                    'options' => [
+//                        'placeholder' => 'Select  ...',
+//                        'multiple' => false
+//                    ],
+//                ]),
+//
+//                'format' => 'html',
+//
+//
+//            ],
           
             [
                 'attribute'=>'quantity',
