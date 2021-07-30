@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'purchasing_price',
                 'value' => function ($searchModel) {
-                    return    Html::a( $searchModel->quantity_come,['products/change-purchasing-price','product_id'=>$searchModel->id ],["class"=>"fast_order"]);;
+                    return    Html::a( $searchModel->quantity_come,['products/change-purchasing-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
                 },
                 'format' => 'html',
             ],
@@ -66,14 +66,14 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'selling_price',
                 'value' => function ($searchModel) {
-                    return    Html::a( $searchModel->quantity_come,['products/change-selling-price','product_id'=>$searchModel->id ],["class"=>"fast_order"]);;
+                    return    Html::a( $searchModel->quantity_come,['products/change-selling-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
                 },
                 'format' => 'html',
             ],
             [
                 'attribute'=>'quantity_come',
                 'value' => function ($searchModel) {
-                    return    Html::a( $searchModel->quantity_come,['products/change-quantity-come','product_id'=>$searchModel->id ],["class"=>"fast_order"]);;
+                    return    Html::a( $searchModel->quantity_come,['products/change-quantity-come','id'=>$searchModel->id ],["class"=>"open_model"]);;
                 },
                 'format' => 'html',
             ],
@@ -162,7 +162,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     }
 
-                    return    Html::a( $str,['products/change-total','product_id'=>$searchModel->id ],["class"=>"fast_order"]);;
+                    return    Html::a( $str,['products/change-total','id'=>$searchModel->id ],["class"=>"open_model"]);;
 
     
                 },

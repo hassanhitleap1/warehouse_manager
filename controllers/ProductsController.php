@@ -517,4 +517,165 @@ class ProductsController extends BaseController
 
     }
 
+
+    public function actionChangePurchasingPrice($id){
+
+        $model=$this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            if($model->validate()){
+                $model->save();
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;  
+            
+                return [
+                    'data' => [
+                        'success' => true,
+                        'model' => $model,
+                        'message' => 'Model has been saved.',
+                    ],
+                    'code' => 0,
+                ];
+            }else{
+
+                return [
+                    'data' => [
+                        'success' => false,
+                        'errors' => $model->getErrors(),
+                        'message' => 'An error occured.',
+                    ],
+                    'code' => 1, // Some semantic codes that you know them for yourself
+                ];
+
+            }
+           
+         
+        }
+
+        return $this->renderAjax('change-purchasing-price',[
+            'model' =>$model,
+          
+        ]);
+    }
+
+
+
+    public function actionChangeQuantityCome($id){
+
+        $model=$this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            if($model->validate()){
+                $model->save();
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;  
+            
+                return [
+                    'data' => [
+                        'success' => true,
+                        'model' => $model,
+                        'message' => 'Model has been saved.',
+                    ],
+                    'code' => 0,
+                ];
+            }else{
+
+                return [
+                    'data' => [
+                        'success' => false,
+                        'errors' => $model->getErrors(),
+                        'message' => 'An error occured.',
+                    ],
+                    'code' => 1, // Some semantic codes that you know them for yourself
+                ];
+
+            }
+           
+         
+        }
+
+        return $this->renderAjax('change-quantity-come',[
+            'model' =>$model,
+          
+        ]);
+    }
+
+
+    public function actionChangeSellingPrice($id){
+
+        $model=$this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            if($model->validate()){
+                $model->save();
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;  
+            
+                return [
+                    'data' => [
+                        'success' => true,
+                        'model' => $model,
+                        'message' => 'Model has been saved.',
+                    ],
+                    'code' => 0,
+                ];
+            }else{
+
+                return [
+                    'data' => [
+                        'success' => false,
+                        'errors' => $model->getErrors(),
+                        'message' => 'An error occured.',
+                    ],
+                    'code' => 1, // Some semantic codes that you know them for yourself
+                ];
+
+            }
+           
+         
+        }
+
+        return $this->renderAjax('change-selling-price',[
+            'model' =>$model,
+          
+        ]);
+    }
+
+
+    public function actionChangeTotal($id){
+
+        $model=$this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            if($model->validate()){
+                $model->save();
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;  
+            
+                return [
+                    'data' => [
+                        'success' => true,
+                        'model' => $model,
+                        'message' => 'Model has been saved.',
+                    ],
+                    'code' => 0,
+                ];
+            }else{
+
+                return [
+                    'data' => [
+                        'success' => false,
+                        'errors' => $model->getErrors(),
+                        'message' => 'An error occured.',
+                    ],
+                    'code' => 1, // Some semantic codes that you know them for yourself
+                ];
+
+            }
+           
+         
+        }
+
+        return $this->renderAjax('change-total',[
+            'model' =>$model,
+          
+        ]);
+    }
+    
 }

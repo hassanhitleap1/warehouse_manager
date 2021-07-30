@@ -154,6 +154,15 @@ $(document).on('change','#area_id',function (e) {
 
 
 
+$(document).on('click', '.open_model', function(e){
+    e.preventDefault();
+    
+    url = $(this).attr('href');
+
+    $('#model').modal('show')
+        .find('#modelContent')
+        .load(url);
+});
 
 $(document).on('click', '.fast_order', function(e){
     e.preventDefault();
@@ -694,4 +703,38 @@ function get_sub_product(_this){
 });  
 
 
- 
+$(document).on('click','#save_model',function (event) {
+    event.preventDefault(); // stopping submitting
+    var data = $(".fast-order-form").serializeArray();
+    var id= $(".fast-order-form").attr('att_id');
+    var url = $(".fast-order-form").attr('action')+"&id="+id;
+
+    $.ajax({
+        url: url,
+        type: 'post',
+        dataType: 'json',
+        data: data
+    })
+        .done(function(response) {
+            if (response.data.success == true) {
+                Swal.fire('success add order');
+                $("#div_errors").fadeOut(); 
+                 $("#div_errors").html("");
+            }else{
+                var string_error="";
+                var errors=response.data.errors;
+                $( errors).each(function( index,error ) {
+                    $.each( error, function( key, value ) {
+                        string_error+=value[0]+"<br />";
+                      });
+
+                  });
+                  $("#div_errors").fadeIn(); 
+                 $("#div_errors").html(string_error);
+            }
+        })
+        .fail(function() {
+            console.log("error");
+        });
+
+});
