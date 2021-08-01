@@ -50,6 +50,32 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
     </div>
+
+    <div class="row" >
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"><?= Yii::t('app','Name')?></th>
+                <th scope="col"><?= Yii::t('app','Count')?></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($details as $key_det=> $detail):?>
+                <tr>
+                    <th scope="row"><?= ++$key_det ?></th>
+                    <td><?= $detail->type ?> </td>
+                    <td><?= $detail->sum_quantity ?></td>
+                </tr>
+            <?php endforeach;?>
+
+
+            </tbody>
+        </table>
+
+
+    </div>
     <div class="row" >
 
             <div class="col-md-3">

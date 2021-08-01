@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\orders\Orders;
 use app\models\ordersitem\OrdersItem;
 use app\models\Outlays\Outlays;
+use Carbon\Carbon;
 use Yii;
 use yii\filters\VerbFilter;
 
@@ -34,33 +35,32 @@ class  DashboardController extends BaseController {
     public function actionIndex()
     {
         
-        $date=date('Y-m-d');
-
-            $orders = Orders::find()->select(['count(*) as count_order',
+        $date=Carbon::now("Asia/Amman")->toDateString();
+        $orders = Orders::find()->select(['count(*) as count_order',
             'sum(orders.amount_required) as total_sales' ,
-
-            "(SELECT sum(profits_margin) FROM `orders_item` 
-                    inner join orders on  orders.id = orders_item.order_id
-                    where date(orders_item.created_at) ='$date' and 
-                            orders.status_id in (1,2,3,4)  )  as 
-             profit_margin",
-             
-             "(SELECT sum(quantity) FROM `orders_item` 
-                     inner join orders on  orders.id = orders_item.order_id
-                    where date(orders_item.created_at) ='$date' and
-                    orders.status_id in (1,2,3,4) )  as 
-                    quantity",
-             "(SELECT sum(value) FROM `outlays` 
-                    where date(outlays.created_at) ='$date')  as 
-                    outlays",       
-            ])
-            ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
+            "(SELECT sum(profits_margin) FROM `orders_item`  inner join orders on  orders.id = orders_item.order_id where date(orders_item.created_at) ='$date' and orders.status_id in (1,2,3,4)  )  as  profit_margin",
+             "(SELECT sum(quantity) FROM `orders_item`  inner join orders on  orders.id = orders_item.order_id  where date(orders_item.created_at) ='$date' and  orders.status_id in (1,2,3,4) )  as  quantity",
+             "(SELECT sum(value) FROM `outlays`  where date(outlays.created_at) ='$date')  as  outlays",
+            ])->andWhere('date(orders.created_at) >= :date', [':date' => $date])
             ->andWhere(['in','orders.status_id', [1,2,3,4]])
             ->groupBy(['DAY(orders.created_at)'])
             ->asArray()->one();
-     
+        /*
+         * SELECT sum(orders_item.quantity) as sum_quantity,orders_item.product_id,orders_item.sub_product_id,orders_item.quantity,products.name,sub_product_count.type
+         * from orders_item inner join products on products.id= orders_item.sub_product_id
+         * inner join sub_product_count on sub_product_count.id= orders_item.sub_product_id GROUP by orders_item.sub_product_id
+         */
+        $subQuery = Orders::find()->select('id')->andWhere(['in','orders.status_id', [1,2,3,4]])->andWhere('date(orders.created_at) >= :date', [':date' => $date]);
+        $details=OrdersItem::find()->select(['sum(orders_item.quantity) as sum_quantity','orders_item.product_id','orders_item.sub_product_id','orders_item.quantity','products.name','sub_product_count.type'])
+            ->innerJoin('products', 'products.id=orders_item.product_id')
+            ->innerJoin('sub_product_count', 'sub_product_count.id= orders_item.sub_product_id')
+            ->andWhere('date(orders_item.created_at) >= :date', [':date' => $date])
+            ->where(['in', 'orders_item.order_id', $subQuery])
+            ->groupBy(['orders_item.sub_product_id'])->all();
+
+
           return $this->render('index',[
-            'orders'=>$orders,
+            'orders'=>$orders, 'details'=>$details
         ]);
     }
 
