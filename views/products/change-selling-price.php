@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
         <div class="wrapper row">
             <div class="preview col-md-12">
                 <?php  $form = ActiveForm::begin([
-                'action' => ['products/change-quantity-come' ],
+                'action' => ['products/change-selling-price' ],
                 'options' => [
                 'class' => 'fast-order-form',
                 'att_id'=>$model->id

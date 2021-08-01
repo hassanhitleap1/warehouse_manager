@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'purchasing_price',
                 'value' => function ($searchModel) {
-                    return    Html::a( $searchModel->quantity_come,['products/change-purchasing-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
+                    return    Html::a( $searchModel->purchasing_price,['products/change-purchasing-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
                 },
                 'format' => 'html',
             ],
@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'selling_price',
                 'value' => function ($searchModel) {
-                    return    Html::a( $searchModel->quantity_come,['products/change-selling-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
+                    return    Html::a( $searchModel->selling_price,['products/change-selling-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
                 },
                 'format' => 'html',
             ],
