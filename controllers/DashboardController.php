@@ -56,9 +56,7 @@ class  DashboardController extends BaseController {
             ->innerJoin('sub_product_count', 'sub_product_count.id= orders_item.sub_product_id')
             ->andWhere('date(orders_item.created_at) >= :date', [':date' => $date])
             ->where(['in', 'orders_item.order_id', $subQuery])
-            ->groupBy(['orders_item.sub_product_id'])->all();
-
-
+            ->groupBy(['orders_item.sub_product_id'])->asArray()->all();
           return $this->render('index',[
             'orders'=>$orders, 'details'=>$details
         ]);
@@ -292,7 +290,7 @@ class  DashboardController extends BaseController {
             ->groupBy(['sub_product_id'])
             ->orderBy(['count_quantity'=>SORT_DESC])
             ->asArray()->limit(24)->all();
-        
+
        
         return $this->render('best-seller',['orders'=>$orders]);
     }

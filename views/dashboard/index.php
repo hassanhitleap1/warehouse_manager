@@ -65,8 +65,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php foreach ($details as $key_det=> $detail):?>
                 <tr>
                     <th scope="row"><?= ++$key_det ?></th>
-                    <td><?= $detail->type ?> </td>
-                    <td><?= $detail->sum_quantity ?></td>
+                    <td><?= $detail['type'] ?> </td>
+                    <td><?= $detail['sum_quantity'] ?></td>
                 </tr>
             <?php endforeach;?>
 
