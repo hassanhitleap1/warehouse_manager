@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
                 ]);
                 ?>
 
-                <?= $form->field($model, 'purchasing_price')->textInput() ?>
+                <?= $form->field($model, 'selling_price')->textInput() ?>
 
                 <div class="row">
                     <div class="form-group">

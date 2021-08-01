@@ -44,14 +44,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format'=>'html'
             ],
-           
-            
             [
                 'attribute'=>'thumbnail',
                 'value' => function ($searchModel) {
-
                     return Html::img($searchModel->thumbnail,['width'=>'100','height'=>'100']);
-    
                 },
                 'format' => 'html',
             ],
@@ -89,9 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'multiple' => false
                     ],
                 ]),
-
                 'format' => 'html',
-
             ],
            
 //            'status',
