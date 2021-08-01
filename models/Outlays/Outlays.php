@@ -2,6 +2,7 @@
 
 namespace app\models\Outlays;
 
+use app\components\OrderHelper;
 use app\models\products\Products;
 use app\models\TypeOutlay\TypeOutlay;
 use Carbon\Carbon;
@@ -38,6 +39,7 @@ class Outlays extends \yii\db\ActiveRecord
             [['type', 'product_id'], 'integer'],
             [['value'], 'double'],
             [['title'], 'string', 'max' => 255],
+            [['range'],  'string'],
         ];
     }
 
@@ -68,6 +70,17 @@ class Outlays extends \yii\db\ActiveRecord
 
     public function getTypeoulay(){
         return $this->hasOne(TypeOutlay::className(),['id' => 'type']);
+    }
+
+
+
+    public function beforeValidate()
+    {
+        if (parent::beforeValidate()) {
+            $this->range=OrderHelper::faTOen($this->range);
+            return true;
+        }
+        return false;
     }
       /**
      * @inheritdoc

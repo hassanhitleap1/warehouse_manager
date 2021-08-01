@@ -9,10 +9,17 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('app', 'Outlays');
 $this->params['breadcrumbs'][] = $this->title;
+$session = Yii::$app->session;
 ?>
 <div class="outlays-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <?php  if($session->has('message')):?>
+        <div class="alert alert-success"> <?= $session->get("message") ?> </div>
+        <?php  $session->remove('message');?>
+
+    <?php endif; ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create_Outlay'), ['create'], ['class' => 'btn btn-success']) ?>

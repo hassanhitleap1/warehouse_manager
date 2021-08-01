@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\DateHelper;
 use Yii;
 use app\models\Outlays\Outlays;
 use app\models\Outlays\OutlaysSearch;
@@ -67,11 +68,12 @@ class OutlaysController extends Controller
         $model = new Outlays();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if(!is_null($this->range)){
+            if(is_null($model->range) ||  $model->range == "" ){
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }else{
-                $dates=[];
+                $arr_date=explode(' - ',$model->range);
+                $dates=DateHelper::getDatesFromRange($arr_date[0],$arr_date[1]);
                 $data_inserted=[];
                   foreach ($dates as $data){
                     $data_inserted[]=[
@@ -88,9 +90,12 @@ class OutlaysController extends Controller
                     ->createCommand()
                     ->batchInsert('outlays', ['title','value','type','product_id','created_at','updated_at'], $data_inserted)
                     ->execute();
+                $session = Yii::$app->session;
+                $session->set('message', Yii::t('app','Successfuly'));
 
             }
 
+            return $this->redirect(['outlays/index']);
         }
 
         return $this->render('create', [

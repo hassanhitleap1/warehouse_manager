@@ -6,7 +6,7 @@ use kartik\daterange\DateRangePicker;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\form\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Outlays\Outlays */
@@ -34,14 +34,15 @@ use yii\widgets\ActiveForm;
                                             'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'class'=>'product_id'],
                                         
                                         ]); ?>
-    <?php if($this->isNewRecord): ?>
+    <?php if($model->isNewRecord): ?>
 
-        <?= $form->field($model, 'range', [
+        <?=
+        $form->field($model, 'range', [
             'addon'=>['prepend'=>['content'=>'<i class="fas fa-calendar-alt"></i>']],
-            'options'=>['class'=>'drp-container form-group']
-            ])->widget(DateRangePicker::classname(), [
-                'useWithAddon'=>true
-            ]);
+            'options'=>['class'=>'drp-container form-group' ]
+        ])->widget(DateRangePicker::classname(), [
+            'useWithAddon'=>true
+        ]);
 
         ?>
     <?php endif;?>
