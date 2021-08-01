@@ -717,8 +717,9 @@ $(document).on('click','#save_model',function (event) {
     })
         .done(function(response) {
             var class_name= response.data.class_name;
+            console.log( "tr","#tr_"+response.data.model["id"],  "class_name" , class_name )
             if (response.data.success == true) {
-                $("#tr_".response.data.id).find(class_name).text(response.data[class_name])
+                $("#tr_"+response.data.model["id"]).find("."+class_name).find("a").text(response.data.model[class_name])
                  $("#div_errors").html("");
                 $("#model").modal('hide');
             }else{
