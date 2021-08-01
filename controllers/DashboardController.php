@@ -230,14 +230,14 @@ class  DashboardController extends BaseController {
         foreach($profits_day_model as $profit_day){
             $label_day[]=$profit_day['date'];
             $orders_count_day[]=$profit_day['count_order'];
-            $profits_day[]=$profit_day['profits_margin'];
+            $profits_day[]=round($profit_day['profits_margin'],2);
         }
       
 
         foreach($profits_month_model as $profit_month){
             $label_month[]=$profit_month['month'];
             $orders_count_month[]=$profit_month['count_order'];
-            $profits_month[]=$profit_month['profits_margin'];
+            $profits_month[]=round($profit_month['profits_margin'],2);
         }
         return $this->render('orders',[
             'label_month'=>$label_month,
