@@ -19,20 +19,27 @@ class MainAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
-    public $css = [
-        'css/site.css',
-        'css/orders.css',
-        'css/swiper/swiper-bundle.min.css',
-       
-    ];
-    public $js = [
-        'js/main.js',
-        'js/custum.js',
-        'js/sweetalert2/main.js', 
-    ];
+    public $css ;
+    public $js ;
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'airani\bootstrap\BootstrapRtlAsset',
     ];
+
+
+    function __construct() {
+        $this->css=[
+            'css/site.css?v='.rand(),
+            'css/orders.css?v='.rand(),
+            'css/swiper/swiper-bundle.min.css',
+           
+        ];
+        $this->js=[
+            'js/main.js?v='.rand(),
+            'js/custum.js?v='.rand(),
+            'js/sweetalert2/main.js', 
+        ];
+    }
+
 }
