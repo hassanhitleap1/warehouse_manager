@@ -66,19 +66,20 @@ class  DashboardController extends BaseController {
 
 
     public function actionSales(){
+        $date=Carbon::now("Asia/Amman");
+        $year=$date->format('Y');
+        $month=$date->format('m');
+//        if(date('m') < 7 ){
+//            $month=date('m');
+//        }else{
+//            $month = date('m', strtotime(date('Y-m-d'). ' -7 month'));
+//        }
 
-        $year=date('Y');
-        if(date('m') < 7 ){
-            $month=date('m');
-        }else{
-            $month = date('m', strtotime(date('Y-m-d'). ' -7 month'));
-        }
-
-        if(date('d') < 7 ){
-            $day=date('d');
-        }else{
-            $day = date('d', strtotime(date('Y-m-d'). ' -7 day'));
-        }
+//        if(date('d') < 7 ){
+//            $day=date('d');
+//        }else{
+//            $day = date('d', strtotime(date('Y-m-d'). ' -7 day'));
+//        }
 
 
         $profits_day_model = Orders::find()->select([
@@ -114,8 +115,8 @@ class  DashboardController extends BaseController {
              
              ])
              
-             ->andWhere('YEAR(orders.created_at)=:year', [':year' => date('Y')])
-            ->andWhere('MONTH(orders.created_at)=:month', [':month' => date('m')])
+             ->andWhere('YEAR(orders.created_at)=:year', [':year' => $year])
+            ->andWhere('MONTH(orders.created_at)=:month', [':month' => $month])
             ->groupBy(['DAY(`orders`.`created_at`)'])
             ->orderBy(['orders.created_at'=>SORT_ASC])
             ->asArray()->all();    
@@ -128,7 +129,7 @@ class  DashboardController extends BaseController {
             'count(*) as count_order',
             'orders.created_at',
             'MONTH(orders.created_at) as month',
-            // 'sum(orders.profit_margin)  as profit_margin',
+
 
             "(SELECT SUM(orders_item.profits_margin) FROM `orders_item`
                     inner join orders as ord on  ord.id = orders_item.order_id
@@ -158,7 +159,7 @@ class  DashboardController extends BaseController {
                     outlays",
         ])
 
-        ->andWhere('YEAR(orders.created_at)=:year', [':year' => date('Y')])
+        ->andWhere('YEAR(orders.created_at)=:year', [':year' => $year])
             ->groupBy(['MONTH(orders.created_at)'])
             ->orderBy(['orders.created_at'=>SORT_ASC])
             ->asArray()->all();
@@ -192,8 +193,9 @@ class  DashboardController extends BaseController {
     }
 
     public function actionOrders(){
-        $date_day = date('Y-m-d', strtotime(date('Y-m-d'). ' -7 day'));
-        $date_month = date('Y-m-d', strtotime(date('Y-m-d'). ' -7 month'));
+        $date=Carbon::now("Asia/Amman")->toDateString();
+        $date_day = date('Y-m-d', strtotime($date. ' -7 day'));
+        $date_month = date('Y-m-d', strtotime($date. ' -7 month'));
 
         $profits_day_model = Orders::find()->select([
             'count(*) as count_order', 
@@ -244,19 +246,20 @@ class  DashboardController extends BaseController {
 
     public function actionOutlay(){
 
-        if(date('m') < 7 ){
-            $month=date('m');
-        }else{
-            $month = date('m', strtotime(date('Y-m-d'). ' -7 month'));
-        }
-
-        if(date('d') < 7 ){
-            $day=date('d');
-        }else{
-            $day = date('d', strtotime(date('Y-m-d'). ' -7 day'));
-        }
-        $date_day = date('Y-m-d', strtotime(date('Y-m-d'). ' -7 day'));
-        $date_month = date('Y-m-d', strtotime(date('Y-m-d'). ' -7 month'));
+//        if(date('m') < 7 ){
+//            $month=date('m');
+//        }else{
+//            $month = date('m', strtotime(date('Y-m-d'). ' -7 month'));
+//        }
+//
+//        if(date('d') < 7 ){
+//            $day=date('d');
+//        }else{
+//            $day = date('d', strtotime(date('Y-m-d'). ' -7 day'));
+//        }
+        $date=Carbon::now("Asia/Amman")->toDateString();
+        $date_day = date('Y-m-d', strtotime($date. ' -7 day'));
+        $date_month = date('Y-m-d', strtotime($date. ' -7 month'));
 
         // SELECT count(*) ,count(`profit_margin`) FROM `orders` GROUP BY YEAR(`created_at`), MONTH(`created_at`),DAY(`created_at`)
         $outlays_day_model = Outlays::find()->select([ 'sum(value)  as outlays','date(`created_at`) as created_at'])
@@ -277,7 +280,7 @@ class  DashboardController extends BaseController {
     }
 
     public function actionBestSeller(){
-        $date=date('Y-m-d');
+        $date=Carbon::now("Asia/Amman")->toDateString();
         $orders = OrdersItem::find()->select([
             'count(orders_item.quantity) as count_quantity', 
             'sum(price_item_count) as total_sales' ,
