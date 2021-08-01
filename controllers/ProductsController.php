@@ -537,7 +537,7 @@ class ProductsController extends BaseController
                     'code' => 0,
                 ];
             }else{
-
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
                 return [
                     'data' => [
                         'success' => false,
@@ -580,7 +580,7 @@ class ProductsController extends BaseController
                     'code' => 0,
                 ];
             }else{
-
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
                 return [
                     'data' => [
                         'success' => false,
@@ -622,7 +622,7 @@ class ProductsController extends BaseController
                     'code' => 0,
                 ];
             }else{
-
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
                 return [
                     'data' => [
                         'success' => false,
@@ -664,7 +664,7 @@ class ProductsController extends BaseController
                     'code' => 0,
                 ];
             }else{
-
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
                 return [
                     'data' => [
                         'success' => false,
