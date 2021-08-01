@@ -115,8 +115,8 @@ var  data = {
   labels: label_profits_day_model,
   datasets: [{
     label: 'الارباح اليومية',
-    backgroundColor: 'rgb(255, 99, 132)',
-    borderColor: 'rgb(255, 99, 132)',
+    backgroundColor: 'rgb(11, 168, 90)',
+            borderColor: 'rgb(11, 168, 90)',
     data: <?=json_encode($data_profits_day_model)?> ,
   }]
 };
@@ -135,8 +135,8 @@ var  data = {
     labels: label_profits_day_model,
     datasets: [{
         label: 'عدد الطلبات',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgb(11, 168, 90)',
+            borderColor: 'rgb(11, 168, 90)',
         data: <?=json_encode($data_orders_day_model)?> ,
     }]
 };
@@ -158,8 +158,8 @@ var data = {
   labels: label_profits_month_model,
   datasets: [{
     label: 'الارباح الشهري',
-    backgroundColor: 'rgb(255, 99, 132)',
-    borderColor: 'rgb(255, 99, 132)',
+    backgroundColor: 'rgb(11, 168, 90)',
+            borderColor: 'rgb(11, 168, 90)',
     data: <?=json_encode($data_profits_month_model)?> ,
   }]
 };
@@ -180,8 +180,8 @@ var data = {
     labels: label_profits_month_model,
     datasets: [{
         label: 'الطلبات الشهري',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgb(11, 168, 90)',
+            borderColor: 'rgb(11, 168, 90)',
         data: <?=json_encode($data_orders_month_model)?> ,
     }]
 };
