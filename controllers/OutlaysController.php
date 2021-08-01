@@ -66,8 +66,31 @@ class OutlaysController extends Controller
     {
         $model = new Outlays();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if(!is_null($this->range)){
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }else{
+                $dates=[];
+                $data_inserted=[];
+                  foreach ($dates as $data){
+                    $data_inserted[]=[
+                    'title'=>$model->title,
+                     'value'=>$model->value  ,
+                     'type'=>$model->type,
+                     'product_id'=>$model->type,
+                     'created_at' =>$data,
+                     'updated_at' =>$data,
+                    ];
+                }
+
+                Yii::$app->db
+                    ->createCommand()
+                    ->batchInsert('outlays', ['title','value','type','product_id','created_at','updated_at'], $data_inserted)
+                    ->execute();
+
+            }
+
         }
 
         return $this->render('create', [

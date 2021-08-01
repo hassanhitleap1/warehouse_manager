@@ -2,6 +2,7 @@
 
 use app\models\products\Products;
 use app\models\TypeOutlay\TypeOutlay;
+use kartik\daterange\DateRangePicker;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -18,6 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'value')->textInput() ?>
+
     <?= $form->field($model,"type")->widget(Select2::classname(), [
                                             'data' =>ArrayHelper::map(TypeOutlay::find()->all(),'id','title' ),
                                             'language' => 'ar',
@@ -31,10 +33,18 @@ use yii\widgets\ActiveForm;
                                             'language' => 'ar',
                                             'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'class'=>'product_id'],
                                         
-                                        ]); ?>  
-    
+                                        ]); ?>
+    <?php if($this->isNewRecord): ?>
 
+        <?= $form->field($model, 'range', [
+            'addon'=>['prepend'=>['content'=>'<i class="fas fa-calendar-alt"></i>']],
+            'options'=>['class'=>'drp-container form-group']
+            ])->widget(DateRangePicker::classname(), [
+                'useWithAddon'=>true
+            ]);
 
+        ?>
+    <?php endif;?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

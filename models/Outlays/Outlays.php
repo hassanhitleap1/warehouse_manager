@@ -19,6 +19,7 @@ use Yii;
  */
 class Outlays extends \yii\db\ActiveRecord
 {
+    public $range;
     /**
      * {@inheritdoc}
      */
@@ -51,6 +52,7 @@ class Outlays extends \yii\db\ActiveRecord
             'type' => Yii::t('app',"Type"),
             'value'=>Yii::t('app',"Value"),
             'product_id' =>Yii::t('app',"Product") ,
+            'range'=>Yii::t('app',"Range") ,
             'created_at' => Yii::t('app',"Created_At"),
             'updated_at' => Yii::t('app',"Updated_At"),
         ];
@@ -76,10 +78,10 @@ class Outlays extends \yii\db\ActiveRecord
         if (parent::beforeSave($insert)) {
             // Place your custom code here
             if ($this->isNewRecord) {
-                $this->created_at = $today;
-                $this->updated_at = $today;
-
-
+                if(!is_null($this->range)){
+                    $this->created_at = $today;
+                    $this->updated_at = $today;
+                }
             } else {
                 $this->updated_at =$today;
             }
