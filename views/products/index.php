@@ -33,6 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' =>  function($searchModel){
+            return  ['id' =>'tr_'.$searchModel['id']];
+            },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             // 'id',
@@ -42,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>function ($searchModel) {
                     return Html::a($searchModel['name'] ,['sub-product-count/index','product_id'=>$searchModel->id]);
                 },
+                'headerOptions' => ['class' => 'name'],
                 'format'=>'html'
             ],
             [
@@ -56,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($searchModel) {
                     return    Html::a( $searchModel->purchasing_price,['products/change-purchasing-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
                 },
+                'headerOptions' => ['class' => 'purchasing_price'],
                 'format' => 'html',
             ],
 
@@ -64,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($searchModel) {
                     return    Html::a( $searchModel->selling_price,['products/change-selling-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
                 },
+                'headerOptions' => ['class' => 'selling_price'],
                 'format' => 'html',
             ],
             [
@@ -71,6 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($searchModel) {
                     return    Html::a( $searchModel->quantity_come,['products/change-quantity-come','id'=>$searchModel->id ],["class"=>"open_model"]);;
                 },
+                'headerOptions' => ['class' => 'quantity_come'],
                 'format' => 'html',
             ],
             [
@@ -85,6 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'multiple' => false
                     ],
                 ]),
+                'headerOptions' => ['class' => 'category_id'],
                 'format' => 'html',
             ],
            
@@ -155,11 +163,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             
                         }
                     }
-
                     return    Html::a( $str,['products/change-total','id'=>$searchModel->id ],["class"=>"open_model"]);;
-
-    
                 },
+                'headerOptions' => ['class' => 'quantity'],
                 'format' => 'html',
             ],
 

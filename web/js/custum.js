@@ -716,10 +716,11 @@ $(document).on('click','#save_model',function (event) {
         data: data
     })
         .done(function(response) {
+            var class_name= response.data.class_name;
             if (response.data.success == true) {
-                Swal.fire('success add order');
-                $("#div_errors").fadeOut(); 
+                $("#tr_".response.data.id).find(class_name).text(response.data[class_name])
                  $("#div_errors").html("");
+                $("#model").modal('hide');
             }else{
                 var string_error="";
                 var errors=response.data.errors;
