@@ -531,6 +531,7 @@ class ProductsController extends BaseController
                     'data' => [
                         'success' => true,
                         'model' => $model,
+                        'class_name'=>"purchasing_price",
                         'message' => 'Model has been saved.',
                     ],
                     'code' => 0,
@@ -542,6 +543,7 @@ class ProductsController extends BaseController
                         'success' => false,
                         'errors' => $model->getErrors(),
                         'message' => 'An error occured.',
+                        'class_name'=>"purchasing_price",
                     ],
                     'code' => 1, // Some semantic codes that you know them for yourself
                 ];
@@ -572,6 +574,7 @@ class ProductsController extends BaseController
                     'data' => [
                         'success' => true,
                         'model' => $model,
+                        'class_name'=>"quantity_come",
                         'message' => 'Model has been saved.',
                     ],
                     'code' => 0,
@@ -582,6 +585,7 @@ class ProductsController extends BaseController
                     'data' => [
                         'success' => false,
                         'errors' => $model->getErrors(),
+                        'class_name'=>"quantity_come",
                         'message' => 'An error occured.',
                     ],
                     'code' => 1, // Some semantic codes that you know them for yourself
@@ -612,6 +616,7 @@ class ProductsController extends BaseController
                     'data' => [
                         'success' => true,
                         'model' => $model,
+                        'class_name'=>"selling_price",
                         'message' => 'Model has been saved.',
                     ],
                     'code' => 0,
@@ -622,6 +627,7 @@ class ProductsController extends BaseController
                     'data' => [
                         'success' => false,
                         'errors' => $model->getErrors(),
+                        'class_name'=>"selling_price",
                         'message' => 'An error occured.',
                     ],
                     'code' => 1, // Some semantic codes that you know them for yourself
@@ -652,6 +658,7 @@ class ProductsController extends BaseController
                     'data' => [
                         'success' => true,
                         'model' => $model,
+                        'class_name'=>"quantity",
                         'message' => 'Model has been saved.',
                     ],
                     'code' => 0,
@@ -662,6 +669,7 @@ class ProductsController extends BaseController
                     'data' => [
                         'success' => false,
                         'errors' => $model->getErrors(),
+                        'class_name'=>"quantity",
                         'message' => 'An error occured.',
                     ],
                     'code' => 1, // Some semantic codes that you know them for yourself
