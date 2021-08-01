@@ -196,25 +196,30 @@ class  DashboardController extends BaseController {
         $date=Carbon::now("Asia/Amman")->toDateString();
         $date_day = date('Y-m-d', strtotime($date. ' -7 day'));
         $date_month = date('Y-m-d', strtotime($date. ' -7 month'));
-
+      
         $profits_day_model = Orders::find()->select([
             'count(*) as count_order', 
-            '(SELECT SUM(orders_item.profits_margin) as profits_margin  FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
-               ord.status_id not in (6,7,8,9,10,11,13)  and date(orders_item.created_at) >= "'.$date_day.'")',
+            '(SELECT SUM(orders_item.profits_margin)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
+               ord.status_id not in (6,7,8,9,10,11,13)  and date(orders_item.created_at) >= "'.$date_day.'") as profits_margin',
             'date(`created_at`) as date'])
             ->andWhere('date(created_at) >= :date', [':date' => $date_day])
             ->groupBy(['DAY(`created_at`)'])
+            ->orderBy(['created_at' => SORT_ASC])
          ->asArray()->all();
-
+         
         $profits_month_model = Orders::find()->select([
             'count(*) as count_order',
-            '(SELECT SUM(orders_item.profits_margin) as profits_margin  FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
-               ord.status_id not in (6,7,8,9,10,11,13)  and date(orders_item.created_at) >= "'.$date_day.'")',
+            '(SELECT SUM(orders_item.profits_margin)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
+               ord.status_id not in (6,7,8,9,10,11,13)  and date(orders_item.created_at) >= "'.$date_day.'") as profits_margin',
             'MONTH(`created_at`) as month'])
             ->andWhere('date(created_at) >= :date', [':date' => $date_day])
             ->groupBy(['MONTH(`created_at`)'])
+            ->orderBy(['month' => SORT_ASC])
             ->asArray()->all();
 
+     
+
+       
         $label_month=[];
         $label_day=[];
         $orders_count_month=[];
@@ -223,16 +228,16 @@ class  DashboardController extends BaseController {
         $profits_day=[];
 
         foreach($profits_day_model as $profit_day){
-            $label_day[]=$profit_day['day'];
+            $label_day[]=$profit_day['date'];
             $orders_count_day[]=$profit_day['count_order'];
-            $profits_day[]=$profit_day['profit_margin'];
+            $profits_day[]=$profit_day['profits_margin'];
         }
-
+      
 
         foreach($profits_month_model as $profit_month){
-            $label_month[]=$profit_day['month'];
-            $orders_count_month[]=$profit_day['count_order'];
-            $profits_month[]=$profit_day['profit_margin'];
+            $label_month[]=$profit_month['month'];
+            $orders_count_month[]=$profit_month['count_order'];
+            $profits_month[]=$profit_month['profits_margin'];
         }
         return $this->render('orders',[
             'label_month'=>$label_month,
