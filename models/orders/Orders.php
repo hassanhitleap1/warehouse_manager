@@ -114,8 +114,10 @@ class Orders extends \yii\db\ActiveRecord
     public function beforeValidate()
     {
         if (parent::beforeValidate()) {
+            $this->phone=trim($this->phone);
             $this->phone= OrderHelper::faTOen($this->phone);
             if(!is_null($this->other_phone)){
+                $this->other_phone=trim($this->other_phone);
                 $this->other_phone= OrderHelper::faTOen($this->other_phone);
             }
             return true;
