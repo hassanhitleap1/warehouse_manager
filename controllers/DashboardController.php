@@ -45,11 +45,7 @@ class  DashboardController extends BaseController {
             ->andWhere(['in','orders.status_id', [1,2,3,4]])
             ->groupBy(['DAY(orders.created_at)'])
             ->asArray()->one();
-        /*
-         * SELECT sum(orders_item.quantity) as sum_quantity,orders_item.product_id,orders_item.sub_product_id,orders_item.quantity,products.name,sub_product_count.type
-         * from orders_item inner join products on products.id= orders_item.sub_product_id
-         * inner join sub_product_count on sub_product_count.id= orders_item.sub_product_id GROUP by orders_item.sub_product_id
-         */
+    
         $subQuery = Orders::find()->select('id')->andWhere(['in','orders.status_id', [1,2,3,4]])->andWhere('date(orders.created_at) >= :date', [':date' => $date]);
         $details=OrdersItem::find()->select(['sum(orders_item.quantity) as sum_quantity','orders_item.product_id','orders_item.sub_product_id','orders_item.quantity','products.name','sub_product_count.type'])
             ->innerJoin('products', 'products.id=orders_item.product_id')
@@ -57,8 +53,14 @@ class  DashboardController extends BaseController {
             ->andWhere('date(orders_item.created_at) >= :date', [':date' => $date])
             ->where(['in', 'orders_item.order_id', $subQuery])
             ->groupBy(['orders_item.sub_product_id'])->asArray()->all();
+
+        $status_orders=Orders::find()->select(['count(*) as count_order','orders.status_id','status.name_ar'])
+            ->innerJoin('status', 'status.id=orders.status_id')
+            ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
+            ->groupBy(['orders.status_id'])->asArray()->all();
+
           return $this->render('index',[
-            'orders'=>$orders, 'details'=>$details
+            'orders'=>$orders, 'details'=>$details,'status_orders'=>$status_orders
         ]);
     }
 
