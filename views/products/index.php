@@ -72,14 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['class' => 'selling_price'],
                 'format' => 'html',
             ],
-            [
-                'attribute'=>'quantity_come',
-                'value' => function ($searchModel) {
-                    return    Html::a( $searchModel->quantity_come,['products/change-quantity-come','id'=>$searchModel->id ],["class"=>"open_model"]);;
-                },
-                'contentOptions' => ['class' => 'quantity_come'],
-                'format' => 'html',
-            ],
+
             [
                 'attribute' => 'category_id',
                 'value' => 'category.name_ar',
@@ -185,6 +178,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'html',
                 'headerOptions' => ['style' => 'width:20%'],
+            ],
+            [
+                'attribute'=>'quantity_come',
+                'value' => function ($searchModel) {
+                    return    Html::a( $searchModel->quantity_come,['products/change-quantity-come','id'=>$searchModel->id ],["class"=>"open_model"]);;
+                },
+                'contentOptions' => ['class' => 'quantity_come'],
+                'format' => 'html',
             ],
 //            'created_at',
             //'updated_at',

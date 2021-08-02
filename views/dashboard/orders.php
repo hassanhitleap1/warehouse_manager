@@ -55,8 +55,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 labels:  label_day,
                 datasets: [{
                     label: 'ارباح اليومية',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgb(11, 168, 90)',
+                    borderColor: 'rgb(11, 168, 90)',
                     data: profits_day
                 }]
             };
@@ -65,8 +65,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 labels:  label_day,
                 datasets: [{
                     label: 'الطلبات اليومية',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgb(11, 168, 90)',
+                    borderColor: 'rgb(11, 168, 90)',
                     data: orders_count_day
                 }]
             };    
@@ -76,8 +76,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 labels:  label_month,
                 datasets: [{
                     label: 'ارباح الشهرية',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgb(11, 168, 90)',
+                    borderColor: 'rgb(11, 168, 90)',
                     data: profits_month
                 }]
             };
@@ -87,8 +87,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 labels:  label_month,
                 datasets: [{
                     label: 'الطلبات الشهرية',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgb(11, 168, 90)',
+                    borderColor: 'rgb(11, 168, 90)',
                     data: orders_count_month
                 }]
             };     

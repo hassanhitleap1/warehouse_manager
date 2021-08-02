@@ -90,8 +90,8 @@ $data_outlays_month_model=[];
         labels: label,
         datasets: [{
             label: 'الننفقات اليومية',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(252, 35, 35)',
+            borderColor: 'rgb(252, 35, 35)',
             data: <?=json_encode($data_outlays_day_model)?> ,
         }]
     };
