@@ -251,9 +251,11 @@ $columns = [
                 ]);
             },
             'history-status' => function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-calendar"></span>', ['history-status/index', ['order_id' =>$model->id]] , [
-                    'title' => Yii::t('yii', 'History_Status'),
-                ]);
+
+                return Html::a('<span class="glyphicon glyphicon-calendar"></span>', 
+                    ['history-status/index','order_id' =>$model->id], 
+                    ['class' => 'profile-link']);
+              
             },
         ]
     ],

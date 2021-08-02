@@ -57,7 +57,7 @@ class HistoryStatusSearch extends HistoryStatus
             return $dataProvider;
         }
         if(isset($_GET["order_id"]) && $_GET["order_id"] !=""){
-            $query->andWhere(["history_status.order_id" ,$_GET["order_id"] ]);
+            $query->andWhere(["history_status.order_id" =>$_GET["order_id"]]);
         }
         // grid filtering conditions
         $query->andFilterWhere([
