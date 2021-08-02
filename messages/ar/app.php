@@ -204,6 +204,7 @@ return [
     "Count_Orders"=>"عدد الطلبات",
     "Month"=>"الشهر",
     "History_Status"=>"تاريخ الحالة الطلبات",
+    "Number_Of_Grains"=>"عدد الحبات"
 
 
 

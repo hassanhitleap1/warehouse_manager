@@ -134,7 +134,7 @@ $data_profits_month=[];
                 }]
             };
         new Chart(canvas, {
-            type: 'line',
+            type: 'bar',
             data:data,
             options: {}
         });
@@ -150,7 +150,7 @@ $data_profits_month=[];
             }]
         };
         new Chart(canvas, {
-            type: 'line',
+            type: 'bar',
             data:data,
             options: {}
         });
@@ -167,7 +167,7 @@ $data_profits_month=[];
             }]
         };
         new Chart(canvas, {
-            type: 'line',
+            type: 'bar',
             data:data,
             options: {}
         });
@@ -185,7 +185,7 @@ $data_profits_month=[];
             }]
         };
         new Chart(canvas, {
-            type: 'line',
+            type: 'bar',
             data:data,
             options: {}
         });
@@ -201,7 +201,7 @@ $data_profits_month=[];
             }]
         };
         new Chart(canvas, {
-            type: 'line',
+            type: 'bar',
             data:data,
             options: {}
         });
@@ -218,7 +218,7 @@ $data_profits_month=[];
             }]
         };
         new Chart(canvas, {
-            type: 'line',
+            type: 'bar',
             data:data,
             options: {}
         });
