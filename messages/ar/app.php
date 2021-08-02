@@ -202,7 +202,9 @@ return [
     "Value"=>"القيمة",
     "Date"=>"تاريخ",
     "Count_Orders"=>"عدد الطلبات",
-    "Month"=>"الشهر"
+    "Month"=>"الشهر",
+    "History_Status"=>"تاريخ الحالة الطلبات",
+
 
 
 
