@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -32,7 +33,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'status_id',
             'order_id',
-            'created_at',
+            [
+                'attribute'=>'created_at',
+                'value' => function ($model) {
+                    return    Carbon::parse($model->created_at)->toDateString();
+                },
+            ],
+            [
+                'attribute'=>'time',
+                'value' => function ($model) {
+                    return    Carbon::parse($model->created_at)->toTimeString();
+                },
+            ],
+
             'updated_at',
         ],
     ]) ?>

@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\historystatus\HistoryStatusSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'History Statuses');
+$this->title = Yii::t('app', 'History_Status');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="history-status-index">

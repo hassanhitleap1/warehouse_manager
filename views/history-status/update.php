@@ -5,10 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\historystatus\HistoryStatus */
 
-$this->title = Yii::t('app', 'Update History Status: {name}', [
-    'name' => $model->id,
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'History Statuses'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'History_Status'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
