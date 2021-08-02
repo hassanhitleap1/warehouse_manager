@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\components\OrderHelper;
+use app\models\historystatus\HistoryStatus;
 use app\models\Model;
 use app\models\status\Status;
 use Yii;
@@ -227,10 +228,23 @@ class OrdersController extends Controller
         $models=Orders::find()->where(['in','id',$ides])->all();
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $data=[];
+        $history_status=[];
+        $date=Carbon::now("Asia/Amman");
         foreach($models as $key =>$model){
             $status_name=OrderHelper::management_stock_product($model,$status_id);
+            $history_status[]=[
+                "order_id"=>$model->id,
+                "status_id"=>$status_id,
+                "created_at"=>$date
+            ];
             $data[]=['id'=>$model->id,'status_id'=>$status_id,'status_name'=>$status_name];
         }
+
+        Yii::$app->db
+            ->createCommand()
+            ->batchInsert('history_status', ['order_id','status_id','created_at'], $history_status)
+            ->execute();
+
         return ['code'=>201,'data'=>$data];
     }
 
@@ -269,6 +283,10 @@ class OrdersController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $status_id=$_GET['status_id'];
         OrderHelper::management_stock_product($model,$status_id);
+        $history_status=new HistoryStatus();
+        $history_status->order_id=$model->id;
+        $history_status->status_id=$status_id;
+        $history_status->save();
          return ['code'=>201];  
     }
     /**
