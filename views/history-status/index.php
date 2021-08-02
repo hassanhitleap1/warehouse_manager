@@ -28,9 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'status.name_ar',
+            // 'id',
             'order_id',
+            [
+                'attribute'=>'status_id',
+                'value' => function ($searchModel) {
+                    return    $searchModel->status['name_ar'];
+                },
+            ],
+            
             [
                 'attribute'=>'created_at',
                 'value' => function ($searchModel) {
@@ -40,11 +46,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'time',
                 'value' => function ($searchModel) {
-                    return    Carbon::parse($searchModel->created_at)->toTimeString();
+                    return    Carbon::parse($searchModel->created_at)->format('g:i A');
                 },
             ],
 
-            'updated_at',
+            // 'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

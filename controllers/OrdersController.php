@@ -18,6 +18,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use Carbon\Carbon;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -234,15 +235,16 @@ class OrdersController extends Controller
             $status_name=OrderHelper::management_stock_product($model,$status_id);
             $history_status[]=[
                 "order_id"=>$model->id,
-                "status_id"=>$status_id,
-                "created_at"=>$date
+                "status_id"=>(int)$status_id,
+                "created_at"=>"$date",
+                'updated_at'=>"$date",
             ];
             $data[]=['id'=>$model->id,'status_id'=>$status_id,'status_name'=>$status_name];
         }
 
         Yii::$app->db
             ->createCommand()
-            ->batchInsert('history_status', ['order_id','status_id','created_at'], $history_status)
+            ->batchInsert('history_status', ['order_id','status_id','created_at','updated_at'], $history_status)
             ->execute();
 
         return ['code'=>201,'data'=>$data];

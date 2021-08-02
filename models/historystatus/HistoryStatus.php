@@ -5,6 +5,7 @@ namespace app\models\historystatus;
 use app\models\orders\Orders;
 use app\models\status\Status;
 use app\models\subproductcount\SubProductCount;
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -45,9 +46,11 @@ class HistoryStatus extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'status_id' => Yii::t('app', 'Status'),
-            'order_id' => Yii::t('app', 'Order_ID'),
+            'order_id' => Yii::t('app', 'Order_Id'),
+            'time'=> Yii::t('app', 'Time'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
+
         ];
     }
 
