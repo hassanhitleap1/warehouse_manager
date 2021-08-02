@@ -10,3 +10,6 @@ CREATE TABLE `outlays` ( `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(255)
 CREATE TABLE `type_outlay` ( `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , `created_at` DATETIME NOT NULL , `updated_at` DATETIME NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ALTER TABLE `outlays` ADD `value` DOUBLE NOT NULL AFTER `title`;
 
+# history_status
+
+CREATE TABLE `history_status` ( `id` INT NOT NULL AUTO_INCREMENT , `status_id` SMALLINT NOT NULL , `order_id` INT NOT NULL , `created_at` DATETIME NULL DEFAULT NULL , `updated_at` DATETIME NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
