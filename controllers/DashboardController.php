@@ -69,18 +69,6 @@ class  DashboardController extends BaseController {
         $date=Carbon::now("Asia/Amman");
         $year=$date->format('Y');
         $month=$date->format('m');
-//        if(date('m') < 7 ){
-//            $month=date('m');
-//        }else{
-//            $month = date('m', strtotime(date('Y-m-d'). ' -7 month'));
-//        }
-
-//        if(date('d') < 7 ){
-//            $day=date('d');
-//        }else{
-//            $day = date('d', strtotime(date('Y-m-d'). ' -7 day'));
-//        }
-
 
         $profits_day_model = Orders::find()->select([
              'count(*) as count_order',
@@ -196,9 +184,10 @@ class  DashboardController extends BaseController {
         $date=Carbon::now("Asia/Amman")->toDateString();
         $date_day = date('Y-m-d', strtotime($date. ' -7 day'));
         $date_month = date('Y-m-d', strtotime($date. ' -7 month'));
-      
-        $profits_day_model = Orders::find()->select([
-            'count(*) as count_order', 
+        $day_data = Orders::find()->select([
+            'count(*) as count_order',
+            '(SELECT SUM(orders_item.quantity)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
+               ord.status_id not in (6,7,8,9,10,11,13)  and date(orders_item.created_at) >= "'.$date_day.'") as quantities',
             '(SELECT SUM(orders_item.profits_margin)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
                ord.status_id not in (6,7,8,9,10,11,13)  and date(orders_item.created_at) >= "'.$date_day.'") as profits_margin',
             'date(`created_at`) as date'])
@@ -206,46 +195,22 @@ class  DashboardController extends BaseController {
             ->groupBy(['DAY(`created_at`)'])
             ->orderBy(['created_at' => SORT_ASC])
          ->asArray()->all();
-         
-        $profits_month_model = Orders::find()->select([
+        $month_data = Orders::find()->select([
             'count(*) as count_order',
             '(SELECT SUM(orders_item.profits_margin)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
-               ord.status_id not in (6,7,8,9,10,11,13)  and date(orders_item.created_at) >= "'.$date_day.'") as profits_margin',
+               ord.status_id not in (6,7,8,9,10,11,13)  and date(orders_item.created_at) >= "'.$date_month.'") as profits_margin',
+            '(SELECT SUM(orders_item.quantity)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
+               ord.status_id not in (6,7,8,9,10,11,13)  and date(orders_item.created_at) >= "'.$date_month.'") as quantities',
             'MONTH(`created_at`) as month'])
-            ->andWhere('date(created_at) >= :date', [':date' => $date_day])
+            ->andWhere('date(created_at) >= :date', [':date' => $date_month])
             ->groupBy(['MONTH(`created_at`)'])
             ->orderBy(['month' => SORT_ASC])
             ->asArray()->all();
 
-     
-
-       
-        $label_month=[];
-        $label_day=[];
-        $orders_count_month=[];
-        $orders_count_day=[];
-        $profits_month=[];
-        $profits_day=[];
-
-        foreach($profits_day_model as $profit_day){
-            $label_day[]=$profit_day['date'];
-            $orders_count_day[]=$profit_day['count_order'];
-            $profits_day[]=round($profit_day['profits_margin'],2);
-        }
-      
-
-        foreach($profits_month_model as $profit_month){
-            $label_month[]=$profit_month['month'];
-            $orders_count_month[]=$profit_month['count_order'];
-            $profits_month[]=round($profit_month['profits_margin'],2);
-        }
         return $this->render('orders',[
-            'label_month'=>$label_month,
-            'label_day'=>$label_day,
-            'orders_count_month'=>$orders_count_month,
-            'orders_count_day'=>$orders_count_day,
-            'profits_month'=>$profits_month,
-            'profits_day'=> $profits_day,
+            'day_data'=>$day_data,
+            'month_data'=>$month_data,
+
         ]);
     }
 
