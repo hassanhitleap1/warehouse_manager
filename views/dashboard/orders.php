@@ -93,10 +93,10 @@ $data_profits_month=[];
                 <?php foreach ($month_data as $key_day => $month_data):?>
                     <tr>
                         <th scope="row"><?= ++ $key_day?></th>
-                        <td><?= $day_data["count_order"]?></td>
-                        <td><?= $day_data["quantities"]?></td>
-                        <td><?= round( $day_data["profits_margin"] ,2)?></td>
-                        <td><?= $day_data["month"]?></td>
+                        <td><?= $month_data["count_order"]?></td>
+                        <td><?= $month_data["quantities"]?></td>
+                        <td><?= round( $month_data["profits_margin"] ,2)?></td>
+                        <td><?= $month_data["month"]?></td>
                     </tr>
                     <?php
                     $label_month[]=$month_data["month"];

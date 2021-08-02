@@ -216,17 +216,7 @@ class  DashboardController extends BaseController {
 
     public function actionOutlay(){
 
-//        if(date('m') < 7 ){
-//            $month=date('m');
-//        }else{
-//            $month = date('m', strtotime(date('Y-m-d'). ' -7 month'));
-//        }
-//
-//        if(date('d') < 7 ){
-//            $day=date('d');
-//        }else{
-//            $day = date('d', strtotime(date('Y-m-d'). ' -7 day'));
-//        }
+
         $date=Carbon::now("Asia/Amman")->toDateString();
         $date_day = date('Y-m-d', strtotime($date. ' -7 day'));
         $date_month = date('Y-m-d', strtotime($date. ' -7 month'));
