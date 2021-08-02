@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create History Status'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?php  /* Html::a(Yii::t('app', 'Create History Status'), ['create'], ['class' => 'btn btn-success'])  */?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -28,9 +29,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'status_id',
+            'status.name_ar',
             'order_id',
-            'created_at',
+            [
+                'attribute'=>'created_at',
+                'value' => function ($searchModel) {
+                    return    Carbon::parse($searchModel->created_at)->toDateString();
+                },
+            ],
+            [
+                'attribute'=>'time',
+                'value' => function ($searchModel) {
+                    return    Carbon::parse($searchModel->created_at)->toTimeString();
+                },
+            ],
+
             'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],

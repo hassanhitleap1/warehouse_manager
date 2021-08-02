@@ -243,13 +243,18 @@ $columns = [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,
         'order' => DynaGrid::ORDER_FIX_RIGHT,
-        'template' => '{view},{update},{delete},{bill}',
+        'template' => '{view},{update},{delete},{bill}{history-status}',
         'buttons' => [
             'bill' => function ($url, $model) {
                 return Html::a('<span class="glyphicon glyphicon-align-center"></span>', $url, [
                     'title' => Yii::t('yii', 'Invoice'),
                 ]);
-            }
+            },
+            'history-status' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-align-center"></span>', $url, [
+                    'title' => Yii::t('yii', 'Invoice'),
+                ]);
+            },
         ]
     ],
 

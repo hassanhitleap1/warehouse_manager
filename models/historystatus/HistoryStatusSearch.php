@@ -49,23 +49,26 @@ class HistoryStatusSearch extends HistoryStatus
         ]);
 
         $this->load($params);
-
+        $query->joinWith('status');
+        $query->joinWith('orders');
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
         if(isset($_GET["order_id"]) && $_GET["order_id"] !=""){
-            $query->andWhere(["order_id" ,$_GET["order_id"] ]);
+            $query->andWhere(["history_status.order_id" ,$_GET["order_id"] ]);
         }
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'status_id' => $this->status_id,
-            'order_id' => $this->order_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'history_status.id' => $this->id,
+            'history_status.status_id' => $this->status_id,
+            'history_status.order_id' => $this->order_id,
+            'history_status.created_at' => $this->created_at,
+            'history_status.updated_at' => $this->updated_at,
         ]);
+
+        $query->orderBy(['history_status.id' => SORT_DESC]);;
 
         return $dataProvider;
     }

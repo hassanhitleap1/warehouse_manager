@@ -2,6 +2,9 @@
 
 namespace app\models\historystatus;
 
+use app\models\orders\Orders;
+use app\models\status\Status;
+use app\models\subproductcount\SubProductCount;
 use Yii;
 
 /**
@@ -49,6 +52,9 @@ class HistoryStatus extends \yii\db\ActiveRecord
     }
 
 
+
+
+
     /**
      * @inheritdoc
      */
@@ -70,6 +76,16 @@ class HistoryStatus extends \yii\db\ActiveRecord
         } else {
             return false;
         }
+    }
+
+    public function getOrder()
+    {
+        return $this->hasOne(Orders::className(), ['id' => 'order_id']);
+    }
+
+    public function getStatus()
+    {
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
     }
     /**
      * {@inheritdoc}
