@@ -206,7 +206,7 @@ $data_orders=[];
             label: 'الاكثر مبيعا',
             data: <?=json_encode($data)?> ,
             borderWidth: 1,
-            backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400', '#57AE60', '#894EA0', '#D37400','#27AE60', '#884EA0', '#D35400'],
+            backgroundColor: ['#B30C1C', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400', '#57AE60', '#894EA0', '#D37400','#27AE60', '#884EA0', '#D35400'],
         }]
     };
 
@@ -233,7 +233,7 @@ $data_orders=[];
             label: '<?= Yii::t('app','Number_Of_Grains')?>',
             data: <?=json_encode($data_gin)?> ,
             borderWidth: 1,
-            backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400', '#57AE60', '#894EA0', '#D37400','#27AE60', '#884EA0', '#D35400'],
+            backgroundColor: ['#B30C1C', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400', '#57AE60', '#894EA0', '#D37400','#27AE60', '#884EA0', '#D35400'],
         }]
     };
 
@@ -260,7 +260,7 @@ $data_orders=[];
             label: '<?= Yii::t('app','Orders')?>',
             data: <?=json_encode($data_orders)?> ,
             borderWidth: 1,
-            backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400', '#57AE60', '#894EA0', '#D37400','#27AE60', '#884EA0', '#D35400'],
+            backgroundColor: ['#B30C1C', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400', '#57AE60', '#894EA0', '#D37400','#27AE60', '#884EA0', '#D35400'],
         }]
     };
 
