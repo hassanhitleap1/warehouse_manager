@@ -9,7 +9,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 $label=[];
+$label_gin=[];
+$label_orders=[];
 $data=[];
+$data_gin=[];
+$data_orders=[];
 
 ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -51,62 +55,66 @@ $data=[];
 
     <hr />
 
-    <div class="row" >
-        <div class="col-md-12">
-            <h2><?= Yii::t('app','Number_Of_Grains')?></h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-center"><?= Yii::t('app','Number_Of_Grains')?></h2>
+            <canvas id="chart_gin"></canvas>
+        </div>   
+        <div class="col-md-6">
+            <h2 class="text-center"><?= Yii::t('app','Orders')?></h2>
+            <canvas id="chart_orders"></canvas>
+        </div>  
+    </div>   
+
+    <div class="row">
+        <div class="col-md-6">
             <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col"><?= Yii::t('app','Name')?></th>
-                <th scope="col"><?= Yii::t('app','Number_Of_Grains')?></th>
-
-            </tr>
-            </thead>
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col"><?= Yii::t('app','Name')?></th>
+                        <th scope="col"><?= Yii::t('app','Number_Of_Grains')?></th>
+                    </tr>
+                </thead>
             <tbody>
-            <?php foreach ($details as $key_det=> $detail):?>
-                <tr>
-                    <th scope="row"><?= ++$key_det ?></th>
-                    <td><?= $detail['type'] ?> </td>
-                    <td><?= $detail['sum_quantity'] ?></td>
-                </tr>
-            <?php endforeach;?>
-
-
+                <?php foreach ($details as $key_det=> $detail):?>
+                    <tr>
+                        <th scope="row"><?= ++$key_det ?></th>
+                        <td><?= $detail['type'] ?> </td>
+                        <td><?= $detail['sum_quantity'] ?></td>
+                    </tr>
+                    <?php $label_gin[] =$detail['type'] ; $data_gin[]=$detail['sum_quantity']; ?>
+                <?php endforeach;?>
             </tbody>
-        </table>
-        </div>
+            </table>
+        </div>   
+        <div class="col-md-6">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= Yii::t('app','Status')?></th>
+                    <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($status_orders as $key_stat => $status_order):?>
+                    <tr>
+                        <th scope="row"><?= ++$key_stat ?></th>
+                        <td><?= $status_order['name_ar'] ?> </td>
+                        <td><?= $status_order['count_order'] ?></td>
+                    </tr>
+                    <?php $label_orders[] =$status_order['name_ar'] ; $data_orders[]=$status_order['count_order']  ?>
+                <?php endforeach;?>
+
+
+                </tbody>
+            </table>
+        </div> 
     </div>
 
 
-    <hr />
-    <div class="row" >
-        <div class="col-md-12">
-            <h2><?= Yii::t('app','Number_Of_Grains')?></h2>
-            <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col"><?= Yii::t('app','Status')?></th>
-                <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($status_orders as $key_stat => $status_order):?>
-                <tr>
-                    <th scope="row"><?= ++$key_stat ?></th>
-                    <td><?= $status_order['name_ar'] ?> </td>
-                    <td><?= $status_order['count_order'] ?></td>
-                </tr>
-            <?php endforeach;?>
-
-
-            </tbody>
-        </table>
-        </div>
-
-    </div>
 
     <hr />
     <div class="row" >
@@ -205,4 +213,51 @@ $data=[];
     );
 
 
+
+     ctx = document.getElementById('chart_gin').getContext('2d');
+    data = {
+        labels: <?=json_encode($label_gin)?>,
+        datasets: [{
+            label: '<?= Yii::t('app','Number_Of_Grains')?>',
+            data: <?=json_encode($data_gin)?> ,
+            borderWidth: 1,
+            backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400', '#57AE60', '#894EA0', '#D37400','#27AE60', '#884EA0', '#D35400'],
+        }]
+    };
+
+    var config = {
+        type: 'pie',
+        data: data,
+        options: {}
+    };
+
+    new Chart(
+        document.getElementById('chart_gin'),
+        config
+    );
+
+
+
+
+    ctx = document.getElementById('chart_orders').getContext('2d');
+    data = {
+        labels: <?=json_encode($label_orders)?>,
+        datasets: [{
+            label: '<?= Yii::t('app','Orders')?>',
+            data: <?=json_encode($data_orders)?> ,
+            borderWidth: 1,
+            backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400', '#57AE60', '#894EA0', '#D37400','#27AE60', '#884EA0', '#D35400'],
+        }]
+    };
+
+    var config = {
+        type: 'pie',
+        data: data,
+        options: {}
+    };
+
+    new Chart(
+        document.getElementById('chart_orders'),
+        config
+    );
 </script>
