@@ -104,6 +104,35 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     </div>
+
+
+    <div class="row" >
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"><?= Yii::t('app','Status')?></th>
+                <th scope="col"><?= Yii::t('app','Count')?></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($status_statisticis as $key_stici => $status_statistici):?>
+                <tr>
+                    <th scope="row"><?= ++$key_stici ?></th>
+                    <td><?= $status_statistici['name_ar'] ?> </td>
+                    <td><?= $status_statistici['count_order'] ?></td>
+                </tr>
+            <?php endforeach;?>
+
+
+            </tbody>
+        </table>
+
+
+    </div>
+
+
     <div class="row" >
 
             <div class="col-md-3">

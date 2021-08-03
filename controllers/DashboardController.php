@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\historystatus\HistoryStatus;
 use app\models\orders\Orders;
 use app\models\ordersitem\OrdersItem;
 use app\models\Outlays\Outlays;
@@ -59,8 +60,13 @@ class  DashboardController extends BaseController {
             ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
             ->groupBy(['orders.status_id'])->asArray()->all();
 
+        $status_statisticis=HistoryStatus::select(["count(*) as count_order","history_status.order_id",'history_status.status_id','status.name_ar'])
+            ->andWhere('date(history_status.created_at) >= :date', [':date' => $date])
+            ->andWhere(['not in', 'history_status.order_id', Orders::find()->select('id')->andWhere('date(orders.created_at) >= :date', [':date' => $date])])
+            ->groupBy(['orders.status_id',"history_status.order_id"])->asArray()->all();
+
           return $this->render('index',[
-            'orders'=>$orders, 'details'=>$details,'status_orders'=>$status_orders
+            'orders'=>$orders, 'details'=>$details,'status_orders'=>$status_orders,'status_statisticis'=>$status_statisticis
         ]);
     }
 
