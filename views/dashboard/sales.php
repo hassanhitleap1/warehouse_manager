@@ -23,6 +23,14 @@ $data_orders_month_model=[];
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="row">
         <div class="col-md-6">
+            <canvas id="profits_day_model"></canvas>
+        </div>
+        <div class="col-md-6 ">
+            <canvas id="orders_day_model"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -55,16 +63,19 @@ $data_orders_month_model=[];
                 </tbody>
             </table>
         </div>
-        <div class="col-md-6">
-            <canvas id="profits_day_model"></canvas>
-        </div>
-        <div class="col-md-6 ">
-            <canvas id="orders_day_model"></canvas>
-        </div>
     </div>
     <hr />
+
     <div class="row">
         <div class="col-md-6">
+            <canvas id="profits_month_model"></canvas>
+        </div>
+        <div class="col-md-6 " >
+            <canvas id="orders_month_model"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -96,12 +107,6 @@ $data_orders_month_model=[];
                     
                 </tbody>
             </table>
-        </div>
-        <div class="col-md-6">
-            <canvas id="profits_month_model"></canvas>
-        </div>
-        <div class="col-md-6 col-md-offset-6" >
-            <canvas id="orders_month_model"></canvas>
         </div>
     </div>
 
