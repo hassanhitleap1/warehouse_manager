@@ -56,18 +56,8 @@ $data_orders=[];
     <hr />
 
     <div class="row">
-        <div class="col-md-6">
-            <h2 class="text-center"><?= Yii::t('app','Number_Of_Grains')?></h2>
-            <canvas id="chart_gin"></canvas>
-        </div>   
-        <div class="col-md-6">
-            <h2 class="text-center"><?= Yii::t('app','Orders')?></h2>
-            <canvas id="chart_orders"></canvas>
-        </div>  
-    </div>   
-
-    <div class="row">
-        <div class="col-md-6">
+         <div class="col-md-6">
+         <h2 class="text-center"><?= Yii::t('app','Number_Of_Grains')?></h2>
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -87,9 +77,22 @@ $data_orders=[];
                 <?php endforeach;?>
             </tbody>
             </table>
-        </div>   
+        </div>
+
+
         <div class="col-md-6">
-            <table class="table">
+           
+            <canvas class="" id="chart_gin"></canvas>
+        </div>   
+       
+       
+    </div>   
+
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+        <h2 class="text-center"><?= Yii::t('app','Orders')?></h2>
+        <table class="table">
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
@@ -111,6 +114,10 @@ $data_orders=[];
 
                 </tbody>
             </table>
+        </div>   
+        <div class="col-md-6">
+            <canvas class="" id="chart_orders"></canvas>
+           
         </div> 
     </div>
 
@@ -191,6 +198,8 @@ $data_orders=[];
 <script>
 
     var ctx = document.getElementById('chart').getContext('2d');
+    ctx.canvas.parentNode.style.height = '400px';
+     ctx.canvas.parentNode.style.width = '400px';
     data = {
         labels: <?=json_encode($label)?>,
         datasets: [{
@@ -215,6 +224,9 @@ $data_orders=[];
 
 
      ctx = document.getElementById('chart_gin').getContext('2d');
+
+     ctx.canvas.parentNode.style.height = '400px';
+     ctx.canvas.parentNode.style.width = '400px';
     data = {
         labels: <?=json_encode($label_gin)?>,
         datasets: [{
@@ -240,6 +252,8 @@ $data_orders=[];
 
 
     ctx = document.getElementById('chart_orders').getContext('2d');
+    ctx.canvas.parentNode.style.height = '400px';
+     ctx.canvas.parentNode.style.width = '400px';
     data = {
         labels: <?=json_encode($label_orders)?>,
         datasets: [{
