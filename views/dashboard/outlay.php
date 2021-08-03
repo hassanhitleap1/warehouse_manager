@@ -62,12 +62,12 @@ $data_outlays_month_model=[];
                 <?php foreach($outlays_month_model as $key_month => $outlay_month_model):?>
                     <tr>
                         <th><?= ++ $key_month?></th>
-                        <th><?= $outlay_month_model["outlays"]?></th>
+                        <th><?= round($outlay_month_model["outlays"],2)?></th>
                         <th><?= $outlay_month_model["month"]?></th>
                     </tr>
                     <?php
                     $label_outlays_month_model[]= $outlay_month_model["month"];
-                    $data_outlays_month_model[]=$outlay_month_model["outlays"];
+                    $data_outlays_month_model[]=round($outlay_month_model["outlays"],2);
                     ?>
                 <?php endforeach;?>
 
