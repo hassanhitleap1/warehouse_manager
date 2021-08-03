@@ -47,7 +47,7 @@ $data_orders_month_model=[];
                     <tr>
                         <th><?= $profit_day_model["count_order"]?></th>
                         <th><?= round($profit_day_model["profit_margin"],2)?> jd</th>
-                        <th><?= $profit_day_model["outlays"]?> jd</th>
+                        <th><?= round($profit_day_model["outlays"],2)?> jd</th>
                         <th><?= round($profit_day_model["profit_margin"] - $profit_day_model["outlays"],2) ?> jd</th>
                         <th><?= $profit_day_model["quantity"]?></th>
                         <th><?= $profit_day_model["month"]?>/<?= $profit_day_model["day"]?></th>
@@ -92,7 +92,7 @@ $data_orders_month_model=[];
                         <tr>
                             <th><?= $profit_month_model["count_order"]?></th>
                             <th><?= round($profit_month_model["profit_margin"] ,2)?> jd</th>
-                            <th><?= $profit_month_model["outlays"]  ?> jd</th>
+                            <th><?= round($profit_month_model["outlays"],2)  ?> jd</th>
                             <th><?= round($profit_month_model["profit_margin"]-$profit_month_model["outlays"] ,2)?> jd</th>
 
                             <th><?= $profit_month_model["quantity"]?></th>
