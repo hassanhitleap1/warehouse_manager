@@ -191,6 +191,7 @@ class  DashboardController extends BaseController {
         $date=Carbon::now("Asia/Amman")->toDateString();
         $date_day = date('Y-m-d', strtotime($date. ' -7 day'));
         $date_month = date('Y-m-d', strtotime($date. ' -7 month'));
+
         $day_data = Orders::find()->select([
             'count(*) as count_order',
             '(SELECT SUM(orders_item.quantity)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
@@ -202,6 +203,7 @@ class  DashboardController extends BaseController {
             ->groupBy(['DAY(`created_at`)'])
             ->orderBy(['created_at' => SORT_ASC])
          ->asArray()->all();
+
         $month_data = Orders::find()->select([
             'count(*) as count_order',
             '(SELECT SUM(orders_item.profits_margin)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
