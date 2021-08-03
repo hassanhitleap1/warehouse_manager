@@ -33,17 +33,17 @@ $data=[];
         
         <div class="col-md-2">
             <div class="panel panel-default">
-                <div class="panel-body"> <?= $orders["outlays"]?>  النفقات</div>
+                <div class="panel-body"> <?= round($orders["outlays"],2)?>  النفقات</div>
             </div>
         </div>
         <div class="col-md-2">
             <div class="panel panel-default">
-                <div class="panel-body"> <?= $orders["profit_margin"] ?>    المرابح</div>
+                <div class="panel-body"> <?= round($orders["profit_margin"],2) ?>    المرابح</div>
             </div>
         </div>
         <div class="col-md-2">
             <div class="panel panel-default">
-                <div class="panel-body"> <?= $orders["profit_margin"] - $orders["outlays"]?>   صافي المرابح</div>
+                <div class="panel-body"> <?= round ($orders["profit_margin"] - $orders["outlays"] ,2)?>   صافي المرابح</div>
             </div>
         </div>
 
