@@ -38,7 +38,7 @@ $data_orders_month_model=[];
                     <th><?= Yii::t('app','Profit_Margin');?></th>
                     <th><?= Yii::t('app','Outlays');?></th>
                     <th><?= Yii::t('app','Total');?>   <?= Yii::t('app','Profit_Margin');?></th>
-                    <th><?= Yii::t('app','Quantity');?></th>
+                    <th><?= Yii::t('app','Number_Of_Grains');?></th>
                     <th><?= Yii::t('app','Date');?></th>
                 </tr>
                 </thead>
@@ -83,7 +83,7 @@ $data_orders_month_model=[];
                     <th><?= Yii::t('app','Profit_Margin');?></th>
                     <th><?= Yii::t('app','Outlays');?></th>
                     <th><?= Yii::t('app','Total');?>   <?= Yii::t('app','Profit_Margin');?></th>
-                    <th><?= Yii::t('app','Quantity');?></th>
+                    <th><?= Yii::t('app','Number_Of_Grains');?></th>
                     <th><?= Yii::t('app','Month');?></th>
                 </tr>
                 </thead>
