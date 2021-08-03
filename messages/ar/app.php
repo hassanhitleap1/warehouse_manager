@@ -205,7 +205,8 @@ return [
     "Month"=>"الشهر",
     "History_Status"=>"تاريخ الحالة الطلبات",
     "Number_Of_Grains"=>"عدد الحبات",
-    'Time'=>"الوقت"
+    'Time'=>"الوقت",
+    "Previous_Order_Statuses"=>"حالات الطلبات السابقة",
 
 
 

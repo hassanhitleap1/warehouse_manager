@@ -8,13 +8,11 @@ $this->title = Yii::t('app','Dashboard');
 $this->params['breadcrumbs'][] = $this->title;
 
 
-//$label_month;
-// $label_day;
-// $orders_count_month;
-// $orders_count_day; 
-// $profits_month;
+$label=[];
+$data=[];
 
 ?>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="site-about">
     <div class="row" >
         <div class="col-md-2">
@@ -51,13 +49,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </div>
 
+    <hr />
+
     <div class="row" >
-        <table class="table">
+        <div class="col-md-12">
+            <h2><?= Yii::t('app','Number_Of_Grains')?></h2>
+            <table class="table">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col"><?= Yii::t('app','Name')?></th>
-                <th scope="col"><?= Yii::t('app','Count')?></th>
+                <th scope="col"><?= Yii::t('app','Number_Of_Grains')?></th>
 
             </tr>
             </thead>
@@ -73,19 +75,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </tbody>
         </table>
-
-
+        </div>
     </div>
 
 
-
+    <hr />
     <div class="row" >
-        <table class="table">
+        <div class="col-md-12">
+            <h2><?= Yii::t('app','Number_Of_Grains')?></h2>
+            <table class="table">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col"><?= Yii::t('app','Status')?></th>
-                <th scope="col"><?= Yii::t('app','Count')?></th>
+                <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
 
             </tr>
             </thead>
@@ -101,18 +104,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </tbody>
         </table>
-
+        </div>
 
     </div>
 
-
+    <hr />
     <div class="row" >
-        <table class="table">
+        <h2><?= Yii::t('app','Previous_Order_Statuses')?></h2>
+        <div class="col-md-6">
+            <table class="table">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col"><?= Yii::t('app','Status')?></th>
-                <th scope="col"><?= Yii::t('app','Count')?></th>
+                <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
 
             </tr>
             </thead>
@@ -123,12 +128,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td><?= $status_statistici['name_ar'] ?> </td>
                     <td><?= $status_statistici['count_order'] ?></td>
                 </tr>
+                <?php
+
+                $label[]=$status_statistici["name_ar"];
+                $data[]=$status_statistici["count_order"];
+                ?>
             <?php endforeach;?>
 
 
             </tbody>
         </table>
-
+        </div>
+        <div class="col-md-6">
+            <canvas id="chart"></canvas>
+        </div>
 
     </div>
 
@@ -166,3 +179,30 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
+<script>
+
+    var ctx = document.getElementById('chart').getContext('2d');
+    data = {
+        labels: <?=json_encode($label)?>,
+        datasets: [{
+            label: 'الاكثر مبيعا',
+            data: <?=json_encode($data)?> ,
+            borderWidth: 1,
+            backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400', '#57AE60', '#894EA0', '#D37400','#27AE60', '#884EA0', '#D35400'],
+        }]
+    };
+
+    var config = {
+        type: 'pie',
+        data: data,
+        options: {}
+    };
+
+    new Chart(
+        document.getElementById('chart'),
+        config
+    );
+
+
+</script>
