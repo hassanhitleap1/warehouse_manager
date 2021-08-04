@@ -35,6 +35,10 @@ AdminAsset::register($this);
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
+    <div class="container">
+        <?= $content ?>
+    </div>
+
     <?= include ("sections/sidebar.php");?>
 
     <!-- Content Wrapper. Contains page content -->
