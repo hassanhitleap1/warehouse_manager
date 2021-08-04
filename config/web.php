@@ -1,7 +1,8 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
+$aliases = require __DIR__ . '/aliases.php';
 $db = require __DIR__ . '/db.php';
+$params = require __DIR__ . '/params.php';
 
 $config = [
     'id' => 'baseic',
@@ -9,10 +10,7 @@ $config = [
     'name'=>$params['name_of_store'],
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'aliases' => [
-        '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
-    ],
+    'aliases' => $aliases,
     'components' => [
         'assetManager' => [
             'bundles' => [
@@ -99,7 +97,8 @@ $config = [
             // your other grid module settings
         ]
    ] ,
-    'params' => $params,
+    'params' => $params
+
 ];
 
 if (YII_ENV_DEV) { // YII_ENV_DEV YII_ENV_PROD

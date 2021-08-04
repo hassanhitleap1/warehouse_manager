@@ -35,6 +35,7 @@ class AreaController extends BaseController
      */
     public function actionIndex()
     {
+        $this->layout = "admin";
         $searchModel = new AreaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
