@@ -139,7 +139,15 @@ class OrdersController extends Controller
                         return $this->redirect(['orders/create']);
                     }
                 } catch (Exception $e) {
+
                     $transaction->rollBack();
+                    
+                    return $this->render('create', [
+                        'model' => $model,
+                        'ordersItem' => $ordersItem
+                    ]);
+                  
+                    
                     
                 }
             }
@@ -147,7 +155,7 @@ class OrdersController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'ordersItem' => (empty($ordersItem)) ? [new OrdersItem()] : $ordersItem
+            'ordersItem' =>  [new OrdersItem()] 
         ]);
 
 
