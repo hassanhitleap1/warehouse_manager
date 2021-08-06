@@ -136,10 +136,11 @@ class OrdersController extends Controller
                         $session = Yii::$app->session;
                         $session->set('message', Yii::t('app','Successfuly_Create_Order'));
 
-                        return $this->redirect(['create']);
+                        return $this->redirect(['orders/create']);
                     }
                 } catch (Exception $e) {
                     $transaction->rollBack();
+                    
                 }
             }
         }
