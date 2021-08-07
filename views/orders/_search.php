@@ -60,7 +60,7 @@ $products=ArrayHelper::map(Products::find()->orderBy(['id' => SORT_DESC])->all()
             <div class="col-md-1" style="margin-top: 27px;">
             
                 <div class="form-group">
-                    <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary search_order']) ?>
                     <?= Html::a(Yii::t('app', 'Reset'), ['/orders'],['class' => 'btn btn-outline-secondary']) ?>
                 </div>
 
