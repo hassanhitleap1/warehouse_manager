@@ -51,6 +51,9 @@ class HistoryStatusSearch extends HistoryStatus
         $this->load($params);
         $query->joinWith('status');
         $query->joinWith('order');
+        $query->joinWith('order.user');
+
+        
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
@@ -64,9 +67,16 @@ class HistoryStatusSearch extends HistoryStatus
             'history_status.id' => $this->id,
             'history_status.status_id' => $this->status_id,
             'history_status.order_id' => $this->order_id,
-            'history_status.created_at' => $this->created_at,
             'history_status.updated_at' => $this->updated_at,
         ]);
+
+
+        if(!is_null($this->created_at) && $this->created_at !=''){
+            $arr_date=explode(' - ',$this->created_at);
+            $query->andFilterWhere(['>=', 'DATE(history_status.created_at)', $arr_date[0]])
+            ->andFilterWhere(['<=', 'DATE(history_status.created_at)', $arr_date[1]]);
+        }
+       
 
         $query->orderBy(['history_status.id' => SORT_DESC]);;
 

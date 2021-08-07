@@ -4,6 +4,8 @@ use Carbon\Carbon;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\helpers\ArrayHelper;
+use app\models\status\Status;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\historystatus\HistoryStatusSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -20,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -31,11 +33,46 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'id',
             'order_id',
             [
+                'attribute'=>'phone',
+                'value' => function ($searchModel) {
+                    return    $searchModel->order['user']["phone"];
+                },
+                'label'=>Yii::t('app','Phone')
+            ],
+
+            [
+                'attribute'=>'Name',
+                'value' => function ($searchModel) {
+                    return    $searchModel->order['user']["name"];
+                },
+                'label'=>Yii::t('app','Name')
+            ],
+
+            [
+                'attribute'=>'order',
+                'value' => function ($searchModel) {
+                    $orderItemString = '';
+                    foreach ($searchModel->order->orderItems as $orderItem) {
+                        $type = '';
+                        if (isset($orderItem->product->subProductCount)&& count($orderItem->product->subProductCount) > 1) {
+                            $type = $orderItem->subProduct->type;
+                        }
+                        $orderItemString .= ' ' . $orderItem['product']['name'] . ' ' . $type . ' ' . Yii::t('app', 'Number') . ' ( ' . $orderItem->quantity . ' ) </br>';
+                    }
+                    return $orderItemString;
+                },
+                'label'=>Yii::t('app','Order'),
+                'format'=>"html"
+            ],
+
+            [
                 'attribute'=>'status_id',
                 'value' => function ($searchModel) {
                     return    $searchModel->status['name_ar'];
                 },
+                'filter' => ArrayHelper::map(Status::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'),
             ],
+
             
             [
                 'attribute'=>'created_at',
