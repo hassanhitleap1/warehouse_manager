@@ -32,7 +32,9 @@ $products=ArrayHelper::map(Products::find()->orderBy(['id' => SORT_DESC])->all()
                     'model'=>$model,
                     'language' => 'en',
                     'attribute'=>'created_at',
+                    'readonly'=>true,
                     'convertFormat'=>true,
+                    'options' => ['class' => 'form-control' ,"autocomplete"=>"off" ,"autocomplete"=>"no-fill"],
                     'pluginOptions'=>[
                         'timePicker'=>true,
                         'timePickerIncrement'=>30,
