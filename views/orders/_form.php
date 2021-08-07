@@ -43,11 +43,11 @@ if (!$model->isNewRecord) {
     <div class="row">
         <div class="col-md-3">
             
-            <?= $form->field($model, 'name')->textInput(['value'=>$name]) ?>
+            <?= $form->field($model, 'name')->textInput(['value'=>$name ,"autocomplete"=>"off"]) ?>
          
-            <?= $form->field($model, 'phone')->textInput(['value'=>$phone]) ?>
-            <?= $form->field($model, 'other_phone')->textInput(['value'=>$other_phone]) ?>
-            <?= $form->field($model, 'address')->textInput(['maxlength' => true,['value'=>$address]]) ?>
+            <?= $form->field($model, 'phone')->textInput(['value'=>$phone ,"autocomplete"=>"no-fill"]) ?>
+            <?= $form->field($model, 'other_phone')->textInput(['value'=>$other_phone,"autocomplete"=>"no-fill" ,"autocomplete"=>"false"]) ?>
+            <?= $form->field($model, 'address')->textInput(['maxlength' => true,['value'=>$address ,"autocomplete"=>"off"]]) ?>
 
 
             <?= $form->field($model, 'region_id')->widget(Select2::classname(), [
