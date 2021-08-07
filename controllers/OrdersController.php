@@ -175,6 +175,7 @@ class OrdersController extends Controller
         $ordersItem = $model->orderItems;
 
         if ($model->load(Yii::$app->request->post())) {
+            $ordersItem = [new OrdersItem()];
             $oldIDs = ArrayHelper::map($ordersItem, 'id', 'id');
             $ordersItem = Model::createMultiple(OrdersItem::classname(), $ordersItem);
             Model::loadMultiple($ordersItem, Yii::$app->request->post());
@@ -188,7 +189,7 @@ class OrdersController extends Controller
             {
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
-                    //OrdersItem::deleteAll(['=','order_id',$id]);
+                    OrdersItem::deleteAll(['=','order_id',$id]);
                     if ($flag = $model->save(false)) {
                         foreach ($ordersItem as $orderItem) {
                             $orderItem->order_id = $model->id;
