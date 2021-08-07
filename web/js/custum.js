@@ -742,5 +742,6 @@ $(document).on('click','#save_model',function (event) {
 });
 
 $(document).on('click','.applyBtn',function (event) {
-    $('input[type=submit]').click();
+    $(".search_order").click();
+    
 });
