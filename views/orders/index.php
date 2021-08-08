@@ -182,6 +182,7 @@ $columns = [
         'pageSummary' => true,
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
     ],
     // 'total_price',
     [
@@ -247,6 +248,7 @@ $columns = [
         'pageSummary' => true,
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
     ],
 
     [
