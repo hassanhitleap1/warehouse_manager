@@ -16,7 +16,7 @@ $users = Users::find()->orderBy('name')->asArray()->all();
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\orders\OrdersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
+/* skip-export add class to export */
 $this->title = Yii::t('app', 'Orders');
 $this->params['breadcrumbs'][] = $this->title;
 $status = ArrayHelper::map(Status::find()->all(), 'id', 'name_ar');
@@ -31,14 +31,20 @@ $columns = [
 
     ],
 
+    [
+        'attribute' => 'order_id',
+        'contentOptions' => ['class' => 'skip-export'],
+        'visible' => false,
+        'value' => 'order_id'
+    ],
 
-    'order_id',
+
 
     [
         'attribute' => 'created_at',
         'format' => 'raw',
         'width' => '100px',
-        // 'contentOptions' => ['class' => 'skip-export'],
+        'contentOptions' => ['class' => 'skip-export'],
         'visible' => true,
         'value' => function ($model, $key, $index, $widget) {
             return  date('Y-m-d', strtotime($model->created_at));
@@ -53,7 +59,7 @@ $columns = [
             return $model['user']['name'];
         },
 
-
+        'contentOptions' => ['class' => 'skip-export'],
 
         'filterWidgetOptions' => [
             'pluginOptions' => ['allowClear' => true],
@@ -85,7 +91,9 @@ $columns = [
         'filterWidgetOptions' => [
             'pluginOptions' => ['format' => 'yyyy-mm-dd']
         ],
-        'visible' => true,
+        'visible' => false,
+        
+        'contentOptions' => ['class' => 'skip-export'],
     ],
     [
         'attribute' => 'country_id',
@@ -101,7 +109,8 @@ $columns = [
         ],
         'filterInputOptions' => ['placeholder' => 'select user'],
         'format' => 'raw',
-        'visible' => true,
+        'visible' => false,
+        'contentOptions' => ['class' => 'skip-export'],
     ],
     [
         'attribute' => 'region_id',
@@ -118,6 +127,7 @@ $columns = [
         'filterInputOptions' => ['placeholder' => 'select user'],
         'format' => 'raw',
         'visible' => true,
+        'contentOptions' => ['class' => 'skip-export']
     ],
     'address',
 
@@ -138,6 +148,7 @@ $columns = [
         'filterInputOptions' => ['placeholder' => 'select status'],
         'format' => 'html',
         'visible' => true,
+        'contentOptions' => ['class' => 'skip-export'],
         // 'editableOptions'=> function ($model, $key, $index,$form) {
         //     return [
         //         'header'=>'status', 
@@ -162,7 +173,8 @@ $columns = [
         },
         'format' => 'raw',
         'visible' => true,
-        'pageSummary' => true
+        'pageSummary' => true,
+        'contentOptions' => ['class' => 'skip-export'],
     ],
     // 'total_price',
     [
@@ -198,10 +210,12 @@ $columns = [
 
         'format' => 'html',
         'visible' => true,
+        'contentOptions' => ['class' => 'skip-export'],
     ],
     'note',
     //'delivery_price',
     // 'discount',
+    
 
     [
         'attribute' => 'delivery_price',
@@ -210,7 +224,8 @@ $columns = [
         'value' => 'delivery_price',
         'format' => 'raw',
         'visible' => true,
-        'pageSummary' => true
+        'pageSummary' => true,
+        'contentOptions' => ['class' => 'skip-export'],
     ],
 
     [
@@ -220,7 +235,8 @@ $columns = [
         'value' => 'discount',
         'format' => 'raw',
         'visible' => true,
-        'pageSummary' => true
+        'pageSummary' => true,
+        'contentOptions' => ['class' => 'skip-export'],
     ],
 
     [
@@ -235,7 +251,7 @@ $columns = [
         'filterWidgetOptions' => [
             'pluginOptions' => ['allowClear' => true],
         ],
-
+        'contentOptions' => ['class' => 'skip-export'],
         'format' => 'raw',
         'visible' => true,
     ],
