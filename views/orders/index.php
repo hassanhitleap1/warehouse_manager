@@ -34,6 +34,7 @@ $columns = [
     [
         'attribute' => 'order_id',
         'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
         'visible' => false,
         'value' => 'order_id'
     ],
@@ -45,6 +46,7 @@ $columns = [
         'format' => 'raw',
         'width' => '100px',
         'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
         'visible' => true,
         'value' => function ($model, $key, $index, $widget) {
             return  date('Y-m-d', strtotime($model->created_at));
@@ -60,7 +62,7 @@ $columns = [
         },
 
         'contentOptions' => ['class' => 'skip-export'],
-
+        'headerOptions' => ['class' => 'skip-export'],
         'filterWidgetOptions' => [
             'pluginOptions' => ['allowClear' => true],
         ],
@@ -94,6 +96,7 @@ $columns = [
         'visible' => false,
         
         'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
     ],
     [
         'attribute' => 'country_id',
@@ -111,6 +114,7 @@ $columns = [
         'format' => 'raw',
         'visible' => false,
         'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
     ],
     [
         'attribute' => 'region_id',
@@ -127,7 +131,8 @@ $columns = [
         'filterInputOptions' => ['placeholder' => 'select user'],
         'format' => 'raw',
         'visible' => true,
-        'contentOptions' => ['class' => 'skip-export']
+        'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
     ],
     'address',
 
@@ -149,6 +154,7 @@ $columns = [
         'format' => 'html',
         'visible' => true,
         'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
         // 'editableOptions'=> function ($model, $key, $index,$form) {
         //     return [
         //         'header'=>'status', 
@@ -175,6 +181,7 @@ $columns = [
         'visible' => true,
         'pageSummary' => true,
         'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
     ],
     // 'total_price',
     [
@@ -211,6 +218,7 @@ $columns = [
         'format' => 'html',
         'visible' => true,
         'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
     ],
     'note',
     //'delivery_price',
@@ -226,6 +234,7 @@ $columns = [
         'visible' => true,
         'pageSummary' => true,
         'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
     ],
 
     [
@@ -237,6 +246,7 @@ $columns = [
         'visible' => true,
         'pageSummary' => true,
         'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
     ],
 
     [
@@ -252,6 +262,7 @@ $columns = [
             'pluginOptions' => ['allowClear' => true],
         ],
         'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
         'format' => 'raw',
         'visible' => true,
     ],
