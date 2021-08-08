@@ -35,6 +35,7 @@ $columns = [
         'attribute' => 'order_id',
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
         'visible' => false,
         'value' => 'order_id'
     ],
@@ -47,6 +48,7 @@ $columns = [
         'width' => '100px',
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
         'visible' => true,
         'value' => function ($model, $key, $index, $widget) {
             return  date('Y-m-d', strtotime($model->created_at));
@@ -63,6 +65,7 @@ $columns = [
 
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
         'filterWidgetOptions' => [
             'pluginOptions' => ['allowClear' => true],
         ],
@@ -97,6 +100,7 @@ $columns = [
         
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
     ],
     [
         'attribute' => 'country_id',
@@ -115,6 +119,7 @@ $columns = [
         'visible' => false,
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
     ],
     [
         'attribute' => 'region_id',
@@ -133,6 +138,7 @@ $columns = [
         'visible' => true,
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
     ],
     'address',
 
@@ -155,6 +161,7 @@ $columns = [
         'visible' => true,
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
         // 'editableOptions'=> function ($model, $key, $index,$form) {
         //     return [
         //         'header'=>'status', 
@@ -220,6 +227,7 @@ $columns = [
         'visible' => true,
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
     ],
     'note',
     //'delivery_price',
@@ -236,6 +244,7 @@ $columns = [
         'pageSummary' => true,
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
     ],
 
     [
@@ -265,6 +274,7 @@ $columns = [
         ],
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
         'format' => 'raw',
         'visible' => true,
     ],
