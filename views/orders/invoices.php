@@ -118,7 +118,7 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
                 </div>
 
                 <div class="col-md-4">
-                    <?php $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+                    <?php $generator = new Picqer\Barcode\BarcodeGeneratorSVG();
                         echo $generator->getBarcode($model->order_id, $generator::TYPE_CODE_128);?>
                 </div>
                 <div class="col-md-4">
