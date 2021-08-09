@@ -33,10 +33,10 @@ $columns = [
 
     [
         'attribute' => 'order_id',
-        'contentOptions' => ['class' => 'skip-export'],
-        'headerOptions' => ['class' => 'skip-export'],
-        'footerOptions' => ['class' => 'skip-export'],
-        'visible' => false,
+        // 'contentOptions' => ['class' => 'skip-export'],
+        // 'headerOptions' => ['class' => 'skip-export'],
+        // 'footerOptions' => ['class' => 'skip-export'],
+        // 'visible' => false,
         'value' => 'order_id'
     ],
 
