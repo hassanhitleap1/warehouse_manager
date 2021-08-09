@@ -81,7 +81,7 @@ $data_orders=[];
 
 
         <div class="col-md-6">
-           
+            <?= Html::a(Yii::t('app','More'), ['dashboard/sales'],['class'=>'pull-left']) ?>
             <canvas class="" id="chart_gin"></canvas>
         </div>   
        
@@ -116,6 +116,7 @@ $data_orders=[];
             </table>
         </div>   
         <div class="col-md-6">
+            <?= Html::a(Yii::t('app','More'), ['dashboard/orders'],['class'=>'pull-left']) ?>
             <canvas class="" id="chart_orders"></canvas>
            
         </div> 
@@ -155,6 +156,7 @@ $data_orders=[];
         </table>
         </div>
         <div class="col-md-6">
+            <?= Html::a(Yii::t('app','More'), ['dashboard/outlay'],['class'=>'pull-left']) ?>
             <canvas id="chart"></canvas>
         </div>
 
