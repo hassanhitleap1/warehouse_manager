@@ -197,7 +197,7 @@ class  DashboardController extends BaseController {
 
     public function actionOrders(){
         $date=Carbon::now("Asia/Amman")->toDateString();
-        $date_day = date('Y-m-d', strtotime($date. ' -7 day'));
+        $date_day = date('Y-m-d', strtotime($date. ' -15 day'));
         $date_month = date('Y-m-d', strtotime($date. ' -7 month'));
 
         $day_data = Orders::find()->select([
@@ -236,7 +236,7 @@ class  DashboardController extends BaseController {
 
 
         $date=Carbon::now("Asia/Amman")->toDateString();
-        $date_day = date('Y-m-d', strtotime($date. ' -7 day'));
+        $date_day = date('Y-m-d', strtotime($date. ' -15 day'));
         $date_month = date('Y-m-d', strtotime($date. ' -7 month'));
 
         // SELECT count(*) ,count(`profit_margin`) FROM `orders` GROUP BY YEAR(`created_at`), MONTH(`created_at`),DAY(`created_at`)
