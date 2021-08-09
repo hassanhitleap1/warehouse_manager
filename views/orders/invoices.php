@@ -110,11 +110,16 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
                 <div class="col-md-2">
                     <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $model->total_price?> JD  </strong></p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <?php if(!is_null($model->note) && $model->note != "" ): ?>
                         
                         <strong> <?=Yii::t("app",'Note');?> :-  <?= $model->note ;?></strong>
                       <?php endif;?>  
+                </div>
+
+                <div class="col-md-4">
+                    <?php $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+                        echo $generator->getBarcode($model->order_id, $generator::TYPE_CODE_128);?>
                 </div>
                 <div class="col-md-4">
                     <?php  $data = $public_path.Url::toRoute(['orders/bill', 'id' => $model->id])?>

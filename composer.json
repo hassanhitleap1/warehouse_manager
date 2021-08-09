@@ -41,7 +41,8 @@
         "kartik-v/yii2-date-range": "*",
         "chillerlan/php-qrcode": "^3.4",
         "kartik-v/yii2-widget-touchspin": "*",
-        "c006/yii2-submit-spinner": "*"
+        "c006/yii2-submit-spinner": "*",
+        "picqer/php-barcode-generator": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
