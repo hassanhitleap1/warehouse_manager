@@ -93,7 +93,8 @@ class OrdersController extends Controller
         $model = new Orders();
         $ordersItem = [new OrdersItem()];
         if ($model->load(Yii::$app->request->post())) {
-            $order_id =  Orders::find()->count() + 1 ;
+            $id_lead_last = Yii::$app->db->createCommand("SELECT MAX(`id`) as `max` FROM `orders` WHERE 1")->queryScalar();
+            $order_id =  $id_lead_last + 1000000 ;
             $model->order_id=$order_id;
             $model->status_id=2;
             $ordersItem = Model::createMultiple(OrdersItem::classname());

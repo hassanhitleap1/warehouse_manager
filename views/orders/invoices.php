@@ -107,21 +107,23 @@ $public_path=$protocol.$_SERVER['HTTP_HOST'];
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-2 col-sm-2  col-xm-2">
                     <p><strong> <?= Yii::t('app','Total_Amount')?>  : <?= $model->total_price?> JD  </strong></p>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 col-sm-2 col-xm-2">
                     <?php if(!is_null($model->note) && $model->note != "" ): ?>
                         
                         <strong> <?=Yii::t("app",'Note');?> :-  <?= $model->note ;?></strong>
                       <?php endif;?>  
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4 col-xm-4">
                     <?php $generator = new Picqer\Barcode\BarcodeGeneratorSVG();
                         echo $generator->getBarcode($model->order_id, $generator::TYPE_CODE_128);?>
+                        <p style="margin-right: 50px;"><?=$model->order_id?></p>
+                        
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4 col-xm-4">
                     <?php  $data = $public_path.Url::toRoute(['orders/bill', 'id' => $model->id])?>
                     <?= '<img class="img-qr-code" src="'.(new \chillerlan\QRCode\QRCode())->render($data).'" alt="QR Code" />';?>
                 </div>
