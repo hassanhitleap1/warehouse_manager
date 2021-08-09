@@ -60,6 +60,14 @@ class  DashboardController extends BaseController {
             ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
             ->groupBy(['orders.status_id'])->asArray()->all();
 
+        $products_order=OrdersItem::find()->select([ 'count(*) as count_order','orders_item.order_id','products.name'])
+            ->innerJoin('products', 'products.id=orders_item.product_id')
+            ->innerJoin('orders', 'orders.id=orders_item.order_id')
+            ->andWhere(['in','orders.status_id', [1,2,3,4]])
+            ->andWhere('date(orders_item.created_at) >= :date', [':date' => $date])
+            ->groupBy(['orders_item.product_id'])->asArray()->all();
+
+
         $status_statisticis=HistoryStatus::find()->select(["count(*) as count_order",'history_status.status_id','status.name_ar'])
             ->innerJoinWith('status','history_status.status_id = status.id')
             ->andWhere('date(history_status.created_at) >= :date', [':date' => $date])
@@ -67,7 +75,7 @@ class  DashboardController extends BaseController {
             ->groupBy(['history_status.status_id'])->asArray()->all();
 
           return $this->render('index',[
-            'orders'=>$orders, 'details'=>$details,'status_orders'=>$status_orders,'status_statisticis'=>$status_statisticis
+            'orders'=>$orders, 'details'=>$details,'status_orders'=>$status_orders,'status_statisticis'=>$status_statisticis,'products_order'=>$products_order
         ]);
     }
 
