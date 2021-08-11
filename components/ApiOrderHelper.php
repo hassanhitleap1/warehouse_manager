@@ -22,27 +22,23 @@ class ApiOrderHelper extends BaseObject
      */
     public  function push_order($model){
 
-
-        print_r($model);
-        exit;
         
-
         $pkg=[];
         $destinationAddress=[
             "addressLine1" => $model['address'], //required
-            "cityId"=> 1, //required
-            "villageId"=> 38, //required
-            "regionId"=> 1, //required
+            "cityId"=> $model["cityId"], //required
+            "villageId"=> $model["villageId"], //required
+            "regionId"=> $model["regionId"], //required
             "country"=> "Jordan" //required
         ];
         $pkgUnitType="METRIC";
         $originAddress=[
             "addressLine1" =>$model['address'], //required
             "addressLine2"=> "",
-            "cityId"=>5, //required
+            "cityId"=>$model["cityId"], //required
             "country"=> "Jordan", //required
-            "regionId" => 1, //required
-            "villageId"=> 180 //required
+            "regionId" => $model["regionId"], //required
+            "villageId"=> $model["villageId"] //required
         ];
         $pkg[]=[
             "cost"=>2,
@@ -93,7 +89,7 @@ class ApiOrderHelper extends BaseObject
     
 
 
-        $ch = curl_init('http://www.example.com');
+        $ch = curl_init('https://apis.logestechs.com/saas/api/ship/customer/request');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->request_headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $array_pushed);

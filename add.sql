@@ -19,3 +19,9 @@ CREATE TABLE `history_status` ( `id` INT NOT NULL AUTO_INCREMENT , `status_id` S
 
 UPDATE `status` SET `name_ar` = 'تم استلام الطلب الملغي ودفع المبلغ' WHERE `status`.`id` = 13;
 INSERT INTO `status` (`id`, `name_en`, `name_ar`, `color`, `created_at`, `updated_at`) VALUES ('14', 'تم استلام الطلب الملغي بدون دفع المبلغ', 'تم استلام الطلب الملغي بدون دفع المبلغ', '', '2021-08-11 09:53:08.000000', '2021-08-11 09:53:08.000000');
+
+
+
+ALTER TABLE `regions` ADD `region_api_id` INT NOT NULL DEFAULT '1' AFTER `country_id`;
+ALTER TABLE `regions` ADD `city_api_id` INT NOT NULL DEFAULT '1' AFTER `region_api_id`;
+ALTER TABLE `regions` ADD `village_api_id` INT NOT NULL DEFAULT '1' AFTER `city_api_id`;
