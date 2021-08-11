@@ -26,19 +26,19 @@ class ApiOrderHelper extends BaseObject
         $pkg=[];
         $destinationAddress=[
             "addressLine1" => $model['address'], //required
-            "cityId"=> $model["cityId"], //required
-            "villageId"=> $model["villageId"], //required
-            "regionId"=> $model["regionId"], //required
+            "cityId"=> $model["city_api_id"], //required
+            "villageId"=> $model["village_api_id"], //required
+            "regionId"=> $model["region_api_id"], //required
             "country"=> "Jordan" //required
         ];
         $pkgUnitType="METRIC";
         $originAddress=[
             "addressLine1" =>$model['address'], //required
             "addressLine2"=> "",
-            "cityId"=>$model["cityId"], //required
+            "cityId"=>$model["city_api_id"], //required
             "country"=> "Jordan", //required
-            "regionId" => $model["regionId"], //required
-            "villageId"=> $model["villageId"] //required
+            "regionId" => $model["region_api_id"], //required
+            "villageId"=> $model["village_api_id"] //required
         ];
         $pkg[]=[
             "cost"=>2,

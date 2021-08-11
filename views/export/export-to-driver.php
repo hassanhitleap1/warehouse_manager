@@ -32,7 +32,7 @@ $api= new ApiOrderHelper();
   <tbody>
       <?php foreach($models as $key =>$model):?>
         <?php 
-        // $responce=$api->push_order($model);
+         $responce=$api->push_order($model);
          if(true){
             $class_name="bg-success";
         }else{
@@ -42,10 +42,10 @@ $api= new ApiOrderHelper();
         ?>
         <tr class="<?=$class_name?>">
             <th scope="row"><?= ++$key?></th>
-            <td><?= $model["user"]["name"] ?></td>
-            <td><?= $model["user"]["phone"] ?></td>
+            <td><?= $model["name"] ?></td>
+            <td><?= $model["phone"] ?></td>
             <td><?= $model["address"] ?></td>
-            <td><?= $model['region']['name_ar']?></td>
+            <td><?= $model['name_ar']?></td>
             <td><?= $model["total_price"] ?></td>
         </tr>
     

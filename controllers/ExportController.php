@@ -62,8 +62,12 @@ class ExportController extends BaseController
         $ides = explode(",", $string_id);
 
         
-        $models=Orders::find()->select(['orders.*'])->where(['in','id',$ides])->all();
-     
+        $models=Orders::find()->select(['orders.*','user.name','user.phone',
+        'regions.name_ar','regions.region_api_id','regions.city_api_id','regions.village_api_id'])
+        ->join('inner JOIN', 'user', 'user.id = orders.user_id')
+        ->join('inner JOIN', 'regions', 'regions.id = user.region_id')
+        ->where(['in','orders.id',$ides])->asArray()->all();
+      
     
         return $this->render('export-to-driver',['models'=>$models]);
     }
