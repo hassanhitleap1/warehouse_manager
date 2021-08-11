@@ -205,3 +205,142 @@ class ApiOrderHelper extends BaseObject
         var_dump($response);
     }
 }
+
+
+/*
+ * {
+    "data": [
+        {
+            "name": "Aabel Al Qameh",
+            "arabicName": "آبل القمح",
+            "cityId": 27,
+            "isSelected": true,
+            "isAddedByUser": false,
+            "numberOfPackages": 0,
+            "regionId": 4,
+            "regionName": "48 Cities",
+            "cityName": "Yafa",
+            "createdDate": "2019-10-01T20:04:33.000+0000",
+            "id": 533
+        },
+        {
+            "name": "Aappa",
+            "arabicName": "عابا",
+            "cityId": 7,
+            "isSelected": true,
+            "isAddedByUser": false,
+            "numberOfPackages": 0,
+            "regionId": 1,
+            "regionName": "West Bank",
+            "cityName": "Jenin",
+            "createdDate": "2019-10-01T19:57:07.000+0000",
+            "id": 310
+        },
+        {
+            "name": "Aboud",
+            "arabicName": "عابود",
+            "cityId": 5,
+            "isSelected": true,
+            "isAddedByUser": false,
+            "numberOfPackages": 0,
+            "regionId": 1,
+            "regionName": "West Bank",
+            "cityName": "Ramallah and Al-Bireh",
+            "createdDate": "2019-10-01T19:54:52.000+0000",
+            "id": 210
+        },
+        {
+            "name": "Abu Dis",
+            "arabicName": "أبو ديس",
+            "cityId": 5,
+            "isSelected": true,
+            "isAddedByUser": false,
+            "numberOfPackages": 0,
+            "regionId": 1,
+            "regionName": "West Bank",
+            "cityName": "Ramallah and Al-Bireh",
+            "createdDate": "2019-10-01T19:51:36.000+0000",
+            "id": 76
+        },
+        {
+            "name": "Abu Qash",
+            "arabicName": "أبو قش",
+            "cityId": 5,
+            "isSelected": true,
+            "isAddedByUser": false,
+            "numberOfPackages": 0,
+            "regionId": 1,
+            "regionName": "West Bank",
+            "cityName": "Ramallah and Al-Bireh",
+            "createdDate": "2019-10-01T19:53:48.000+0000",
+            "id": 160
+        },
+        {
+            "name": "Abu Shkheidam",
+            "arabicName": "أبو شخيدم",
+            "cityId": 5,
+            "isSelected": true,
+            "isAddedByUser": false,
+            "numberOfPackages": 0,
+            "regionId": 1,
+            "regionName": "West Bank",
+            "cityName": "Ramallah and Al-Bireh",
+            "createdDate": "2019-10-01T19:53:47.000+0000",
+            "id": 159
+        },
+        {
+            "name": "Abu Shkheidam",
+            "arabicName": "أبوشخيدم",
+            "cityId": 5,
+            "isSelected": true,
+            "isAddedByUser": false,
+            "numberOfPackages": 0,
+            "regionId": 1,
+            "regionName": "West Bank",
+            "cityName": "Ramallah and Al-Bireh",
+            "createdDate": "2019-10-01T19:53:57.000+0000",
+            "id": 167
+        },
+        {
+            "name": "Abu Shoosha",
+            "arabicName": "أبو شوشة",
+            "cityId": 26,
+            "isSelected": true,
+            "isAddedByUser": false,
+            "numberOfPackages": 0,
+            "regionId": 4,
+            "regionName": "48 Cities",
+            "cityName": "Beer Al Sabe'",
+            "createdDate": "2019-10-01T20:02:55.000+0000",
+            "id": 471
+        },
+        {
+            "name": "Abu Talloul",
+            "arabicName": "أبو تلول",
+            "cityId": 29,
+            "isSelected": true,
+            "isAddedByUser": false,
+            "numberOfPackages": 0,
+            "regionId": 4,
+            "regionName": "48 Cities",
+            "cityName": "Al Ramla",
+            "createdDate": "2019-10-01T20:05:36.000+0000",
+            "id": 568
+        },
+        {
+            "name": "Abu Zraiq",
+            "arabicName": "أبو زريق",
+            "cityId": 26,
+            "isSelected": true,
+            "isAddedByUser": false,
+            "numberOfPackages": 0,
+            "regionId": 4,
+            "regionName": "48 Cities",
+            "cityName": "Beer Al Sabe'",
+            "createdDate": "2019-10-01T20:02:43.000+0000",
+            "id": 464
+        }
+    ],
+    "totalRecordsNo": 0
+}
+ */
