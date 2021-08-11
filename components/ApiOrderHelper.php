@@ -86,12 +86,15 @@ class ApiOrderHelper extends BaseObject
 
 
 
-        
-         $ch = curl_init('https://apis.logestechs.com/saas/api/ship/customer/request');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->request_headers);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $array_pushed);
+        $ch = curl_init();
 
+        curl_setopt($ch, CURLOPT_URL,            "https://apis.logestechs.com/saas/api/ship/customer/request" );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt($ch, CURLOPT_POST,           1 );
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $array_pushed);
+        curl_setopt($ch, CURLOPT_HTTPHEADER,     $this->request_headers); 
+
+    
         $response = curl_exec($ch);
         curl_close($ch);
         return $response;
@@ -129,6 +132,10 @@ class ApiOrderHelper extends BaseObject
         if(isset($_GET["regionId"])){
             $regionId=$_GET["regionId"];
         }
+
+
+
+        
 
         $ch = curl_init("https://apis.logestechs.com/saas/api/addresses/villages?search=$search&cityId=$cityId&regionId=$regionId&page=$page");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
