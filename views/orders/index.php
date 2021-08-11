@@ -63,9 +63,9 @@ $columns = [
             return $model['user']['name'];
         },
 
-        'contentOptions' => ['class' => 'skip-export'],
-        'headerOptions' => ['class' => 'skip-export'],
-        'footerOptions' => ['class' => 'skip-export'],
+//        'contentOptions' => ['class' => 'skip-export'],
+//        'headerOptions' => ['class' => 'skip-export'],
+//        'footerOptions' => ['class' => 'skip-export'],
         'filterWidgetOptions' => [
             'pluginOptions' => ['allowClear' => true],
         ],
