@@ -42,5 +42,28 @@ class ApiOrderHelper extends BaseObject
 
        var_dump($response);
     }
-   
+
+
+
+
+    public  function change_status($order_id){
+        $array_pushed=[];
+
+
+        $request_headers = array(
+            "X-Mashape-Key:" . "params",
+            "X-Mashape-Host:" . "houst"
+        );
+
+
+        $ch = curl_init('http://www.example.com');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $array_pushed);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        var_dump($response);
+    }
 }
