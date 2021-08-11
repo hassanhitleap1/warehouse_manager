@@ -35,9 +35,10 @@ class Outlays extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'type','value'], 'required'],
+            [['title', 'type','created_at','value'], 'required'],
             [['type', 'product_id'], 'integer'],
             [['value'], 'double'],
+            ['created_at', 'datetime', 'format' => 'php:Y-m-d'],
             [['title'], 'string', 'max' => 255],
             [['range'],  'string'],
         ];
@@ -90,15 +91,9 @@ class Outlays extends \yii\db\ActiveRecord
         $today=Carbon::now("Asia/Amman");
         if (parent::beforeSave($insert)) {
             // Place your custom code here
-            if ($this->isNewRecord) {
-                if(!is_null($this->range)){
-                    $this->created_at = $today;
-                    $this->updated_at = $today;
-                }
-            } else {
+            if (!$this->isNewRecord) {
                 $this->updated_at =$today;
             }
-
             return true;
         } else {
             return false;
