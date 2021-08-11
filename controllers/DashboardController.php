@@ -91,14 +91,14 @@ class  DashboardController extends BaseController {
             "orders.created_at",
             'MONTH(`orders`.`created_at`) as month',
 
-//            "(SELECT SUM(orders_item.quantity) FROM `orders_item`
-//                    inner join orders as ord on  ord.id = orders_item.order_id
-//                    WHERE
-//                    date(orders_item.created_at) = date(`orders`.`created_at`)
-//                    and
-//                    orders.status_id not in (6,7,8,9,10,11,13,14)  )
-//                    as
-//                    quantity",
+            "(SELECT SUM(orders_item.quantity) FROM `orders_item`
+                    inner join orders as ord on  ord.id = orders_item.order_id
+                    WHERE
+                    date(orders_item.created_at) = date(`orders`.`created_at`)
+                    and
+                    orders.status_id not in (6,7,8,9,10,11,13,14)  )
+                    as
+                    quantity",
 //
 //                    "(SELECT SUM(orders_item.profits_margin) FROM `orders_item`
 //                    inner join orders as ord on  ord.id = orders_item.order_id
