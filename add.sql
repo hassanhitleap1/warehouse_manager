@@ -13,3 +13,9 @@ ALTER TABLE `outlays` ADD `value` DOUBLE NOT NULL AFTER `title`;
 # history_status
 
 CREATE TABLE `history_status` ( `id` INT NOT NULL AUTO_INCREMENT , `status_id` SMALLINT NOT NULL , `order_id` INT NOT NULL , `created_at` DATETIME NULL DEFAULT NULL , `updated_at` DATETIME NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+-- # last update
+
+UPDATE `status` SET `name_ar` = 'تم استلام الطلب الملغي ودفع المبلغ' WHERE `status`.`id` = 13;
+INSERT INTO `status` (`id`, `name_en`, `name_ar`, `color`, `created_at`, `updated_at`) VALUES ('14', 'تم استلام الطلب الملغي بدون دفع المبلغ', 'تم استلام الطلب الملغي بدون دفع المبلغ', '', '2021-08-11 09:53:08.000000', '2021-08-11 09:53:08.000000');

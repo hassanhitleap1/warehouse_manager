@@ -94,7 +94,7 @@ class  DashboardController extends BaseController {
                     WHERE 
                     date(orders_item.created_at) = date(`orders`.`created_at`) 
                     and
-                    orders.status_id not in (6,7,8,9,10,11,13)  ) 
+                    orders.status_id not in (6,7,8,9,10,11,13,14)  ) 
                     as
                     quantity",
 
@@ -103,7 +103,7 @@ class  DashboardController extends BaseController {
                     WHERE 
                     date(orders_item.created_at) = date(`orders`.`created_at`) 
                     and
-                    orders.status_id not in (6,7,8,9,10,11,13)  ) 
+                    orders.status_id not in (6,7,8,9,10,11,13,14)  ) 
                     as
                     profit_margin",
          
@@ -140,7 +140,7 @@ class  DashboardController extends BaseController {
                     YEAR(orders_item.created_at) = YEAR(`orders`.`created_at`) and
                     MONTH(orders_item.created_at) = MONTH(`orders`.`created_at`)
                     and
-                    orders.status_id not in (6,7,8,9,10,11,13)  ) 
+                    orders.status_id not in (6,7,8,9,10,11,13,14)  ) 
                     as
                     profit_margin",
 
@@ -151,7 +151,7 @@ class  DashboardController extends BaseController {
                     YEAR(orders_item.created_at) = YEAR(`orders`.`created_at`) and
                     MONTH(orders_item.created_at) = MONTH(`orders`.`created_at`)
                     and
-                    orders.status_id not in (6,7,8,9,10,11,13)  ) 
+                    orders.status_id not in (6,7,8,9,10,11,13,14)  ) 
                     as
                     quantity",
 
@@ -204,9 +204,9 @@ class  DashboardController extends BaseController {
             'count(*) as count_order',
             'date(`created_at`) as date',
             '(SELECT SUM(orders_item.quantity)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
-               ord.status_id not in (6,7,8,9,10,11,13)  and date(orders_item.created_at) = date(orders.created_at)) as quantities',
+               ord.status_id not in (6,7,8,9,10,11,13,14)  and date(orders_item.created_at) = date(orders.created_at)) as quantities',
             '(SELECT SUM(orders_item.profits_margin)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
-               ord.status_id not in (6,7,8,9,10,11,13)  and date(orders_item.created_at) = date(orders.created_at)) as profits_margin',
+               ord.status_id not in (6,7,8,9,10,11,13,14)  and date(orders_item.created_at) = date(orders.created_at)) as profits_margin',
             ])
             ->andWhere('date(created_at) >= :date', [':date' => $date_day])
             ->groupBy(['DAY(`created_at`)'])
@@ -216,9 +216,9 @@ class  DashboardController extends BaseController {
         $month_data = Orders::find()->select([
             'count(*) as count_order',
             '(SELECT SUM(orders_item.profits_margin)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
-               ord.status_id not in (6,7,8,9,10,11,13)  and MONTH(orders_item.created_at) = MONTH(orders.created_at) and  year(orders_item.created_at) = year(orders.created_at)) as profits_margin',
+               ord.status_id not in (6,7,8,9,10,11,13,14)  and MONTH(orders_item.created_at) = MONTH(orders.created_at) and  year(orders_item.created_at) = year(orders.created_at)) as profits_margin',
             '(SELECT SUM(orders_item.quantity)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
-               ord.status_id not in (6,7,8,9,10,11,13)  and MONTH(orders_item.created_at) = MONTH(orders.created_at) and  year(orders_item.created_at) = year(orders.created_at)) as quantities',
+               ord.status_id not in (6,7,8,9,10,11,13,14)  and MONTH(orders_item.created_at) = MONTH(orders.created_at) and  year(orders_item.created_at) = year(orders.created_at)) as quantities',
             'MONTH(`created_at`) as month'])
             ->andWhere('date(created_at) >= :date', [':date' => $date_month])
             ->groupBy(['MONTH(`created_at`)'])
