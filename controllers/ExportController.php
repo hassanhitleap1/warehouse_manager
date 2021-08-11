@@ -48,7 +48,7 @@ class ExportController extends BaseController
             ];
             fputcsv($out, $data,"\t");
         }
-      
+
 
         header("Content-Disposition: attachment; filename=\"demo.xls\"");
         header("Content-Type: application/vnd.ms-excel;");
