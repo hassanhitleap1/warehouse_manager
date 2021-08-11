@@ -63,9 +63,15 @@ class ExportController extends BaseController
     public function actionExportToDriver(){
         $string_id=$_GET['string_id'];
         $ides = explode(",", $string_id);
+
+        
         $models=Orders::find()->where(['in','id',$ides])->all();
         $api = new ApiOrderHelper();
-        $respoance=[];
+
+        $response=$api->get_villages();
+        print_r( $response["data"] );
+
+        exit;
         foreach ($models as $key => $model){
             $res=$api->push_order($model);
             $respoance[]=["status"=>$res["status"],"data"=>$model];

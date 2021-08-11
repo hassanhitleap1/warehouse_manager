@@ -207,7 +207,7 @@ class  DashboardController extends BaseController {
             'date(`created_at`) as date',
             '(SELECT SUM(orders_item.quantity)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
                ord.status_id not in (6,7,8,9,10,11,13,14)  and date(orders_item.created_at) = date(orders.created_at)) as quantities',
-            'sum(orders.profit_margin) as profit_margin' ,
+            'sum(orders.profit_margin) as profits_margin' ,
 //            '(SELECT SUM(orders_item.profits_margin)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where
 //               ord.status_id not in (6,7,8,9,10,11,13,14)  and date(orders_item.created_at) = date(orders.created_at)) as profits_margin',
             ])
@@ -218,7 +218,7 @@ class  DashboardController extends BaseController {
 
         $month_data = Orders::find()->select([
             'count(*) as count_order',
-            'sum(orders.profit_margin) as profit_margin' ,
+            'sum(orders.profit_margin) as profits_margin' ,
 //            '(SELECT SUM(orders_item.profits_margin)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where
 //               ord.status_id not in (6,7,8,9,10,11,13,14)  and MONTH(orders_item.created_at) = MONTH(orders.created_at) and  year(orders_item.created_at) = year(orders.created_at)) as profits_margin',
             '(SELECT SUM(orders_item.quantity)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
