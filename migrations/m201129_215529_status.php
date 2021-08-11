@@ -21,7 +21,8 @@ class m201129_215529_status extends Migration
         ['name_en'=>'no answer','name_ar'=>'لا يرد','color'=>'#292fca'], // 10
         ['name_en'=>'no answer','name_ar'=>'لا يرد من الشركة','color'=>'#292fca'], // 11
         ['name_en'=>'Payment has been received','name_ar'=>'تم استلام المبلغ','color'=>'#292fca'], // 12
-        ['name_en'=>'The canceled request has been received','name_ar'=>'تم استلام الطلب الملغي','color'=>'#292fca'], // 13
+        ['name_en'=>'The canceled request has been received','name_ar'=>'تم استلام الطلب الملغي وفع المبلغ توصيل','color'=>'#292fca'], // 13
+        ['name_en'=>'The canceled request has been received','name_ar'=>'تم استلام الطلب الملغي بدون المبلغ توصيل','color'=>'#292fca'], // 14
        
       
     ];

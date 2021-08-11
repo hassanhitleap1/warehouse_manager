@@ -97,7 +97,7 @@ $columns = [
             'pluginOptions' => ['format' => 'yyyy-mm-dd']
         ],
         'visible' => false,
-        
+
         'contentOptions' => ['class' => 'skip-export'],
         'headerOptions' => ['class' => 'skip-export'],
         'footerOptions' => ['class' => 'skip-export'],
@@ -182,7 +182,7 @@ $columns = [
         'vAlign' => 'middle',
         'width' => '50px',
         'value' => function ($model, $key, $index, $widget) {
-            return (in_array( $model->status_id,[6,7 ,13])) ? - $model->amount_required  :$model->amount_required ;
+            return ($model->status_id == 14 ) ?  -2 :$model->amount_required ;
         },
         'format' => 'raw',
         'visible' => true,
@@ -197,7 +197,7 @@ $columns = [
         'vAlign' => 'middle',
         'width' => '50px',
         'value' => function ($model, $key, $index, $widget) {
-            return $model->total_price ;
+            return ($model->status_id == 14 ) ?  -2 :$model->total_price ;
         },
         'format' => 'raw',
         'visible' => true,
@@ -232,7 +232,7 @@ $columns = [
     'note',
     //'delivery_price',
     // 'discount',
-    
+
 
     [
         'attribute' => 'delivery_price',
@@ -291,10 +291,10 @@ $columns = [
             },
             'history-status' => function ($url, $model) {
 
-                return Html::a('<span class="glyphicon glyphicon-calendar"></span>', 
-                    ['history-status/index','order_id' =>$model->id], 
+                return Html::a('<span class="glyphicon glyphicon-calendar"></span>',
+                    ['history-status/index','order_id' =>$model->id],
                     ['class' => 'profile-link']);
-              
+
             },
         ]
     ],
@@ -308,7 +308,7 @@ $session = Yii::$app->session;
 ?>
 <div class="orders-index">
 
-   
+
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php  if($session->has('message')):?>
@@ -326,16 +326,16 @@ $session = Yii::$app->session;
             'filterModel' => $searchModel,
             'panel' => [
                 'heading' => '<h3 class="panel-title">' . $this->title . '</h3>',
-                'before' => '{dynagrid}' .  Html::a( "<span class='glyphicon glyphicon-plus' > </span>", ['create'], ['class' => 'btn btn-success' ,'title'=>Yii::t('app', 'Create_Order')]) . 
-                "<button id='print_all_invoice' style='display: none;' class='btn btn-success' title='" . Yii::t('app', 'Print_All_Invoice') . "' > <span    class='glyphicon glyphicon-print' > </span> </button>".
-                "<button id='export_pdf' class='btn btn-success' title='" . Yii::t('app', 'Export_PDF') . "' > <span   class='glyphicon glyphicon-print' > </span> </button>".
-                "<button id='change_status' class='btn btn-success' title='" . Yii::t('app', 'Change_Status') . "' > <span   class='glyphicon glyphicon-screenshot' > </span> </button>".
-                "<button id='delete_orders' class='btn btn-success' title='" . Yii::t('app', 'Delete_Orders') . "' > <span   class='glyphicon glyphicon-trash' > </span> </button>"            ],
+                'before' => '{dynagrid}' .  Html::a( "<span class='glyphicon glyphicon-plus' > </span>", ['create'], ['class' => 'btn btn-success' ,'title'=>Yii::t('app', 'Create_Order')]) .
+                    "<button id='print_all_invoice' style='display: none;' class='btn btn-success' title='" . Yii::t('app', 'Print_All_Invoice') . "' > <span    class='glyphicon glyphicon-print' > </span> </button>".
+                    "<button id='export_pdf' class='btn btn-success' title='" . Yii::t('app', 'Export_PDF') . "' > <span   class='glyphicon glyphicon-print' > </span> </button>".
+                    "<button id='change_status' class='btn btn-success' title='" . Yii::t('app', 'Change_Status') . "' > <span   class='glyphicon glyphicon-screenshot' > </span> </button>".
+                    "<button id='delete_orders' class='btn btn-success' title='" . Yii::t('app', 'Delete_Orders') . "' > <span   class='glyphicon glyphicon-trash' > </span> </button>"            ],
             'showPageSummary' => true,
         ],
 
         'options' => ['id' => 'dynagrid'],  // a unique identifier is important
-        
+
     ]);
 
 
