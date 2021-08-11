@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 
+use app\components\ApiOrderHelper;
 use app\models\orders\Orders;
 use app\models\orders\OrdersSearch;
 use Yii;
@@ -63,8 +64,13 @@ class ExportController extends BaseController
         $string_id=$_GET['string_id'];
         $ides = explode(",", $string_id);
         $models=Orders::find()->where(['in','id',$ides])->all();
-
-
-
+        $api = new ApiOrderHelper();
+        $respoance=[];
+        foreach ($models as $key => $model){
+            $res=$api->push_order($model);
+            $respoance[]=["status"=>$res["status"],"data"=>$model];
+        }
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $respoance;
     }
 }

@@ -9,8 +9,12 @@ use yii\base\BaseObject;
 class ApiOrderHelper extends BaseObject
 {
 
+    private $senderFirstName="mohammed";
+    private $senderLastName="kiwan";
+    private $senderMiddleName="kahled";
+
    public  function push_orders($models){
-       $pkg=[];
+    /*    $pkg=[];
        $destinationAddress=[
            "addressLine1" => "عين منجد", //required
             "cityId"=> 1, //required
@@ -44,14 +48,14 @@ class ApiOrderHelper extends BaseObject
                 "width"=> 40,
                 "height"=> 40,
                 "parcelTypeId"=> null,
-               "senderFirstName"=>  "Majdi", //ask
-                "senderLastName"=>  "Mafarja", //ask
-               "senderMiddleName"=> "M",//ask
-                "businessSenderName"=> "شركة لوجستكس",//ask
-                "businessReceiverName"=> "",//ask
+               "senderFirstName"=>  $this->senderFirstName, //ask
+                "senderLastName"=>   $this->senderLastName, //ask
+               "senderMiddleName"=>     $this->senderMiddleName,//ask
+                "businessSenderName"=>  Yii::$app->params["name_of_store"],//ask
+                "businessReceiverName"=> "wheel",//ask
                "receiverAuthorizedGovRegistrationNumber"=> "",//ask
                 "senderAuthorizedGovRegistrationNumber"=> "",//ask
-               "senderEmail"=> "log@loges.com", //required - customer email ask
+               "senderEmail"=> Yii::$app->params["adminEmail"]   , //required - customer email ask
                 "receiverFirstName"=> $model['user']['name'], //required
                 "receiverLastName"=> "",
                 "receiverMiddleName"=> "",
@@ -76,6 +80,16 @@ class ApiOrderHelper extends BaseObject
 
 
        }
+
+       $originAddress=[
+           "addressLine1" =>$model["user"]["address"], //required
+           "addressLine2"=> "",
+           "cityId"=>5, //required
+           "country"=> "Jordan", //required
+           "regionId" => 1, //required
+           "villageId"=> 180 //required
+       ];
+
        $array_pushed=[
            "pkg"=>$pkg,
            "destinationAddress"=>$destinationAddress,
@@ -99,14 +113,19 @@ class ApiOrderHelper extends BaseObject
        $response = curl_exec($ch);
        curl_close($ch);
 
-       var_dump($response);
+        */
     }
 
 
+    /*
+     * @param object ActiveModel
+     */
     public  function push_order($model){
+
+
         $pkg=[];
         $destinationAddress=[
-            "addressLine1" => "عين منجد", //required
+            "addressLine1" => $model['address'], //required
             "cityId"=> 1, //required
             "villageId"=> 38, //required
             "regionId"=> 1, //required
@@ -114,7 +133,7 @@ class ApiOrderHelper extends BaseObject
         ];
         $pkgUnitType="METRIC";
         $originAddress=[
-            "addressLine1" =>"الشارع الرئيسي", //required
+            "addressLine1" =>$model['address'], //required
             "addressLine2"=> "",
             "cityId"=>5, //required
             "country"=> "Jordan", //required
@@ -137,14 +156,14 @@ class ApiOrderHelper extends BaseObject
             "width"=> 40,
             "height"=> 40,
             "parcelTypeId"=> null,
-            "senderFirstName"=>  "Majdi", //ask
-            "senderLastName"=>  "Mafarja", //ask
-            "senderMiddleName"=> "M",//ask
-            "businessSenderName"=> "شركة لوجستكس",//ask
-            "businessReceiverName"=> "",//ask
+            "senderFirstName"=>  $this->senderFirstName, //ask
+            "senderLastName"=>   $this->senderLastName, //ask
+            "senderMiddleName"=>     $this->senderMiddleName,//ask
+            "businessSenderName"=>  Yii::$app->params["name_of_store"],//ask
+            "businessReceiverName"=> "wheel",//ask
             "receiverAuthorizedGovRegistrationNumber"=> "",//ask
             "senderAuthorizedGovRegistrationNumber"=> "",//ask
-            "senderEmail"=> "log@loges.com", //required - customer email ask
+            "senderEmail"=> Yii::$app->params["adminEmail"]   , //required - customer email ask
             "receiverFirstName"=> $model['user']['name'], //required
             "receiverLastName"=> "",
             "receiverMiddleName"=> "",
@@ -180,8 +199,9 @@ class ApiOrderHelper extends BaseObject
 
         $response = curl_exec($ch);
         curl_close($ch);
-
+        return $response;
         var_dump($response);
+
     }
 
     public  function change_status($order_id){
