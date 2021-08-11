@@ -64,13 +64,13 @@ class ApiOrderHelper extends BaseObject
             "receiverAuthorizedGovRegistrationNumber"=> "",//ask
             "senderAuthorizedGovRegistrationNumber"=> "",//ask
             "senderEmail"=> Yii::$app->params["adminEmail"]   , //required - customer email ask
-            "receiverFirstName"=> $model['user']['name'], //required
+            "receiverFirstName"=> $model['name'], //required
             "receiverLastName"=> "",
             "receiverMiddleName"=> "",
-            "senderPhone"=> Yii::$app->params["phone"], //required
-            "senderPhone2"=> Yii::$app->params["phone"],
-            "receiverPhone"=> $model['user']['phone'] , //required
-            "receiverPhone2"=>$model['user']['other_phone'] ,
+            "senderPhone"=> "0".str_replace("+962","",Yii::$app->params["phone"]), //required
+            "senderPhone2"=>"0".str_replace("+962","",Yii::$app->params["phone"]),
+            "receiverPhone"=> $model['phone'] , //required
+            "receiverPhone2"=>$model['other_phone'] ,
             "receiverEmail"=> "",
             "serviceType"=> "STANDARD", //required
             "shipmentType"=> "COD", //required
@@ -86,10 +86,8 @@ class ApiOrderHelper extends BaseObject
 
 
 
-    
-
-
-        $ch = curl_init('https://apis.logestechs.com/saas/api/ship/customer/request');
+        
+         $ch = curl_init('https://apis.logestechs.com/saas/api/ship/customer/request');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->request_headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $array_pushed);
