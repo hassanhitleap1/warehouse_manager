@@ -56,4 +56,15 @@ class ExportController extends BaseController
         header("Expires: 0");
         fclose($out);
     }
+
+
+
+    public function actionExportToDriver(){
+        $string_id=$_GET['string_id'];
+        $ides = explode(",", $string_id);
+        $models=Orders::find()->where(['in','id',$ides])->all();
+
+
+
+    }
 }
