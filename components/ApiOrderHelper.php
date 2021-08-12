@@ -12,133 +12,33 @@ class ApiOrderHelper extends BaseObject
     private $senderFirstName="mohammed";
     private $senderLastName="kiwan";
     private $senderMiddleName="kahled";
-
-   public  function push_orders($models){
-    /*    $pkg=[];
-       $destinationAddress=[
-           "addressLine1" => "عين منجد", //required
-            "cityId"=> 1, //required
-            "villageId"=> 38, //required
-            "regionId"=> 1, //required
-            "country"=> "Jordan" //required
-       ];
-       $pkgUnitType="METRIC";
-       $originAddress=[
-           "addressLine1" =>"الشارع الرئيسي", //required
-            "addressLine2"=> "",
-            "cityId"=>5, //required
-            "country"=> "Jordan", //required
-            "regionId" => 1, //required
-            "villageId"=> 180 //required
-       ];
-       foreach ($models as $key => $model){
-           $pkg[]=[
-               "cost"=>2,
-               "cod"=>$model['total_price'],
-               "isInsurance" => false,
-                "isBreakable"=> false,
-                "isflammable"=> false,
-                "isDangerousOrChemical"=> false,
-                "isAnimalOrPit"=> false,
-                "isNeedPacking"=> false,
-               "notes" => $model['note'],
-               "invoiceNumber"=>$model['order_id'],
-               "weight"=> 20,
-                "length"=> 40,
-                "width"=> 40,
-                "height"=> 40,
-                "parcelTypeId"=> null,
-               "senderFirstName"=>  $this->senderFirstName, //ask
-                "senderLastName"=>   $this->senderLastName, //ask
-               "senderMiddleName"=>     $this->senderMiddleName,//ask
-                "businessSenderName"=>  Yii::$app->params["name_of_store"],//ask
-                "businessReceiverName"=> "wheel",//ask
-               "receiverAuthorizedGovRegistrationNumber"=> "",//ask
-                "senderAuthorizedGovRegistrationNumber"=> "",//ask
-               "senderEmail"=> Yii::$app->params["adminEmail"]   , //required - customer email ask
-                "receiverFirstName"=> $model['user']['name'], //required
-                "receiverLastName"=> "",
-                "receiverMiddleName"=> "",
-                "senderPhone"=> Yii::$app->params["phone"], //required
-                "senderPhone2"=> Yii::$app->params["phone"],
-                "receiverPhone"=> $model['user']['phone'] , //required
-                "receiverPhone2"=>$model['user']['other_phone'] ,
-                "receiverEmail"=> "",
-                "serviceType"=> "STANDARD", //required
-                "shipmentType"=> "COD", //required
-                "quantity"=> 1
-
-           ];
-
-
-
-
-
-
-
-
-
-
-       }
-
-       $originAddress=[
-           "addressLine1" =>$model["user"]["address"], //required
-           "addressLine2"=> "",
-           "cityId"=>5, //required
-           "country"=> "Jordan", //required
-           "regionId" => 1, //required
-           "villageId"=> 180 //required
-       ];
-
-       $array_pushed=[
-           "pkg"=>$pkg,
-           "destinationAddress"=>$destinationAddress,
-           "pkgUnitType"=>$pkgUnitType,
-           "originAddress"=>$originAddress,
-           ];
-
-
-
-       $request_headers = array(
-           "Authorization-Token:" . "7be004ba6ae88fb4097ef885fdf5fe148886fd68b424b7192a0e060a58e10",
-           "company-d:" . "143"
-       );
-
-
-       $ch = curl_init('http://www.example.com');
-       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-       curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
-       curl_setopt($ch, CURLOPT_POSTFIELDS, $array_pushed);
-
-       $response = curl_exec($ch);
-       curl_close($ch);
-
-        */
-    }
-
+    private $request_headers=[
+                        "Authorization-Token:" . "7be004ba6ae88fb4097ef885fdf5fe148886fd68b424b7192a0e060a58e10",
+                        "company-id:" . "143"
+                    ];
 
     /*
      * @param object ActiveModel
      */
     public  function push_order($model){
 
-
+        
         $pkg=[];
         $destinationAddress=[
             "addressLine1" => $model['address'], //required
-            "cityId"=> 1, //required
-            "villageId"=> 38, //required
-            "regionId"=> 1, //required
+            "cityId"=> $model["city_api_id"], //required
+            "villageId"=> $model["village_api_id"], //required
+            "regionId"=> $model["region_api_id"], //required
             "country"=> "Jordan" //required
         ];
         $pkgUnitType="METRIC";
         $originAddress=[
             "addressLine1" =>$model['address'], //required
             "addressLine2"=> "",
-            "cityId"=>5, //required
+            "cityId"=>$model["city_api_id"], //required
             "country"=> "Jordan", //required
-            "regionId" => 1, //required
-            "villageId"=> 180 //required
+            "regionId" => $model["region_api_id"], //required
+            "villageId"=> $model["village_api_id"] //required
         ];
         $pkg[]=[
             "cost"=>2,
@@ -164,13 +64,13 @@ class ApiOrderHelper extends BaseObject
             "receiverAuthorizedGovRegistrationNumber"=> "",//ask
             "senderAuthorizedGovRegistrationNumber"=> "",//ask
             "senderEmail"=> Yii::$app->params["adminEmail"]   , //required - customer email ask
-            "receiverFirstName"=> $model['user']['name'], //required
+            "receiverFirstName"=> $model['name'], //required
             "receiverLastName"=> "",
             "receiverMiddleName"=> "",
-            "senderPhone"=> Yii::$app->params["phone"], //required
-            "senderPhone2"=> Yii::$app->params["phone"],
-            "receiverPhone"=> $model['user']['phone'] , //required
-            "receiverPhone2"=>$model['user']['other_phone'] ,
+            "senderPhone"=> "0".str_replace("+962","",Yii::$app->params["phone"]), //required
+            "senderPhone2"=>"0".str_replace("+962","",Yii::$app->params["phone"]),
+            "receiverPhone"=> $model['phone'] , //required
+            "receiverPhone2"=>$model['other_phone'] ,
             "receiverEmail"=> "",
             "serviceType"=> "STANDARD", //required
             "shipmentType"=> "COD", //required
@@ -186,17 +86,15 @@ class ApiOrderHelper extends BaseObject
 
 
 
-        $request_headers = array(
-            "Authorization-Token:" . "7be004ba6ae88fb4097ef885fdf5fe148886fd68b424b7192a0e060a58e10",
-            "company-d:" . "143"
-        );
+        $ch = curl_init();
 
-
-        $ch = curl_init('http://www.example.com');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
+        curl_setopt($ch, CURLOPT_URL,            "https://apis.logestechs.com/saas/api/ship/customer/request" );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt($ch, CURLOPT_POST,           1 );
         curl_setopt($ch, CURLOPT_POSTFIELDS, $array_pushed);
+        curl_setopt($ch, CURLOPT_HTTPHEADER,     $this->request_headers); 
 
+    
         $response = curl_exec($ch);
         curl_close($ch);
         return $response;
@@ -204,163 +102,105 @@ class ApiOrderHelper extends BaseObject
 
     }
 
-    public  function change_status($order_id){
-        $array_pushed=[];
 
 
-        $request_headers = array(
-            "X-Mashape-Key:" . "params",
-            "X-Mashape-Host:" . "houst"
-        );
 
 
-        $ch = curl_init('http://www.example.com');
+
+
+
+
+
+    public function get_villages()
+    {
+        
+        $page=1;
+        $search="";
+        $cityId="";
+        $regionId="";
+        if(isset($_GET["page"])){
+            $page=$_GET["page"];
+        }
+        if(isset($_GET["search"])){
+            $search=$_GET["search"];
+        }
+
+        if(isset($_GET["cityId"])){
+            $cityId=$_GET["cityId"];
+        }
+
+        if(isset($_GET["regionId"])){
+            $regionId=$_GET["regionId"];
+        }
+
+
+
+        
+
+        $ch = curl_init("https://apis.logestechs.com/saas/api/addresses/villages?search=$search&cityId=$cityId&regionId=$regionId&page=$page");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $array_pushed);
-
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->request_headers);
         $response = curl_exec($ch);
         curl_close($ch);
+        return json_decode($response,true);
 
-        var_dump($response);
     }
-}
 
 
-/*
- * {
-    "data": [
-        {
-            "name": "Aabel Al Qameh",
-            "arabicName": "آبل القمح",
-            "cityId": 27,
-            "isSelected": true,
-            "isAddedByUser": false,
-            "numberOfPackages": 0,
-            "regionId": 4,
-            "regionName": "48 Cities",
-            "cityName": "Yafa",
-            "createdDate": "2019-10-01T20:04:33.000+0000",
-            "id": 533
-        },
-        {
-            "name": "Aappa",
-            "arabicName": "عابا",
-            "cityId": 7,
-            "isSelected": true,
-            "isAddedByUser": false,
-            "numberOfPackages": 0,
-            "regionId": 1,
-            "regionName": "West Bank",
-            "cityName": "Jenin",
-            "createdDate": "2019-10-01T19:57:07.000+0000",
-            "id": 310
-        },
-        {
-            "name": "Aboud",
-            "arabicName": "عابود",
-            "cityId": 5,
-            "isSelected": true,
-            "isAddedByUser": false,
-            "numberOfPackages": 0,
-            "regionId": 1,
-            "regionName": "West Bank",
-            "cityName": "Ramallah and Al-Bireh",
-            "createdDate": "2019-10-01T19:54:52.000+0000",
-            "id": 210
-        },
-        {
-            "name": "Abu Dis",
-            "arabicName": "أبو ديس",
-            "cityId": 5,
-            "isSelected": true,
-            "isAddedByUser": false,
-            "numberOfPackages": 0,
-            "regionId": 1,
-            "regionName": "West Bank",
-            "cityName": "Ramallah and Al-Bireh",
-            "createdDate": "2019-10-01T19:51:36.000+0000",
-            "id": 76
-        },
-        {
-            "name": "Abu Qash",
-            "arabicName": "أبو قش",
-            "cityId": 5,
-            "isSelected": true,
-            "isAddedByUser": false,
-            "numberOfPackages": 0,
-            "regionId": 1,
-            "regionName": "West Bank",
-            "cityName": "Ramallah and Al-Bireh",
-            "createdDate": "2019-10-01T19:53:48.000+0000",
-            "id": 160
-        },
-        {
-            "name": "Abu Shkheidam",
-            "arabicName": "أبو شخيدم",
-            "cityId": 5,
-            "isSelected": true,
-            "isAddedByUser": false,
-            "numberOfPackages": 0,
-            "regionId": 1,
-            "regionName": "West Bank",
-            "cityName": "Ramallah and Al-Bireh",
-            "createdDate": "2019-10-01T19:53:47.000+0000",
-            "id": 159
-        },
-        {
-            "name": "Abu Shkheidam",
-            "arabicName": "أبوشخيدم",
-            "cityId": 5,
-            "isSelected": true,
-            "isAddedByUser": false,
-            "numberOfPackages": 0,
-            "regionId": 1,
-            "regionName": "West Bank",
-            "cityName": "Ramallah and Al-Bireh",
-            "createdDate": "2019-10-01T19:53:57.000+0000",
-            "id": 167
-        },
-        {
-            "name": "Abu Shoosha",
-            "arabicName": "أبو شوشة",
-            "cityId": 26,
-            "isSelected": true,
-            "isAddedByUser": false,
-            "numberOfPackages": 0,
-            "regionId": 4,
-            "regionName": "48 Cities",
-            "cityName": "Beer Al Sabe'",
-            "createdDate": "2019-10-01T20:02:55.000+0000",
-            "id": 471
-        },
-        {
-            "name": "Abu Talloul",
-            "arabicName": "أبو تلول",
-            "cityId": 29,
-            "isSelected": true,
-            "isAddedByUser": false,
-            "numberOfPackages": 0,
-            "regionId": 4,
-            "regionName": "48 Cities",
-            "cityName": "Al Ramla",
-            "createdDate": "2019-10-01T20:05:36.000+0000",
-            "id": 568
-        },
-        {
-            "name": "Abu Zraiq",
-            "arabicName": "أبو زريق",
-            "cityId": 26,
-            "isSelected": true,
-            "isAddedByUser": false,
-            "numberOfPackages": 0,
-            "regionId": 4,
-            "regionName": "48 Cities",
-            "cityName": "Beer Al Sabe'",
-            "createdDate": "2019-10-01T20:02:43.000+0000",
-            "id": 464
+
+
+    public function get_cities()
+    {
+
+              
+        $page=1;
+        $search="";
+        $cityId="";
+      
+        if(isset($_GET["page"])){
+            $page=$_GET["page"];
         }
-    ],
-    "totalRecordsNo": 0
+        if(isset($_GET["search"])){
+            $search=$_GET["search"];
+        }
+
+        if(isset($_GET["cityId"])){
+            $cityId=$_GET["cityId"];
+        }
+
+        $ch = curl_init("https://apis.logestechs.com/saas/api/addresses/cities?search=$search&cityId=$cityId&page=$page");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->request_headers);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($response,true);
+
+    }
+
+
+
+    public function get_regions()
+    {
+
+        $page=1;
+        $search="";
+        $cityId="";
+      
+        if(isset($_GET["page"])){
+            $page=$_GET["page"];
+        }
+        if(isset($_GET["search"])){
+            $search=$_GET["search"];
+        }
+        
+        $ch = curl_init("https://apis.logestechs.com/saas/api/addresses/regions?search=$search&page=$page");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->request_headers);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($response,true);
+
+    }
+
 }
- */
+

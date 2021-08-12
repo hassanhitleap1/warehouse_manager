@@ -2,13 +2,10 @@
 
 namespace app\controllers;
 
-
-use app\components\ApiOrderHelper;
 use app\models\orders\Orders;
-use app\models\orders\OrdersSearch;
 use Yii;
 use yii\filters\VerbFilter;
-use kartik\export\ExportMenu;
+
 
 
 /**
@@ -63,14 +60,15 @@ class ExportController extends BaseController
     public function actionExportToDriver(){
         $string_id=$_GET['string_id'];
         $ides = explode(",", $string_id);
-        $models=Orders::find()->where(['in','id',$ides])->all();
-        $api = new ApiOrderHelper();
-        $respoance=[];
-        foreach ($models as $key => $model){
-            $res=$api->push_order($model);
-            $respoance[]=["status"=>$res["status"],"data"=>$model];
-        }
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        return $respoance;
+
+        
+        $models=Orders::find()->select(['orders.*','user.name','user.phone','user.other_phone',
+        'regions.name_ar','regions.region_api_id','regions.city_api_id','regions.village_api_id'])
+        ->join('inner JOIN', 'user', 'user.id = orders.user_id')
+        ->join('inner JOIN', 'regions', 'regions.id = user.region_id')
+        ->where(['in','orders.id',$ides])->asArray()->all();
+      
+    
+        return $this->render('export-to-driver',['models'=>$models]);
     }
 }
