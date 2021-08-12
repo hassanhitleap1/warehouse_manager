@@ -330,6 +330,7 @@ $session = Yii::$app->session;
                     "<button id='print_all_invoice' style='display: none;' class='btn btn-success' title='" . Yii::t('app', 'Print_All_Invoice') . "' > <span    class='glyphicon glyphicon-print' > </span> </button>".
                     "<button id='export_pdf' class='btn btn-success' title='" . Yii::t('app', 'Export_PDF') . "' > <span   class='glyphicon glyphicon-print' > </span> </button>".
                     "<button id='change_status' class='btn btn-success' title='" . Yii::t('app', 'Change_Status') . "' > <span   class='glyphicon glyphicon-screenshot' > </span> </button>".
+                    "<button id='Previous_Order_Statuses' class='btn btn-success' title='" . Yii::t('app', 'Previous_Order_Statuses') . "' > <span   class='glyphicon glyphicon-print' > </span> </button>".
                     "<button id='delete_orders' class='btn btn-success' title='" . Yii::t('app', 'Delete_Orders') . "' > <span   class='glyphicon glyphicon-trash' > </span> </button>"            ],
             'showPageSummary' => true,
         ],
