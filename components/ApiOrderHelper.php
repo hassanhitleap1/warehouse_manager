@@ -50,7 +50,7 @@ class ApiOrderHelper extends BaseObject
             "isAnimalOrPit"=> false,
             "isNeedPacking"=> false,
             "notes" => $model['note'],
-            "invoiceNumber"=>$model['order_id'],
+            "invoiceNumber"=> "",//$model['order_id'],
             "weight"=> 20,
             "length"=> 40,
             "width"=> 40,

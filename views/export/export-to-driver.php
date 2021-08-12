@@ -33,6 +33,14 @@ $api= new ApiOrderHelper();
       <?php foreach($models as $key =>$model):?>
         <?php 
          $responce=$api->push_order($model);
+         if(isset($responce["error"])){
+             $class_name="bg-danger";
+         }else{
+             $class_name="bg-success";
+             $model->order_id=$responce['invoiceNumber'];
+             $model->save();
+         }
+
          if(true){
             $class_name="bg-success";
         }else{
