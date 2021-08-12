@@ -23,7 +23,7 @@ $api= new ApiOrderHelper();
         <tr>
           <th scope="col">
               #
-                <input type="checkbox" class="kv-row-checkbox" name="selection" >
+                <input type="checkbox" class="select-on-check-all" name="selection" >
           </th>
           <th scope="col"><?= Yii::t('app','Name')?></th>
           <th scope="col"><?= Yii::t('app','Phone')?></th>
