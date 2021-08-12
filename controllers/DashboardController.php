@@ -278,5 +278,48 @@ class  DashboardController extends BaseController {
        
         return $this->render('best-seller',['orders'=>$orders]);
     }
-    
+
+
+    public function actionStatus()
+    {
+
+        $date=Carbon::now("Asia/Amman");
+        $year=$date->format('Y');
+        $month=$date->format('m');
+        $status_day = Orders::find()->select([
+            'count(*) as count_order',
+            "orders.created_at",
+            "orders.status_id",
+            "status.name_ar",
+            'DAY(orders.created_at) as day',
+        ])
+            ->join('inner JOIN', 'status', 'status.id = orders.status_id')
+            ->andWhere('YEAR(orders.created_at)=:year', [':year' => $year])
+            ->andWhere('MONTH(orders.created_at)=:month', [':month' => $month])
+            ->groupBy(['DAY(`orders`.`created_at`)','orders.status_id'])
+            ->orderBy(['orders.created_at'=>SORT_ASC])
+            ->asArray()->all();
+
+        $status_month = Orders::find()->select([
+            'count(*) as count_order',
+            "orders.created_at",
+            'MONTH(`orders`.`created_at`) as month',
+            "orders.status_id",
+            "status.name_ar",
+            'MONTH(orders.created_at) as month',
+        ])
+            ->join('inner JOIN', 'status', 'status.id = orders.status_id')
+            ->andWhere('YEAR(orders.created_at)=:year', [':year' => $year])
+            ->groupBy(['MONTH(orders.created_at)'])
+            ->orderBy(['orders.created_at'=>SORT_ASC])
+            ->asArray()->all();
+
+
+        return $this->render('status',[
+            'status_day'=>$status_day,
+            'status_month'=>$status_month,
+        ]);
+
+    }
+
 }
