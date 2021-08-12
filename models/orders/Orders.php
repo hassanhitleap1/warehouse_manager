@@ -40,6 +40,8 @@ class Orders extends \yii\db\ActiveRecord
     public $name_in_facebook;
     public $order;
     public $products_id=[] ;
+    const DEPOTED=1;
+    const UN_DEPOTED=0;
 
     /**
      * {@inheritdoc}

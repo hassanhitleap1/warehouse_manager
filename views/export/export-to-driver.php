@@ -2,6 +2,7 @@
 
 
 use app\components\ApiOrderHelper;
+use app\models\orders\Orders;
 use yii\helpers\Html;
 
 
@@ -31,22 +32,24 @@ $api= new ApiOrderHelper();
   </thead>
   <tbody>
       <?php foreach($models as $key =>$model):?>
-        <?php 
-         $responce=$api->push_order($model);
-         if(isset($responce["error"])){
-             $class_name="bg-danger";
-         }else{
-             $class_name="bg-success";
-             $model->order_id=$responce['invoiceNumber'];
-             $model->save();
-         }
-
-         if(true){
-            $class_name="bg-success";
+        <?php
+        if($model->deported == Orders::UN_DEPOTED){
+            $responce=$api->push_order($model);
+            if(isset($responce["error"])){
+                $class_name="bg-danger";
+            }else{
+                Yii::$app->db->createCommand()
+                    ->update('orders', ['order_id' => $responce['barcode'],'deported'=>Orders::DEPOTED], "orders.id =". $model['id'])
+                    ->execute();
+                $class_name="bg-success";
+            }
         }else{
-
-            $class_name="bg-danger";
+            $class_name="bg-success";
         }
+
+
+
+
         ?>
         <tr class="<?=$class_name?>">
             <th scope="row"><?= ++$key?></th>
@@ -54,7 +57,7 @@ $api= new ApiOrderHelper();
             <td><?= $model["phone"] ?></td>
             <td><?= $model["address"] ?></td>
             <td><?= $model['name_ar']?></td>
-            <td><?= $model["total_price"] ?></td>
+            <td><?= $model["total_price"] ?> </td>
         </tr>
     
     <?php endforeach;?>

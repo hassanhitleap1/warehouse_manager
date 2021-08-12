@@ -4,6 +4,7 @@ namespace  app\components;
 
 use Yii;
 use yii\base\BaseObject;
+use function Symfony\Component\Translation\t;
 
 
 class ApiOrderHelper extends BaseObject
@@ -14,7 +15,8 @@ class ApiOrderHelper extends BaseObject
     private $senderMiddleName="kahled";
     private $request_headers=[
                         "Authorization-Token:" . "7be004ba6ae88fb4097ef885fdf5fe148886fd68b424b7192a0e060a58e10",
-                        "company-id:" . "143"
+                        "company-id:" . "143",
+                        "Content-Type: application/json"
                     ];
 
     /*
@@ -22,8 +24,6 @@ class ApiOrderHelper extends BaseObject
      */
     public  function push_order($model){
 
-        
-        $pkg=[];
         $destinationAddress=[
             "addressLine1" => $model['address'], //required
             "cityId"=> $model["city_api_id"], //required
@@ -40,7 +40,7 @@ class ApiOrderHelper extends BaseObject
             "regionId" => $model["region_api_id"], //required
             "villageId"=> $model["village_api_id"] //required
         ];
-        $pkg[]=[
+        $pkg=[
             "cost"=>2,
             "cod"=>$model['total_price'],
             "isInsurance" => false,
@@ -85,20 +85,22 @@ class ApiOrderHelper extends BaseObject
         ];
 
 
+        $json= json_encode($array_pushed ,true );
 
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL,            "https://apis.logestechs.com/saas/api/ship/customer/request" );
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
         curl_setopt($ch, CURLOPT_POST,           1 );
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $array_pushed);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$json);
         curl_setopt($ch, CURLOPT_HTTPHEADER,     $this->request_headers); 
 
     
         $response = curl_exec($ch);
         curl_close($ch);
-        return $response;
-        var_dump($response);
+        return json_decode($response ,true);
+
 
     }
 
