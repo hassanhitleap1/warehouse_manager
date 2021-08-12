@@ -40,7 +40,7 @@ $api= new ApiOrderHelper();
             ?>
           <?php foreach($models as $key =>$model):?>
             <?php
-            if($model->deported == Orders::UN_DEPOTED ){
+            if($model['deported'] == Orders::UN_DEPOTED ){
                 if($total_exprot < $max_exprt){
                     $responce=$api->push_order($model);
                     if(isset($responce["error"])){
