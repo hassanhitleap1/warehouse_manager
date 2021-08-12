@@ -28,6 +28,7 @@ $api= new ApiOrderHelper();
       <th scope="col"><?= Yii::t('app','Address')?></th>
       <th scope="col"><?= Yii::t('app','Region')?></th>
       <th scope="col"><?= Yii::t('app','Total_Price')?></th>
+        <th scope="col"><?= Yii::t('app','Action')?></th>
     </tr>
   </thead>
   <tbody>
@@ -46,10 +47,6 @@ $api= new ApiOrderHelper();
         }else{
             $class_name="bg-success";
         }
-
-
-
-
         ?>
         <tr class="<?=$class_name?>">
             <th scope="row"><?= ++$key?></th>
@@ -58,6 +55,10 @@ $api= new ApiOrderHelper();
             <td><?= $model["address"] ?></td>
             <td><?= $model['name_ar']?></td>
             <td><?= $model["total_price"] ?> </td>
+            <td> <? Html::a("<span   class='glyphicon glyphicon-plane' > </span>",
+                    ['export/export-to-driver', 'string_id'=>$model["id"]],
+                    ['class' => 'btn btn-success' ,"target"=>"_blank"])?>
+            </td>
         </tr>
     
     <?php endforeach;?>
