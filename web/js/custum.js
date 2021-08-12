@@ -477,6 +477,24 @@ $(document).on('click','#export_pdf',function (e) {
 });
 
 
+$(document).on('click','#export_to_driver',function (e) {
+    let selected=get_seletcted();
+    ides=[];
+    let string_id=selected.string_id;
+    ides=selected.ides;
+
+    if(ides.length==0){
+        alert("select orders");
+        return;
+    }
+    string_id=string_id.slice(0, -1)
+    let url= `${SITE_URL}/index.php?r=export/export-to-driver&string_id=${string_id}`;
+    window.open(url);
+
+});
+
+
+
 $(document).on('click','#change_status',function (e) {
     let selected=get_seletcted();
     ides=[];
