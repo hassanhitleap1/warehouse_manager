@@ -159,6 +159,7 @@ $data_product_order=[];
         </div>
         <div class="col-md-6">
             <?= Html::a(Yii::t('app','More'), ['dashboard/outlay'],['class'=>'pull-left']) ?>
+            <?= Html::a(Yii::t('app','Previous_Order_Statuses'), ['dashboard/status'],['class'=>'pull-left']) ?>
             <canvas id="chart"></canvas>
         </div>
 
