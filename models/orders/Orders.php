@@ -4,6 +4,7 @@ namespace app\models\orders;
 
 use app\components\OrderHelper;
 use app\models\area\Area;
+use app\models\companydelivery\CompanyDelivery;
 use app\models\countries\Countries;
 use app\models\regions\Regions;
 use Carbon\Carbon;
@@ -172,6 +173,11 @@ class Orders extends \yii\db\ActiveRecord
     public function getArea()
     {
         return $this->hasOne(Area::className(), ['id' => 'area_id']);
+    }
+
+    public function getCompany()
+    {
+        return $this->hasOne(CompanyDelivery::className(), ['id' => 'company_delivery_id']);
     }
 
     public function getCountry()

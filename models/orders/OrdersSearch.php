@@ -23,7 +23,7 @@ class OrdersSearch extends Orders
     public function rules()
     {
         return [
-            [['id', 'country_id', 'region_id','area_id', 'status_id','delivery_price','discount','total_price','amount_required'], 'integer'],
+            [['id', 'country_id', 'region_id','area_id', 'status_id','delivery_price','discount','total_price','amount_required','company_delivery_id'], 'integer'],
             [['order_id', 'search_string','delivery_date','user_id', 'delivery_time', 'address', 'phone','created_at', 'updated_at','products_id'], 'safe'],
 
         ];
@@ -80,6 +80,8 @@ class OrdersSearch extends Orders
 
 
         $query->joinWith('user');
+        $query->joinWith('company');
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -95,6 +97,7 @@ class OrdersSearch extends Orders
             'orders.total_price' => $this->total_price,
             'orders.amount_required' => $this->amount_required,
             'orders.status_id' => $this->status_id,
+            'orders.company_delivery_id' => $this->company_delivery_id,
 //            'DATE(orders.created_at)' => $this->created_at,
 //            'orders.updated_at' => $this->updated_at,
         ]);

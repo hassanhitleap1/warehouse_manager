@@ -1,6 +1,7 @@
 <?php
 
 use app\models\area\Area;
+use app\models\companydelivery\CompanyDelivery;
 use app\models\countries\Countries;
 use app\models\regions\Regions;
 use app\models\status\Status;
@@ -230,6 +231,7 @@ $columns = [
         'footerOptions' => ['class' => 'skip-export'],
     ],
     'note',
+    // 'profit_margin',
     //'delivery_price',
     // 'discount',
 
@@ -269,6 +271,32 @@ $columns = [
         },
         'filterType' => GridView::FILTER_SELECT2,
         'filter' => ArrayHelper::map(Area::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'),
+        'filterWidgetOptions' => [
+            'pluginOptions' => ['allowClear' => true],
+        ],
+        'contentOptions' => ['class' => 'skip-export'],
+        'headerOptions' => ['class' => 'skip-export'],
+        'footerOptions' => ['class' => 'skip-export'],
+        'format' => 'raw',
+        'visible' => true,
+    ],
+
+
+    
+    [
+
+       
+        'attribute' => 'company_delivery_id',
+        'vAlign' => 'middle',
+        'width' => '50px',
+        'value' => function ($model, $key, $index, $widget) {
+            // return $model["company_delivery_id"];
+            return $model['company']['name'];
+        },
+        'filterInputOptions' => ['placeholder' => 'select campany'],
+        // 'filterType' => GridView::FILTER_SELECT2,
+
+        'filter' => ArrayHelper::map(CompanyDelivery::find()->orderBy('name')->asArray()->all(), 'id', 'name'),
         'filterWidgetOptions' => [
             'pluginOptions' => ['allowClear' => true],
         ],
