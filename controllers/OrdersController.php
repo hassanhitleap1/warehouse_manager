@@ -314,6 +314,17 @@ class OrdersController extends Controller
 
 
 
+    public function actionChangeCampany($id){
+        $model = $this->findModel($id);
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $campany_id=$_GET['campany_id'];
+        
+        Yii::$app->db->createCommand()
+        ->update('orders', ['company_delivery_id' => $campany_id], "orders.id =". $model->id)
+        ->execute();
+       
+         return ['code'=>201];  
+    }
 
     public function actionChangeStatus($id){
         $model = $this->findModel($id);
@@ -371,6 +382,12 @@ class OrdersController extends Controller
         return $this->renderAjax('set_status',['model'=> $model,'status'=>$status]);
     }
 
+    public function actionSetCampany($id)
+    {
+        $model=$this->findModel($id);
+        $campanies=CompanyDelivery::find()->all();
+        return $this->renderAjax('set_campany',['model'=> $model,'campanies'=>$campanies]);
+    }
   
 
     public function actionSetStatusSelected()

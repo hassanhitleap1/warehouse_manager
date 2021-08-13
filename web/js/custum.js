@@ -209,6 +209,30 @@ $(document).on('click', '.change-status', function(e){
 });
 
 
+$(document).on('click', '.change-campany', function(e){
+    e.preventDefault();
+    var id= $(this).attr("att_id");
+    var campany_id= $(this).attr("att_campany_id");
+    var name_campany= $(this).attr("name_campany");
+    let url= `${SITE_URL}/index.php?r=orders/change-campany&id=${id}&campany_id=${campany_id}`;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (json) {
+            if(json.code==201){
+                $(".column_campany_"+id).text(name_campany);
+                $('#model').modal('hide');
+                $('#modelContent').html("");
+
+            }else {
+                alert("sumthing  error");
+            }
+        }
+    });
+
+});
+
+
 $(document).on('click', '.change-status-all', function(e){
     e.preventDefault();
     var id_string= $(this).attr("att_id_string");
