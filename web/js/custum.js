@@ -239,6 +239,38 @@ $(document).on('click', '.change-status-all', function(e){
 
 });
 
+$(document).on('click', '.change-campany-all', function(e){
+    e.preventDefault();
+    var id_string= $(this).attr("att_id_string");
+    var campany_id= $(this).attr("att_campany_id");
+    
+    var name_campany= $(this).attr("name_campany");
+    let url= `${SITE_URL}/index.php?r=orders/change-campany-selected&name_campany=${name_campany}&campany_id=${campany_id}&string_id=${id_string}`;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (json) {
+          
+            if(json.code==201){
+                
+            $.each(json.data, function( index, value ) {
+                console.log("value",value);
+                console.log("name_campany",name_campany);
+                $(".column_campany_"+value.id).text(name_campany);
+            });
+                
+                $('#model').modal('hide');
+                $('#modelContent').html("");
+
+            }else {
+                alert("sumthing  error");
+            }
+        }
+    });
+
+});
+
+
 
 function profit_margin_fn(){
     let profit_margin=0;
@@ -493,6 +525,25 @@ $(document).on('click','#export_to_driver',function (e) {
 
 });
 
+
+
+$(document).on('click','#change_campany',function (e) {
+    let selected=get_seletcted();
+    ides=[];
+    let string_id=selected.string_id;
+    ides=selected.ides;
+    if(ides.length==0){
+        alert("select orders");
+        return ;
+    }
+    string_id=string_id.slice(0, -1);
+    let url= `${SITE_URL}/index.php?r=orders/set-campany-selected&string_id=${string_id}`;
+
+    $('#model').modal('show')
+        .find('#modelContent')
+        .load(url);
+
+});
 
 
 $(document).on('click','#change_status',function (e) {

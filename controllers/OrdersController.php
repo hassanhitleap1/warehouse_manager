@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\components\OrderHelper;
+use app\models\companydelivery\CompanyDelivery;
 use app\models\historystatus\HistoryStatus;
 use app\models\Model;
 use app\models\status\Status;
@@ -261,6 +262,29 @@ class OrdersController extends Controller
         return ['code'=>201,'data'=>$data];
     }
 
+    
+
+    public function actionChangeCampanySelected(){
+        $string_id=$_GET['string_id'];
+        $campany_id=$_GET['campany_id'];
+        $name_campany=$_GET['name_campany'];
+        $ides = explode(",", $string_id);
+        $models=Orders::find()->where(['in','id',$ides])->all();
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $data=[];
+      
+        foreach($models as $key =>$model){
+            $model->company_delivery_id=$campany_id;
+            Yii::$app->db->createCommand()
+            ->update('orders', ['company_delivery_id' => $campany_id], "orders.id =". $model->id)
+            ->execute();
+            
+            $data[]=['id'=>$model->id,'campany_id'=>$campany_id,'name_campany'=>$name_campany];
+        }
+
+
+        return ['code'=>201,'data'=>$data];
+    }
 
     public function actionDeleteOrderSelected(){
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -347,12 +371,21 @@ class OrdersController extends Controller
         return $this->renderAjax('set_status',['model'=> $model,'status'=>$status]);
     }
 
+  
 
     public function actionSetStatusSelected()
     {
         $string_id=$_GET['string_id'];
         $status= $status=Status::find()->all();
         return $this->renderAjax('set_status_all',['status'=>$status,'string_id'=>$string_id]);
+    }
+
+
+    public function actionSetCampanySelected()
+    {
+        $string_id=$_GET['string_id'];
+         $campanies=CompanyDelivery::find()->all();
+        return $this->renderAjax('set_campany_all',['campanies'=>$campanies,'string_id'=>$string_id]);
     }
 
 
