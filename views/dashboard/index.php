@@ -376,7 +376,7 @@ $data_delivery_order=[];
     };
 
     new Chart(
-        document.getElementById('chart_orders'),
+        document.getElementById('chart_product_order'),
         config
     );
 
