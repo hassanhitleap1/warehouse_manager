@@ -85,3 +85,29 @@ $api= new ApiOrderHelper();
       </tbody>
     </table>
 </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script  type="text/javascript">
+
+
+
+    $(document).on('click','.select-on-check-all',function (e) {
+        console.log($(this).attr('checked'));
+        if ($(this).is(":checked")){
+            $('.kv-row-checkbox').each(function() {
+                $(this).prop('checked', true);
+            });
+        }else{
+            $('.kv-row-checkbox').each(function() {
+                $(this).prop('checked', false);
+            });
+
+        }
+
+
+    });
+
+
+
+
+</script>
