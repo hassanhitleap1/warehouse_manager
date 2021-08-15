@@ -82,8 +82,7 @@ $data_month=[];
                 ?>
 
                 <?php endforeach;?>
-                <?php endforeach;?>
-
+               
                 </tbody>
             </table>
         </div>
