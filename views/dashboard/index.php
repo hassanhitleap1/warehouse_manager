@@ -231,7 +231,7 @@ $data_delivery_order=[];
             </table>
         </div>
         <div class="col-md-6">
-            <?= Html::a(Yii::t('app','More'), ['dashboard/best-seller'],['class'=>'pull-left']) ?>
+            <?= Html::a(Yii::t('app','More'), ['dashboard/delivery'],['class'=>'pull-left']) ?>
             <canvas class="" id="chart_delivery_order"></canvas>
 
         </div>

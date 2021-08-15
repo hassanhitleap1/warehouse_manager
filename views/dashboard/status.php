@@ -93,22 +93,22 @@ $data_month=[];
 
 <script>
 
-    new Chart(
-        document.getElementById('status_day'),
-        {
-            type: 'line',
-                {
-                    labels: <?=json_encode($label_day)?>,
-                    datasets: [{
-                        label: 'الحالات اليومية',
-                        backgroundColor: 'rgb(11, 168, 90)',
-                        borderColor: 'rgb(11, 168, 90)',
-                        data: <?=json_encode($data_day)?> ,
-                        }]
-                },
-            options: {}
-            }
-    );
+    // new Chart(
+    //     document.getElementById('status_day'),
+    //     {
+    //         type: 'line',
+    //             {
+    //                 labels: <?=json_encode($label_day)?>,
+    //                 datasets: [{
+    //                     label: 'الحالات اليومية',
+    //                     backgroundColor: 'rgb(11, 168, 90)',
+    //                     borderColor: 'rgb(11, 168, 90)',
+    //                     data: <?=json_encode($data_day)?> ,
+    //                     }]
+    //             },
+    //         options: {}
+    //         }
+    // );
 
 
 

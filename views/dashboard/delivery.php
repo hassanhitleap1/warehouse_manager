@@ -27,7 +27,7 @@ $data_month=[];
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th><?= Yii::t('app','Status');?></th>
+                        <th><?= Yii::t('app','Name');?></th>
                         <th><?= Yii::t('app','Count_Orders');?></th>
                         <th><?= Yii::t('app','Date');?></th>
                     </tr>
@@ -62,7 +62,7 @@ $data_month=[];
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><?= Yii::t('app','Status');?></th>
+                    <th><?= Yii::t('app','Name');?></th>
                     <th><?= Yii::t('app','Count_Orders');?></th>
                     <th><?= Yii::t('app','Month');?></th>
 
@@ -71,18 +71,18 @@ $data_month=[];
                 <tbody>
                 <?php foreach($delivery_month as $deliv_month):?>
                 <tr>
-                    <th><?= $deliv_month["name_ar"]?></th>
+                    <th><?= $deliv_month["name"]?></th>
                     <th><?= $deliv_month["count_order"]?> </th>
                     <th><?= $deliv_month["month"]?> </th>
 
                 </tr>
                 <?php
-                $label_month[]=$deliv_month["name_ar"];
+                $label_month[]=$deliv_month["name"];
                 $data_month[]=$deliv_month["count_order"];
                 ?>
 
                 <?php endforeach;?>
-                <?php endforeach;?>
+               
 
                 </tbody>
             </table>
