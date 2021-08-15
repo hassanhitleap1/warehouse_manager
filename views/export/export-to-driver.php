@@ -36,14 +36,14 @@ $api= new ApiOrderHelper();
       <tbody>
             <?php
             $total_exprot=0;
-            $max_exprt=20
+            $max_exprt=30
             ?>
           <?php foreach($models as $key =>$model):?>
             <?php
             if($model['deported'] == Orders::UN_DEPOTED ){
                 if($total_exprot < $max_exprt){
-//                    $responce=$api->push_order($model);
-                    $responce["barcode"]="sss";
+                    $responce=$api->push_order($model);
+//                    $responce["barcode"]="sss";
 //                    $responce["error"]="ss";
                     if(isset($responce["error"])){
                         $class_name="bg-danger";
