@@ -75,8 +75,13 @@ class  DashboardController extends BaseController {
             ->andWhere(['not in', 'history_status.order_id', Orders::find()->select('id')->andWhere('date(orders.created_at) >= :date', [':date' => $date])])
             ->groupBy(['history_status.status_id'])->asArray()->all();
 
+        $delivery_order=Orders::find()->select(['count(*) as count_order','company_delivery.name'])
+            ->innerJoin('company_delivery', 'company_delivery.id=orders.company_delivery_id')
+            ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
+            ->groupBy(['orders.company_delivery_id'])->asArray()->all();
+
           return $this->render('index',[
-            'orders'=>$orders, 'details'=>$details,'status_orders'=>$status_orders,'status_statisticis'=>$status_statisticis,'products_order'=>$products_order
+            'orders'=>$orders, 'details'=>$details,'status_orders'=>$status_orders,'status_statisticis'=>$status_statisticis,'products_order'=>$products_order,'delivery_order'=>$delivery_order
         ]);
     }
 
@@ -320,6 +325,47 @@ class  DashboardController extends BaseController {
             'status_month'=>$status_month,
         ]);
 
+    }
+
+
+    public function actionDelivery(){
+        $date=Carbon::now("Asia/Amman");
+        $year=$date->format('Y');
+        $month=$date->format('m');
+
+        $delivery_day = Orders::find()->select([
+            'count(*) as count_order',
+            "orders.created_at",
+            "orders.company_delivery_id",
+            "company_delivery.name",
+            'DAY(orders.created_at) as day',
+        ])
+            ->innerJoin('company_delivery', 'company_delivery.id=orders.company_delivery_id')
+            ->andWhere('YEAR(orders.created_at)=:year', [':year' => $year])
+            ->andWhere('MONTH(orders.created_at)=:month', [':month' => $month])
+            ->groupBy(['DAY(`orders`.`created_at`)','orders.company_delivery_id'])
+            ->orderBy(['orders.created_at'=>SORT_ASC])
+            ->asArray()->all();
+
+        $delivery_month = Orders::find()->select([
+            'count(*) as count_order',
+            "orders.created_at",
+            'MONTH(`orders`.`created_at`) as month',
+            "orders.company_delivery_id",
+            "company_delivery.name",
+            'MONTH(orders.created_at) as month',
+        ])
+            ->innerJoin('company_delivery', 'company_delivery.id=orders.company_delivery_id')
+            ->andWhere('YEAR(orders.created_at)=:year', [':year' => $year])
+            ->groupBy(['MONTH(orders.created_at)'])
+            ->orderBy(['orders.created_at'=>SORT_ASC])
+            ->asArray()->all();
+
+
+        return $this->render('delivery',[
+            'delivery_day'=>$delivery_day,
+            'delivery_month'=>$delivery_month,
+        ]);
     }
 
 }
