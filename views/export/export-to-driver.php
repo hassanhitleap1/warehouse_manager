@@ -42,7 +42,9 @@ $api= new ApiOrderHelper();
             <?php
             if($model['deported'] == Orders::UN_DEPOTED ){
                 if($total_exprot < $max_exprt){
-                    $responce=$api->push_order($model);
+//                    $responce=$api->push_order($model);
+                    $responce["barcode"]="sss";
+//                    $responce["error"]="ss";
                     if(isset($responce["error"])){
                         $class_name="bg-danger";
                     }else{
@@ -61,9 +63,7 @@ $api= new ApiOrderHelper();
             ?>
             <tr class="<?=$class_name?>">
                 <th scope="row">
-                    <?php if($class_name =="bg-danger"):?>
-                        <input type="checkbox" class="kv-row-checkbox" name="selection[]" value="<?=$model["id"]?>">
-                    <?php endif;?>
+                    <input type="checkbox" class="kv-row-checkbox" name="selection[]" value="<?=$model["id"]?>">
                     <?= ++$key?>
                 </th>
                 <td><?= $model["name"] ?></td>
