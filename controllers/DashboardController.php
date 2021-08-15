@@ -72,7 +72,7 @@ class  DashboardController extends BaseController {
             ->andWhere(['in','orders.status_id', [1,2,3,4]])
             ->andWhere('date(orders_item.created_at) >= :date', [':date' => $date])
             ->groupBy(['orders_item.product_id'])
-            ->orderBy(['orders.count_order'=>SORT_ASC])
+            ->orderBy(['count_order'=>SORT_ASC])
             ->asArray()->all();
 
 
