@@ -63,7 +63,9 @@ $api= new ApiOrderHelper();
             ?>
             <tr class="<?=$class_name?>">
                 <th scope="row">
+                    <?php if($class_name =="bg-danger"):?>
                     <input type="checkbox" class="kv-row-checkbox" name="selection[]" value="<?=$model["id"]?>">
+                    <?php endif;?>
                     <?= ++$key?>
                 </th>
                 <td><?= $model["name"] ?></td>
