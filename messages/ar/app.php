@@ -207,7 +207,8 @@ return [
     "Number_Of_Grains"=>"عدد الحبات",
     'Time'=>"الوقت",
     "Previous_Order_Statuses"=>"حالات الطلبات السابقة",
-    "Export_To_Driver"=>"تصدير الى السائق"
+    "Export_To_Driver"=>"تصدير الى السائق",
+    "Campany_Delivery"=>"شركات التوصيل"
 
 
 

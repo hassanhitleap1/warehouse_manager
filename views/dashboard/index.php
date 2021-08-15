@@ -16,6 +16,8 @@ $data_gin=[];
 $data_orders=[];
 $label_product_order=[];
 $data_product_order=[];
+$label_delivery_order=[];
+$data_delivery_order=[];
 
 ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -202,6 +204,41 @@ $data_product_order=[];
 
     <hr />
 
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-center"><?= Yii::t('app','Campany_Delivery')?></h2>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= Yii::t('app','Name')?></th>
+                    <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($delivery_order as $key_delivery_or => $delivery_or):?>
+                    <tr>
+                        <th scope="row"><?= ++$key_delivery_or ?></th>
+                        <td><?= $delivery_or['name'] ?> </td>
+                        <td><?= $delivery_or['count_order'] ?></td>
+                    </tr>
+                    <?php $label_delivery_order[] =$delivery_or['name'] ; $data_delivery_order[]=$delivery_or['count_order']  ?>
+                <?php endforeach;?>
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <?= Html::a(Yii::t('app','More'), ['dashboard/best-seller'],['class'=>'pull-left']) ?>
+            <canvas class="" id="chart_delivery_order"></canvas>
+
+        </div>
+    </div>
+
+    <hr />
+
 
     <div class="row" >
 
@@ -340,6 +377,35 @@ $data_product_order=[];
 
     new Chart(
         document.getElementById('chart_orders'),
+        config
+    );
+
+
+
+
+
+    
+    ctx = document.getElementById('chart_delivery_order').getContext('2d');
+    ctx.canvas.parentNode.style.height = '400px';
+    ctx.canvas.parentNode.style.width = '400px';
+    data = {
+        labels: <?=json_encode($label_delivery_order)?>,
+        datasets: [{
+            label: '<?= Yii::t('app','Campany_Delivery')?>',
+            data: <?=json_encode($data_delivery_order)?> ,
+            borderWidth: 1,
+            backgroundColor: ['#B30C1C', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400', '#57AE60', '#894EA0', '#D37400','#27AE60', '#884EA0', '#D35400'],
+        }]
+    };
+
+    var config = {
+        type: 'pie',
+        data: data,
+        options: {}
+    };
+
+    new Chart(
+        document.getElementById('chart_delivery_order'),
         config
     );
 </script>
