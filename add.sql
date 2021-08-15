@@ -27,3 +27,25 @@ ALTER TABLE `orders` ADD `deported` SMALLINT NOT NULL DEFAULT '0' AFTER `company
 ALTER TABLE `regions` ADD `region_api_id` INT NOT NULL DEFAULT '1' AFTER `country_id`;
 ALTER TABLE `regions` ADD `city_api_id` INT NOT NULL DEFAULT '1' AFTER `region_api_id`;
 ALTER TABLE `regions` ADD `village_api_id` INT NOT NULL DEFAULT '1' AFTER `city_api_id`;
+
+
+
+
+INSERT INTO `regions` (`id`, `name_en`, `name_ar`, `price_delivery`, `country_id`, `village_api_id`, `city_api_id`, `region_api_id`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'عمان', 2, 1, 6074, 395, 33, NULL, NULL),
+(2, NULL, 'اربد', 2, 1, 6000, 1184, 43, NULL, NULL),
+(3, NULL, 'الزرقاء', 2, 1, 6020, 1176, 44, NULL, NULL),
+(4, NULL, 'معان', 2, 1, 6106, 1174, 38, NULL, NULL),
+(5, NULL, 'المفرق', 2, 1, 6048, 1179, 36, NULL, NULL),
+(6, NULL, 'العقبة', 2, 1, 6038, 1173, 40, NULL, NULL),
+(7, NULL, 'مادبا', 2, 1, 6104, 1181, 34, NULL, NULL),
+(8, NULL, 'السلط', 2, 1, 242, 1180, 242, NULL, NULL),
+(9, NULL, 'الكرك', 2, 1, 6039, 1175, 37, NULL, NULL),
+(10, NULL, 'الطفيلة', 2, 1, 6036, 387, 39, NULL, NULL),
+(11, NULL, 'عجلون', 2, 1, 42, 1178, 42, NULL, NULL),
+(12, NULL, 'جرش', 2, 1, 41, 1177, 41, NULL, NULL),
+(13, NULL, 'البلقاء', 2, 1, 1, 1, 1, NULL, NULL),
+(14, 'الاغوار', 'الاغوار', 2, 1, 243, 1182, 243, NULL, NULL),
+(15, 'الرصيفة', 'الرصيفة', 2, 1, 244, 1188, 244, NULL, NULL),
+(16, 'الرمثا', 'الرمثا', 2, 1, 246, 1189, 246, NULL, NULL),
+(17, 'عين الباشا', 'عين الباشا', 2, 1, 245, 1186, 245, NULL, NULL);
