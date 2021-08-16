@@ -346,15 +346,18 @@ class  DashboardController extends BaseController {
 
         $delivery_day = Orders::find()->select([
             'count(*) as count_order',
-            "orders.created_at",
+            "date(orders.created_at) as created_at",
             "orders.company_delivery_id",
+            "orders.status_id",
+            "status.name_ar",
             "company_delivery.name",
             'DAY(orders.created_at) as day',
         ])
             ->innerJoin('company_delivery', 'company_delivery.id=orders.company_delivery_id')
+            ->innerJoin('status', 'status.id=orders.status_id')
             ->andWhere('YEAR(orders.created_at)=:year', [':year' => $year])
             ->andWhere('MONTH(orders.created_at)=:month', [':month' => $month])
-            ->groupBy(['DAY(`orders`.`created_at`)','orders.company_delivery_id'])
+            ->groupBy(['DAY(`orders`.`created_at`)','orders.company_delivery_id','orders.status_id'])
             ->orderBy(['orders.created_at'=>SORT_ASC])
             ->asArray()->all();
 

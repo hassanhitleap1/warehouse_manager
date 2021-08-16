@@ -20,23 +20,25 @@ $data_month=[];
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <canvas id="status_day"></canvas>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
-                    <tr>
-                        <th><?= Yii::t('app','Name');?></th>
-                        <th><?= Yii::t('app','Count_Orders');?></th>
-                        <th><?= Yii::t('app','Date');?></th>
-                    </tr>
+                <tr>
+                    <th><?= Yii::t('app','Name');?></th>
+                    <th><?= Yii::t('app','Status');?></th>
+                    <th><?= Yii::t('app','Count_Orders');?></th>
+                    <th><?= Yii::t('app','Date');?></th>
+                </tr>
                 </thead>
                 <tbody>
                 <?php foreach($delivery_day as $deliv_day):?>
                     <tr>
                         <th><?= $deliv_day["name"]?></th>
                         <th><?= $deliv_day["count_order"]?> </th>
+                        <th><?= $deliv_day["name_ar"]?> </th>
                         <th><?= $deliv_day["created_at"]?> </th>
 
                     </tr>
@@ -50,6 +52,8 @@ $data_month=[];
                 </tbody>
             </table>
         </div>
+
+
     </div>
 
     <hr />
