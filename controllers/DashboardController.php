@@ -46,7 +46,7 @@ class  DashboardController extends BaseController {
             ])->andWhere('date(orders.created_at) >= :date', [':date' => $date])
             ->andWhere(['in','orders.status_id', [1,2,3,4]])
             ->groupBy(['DAY(orders.created_at)'])
-            ->orderBy(['count_order'=>SORT_ASC])
+            ->orderBy(['count_order'=>SORT_DESC])
             ->asArray()->one();
     
         $subQuery = Orders::find()->select('id')->andWhere(['in','orders.status_id', [1,2,3,4]])->andWhere('date(orders.created_at) >= :date', [':date' => $date]);
@@ -56,14 +56,14 @@ class  DashboardController extends BaseController {
             ->andWhere('date(orders_item.created_at) >= :date', [':date' => $date])
             ->where(['in', 'orders_item.order_id', $subQuery])
             ->groupBy(['orders_item.sub_product_id'])
-            ->orderBy(['sum_quantity'=>SORT_ASC])
+            ->orderBy(['sum_quantity'=>SORT_DESC])
             ->asArray()->all();
 
         $status_orders=Orders::find()->select(['count(*) as count_order','orders.status_id','status.name_ar'])
             ->innerJoin('status', 'status.id=orders.status_id')
             ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
             ->groupBy(['orders.status_id'])
-            ->orderBy(['orders.status_id'=>SORT_ASC])
+            ->orderBy(['count_order'=>SORT_DESC])
             ->asArray()->all();
 
         $products_order=OrdersItem::find()->select([ 'count(*) as count_order','orders_item.order_id','products.name'])
@@ -72,7 +72,7 @@ class  DashboardController extends BaseController {
             ->andWhere(['in','orders.status_id', [1,2,3,4]])
             ->andWhere('date(orders_item.created_at) >= :date', [':date' => $date])
             ->groupBy(['orders_item.product_id'])
-            ->orderBy(['count_order'=>SORT_ASC])
+            ->orderBy(['count_order'=>SORT_DESC])
             ->asArray()->all();
 
 
@@ -81,14 +81,14 @@ class  DashboardController extends BaseController {
             ->andWhere('date(history_status.created_at) >= :date', [':date' => $date])
             ->andWhere(['not in', 'history_status.order_id', Orders::find()->select('id')->andWhere('date(orders.created_at) >= :date', [':date' => $date])])
             ->groupBy(['history_status.status_id'])
-            ->orderBy(['count_order'=>SORT_ASC])
+            ->orderBy(['count_order'=>SORT_DESC])
             ->asArray()->all();
 
         $delivery_order=Orders::find()->select(['count(*) as count_order','company_delivery.name'])
             ->innerJoin('company_delivery', 'company_delivery.id=orders.company_delivery_id')
             ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
             ->groupBy(['orders.company_delivery_id'])
-            ->orderBy(['company_delivery_id'=>SORT_ASC])
+            ->orderBy(['company_delivery_id'=>SORT_DESC])
             ->asArray()->all();
 
           return $this->render('index',[
