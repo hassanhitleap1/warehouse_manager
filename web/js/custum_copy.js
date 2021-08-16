@@ -1,5 +1,5 @@
 let SITE_URL = getSiteUrl() ;
-var order_data={};
+
 function get_price_delivery(){
     let company_delivery_id=$("#company_delivery_id").val();
     let region_id=  $("#region_id").val();
@@ -23,13 +23,11 @@ $(document).on('change','#region_id,#company_delivery_id',function (e) {
      get_price_delivery();
  });
 
-function calculat_data_order(product,type_options,index){
-    order_data[index]={
-        product:product,
-        type_options,type_options
-    };
-    console.log(order_data);
-}
+
+
+
+
+
 
 
  $(document).on('change','#discount',function (e) {
@@ -120,48 +118,15 @@ $(document).on('change','.sub_product_id',function (e) {
 
  $(document).on('change keypress blur keyup','.quantity_sub_product',function (e) {
 
-     var index_pro =$(".item").index($(this).closest(".item")) +1;
     let quantity_sub_product =parseInt($(this).val());
-    var type_options=order_data[index_pro].type_options;
-    var product=order_data[index_pro].product;
-     let price;
-     let price_item_count;
-     let profit_margin;
-     let profits_margin;
-
-     let cost;
-
-    var type_option = type_options.filter(function(type_option) {
-         return type_option['number'] ==  quantity_sub_product;
-     });
-    if(quantity_sub_product == 0 || quantity_sub_product == '' || quantity_sub_product =='undefined' ){
-        Swal.fire('ارجو وضع حبه واحده على الاقل في المنتج');
-        return ;
-     }
-
-
-     if(type_option.length){
-         price_item_count=type_option[0].price;
-         price=(type_option[0].price / quantity_sub_product ).toFixed(2) ;
-
-     }else{
-         type_option[0]=getMax(order_data[index_pro].type_options, 'number');
-         price_item_count=type_option[0].price;
-         price = (type_option[0].price / quantity_sub_product ).toFixed(2)  ;  //( val ).toFixed(2)
-     }
-     profit_margin = price - product.purchasing_price;
-     cost=product.purchasing_price * quantity_sub_product;
-     profits_margin = price_item_count - cost;
-
-     $(this).closest(".row").find(".price").val(price);
-     $(this).closest(".row").find(".price_item_count").val(price_item_count);
-     $(this).closest(".row").find(".price").val(price);
-     $(this).closest(".row").find(".profit_margin").val( profit_margin );
-     $(this).closest(".row").find(".profits_margin").val( profits_margin );
-     $(this).closest(".item").find(".span_price_items").text(price);
-
-
-
+    let total_price=0;
+     let price= parseFloat($(this).closest(".row").find(".price").val());
+    let profit_margin= parseFloat($(this).closest(".row").find(".profit_margin").val());
+     $(this).closest(".row").find(".price_item_count").val(price *quantity_sub_product);
+    if(quantity_sub_product != '' && quantity_sub_product !='undefined' && ! isNaN(quantity_sub_product )){
+        $(this).closest(".row").find(".profits_margin").val( (profit_margin*quantity_sub_product ).toFixed(2) );
+        $(this).closest(".row").find(".price_item").val(price * quantity_sub_product);
+    }
    callculate_all();
 
 
@@ -771,8 +736,6 @@ function get_product(_this){
         success: function (json) {
             let data=json.data;
             let product=json.product;
-            index_pro =$(".item").index($(_this).closest(".item")) +1;
-            calculat_data_order(product ,json.type_options, index_pro );
            options_sub_product(data,_this);
            header_product_card(product.quantity,data[0].count,product.selling_price ,_this);
            set_value_heddin(data,product,_this);
@@ -791,13 +754,6 @@ function get_sub_product(_this){
          success: function (json) {
             $(_this).closest(".row").find(".quantity_sub_product").attr("max",json.data.sub_product.count);
              $(_this).closest(".item").find("span_quantity_item").text(json.data.sub_product.count);
-            try {
-                var index_pro =$(".item").index($(_this).closest(".item")) +1;
-                calculat_data_order(product ,json.type_options, index_pro );
-            }catch (e) {
-
-            }
-
 
          }
      });
@@ -882,17 +838,3 @@ $(document).on('click','.applyBtn',function (event) {
     $(".search_order").click();
     
 });
-function getMax(array, propName) {
-    var max = 0;
-    var maxItem = null;
-    console.log("array",array)
-    for(var i=0; i<array.length; i++) {
-        var item = array[i];
-        if(item[propName] > max) {
-            max = item[propName];
-            maxItem = item;
-        }
-    }
-
-    return maxItem;
-}

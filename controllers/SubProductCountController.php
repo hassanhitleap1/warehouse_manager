@@ -80,6 +80,8 @@ class SubProductCountController extends BaseController
         $model=SubProductCount::findOne($id);
         $data['sub_product']= $model;
         $data['product']= $model->product;
+        $data['type_options'] =$model->product->typeOptions;
+
         return ['data'=> $data]; 
     }
 

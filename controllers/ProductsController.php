@@ -502,7 +502,7 @@ class ProductsController extends BaseController
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;  
          $product= $this->findModel($id);
-        return ['data'=> $product->subProductCount,'product'=>$product];
+        return ['data'=> $product->subProductCount,'product'=>$product,'type_options'=>$product->typeOptions];
       
     }
 
