@@ -84,7 +84,7 @@ class  DashboardController extends BaseController {
             ->orderBy(['count_order'=>SORT_DESC])
             ->asArray()->all();
 
-        $delivery_order=Orders::find()->select(['count(*) as count_order','company_delivery.name'])
+        $delivery_order=Orders::find()->select(['count(*) as count_order','company_delivery_id','company_delivery.name'])
             ->innerJoin('company_delivery', 'company_delivery.id=orders.company_delivery_id')
             ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
             ->groupBy(['orders.company_delivery_id'])
@@ -92,7 +92,10 @@ class  DashboardController extends BaseController {
             ->asArray()->all();
 
           return $this->render('index',[
-            'orders'=>$orders, 'details'=>$details,'status_orders'=>$status_orders,'status_statisticis'=>$status_statisticis,'products_order'=>$products_order,'delivery_order'=>$delivery_order
+            'orders'=>$orders, 'details'=>$details,
+              'status_orders'=>$status_orders,'status_statisticis'=>
+                  $status_statisticis,'products_order'=>$products_order,
+              'delivery_order'=>$delivery_order,'date'=>$date
         ]);
     }
 

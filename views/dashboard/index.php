@@ -219,9 +219,11 @@ $data_delivery_order=[];
                 <tbody>
                 <?php foreach ($delivery_order as $key_delivery_or => $delivery_or):?>
                     <tr>
+<!--                        OrdersSearch%5Bcreated_at%5D=2021-08-17+-+2021-08-18  -->
+<!--                        v/index.php?r=orders%2Findex&amp;1%5BOrdersSearch%5Bcompany_delivery_id%5D%5D=2021-08-17%2B-%2B2021-08-17-->
                         <th scope="row"><?= ++$key_delivery_or ?></th>
-                        <td><?= $delivery_or['name'] ?> </td>
-                        <td><?= $delivery_or['count_order'] ?></td>
+                        <td> <?= Html::a( $delivery_or['name'], ['orders/index' ,["OrdersSearch[company_delivery_id]" =>$delivery_or["company_delivery_id"], "OrdersSearch[company_delivery_id]"=>"$date+-+$date"   ]]) ?></td>
+                        <td><?= Html::a(  $delivery_or['count_order'], ['orders/index']) ?></td>
                     </tr>
                     <?php $label_delivery_order[] =$delivery_or['name'] ; $data_delivery_order[]=$delivery_or['count_order']  ?>
                 <?php endforeach;?>
