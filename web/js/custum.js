@@ -142,6 +142,7 @@ $(document).on('change keypress blur keyup','.quantity_sub_product',function (e)
     console.log("type_option.length",type_option.length);
     if(type_option.length){
         price_item_count=type_option[0].price;
+        console.log("price_item_count",price_item_count)
         price=(type_option[0].price / quantity_sub_product ).toFixed(2) ;
 
     }else{
