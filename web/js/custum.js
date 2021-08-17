@@ -763,6 +763,9 @@ function callculate_all(){
 }
 
 function get_product(_this){
+    if($(_this).val() == 0 || $(_this).val() == ""){
+        return;
+    }
     let product_id_str=$(_this).attr('id');
     let url= `${SITE_URL}/index.php?r=products/get-product&id=${$(_this).val()}`;
     $.ajax({
@@ -783,6 +786,9 @@ function get_product(_this){
 
 
 function get_sub_product(_this){
+    if($(_this).val() == 0 || $(_this).val() == ""){
+        return;
+    }
     let url= `${SITE_URL}/index.php?r=sub-product-count/get-sub-product&id=${$(_this).val()}`;
     let product_id_str=$(_this).attr('id');
     $.ajax({
