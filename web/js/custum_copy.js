@@ -540,7 +540,7 @@ function get_price_delivery(){
     let company_delivery_id=$("#company_delivery_id").val();
     let region_id=  $("#region_id").val();
     if(region_id==''){
-        alert("ارجو تحديد المحافظة")
+        alert("ارجو تحديد المحافظة");
         return;
     }
     let url= `${SITE_URL}/index.php?r=regions/get-price&id=${region_id}&company_delivery_id=${company_delivery_id}`;
