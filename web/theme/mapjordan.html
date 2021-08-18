@@ -20,8 +20,9 @@
 
     // Configure series
     var polygonTemplate = polygonSeries.mapPolygons.template;
-    // polygonTemplate.tooltipText = "{name}";
-    polygonTemplate.tooltipText = "20";
+    console.log(am4geodata_jordanLow.features[0].properties);
+    polygonTemplate.tooltipText = "{CNTRY}";
+
     polygonTemplate.fill = am4core.color("#74B266");
 
     // Create hover state and set alternative fill color
