@@ -31,7 +31,8 @@ class  NewAsset extends AssetBundle
     function __construct() {
         $path_theme="theme/new";
         $this->css=[
-            "$path_theme/main.css",
+            "https://use.fontawesome.com/releases/v5.0.6/css/all.css",
+            "$path_theme/css_ar/main.css",
         ];
         $this->js=[
             "$path_theme/main.js",
