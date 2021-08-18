@@ -14,6 +14,13 @@ use app\models\products\Products;
  */
 class SubProductCountController extends BaseController 
 {
+    public function init()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $this->layout = "new";
+        }
+        parent::init();
+    }
     /**
      * {@inheritdoc}
      */

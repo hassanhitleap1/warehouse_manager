@@ -33,3 +33,13 @@ jQuery(function ($) {
 
 
 });
+
+open_menu_List();
+
+function open_menu_List(){
+    $(".menu-item.active").each(function () {
+         $(this).closest(".sidebar-dropdown").addClass("active");
+        $(this).closest(".sidebar-submenu").show();
+
+    });
+}

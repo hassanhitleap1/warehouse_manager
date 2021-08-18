@@ -479,3 +479,9 @@ body {
 .chiller-theme .sidebar-footer>a:last-child {
     border-right: none;
 }
+
+.menu-item.active{
+    background: white;
+    width: -webkit-fill-available;
+    color: blue;
+}

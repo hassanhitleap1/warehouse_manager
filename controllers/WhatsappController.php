@@ -10,6 +10,14 @@ use yii\web\Controller;
 
 class WhatsappController extends Controller
 {
+    public function init()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $this->layout = "new";
+        }
+        parent::init();
+    }
+
         public $enableCsrfValidation = false;
 
 //        public function behaviors()

@@ -14,6 +14,14 @@ use yii\filters\VerbFilter;
  */
 class PriceCompanyDeliveryController extends Controller
 {
+
+    public function init()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $this->layout = "new";
+        }
+        parent::init();
+    }
     /**
      * {@inheritdoc}
      */
