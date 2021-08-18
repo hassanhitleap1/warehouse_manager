@@ -41,11 +41,13 @@ use app\models\User;use yii\helpers\Html;
             </div>
         </div>
         <!-- sidebar-search  -->
+        
         <div class="sidebar-menu">
             <ul>
                 <li class="header-menu">
                     <span>General</span>
                 </li>
+                <?php if(Yii::$app->user->identity->type == User::SUPER_ADMIN):?>
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="fa fa-tachometer-alt"></i>
@@ -73,6 +75,7 @@ use app\models\User;use yii\helpers\Html;
                         </ul>
                     </div>
                 </li>
+                <?php endif;?>
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="fa fa-shopping-cart"></i>
@@ -91,6 +94,8 @@ use app\models\User;use yii\helpers\Html;
                         </ul>
                     </div>
                 </li>
+                <?php if(Yii::$app->user->identity->type == User::SUPER_ADMIN):?>
+
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="far fa-gem"></i>
@@ -192,7 +197,7 @@ use app\models\User;use yii\helpers\Html;
 
                 </li>
 
-
+                <?php endif;?>
             </ul>
         </div>
         <!-- sidebar-menu  -->
