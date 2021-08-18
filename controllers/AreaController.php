@@ -28,6 +28,12 @@ class AreaController extends BaseController
             ],
         ];
     }
+    public function init()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $this->layout = "new";
+        }
+    }
 
     /**
      * Lists all Area models.
@@ -35,7 +41,7 @@ class AreaController extends BaseController
      */
     public function actionIndex()
     {
-        $this->layout = "new";
+
         $searchModel = new AreaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

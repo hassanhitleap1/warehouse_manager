@@ -208,7 +208,8 @@ return [
     'Time'=>"الوقت",
     "Previous_Order_Statuses"=>"حالات الطلبات السابقة",
     "Export_To_Driver"=>"تصدير الى السائق",
-    "Campany_Delivery"=>"شركات التوصيل"
+    "Campany_Delivery"=>"شركات التوصيل",
+    "Main"=>"الرئيسي"
 
 
 

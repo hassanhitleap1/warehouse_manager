@@ -299,7 +299,7 @@
 
 .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a:after {
     transform: rotate(90deg);
-    right: 17px;
+    left: 17px;
 }
 
 /*--------------------------side-footer------------------------------*/

@@ -1,7 +1,12 @@
+<?php
+
+use app\models\User;use yii\helpers\Html;
+
+?>
 <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
         <div class="sidebar-brand">
-            <a href="#">pro sidebar</a>
+            <a href="#"><?= Yii::$app->user->identity->username?></a>
             <div id="close-sidebar">
                 <i class="fas fa-times"></i>
             </div>
@@ -12,13 +17,13 @@
                      alt="User picture">
             </div>
             <div class="user-info">
-          <span class="user-name">Jhon
-            <strong>Smith</strong>
+          <span class="user-name">
+            <strong><?= Yii::$app->user->identity->name?></strong>
           </span>
-                <span class="user-role">Administrator</span>
+                <span class="user-role"><?= (Yii::$app->user->identity->type== User::SUPER_ADMIN)?'مدير':"مدخل بيانات" ;?></span>
                 <span class="user-status">
             <i class="fa fa-circle"></i>
-            <span>Online</span>
+            <span>متصل</span>
           </span>
             </div>
         </div>
@@ -44,21 +49,26 @@
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="fa fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                        <span class="badge badge-pill badge-warning">New</span>
+                        <span><?=Yii::t('app','Dashboard')?></span>
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
+
                             <li>
-                                <a href="#">Dashboard 1
-                                    <span class="badge badge-pill badge-success">Pro</span>
-                                </a>
+                                <?= Html::a(Yii::t('app','Main'), ['dashboard/index'])?>
+                            </li>
+
+                            <li>
+                                <?= Html::a(Yii::t('app','The_Sales'), ['dashboard/sales'])?>
                             </li>
                             <li>
-                                <a href="#">Dashboard 2</a>
+                                <?= Html::a(Yii::t('app','The_Outlay'), ['dashboard/outlay'])?>
                             </li>
                             <li>
-                                <a href="#">Dashboard 3</a>
+                                <?= Html::a(Yii::t('app','Best_Seller'), ['dashboard/best-seller'])?>
+                            </li>
+                            <li>
+                                <?= Html::a(Yii::t('app','The_Orders'), ['dashboard/orders'])?>
                             </li>
                         </ul>
                     </div>
@@ -66,46 +76,36 @@
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="fa fa-shopping-cart"></i>
-                        <span>E-commerce</span>
-                        <span class="badge badge-pill badge-danger">3</span>
+                        <span><?=Yii::t('app','Orders')?></span>
+<!--                        <span class="badge badge-pill badge-danger">3</span>-->
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
                             <li>
-                                <a href="#">Products
+                                <?= Html::a(Yii::t('app','Orders'), ['orders/index'])?>
+                            </li>
+                            <li>
+                                <?= Html::a(Yii::t('app','Create_Order'), ['orders/create'])?>
+                            </li>
 
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">Orders</a>
-                            </li>
-                            <li>
-                                <a href="#">Credit cart</a>
-                            </li>
                         </ul>
                     </div>
                 </li>
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="far fa-gem"></i>
-                        <span>Components</span>
+                        <span><?=Yii::t('app','Products')?></span>
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
                             <li>
-                                <a href="#">General</a>
+                                <?= Html::a(Yii::t('app','Products'), ['products/index'])?>
                             </li>
                             <li>
-                                <a href="#">Panels</a>
+                                <?= Html::a(Yii::t('app','SubProductCount'), ['sub-product-count/index'])?>
                             </li>
                             <li>
-                                <a href="#">Tables</a>
-                            </li>
-                            <li>
-                                <a href="#">Icons</a>
-                            </li>
-                            <li>
-                                <a href="#">Forms</a>
+                                <?= Html::a(Yii::t('app','Type_Options'), ['options-sell-product/index'])?>
                             </li>
                         </ul>
                     </div>
@@ -113,21 +113,15 @@
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="fa fa-chart-line"></i>
-                        <span>Charts</span>
+                        <span><?=Yii::t('app','Users')?></span>
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
                             <li>
-                                <a href="#">Pie chart</a>
+                                <?= Html::a(Yii::t('app','Suppliers'), ['suppliers/index'])?>
                             </li>
                             <li>
-                                <a href="#">Line chart</a>
-                            </li>
-                            <li>
-                                <a href="#">Bar chart</a>
-                            </li>
-                            <li>
-                                <a href="#">Histogram</a>
+                                <?= Html::a(Yii::t('app','Users'), ['users/index'])?>
                             </li>
                         </ul>
                     </div>
@@ -135,40 +129,67 @@
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="fa fa-globe"></i>
-                        <span>Maps</span>
+                        <span><?=Yii::t('app','Countries')?></span>
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
                             <li>
-                                <a href="#">Google maps</a>
+                                <?= Html::a(Yii::t('app','Countries'), ['countries/index'])?>
                             </li>
                             <li>
-                                <a href="#">Open street map</a>
+                                <?= Html::a(Yii::t('app','Regions'), ['regions/index'])?>
+                            </li>
+                            <li>
+                                <?= Html::a(Yii::t('app','Area'), ['area/index'])?>
                             </li>
                         </ul>
                     </div>
                 </li>
                 <li class="header-menu">
-                    <span>Extra</span>
+                    <span><?= Yii::t('app', 'Additional')?></span>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-globe"></i>
+                        <span><?=Yii::t('app','Additional')?></span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li>
+                                <?= Html::a(Yii::t('app','Categorises'), ['categorises/index'])?>
+                            </li>
+                            <li>
+                                <?= Html::a(Yii::t('app','Units'), ['units/index'])?>
+                            </li>
+                            <li>
+                                <?= Html::a(Yii::t('app','Status'), ['status/index'])?>
+                            </li>
+                            <li>
+                                <?= Html::a(Yii::t('app','Warehouse'), ['warehouse/index'])?>
+                            </li>
+                            <li>
+                                <?= Html::a(Yii::t('app','Company_Delivery'), ['company-delivery/index'])?>
+                            </li>
+                            <li>
+                                <?= Html::a(Yii::t('app','Price_Company_Delivery'), ['price-company-delivery/index'])?>
+                            </li>
+                            <li>
+                                <?= Html::a(Yii::t('app','Change_Password'), ['change-password/index'])?>
+
+                            </li>
+                            <li>
+                                <?= Html::a(Yii::t('app','Outlays'), ['outlays/index'])?>
+
+                            </li>
+                            <li>
+                                <?= Html::a(Yii::t('app','Type_Outlay'), ['type-outlay/index'])?>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fa fa-book"></i>
-                        <span>Documentation</span>
-                        <span class="badge badge-pill badge-primary">Beta</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-calendar"></i>
-                        <span>Calendar</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-folder"></i>
-                        <span>Examples</span>
-                    </a>
+                        <?= Html::a( '<i class="fa fa-folder"></i><span>'.Yii::t('app','Settings').'</span>', ['settings/index'])?>
+
                 </li>
             </ul>
         </div>
