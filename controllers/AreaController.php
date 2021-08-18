@@ -33,6 +33,7 @@ class AreaController extends BaseController
         if (!Yii::$app->user->isGuest) {
             $this->layout = "new";
         }
+        parent::init();
     }
 
     /**
@@ -74,7 +75,8 @@ class AreaController extends BaseController
         $model = new Area();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'This is the message');
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -94,7 +96,8 @@ class AreaController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'This is the message');
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -112,6 +115,7 @@ class AreaController extends BaseController
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success', 'This is the message');
 
         return $this->redirect(['index']);
     }

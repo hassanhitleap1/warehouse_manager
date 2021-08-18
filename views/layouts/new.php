@@ -1,5 +1,6 @@
 <?php
 use app\assets\NewAsset;
+use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
@@ -35,6 +36,7 @@ NewAsset::register($this);
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
             <div class="container-fluid">
+                <?= Alert::widget() ?>
                 <?= $content ?>
             </div>
         </main>
