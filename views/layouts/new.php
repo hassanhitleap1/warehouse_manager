@@ -30,7 +30,7 @@ NewAsset::register($this);
         <?php include "sidebar.php"; ?>
 
         <!-- sidebar-wrapper  -->
-
+        <div class="loader"></div>
         <main class="page-content">
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

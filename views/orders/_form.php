@@ -80,7 +80,7 @@ if (!$model->isNewRecord) {
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ["id"=>"submitform",'class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Save'), ["id"=>"submitform",'class' => 'btn btn-success','data-loading-text'=>"Loading..."]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
@@ -94,6 +94,10 @@ $( document ).ready(function() {
     
     $(document).on('click','#submitform',function (e) {
           e.preventDefault();
+          var $btn = $(this);
+       
+            $btn.button('loading');
+
             $('#submitform').attr('disabled','disabled');
             $("#dynamic-form").submit();
             setTimeout(function(){ 
@@ -101,11 +105,13 @@ $( document ).ready(function() {
                 if(form.find('.has-error').length) {
                     hide_loader();
                     $('#submitform').prop('disabled',false);
+                    $btn.button('reset');
                     return false;
 
                 }else{
                     show_loader();
                     $('#submitform').prop('disabled',true);
+                    $btn.button('reset');
                 }
             
             }, 
