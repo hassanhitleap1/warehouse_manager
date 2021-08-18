@@ -37,7 +37,7 @@ if (!$model->isNewRecord) {
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="container">
+<div >
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="row">
