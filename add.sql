@@ -49,3 +49,20 @@ INSERT INTO `regions` (`id`, `name_en`, `name_ar`, `price_delivery`, `country_id
 (15, 'الرصيفة', 'الرصيفة', 2, 1, 244, 1188, 244, NULL, NULL),
 (16, 'الرمثا', 'الرمثا', 2, 1, 246, 1189, 246, NULL, NULL),
 (17, 'عين الباشا', 'عين الباشا', 2, 1, 245, 1186, 245, NULL, NULL);
+
+
+INSERT INTO `status` (`id`, `name_en`, `name_ar`, `color`, `created_at`, `updated_at`) VALUES
+(1, 'Make a call ', 'اجراء مكالمة', '#292fca', NULL, NULL),
+(2, 'To be equipped', 'مطلوب تجهيزه', '#237923', NULL, NULL),
+(3, 'ready', 'تم تجهيزه', '#237923', NULL, NULL),
+(4, 'Connecting', 'قيد التوصيل', '#237923', NULL, NULL),
+(5, 'to be deliverd', 'تم توصيله', '#237923', NULL, NULL),
+(6, 'canceled', 'ملغي', '#eb0017', NULL, NULL),
+(7, 'canceled from company', 'ملغي من الشركة', '#eb0017', NULL, NULL),
+(8, 'delayed', 'مؤجل', '#292fca', NULL, NULL),
+(9, 'delayed form company', 'مؤجل من الشركة', '#292fca', NULL, NULL),
+(10, 'no answer', 'لا يرد', '#292fca', NULL, NULL),
+(11, 'no answer', 'لا يرد من الشركة', '#292fca', NULL, NULL),
+(12, 'Payment has been received', 'تم استلام المبلغ', '#292fca', NULL, NULL),
+(13, 'The canceled request has been received', 'تم استلام الطلب الملغي ودفع الاجور', '#292fca', NULL, NULL),
+(14, 'رفض استلام وعدم دفع المبلغ', 'رفض استلام وعدم دفع الاجور', '#000000', '2021-08-09 20:43:23', '2021-08-10 14:27:00')

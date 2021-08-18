@@ -183,7 +183,22 @@ $columns = [
         'vAlign' => 'middle',
         'width' => '50px',
         'value' => function ($model, $key, $index, $widget) {
-            return ($model->status_id == 14 ) ?  -2 :$model->amount_required ;
+            
+            switch ($model->status_id) {
+                case 13:
+                case 6:    
+                       return  0;
+                case 14:
+                    return  -1 * $model->delivery_price ;
+                    break;
+                case 7:    
+                    return  -1 * $model->amount_required ;
+                    break;
+                default:
+                return $model->amount_required;
+            }
+
+            
         },
         'format' => 'raw',
         'visible' => true,
@@ -198,7 +213,21 @@ $columns = [
         'vAlign' => 'middle',
         'width' => '50px',
         'value' => function ($model, $key, $index, $widget) {
-            return ($model->status_id == 14 ) ?  -2 :$model->total_price ;
+
+            switch ($model->status_id) {
+                case 13:
+                case 14:
+                case 6:    
+                   return  0;
+                   break;
+                case 7:    
+                    return  -1 * $model->total_price ;   
+                    break;
+                default:
+                return $model->total_price;
+            }
+
+           
         },
         'format' => 'raw',
         'visible' => true,
