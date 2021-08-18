@@ -192,14 +192,7 @@ use app\models\User;use yii\helpers\Html;
 
                 </li>
 
-                <?= '<li class="fa fa-folder ">'
-                    . Html::beginForm(['/site/logout'], 'post')
-                    . Html::submitButton(
-                    '( ' . Yii::t('app', 'Logout') . ' ' . Yii::$app->user->identity->username . ') '
 
-                    )
-                    . Html::endForm()
-                    . '</li>';?>
             </ul>
         </div>
         <!-- sidebar-menu  -->
@@ -207,19 +200,14 @@ use app\models\User;use yii\helpers\Html;
     <!-- sidebar-content  -->
     <div class="sidebar-footer">
         <a href="#">
-            <i class="fa fa-bell"></i>
-            <span class="badge badge-pill badge-warning notification">3</span>
-        </a>
-        <a href="#">
-            <i class="fa fa-envelope"></i>
-            <span class="badge badge-pill badge-success notification">7</span>
-        </a>
-        <a href="#">
-            <i class="fa fa-cog"></i>
-            <span class="badge-sonar"></span>
-        </a>
-        <a href="#">
-            <i class="fa fa-power-off"></i>
+            <?=
+            Html::beginForm(['/site/logout'], 'post')
+            . Html::submitButton('',["class"=>"btn-danger fa fa-power-off"]
+
+            )
+            . Html::endForm()
+            ?>
+
         </a>
     </div>
 </nav>
