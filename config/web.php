@@ -19,6 +19,19 @@ $config = [
                 ],
             ],
         ],
+        'pusher' => [
+            'class' => 'br0sk\pusher\Pusher',
+            /*
+             * Mandatory parameters.
+             */
+            'appId' => 'YOUR_APP_ID',
+            'appKey' => 'YOUR_APP_KEY',
+            'appSecret' => 'YOUR_APP_SECRET',
+            /*
+             * Optional parameters.
+             */
+            'options' => ['encrypted' => true, 'cluster' => 'YOUR_APP_CLUSTER']
+        ],
 //         'urlManager' => [
 //             'enablePrettyUrl' => true,
 //             'showScriptName' => false,
