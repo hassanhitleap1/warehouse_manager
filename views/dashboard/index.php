@@ -241,9 +241,45 @@ $data_delivery_order=[];
 
     <hr />
 
+    <div class="row">
+        <div class="col-md-4">
+            <h2 class="text-center"><?= Yii::t('app','Regions')?></h2>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= Yii::t('app','Name')?></th>
+                    <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($regions_order as $key_region_or => $region_order):?>
+                    <tr>
+                        <!--                        OrdersSearch%5Bcreated_at%5D=2021-08-17+-+2021-08-18  -->
+                        <!--                        v/index.php?r=orders%2Findex&amp;1%5BOrdersSearch%5Bcompany_delivery_id%5D%5D=2021-08-17%2B-%2B2021-08-17-->
+                        <th scope="row"><?= ++$key_region_or ?></th>
+                        <td> <?= Html::a( $region_order['name'], ['orders/index' ,["OrdersSearch[region_id]" =>$region_order["region_id"], "OrdersSearch[region_id]"=>"$date+-+$date"   ]]) ?></td>
+                        <td><?= Html::a(  $region_order['count_order'], ['orders/index']) ?></td>
+                    </tr>
+                    <?php $label_region_order[] =$region_order['name_ar'] ; $data_region_order[]=$region_order['count_order']  ?>
+                <?php endforeach;?>
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-8" >
+            <?= Html::a(Yii::t('app','More'), ['dashboard/region'],['class'=>'pull-left']) ?>
+            <div style="height:150px;" id="chart_region_order"></div>
+        </div>
+    </div>
 
 
 </div>
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/geodata/jordanLow.js"></script>
 
 <script>
 
@@ -379,4 +415,33 @@ $data_delivery_order=[];
         document.getElementById('chart_delivery_order'),
         config
     );
+
+
+
+    var chart = am4core.create("chart_region_order", am4maps.MapChart);
+
+    // Set map definition
+    chart.geodata = am4geodata_jordanLow;
+
+    // Set projection
+    chart.projection = new am4maps.projections.Miller();
+
+    // Create map polygon series
+    var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
+
+    // Make map load polygon (like country names) data from GeoJSON
+    polygonSeries.useGeodata = true;
+
+    // Configure series
+    var polygonTemplate = polygonSeries.mapPolygons.template;
+
+    console.log(am4geodata_jordanLow.features[0].properties);
+    polygonTemplate.tooltipText = "{CNTRY}";
+
+    polygonTemplate.fill = am4core.color("#74B266");
+
+    // Create hover state and set alternative fill color
+    var hs = polygonTemplate.states.create("hover");
+    hs.properties.fill = am4core.color("#367B25");
+
 </script>

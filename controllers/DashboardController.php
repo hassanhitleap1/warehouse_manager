@@ -94,15 +94,25 @@ class  DashboardController extends BaseController {
         $delivery_order=Orders::find()->select(['count(*) as count_order','company_delivery_id','company_delivery.name'])
             ->innerJoin('company_delivery', 'company_delivery.id=orders.company_delivery_id')
             ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
+            ->andWhere(['in','orders.status_id', [1,2,3,4]])
             ->groupBy(['orders.company_delivery_id'])
             ->orderBy(['company_delivery_id'=>SORT_DESC])
+            ->asArray()->all();
+
+        $regions_order=Orders::find()->select(['count(*) as count_order','region_id','regions.name_ar'])
+            ->innerJoin('regions', 'regions.id=orders.region_id')
+            ->andWhere('date(orders.region_id) >= :date', [':date' => $date])
+            ->andWhere(['in','orders.status_id', [1,2,3,4]])
+            ->groupBy(['orders.region_id'])
+            ->orderBy(['region_id'=>SORT_DESC])
             ->asArray()->all();
 
           return $this->render('index',[
             'orders'=>$orders, 'details'=>$details,
               'status_orders'=>$status_orders,'status_statisticis'=>
                   $status_statisticis,'products_order'=>$products_order,
-              'delivery_order'=>$delivery_order,'date'=>$date
+              'delivery_order'=>$delivery_order,'date'=>$date,
+              'regions_order'=>$regions_order
         ]);
     }
 
