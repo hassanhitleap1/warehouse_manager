@@ -21,6 +21,7 @@ $data_delivery_order=[];
 
 ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <div class="site-about">
     <div class="row" >
         <div class="col-md-2">
@@ -259,7 +260,7 @@ $data_delivery_order=[];
                         <!--                        OrdersSearch%5Bcreated_at%5D=2021-08-17+-+2021-08-18  -->
                         <!--                        v/index.php?r=orders%2Findex&amp;1%5BOrdersSearch%5Bcompany_delivery_id%5D%5D=2021-08-17%2B-%2B2021-08-17-->
                         <th scope="row"><?= ++$key_region_or ?></th>
-                        <td> <?= Html::a( $region_order['name'], ['orders/index' ,["OrdersSearch[region_id]" =>$region_order["region_id"], "OrdersSearch[region_id]"=>"$date+-+$date"   ]]) ?></td>
+                        <td> <?= Html::a( $region_order['name_ar'], ['orders/index' ,["OrdersSearch[region_id]" =>$region_order["region_id"], "OrdersSearch[region_id]"=>"$date+-+$date"   ]]) ?></td>
                         <td><?= Html::a(  $region_order['count_order'], ['orders/index']) ?></td>
                     </tr>
                     <?php $label_region_order[] =$region_order['name_ar'] ; $data_region_order[]=$region_order['count_order']  ?>
@@ -269,14 +270,16 @@ $data_delivery_order=[];
                 </tbody>
             </table>
         </div>
-        <div class="col-md-8" >
+        <div class="col-md-12" >
             <?= Html::a(Yii::t('app','More'), ['dashboard/region'],['class'=>'pull-left']) ?>
-            <div style="height:150px;" id="chart_region_order"></div>
+            <div  style=" width: 100%;
+                height: 400px;" id="chart_region_order"></div>
         </div>
     </div>
 
 
 </div>
+
 <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/geodata/jordanLow.js"></script>
@@ -418,12 +421,10 @@ $data_delivery_order=[];
 
 
 
+    var regions=<?=json_encode($regions_order)?>;
+
     var chart = am4core.create("chart_region_order", am4maps.MapChart);
-
-    // Set map definition
     chart.geodata = am4geodata_jordanLow;
-
-    // Set projection
     chart.projection = new am4maps.projections.Miller();
 
     // Create map polygon series
@@ -435,8 +436,30 @@ $data_delivery_order=[];
     // Configure series
     var polygonTemplate = polygonSeries.mapPolygons.template;
 
-    console.log(am4geodata_jordanLow.features[0].properties);
-    polygonTemplate.tooltipText = "{CNTRY}";
+    var features=am4geodata_jordanLow.features;
+    var temp;
+    console.log(regions)
+    $.each( features, function( key, value ) {
+         temp =  regions.filter(function(region) {
+            return region.key == value.id;
+        });
+
+
+        if(temp.length > 0){
+            am4geodata_jordanLow.features[key].properties["count_order"]=temp[0]["count_order"];
+            am4geodata_jordanLow.features[key].properties["name"]=temp[0]["name_ar"];
+            am4geodata_jordanLow.features[key].properties["NAME_EN"]=temp[0]["name_ar"];
+        }else {
+            am4geodata_jordanLow.features[key].properties["count_order"]= 0;
+
+        }
+
+    });
+
+
+    console.log(am4geodata_jordanLow.features);
+
+    polygonTemplate.tooltipText= " {count_order} - {name}";
 
     polygonTemplate.fill = am4core.color("#74B266");
 

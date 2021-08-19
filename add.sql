@@ -67,3 +67,6 @@ INSERT INTO `status` (`id`, `name_en`, `name_ar`, `color`, `created_at`, `update
 (12, 'تم استلام المبلغ', 'تم استلام المبلغ', '#292fca', NULL, NULL),
 (13, 'تم استلام الطلب الملغي ', 'تم استلام الطلب الملغي ', '#292fca', NULL, '2021-08-18 20:45:34'),
 (14, 'رفض استلام وعدم دفع الأجور', 'رفض استلام وعدم دفع الأجور', '#000000', '2021-08-09 20:43:23', '2021-08-18 20:47:43');
+
+
+ALTER TABLE `regions` ADD `key` VARCHAR(255) NULL DEFAULT NULL AFTER `country_id`;

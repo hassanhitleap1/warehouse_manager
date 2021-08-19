@@ -22,6 +22,8 @@ use yii\web\View;
 
     <?= $form->field($model, 'name_ar')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'price_delivery')->textInput() ?>
 
 

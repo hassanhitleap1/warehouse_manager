@@ -37,7 +37,7 @@ class Regions extends \yii\db\ActiveRecord
             [['price_delivery'], 'number'],
             [['country_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name_en', 'name_ar'], 'string', 'max' => 255],
+            [['name_en', 'name_ar',"key"], 'string', 'max' => 255],
         ];
     }
 
@@ -52,6 +52,7 @@ class Regions extends \yii\db\ActiveRecord
             'name_ar' => Yii::t('app', 'Name_Ar'),
             'price_delivery' => Yii::t('app', 'Price_Delivery'),
             'country_id' => Yii::t('app', 'Country'),
+            "key" => Yii::t('app', 'Key'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
         ];
