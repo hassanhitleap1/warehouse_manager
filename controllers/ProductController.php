@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\NotifcationHelper;
 use app\components\OrderHelper;
 use app\models\OptionsSellProduct\OptionsSellProduct;
 use app\models\orders\OrderForm;
@@ -81,6 +82,7 @@ class ProductController extends Controller
                     $transaction->commit();
                     Yii::$app->session->set('order_model', $order_model );
                     Yii::$app->session->set('id', $id );
+                    NotifcationHelper::push_order_notifcation($order_model);
                     return $this->redirect(['product/thanks']);
                 }else{
                     Yii::$app->session->set('message', Yii::t('app', 'Error'));
