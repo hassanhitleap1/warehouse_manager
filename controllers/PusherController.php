@@ -87,8 +87,21 @@ class PusherController extends Controller
 
     }
 
-        public function actionIndex2(){
-            return $this->render("index");
+        public function actionIndex2(){+
+
+            $app_id = '572683';
+            $app_key = '627b6a0bb17dace13a6f';
+            $app_secret = '78b24397ebd942fead2c';
+            $app_cluster = 'mt1';
+
+            $options = [
+                'cluster' => $app_cluster,
+                'useTLS' => false
+            ];
+            $pusher = new \Pusher($app_key, $app_secret, $app_id, $options);
+            $data['message'] = 'hello world';
+            $pusher->trigger('my-channel', 'my-event', $data);
+            print_r($pusher);
         }
 
 }
