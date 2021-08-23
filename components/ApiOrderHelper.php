@@ -110,9 +110,6 @@ class ApiOrderHelper extends BaseObject
 
 
 
-
-
-
     public function get_villages()
     {
         

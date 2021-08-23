@@ -903,3 +903,61 @@ function getMax(array, propName) {
 
     return maxItem;
 }
+
+const beamsClient = new PusherPushNotifications.Client({
+    instanceId: '19d18ac9-8169-4815-ad1e-85bb3d827747',
+});
+
+beamsClient.start()
+    .then(() => beamsClient.addDeviceInterest('hello'))
+    .then(() => console.log('Successfully registered and subscribed!'))
+    .catch(console.error);
+
+// Enable pusher logging - don't include this in production
+Pusher.logToConsole = true;
+
+var pusher = new Pusher('78a323b54ba0c2d92d1f', {
+    cluster: 'mt1'
+});
+
+var channel = pusher.subscribe('my-channel');
+channel.bind('my-event', function(data) {
+    if($(".profile").attr("type")=="admin"){
+        play_voice_bell();
+        alert(JSON.stringify(data));
+    }
+
+});
+
+function play_voice_bell() {
+    var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', `${SITE_URL}/web/sounds/bell-ringing.mp3`);
+    this.play();
+    return;
+    audioElement.addEventListener('ended', function() {
+        this.play();
+    }, false);
+    audioElement.addEventListener("canplay",function(){
+        $("#length").text("Duration:" + audioElement.duration + " seconds");
+        $("#source").text("Source:" + audioElement.src);
+        $("#status").text("Status: Ready to play").css("color","green");
+    });
+
+    audioElement.addEventListener("timeupdate",function(){
+        $("#currentTime").text("Current second:" + audioElement.currentTime);
+    });
+
+    $('#play').click(function() {
+        audioElement.play();
+        $("#status").text("Status: Playing");
+    });
+
+    $('#pause').click(function() {
+        audioElement.pause();
+        $("#status").text("Status: Paused");
+    });
+
+    $('#restart').click(function() {
+        audioElement.currentTime = 0;
+    });
+}

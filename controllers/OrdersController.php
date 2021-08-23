@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\NotifcationHelper;
 use app\components\OrderHelper;
 use app\models\companydelivery\CompanyDelivery;
 use app\models\historystatus\HistoryStatus;
@@ -144,7 +145,7 @@ class OrdersController extends Controller
                       
                         $session = Yii::$app->session;
                         $session->set('message', Yii::t('app','Successfuly_Create_Order'));
-
+                        NotifcationHelper::push_order_notifcation($model);
                         return $this->redirect(['orders/create']);
                     }
                 } catch (Exception $e) {
