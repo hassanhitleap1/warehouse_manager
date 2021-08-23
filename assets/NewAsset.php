@@ -43,6 +43,8 @@ class  NewAsset extends AssetBundle
             'js/main.js?v='.rand(),
             'js/custum.js?v='.rand(),
             'js/sweetalert2/main.js',
+            "https://js.pusher.com/beams/1.0/push-notifications-cdn.js",
+            "https://js.pusher.com/7.0/pusher.min.js"
         ];
     }
 }
