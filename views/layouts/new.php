@@ -16,6 +16,8 @@ NewAsset::register($this);
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php $this->registerCsrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
+        <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
         <?php $this->head() ?>
     </head>
 
