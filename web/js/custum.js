@@ -924,7 +924,7 @@ var channel = pusher.subscribe('my-channel');
 channel.bind('my-event', function(data) {
     if($(".profile").attr("type")=="admin"){
         play_voice_bell();
-        alert(JSON.stringify(data));
+       
     }
 
 });

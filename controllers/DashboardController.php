@@ -99,7 +99,7 @@ class  DashboardController extends BaseController {
             ->orderBy(['company_delivery_id'=>SORT_DESC])
             ->asArray()->all();
 
-        $regions_order=Orders::find()->select(['count(*) as count_order','region_id','regions.name_ar','regions.name_en','regions.key'])
+        $regions_order=Orders::find()->select(['count(*) as count_order','region_id','regions.name_ar','regions.name_en'])
             ->innerJoin('regions', 'regions.id=orders.region_id')
             ->andWhere('date(orders.created_at) >= :date', [':date' => $date])
             ->andWhere(['in','orders.status_id', [1,2,3,4]])

@@ -3,10 +3,10 @@
 // use app\models\area\Area;
 use app\models\companydelivery\CompanyDelivery;
 // use app\models\countries\Countries;
-use app\models\orders\Orders;
+// use app\models\orders\Orders;
 use app\models\regions\Regions;
-use app\models\status\Status;
-use Carbon\Carbon;
+// use app\models\status\Status;
+// use Carbon\Carbon;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -21,6 +21,8 @@ $other_phone=null;
 $address=null;
 $discount=0;
 
+$company_delivery_id= Yii::$app->params['company_delivery'];
+
 
 if (!$model->isNewRecord) {
     $delivery_price=$model->delivery_price;
@@ -30,6 +32,7 @@ if (!$model->isNewRecord) {
     $other_phone=$user->other_phone;
     $address=$user->address;
     $discount=$model->discount;
+    $company_delivery_id=$model->company_delivery_id;
 
 }
 /* @var $this yii\web\View */
@@ -59,7 +62,7 @@ if (!$model->isNewRecord) {
             <?= $form->field($model, 'company_delivery_id')->widget(Select2::classname(), [
                 'data' =>  ArrayHelper::map(CompanyDelivery::find()->all(), 'id', 'name'),
                 'language' => 'ar',
-                'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'id'=>'company_delivery_id'],
+                'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'id'=>'company_delivery_id','value'=>$company_delivery_id],
             ]); ?>
         </div>
         <div class="col-md-6">
