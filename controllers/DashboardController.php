@@ -127,8 +127,10 @@ class  DashboardController extends BaseController {
         $to=$date->addDay( -15)->toDateString();
 
         $date_range= "$from - $to";  // 2021-08-09 - 2021-08-16
+        $where="";
         if(isset($_GET["Seals"]["product_id"])){
             $product_id=$_GET["Seals"]["product_id"];
+            $where=" where orders_item.product_id in (".implode(",", $product_id) ." ) ";
         }
         if(isset($_GET["Seals"]["created_at"])){
             $date_range=$_GET["Seals"]["created_at"];
@@ -154,6 +156,7 @@ class  DashboardController extends BaseController {
                     and
                     orders.status_id not in (6,7,8,9,10,11,13,14)  and
                     date(orders_item.created_at) BETWEEN '$from' AND'$to' 
+                    $where
                     
                     )
                     as
