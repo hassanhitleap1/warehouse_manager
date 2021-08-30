@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\dashboard\Seals;
 use app\models\historystatus\HistoryStatus;
 use app\models\orders\Orders;
 use app\models\ordersitem\OrdersItem;
@@ -119,7 +120,24 @@ class  DashboardController extends BaseController {
 
 
     public function actionSales(){
+        $model= new Seals();
+        $product_id=[];
         $date=Carbon::now("Asia/Amman");
+        $from=$date->toDateString();
+        $to=$date->addDay( -15)->toDateString();
+
+        $date_range= "$from - $to";  // 2021-08-09 - 2021-08-16
+        if(isset($_GET["Seals"]["product_id"])){
+            $product_id=$_GET["Seals"]["product_id"];
+        }
+        if(isset($_GET["Seals"]["created_at"])){
+            $date_range=$_GET["Seals"]["created_at"];
+            $arr_date=explode(' - ',$date_range);
+            $from=$arr_date[0];
+            $to=$arr_date[1];
+            $date_range= "$from - $to";  // 2021-08-09 - 2021-08-16
+        }
+        
         $year=$date->format('Y');
         $month=$date->format('m');
 
@@ -134,18 +152,12 @@ class  DashboardController extends BaseController {
                     WHERE
                     date(orders_item.created_at) = date(`orders`.`created_at`)
                     and
-                    orders.status_id not in (6,7,8,9,10,11,13,14)  )
+                    orders.status_id not in (6,7,8,9,10,11,13,14)  and
+                    date(orders_item.created_at) BETWEEN '$from' AND'$to' 
+                    
+                    )
                     as
                     quantity",
-//
-//                    "(SELECT SUM(orders_item.profits_margin) FROM `orders_item`
-//                    inner join orders as ord on  ord.id = orders_item.order_id
-//                    WHERE
-//                    date(orders_item.created_at) = date(`orders`.`created_at`)
-//                    and
-//                    orders.status_id not in (6,7,8,9,10,11,13,14)  )
-//                    as
-//                    profit_margin",
 
             'sum(orders.profit_margin) as profit_margin' ,
              'DAY(orders.created_at) as day',
@@ -153,20 +165,18 @@ class  DashboardController extends BaseController {
                     where 
                     date(outlays.created_at) = date(`orders`.`created_at`) and 
                     MONTH(outlays.created_at) = MONTH(`orders`.`created_at`) and
-                    DAY(outlays.created_at) = DAY(`orders`.`created_at`))  as 
+                    DAY(outlays.created_at) = DAY(`orders`.`created_at`)    and
+                      date(outlays.created_at) BETWEEN '$from' AND'$to' 
+                    )  as 
                     outlays",
              
              ])
-             
-             ->andWhere('YEAR(orders.created_at)=:year', [':year' => $year])
-            ->andWhere('MONTH(orders.created_at)=:month', [':month' => $month])
+//             ->andWhere('YEAR(orders.created_at)=:year', [':year' => $year])
+//            ->andWhere('MONTH(orders.created_at)=:month', [':month' => $month])
+            ->andWhere(['between', 'date(orders.created_at)', $from, $to ])
             ->groupBy(['DAY(`orders`.`created_at`)'])
             ->orderBy(['orders.created_at'=>SORT_ASC])
             ->asArray()->all();    
-            
-            
-
-
 
         $profits_month_model = Orders::find()->select([
             'count(*) as count_order',
@@ -175,16 +185,6 @@ class  DashboardController extends BaseController {
             'MONTH(orders.created_at) as month',
 
             'sum(orders.profit_margin) as profit_margin' ,
-//            "(SELECT SUM(orders_item.profits_margin) FROM `orders_item`
-//                    inner join orders as ord on  ord.id = orders_item.order_id
-//                    WHERE
-//                    YEAR(orders_item.created_at) = YEAR(`orders`.`created_at`) and
-//                    MONTH(orders_item.created_at) = MONTH(`orders`.`created_at`)
-//                    and
-//                    orders.status_id not in (6,7,8,9,10,11,13,14)  )
-//                    as
-//                    profit_margin",
-
 
                     "(SELECT SUM(orders_item.quantity) FROM `orders_item`
                     inner join orders as ord on  ord.id = orders_item.order_id
@@ -212,6 +212,9 @@ class  DashboardController extends BaseController {
         return $this->render('sales',[
             'profits_day_model'=>$profits_day_model,
             'profits_month_model'=>$profits_month_model,
+            'model'=>$model,
+            "date_range"=>$date_range,
+            'product_id'=>$product_id
         ]);
     }
 
