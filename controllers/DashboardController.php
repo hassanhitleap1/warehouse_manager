@@ -126,6 +126,7 @@ class  DashboardController extends BaseController {
         $profits_day_model = Orders::find()->select([
              'count(*) as count_order',
             "orders.created_at",
+            'sum(orders.amount_required) as total_sales' ,
             'MONTH(`orders`.`created_at`) as month',
 
             "(SELECT SUM(orders_item.quantity) FROM `orders_item`
@@ -169,6 +170,7 @@ class  DashboardController extends BaseController {
 
         $profits_month_model = Orders::find()->select([
             'count(*) as count_order',
+            'sum(orders.amount_required) as total_sales' ,
             'orders.created_at',
             'MONTH(orders.created_at) as month',
 
@@ -242,6 +244,7 @@ class  DashboardController extends BaseController {
         $day_data = Orders::find()->select([
             'count(*) as count_order',
             'date(`created_at`) as date',
+            'sum(orders.amount_required) as total_sales' ,
             '(SELECT SUM(orders_item.quantity)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 
                ord.status_id not in (6,7,8,9,10,11,13,14)  and date(orders_item.created_at) = date(orders.created_at)) as quantities',
             'sum(orders.profit_margin) as profits_margin' ,
@@ -256,6 +259,7 @@ class  DashboardController extends BaseController {
         $month_data = Orders::find()->select([
             'count(*) as count_order',
             'sum(orders.profit_margin) as profits_margin' ,
+            'sum(orders.amount_required) as total_sales' ,
 //            '(SELECT SUM(orders_item.profits_margin)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where
 //               ord.status_id not in (6,7,8,9,10,11,13,14)  and MONTH(orders_item.created_at) = MONTH(orders.created_at) and  year(orders_item.created_at) = year(orders.created_at)) as profits_margin',
             '(SELECT SUM(orders_item.quantity)   FROM `orders_item` inner join orders as ord on ord.id = orders_item.order_id where 

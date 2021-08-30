@@ -11,10 +11,16 @@ $this->params['breadcrumbs'][] = $this->title;
 $label_profits_day_model=[];
 $data_profits_day_model=[];
 $data_orders_day_model=[];
+$data_sales_day_model=[];
+$data_outlays_day_model=[];
+
 
 $label_profits_month_model=[];
 $data_profits_month_model=[];
 $data_orders_month_model=[];
+$data_sales_month_model=[];
+$data_outlays_month_model=[];
+
 
 ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -25,9 +31,16 @@ $data_orders_month_model=[];
         <div class="col-md-6">
             <canvas id="profits_day_model"></canvas>
         </div>
-        <div class="col-md-6 ">
+        <div class="col-md-6">
             <canvas id="orders_day_model"></canvas>
         </div>
+        <div class="col-md-6">
+            <canvas id="sales_day_model"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="outlays_day_model"></canvas>
+        </div>
+
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -35,6 +48,7 @@ $data_orders_month_model=[];
                 <thead>
                 <tr>
                     <th><?= Yii::t('app','Count_Orders');?></th>
+                    <th scope="col"><?= Yii::t('app','Total_Sales');?></th>
                     <th><?= Yii::t('app','Profit_Margin');?></th>
                     <th><?= Yii::t('app','Outlays');?></th>
                     <th><?= Yii::t('app','Total');?>   <?= Yii::t('app','Profit_Margin');?></th>
@@ -46,6 +60,7 @@ $data_orders_month_model=[];
                 <?php foreach($profits_day_model as $profit_day_model):?>
                     <tr>
                         <th><?= $profit_day_model["count_order"]?></th>
+                        <td><?= $profit_day_model["total_sales"]?></td>
                         <th><?= round($profit_day_model["profit_margin"],2)?> jd</th>
                         <th><?= round($profit_day_model["outlays"],2)?> jd</th>
                         <th><?= round($profit_day_model["profit_margin"] - $profit_day_model["outlays"],2) ?> jd</th>
@@ -56,6 +71,8 @@ $data_orders_month_model=[];
                         $data_profits_day_model[]= round($profit_day_model["profit_margin"] - $profit_day_model["outlays"],2);
                         $label_profits_day_model[]=$profit_day_model["month"] ."/". $profit_day_model["day"];
                         $data_orders_day_model[]= $profit_day_model["count_order"];
+                        $data_outlays_day_model[]=round($profit_day_model["outlays"],2);
+                        $data_sales_day_model=$profit_day_model["total_sales"];
                     ?>
 
                 <?php endforeach;?>
@@ -73,6 +90,14 @@ $data_orders_month_model=[];
         <div class="col-md-6 " >
             <canvas id="orders_month_model"></canvas>
         </div>
+
+        <div class="col-md-6">
+            <canvas id="sales_month_model"></canvas>
+        </div>
+        <div class="col-md-6 " >
+            <canvas id="outlays_month_model"></canvas>
+        </div>
+
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -80,6 +105,7 @@ $data_orders_month_model=[];
                 <thead>
                 <tr>
                     <th><?= Yii::t('app','Count_Orders');?></th>
+                    <th scope="col"><?= Yii::t('app','Total_Sales');?></th>
                     <th><?= Yii::t('app','Profit_Margin');?></th>
                     <th><?= Yii::t('app','Outlays');?></th>
                     <th><?= Yii::t('app','Total');?>   <?= Yii::t('app','Profit_Margin');?></th>
@@ -91,6 +117,7 @@ $data_orders_month_model=[];
                 <?php foreach($profits_month_model as $profit_month_model):?>
                         <tr>
                             <th><?= $profit_month_model["count_order"]?></th>
+                            <td><?= $profit_month_model["total_sales"]?></td>
                             <th><?= round($profit_month_model["profit_margin"] ,2)?> jd</th>
                             <th><?= round($profit_month_model["outlays"],2)  ?> jd</th>
                             <th><?= round($profit_month_model["profit_margin"]-$profit_month_model["outlays"] ,2)?> jd</th>
@@ -102,7 +129,9 @@ $data_orders_month_model=[];
                                 $label_profits_month_model[]= $profit_month_model["month"];
                                 $data_profits_month_model[]= round($profit_month_model["profit_margin"]- $profit_month_model["outlays"],2);
                                 $data_orders_month_model[]= $profit_month_model["count_order"];
-                            ?>
+                                $data_outlays_month_model=round($profit_month_model["outlays"],2);
+                                $data_sales_month_model=$profit_month_model["total_sales"];
+                    ?>
                     <?php endforeach;?>
                     
                 </tbody>
@@ -135,6 +164,26 @@ new Chart(
     config
   );
 
+var  data = {
+    labels: label_profits_day_model,
+    datasets: [{
+        label: 'المصاريف اليومية',
+        backgroundColor: 'rgb(11, 168, 90)',
+        borderColor: 'rgb(11, 168, 90)',
+        data: <?=json_encode($data_outlays_day_model)?> ,
+    }]
+};
+var  config = {
+    type: 'line',
+    data,
+    options: {}
+};
+new Chart(
+    document.getElementById('outlays_day_model'),
+    config
+);
+
+
 
 var  data = {
     labels: label_profits_day_model,
@@ -154,6 +203,27 @@ new Chart(
     document.getElementById('orders_day_model'),
     config
 );
+
+var  data = {
+    labels: label_profits_day_model,
+    datasets: [{
+        label: 'المبيعات اليومية',
+        backgroundColor: 'rgb(11, 168, 90)',
+        borderColor: 'rgb(11, 168, 90)',
+        data: <?=json_encode($data_sales_day_model)?> ,
+    }]
+};
+var  config = {
+    type: 'line',
+    data,
+    options: {}
+};
+new Chart(
+    document.getElementById('sales_day_model'),
+    config
+);
+
+
 
 
 var label_profits_month_model = <?=json_encode($label_profits_month_model)?>;
@@ -202,5 +272,49 @@ new Chart(
     config
 );
 
+
+
+var data = {
+    labels: label_profits_month_model,
+    datasets: [{
+        label: 'المبيعات الشهري',
+        backgroundColor: 'rgb(11, 168, 90)',
+        borderColor: 'rgb(11, 168, 90)',
+        data: <?=json_encode($data_sales_month_model)?> ,
+    }]
+};
+
+var config = {
+    type: 'line',
+    data,
+    options: {}
+};
+
+new Chart(
+    document.getElementById('sales_month_model'),
+    config
+);
+
+
+var data = {
+    labels: label_profits_month_model,
+    datasets: [{
+        label: 'المصاريف الشهري',
+        backgroundColor: 'rgb(11, 168, 90)',
+        borderColor: 'rgb(11, 168, 90)',
+        data: <?=json_encode($data_outlays_month_model)?> ,
+    }]
+};
+
+var config = {
+    type: 'line',
+    data,
+    options: {}
+};
+
+new Chart(
+    document.getElementById('outlays_month_model'),
+    config
+);
 
 </script>

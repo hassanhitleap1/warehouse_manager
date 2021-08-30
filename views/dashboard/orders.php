@@ -37,6 +37,7 @@ $data_profits_month=[];
             <tr>
                 <th scope="col">#</th>
                 <th scope="col"><?= Yii::t('app','Count_Orders');?></th>
+                <th scope="col"><?= Yii::t('app','Total_Sales');?></th>
                 <th scope="col"><?= Yii::t('app','Number_Of_Grains');?></th>
                 <th scope="col"><?= Yii::t('app','Profits');?></th>
                 <th scope="col"><?= Yii::t('app','Date');?></th>
@@ -47,6 +48,7 @@ $data_profits_month=[];
                     <tr>
                         <th scope="row"><?= ++ $key_day?></th>
                         <td><?= $day_data["count_order"]?></td>
+                        <td><?= $day_data["total_sales"]?></td>
                         <td><?= $day_data["quantities"]?></td>
                         <td><?= round( $day_data["profits_margin"] ,2)?></td>
                         <td><?= $day_data["date"]?></td>
@@ -84,6 +86,7 @@ $data_profits_month=[];
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col"><?= Yii::t('app','Count_Orders');?></th>
+                    <th scope="col"><?= Yii::t('app','Total_Sales');?></th>
                     <th scope="col"><?= Yii::t('app','Number_Of_Grains');?></th>
                     <th scope="col"><?= Yii::t('app','Profits');?></th>
                     <th scope="col"><?= Yii::t('app','Month');?></th>
@@ -94,6 +97,7 @@ $data_profits_month=[];
                     <tr>
                         <th scope="row"><?= ++ $key_day?></th>
                         <td><?= $month_data["count_order"]?></td>
+                        <td><?= $month_data["total_sales"]?></td>
                         <td><?= $month_data["quantities"]?></td>
                         <td><?= round( $month_data["profits_margin"] ,2)?></td>
                         <td><?= $month_data["month"]?></td>

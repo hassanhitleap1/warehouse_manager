@@ -209,7 +209,8 @@ return [
     "Previous_Order_Statuses"=>"حالات الطلبات السابقة",
     "Export_To_Driver"=>"تصدير الى السائق",
     "Campany_Delivery"=>"شركات التوصيل",
-    "Main"=>"الرئيسي"
+    "Main"=>"الرئيسي",
+    "Total_Sales"=>"المبيعات"
 
 
 
