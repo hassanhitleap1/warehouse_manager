@@ -137,7 +137,7 @@ class  DashboardController extends BaseController {
             $to=$arr_date[1];
             $date_range= "$from - $to";  // 2021-08-09 - 2021-08-16
         }
-        
+
         $year=$date->format('Y');
         $month=$date->format('m');
 
@@ -175,8 +175,15 @@ class  DashboardController extends BaseController {
 //            ->andWhere('MONTH(orders.created_at)=:month', [':month' => $month])
             ->andWhere(['between', 'date(orders.created_at)', $from, $to ])
             ->groupBy(['DAY(`orders`.`created_at`)'])
-            ->orderBy(['orders.created_at'=>SORT_ASC])
-            ->asArray()->all();    
+            ->orderBy(['orders.created_at'=>SORT_ASC]);
+
+        if(isset($_GET["Seals"]["product_id"])){
+            $profits_day_model->andWhere(['in', 'id',OrdersItem::find()->select(["order_id"])->where(['product_id'=>$product_id])]);
+        }
+
+        $profits_day_model=$profits_day_model->asArray()->all();
+
+
 
         $profits_month_model = Orders::find()->select([
             'count(*) as count_order',
