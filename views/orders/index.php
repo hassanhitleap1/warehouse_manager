@@ -34,10 +34,10 @@ $columns = [
 
     [
         'attribute' => 'order_id',
-        // 'contentOptions' => ['class' => 'skip-export'],
-        // 'headerOptions' => ['class' => 'skip-export'],
-        // 'footerOptions' => ['class' => 'skip-export'],
-        // 'visible' => false,
+         'contentOptions' => ['class' => 'skip-export'],
+         'headerOptions' => ['class' => 'skip-export'],
+         'footerOptions' => ['class' => 'skip-export'],
+         'visible' => false,
         'value' => 'order_id'
     ],
 
@@ -137,9 +137,9 @@ $columns = [
         'filterInputOptions' => ['placeholder' => 'select user'],
         'format' => 'raw',
         'visible' => true,
-        'contentOptions' => ['class' => 'skip-export'],
-        'headerOptions' => ['class' => 'skip-export'],
-        'footerOptions' => ['class' => 'skip-export'],
+//        'contentOptions' => ['class' => 'skip-export'],
+//        'headerOptions' => ['class' => 'skip-export'],
+//        'footerOptions' => ['class' => 'skip-export'],
     ],
     'address',
 
@@ -255,9 +255,9 @@ $columns = [
 
         'format' => 'html',
         'visible' => true,
-        'contentOptions' => ['class' => 'skip-export'],
-        'headerOptions' => ['class' => 'skip-export'],
-        'footerOptions' => ['class' => 'skip-export'],
+//        'contentOptions' => ['class' => 'skip-export'],
+//        'headerOptions' => ['class' => 'skip-export'],
+//        'footerOptions' => ['class' => 'skip-export'],
     ],
     'note',
     // 'profit_margin',

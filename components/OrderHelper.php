@@ -136,31 +136,32 @@ class OrderHelper extends BaseObject
 
    public static function stock_plus($ordersItem){
         foreach ($ordersItem as $orderItem) {
-            // $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
-            // $orderItemModel->count=$orderItemModel->count+$orderItem->quantity;
-            // $orderItemModel->save();
             $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
-            $productModel->quantity=$productModel->quantity+$orderItem->quantity;
-            $sub_product_count=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
-            $sub_product_count->count= (int)$sub_product_count->count + (int) $orderItem->quantity;
-            $sub_product_count->save();
-            $productModel->save();
+            if(!is_null($productModel)){
+                $productModel->quantity=$productModel->quantity+$orderItem->quantity;
+                $sub_product_count=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                if(!is_null($sub_product_count)){
+                    $sub_product_count->count= (int)$sub_product_count->count + (int) $orderItem->quantity;
+                    $sub_product_count->save();
+                }
+                $productModel->save();
+            }
         }
 
    }
 
    public static function stock_minus($ordersItem){
         foreach ($ordersItem as $orderItem) {
-            // $orderItemModel=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
-            // $orderItemModel->count=$orderItemModel->count-$orderItem->quantity;
-            // $orderItemModel->save();
             $productModel=Products::find()->where(['id'=>$orderItem->product_id])->one();
-            $productModel->quantity=$productModel->quantity-$orderItem->quantity;
-            $sub_product_count=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
-            $sub_product_count->count=(int) $sub_product_count->count - (int) $orderItem->quantity;
-            $sub_product_count->save();
-            $productModel->save();
-
+            if(!is_null($productModel)){
+                $productModel->quantity=$productModel->quantity-$orderItem->quantity;
+                $sub_product_count=SubProductCount::find()->where(['id'=>$orderItem->sub_product_id])->one();
+                if(!is_null($productModel)){
+                    $sub_product_count->count=(int) $sub_product_count->count - (int) $orderItem->quantity;
+                    $sub_product_count->save();
+                }
+                $productModel->save();
+            }
         }
     }
 
