@@ -128,7 +128,8 @@ class  DashboardController extends BaseController {
 
         $date_range= "$from - $to";  // 2021-08-09 - 2021-08-16
         $where="";
-        if(isset($_GET["Seals"]["product_id"])){
+        if(isset($_GET["Seals"]["product_id"]) && count($product_id)){
+        
             $product_id=$_GET["Seals"]["product_id"];
             $where=" where orders_item.product_id in (".implode(",", $product_id) ." ) ";
         }
@@ -174,13 +175,13 @@ class  DashboardController extends BaseController {
                     outlays",
              
              ])
-//             ->andWhere('YEAR(orders.created_at)=:year', [':year' => $year])
-//            ->andWhere('MONTH(orders.created_at)=:month', [':month' => $month])
+        //     ->andWhere('YEAR(orders.created_at)=:year', [':year' => $year])
+        //    ->andWhere('MONTH(orders.created_at)=:month', [':month' => $month])
             ->andWhere(['between', 'date(orders.created_at)', $from, $to ])
             ->groupBy(['DAY(`orders`.`created_at`)'])
             ->orderBy(['orders.created_at'=>SORT_ASC]);
 
-        if(isset($_GET["Seals"]["product_id"])){
+        if(isset($_GET["Seals"]["product_id"]) && count($product_id)){
             $profits_day_model->andWhere(['in', 'id',OrdersItem::find()->select(["order_id"])->where(['product_id'=>$product_id])]);
         }
 
