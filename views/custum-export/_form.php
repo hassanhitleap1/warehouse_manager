@@ -99,7 +99,7 @@ $columns = [
                     <?php foreach ($columns as $column):?>
                         <p class="drag"><a class="btn btn-default"><?=$column[1]?></a></p>
                     <?php endforeach;?>>
-                    
+
                 </div>
             </div>
 
