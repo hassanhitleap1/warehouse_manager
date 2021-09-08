@@ -47,16 +47,26 @@ class  DashboardController extends BaseController {
         $date=Carbon::now("Asia/Amman")->toDateString();
         $orders = Orders::find()->select(['count(*) as count_order',
             'sum(orders.amount_required) as total_sales' ,
-            //"(SELECT sum(profits_margin) FROM `orders_item`  inner join orders on  orders.id = orders_item.order_id where date(orders_item.created_at) ='$date' and orders.status_id in (1,2,3,4)  )  as  profit_margin",
             'sum(orders.profit_margin) as profit_margin' ,
              "(SELECT sum(quantity) FROM `orders_item`  inner join orders on  orders.id = orders_item.order_id  where date(orders_item.created_at) ='$date' and  orders.status_id in (1,2,3,4) )  as  quantity",
              "(SELECT sum(value) FROM `outlays`  where date(outlays.created_at) ='$date')  as  outlays",
-            ])->andWhere('date(orders.created_at) >= :date', [':date' => $date])
+            ])
+            ->andWhere('date(orders.created_at) = :date', [':date' => $date])
             ->andWhere(['in','orders.status_id', [1,2,3,4]])
-            ->groupBy(['DAY(orders.created_at)'])
             ->orderBy(['count_order'=>SORT_DESC])
             ->asArray()->one();
-    
+
+        $orders_cousts=OrdersItem::find()->select(['orders_item.product_id','orders_item.quantity','products.purchasing_price'])
+            ->innerJoin('products', 'products.id= orders_item.product_id')
+            ->innerJoin('orders', 'orders.id= orders_item.order_id')
+            ->andWhere('date(orders_item.created_at) = :date', [':date' => $date])
+            ->andWhere(['in','orders.status_id', [1,2,3,4]])
+            ->asArray()->all();
+        $cost_products=0;
+        foreach ($orders_cousts as $order_cost){
+            $cost_products +=$order_cost["quantity"]* $order_cost["purchasing_price"];
+        }
+
         $subQuery = Orders::find()->select('id')->andWhere(['in','orders.status_id', [1,2,3,4]])->andWhere('date(orders.created_at) >= :date', [':date' => $date]);
         $details=OrdersItem::find()->select(['sum(orders_item.quantity) as sum_quantity','orders_item.product_id','orders_item.sub_product_id','orders_item.quantity','products.name','sub_product_count.type'])
             ->innerJoin('products', 'products.id=orders_item.product_id')
@@ -114,6 +124,7 @@ class  DashboardController extends BaseController {
                   $status_statisticis,'products_order'=>$products_order,
               'delivery_order'=>$delivery_order,'date'=>$date,
               'regions_order'=>$regions_order,
+              'cost_products'=>$cost_products
 
         ]);
     }
