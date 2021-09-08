@@ -71,7 +71,7 @@ class RegionsController extends BaseController
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         if(isset($_GET['company_delivery_id'])&& $_GET['company_delivery_id'] !=''){
             $price_delivery_model=PriceCompanyDelivery::find()->where(['=','region_id',$id])
-                ->where(['=','company_delivery_id',$_GET['company_delivery_id']])
+                ->andWhere(['=','company_delivery_id',$_GET['company_delivery_id']])
                 ->one();
             $price_delivery=$price_delivery_model->price;
         }else{
