@@ -68,7 +68,8 @@ class  DashboardController extends BaseController {
         }
 
         $subQuery = Orders::find()->select('id')->andWhere(['in','orders.status_id', [1,2,3,4]])->andWhere('date(orders.created_at) >= :date', [':date' => $date]);
-        $details=OrdersItem::find()->select(['sum(orders_item.quantity) as sum_quantity','orders_item.product_id','orders_item.sub_product_id','orders_item.quantity','products.name','sub_product_count.type'])
+        $details=OrdersItem::find()->select(['sum(orders_item.quantity) as sum_quantity','orders_item.product_id','orders_item.sub_product_id','orders_item.quantity',
+            'products.purchasing_price','products.name','sub_product_count.type'])
             ->innerJoin('products', 'products.id=orders_item.product_id')
             ->innerJoin('sub_product_count', 'sub_product_count.id= orders_item.sub_product_id')
             ->andWhere('date(orders_item.created_at) >= :date', [':date' => $date])

@@ -52,6 +52,12 @@ $data_delivery_order=[];
         </div>
         <div class="col-md-2">
             <div class="panel panel-default">
+                <div class="panel-body"> <?= $cost_products ?>   تكاليف البضائع</div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="panel panel-default">
                 <div class="panel-body"> <?= round ($orders["total_sales"] - $cost_products  - $orders["outlays"] ,2)?>   صافي المرابح</div>
             </div>
         </div>
@@ -69,6 +75,7 @@ $data_delivery_order=[];
                         <th scope="col">#</th>
                         <th scope="col"><?= Yii::t('app','Name')?></th>
                         <th scope="col"><?= Yii::t('app','Number_Of_Grains')?></th>
+                        <th scope="col"><?= Yii::t('app','Cost')?></th>
                     </tr>
                 </thead>
             <tbody>
@@ -77,6 +84,7 @@ $data_delivery_order=[];
                         <th scope="row"><?= ++$key_det ?></th>
                         <td><?= $detail['type'] ?> </td>
                         <td><?= $detail['sum_quantity'] ?></td>
+                        <td><?= $detail['sum_quantity'] * $detail['purchasing_price'] ?></td>
                     </tr>
                     <?php $label_gin[] =$detail['type'] ; $data_gin[]=$detail['sum_quantity']; ?>
                 <?php endforeach;?>
