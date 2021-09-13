@@ -45,6 +45,9 @@ class  DashboardController extends BaseController {
     {
         
         $date=Carbon::now("Asia/Amman")->toDateString();
+        if(isset($_GET["date"])&& $_GET["date"]){
+            $date=$_GET["date"];
+        }
         $orders = Orders::find()->select(['count(*) as count_order',
             'sum(orders.amount_required) as total_sales' ,
             'sum(orders.profit_margin) as profit_margin' ,
@@ -120,6 +123,7 @@ class  DashboardController extends BaseController {
             ->asArray()->all();
 
           return $this->render('index',[
+              'date'=>$date,
             'orders'=>$orders, 'details'=>$details,
               'status_orders'=>$status_orders,'status_statisticis'=>
                   $status_statisticis,'products_order'=>$products_order,

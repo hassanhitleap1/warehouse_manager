@@ -847,6 +847,10 @@ $( document ).ready(function() {
 });
 
 
+$(document).on('change','#filter_single_date',function (event) {
+    $(this).closest("form").submit();
+})
+
 $(document).on('click','#save_model',function (event) {
     event.preventDefault(); // stopping submitting
     var data = $(".fast-order-form").serializeArray();
