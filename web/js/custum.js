@@ -455,7 +455,6 @@ function appaend_products(result){
             '<img src="'+SITE_URL+'/'+product.thumbnail+'"   alt="" style="width:100%;" />\n'+
             '<h1>'+product.name+' </h1> \n'+
             '<p class="price"> $ '+product.selling_price+'</p>\n'+
-            '<p >'+product.description+'</p>\n'+
             '<p><a hrf="'+path+'" class="btn  btn-green"> تفاصيل أكثر  <span class="glyphicon glyphicon-eye-open" ></span> </a>\n'+
             '</p> \n'+
             '</div>\n'+
