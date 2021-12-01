@@ -9,7 +9,6 @@ use yii\helpers\Html;
     <?php $this->registerCsrfMetaTags() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= Html::encode($this->title) ?></title>
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo  Yii::$app->request->baseUrl;?>/theme/adminlte/plugins/fontawesome-free/css/all.min.css" />
     <!-- Ionicons -->
@@ -34,16 +33,7 @@ use yii\helpers\Html;
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
     <!-- Custom style for RTL -->
     <link rel="stylesheet" href="<?php echo  Yii::$app->request->baseUrl;?>/theme/adminlte/dist/css/custom.css">
-
-
-
-
-
-
-
     <?php $this->head() ?>
-
-
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <?php $this->beginBody() ?>
@@ -57,10 +47,10 @@ use yii\helpers\Html;
 
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+        <strong>Copyright &copy; 2014-<?= date('Y') .   Html::a(Yii::$app->params['name_of_store'], ['site/index'])?>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.0.0-rc.1
+            <b>Version</b> 1.0
         </div>
     </footer>
 
