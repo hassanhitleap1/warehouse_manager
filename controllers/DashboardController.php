@@ -16,7 +16,7 @@ class  DashboardController extends BaseController {
     public function init()
     {
         if (!Yii::$app->user->isGuest) {
-            $this->layout = "new";
+            $this->layout = "adminrte";
         }
         parent::init();
     }

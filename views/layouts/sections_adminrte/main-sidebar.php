@@ -1,3 +1,6 @@
+<?php
+use yii\helpers\Html;
+?>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -93,7 +96,7 @@
 
 
 
-                <?php if(Yii::$app->user->identity->type == User::SUPER_ADMIN):?>
+                <?php if(Yii::$app->user->identity->type == \app\models\User::SUPER_ADMIN):?>
 
                     <li class="sidebar-dropdown">
                         <a href="#">
@@ -334,6 +337,7 @@
                         <li class="nav-item">
                             <a href="pages/UI/timeline.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
+                                <p>Timeline</p>
                                 <p>Timeline</p>
                             </a>
                         </li>
