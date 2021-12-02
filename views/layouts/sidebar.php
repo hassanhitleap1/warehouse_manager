@@ -59,7 +59,6 @@ use app\models\User;use yii\helpers\Html;
                             <li  class="menu-item <?= Yii::$app->controller->route =='dashboard/index'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Main'), ['dashboard/index'])?>
                             </li>
-
                             <li  class="menu-item <?= Yii::$app->controller->route =='dashboard/sales'?'active':''?>">
                                 <?= Html::a(Yii::t('app','The_Sales'), ['dashboard/sales'])?>
                             </li>
