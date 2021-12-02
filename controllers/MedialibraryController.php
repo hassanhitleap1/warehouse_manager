@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Model;
 use Yii;
 use app\models\medialibrary\Medialibrary;
 use app\models\medialibrary\MedialibrarySearch;
@@ -67,11 +68,20 @@ class MedialibraryController extends Controller
     public function actionCreate()
     {
         $model = new Medialibrary();
-
         if ($model->load(Yii::$app->request->post()) ) {
-            $images_media = UploadedFile::getInstances($model, 'images_product');
-            if($model->validate()){
-                $path=date('Y/m/d');
+            $models= Model::createMultiple(Medialibrary::classname());
+            Model::loadMultiple($models, Yii::$app->request->post());
+            $valid =Model::validateMultiple($models) ;
+            $valid =boolval($valid);
+            $images_media = UploadedFile::getInstances($model, 'media');
+            if(true){
+                $i=1;
+                $path="uploads/".date('Y/m/d')."/$i";
+                while (file_exists($path)){
+                    ++$i;
+                    $path="uploads/".date('Y/m/d')."/$i";
+                }
+
                 FileHelper::createDirectory($path,
                     $mode = 0775, $recursive = true);
                 if (!is_null($images_media)) {
@@ -80,8 +90,9 @@ class MedialibraryController extends Controller
                         $file_path = "$path/$key" . "." . $media->extension;
                         $modelMedia->path = $file_path;
                         $modelMedia->name="$path";
+                        $modelMedia->extension=$media->extension;
                         $media->saveAs($file_path);
-                        $modelMedia->save();
+                        $modelMedia->save(false);
 
                     }
                 }

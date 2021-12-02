@@ -90,37 +90,13 @@ class ProductsController extends BaseController
             Model::loadMultiple($subProductCounts, Yii::$app->request->post());
             Model::loadMultiple($type_options, Yii::$app->request->post());
             $model->quantity_come=$model->quantity;
-             // validate all models
              $valid = $model->validate();
              $valid =    Model::validateMultiple($subProductCounts) && $valid;
             $valid =Model::validateMultiple($type_options) && $valid;
             $valid =boolval($valid);
-
-            // foreach ($type_options as $key => $type_option) {
-            //     var_dump($type_option->getErrors());
-            // }
-
-            // var_dump($_POST);
-            // foreach ($subProductCounts as $key => $subProductCount) {
-            //     var_dump($subProductCount->getErrors());
-            // }
-            // var_dump($model->getErrors());
-            // exit;
-           // var_dump($type_options[0]->getErrors());
-            // var_dump($model->getErrors());
-            // var_dump($type_options);
-            // var_dump($subProductCounts[0]->getErrors());
-            // var_dump($type_options[0]->getErrors());
-
-       
              if ($valid) {
-
-                
                 $transaction = \Yii::$app->db->beginTransaction();
-                
                 try {
-                  
-
                     $file = UploadedFile::getInstance($model, 'file');
                     $images_product = UploadedFile::getInstances($model, 'images_product');
                     if (!is_null($file)) {

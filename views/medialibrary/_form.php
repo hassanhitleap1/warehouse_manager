@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'media[]')->widget(FileInput::classname(), [
+    <?= $form->field($model, 'media[]')->widget(\kartik\file\FileInput::classname(), [
                 'options' => ['accept' => 'image/*', 'multiple' => true],
                 'pluginOptions' => $dataImages
             ]);?>
