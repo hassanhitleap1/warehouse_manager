@@ -7,9 +7,11 @@ use app\models\historystatus\HistoryStatus;
 use app\models\orders\Orders;
 use app\models\ordersitem\OrdersItem;
 use app\models\Outlays\Outlays;
+use app\models\User;
 use Carbon\Carbon;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 class  DashboardController extends BaseController {
 
@@ -17,6 +19,9 @@ class  DashboardController extends BaseController {
     {
         if (!Yii::$app->user->isGuest) {
             $this->layout = "adminrte";
+            if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
+                throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+            }
         }
         parent::init();
     }

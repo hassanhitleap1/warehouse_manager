@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Model;
+use app\models\User;
 use Yii;
 use app\models\medialibrary\Medialibrary;
 use app\models\medialibrary\MedialibrarySearch;
@@ -17,6 +18,17 @@ use yii\web\UploadedFile;
  */
 class MedialibraryController extends Controller
 {
+
+    public function init()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $this->layout = "adminrte";
+            if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
+                throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+            }
+        }
+        parent::init();
+    }
     /**
      * {@inheritdoc}
      */

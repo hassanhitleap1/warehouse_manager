@@ -3,10 +3,10 @@
 namespace app\controllers;
 
 use app\models\pricecompanydelivery\PriceCompanyDelivery;
+use app\models\User;
 use Yii;
 use app\models\regions\Regions;
 use app\models\regions\RegionsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -19,11 +19,14 @@ class RegionsController extends BaseController
     public function init()
     {
         if (!Yii::$app->user->isGuest) {
-            $this->layout = "new";
+            $this->layout = "adminrte";
+            if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
+                throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+            }
         }
         parent::init();
     }
-    /**
+        /**
      * {@inheritdoc}
      */
     public function behaviors()

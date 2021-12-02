@@ -41,7 +41,7 @@ use yii\helpers\Html;
 
     <?= include ("sections_adminrte/main-header.php");?>
 
-    <?= include ("sections_adminrte/main-sidebar.php");?>
+    <?= include ("sections_adminrte/main-sidebar-copy.php");?>
 
     <?= include ("sections_adminrte/content-wrapper.php");?>
 
