@@ -80,7 +80,7 @@ use yii\helpers\Url;
 
 
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             <?=Yii::t('app','Orders')?>
@@ -108,7 +108,7 @@ use yii\helpers\Url;
                 </li>
 
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             <?=Yii::t('app','Products')?>
@@ -145,7 +145,7 @@ use yii\helpers\Url;
 
 
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             <?=Yii::t('app','Users')?>
@@ -175,7 +175,7 @@ use yii\helpers\Url;
 
 
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             <?=Yii::t('app','Users')?>
@@ -213,7 +213,7 @@ use yii\helpers\Url;
 
 
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             <?=Yii::t('app','Additional')?>
