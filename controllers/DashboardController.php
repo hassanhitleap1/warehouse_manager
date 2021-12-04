@@ -18,14 +18,7 @@ class  DashboardController extends BaseController {
     public function init()
     {
         if (!Yii::$app->user->isGuest) {
-<<<<<<< HEAD
             $this->layout = "new";
-=======
-            $this->layout = "adminrte";
-            if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
-                throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
-            }
->>>>>>> f34f918189ed80c7dcc1e1edcc074367a336e7ac
         }
         parent::init();
     }
