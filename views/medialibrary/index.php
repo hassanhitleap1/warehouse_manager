@@ -30,6 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'id',
             'name',
             [
+                'attribute'=>'copy',
+                'value' => function ($searchModel) {
+                    return '<span class="glyphicon glyphicon-copy" attr_copy="'.$searchModel->path.'"></span>';
+                },
+                'format' => 'html',
+            ],
+            [
                 'attribute'=>'path',
                 'value' => function ($searchModel) {
                     return Html::img($searchModel->path,['width'=>'100','height'=>'100']);

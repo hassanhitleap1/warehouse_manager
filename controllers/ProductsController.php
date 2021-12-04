@@ -9,6 +9,7 @@ use app\models\orders\OrderForm;
 use app\models\orders\Orders;
 use app\models\ordersitem\OrdersItem;
 use app\models\regions\Regions;
+use app\models\User;
 use app\models\users\Users;
 use Carbon\Carbon;
 use Yii;
@@ -28,6 +29,17 @@ use yii\web\UploadedFile;
  */
 class ProductsController extends BaseController 
 {
+
+    public function init()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $this->layout = "adminrte";
+            if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
+                throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+            }
+        }
+        parent::init();
+    }
     /**
      * {@inheritdoc}
      */

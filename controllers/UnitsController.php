@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use app\models\units\Units;
 use app\models\units\UnitsSearch;
@@ -17,7 +18,10 @@ class UnitsController extends BaseController
     public function init()
     {
         if (!Yii::$app->user->isGuest) {
-            $this->layout = "new";
+            $this->layout = "adminrte";
+            if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
+                throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+            }
         }
         parent::init();
     }

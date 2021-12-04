@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\components\DateHelper;
+use app\models\User;
 use Yii;
 use app\models\Outlays\Outlays;
 use app\models\Outlays\OutlaysSearch;
@@ -16,10 +17,14 @@ use yii\filters\VerbFilter;
 class OutlaysController extends Controller
 {
 
+
     public function init()
     {
         if (!Yii::$app->user->isGuest) {
-            $this->layout = "new";
+            $this->layout = "adminrte";
+            if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
+                throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+            }
         }
         parent::init();
     }

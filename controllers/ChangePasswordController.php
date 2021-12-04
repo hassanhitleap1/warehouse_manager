@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 use app\models\auth\ChangePassword;
+use app\models\User;
 use app\models\users\Users;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 /**
  * AreaController implements the CRUD actions for Area model.
@@ -14,7 +16,10 @@ class ChangePasswordController extends BaseController
     public function init()
     {
         if (!Yii::$app->user->isGuest) {
-            $this->layout = "new";
+            $this->layout = "adminrte";
+            if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
+                throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+            }
         }
         parent::init();
     }
