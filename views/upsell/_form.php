@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\upsell\Upsell */
 /* @var $form yii\widgets\ActiveForm */
-$products \yii\helpers\ArrayHelper::map(\app\models\products\Products::find()->all(), 'id', 'name');
+$products =\yii\helpers\ArrayHelper::map(\app\models\products\Products::find()->all(), 'id', 'name');
 
 ?>
 
