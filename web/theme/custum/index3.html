@@ -1,0 +1,117 @@
+
+<html>
+<head>
+    <title>3D product hover effect (RIR)</title>
+
+</head>
+<body>
+
+<style>
+
+    body {
+        background-size: contain;
+        background: radial-gradient(grey,black);
+    }
+    #container {
+        background: url(https://4.bp.blogspot.com/-SwBb_-GhxI4/W1NPTzc7coI/AAAAAAAABBw/Dri7V0algrEMayM55WDNSAWUAF9fFh9xwCLcBGAs/s320/alexa_pro_shadow.png);
+        background-size: cover;
+        background-position: -20px 30px;
+        width: 300px;
+    }
+    #product
+    {
+        margin-top: 100px;
+        width: 300px;
+        height: 200px;
+        background: url(https://pngimg.com/uploads/running_shoes/running_shoes_PNG5805.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        transition: all .8s ease;
+        filter: contrast(150%);
+    }
+    #product2 {
+        margin-top: 100px;
+        width: 300px;
+        height: 200px;
+        background: url(http://anatfran-store.com/web/products/31/index.jpg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        transition: all .8s ease;
+        filter: contrast(150%);
+    }
+    #product3 {
+        margin-top: 100px;
+        width: 300px;
+        height: 200px;
+        background: url(https://purepng.com/public/uploads/large/purepng.com-nike-lazer-bagbagbackpacksnike-lazer-bagtourist-bags-1421526271674pxn0o.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        transition: all .8s ease;
+        filter: contrast(150%);
+    }
+    #info {
+        transition: all .5s ease;
+        color: white;
+        width: 0%;
+        height: auto;
+        padding: 5px;
+        font-family: sans-serif;
+        font-size: 0px;
+        font-weight: bold;
+        border: 2px solid white;
+        border-radius: 10px;
+        background: rgba(0,0,0,.5);
+        filter: opacity(0%);
+    }
+    #product:hover {
+        transform: translate(0px, -50px);
+        cursor: pointer;
+        filter: contrast(100%);
+    }
+    #product:hover > #info {
+        font-size: 30px;
+        width: 100%;
+        filter: opacity(100%);
+    }
+    #product2:hover > #info {
+        font-size: 30px;
+        width: 100%;
+        filter: opacity(100%);
+    }
+    #product3:hover > #info {
+        font-size: 30px;
+        width: 100%;
+        filter: opacity(100%);
+    }
+    #product2:hover {
+        transform: translate(0px, -50px);
+        cursor: pointer;
+        filter: contrast(100%);
+    }
+    #product3:hover {
+        transform: translate(0px, -50px);
+        cursor: pointer;
+        filter: contrast(100%);
+    }
+</style>
+<a href="https://www.facebook.com/RIRwebdesign" target="_blank" style="color: white">LIKE my page</a>
+<center>
+    <div id="container">
+        <div id="product">
+            <div id="info">Price:0$</div>
+        </div>
+    </div>
+    <div id="container">
+        <div id="product2" >
+            <div id="info">Price:0$</div>
+        </div>
+    </div>
+    <div id="container">
+        <div id="product3" >
+            <div id="info">Price:0$</div>
+        </div>
+    </div>
+
+</center>
+</body>
+</html>
