@@ -101,6 +101,10 @@ const purchase = document.querySelector(".purchase");
 const description = document.querySelector(".info h3");
 const sizes = document.querySelector(".sizes");
 
+
+
+
+
 //Moving Animation Event
 container.addEventListener("mousemove", (e) => {
     let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
@@ -132,3 +136,6 @@ container.addEventListener("mouseleave", (e) => {
     sizes.style.transform = "translateZ(0px)";
     purchase.style.transform = "translateZ(0px)";
 });
+
+
+document.documentElement.style.setProperty('--animate-duration', '2s');

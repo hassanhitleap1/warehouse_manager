@@ -40,10 +40,6 @@ $(".navbar-toggler").click(function(){
 });
 
 
-
-// ------------------------------------------------------------------------------------------------------------
-
-
 // --------------add active class-on another-page move----------
 jQuery(document).ready(function($){
     // Get current path and find target link
@@ -60,16 +56,117 @@ jQuery(document).ready(function($){
 });
 
 
+// ------------------------------------------------------------------------------------------------------------
 
-var card = document.querySelector('.card');
+
+
+
+
+
+var card = null;
+
+function setCard(_card){
+    card=_card;
+}
+
+document.body.addEventListener('click', function (e){
+    console.log(e.target)
+}, true);
+
+
+
 
 document.addEventListener('mousemove', function (e) {
-    var xAxis = (window.innerWidth / 2 - e.pageX) / 10;
-    var yAxis = (window.innerHeight / 2 - e.pageY) / 5;
-    card.style.transform = 'rotateY(' + xAxis + 'deg) rotateX(' + yAxis + 'deg)';
+    if(card != null){
+        var xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+        var yAxis = (window.innerHeight / 2 - e.pageY) / 5;
+        card.style.transform = 'rotateY(' + xAxis + 'deg) rotateX(' + yAxis + 'deg)';
+    }
+
 });
 
+
+// function startup() {
+//     var el = document.querySelector("body");
+//     el.addEventListener("touchstart", handleStart, false);
+//     el.addEventListener("touchend", handleEnd, false);
+//     el.addEventListener("touchcancel", handleCancel, false);
+//     el.addEventListener("touchmove", handleMove, false);
+// }
+//
+// document.addEventListener("DOMContentLoaded", startup);
+
+
+var el = document.querySelector(".card");
+
+
+
+
+
+    // }, false);
+    el.addEventListener("touchmove", function (e){
+        if(card != null){
+            var xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+            var yAxis = (window.innerHeight / 2 - e.pageY) / 5;
+            card.style.transform = 'rotateY(' + xAxis + 'deg) rotateX(' + yAxis + 'deg)';
+
+        }
+
+    }, false);
 
 // ------------------------------------------------------------------------------------------------------------
 
 
+
+document.querySelector("body").addEventListener("touchmove", function (e){
+    if(card != null){
+        var xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+        var yAxis = (window.innerHeight / 2 - e.pageY) / 5;
+        card.style.transform = 'rotateY(' + xAxis + 'deg) rotateX(' + yAxis + 'deg)';
+    }
+
+}, false);
+
+
+
+
+
+
+document.body.addEventListener('touchmove', function (e){
+    if(card != null){
+        var xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+        var yAxis = (window.innerHeight / 2 - e.pageY) / 5;
+        card.style.transform = 'rotateY(' + xAxis + 'deg) rotateX(' + yAxis + 'deg)';
+    }
+}, true);
+
+
+
+document.body.addEventListener("touchstart", function (e){
+    if(card != null){
+        var xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+        var yAxis = (window.innerHeight / 2 - e.pageY) / 5;
+        card.style.transform = 'rotateY(' + xAxis + 'deg) rotateX(' + yAxis + 'deg)';
+    }
+
+}, false);
+document.body.addEventListener("touchend", function (e){
+    if(card != null){
+        var xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+        var yAxis = (window.innerHeight / 2 - e.pageY) / 5;
+        card.style.transform = 'rotateY(' + xAxis + 'deg) rotateX(' + yAxis + 'deg)';
+    }
+
+}, false);
+
+
+
+
+    document.body.addEventListener("touchcancel", function (e){
+        if(card != null){
+            var xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+            var yAxis = (window.innerHeight / 2 - e.pageY) / 5;
+            card.style.transform = 'rotateY(' + xAxis + 'deg) rotateX(' + yAxis + 'deg)';
+        }
+
+    }, false);

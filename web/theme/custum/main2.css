@@ -197,12 +197,6 @@ body {
 /*---------------------------------------------------------------------------------------------*/
 
 
-.container {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .card {
     transform-style: preserve-3d;
@@ -210,6 +204,7 @@ body {
     width: 35rem;
     border-radius: 30px;
     padding: 0rem 5rem;
+    margin: 8px;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
 }
 
