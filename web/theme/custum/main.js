@@ -56,3 +56,32 @@ jQuery(document).ready(function($){
 });
 
 
+
+
+// ------------------------
+// add anmatio 2m
+
+
+function set_anmiation_for_product(add,classRemoved){
+
+    var items = document.getElementsByClassName("animate__animated");
+    for (i = 0; i < items.length; i++) {
+
+        classRemoved.forEach(function(element) {
+            items[i].classList.remove(element);
+        });
+
+    }
+    for (i = 0; i < items.length; i++) {
+        items[i].classList.add(add);
+    }
+}
+
+
+setTimeout(
+    set_anmiation_for_product("animate__flip",["animate__bounce","animate__repeat-1"]),
+    4000);
+
+setTimeout(
+    set_anmiation_for_product("animate__flip",["animate__flip"]),
+    8000);

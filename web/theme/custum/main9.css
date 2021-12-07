@@ -204,7 +204,7 @@ i {
     text-align: center;
 }
 
-.card-content h2 {
+.card-content h3 {
     color: #FFF;
     -webkit-transform: translateZ(100px);
     transform: translateZ(100px);
@@ -216,9 +216,7 @@ i {
     -webkit-transform: translateZ(100px);
     transform: translateZ(100px);
     z-index: 99;
-    /*    box-shadow: 2px 2px 2px #000;
-       -webkit-box-shadow: 2px 2px 2px #000;
-       -moz-box-shadow: 2px 2px 2px #000; */
+
 }
 
 .card-content p {
