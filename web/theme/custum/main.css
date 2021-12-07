@@ -327,7 +327,7 @@ body{
 }
 .product-grid .product-links li a{
     color:  var(--fontcolor);
-    background:var(--colorsite);
+    background:var(--backgroundnav);
     font-size: 16px;
     line-height: 48px;
     width: 48px;
