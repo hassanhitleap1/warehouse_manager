@@ -14,6 +14,7 @@ body{
 }
 .navbar-mainbg{
     background-color:var(--colorsite);
+    background: var(--backgroundnav);
     padding: 0px;
 }
 
@@ -325,8 +326,8 @@ body{
     margin: 0 2px;
 }
 .product-grid .product-links li a{
-    color: #fff;
-    background: #000;
+    color:  var(--fontcolor);
+    background:var(--colorsite);
     font-size: 16px;
     line-height: 48px;
     width: 48px;
