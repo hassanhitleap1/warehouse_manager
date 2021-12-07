@@ -10,7 +10,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\orders\Orders;
+
 use app\models\products\Products;
 use yii\data\Pagination;
 
@@ -18,11 +18,11 @@ use yii\data\Pagination;
 
 class SiteController extends Controller
 {
-//    public function __construct($id, $module, $config = [])
-//    {
-//        parent::__construct($id, $module, $config);
-//        $this->layout='app';
-//    }
+   public function __construct($id, $module, $config = [])
+   {
+       parent::__construct($id, $module, $config);
+       $this->layout='app';
+   }
 
     /**
      * {@inheritdoc}
@@ -93,70 +93,7 @@ class SiteController extends Controller
     }
 
     
-        /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionDashboard()
-    {
-
-        if(date('m') < 7 ){
-            $month=date('m'); 
-         }else{
-             $month = date('m', strtotime(date('Y-m-d'). ' -7 month'));
-         }
-
-        if(date('d') < 7 ){
-           $day=date('d'); 
-        }else{
-            $day = date('d', strtotime(date('Y-m-d'). ' -7 day'));
-        }
-     
-        // SELECT count(*) ,count(`profit_margin`) FROM `orders` GROUP BY YEAR(`created_at`), MONTH(`created_at`),DAY(`created_at`)
-        $profits_day_model = Orders::find()->select(['count(*) as count_order', 'sum(profit_margin)  as profit_margin','MONTH(`created_at`) as month','DAY(`created_at`) as day'])
-            ->andWhere('YEAR(created_at)=:year', [':year' => date('Y')])
-            ->andWhere('MONTH(created_at)=:month', [':month' => date('m')]) 
-            ->andWhere('DAY(created_at) >= :day', [':day' => $day]) 
-            ->groupBy(['YEAR(`created_at`)', ' MONTH(`created_at`)','DAY(`created_at`)'])
-            ->asArray()->all();
-
-        $profits_month_model = Orders::find()->select(['count(*) as count_order', 'sum(profit_margin)  as profit_margin','MONTH(`created_at`) as month'])
-            ->andWhere('YEAR(created_at)=:year', [':year' => date('Y')])
-            ->andWhere('MONTH(created_at)>= :month', [':month' => $month]) 
-            ->groupBy(['YEAR(`created_at`)', ' MONTH(`created_at`)'])
-            ->asArray()->all();
-
-         $label_month=[];
-         $label_day=[];
-         $orders_count_month=[];
-         $orders_count_day=[]; 
-         $profits_month=[];
-         $profits_day=[]; 
-
-         foreach($profits_day_model as $profit_day){
-            $label_day[]=$profit_day['day'];
-            $orders_count_day[]=$profit_day['count_order'];
-            $profits_day[]=$profit_day['profit_margin'];
-         }
-
-
-        foreach($profits_month_model as $profit_month){
-            $label_month[]=$profit_day['month'];
-            $orders_count_month[]=$profit_day['count_order'];
-            $profits_month[]=$profit_day['profit_margin'];  
-        }
-          return $this->render('dashboard',[
-            'label_month'=>$label_month,
-            'label_day'=>$label_day,
-            'orders_count_month'=>$orders_count_month,
-            'orders_count_day'=>$orders_count_day, 
-            'profits_month'=>$profits_month,
-            'profits_day'=> $profits_day, 
-        ]);
-     
-    }
-    
+      
     
     /**
      * Login action.
@@ -220,30 +157,5 @@ class SiteController extends Controller
         return $this->render('about');
     }
     
-    
-    public function getStatistics(){
-       $statistics_day=Orders ::find()->select("count('profit_margin')");
-        $statistics_week=Orders ::find()->select("count('profit_margin')");
-        $statistics_month=Orders ::find()->select("count('profit_margin')");
-         $date=date('Y-m-d');
-        $month=date('Y-m-d');  
-         $week=date('Y-m-d');  
-        if(isset($_GET['date']) && $_GET['date'] !=''){
-            $date= $_GET['date'];
-        }
-           
-           if(isset($_GET['week']) && $_GET['week'] !=''){
-            $week= $_GET['week'];
-        }
-         if(isset($_GET['month']) && $_GET['month'] !=''){
-            $month= $_GET['month'];
-        }
-         $statistics_day= $statistics_day->andFilterWhere(['=', 'created_at', $date])->all();
-        
-          $statistics_week= $statistics_week->andFilterWhere(['=', 'created_at', $date])->all();
-        
-          $statistics_month= $statistics_month->andFilterWhere(['=', 'created_at', $date])->all();
-        
-        
-    }
+
 }
