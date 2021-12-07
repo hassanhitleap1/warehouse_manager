@@ -6,19 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+
+
     <link href="main.css" rel="stylesheet">
     <title>Hello, world!</title>
 </head>
 <body>
 
 <div class="wrap">
-    <nav class="navbar navbar-expand-custom navbar-mainbg">
-        <a class="navbar-brand navbar-logo" href="#">Navbar</a>
+
+    <nav class="navbar  navbar-mainbg navbar-expand-sm mb-2 ">
+
         <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars text-white"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <a href="#" class="navbar-brand order-sm-2 order-1">Logo</a>
+
+        <div class="navbar-collapse collapse order-2 order-sm-1 justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
                 <li class="nav-item">
@@ -41,40 +50,60 @@
                 </li>
             </ul>
         </div>
+
     </nav>
 
 
-
-
     <div class="container">
-
-        <a class='card' onclick="setCard(this)">
-            <div class="card-content">
-                <img src="http://anatfran-store.com/web/products/20/index.jpg" alt="unisangil">
-                <h2>¡Ya Viene!</h2>
-                <p>La maratón de programación.</p>
-                <p>Apuntate ahora</p>
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#" class="image">
+                            <img class="pic-1" src="https://elearningindustry.com/wp-content/uploads/2020/08/why-universities-should-use-an-lms.jpg">
+                            <img class="pic-2" src="ihttps://atlanticwebfitters.com/wp-content/uploads/2018/08/LMS-5-warning-signs-1.png">
+                        </a>
+                        <a href="#" class="product-like-icon" data-tip="Add to Wishlist">
+                            <i class="far fa-heart"></i>
+                        </a>
+                        <ul class="product-links">
+                            <li><a href="#"><i class="fa fa-search"></i></a></li>
+                            <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">Women's Top</a></h3>
+                        <div class="price">$75.99</div>
+                    </div>
+                </div>
             </div>
-        </a>
-
-        <a class='card' onclick="setCard(this)">
-            <div class="card-content">
-                <img src="http://anatfran-store.com/web/products/20/index.jpg" alt="unisangil">
-                <h2>¡Ya Viene!</h2>
-                <p>La maratón de programación.</p>
-                <p>Apuntate ahora</p>
+            <div class="col-md-6 col-sm-6">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#" class="image">
+                            <img class="pic-1" src="https://elearningindustry.com/wp-content/uploads/2020/08/why-universities-should-use-an-lms.jpg">
+                            <img class="pic-2" src="ihttps://atlanticwebfitters.com/wp-content/uploads/2018/08/LMS-5-warning-signs-1.png">
+                        </a>
+                        <a href="#" class="product-like-icon" data-tip="Add to Wishlist">
+                            <i class="far fa-heart"></i>
+                        </a>
+                        <ul class="product-links">
+                            <li><a href="#"><i class="fa fa-search"></i></a></li>
+                            <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">Women's Top</a></h3>
+                        <div class="price">$75.99</div>
+                    </div>
+                </div>
             </div>
-        </a>
-        <a class='card' onclick="setCard(this)">
-            <div class="card-content">
-                <img src="http://anatfran-store.com/web/products/20/index.jpg" alt="unisangil">
-                <h2>¡Ya Viene!</h2>
-                <p>La maratón de programación.</p>
-                <p>Apuntate ahora</p>
-            </div>
-        </a>
 
+        </div>
     </div>
+
 </div>
 
 <!-- Optional JavaScript; choose one of the two! -->
@@ -82,10 +111,6 @@
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="main.js"></script>
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
--->
+
 </body>
 </html>
