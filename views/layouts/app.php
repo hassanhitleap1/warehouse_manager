@@ -29,7 +29,8 @@ AppAsset::register($this);
 
     <div class="wrap">
 
-        <?= include ("navbar.php");?>
+        <?php include ("navbar.php")  ?>
+
         <?= $content ?>
       
 

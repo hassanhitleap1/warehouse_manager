@@ -4,7 +4,27 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
-/*----------bootstrap-navbar-css------------*/
+.logo{
+    float: right;
+    /* width: 145px; */
+    height: 42px;
+    /* padding-left: 300px; */
+    /* margin-bottom: -22px; */
+    padding: 0px;
+    /* left: 35px; */
+    /* right: 53px; */
+    margin-left: 21px;
+    /* margin-bottom: -33px; */
+    margin-top: -9px;
+    display: -webkit-box;
+    position: relative;
+    margin: 3px;
+}
+.navbar-brand:hover{
+    color: var(--fontcolor);
+}
+
+    /*----------bootstrap-navbar-css------------*/
 .navbar-brand{
     color: var(--fontcolor);
 }

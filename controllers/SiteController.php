@@ -18,6 +18,7 @@ use yii\data\Pagination;
 
 class SiteController extends Controller
 {
+
    public function __construct($id, $module, $config = [])
    {
        parent::__construct($id, $module, $config);
@@ -77,6 +78,9 @@ class SiteController extends Controller
         // $this->layout='empty';
         // return $this->render('test');
         $query =    Products::find();
+        if(isset($_GET['category'])){
+            $query->where(['category_id'=>$_GET['category']]) ;
+        }
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
         $models = $query->offset($pages->offset)
