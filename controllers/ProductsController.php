@@ -23,6 +23,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -111,12 +112,23 @@ class ProductsController extends BaseController
                 try {
                     $file = UploadedFile::getInstance($model, 'file');
                     $images_product = UploadedFile::getInstances($model, 'images_product');
+
                     if (!is_null($file)) {
                         $folder_path = "products/$newId";
                         FileHelper::createDirectory($folder_path, $mode = 0775, $recursive = true);
                         $thumbnail_path = "$folder_path/index" . "." . $file->extension;
                         $model->thumbnail= $thumbnail_path;
                         $file->saveAs($thumbnail_path);
+
+
+                        $img = Image::make($thumbnail_path);
+                        $img->insert($thumbnail_path);
+                        $img->resize(400, 400, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->save("$folder_path/thumnil.".$file->extension);
+
+
+
                         $model->thumbnail = $thumbnail_path;
                     }
 
@@ -252,6 +264,15 @@ class ProductsController extends BaseController
                         $thumbnail_path = "$folder_path/index" . "." . $file->extension;
                         $model->thumbnail = $thumbnail_path;
                         $file->saveAs($thumbnail_path);
+
+                        $img = Image::make($thumbnail_path);
+                        $img->insert($thumbnail_path);
+
+                        $img->crop(1024, 1024, 25, 25)->save("$folder_path/thumnil.".$file->extension);
+//                        $img->resize(400, 400, function ($constraint) {
+//                            $constraint->aspectRatio();
+//                        })->save("$folder_path/thumnil.".$file->extension);
+
                         $model->thumbnail = $thumbnail_path;
                     }
 
