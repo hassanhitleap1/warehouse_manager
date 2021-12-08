@@ -175,4 +175,15 @@ class Products extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Categorises::className(), ['id' => 'unit_id']);
     } 
+
+
+
+    public function fields()
+    {
+        $fields = parent::fields();
+        $fields[] = 'imagesProduct';
+
+        return $fields;
+    }
+
 }

@@ -158,14 +158,15 @@ class ProductController extends Controller
 
 
 
-    public function actionLoadMore(){  
-        $query =    Products::find()->where(['!=','quantity',0]);
+    public function actionLoadMore(){ 
+        $query =   Products::find()->where(['!=','quantity',0]);
         $countQuery = clone $query;
         $page=$_GET['page'];
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
         $offset= ($page-1) *$pages->limit;
         $models = $query->offset($offset)
             ->limit($pages->limit)
+            ->with('imagesProduct')
             ->orderBy([
                 'created_at' => SORT_DESC //specify sort order ASC for ascending DESC for descending      
             ])

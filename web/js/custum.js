@@ -418,13 +418,11 @@ window.onscroll = function() {fade_in_out_button()};
 
 let page=2;
 
-$(window).scroll(function() {
-    let full_path=window.location.href;
-    var splitstring =full_path.split("?");
-    console.log("splitstring",splitstring[1])
-    if(splitstring[1] == "undefined" || splitstring[1] == undefined || splitstring[1]=='r=site/index' ||  splitstring[1]=='r=site%2Findex'){
-        if($(window).scrollTop() == $(document).height() - $(window).height())
-        {
+$(window).scroll(function(){
+    if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+        let full_path=window.location.href;
+        var splitstring =full_path.split("?");
+        if(splitstring[1] == "undefined" || splitstring[1] == undefined || splitstring[1]=='r=site/index' ||  splitstring[1]=='r=site%2Findex'){
             var url=`${SITE_URL}/index.php?r=product/load-more&page=${page}`;
             show_loader();
 
@@ -437,28 +435,62 @@ $(window).scroll(function() {
 
                 }
             });
-
         }
     }
 });
+
 
 function appaend_products(result){
 
     let content="";
     var path='';
     var image_path='';
+
+
     result.forEach(function(product) {
-        path=`'${SITE_URL}/index.php?r=product/view&id=${product.id}'`;
+        path=`${SITE_URL}/index.php?r=product/view&id=${product.id}`;
+
         image_path=SITE_URL+'/'+product.thumbnail;
-        content+='<div class="col-md-4"> \n'+
-            '<div class="card" onclick="window.location.href ='+path+'"> \n'+
-            '<img src="'+SITE_URL+'/'+product.thumbnail+'"   alt="" style="width:100%;" />\n'+
-            '<h1>'+product.name+' </h1> \n'+
-            '<p class="price"> $ '+product.selling_price+'</p>\n'+
-            '<p><a hrf="'+path+'" class="btn  btn-green"> تفاصيل أكثر  <span class="glyphicon glyphicon-eye-open" ></span> </a>\n'+
-            '</p> \n'+
-            '</div>\n'+
-            '</div>';
+        
+        path=`<div class="col-md-6 col-sm-6 card  animate__animated animate__bounce animate__repeat-1" > 
+                <div class="product-grid">
+                    <div class="product-image">
+                    <a href="${path}" class="image">
+                        <img class="pic-1" src="${image_path}"
+                        <img class="pic-2" src="${(product.imagesProduct.length)?product.imagesProduct[0].path :image_path }"
+                   
+                    </a>
+                    <a href="#" class="product-like-icon" data-tip="Add to Wishlist">
+                        <i class="far fa-heart"></i>
+                    </a>
+                <ul class="product-links">
+                    <li><a href="${path}"><i class="fa fa-search"></i></a></li>
+                   
+                </ul>
+            </div>
+            <div class="product-content">
+                <h3 class="title"><a href="#">${product.name} </a></h3>
+                <div class="price">${product.selling_price}  JD</div>
+            </div>
+        </div>
+    </div>`;
+
+
+
+
+
+
+    
+       
+        // content+='<div class="col-md-4"> \n'+
+        //     '<div class="card" onclick="window.location.href ='+path+'"> \n'+
+        //     '<img src="'+SITE_URL+'/'+product.thumbnail+'"   alt="" style="width:100%;" />\n'+
+        //     '<h1>'+product.name+' </h1> \n'+
+        //     '<p class="price"> $ '+product.selling_price+'</p>\n'+
+        //     '<p><a hrf="'+path+'" class="btn  btn-green"> تفاصيل أكثر  <span class="glyphicon glyphicon-eye-open" ></span> </a>\n'+
+        //     '</p> \n'+
+        //     '</div>\n'+
+        //     '</div>';
 
 
 
@@ -469,7 +501,7 @@ function appaend_products(result){
 
 
 
-    console.log(content);
+    console.log("content",content);
     $("#list-products").append(content);
 
 }
