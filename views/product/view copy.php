@@ -1,5 +1,6 @@
 <?php
 
+use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use app\models\products\Products;
 use app\models\regions\Regions;
 use kartik\select2\Select2;
@@ -9,54 +10,64 @@ use yii\widgets\ActiveForm;
 
 $regions_model = Regions::find()->all();
 $regions = [];
-foreach ($regions_model as $key => $value) {
-    $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
+if(is_null($model->company_delivery_id)){
+
+    foreach ($regions_model as $key => $value) {
+        $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
+    }
+    
+}else{
+
+    $price_company_delivery=PriceCompanyDelivery::find()
+    ->select(['regions.*','price_company_delivery.*'])
+    ->leftJoin('regions', 'regions.id=price_company_delivery.region_id')
+    ->where(['=','price_company_delivery.company_delivery_id',$model->company_delivery_id])->asArray()->all();
+    foreach ($price_company_delivery as $key => $value) {
+        $regions[$value['region_id']] = $value['name_ar'] . " ".Yii::t('app','Delivery_Price')." ( " . $value['price'] . " )";
+      
+    } 
+ 
 }
+
+
 $this->title = $model->name;
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.9.0/viewer.min.js" integrity="sha512-0goo56vbVLOJt9J6TMouBm2uE+iPssyO+70sdrT+J5Xbb5LsdYs31Mvj4+LntfPuV+VlK0jcvcinWQG5Hs3pOg==" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.9.0/viewer.css" integrity="sha512-HHYZlJVYgHVdz/pMWo63/ya7zc22sdXeqtNzv4Oz76V3gh7R+xPqbjNUp/NRmf0R85J++Yg6R0Kkmz+TGYHz8g==" crossorigin="anonymous" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span>', ['site/index'], ['class' => 'btn btn-green pull-left']) ?>
 
+
 <div class="card-single">
-
-
-
     <div class="container-fliud">
         <div class="wrapper row">
             <div class="preview col-md-6">
                 <div class="preview-pic tab-content">
 
-                    <div class="tab-pane active" id="pic-1">
-                        <?= Html::img($model->thumbnail, ['data-original' => $model->thumbnail]) ?>
-                    </div>
-
+                    <div class="swiper-container mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                            <?= Html::img($model->thumbnail, ['data-original' => $model->thumbnail]) ?>
+                            </div>
+                            <?php foreach ($model->imagesProduct as $key => $img) : ?>
+                                <div class="swiper-slide">
+                                <?= Html::img($img->path, ['data-original' => $img->path]) ?>
+                                </div>
+                            <?php endforeach; ?>
+                            
+                    
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        </div>
 
                 </div>
-                <div id="galley">
-                    <ul class="preview-thumbnail nav nav-tabs pictures">
-                        <li class="active">
-                            <a data-target="#pic-1" data-toggle="tab">
-                                <?= Html::img($model->thumbnail, ['data-original' => $model->thumbnail]) ?>
-                            </a>
-                        </li>
-                        <?php foreach ($model->imagesProduct as $key => $img) : ?>
-                            <li>
-                                <a data-target="#pic-<?= $key + 2 ?>" data-toggle="tab">
-                                    <?= Html::img($img->path, ['data-original' => $img->path]) ?>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
+                
             </div>
             <div class="details col-md-6">
                 <h5 class="product-title"><?= $this->title ?></h5>
 
                 <p class="product-description"><?= $model->description ?> .</p>
-                <h4 class="price"><?= Yii::t('app', 'Price') ?> : <span><?= $model->selling_price ?> JOD</span></h4>
-
+                
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="<?= str_replace('watch?v=', 'embed/', $model->video_url) ?>" allowfullscreen></iframe>
                 </div>
@@ -109,7 +120,11 @@ $this->title = $model->name;
 
                     <div class="col-md-6">
                         <?php if ($model->type_options == Products::TYPE_CHOOSE_BOX) : ?>
-                            <?= $form->field($modelOrder, 'typeoption')->radioList(ArrayHelper::map($model->typeOptions, 'id', 'text'), ['style' => 'display: grid;']) ?>
+                            <?php 
+                              $typeOptions= ArrayHelper::map($model->typeOptions, 'id', 'text');
+                              $modelOrder->typeoption = array_key_first($typeOptions);; 
+                            ?>
+                            <?= $form->field($modelOrder, 'typeoption')->radioList($typeOptions, ['style' => 'display: grid;']) ?>
                         <?php else : ?>
                             <?= $form->field($modelOrder, 'typeoption')->dropDownList(ArrayHelper::map($model->typeOptions, 'id', 'text')) ?>
                         <?php endif; ?>
@@ -117,7 +132,7 @@ $this->title = $model->name;
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <?= Html::submitButton(Yii::t('app', 'Order_Now') . ' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block', 'id' => 'send_order']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Order_Now') . ' <span class="glyphicon glyphicon-shopping-cart"> </span>', ['class' => 'btn btn-green btn-lg btn-block', 'id' => 'send_order','data-loading-text'=>"Loading..."]) ?>
                     </div>
                 </div>
                 <?php ActiveForm::end(); ?>
@@ -153,7 +168,7 @@ $this->title = $model->name;
                                     <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[0]->id?>'">
                                         <?= Html::img($product_suggested[0]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[0]->name ?></h5>
-                                        <p class="price">$<?= $product_suggested[0]->selling_price ?></p>
+                                        
                                        
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[0]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
@@ -165,7 +180,7 @@ $this->title = $model->name;
                                     <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[1]->id?>'">
                                         <?= Html::img($product_suggested[1]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[1]->name ?></h5>
-                                        <p class="price">$<?= $product_suggested[1]->selling_price ?></p>
+                                      
                                         
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[1]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
@@ -182,7 +197,7 @@ $this->title = $model->name;
                                     <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[2]->id?>'">
                                         <?= Html::img($product_suggested[2]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[2]->name ?></h5>
-                                        <p class="price">$<?= $product_suggested[2]->selling_price ?></p>
+                                        
                                   
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[2]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
@@ -194,7 +209,7 @@ $this->title = $model->name;
                                     <div class="card card-sugested" onclick="window.location.href = '<?= 'index.php?r=product/view&id='.$product_suggested[3]->id?>'">
                                         <?= Html::img($product_suggested[3]->thumbnail, ['style' => 'width:100%']) ?>
                                         <h5><?= $product_suggested[3]->name ?></h5>
-                                        <p class="price">$<?= $product_suggested[3]->selling_price ?></p>
+                                       
                                         
                                         <p><?= Html::a(Yii::t('app', 'More_Info') . ' <span class="glyphicon glyphicon-eye-open" ></span>', ['product/view', 'id' => $product_suggested[3]->id], ['class' => 'btn  btn-green']); ?></p>
                                     </div>
@@ -234,3 +249,14 @@ $this->title = $model->name;
     </script>
     <?php Yii::$app->session->remove('message'); ?>
 <?php endif; ?>
+<!-- Swiper JS -->
+<script src="<?php echo Yii::$app->request->baseUrl; ?>/js/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
+</script>
