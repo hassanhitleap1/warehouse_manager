@@ -37,8 +37,9 @@ $this->title = $model->name;
         <div class="row no-gutters">
             <div class="col-md-5 pr-2">
                 <div class="card">
-                    <div class="demo">
+                    <li class="demo">
                         <ul class="list-image-sider" id="lightSlider">
+
                             <li data-thumb="<?= $model->thumb?>">
                                 <?= Html::img($model->thumbnail) ?>
                             </li>
@@ -76,7 +77,10 @@ $this->title = $model->name;
 
                     <hr>
                     <div class="product-description">
-                        <?php  print $model->description?>
+                        <p>
+                            <?php  print $model->description?>
+                        </p>
+
                     </div>
                     <div class="mb-2">
                         <p> <strong style="color:red;"><?=Yii::t('app','Delivery_Price_Added')?> </strong> </p>
@@ -154,6 +158,8 @@ $this->title = $model->name;
                     </div>
 
                 </div>
+
+
 
                 <div class="card mt-2"> <span>Similar items:</span>
                     <div class="similar-products mt-2 d-flex flex-row">
