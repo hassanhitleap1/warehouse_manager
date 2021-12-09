@@ -960,6 +960,7 @@ var pusher = new Pusher('78a323b54ba0c2d92d1f', {
 });
 
 var channel = pusher.subscribe('my-channel');
+
 channel.bind('my-event', function(data) {
     if($(".profile").attr("type")=="admin"){
         play_voice_bell();
@@ -972,3 +973,10 @@ function play_voice_bell() {
     var audio = new Audio(`${SITE_URL}/sounds/bell-ringing.mp3`);
     audio.play();
 }
+
+
+$(document).on('click','.logout',function (event) {
+    event.preventDefault(); // stopping submitting
+    $(this).closest("form").submit();
+});
+

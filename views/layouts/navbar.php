@@ -19,16 +19,12 @@ $categoris=Categorises::find()->all();
                 </li>
             <?php else:?>
 
-
                 <li class="nav-item ">
-                    <?=
-                    \yii\helpers\Html::beginForm(['/site/logout'], 'post')
-                    . \yii\helpers\Html::submitButton(
-                        '( ' . Yii::t('app', 'Logout') . ' ' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'btn nav-link logout']
-                    )
-                    . \yii\helpers\Html::endForm() ?>
+                    <?= \yii\helpers\Html::beginForm(['/site/logout'], 'post')?>
+                    <a class="nav-link logout"  href="#" > <i class="fas fa-tachometer-alt"></i> <?= Yii::t('app', 'Logout') ?></a>
+                    <?=\yii\helpers\Html::endForm() ?>
                 </li>
+
                 <li class="nav-item ">
                     <?= \yii\helpers\Html::a('<i class="fas fa-tachometer-alt"></i>'.Yii::t('app','Dashboard') ,['dashboard/index'], ['class' => 'nav-link']) ?>
                 </li>

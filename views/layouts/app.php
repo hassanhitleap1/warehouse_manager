@@ -18,6 +18,8 @@ AppAsset::register($this);
         <title><?= Html::encode($this->title) ?></title>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
+        <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
         <?php $this->head() ?>
     
 
