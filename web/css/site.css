@@ -535,3 +535,47 @@ body.busy .spinner { display:block !important; }
 .help-block{
     color: red;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .productmainbtn {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        z-index: 999999;
+    }
+    #ordernow{
+        margin-right: 15%;
+    }
+}
+.productmainbtn {
+    position: fixed;
+    width: 80%;
+    bottom: 0;
+    z-index: 999999;
+}
+.btn-productmainbtn{
+    background: var(--backgroundnav);
+    color: var(--fontcolor);
+}
+
+
+.whats-app {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 3px 4px 3px #999;
+    right: 10px;
+    z-index: 100;
+    float: left;
+}
+
+.my-float {
+    margin-top: 10px;
+}

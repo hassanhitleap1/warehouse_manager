@@ -114,7 +114,7 @@ $config = [
 
 ];
 
-if (YII_ENV_DEV) { // YII_ENV_DEV YII_ENV_PROD
+if (YII_ENV_PROD) { // YII_ENV_DEV YII_ENV_PROD
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [

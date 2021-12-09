@@ -235,7 +235,6 @@ $this->title = $model->name;
  class="float" target="_blank">
 <i class="fa fa-whatsapp my-float"></i>
 
-
 </a>
  
 <?php if (Yii::$app->session->has('message')) : ?>

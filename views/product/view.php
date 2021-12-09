@@ -188,7 +188,16 @@ $this->title = $model->name;
         </div>
     </div>
 
+<div class="row productmainbtn" style="display: block;">
+    <div class="col-md-12">
+        <a href="#" id="ordernow" class="btn btn-productmainbtn btn-lg btn-block" style="width:100%"><i class="fas fa-shopping-cart"></i> <?= Yii::t('app', 'Order_Now') ?> </a>
+    </div>
+</div>
 
+
+<a  class="whats-app" href="https://api.whatsapp.com/send?phone=<?=Yii::$app->params['phone']?>&text=<?= Yii::t('app','Need_Product'). ' '. $model->name?>." target="_blank">
+    <i class="fa fa-whatsapp my-float"></i>
+</a>
 
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
 <script src='https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js'></script>
