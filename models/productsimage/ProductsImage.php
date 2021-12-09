@@ -32,7 +32,7 @@ class ProductsImage extends \yii\db\ActiveRecord
         return [
             [['product_id', 'path'], 'required'],
             [['product_id'], 'integer'],
-            [['path'], 'string', 'max' => 255],
+            [['path','thumbnail'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,6 +45,7 @@ class ProductsImage extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'product_id' => Yii::t('app', 'Product ID'),
             'path' => Yii::t('app', 'Path'),
+            'thumbnail'=>Yii::t('app','thumbnail'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

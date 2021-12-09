@@ -117,16 +117,21 @@ class ProductsController extends BaseController
                         $folder_path = "products/$newId";
                         FileHelper::createDirectory($folder_path, $mode = 0775, $recursive = true);
                         $thumbnail_path = "$folder_path/index" . "." . $file->extension;
+
                         $model->thumbnail= $thumbnail_path;
+                        $thumb="$folder_path/thumbnail.$file->extension";
                         $file->saveAs($thumbnail_path);
+                        if(!in_array($file->extension ,['gif','GIF'])){
+                            $img = Image::make($thumbnail_path);
+                            $img->insert($thumbnail_path);
+                            $img->resize(400, 400, function ($constraint) {
+                                $constraint->aspectRatio();
+                            })->save($thumb);
+                        }else{
+                            $thumb=$thumbnail_path;
+                        }
 
-
-                        $img = Image::make($thumbnail_path);
-                        $img->insert($thumbnail_path);
-                        $img->resize(400, 400, function ($constraint) {
-                            $constraint->aspectRatio();
-                        })->save("$folder_path/thumnil.".$file->extension);
-
+                        $model->thumb=$thumb;
 
 
                         $model->thumbnail = $thumbnail_path;
@@ -145,6 +150,21 @@ class ProductsController extends BaseController
                             $modelImagesProduct->product_id = $newId;
                             $modelImagesProduct->path = $file_path;
                             $image_product->saveAs($file_path);
+
+                            $thumbnail="$folder_path/images/$key-thumbnail.".$image_product->extension;
+                            if(!in_array($image_product->extension ,['gif','GIF'])){
+                                $img_thumbnail = Image::make($file_path);
+                                $img_thumbnail->insert($file_path);
+                                $img_thumbnail->resize(400, 400, function ($constraint) {
+                                    $constraint->aspectRatio();
+                                })->save($thumbnail);
+                            }else{
+                                $thumbnail="$folder_path/images/$key.".$image_product->extension;
+                            }
+
+                            $modelImagesProduct->thumbnail=$thumbnail ;
+
+
                             $modelImagesProduct->save(false);
                 
                         }
@@ -264,19 +284,30 @@ class ProductsController extends BaseController
                         $thumbnail_path = "$folder_path/index" . "." . $file->extension;
                         $model->thumbnail = $thumbnail_path;
                         $file->saveAs($thumbnail_path);
+                        $thumb="$folder_path/thumbnail.$file->extension";
 
-                        $img = Image::make($thumbnail_path);
-                        $img->insert($thumbnail_path);
+                        $file->saveAs($thumbnail_path);
+                        if(!in_array($file->extension ,['gif','GIF'])){
+                            $img = Image::make($thumbnail_path);
+                            $img->insert($thumbnail_path);
+                            $img->resize(400, 400, function ($constraint) {
+                                $constraint->aspectRatio();
+                            })->save($thumb);
+                        }else{
+                            $thumb=$thumbnail_path;
+                        }
 
-                        $img->crop(1024, 1024, 25, 25)->save("$folder_path/thumnil.".$file->extension);
-//                        $img->resize(400, 400, function ($constraint) {
-//                            $constraint->aspectRatio();
-//                        })->save("$folder_path/thumnil.".$file->extension);
+                        $model->thumb=$thumb;
+
+
+
+
+
 
                         $model->thumbnail = $thumbnail_path;
                     }
 
-                    if (!is_null($images_product)) {
+                    if (!is_null($images_product) && count($images_product)) {
 
 
                         $folder_path = "products/$newId";
@@ -296,6 +327,20 @@ class ProductsController extends BaseController
                                 $modelImagesProduct->product_id = $newId;
                                 $modelImagesProduct->path = $file_path;
                                 $image_product->saveAs($file_path);
+
+                                $thumbnail="$folder_path/images/$key-thumbnail.".$image_product->extension;
+                                if(!in_array($image_product->extension ,['gif','GIF'])){
+                                    $img_thumbnail = Image::make($file_path);
+                                    $img_thumbnail->insert($file_path);
+                                    $img_thumbnail->resize(400, 400, function ($constraint) {
+                                        $constraint->aspectRatio();
+                                    })->save($thumbnail);
+                                }else{
+                                    $thumbnail="$folder_path/images/$key.".$image_product->extension;
+                                }
+
+                                $modelImagesProduct->thumbnail=$thumbnail ;
+
                                 $modelImagesProduct->save(false);
                             }
                         }

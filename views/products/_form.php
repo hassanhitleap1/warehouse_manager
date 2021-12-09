@@ -29,26 +29,22 @@ if (!$model->isNewRecord) {
         $images_path_product[] = Yii::getAlias('@web') . '/' . $value['path'];
     }
 
-    
     $dataThumbnail = [
-      
 
         'showCaption' => true,
         'showRemove' => true,
         'showUpload' => false,
         'initialPreview' => [
-            Yii::getAlias('@web') . '/' . $model->thumbnail,
+            Yii::getAlias('@web') . '/' . $model['thumbnail']
         ],
-        'initialPreviewAsData' => false,
+        'initialPreviewAsData' => true,
         'initialCaption' => Yii::getAlias('@web') . '/' . $model->thumbnail,
         'initialPreviewConfig' => [
             ['caption' => $model->name],
         ],
         'overwriteInitial'=>true
-     
 
     ];
-
 
     $dataImages = [
         

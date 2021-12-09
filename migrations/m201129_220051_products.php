@@ -20,6 +20,7 @@ class m201129_220051_products extends Migration
             'name' => $this->string()->notNull(),
             'description'=> $this->text()->defaultValue(null),
             'thumbnail'=> $this->string(255)->notNull(),
+            'thumb'=> $this->string(255)->notNull(),
             'purchasing_price'=> $this->double()->notNull(),
             'selling_price'=> $this->double()->notNull(),
             'quantity'=> $this->integer()->notNull()->defaultValue(1),

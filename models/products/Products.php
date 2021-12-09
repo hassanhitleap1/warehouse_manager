@@ -61,7 +61,7 @@ class Products extends \yii\db\ActiveRecord
             [['purchasing_price', 'selling_price'], 'double'],
             [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id','company_delivery_id','quantity_come'], 'integer'],
             [['name'], 'string', 'max' => 255],
-             [['video_url','thumbnail'], 'string', 'max' => 500],
+             [['video_url','thumbnail','thumb'], 'string', 'max' => 500],
              [['description'], 'string'],
              [['file'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,jpeg,gif'],
              
