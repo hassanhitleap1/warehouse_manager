@@ -452,7 +452,7 @@ function appaend_products(result){
 
         image_path=SITE_URL+'/'+product.thumbnail;
         
-        path=`<div class="col-md-6 col-sm-6 card  animate__animated animate__bounce animate__repeat-1" > 
+        path=`<div class="col-md-6 col-sm-6 card-product  animate__animated animate__bounce animate__repeat-1" > 
                 <div class="product-grid">
                     <div class="product-image">
                     <a href="${path}" class="image">

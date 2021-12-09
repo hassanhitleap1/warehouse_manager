@@ -8,7 +8,7 @@ use yii\helpers\Html;
 <div class="container">
     <div class="row " id="list-products">
         <?php foreach ($models as  $key => $model) : ?>
-            <div class="col-md-6 col-sm-6 card  animate__animated animate__bounce animate__repeat-1" >
+            <div class="col-md-6 col-sm-6 card-product  animate__animated animate__bounce animate__repeat-1" >
                 <div class="product-grid">
                     <div class="product-image">
                         <a href="<?= \yii\helpers\Url::to(['/product/view','id'=>$model->id]) ?>" class="image">

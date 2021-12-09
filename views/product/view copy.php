@@ -137,9 +137,6 @@ $this->title = $model->name;
                 </div>
                 <?php ActiveForm::end(); ?>
 
-
-
-
             </div>
         </div>
 

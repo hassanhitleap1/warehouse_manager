@@ -32,6 +32,7 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        $this->layout='app';
         $modelOrder= new OrderForm();
         $product_suggested=Products::find()->where(['!=','id',$id])->where(['!=','quantity',0])->limit(4)->all();
         if ($modelOrder->load(Yii::$app->request->post())&&  $modelOrder->validate()) {

@@ -210,7 +210,8 @@ return [
     "Export_To_Driver"=>"تصدير الى السائق",
     "Campany_Delivery"=>"شركات التوصيل",
     "Main"=>"الرئيسي",
-    "Total_Sales"=>"المبيعات"
+    "Total_Sales"=>"المبيعات",
+    "Reviews"=>"التقيم"
 
 
 
