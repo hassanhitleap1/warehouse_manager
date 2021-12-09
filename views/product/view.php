@@ -147,7 +147,9 @@ $this->title = $model->name;
                                 <div class="buttons">
                                     <div class="form-group">
                                         <button class="btn btn-light wishlist"> <i class="fa fa-heart"></i> </button>
-                                        <?= Html::submitButton(Yii::t('app', 'Order_Now') . ' <span class="fas fa-shopping-cart"></span> ', ['class' => 'btn btn-outline-warning btn-long cart', 'id' => 'send_order','data-loading-text'=>"Loading..."]) ?>
+                                        <?= Html::submitButton(
+                                                '<span class="spinner spinner-border spinner-border-sm" id="spinner" role="status" aria-hidden="true"></span>'.
+                                                Yii::t('app', 'Order_Now') . ' <span class="fas fa-shopping-cart"></span> ', ['class' => 'btn btn-outline-warning btn-long cart', 'id' => 'send_order','data-loading-text'=>"Loading..."]) ?>
                                     </div>
                                 </div>
                                 <?php ActiveForm::end(); ?>
