@@ -23,6 +23,7 @@ $dataThumbnail = [
     'overwriteInitial'=>true
 
 ];
+$this->title=Yii::t('app','Settings');
 
 ?>
 
