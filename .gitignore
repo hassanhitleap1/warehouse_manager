@@ -17,9 +17,11 @@ Thumbs.db
 /web/products
 /web/uploads
 
+
 # composer itself is not needed
 composer.phar
-
+/web/css/variable.css
+/config/params.php
 # Mac DS_Store Files
 .DS_Store
 

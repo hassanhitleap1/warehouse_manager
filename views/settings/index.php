@@ -25,6 +25,9 @@ $dataThumbnail = [
 ];
 $this->title=Yii::t('app','Settings');
 
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Settings'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <?php if (Yii::$app->session->has('message')) : ?>

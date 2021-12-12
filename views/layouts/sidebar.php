@@ -191,10 +191,24 @@ use app\models\User;use yii\helpers\Html;
                         </ul>
                     </div>
                 </li>
-                <li>
-                        <?= Html::a( '<i class="fa fa-folder"></i><span>'.Yii::t('app','Settings').'</span>', ['settings/index'])?>
 
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-globe"></i>
+                        <span><?=Yii::t('app','Settings')?></span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li  class="menu-item <?= Yii::$app->controller->route =='settings/index'?'active':''?>">
+                                <?= Html::a(Yii::t('app','Settings'), ['settings/index'])?>
+                            </li>
+                            <li  class="menu-item <?= Yii::$app->controller->route =='settings/theme'?'active':''?>">
+                                    <?= Html::a(Yii::t('app','Theme_Settings'), ['settings/theme'])?>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
+
 
                 <?php endif;?>
             </ul>

@@ -1,5 +1,5 @@
 :root {
-    --colorsite:#f857a6;
-    --fontcolor: white;
-    --backgroundnav:linear-gradient(to right, #ff5858, #f857a6);
+  --color_site: #76a5af;
+  --font_color: #ffffff;
+  --background_nav: linear-gradient(to right, #61f025,  #000000);
 }

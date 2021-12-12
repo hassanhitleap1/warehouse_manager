@@ -21,20 +21,20 @@ body{
     margin: 3px;
 }
 .navbar-brand:hover{
-    color: var(--fontcolor);
+    color: var(--font_color);
 }
 
     /*----------bootstrap-navbar-css------------*/
 .navbar-brand{
-    color: var(--fontcolor);
+    color: var(--font_color);
 }
 .navbar-logo{
     padding: 15px;
-    color: var(--fontcolor);
+    color: var(--font_color);
 }
 .navbar-mainbg{
-    background-color:var(--colorsite);
-    background: var(--backgroundnav);
+    background-color:var(--color_site);
+    background: var(--background_nav);
     padding: 0px;
 }
 
@@ -64,7 +64,7 @@ body{
     position: relative;
 }
 #navbarSupportedContent>ul>li.active>a{
-    color: var(--colorsite);
+    color: var(--color_site);
     background-color: transparent;
     transition: all 0.7s;
 }
@@ -92,7 +92,7 @@ body{
     left: 0px;
     transition-duration:0.6s;
     transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    background-color:  var(--fontcolor);
+    background-color:  var(--font_color);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     margin-top: 10px;
@@ -102,7 +102,7 @@ body{
     position: absolute;
     width: 25px;
     height: 25px;
-    background-color: var(--fontcolor);
+    background-color: var(--font_color);
     bottom: 10px;
 }
 .hori-selector .right{
@@ -118,7 +118,7 @@ body{
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: var(--colorsite);
+    background-color: var(--color_site);
 }
 .hori-selector .right:before{
     bottom: 0;
@@ -292,8 +292,8 @@ body{
     margin: 0 2px;
 }
 .product-grid .product-links li a{
-    color:  var(--fontcolor);
-    background:var(--backgroundnav);
+    color:  var(--font_color);
+    background:var(--background_nav);
     font-size: 16px;
     line-height: 48px;
     width: 48px;
@@ -555,8 +555,8 @@ body.busy .spinner { display:block !important; }
     z-index: 999999;
 }
 .btn-productmainbtn{
-    background: var(--backgroundnav);
-    color: var(--fontcolor);
+    background: var(--background_nav);
+    color: var(--font_color);
 }
 
 
