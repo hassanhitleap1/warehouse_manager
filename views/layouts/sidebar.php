@@ -13,8 +13,14 @@ use app\models\User;use yii\helpers\Html;
         </div>
         <div class="sidebar-header profile" type="<?= (Yii::$app->user->identity->type== User::SUPER_ADMIN)?'admin':"dataentry" ;?>">
             <div class="user-pic">
-                <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-                     alt="User picture">
+                <?php
+                try {
+                    $avatar=Yii::$app->user->identity->avatar;
+                }catch (Exception $exception){
+                    $avatar='';
+                }
+                ?>
+                <?= Html::img($avatar, ['class' => 'img-responsive img-rounded']) ?>
             </div>
             <div class="user-info">
           <span class="user-name">

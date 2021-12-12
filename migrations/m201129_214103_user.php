@@ -33,6 +33,7 @@ class m201129_214103_user extends Migration
             'area_id'=>$this->integer()->defaultValue(null),
             'address' => $this->string(250)->defaultValue(null),
             'name_in_facebook' => $this->string(250)->defaultValue(null),
+            'avatar'=> $this->string(250)->defaultValue(null),
             'created_at' => $this->integer()->notNull()->defaultValue(null),
             'updated_at' => $this->integer()->notNull()->defaultValue(null),
         ], $tableOptions);

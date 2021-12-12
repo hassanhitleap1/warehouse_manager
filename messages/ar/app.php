@@ -211,8 +211,13 @@ return [
     "Campany_Delivery"=>"شركات التوصيل",
     "Main"=>"الرئيسي",
     "Total_Sales"=>"المبيعات",
-    "Reviews"=>"التقيم"
-
+    "Reviews"=>"التقيم",
+    "Color_Site"=>'لون الموقع',
+    "Font_Color"=>"لون الخط",
+    "Background_Duration"=>"دوران الرأس",
+    "Background_First_Color"=>"اللون الاول",
+    "Background_Second_Color"=>"اللون الثاني",
+    "Theme_Settings"=>"العدادات القالب"
 
 
 ];
