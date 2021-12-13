@@ -24,379 +24,308 @@ $data_delivery_order=[];
 ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<div class="site-about">
+    <div class="row">
+        <?php $form = ActiveForm::begin([
+            'action' => ['dashboard/index'],
+            'method' => 'get',
+            'options' => [
+                'data-pjax' => 1
+            ],
+        ]); ?>
+        <div class="col-md-8">
+            <?php
+            echo '<label class="control-label">تاريخ</label>';
+            echo DatePicker::widget([
+                'name' => 'date',
+                'id'=>'filter_single_date',
+                'value' => $date,
+                'readonly' => true,
+                'pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd',
+                ]
+            ]);
 
 
-<div class="row">
-    <?php $form = ActiveForm::begin([
-        'action' => ['dashboard/index'],
-        'method' => 'get',
-        'options' => [
-            'data-pjax' => 1
-        ],
-    ]); ?>
-    <div class="col-md-8">
-        <?php
-        echo '<label class="control-label">تاريخ</label>';
-        echo DatePicker::widget([
-            'name' => 'date',
-            'id'=>'filter_single_date',
-            'value' => $date,
-            'readonly' => true,
-            'pluginOptions' => [
-                'autoclose'=>true,
-                'format' => 'yyyy-mm-dd',
-            ]
-        ]);
-
-
-        ?>
-    </div>
-
-    <div class="col-md-4">
-        <div class="form-group">
-            <?= Html::a(Yii::t('app', 'Reset'), ['/dashboard/index'],['class' => 'btn btn-outline-secondary']) ?>
+            ?>
         </div>
-    </div>
 
-    <?php ActiveForm::end(); ?>
-
-
-</div>
-
-<div class="row">
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3> <?= $orders["count_order"]?></h3>
-                <p>عدد طلبات اليوم</p>
+        <div class="col-md-4">
+            <div class="form-group">
+                <?= Html::a(Yii::t('app', 'Reset'), ['/dashboard/index'],['class' => 'btn btn-outline-secondary']) ?>
             </div>
-            <div class="icon">
-                <i class="ion ion-bag"></i>
-            </div>
-
         </div>
+
+        <?php ActiveForm::end(); ?>
+
+
+
     </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3><?= $orders["total_sales"]?></h3>
-
-                <p> مبيعات اليوم</p>
+    <div class="row" >
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body"> <?= $orders["count_order"]?>  عدد طلبات اليوم</div>
             </div>
-            <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-            </div>
-
         </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-warning">
-            <div class="inner">
-                <h3><?= $orders["quantity"]?></h3>
-
-                <p>عدد القطع</p>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body"> <?= $orders["total_sales"]?>  مبيعات اليوم</div>
             </div>
-            <div class="icon">
-                <i class="ion ion-person-add"></i>
-            </div>
-
         </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3><?= round($orders["outlays"],2)?></h3>
-
-                <p>النفقات</p>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body"> <?= $orders["quantity"]?>  عدد القطع</div>
             </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-
         </div>
-    </div>
-    <!-- ./col -->
 
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3><?=  $orders["total_sales"] - $cost_products  ?> </h3>
-
-                <p>المرابح</p>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body"> <?= round($orders["outlays"],2)?>  النفقات</div>
             </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-
         </div>
-    </div>
-    <!-- ./col -->
-
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3><?= $cost_products ?> </h3>
-
-                <p>تكاليف البضائع</p>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body"> <?=  $orders["total_sales"] - $cost_products  ?>    المرابح</div>
             </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-
         </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3><?= round ($orders["total_sales"] - $cost_products  - $orders["outlays"] ,2)?></h3>
-
-                <p> صافي المرابح</p>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body"> <?= $cost_products ?>   تكاليف البضائع</div>
             </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-     
         </div>
+
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body"> <?= round ($orders["total_sales"] - $cost_products  - $orders["outlays"] ,2)?>   صافي المرابح</div>
+            </div>
+        </div>
+
     </div>
-    <!-- ./col -->
 
-</div>
+    <hr />
 
-<hr />
-
-<div class="row">
-    <div class="col-md-6">
-        <h2 class="text-center"><?= Yii::t('app','Number_Of_Grains')?></h2>
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col"><?= Yii::t('app','Name')?></th>
-                <th scope="col"><?= Yii::t('app','Number_Of_Grains')?></th>
-                <th scope="col"><?= Yii::t('app','Cost')?></th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($details as $key_det=> $detail):?>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-center"><?= Yii::t('app','Number_Of_Grains')?></h2>
+            <table class="table">
+                <thead class="thead-dark">
                 <tr>
-                    <th scope="row"><?= ++$key_det ?></th>
-                    <td><?= $detail['type'] ?> </td>
-                    <td><?= $detail['sum_quantity'] ?></td>
-                    <td><?= $detail['sum_quantity'] * $detail['purchasing_price'] ?></td>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= Yii::t('app','Name')?></th>
+                    <th scope="col"><?= Yii::t('app','Number_Of_Grains')?></th>
+                    <th scope="col"><?= Yii::t('app','Cost')?></th>
                 </tr>
-                <?php $label_gin[] =$detail['type'] ; $data_gin[]=$detail['sum_quantity']; ?>
-            <?php endforeach;?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <?php foreach ($details as $key_det=> $detail):?>
+                    <tr>
+                        <th scope="row"><?= ++$key_det ?></th>
+                        <td><?= $detail['type'] ?> </td>
+                        <td><?= $detail['sum_quantity'] ?></td>
+                        <td><?= $detail['sum_quantity'] * $detail['purchasing_price'] ?></td>
+                    </tr>
+                    <?php $label_gin[] =$detail['type'] ; $data_gin[]=$detail['sum_quantity']; ?>
+                <?php endforeach;?>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-md-6">
+            <?= Html::a(Yii::t('app','More'), ['dashboard/sales'],['class'=>'pull-left']) ?>
+            <canvas class="" id="chart_gin"></canvas>
+        </div>
+
+
     </div>
 
-
-    <div class="col-md-6">
-        <?= Html::a(Yii::t('app','More'), ['dashboard/sales'],['class'=>'pull-left']) ?>
-        <canvas class="" id="chart_gin"></canvas>
-    </div>
-
-
-</div>
-
-<hr />
-<div class="row">
-    <div class="col-md-6">
-        <h2 class="text-center"><?= Yii::t('app','Orders')?></h2>
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col"><?= Yii::t('app','Status')?></th>
-                <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($status_orders as $key_stat => $status_order):?>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-center"><?= Yii::t('app','Orders')?></h2>
+            <table class="table">
+                <thead class="thead-dark">
                 <tr>
-                    <th scope="row"><?= ++$key_stat ?></th>
-                    <td><?= $status_order['name_ar'] ?> </td>
-                    <td><?= $status_order['count_order'] ?></td>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= Yii::t('app','Status')?></th>
+                    <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
+
                 </tr>
-                <?php $label_orders[] =$status_order['name_ar'] ; $data_orders[]=$status_order['count_order']  ?>
-            <?php endforeach;?>
+                </thead>
+                <tbody>
+                <?php foreach ($status_orders as $key_stat => $status_order):?>
+                    <tr>
+                        <th scope="row"><?= ++$key_stat ?></th>
+                        <td><?= $status_order['name_ar'] ?> </td>
+                        <td><?= $status_order['count_order'] ?></td>
+                    </tr>
+                    <?php $label_orders[] =$status_order['name_ar'] ; $data_orders[]=$status_order['count_order']  ?>
+                <?php endforeach;?>
 
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <?= Html::a(Yii::t('app','More'), ['dashboard/orders'],['class'=>'pull-left']) ?>
+            <canvas class="" id="chart_orders"></canvas>
+
+        </div>
     </div>
-    <div class="col-md-6">
-        <?= Html::a(Yii::t('app','More'), ['dashboard/orders'],['class'=>'pull-left']) ?>
-        <canvas class="" id="chart_orders"></canvas>
-
-    </div>
-</div>
 
 
 
-<hr />
-<div class="row" >
-    <h2><?= Yii::t('app','Previous_Order_Statuses')?></h2>
-    <div class="col-md-6">
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col"><?= Yii::t('app','Status')?></th>
-                <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($status_statisticis as $key_stici => $status_statistici):?>
+    <hr />
+    <div class="row" >
+        <h2><?= Yii::t('app','Previous_Order_Statuses')?></h2>
+        <div class="col-md-6">
+            <table class="table">
+                <thead class="thead-dark">
                 <tr>
-                    <th scope="row"><?= ++$key_stici ?></th>
-                    <td><?= $status_statistici['name_ar'] ?> </td>
-                    <td><?= $status_statistici['count_order'] ?></td>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= Yii::t('app','Status')?></th>
+                    <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
+
                 </tr>
-                <?php
+                </thead>
+                <tbody>
+                <?php foreach ($status_statisticis as $key_stici => $status_statistici):?>
+                    <tr>
+                        <th scope="row"><?= ++$key_stici ?></th>
+                        <td><?= $status_statistici['name_ar'] ?> </td>
+                        <td><?= $status_statistici['count_order'] ?></td>
+                    </tr>
+                    <?php
 
-                $label[]=$status_statistici["name_ar"];
-                $data[]=$status_statistici["count_order"];
-                ?>
-            <?php endforeach;?>
+                    $label[]=$status_statistici["name_ar"];
+                    $data[]=$status_statistici["count_order"];
+                    ?>
+                <?php endforeach;?>
 
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <?= Html::a(Yii::t('app','More'), ['dashboard/outlay'],['class'=>'pull-left']) ?>
+            <?= Html::a(Yii::t('app','Previous_Order_Statuses'), ['dashboard/status'],['class'=>'pull-left']) ?>
+            <canvas id="chart"></canvas>
+        </div>
+
     </div>
-    <div class="col-md-6">
-        <?= Html::a(Yii::t('app','More'), ['dashboard/outlay'],['class'=>'pull-left']) ?>
-        <?= Html::a(Yii::t('app','Previous_Order_Statuses'), ['dashboard/status'],['class'=>'pull-left']) ?>
-        <canvas id="chart"></canvas>
-    </div>
 
-</div>
+    <hr />
 
-<hr />
-
-<div class="row">
-    <div class="col-md-6">
-        <h2 class="text-center"><?= Yii::t('app','Best_Seller')?></h2>
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col"><?= Yii::t('app','Name')?></th>
-                <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($products_order as $key_product_or => $product_order):?>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-center"><?= Yii::t('app','Best_Seller')?></h2>
+            <table class="table">
+                <thead class="thead-dark">
                 <tr>
-                    <th scope="row"><?= ++$key_product_or ?></th>
-                    <td><?= $product_order['name'] ?> </td>
-                    <td><?= $product_order['count_order'] ?></td>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= Yii::t('app','Name')?></th>
+                    <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
+
                 </tr>
-                <?php $label_product_order[] =$product_order['name'] ; $data_product_order[]=$product_order['count_order']  ?>
-            <?php endforeach;?>
+                </thead>
+                <tbody>
+                <?php foreach ($products_order as $key_product_or => $product_order):?>
+                    <tr>
+                        <th scope="row"><?= ++$key_product_or ?></th>
+                        <td><?= $product_order['name'] ?> </td>
+                        <td><?= $product_order['count_order'] ?></td>
+                    </tr>
+                    <?php $label_product_order[] =$product_order['name'] ; $data_product_order[]=$product_order['count_order']  ?>
+                <?php endforeach;?>
 
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <?= Html::a(Yii::t('app','More'), ['dashboard/best-seller'],['class'=>'pull-left']) ?>
+            <canvas class="" id="chart_product_order"></canvas>
+
+        </div>
     </div>
-    <div class="col-md-6">
-        <?= Html::a(Yii::t('app','More'), ['dashboard/best-seller'],['class'=>'pull-left']) ?>
-        <canvas class="" id="chart_product_order"></canvas>
 
-    </div>
-</div>
+    <hr />
 
-<hr />
-
-<div class="row">
-    <div class="col-md-6">
-        <h2 class="text-center"><?= Yii::t('app','Campany_Delivery')?></h2>
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col"><?= Yii::t('app','Name')?></th>
-                <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($delivery_order as $key_delivery_or => $delivery_or):?>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-center"><?= Yii::t('app','Campany_Delivery')?></h2>
+            <table class="table">
+                <thead class="thead-dark">
                 <tr>
-                    <!--                        OrdersSearch%5Bcreated_at%5D=2021-08-17+-+2021-08-18  -->
-                    <!--                        v/index.php?r=orders%2Findex&amp;1%5BOrdersSearch%5Bcompany_delivery_id%5D%5D=2021-08-17%2B-%2B2021-08-17-->
-                    <th scope="row"><?= ++$key_delivery_or ?></th>
-                    <td> <?= Html::a( $delivery_or['name'], ['orders/index' ,["OrdersSearch[company_delivery_id]" =>$delivery_or["company_delivery_id"], "OrdersSearch[company_delivery_id]"=>"$date+-+$date"   ]]) ?></td>
-                    <td><?= Html::a(  $delivery_or['count_order'], ['orders/index']) ?></td>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= Yii::t('app','Name')?></th>
+                    <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
+
                 </tr>
-                <?php $label_delivery_order[] =$delivery_or['name'] ; $data_delivery_order[]=$delivery_or['count_order']  ?>
-            <?php endforeach;?>
+                </thead>
+                <tbody>
+                <?php foreach ($delivery_order as $key_delivery_or => $delivery_or):?>
+                    <tr>
+                        <!--                        OrdersSearch%5Bcreated_at%5D=2021-08-17+-+2021-08-18  -->
+                        <!--                        v/index.php?r=orders%2Findex&amp;1%5BOrdersSearch%5Bcompany_delivery_id%5D%5D=2021-08-17%2B-%2B2021-08-17-->
+                        <th scope="row"><?= ++$key_delivery_or ?></th>
+                        <td> <?= Html::a( $delivery_or['name'], ['orders/index' ,["OrdersSearch[company_delivery_id]" =>$delivery_or["company_delivery_id"], "OrdersSearch[company_delivery_id]"=>"$date+-+$date"   ]]) ?></td>
+                        <td><?= Html::a(  $delivery_or['count_order'], ['orders/index']) ?></td>
+                    </tr>
+                    <?php $label_delivery_order[] =$delivery_or['name'] ; $data_delivery_order[]=$delivery_or['count_order']  ?>
+                <?php endforeach;?>
 
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <?= Html::a(Yii::t('app','More'), ['dashboard/delivery'],['class'=>'pull-left']) ?>
+            <canvas class="" id="chart_delivery_order"></canvas>
+
+        </div>
     </div>
-    <div class="col-md-6">
-        <?= Html::a(Yii::t('app','More'), ['dashboard/delivery'],['class'=>'pull-left']) ?>
-        <canvas class="" id="chart_delivery_order"></canvas>
 
-    </div>
-</div>
+    <hr />
 
-<hr />
-
-<div class="row">
-    <div class="col-md-4">
-        <h2 class="text-center"><?= Yii::t('app','Regions')?></h2>
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col"><?= Yii::t('app','Name')?></th>
-                <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($regions_order as $key_region_or => $region_order):?>
+    <div class="row">
+        <div class="col-md-4">
+            <h2 class="text-center"><?= Yii::t('app','Regions')?></h2>
+            <table class="table">
+                <thead class="thead-dark">
                 <tr>
-                    <!--                        OrdersSearch%5Bcreated_at%5D=2021-08-17+-+2021-08-18  -->
-                    <!--                        v/index.php?r=orders%2Findex&amp;1%5BOrdersSearch%5Bcompany_delivery_id%5D%5D=2021-08-17%2B-%2B2021-08-17-->
-                    <th scope="row"><?= ++$key_region_or ?></th>
-                    <td> <?= Html::a( $region_order['name_ar'], ['orders/index' ,["OrdersSearch[region_id]" =>$region_order["region_id"], "OrdersSearch[region_id]"=>"$date+-+$date"   ]]) ?></td>
-                    <td><?= Html::a(  $region_order['count_order'], ['orders/index']) ?></td>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= Yii::t('app','Name')?></th>
+                    <th scope="col"><?= Yii::t('app','Count_Orders')?></th>
+
                 </tr>
-                <?php $label_region_order[] =$region_order['name_ar'] ; $data_region_order[]=$region_order['count_order']  ?>
-            <?php endforeach;?>
+                </thead>
+                <tbody>
+                <?php foreach ($regions_order as $key_region_or => $region_order):?>
+                    <tr>
+                        <!--                        OrdersSearch%5Bcreated_at%5D=2021-08-17+-+2021-08-18  -->
+                        <!--                        v/index.php?r=orders%2Findex&amp;1%5BOrdersSearch%5Bcompany_delivery_id%5D%5D=2021-08-17%2B-%2B2021-08-17-->
+                        <th scope="row"><?= ++$key_region_or ?></th>
+                        <td> <?= Html::a( $region_order['name_ar'], ['orders/index' ,["OrdersSearch[region_id]" =>$region_order["region_id"], "OrdersSearch[region_id]"=>"$date+-+$date"   ]]) ?></td>
+                        <td><?= Html::a(  $region_order['count_order'], ['orders/index']) ?></td>
+                    </tr>
+                    <?php $label_region_order[] =$region_order['name_ar'] ; $data_region_order[]=$region_order['count_order']  ?>
+                <?php endforeach;?>
 
 
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-12" >
-        <?= Html::a(Yii::t('app','More'), ['dashboard/region'],['class'=>'pull-left']) ?>
-        <div  style=" width: 100%;
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" >
+            <?= Html::a(Yii::t('app','More'), ['dashboard/region'],['class'=>'pull-left']) ?>
+            <div  style=" width: 100%;
                 height: 400px;" id="chart_region_order"></div>
+        </div>
     </div>
+
+
 </div>
-
-
 
 <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
@@ -586,6 +515,3 @@ $data_delivery_order=[];
     hs.properties.fill = am4core.color("#367B25");
 
 </script>
-
-
-

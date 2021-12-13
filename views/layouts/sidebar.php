@@ -34,34 +34,33 @@ use app\models\User;use yii\helpers\Html;
             </div>
         </div>
         <!-- sidebar-header  -->
-        <div class="sidebar-search">
-            <div>
-                <div class="input-group">
-                    <input type="text" class="form-control search-menu" placeholder="Search...">
-                    <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </span>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!--        <div class="sidebar-search">-->
+<!--            <div>-->
+<!--                <div class="input-group">-->
+<!--                    <input type="text" class="form-control search-menu" placeholder="Search...">-->
+<!--                    <div class="input-group-append">-->
+<!--              <span class="input-group-text">-->
+<!--                <i class="fa fa-search" aria-hidden="true"></i>-->
+<!--              </span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <!-- sidebar-search  -->
         
         <div class="sidebar-menu">
             <ul>
-                <li class="header-menu">
-                    <span>General</span>
-                </li>
+<!--                <li class="header-menu">-->
+<!--                    <span>General</span>-->
+<!--                </li>-->
                 <?php if(Yii::$app->user->identity->type == User::SUPER_ADMIN):?>
                 <li class="sidebar-dropdown">
                     <a href="#">
-                        <i class="fa fa-tachometer-alt"></i>
+                        <i class="fas fa-chart-bar"></i>
                         <span><?=Yii::t('app','Dashboard')?></span>
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
-
                             <li  class="menu-item <?= Yii::$app->controller->route =='dashboard/index'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Main'), ['dashboard/index'])?>
                             </li>
@@ -84,7 +83,7 @@ use app\models\User;use yii\helpers\Html;
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="fa fa-shopping-cart"></i>
-                        <span><?=Yii::t('app','Orders')?></span>
+                        <span><?=Yii::t('app','Orderss')?></span>
 <!--                        <span class="badge badge-pill badge-danger">3</span>-->
                     </a>
                     <div class="sidebar-submenu">
@@ -100,29 +99,15 @@ use app\models\User;use yii\helpers\Html;
                     </div>
                 </li>
                 <?php if(Yii::$app->user->identity->type == User::SUPER_ADMIN):?>
+                <li>
+                    <?= Html::a('<i class="fab fa-product-hunt"></i>'.Yii::t('app','Products'), ['products/index'])?>
+
+                </li>
+
 
                 <li class="sidebar-dropdown">
                     <a href="#">
-                        <i class="far fa-gem"></i>
-                        <span><?=Yii::t('app','Products')?></span>
-                    </a>
-                    <div class="sidebar-submenu">
-                        <ul>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='products/index'?'active':''?>">
-                                <?= Html::a(Yii::t('app','Products'), ['products/index'])?>
-                            </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='sub-product-count/index'?'active':''?>">
-                                <?= Html::a(Yii::t('app','SubProductCount'), ['sub-product-count/index'])?>
-                            </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='options-sell-product/index'?'active':''?>">
-                                <?= Html::a(Yii::t('app','Type_Options'), ['options-sell-product/index'])?>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="sidebar-dropdown">
-                    <a href="#">
-                        <i class="fa fa-chart-line"></i>
+                        <i class="fas fa-users"></i>
                         <span><?=Yii::t('app','Users')?></span>
                     </a>
                     <div class="sidebar-submenu">
@@ -155,9 +140,9 @@ use app\models\User;use yii\helpers\Html;
                         </ul>
                     </div>
                 </li>
-                <li class="header-menu">
-                    <span><?= Yii::t('app', 'Additional')?></span>
-                </li>
+<!--                <li class="header-menu">-->
+<!--                    <span>--><?//= Yii::t('app', 'Additional')?><!--</span>-->
+<!--                </li>-->
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="fa fa-globe"></i>
@@ -198,9 +183,10 @@ use app\models\User;use yii\helpers\Html;
                     </div>
                 </li>
 
+
                 <li class="sidebar-dropdown">
                     <a href="#">
-                        <i class="fa fa-globe"></i>
+                        <i class="fas fa-cogs"></i>
                         <span><?=Yii::t('app','Settings')?></span>
                     </a>
                     <div class="sidebar-submenu">

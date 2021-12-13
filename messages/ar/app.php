@@ -217,7 +217,9 @@ return [
     "Background_Duration"=>"دوران الرأس",
     "Background_First_Color"=>"اللون الاول",
     "Background_Second_Color"=>"اللون الثاني",
-    "Theme_Settings"=>"العدادات القالب"
+    "Theme_Settings"=>"العدادات القالب",
+    "Orderss"=>"الطلبات",
+    "Profile"=>"الملف الشخصي"
 
 
 ];
