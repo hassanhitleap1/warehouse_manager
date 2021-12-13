@@ -115,8 +115,8 @@ body{
 .hori-selector .left:before{
     content: '';
     position: absolute;
-    /*width: 50px;*/
-    /*height: 50px;*/
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background-color: var(--color_site);
 }
@@ -454,18 +454,18 @@ hr {
 }
 
 .buttons .wishlist {
-    background-color: #fff;
-    border-color: #ff7676
+    background-color:var(--color_site);
+    border-color:var(--font_color);
 }
 
 .buttons .wishlist:hover {
-    background-color: #e86464;
-    border-color: #e86464;
+    background-color: var(--font_color);;
+    border-color: var(--color_site);;
     color: #fff
 }
 
 .buttons .wishlist:hover i {
-    color: #fff
+    color: var(--font_color);;
 }
 
 .buttons .wishlist i {
@@ -578,4 +578,9 @@ body.busy .spinner { display:block !important; }
 
 .my-float {
     margin-top: 10px;
+}
+
+label{
+    font-size:large ;
+    font-weight: 500;
 }
