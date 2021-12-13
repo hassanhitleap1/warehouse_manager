@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\dynagrid\DynaGrid;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\regions\RegionsSearch */
@@ -9,38 +9,72 @@ use yii\widgets\Pjax;
 
 $this->title = Yii::t('app', 'Regions');
 $this->params['breadcrumbs'][] = $this->title;
+
+
+$columns = [
+
+    [
+        'class' => 'kartik\grid\SerialColumn',
+        'order' => DynaGrid::ORDER_FIX_LEFT,
+
+    ],
+    [
+        'attribute' => 'name_en',
+        'visible' => false,
+        'value' => 'name_en'
+    ],
+
+
+    [
+        'attribute' => 'name_ar',
+        'visible' => false,
+        'value' => 'name_ar'
+    ],
+
+    [
+        'attribute' => 'price_delivery',
+        'visible' => false,
+        'value' => 'price_delivery'
+    ],
+
+    [
+        'attribute' => 'country_id',
+        'visible' => false,
+        'value' => 'country.name_ar'
+    ],
+
+
+    ['class' => 'kartik\grid\CheckboxColumn',  'order' => DynaGrid::ORDER_FIX_RIGHT],
+];
+
 ?>
 <div class="regions-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Create_Region'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            // 'id',
-            'name_en',
-            'name_ar',
-            'price_delivery',
-            [
-                'attribute'=>"country_id",
-                'value'=>'country.name_ar'
+    <?= DynaGrid::widget([
+        'columns' => $columns,
+        'storage' => DynaGrid::TYPE_COOKIE,
+        'theme' => 'panel-success',
+        'gridOptions' => [
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'panel' => [
+                'heading' => '<h3 class="panel-title">' . $this->title . '</h3>',
+                'before' => '{dynagrid}' .  Html::a( "<span class='glyphicon glyphicon-plus' > </span>", ['create'], ['class' => 'btn btn-success' ,'title'=>Yii::t('app', 'Create')])
             ],
-            //'created_at',
-            //'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            'showPageSummary' => true,
         ],
-    ]); ?>
+
+        'options' => ['id' => 'dynagrid'],  // a unique identifier is important
+
+    ]);
+
+
+    ?>
+
 
     <?php Pjax::end(); ?>
 

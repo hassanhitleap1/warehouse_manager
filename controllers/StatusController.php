@@ -6,7 +6,6 @@ use app\models\User;
 use Yii;
 use app\models\status\Status;
 use app\models\status\StatusSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -19,7 +18,7 @@ class StatusController extends BaseController
     public function init()
     {
         if (!Yii::$app->user->isGuest) {
-            $this->layout = "adminrte";
+            $this->layout = "new";
             if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
                 throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
             }

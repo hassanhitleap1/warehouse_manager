@@ -1,42 +1,49 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\Pjax;
+
+use kartik\dynagrid\DynaGrid;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\units\UnitsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Units');
 $this->params['breadcrumbs'][] = $this->title;
+
+$columns = [
+    ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
+    'name_ar',
+    'name_en',
+    [
+        'class'=>'kartik\grid\ActionColumn',
+        'dropdown'=>false,
+        'order'=>DynaGrid::ORDER_FIX_RIGHT
+    ],
+    ['class'=>'kartik\grid\CheckboxColumn',  'order'=>DynaGrid::ORDER_FIX_RIGHT],
+];
+
+
 ?>
 <div class="units-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create_Unit'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?=  DynaGrid::widget([
+        'columns'=>$columns,
+        'storage'=>DynaGrid::TYPE_COOKIE,
+        'theme'=>'panel-success',
+        'gridOptions'=>[
+            'dataProvider'=>$dataProvider,
+            'filterModel'=>$searchModel,
+            'panel'=>[
+                'heading'=>'<h3 class="panel-title">'.$this->title.'</h3>',
+                'before'=>'{dynagrid}' . Html::a(Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-success'])
+            ],
 
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            // 'id',
-            'name_en',
-            'name_ar',
-            // 'created_at',
-            // 'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
 
-    <?php Pjax::end(); ?>
+        'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
+    ]); ?>
 
 </div>
