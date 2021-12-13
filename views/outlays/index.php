@@ -1,11 +1,25 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\Pjax;
+use kartik\dynagrid\DynaGrid;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\Outlays\OutlaysSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+$columns = [
+    ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
+    'title',
+    'value',
+    'typeoulay.title',
+    'product.name',
+    'created_at',
+    [
+        'class'=>'kartik\grid\ActionColumn',
+        'dropdown'=>false,
+        'order'=>DynaGrid::ORDER_FIX_RIGHT
+    ],
+    ['class'=>'kartik\grid\CheckboxColumn',  'order'=>DynaGrid::ORDER_FIX_RIGHT],
+];
 
 $this->title = Yii::t('app', 'Outlays');
 $this->params['breadcrumbs'][] = $this->title;
@@ -21,31 +35,26 @@ $session = Yii::$app->session;
 
     <?php endif; ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create_Outlay'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?=  DynaGrid::widget([
+        'columns'=>$columns,
+        'storage'=>DynaGrid::TYPE_COOKIE,
+        'theme'=>'panel-success',
+        'gridOptions'=>[
+            'dataProvider'=>$dataProvider,
+            'filterModel'=>$searchModel,
+            'panel'=>[
+                'heading'=>'<h3 class="panel-title">'.$this->title.'</h3>',
+                'before'=>'{dynagrid}' . Html::a(Yii::t('app', 'Create_Area'), ['create'], ['class' => 'btn btn-success'])
+            ],
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            // 'id',
-            'title',
-            'value',
-            'typeoulay.title',
-            'product.name',
-            'created_at',
-            //'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
 
-    <?php Pjax::end(); ?>
+        'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
+    ]);
+
+
+    ?>
+
 
 </div>
