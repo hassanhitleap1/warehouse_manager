@@ -1,11 +1,24 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\Pjax;
+use kartik\dynagrid\DynaGrid;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\companydelivery\CompanyDeliverySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+$columns = [
+    ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
+    'name',
+    'address',
+    'phone',
+    [
+        'class'=>'kartik\grid\ActionColumn',
+        'dropdown'=>false,
+        'order'=>DynaGrid::ORDER_FIX_RIGHT
+    ],
+    ['class'=>'kartik\grid\CheckboxColumn',  'order'=>DynaGrid::ORDER_FIX_RIGHT],
+];
+
 
 $this->title = Yii::t('app', 'Company_Deliveries');
 $this->params['breadcrumbs'][] = $this->title;
@@ -14,30 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create_Company_Delivery'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <?=  DynaGrid::widget([
+        'columns'=>$columns,
+        'storage'=>DynaGrid::TYPE_COOKIE,
+        'theme'=>'panel-success',
+        'gridOptions'=>[
+            'dataProvider'=>$dataProvider,
+            'filterModel'=>$searchModel,
+            'panel'=>[
+                'heading'=>'<h3 class="panel-title">'.$this->title.'</h3>',
+                'before'=>'{dynagrid}' . Html::a(Yii::t('app', 'Create_Area'), ['create'], ['class' => 'btn btn-success'])
+            ],
 
-            'id',
-            'name',
-            'address',
-            'phone',
-            'created_at',
-            //'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update} ' ]
         ],
-    ]); ?>
 
-    <?php Pjax::end(); ?>
+        'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
+    ]);
+
+
+    ?>
+
 
 </div>
