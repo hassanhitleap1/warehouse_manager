@@ -219,7 +219,8 @@ return [
     "Background_Second_Color"=>"اللون الثاني",
     "Theme_Settings"=>"العدادات القالب",
     "Orderss"=>"الطلبات",
-    "Profile"=>"الملف الشخصي"
+    "Profile"=>"الملف الشخصي",
+    "Statistics"=>"الاحصائيات"
 
 
 ];

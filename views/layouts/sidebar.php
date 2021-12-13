@@ -57,7 +57,7 @@ use app\models\User;use yii\helpers\Html;
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="fas fa-chart-bar"></i>
-                        <span><?=Yii::t('app','Dashboard')?></span>
+                        <span><?=Yii::t('app','Statistics')?></span>
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
