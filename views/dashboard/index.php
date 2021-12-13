@@ -25,7 +25,9 @@ $data_delivery_order=[];
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <div class="site-about">
-    <div class="row">
+
+
+    <div class="row filter">
         <?php $form = ActiveForm::begin([
             'action' => ['dashboard/index'],
             'method' => 'get',
@@ -56,12 +58,11 @@ $data_delivery_order=[];
                 <?= Html::a(Yii::t('app', 'Reset'), ['/dashboard/index'],['class' => 'btn btn-outline-secondary']) ?>
             </div>
         </div>
-
         <?php ActiveForm::end(); ?>
-
-
-
     </div>
+
+
+
     <div class="row" >
         <div class="col-md-2">
             <div class="panel panel-default">

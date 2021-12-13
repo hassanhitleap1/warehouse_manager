@@ -33,7 +33,7 @@ class  NewAsset extends AssetBundle
         $this->css=[
             "https://use.fontawesome.com/releases/v5.0.6/css/all.css",
             "$path_theme/css_ar/main.css",
-            'css/site.css?v='.rand(),
+//            'css/site.css?v='.rand(),
             'css/orders.css?v='.rand(),
             'css/swiper/swiper-bundle.min.css',
 
