@@ -2,6 +2,7 @@
 @import "variable.css";
 body{
     font-family: 'Roboto', sans-serif;
+    font-size: 18px;
 }
 
 .logo{
@@ -424,44 +425,44 @@ hr {
 }
 
 .buttons .cart {
-    border-color: #ff7676;
-    color: #ff7676
+    border-color: var(--font_color);
+    color: var(--color_site)
 }
 
 .buttons .cart:hover {
-    background-color: #e86464 !important;
-    color: #fff
+    background-color: var(--color_site) !important;
+    color:var(--font_color);
 }
 
 .buttons .buy {
-    color: #fff;
-    background-color: #ff7676;
-    border-color: #ff7676
+    color: var(--color_site);
+    background-color:var(--color_site) ;
+    border-color: var(--font_color) ;
 }
 
 .buttons .buy:focus,
 .buy:active {
-    color: #fff;
-    background-color: #ff7676;
-    border-color: #ff7676;
+    color: var(--font_color) ;;
+    background-color: var(--font_color) ;
+    border-color: var(--color_site) ;
     box-shadow: none
 }
 
 .buttons .buy:hover {
-    color: #fff;
-    background-color: #e86464;
-    border-color: #e86464
+    color: var(--font_color) ;;;
+    background-color:  var(--color_site) ;;
+    border-color:  var(--color_site) ;
 }
 
 .buttons .wishlist {
-    background-color:var(--color_site);
-    border-color:var(--font_color);
+    background-color:var(--font_color);
+    border-color:var(--color_site);
 }
 
 .buttons .wishlist:hover {
-    background-color: var(--font_color);;
+    background-color: var(--color_site);;
     border-color: var(--color_site);;
-    color: #fff
+    color:  var(--font_color);; 
 }
 
 .buttons .wishlist:hover i {
@@ -583,4 +584,34 @@ body.busy .spinner { display:block !important; }
 label{
     font-size:large ;
     font-weight: 500;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: black;
+    font-size: 17px;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: black;
+    font-size: 17px;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: black;
+    font-size: 17px;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: black;
+    font-size: 17px;
+  }
+
+  input::-webkit-input-placeholder {/* Chrome/Opera/Safari/Edge */
+	/*styles here*/
+    color: black;
+    font-size: 17px;
+}
+.form-control{
+    color: black;
+    font-size: 14px;
+}
+.buttons .btn{
+    font-size: 18px;
 }
