@@ -118,6 +118,9 @@ use app\models\User;use yii\helpers\Html;
                             <li  class="menu-item <?= Yii::$app->controller->id =='users'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Users'), ['users/index'])?>
                             </li>
+                            <li  class="menu-item <?= Yii::$app->controller->id =='customers'?'active':''?>">
+                                <?= Html::a(Yii::t('app','Customers'), ['customers/index'])?>
+                            </li>
                         </ul>
                     </div>
                 </li>

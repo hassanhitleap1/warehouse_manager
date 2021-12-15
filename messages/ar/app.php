@@ -220,7 +220,8 @@ return [
     "Theme_Settings"=>"العدادات القالب",
     "Orderss"=>"الطلبات",
     "Profile"=>"الملف الشخصي",
-    "Statistics"=>"الاحصائيات"
+    "Statistics"=>"الاحصائيات",
+
 
 
 ];
