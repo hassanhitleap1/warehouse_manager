@@ -296,7 +296,7 @@ $columns = [
         'vAlign' => 'middle',
         'width' => '50px',
         'value' => function ($model, $key, $index, $widget) {
-            return $model['area']['name_ar'];
+            return  isset($model['area'])?$model['area']['name_ar']:'';
         },
         'filterType' => GridView::FILTER_SELECT2,
         'filter' => ArrayHelper::map(Area::find()->orderBy('name_ar')->asArray()->all(), 'id', 'name_ar'),
@@ -320,7 +320,7 @@ $columns = [
         'width' => '50px',
         'value' => function ($model, $key, $index, $widget) {
             // return $model["company_delivery_id"];
-            return Html::a($model['company']['name'], ['orders/set-campany', 'id' => $model->id], ['class' => 'modelbutton column_campany_'.$model->id]);
+            return Html::a(isset($model['company'])?$model['company']['name']:'', ['orders/set-campany', 'id' => $model->id], ['class' => 'modelbutton column_campany_'.$model->id]);
             return $model['company']['name'];
         },
         'filterInputOptions' => ['placeholder' => 'select campany'],

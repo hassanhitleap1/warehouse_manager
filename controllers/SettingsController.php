@@ -71,8 +71,6 @@ class SettingsController extends BaseController
             $params['massage_whatsapp']= $model->massage_whatsapp;
             $params['name_of_store']= $model->name_of_store;
 
-
-
             $file = UploadedFile::getInstance($model, 'logo');
             if (!is_null($file)) {
                 $path="images/logo" . "." . $file->extension;

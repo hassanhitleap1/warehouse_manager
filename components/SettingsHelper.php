@@ -43,7 +43,7 @@ class SettingsHelper extends BaseObject
             'tiktok_id'=>'',
             'company_delivery'=>'1',
             'massage_whatsapp'=>'',
-            'name_of_store'=>"شكرا لطلبك من name_of_store لقد طلبت order بسعر price ",
+            'name_of_store'=>"anatfran",
             'color_site'=>"#",
             'font_color'=>"#",
             'background_duration'=>"to right",
