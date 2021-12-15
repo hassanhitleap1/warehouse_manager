@@ -112,10 +112,10 @@ use app\models\User;use yii\helpers\Html;
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='suppliers/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='suppliers'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Suppliers'), ['suppliers/index'])?>
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='users/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='users'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Users'), ['users/index'])?>
                             </li>
                         </ul>
@@ -128,13 +128,13 @@ use app\models\User;use yii\helpers\Html;
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='countries/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='countries'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Countries'), ['countries/index'])?>
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='regions/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='regions'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Regions'), ['regions/index'])?>
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='area/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='area'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Area'), ['area/index'])?>
                             </li>
                         </ul>
@@ -150,33 +150,33 @@ use app\models\User;use yii\helpers\Html;
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='categorises/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='categorises'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Categorises'), ['categorises/index'])?>
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='units/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='units'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Units'), ['units/index'])?>
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='status/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='status'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Status'), ['status/index'])?>
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='warehouse/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='warehouse'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Warehouse'), ['warehouse/index'])?>
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='company-delivery/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='company-delivery'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Company_Delivery'), ['company-delivery/index'])?>
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='price-company-delivery/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='price-company-delivery'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Price_Company_Delivery'), ['price-company-delivery/index'])?>
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='change-password/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='change-password'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Change_Password'), ['change-password/index'])?>
 
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='outlays/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='outlays'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Outlays'), ['outlays/index'])?>
 
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->route =='type-outlay/index'?'active':''?>">
+                            <li  class="menu-item <?= Yii::$app->controller->id =='type-outlay'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Type_Outlay'), ['type-outlay/index'])?>
                             </li>
                         </ul>

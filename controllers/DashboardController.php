@@ -61,27 +61,31 @@ class  DashboardController extends BaseController {
             ->orderBy(['count_order'=>SORT_DESC])
             ->asArray()->one();
 
+       
         $orders_cousts=OrdersItem::find()->select(['orders_item.product_id','orders_item.quantity','products.purchasing_price'])
             ->innerJoin('products', 'products.id= orders_item.product_id')
             ->innerJoin('orders', 'orders.id= orders_item.order_id')
             ->andWhere('date(orders_item.created_at) = :date', [':date' => $date])
             ->andWhere(['in','orders.status_id', [1,2,3,4]])
             ->asArray()->all();
+
         $cost_products=0;
         foreach ($orders_cousts as $order_cost){
             $cost_products +=$order_cost["quantity"]* $order_cost["purchasing_price"];
         }
 
         $subQuery = Orders::find()->select('id')->andWhere(['in','orders.status_id', [1,2,3,4]])->andWhere('date(orders.created_at) >= :date', [':date' => $date]);
-        $details=OrdersItem::find()->select(['sum(orders_item.quantity) as sum_quantity','orders_item.product_id','orders_item.sub_product_id','orders_item.quantity',
-            'products.purchasing_price','products.name','sub_product_count.type'])
-            ->innerJoin('products', 'products.id=orders_item.product_id')
-            ->innerJoin('sub_product_count', 'sub_product_count.id= orders_item.sub_product_id')
-            ->andWhere('date(orders_item.created_at) >= :date', [':date' => $date])
-            ->where(['in', 'orders_item.order_id', $subQuery])
-            ->groupBy(['orders_item.sub_product_id'])
-            ->orderBy(['sum_quantity'=>SORT_DESC])
-            ->asArray()->all();
+
+//        $details=OrdersItem::find()->select(['sum(orders_item.quantity) as sum_quantity',
+//            'orders_item.product_id','orders_item.sub_product_id','orders_item.quantity',
+//            'products.purchasing_price','products.name','sub_product_count.type'])
+//            ->innerJoin('products', 'products.id=orders_item.product_id')
+//            ->innerJoin('sub_product_count', 'sub_product_count.id= orders_item.sub_product_id')
+//            ->andWhere('date(orders_item.created_at) >= :date', [':date' => $date])
+//            ->where(['in', 'orders_item.order_id', $subQuery])
+//            ->groupBy(['orders_item.sub_product_id'])
+//            ->orderBy(['sum_quantity'=>SORT_DESC])
+//            ->asArray()->all();
 
         $status_orders=Orders::find()->select(['count(*) as count_order','orders.status_id','status.name_ar'])
             ->innerJoin('status', 'status.id=orders.status_id')

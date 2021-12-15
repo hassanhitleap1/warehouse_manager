@@ -37,7 +37,7 @@ $columns = [
             'filterModel'=>$searchModel,
             'panel'=>[
                 'heading'=>'<h3 class="panel-title">'.$this->title.'</h3>',
-                'before'=>'{dynagrid}' . Html::a(Yii::t('app', 'Create_Area'), ['create'], ['class' => 'btn btn-success'])
+                'before' => '{dynagrid}' .  Html::a( "<span class='glyphicon glyphicon-plus' > </span>", ['create'], ['class' => 'btn btn-success' ,'title'=>Yii::t('app', 'Create')])
             ],
 
         ],

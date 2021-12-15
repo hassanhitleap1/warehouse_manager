@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\dynagrid\DynaGrid;
-use yii\widgets\Pjax;
+
 
 $this->title = Yii::t('app', 'Suppliers');
 $this->params['breadcrumbs'][] = $this->title;
@@ -63,12 +63,6 @@ $columns = [
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create_Supplier'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php Pjax::begin(); ?>
-
 
     <?= DynaGrid::widget([
         'columns' => $columns,
@@ -91,7 +85,6 @@ $columns = [
 
     ?>
 
-    <?php Pjax::end(); ?>
 
 </div>
 
