@@ -4,7 +4,8 @@ namespace app\models\customers;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\customers\Customers;
+use yii\web\User;
+
 
 /**
  * UsersSearch represents the model behind the search form of `app\models\users\Users`.
@@ -40,7 +41,7 @@ class CustomerSearch extends Customers
      */
     public function search($params)
     {
-        $query = Customers::find();
+            $query = Customers::find()->where(['type'=>\app\models\User::USER]);
 
         // add conditions that should always apply here
 

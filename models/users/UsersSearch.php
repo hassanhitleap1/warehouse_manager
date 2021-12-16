@@ -40,7 +40,7 @@ class UsersSearch extends Users
      */
     public function search($params)
     {
-        $query = Users::find();
+        $query = Users::find()->where(['type'=>\app\models\User::DATA_ENTERY]);
 
         // add conditions that should always apply here
 

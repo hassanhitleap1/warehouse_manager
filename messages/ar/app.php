@@ -221,7 +221,7 @@ return [
     "Orderss"=>"الطلبات",
     "Profile"=>"الملف الشخصي",
     "Statistics"=>"الاحصائيات",
-
+    "Customers"=>"Customers"
 
 
 ];

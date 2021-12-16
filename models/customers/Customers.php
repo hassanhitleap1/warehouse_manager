@@ -82,7 +82,7 @@ class Customers extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new UserQuery(get_called_class());
+        return new CustomersQuery(get_called_class());
     }
 
 

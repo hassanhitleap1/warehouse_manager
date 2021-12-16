@@ -34,12 +34,7 @@ use yii\widgets\ActiveForm;
         <div class="col-md-3">
             <?= $form->field($model, 'password')->passwordInput() ?>
         </div>
-        <div class="col-md-3">
-            <?= $form->field($model, 'type')->dropDownList(
-            [User::USER=>Yii::t("app",'User'),User::DATA_ENTERY=>Yii::t("app",'Data_Entry')],        
-           
-            ); ?>
-        </div>
+
     </div>
 
     

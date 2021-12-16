@@ -81,6 +81,7 @@ class UsersController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->password_hash=Yii::$app->security->generatePasswordHash($model->password);
+            $model->type=User::DATA_ENTERY;
             if( $model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }
