@@ -57,6 +57,9 @@ class PriceCompanyDeliverySearch extends PriceCompanyDelivery
             return $dataProvider;
         }
 
+        if(isset($_GET['company_id']) && $_GET['company_id'] != ''){
+            $query->andWhere(['company_delivery_id'=>$_GET['company_id']]);
+        }
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,

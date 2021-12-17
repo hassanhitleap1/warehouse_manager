@@ -168,9 +168,7 @@ use app\models\User;use yii\helpers\Html;
                             <li  class="menu-item <?= Yii::$app->controller->id =='company-delivery'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Company_Delivery'), ['company-delivery/index'])?>
                             </li>
-                            <li  class="menu-item <?= Yii::$app->controller->id =='price-company-delivery'?'active':''?>">
-                                <?= Html::a(Yii::t('app','Price_Company_Delivery'), ['price-company-delivery/index'])?>
-                            </li>
+
                             <li  class="menu-item <?= Yii::$app->controller->id =='change-password'?'active':''?>">
                                 <?= Html::a(Yii::t('app','Change_Password'), ['change-password/index'])?>
 

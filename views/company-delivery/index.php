@@ -14,7 +14,15 @@ $columns = [
     [
         'class'=>'kartik\grid\ActionColumn',
         'dropdown'=>false,
-        'order'=>DynaGrid::ORDER_FIX_RIGHT
+        'order'=>DynaGrid::ORDER_FIX_RIGHT,
+        'template' => '{view} {update} {delete} {prices}',
+        'buttons' => [
+            'prices' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-eur"></span>', ['price-company-delivery/index','company_id'=>$model->id], [
+                    'title' => Yii::t('yii', 'Prices'),
+                ]);
+            },
+        ]
     ],
     ['class'=>'kartik\grid\CheckboxColumn',  'order'=>DynaGrid::ORDER_FIX_RIGHT],
 ];

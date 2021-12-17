@@ -6,13 +6,13 @@ use kartik\dynagrid\DynaGrid;
 /* @var $searchModel app\models\pricecompanydelivery\PriceCompanyDeliverySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Price Company Deliveries');
+$this->title = Yii::t('app', 'Price_Company_Deliveries');
 $this->params['breadcrumbs'][] = $this->title;
 
 $columns = [
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
-    'region_id',
-    'company_delivery_id',
+    'region.name_ar',
+    'company.name',
     'price',
     [
         'class'=>'kartik\grid\ActionColumn',

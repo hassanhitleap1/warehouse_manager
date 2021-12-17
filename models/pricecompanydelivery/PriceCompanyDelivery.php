@@ -2,6 +2,8 @@
 
 namespace app\models\pricecompanydelivery;
 
+use app\models\companydelivery\CompanyDelivery;
+use app\models\regions\Regions;
 use Carbon\Carbon;
 use Yii;
 
@@ -83,5 +85,14 @@ class PriceCompanyDelivery extends \yii\db\ActiveRecord
         } else {
             return false;
         }
+    }
+
+
+    public function getCompany(){
+        return $this->hasOne(CompanyDelivery::class,['id'=>'company_delivery_id']);
+    }
+
+    public function getRegion(){
+        return $this->hasOne(Regions::class,['id'=>'region_id']);
     }
 }
