@@ -31,9 +31,8 @@ use Yii;
 class Products extends \yii\db\ActiveRecord
 {
 
-    public $file;
+
     public $images_product;
-    
     const To_Be_Equipped=1;
     const To_Be_Ready=2;
     const Ready=3;
@@ -57,13 +56,13 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','quantity', 'purchasing_price', 'selling_price','category_id', 'warehouse_id'], 'required'],
+            [['name','quantity', 'purchasing_price', 'selling_price','category_id', 'warehouse_id','images_product'], 'required'],
             [['purchasing_price', 'selling_price'], 'double'],
             [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id','company_delivery_id','quantity_come'], 'integer'],
             [['name'], 'string', 'max' => 255],
              [['video_url','thumbnail','thumb'], 'string', 'max' => 500],
              [['description'], 'string'],
-             [['file'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,jpeg,gif'],
+             [['images_product'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,jpeg,gif','maxFiles' => 20],
              
         ];
     }

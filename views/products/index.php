@@ -191,7 +191,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
 
             [   'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {faster-order}' ,
+                'template' => '{view} {update} {delete} {faster-order}{view_web}' ,
                 'buttons'=>[
                     'faster-order' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $url, [
@@ -199,7 +199,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class'=>'fast_order'
                         ]);
 
-                    }
+                    },
+                    'view_web'=> function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-log-out"></span>', ['product/view','id'=>$model->id], [
+                            'title' => Yii::t('app', 'View'),'target'=>'_blank'
+
+                        ]);
+
+                    },
                 ]
             ],
         ],

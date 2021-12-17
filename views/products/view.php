@@ -24,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-log-out"></span>', ['product/view','id'=>$model->id], ['class' => 'btn btn-success','target'=>'_blank']) ?>
+
     </p>
 
     <?= DetailView::widget([
@@ -51,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'format' => 'raw',
                 'attribute' => 'supplier_id',
-                'value' =>  $model['supplier']['name'],
+                'value' => isset($model['supplier'])? $model['supplier']['name']:'',
 
             ],
             [

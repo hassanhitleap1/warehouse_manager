@@ -39,9 +39,6 @@ $this->title = $model->name;
                 <div class="card">
                     <div class="demo">
                         <ul class="list-image-sider" id="lightSlider">
-                            <li data-thumb="<?= $model->thumb?>">
-                                <?= Html::img($model->thumbnail) ?>
-                            </li>
 
                             <?php foreach ($model->imagesProduct as $key => $img) : ?>
                                 <li data-thumb="<?= $img->thumbnail ?>">

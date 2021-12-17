@@ -18,7 +18,7 @@ use kartik\editors\Summernote;
 /* @var $form yii\widgets\ActiveForm */
 
 
-$dataThumbnail = [];
+
 $dataImages = [];
 $images_path_product= [];
 
@@ -29,22 +29,7 @@ if (!$model->isNewRecord) {
         $images_path_product[] = Yii::getAlias('@web') . '/' . $value['path'];
     }
 
-    $dataThumbnail = [
 
-        'showCaption' => true,
-        'showRemove' => true,
-        'showUpload' => false,
-        'initialPreview' => [
-            Yii::getAlias('@web') . '/' . $model['thumbnail']
-        ],
-        'initialPreviewAsData' => true,
-        'initialCaption' => Yii::getAlias('@web') . '/' . $model->thumbnail,
-        'initialPreviewConfig' => [
-            ['caption' => $model->name],
-        ],
-        'overwriteInitial'=>true
-
-    ];
 
     $dataImages = [
         
@@ -62,13 +47,7 @@ if (!$model->isNewRecord) {
     ];
 
 }else{
-    $dataThumbnail = [
-      
-       
-        'showCaption' => true,
-        'showRemove' => true,
-        'showUpload' => false
-    ];
+
     $dataImages = [
         
         'showCaption' => true,
@@ -157,16 +136,9 @@ if (!$model->isNewRecord) {
     </div>
   
         <div class="row">
-            <div class="col-md-4">
-                <?= $form->field($model, 'file')->widget(FileInput::classname(), [
-                    'options' => ['accept' => 'image/*'],
-                    'pluginOptions' => $dataThumbnail
-                        ]);
-                    ?>
-            </div>
-        
 
-            <div class="col-md-8">
+
+            <div class="col-md-12">
                 <?= $form->field($model, 'description')->widget(Summernote::class, [
                         'options' => ['placeholder' => 'Edit your blog content here...']
                     ]);?>
