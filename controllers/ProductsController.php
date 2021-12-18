@@ -251,43 +251,11 @@ class ProductsController extends BaseController
             if ($valid) {
                $transaction = \Yii::$app->db->beginTransaction();
                try {
-                    $file = UploadedFile::getInstance($model, 'file');
+
                     $images_product = UploadedFile::getInstances($model, 'images_product');
-                    if (!is_null($file)) {
-                        $folder_path = "products/$newId";
-                        FileHelper::createDirectory($folder_path, $mode = 0775, $recursive = true);
-                        $thumbnail_path = "$folder_path/index" . "." . $file->extension;
-                        $model->thumbnail = $thumbnail_path;
-                        $file->saveAs($thumbnail_path);
-                        $thumb="$folder_path/thumbnail.$file->extension";
-
-                        $file->saveAs($thumbnail_path);
-                        if(!in_array($file->extension ,['gif','GIF'])){
-                            $img = Image::make($thumbnail_path);
-                            $img->insert($thumbnail_path);
-                            $img->resize(400, 400, function ($constraint) {
-                                $constraint->aspectRatio();
-                            })->save($thumb);
-                        }else{
-                            $thumb=$thumbnail_path;
-                        }
-
-                        $model->thumb=$thumb;
-
-
-
-
-
-
-                        $model->thumbnail = $thumbnail_path;
-                    }
-
                     if (!is_null($images_product) && count($images_product)) {
-
-
                         $folder_path = "products/$newId";
                         FileHelper::removeDirectory("$folder_path/images");
-
                         FileHelper::createDirectory(
                             "$folder_path/images",
                             $mode = 0775,
@@ -312,6 +280,12 @@ class ProductsController extends BaseController
                                     })->save($thumbnail);
                                 }else{
                                     $thumbnail="$folder_path/images/$key.".$image_product->extension;
+                                }
+
+                                if($key==0){
+                                    $model->thumb=$file_path;
+                                    $model->thumbnail = $thumbnail_path;
+
                                 }
 
                                 $modelImagesProduct->thumbnail=$thumbnail ;
