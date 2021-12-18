@@ -19,6 +19,7 @@ use Yii;
 class Upsell extends \yii\db\ActiveRecord
 {
     public $upsell_products_id;
+    public $selected_product;
     /**
      * {@inheritdoc}
      */
@@ -33,7 +34,7 @@ class Upsell extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id','upsell_product_id'], 'integer'],
+            [['product_id','upsell_product_id','selected_product'], 'integer'],
             ['upsell_products_id','required']
 
         ];

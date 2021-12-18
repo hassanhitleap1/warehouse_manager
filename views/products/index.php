@@ -191,7 +191,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
 
             [   'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {faster-order}{view_web}' ,
+                'template' => '{view} {update} {delete} {faster-order}{view_web}{upsell}' ,
                 'buttons'=>[
                     'faster-order' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $url, [
@@ -202,6 +202,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'view_web'=> function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-log-out"></span>', ['product/view','id'=>$model->id], [
+                            'title' => Yii::t('app', 'View'),'target'=>'_blank'
+
+                        ]);
+
+                    },
+                    'upsell'=> function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-menu-up"></span>', ['upsell/create','product_id'=>$model->id], [
                             'title' => Yii::t('app', 'View'),'target'=>'_blank'
 
                         ]);

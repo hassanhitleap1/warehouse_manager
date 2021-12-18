@@ -38,7 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>'upsellproduct.name',
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{view}{delete} '
+                ],
+
         ],
     ]); ?>
 

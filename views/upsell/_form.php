@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\upsell\Upsell */
 /* @var $form yii\widgets\ActiveForm */
 $products =\yii\helpers\ArrayHelper::map(\app\models\products\Products::find()->all(), 'id', 'name');
+$selectedProdct=isset($_GET['product_id'])?$_GET['product_id']:-1;
 
 ?>
 
@@ -14,11 +15,12 @@ $products =\yii\helpers\ArrayHelper::map(\app\models\products\Products::find()->
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'selected_product')->hiddenInput(['value'=>$selectedProdct]); ?>
 
     <?= $form->field($model, 'product_id')->widget(\kartik\select2\Select2::classname(), [
         'data' => $products,
         'language' => 'ar',
-        'options' => ['placeholder' =>Yii::t('app',"Plz_Select")],
+        'options' => ['placeholder' =>Yii::t('app',"Plz_Select"),'value'=>$selectedProdct],
     ]); ?>
 
 

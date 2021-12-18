@@ -56,7 +56,10 @@ class UpsellSearch extends Upsell
             // $query->where('0=1');
             return $dataProvider;
         }
+        if(isset($_GET['product_id']) && $_GET['product_id'] !=-1){
 
+            $query->andWhere(['product_id' => $_GET['product_id']]) ;
+        }
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,

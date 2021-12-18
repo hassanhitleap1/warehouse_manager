@@ -88,8 +88,8 @@ class UpsellController extends Controller
                 $modelUpsell->save(false);
 
             }
+            return $this->redirect(array('index', 'product_id'=>$model->selected_product));
 
-            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
