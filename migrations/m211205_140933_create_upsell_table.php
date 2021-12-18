@@ -20,7 +20,7 @@ class m211205_140933_create_upsell_table extends Migration
         $this->createTable('{{%upsell}}', [
             'id' => $this->primaryKey(),
             'product_id'=>$this->integer(),
-            'list_product_id'=>$this->json(),
+            'upsell_product_id'=>$this->integer(),
             'created_at' => $this->dateTime()->defaultValue(null),
             'updated_at' => $this->dateTime()->defaultValue(null),
 

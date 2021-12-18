@@ -7,6 +7,7 @@ use app\models\OptionsSellProduct\OptionsSellProduct;
 use app\models\productsimage\ProductsImage;
 use app\models\subproductcount\SubProductCount;
 use app\models\suppliers\Suppliers;
+use app\models\upsell\Upsell;
 use app\models\warehouse\Warehouse;
 use Carbon\Carbon;
 use Yii;
@@ -119,7 +120,10 @@ class Products extends \yii\db\ActiveRecord
         return $this->hasMany(ProductsImage::className(), ['product_id' => 'id']);
     }
 
-    
+    public function getUpsell(){
+        return $this->hasMany(Upsell::class, ['product_id' => 'id']);
+    }
+
     /**
      * {@inheritdoc}
      * @return ProductsQuery the active query used by this AR class.

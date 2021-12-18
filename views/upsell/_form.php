@@ -22,7 +22,7 @@ $products =\yii\helpers\ArrayHelper::map(\app\models\products\Products::find()->
     ]); ?>
 
 
-    <?= $form->field($model,"list_product_id")->widget(\kartik\select2\Select2::classname(), [
+    <?= $form->field($model,"upsell_products_id")->widget(\kartik\select2\Select2::classname(), [
         'data' => $products,
         'language' => 'ar',
         'options' => ['multiple' => true,'placeholder' =>Yii::t('app',"Plz_Select"),'class'=>''],

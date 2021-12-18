@@ -27,11 +27,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'product_id',
-            'list_product_id:ntext',
-            'created_at',
-            'updated_at',
+            [
+                    'label'=>Yii::t('app','Product_Name'),
+                    'attribute'=>'product_id',
+                    'value'=>'product.name',
+            ],
+            [
+                'label'=>Yii::t('app','Upsell_Product_Name'),
+                'attribute'=>'upsell_product_id',
+                'value'=>'upsellproduct.name',
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

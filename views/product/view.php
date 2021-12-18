@@ -152,33 +152,36 @@ $this->title = $model->name;
 
                 </div>
 
-                <div class="card mt-2"> <span>Similar items:</span>
+
+
+
+                <div class="card mt-2"> <span><?=Yii::t('app','Similar_Item') ;?></span>
+
                     <div class="similar-products mt-2 d-flex flex-row">
-                        <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="https://i.imgur.com/KZpuufK.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">$1,999</h6>
-                            </div>
-                        </div>
-                        <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="https://i.imgur.com/GwiUmQA.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">$1,699</h6>
-                            </div>
-                        </div>
-                        <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="https://i.imgur.com/c9uUysL.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">$2,999</h6>
-                            </div>
-                        </div>
-                        <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="https://i.imgur.com/kYWqL7k.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">$3,999</h6>
-                            </div>
-                        </div>
-                        <div class="card border p-1" style="width: 9rem;"> <img src="https://i.imgur.com/DhKkTrG.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">$999</h6>
-                            </div>
-                        </div>
+                        <?php if(count($model->upsell )):?>
+                            <?php foreach ($model->upsell as $key => $upsell):?>
+
+                                <a href="<?= \yii\helpers\Url::toRoute(['product/view', 'id' => $upsell['product']['id']]);?>" class="card border p-1" style="width: 9rem;margin-right: 3px;">
+                                    <img src="<?= Yii::getAlias('@web').'/'.$upsell['product']['thumbnail'];?>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title" style="color: #0a805e;font-size: 15px"><?=$upsell['product']['selling_price']; ?></h6>
+                                    </div>
+                                </a>
+                            <?php endforeach;?>
+                        <?php else:?>
+
+                            <?php foreach ($product_suggested as $key => $product):?>
+
+                                <a href="<?= \yii\helpers\Url::toRoute(['product/view', 'id' => $product['id']]);?>" class="card border p-1" style="width: 9rem;margin-right: 3px;">
+                                    <img src="<?= Yii::getAlias('@web').'/'.$product['thumbnail'];?>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title" style="color: #0a805e;font-size: 15px"><?=$product['selling_price']; ?></h6>
+                                    </div>
+                                </a>
+                            <?php endforeach;?>
+
+                        <?php endif;?>
+
                     </div>
                 </div>
             </div>

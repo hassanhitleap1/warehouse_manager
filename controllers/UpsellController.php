@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\User;
+use app\widgets\Alert;
 use Yii;
 use app\models\upsell\Upsell;
 use app\models\upsell\UpsellSearch;
@@ -14,6 +16,17 @@ use yii\filters\VerbFilter;
  */
 class UpsellController extends Controller
 {
+
+    public function init()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $this->layout = "new";
+            if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
+                throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+            }
+        }
+        parent::init();
+    }
     /**
      * {@inheritdoc}
      */
@@ -66,8 +79,17 @@ class UpsellController extends Controller
     {
         $model = new Upsell();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            foreach ($model->upsell_products_id as $upsell){
+                $modelUpsell= new Upsell();
+                $modelUpsell->product_id=$model->product_id;
+                $modelUpsell->upsell_product_id=$upsell;
+                $modelUpsell->save(false);
+
+            }
+
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [

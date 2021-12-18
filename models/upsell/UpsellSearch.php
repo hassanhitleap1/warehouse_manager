@@ -11,14 +11,15 @@ use app\models\upsell\Upsell;
  */
 class UpsellSearch extends Upsell
 {
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'product_id'], 'integer'],
-            [['list_product_id', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'product_id','upsell_product_id'], 'integer'],
+            [[ 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -60,11 +61,11 @@ class UpsellSearch extends Upsell
         $query->andFilterWhere([
             'id' => $this->id,
             'product_id' => $this->product_id,
+            'upsell_product_id'=> $this->upsell_product_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'list_product_id', $this->list_product_id]);
 
         return $dataProvider;
     }
