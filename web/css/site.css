@@ -565,6 +565,7 @@ body.busy .spinner { display:block !important; }
 .btn-productmainbtn{
     background: var(--background_nav);
     color: var(--font_color);
+    font-size: 20px;
 }
 
 
@@ -625,4 +626,15 @@ label{
 .thanck-continaer{
     text-align: right;
     font-size: 55px;
+}
+
+.lSPager.lSGallery>li{
+    width: 75px !important;
+}
+.lSPager.lSGallery{
+    width: fit-content !important;
+}
+
+.navbar-brand >span{
+    font-size: 2.25rem;
 }
