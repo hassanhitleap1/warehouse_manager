@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'format' => 'raw',
                 'attribute' => 'unit_id',
-                'value' =>  $model['unit']['name_ar'], 
+                'value' =>   isset($model['unit'])? $model['unit']['name_ar']:'',
             ],
             [
                 'format' => 'raw',

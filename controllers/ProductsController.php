@@ -30,6 +30,8 @@ use Intervention\Image\ImageManagerStatic as Image;
  */
 class ProductsController extends BaseController 
 {
+    private  $width_thumb=500;
+    private  $hight_thumb=500;
 
     public function init()
     {
@@ -94,10 +96,9 @@ class ProductsController extends BaseController
         $model = new Products();
         $subProductCounts = [new SubProductCount()];
         $type_options = [new OptionsSellProduct()];
+        $model->scenario=Products::SCENARIO_CREATE;
         $newId = Products::find()->max('id') + 1;
-
         if ($model->load(Yii::$app->request->post())) {
-           
             $subProductCounts = Model::createMultiple(SubProductCount::classname());
             $type_options= Model::createMultiple(OptionsSellProduct::classname());
             Model::loadMultiple($subProductCounts, Yii::$app->request->post());
@@ -107,12 +108,11 @@ class ProductsController extends BaseController
              $valid =    Model::validateMultiple($subProductCounts) && $valid;
             $valid =Model::validateMultiple($type_options) && $valid;
             $valid =boolval($valid);
+
              if ($valid) {
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
-
                     $images_product = UploadedFile::getInstances($model, 'images_product');
-
                     if (!is_null($images_product)) {
                         $folder_path = "products/$newId";
                         FileHelper::createDirectory("$folder_path/images",
@@ -127,7 +127,7 @@ class ProductsController extends BaseController
                             if(!in_array($image_product->extension ,['gif','GIF'])){
                                 $img_thumbnail = Image::make($file_path);
                                 $img_thumbnail->insert($file_path);
-                                $img_thumbnail->resize(400, 400, function ($constraint) {
+                                $img_thumbnail->resize($this->width_thumb, $this->hight_thumb, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save($thumbnail);
                             }else{
@@ -225,7 +225,8 @@ class ProductsController extends BaseController
     {
         $model = $this->findModel($id);
         $newId=$id;
-        
+        $model->scenario=Products::SCENARIO_UPDATE;
+
         $modelSubProductCount = $model->subProductCount;
         $type_options = $model->typeOptions;
 
@@ -275,7 +276,7 @@ class ProductsController extends BaseController
                                 if(!in_array($image_product->extension ,['gif','GIF'])){
                                     $img_thumbnail = Image::make($file_path);
                                     $img_thumbnail->insert($file_path);
-                                    $img_thumbnail->resize(400, 400, function ($constraint) {
+                                    $img_thumbnail->resize($this->width_thumb, $this->hight_thumb, function ($constraint) {
                                         $constraint->aspectRatio();
                                     })->save($thumbnail);
                                 }else{
@@ -284,7 +285,7 @@ class ProductsController extends BaseController
 
                                 if($key==0){
                                     $model->thumb=$file_path;
-                                    $model->thumbnail = $thumbnail_path;
+                                    $model->thumbnail = $file_path;
 
                                 }
 
@@ -324,10 +325,10 @@ class ProductsController extends BaseController
 
 
                } catch (Exception $e) {
+
                    $transaction->rollBack();
                }
            }
-
 
         }
 

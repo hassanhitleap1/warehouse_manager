@@ -30,8 +30,6 @@ use Yii;
  */
 class Products extends \yii\db\ActiveRecord
 {
-
-
     public $images_product;
     const To_Be_Equipped=1;
     const To_Be_Ready=2;
@@ -41,7 +39,9 @@ class Products extends \yii\db\ActiveRecord
     const Canceled=6;
     const Delayed=7;
     const TYPE_DROP_DAWNLIST=1;
-    const TYPE_CHOOSE_BOX=2;    
+    const TYPE_CHOOSE_BOX=2;
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_UPDATE = 'update';
     /**
      * {@inheritdoc}
      */
@@ -56,13 +56,14 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','quantity', 'purchasing_price', 'selling_price','category_id', 'warehouse_id','images_product'], 'required'],
-            [['purchasing_price', 'selling_price'], 'double'],
-            [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id','company_delivery_id','quantity_come'], 'integer'],
-            [['name'], 'string', 'max' => 255],
-             [['video_url','thumbnail','thumb'], 'string', 'max' => 500],
-             [['description'], 'string'],
-             [['images_product'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,jpeg,gif','maxFiles' => 20],
+            [['name','quantity', 'purchasing_price', 'selling_price','category_id', 'warehouse_id'], 'required','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
+            [['images_product',],'required','on'=>[self::SCENARIO_UPDATE]],
+            [['purchasing_price', 'selling_price'], 'double','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
+            [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id','company_delivery_id','quantity_come'], 'integer','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
+            [['name'], 'string', 'max' => 255,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
+             [['video_url','thumbnail','thumb'], 'string', 'max' => 500,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
+             [['description'], 'string','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
+             [['images_product'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,jpeg,gif','maxFiles' => 20,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
              
         ];
     }
