@@ -29,6 +29,9 @@ NewAsset::register($this);
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
         </a>
+        <audio controls style="display: block" id="ringing">
+            <source src="<?=  Yii::getAlias('@web')?>/sounds/bell-ringing.mp3" type="audio/mpeg">
+        </audio>
 
         <?php include "sidebar.php"; ?>
 

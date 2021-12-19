@@ -943,6 +943,15 @@ function getMax(array, propName) {
     return maxItem;
 }
 
+
+$(document).on('click','.logout',function (event) {
+    event.preventDefault(); // stopping submitting
+    $(this).closest("form").submit();
+});
+
+
+
+
 const beamsClient = new PusherPushNotifications.Client({
     instanceId: '19d18ac9-8169-4815-ad1e-85bb3d827747',
 });
@@ -953,8 +962,6 @@ beamsClient.start()
     .catch(console.error);
 
 
-
-
 Pusher.logToConsole = true;
 
 var pusher = new Pusher('01d79c8e5aa5482515d5', {
@@ -963,31 +970,32 @@ var pusher = new Pusher('01d79c8e5aa5482515d5', {
 
 var channel = pusher.subscribe('my-channel');
 
-var audio = new Audio(`${SITE_URL}/sounds/bell-ringing.mp3`);
-
 channel.bind('my-event', function(data) {
     if($(".profile").attr("type")=="admin"){
-        audio.play()
-        play().then(function() {
+        alerm();
 
-        });
     }
 });
 
+function playAudio(audio){
+    return new Promise(res=>{
+        audio.play()
+        audio.onended = res
+    })
+}
 
-function play() {
-    return new Promise(function(resolve, reject) {   // return a promise
-        var audio = new Audio(`${SITE_URL}/sounds/bell-ringing.mp3`);
-        audio.play()// autoplay when loaded
-        audio.onerror = reject;                      // on error, reject
-        audio.onended = resolve;                     // when done, resolve
-    });
+// how to call
+async function alerm(){
+
+    var obj = document.createElement('audio');
+    obj.src = `${SITE_URL}/sounds/bell-ringing.mp3`;
+    obj.play();
+
+
+    const audio = new Audio(`${SITE_URL}/sounds/bell-ringing.mp3`)
+    await playAudio(audio)
+    // code that will run after audio finishes...
 }
 
 
-
-$(document).on('click','.logout',function (event) {
-    event.preventDefault(); // stopping submitting
-    $(this).closest("form").submit();
-});
 
