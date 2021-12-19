@@ -952,27 +952,38 @@ beamsClient.start()
     .then(() => console.log('Successfully registered and subscribed!'))
     .catch(console.error);
 
-// Enable pusher logging - don't include this in production
+
+
+
 Pusher.logToConsole = true;
 
-var pusher = new Pusher('78a323b54ba0c2d92d1f', {
-    cluster: 'mt1'
+var pusher = new Pusher('01d79c8e5aa5482515d5', {
+    cluster: 'ap2'
 });
 
 var channel = pusher.subscribe('my-channel');
 
+var audio = new Audio(`${SITE_URL}/sounds/bell-ringing.mp3`);
+
 channel.bind('my-event', function(data) {
     if($(".profile").attr("type")=="admin"){
-        play_voice_bell();
-       
-    }
+        audio.play()
+        play().then(function() {
 
+        });
+    }
 });
 
-function play_voice_bell() {
-    var audio = new Audio(`${SITE_URL}/sounds/bell-ringing.mp3`);
-    audio.play();
+
+function play() {
+    return new Promise(function(resolve, reject) {   // return a promise
+        var audio = new Audio(`${SITE_URL}/sounds/bell-ringing.mp3`);
+        audio.play()// autoplay when loaded
+        audio.onerror = reject;                      // on error, reject
+        audio.onended = resolve;                     // when done, resolve
+    });
 }
+
 
 
 $(document).on('click','.logout',function (event) {

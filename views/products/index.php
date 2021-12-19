@@ -2,7 +2,7 @@
 
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\dynagrid\DynaGrid;
 use yii\widgets\Pjax;
 use app\models\categorises\Categorises;
 use app\models\suppliers\Suppliers;
@@ -10,6 +10,114 @@ use app\models\suppliers\Suppliers;
 use app\models\warehouse\Warehouse;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
+
+
+
+$columns = [
+
+    [
+        'class' => 'kartik\grid\SerialColumn',
+        'order' => DynaGrid::ORDER_FIX_LEFT,
+
+    ],
+    [
+
+        'attribute' => 'name',
+        'value'=>function ($searchModel) {
+            return Html::a($searchModel['name'] ,['sub-product-count/index','product_id'=>$searchModel->id]);
+        },
+        'contentOptions' => ['class' => 'name'],
+        'format'=>'html'
+    ],
+    [
+        'attribute'=>'thumbnail',
+        'value' => function ($searchModel) {
+            return Html::img($searchModel->thumbnail,['width'=>'100','height'=>'100']);
+        },
+        'format' => 'html',
+    ],
+    [
+        'attribute'=>'purchasing_price',
+        'value' => function ($searchModel) {
+            return    Html::a( $searchModel->purchasing_price,['products/change-purchasing-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
+        },
+        'contentOptions' => ['class' => 'purchasing_price'],
+        'format' => 'html',
+    ],
+
+    [
+        'attribute'=>'selling_price',
+        'value' => function ($searchModel) {
+            return    Html::a( $searchModel->selling_price,['products/change-selling-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
+        },
+        'contentOptions' => ['class' => 'selling_price'],
+        'format' => 'html',
+    ],
+
+    [
+        'attribute' => 'category_id',
+        'value' => 'category.name_ar',
+        'filter' =>Select2::widget([
+            'name' => 'category_id',
+            "value"=>(isset($_GET['category_id']))?$_GET['category_id']:null,
+            'data' => ArrayHelper::map(Categorises::find()->all(), 'id', 'name_ar'),
+            'options' => [
+                'placeholder' => 'Select  ...',
+                'multiple' => false
+            ],
+        ]),
+        'contentOptions' => ['class' => 'category_id'],
+        'format' => 'html',
+    ],
+
+
+
+    [
+        'attribute'=>'quantity',
+        'value' => function ($searchModel) {
+            $str="العدد الكلي " . $searchModel->quantity;
+            if(count($searchModel->subProductCount) > 1){
+                foreach($searchModel->subProductCount as $subProductCount){
+                    $str.="<br />".$subProductCount->type ." ".$subProductCount->count ;
+
+                }
+            }
+            return    Html::a( $str,['products/change-total','id'=>$searchModel->id ],["class"=>"open_model"]);;
+        },
+        'contentOptions' => ['class' => 'quantity'],
+        'format' => 'html',
+    ],
+
+    [
+        'attribute' =>'type_options',
+        'value'=>function($searchModel){
+            $str='';
+            if(count($searchModel->typeOptions ))
+            {
+                foreach ($searchModel->typeOptions as $type_option)
+                {
+                    $str.=$type_option->text .'  <br />' ;
+                }
+            }
+
+            return    Html::a($str,['options-sell-product/index','product_id'=>$searchModel->id]);;
+        },
+        'format' => 'html',
+        'headerOptions' => ['style' => 'width:20%'],
+    ],
+    [
+        'attribute'=>'quantity_come',
+        'value' => function ($searchModel) {
+            return    Html::a( $searchModel->quantity_come,['products/change-quantity-come','id'=>$searchModel->id ],["class"=>"open_model"]);;
+        },
+        'contentOptions' => ['class' => 'quantity_come'],
+        'format' => 'html',
+    ],
+
+
+    ['class' => 'kartik\grid\CheckboxColumn',  'order' => DynaGrid::ORDER_FIX_RIGHT],
+];
+
 
 
 /* @var $this yii\web\View */
@@ -23,201 +131,34 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create_Product'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+
 
     <?php Pjax::begin(); ?>
+
+    <?= DynaGrid::widget([
+        'columns' => $columns,
+        'storage' => DynaGrid::TYPE_COOKIE,
+        'theme' => 'panel-success',
+        'gridOptions' => [
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'panel' => [
+                'heading' => '<h3 class="panel-title">' . $this->title . '</h3>',
+                'before' => '{dynagrid}' .  Html::a( "<span class='glyphicon glyphicon-plus' > </span>", ['create'], ['class' => 'btn btn-success' ,'title'=>Yii::t('app', 'Create')])
+            ],
+            'showPageSummary' => true,
+        ],
+
+        'options' => ['id' => 'dynagrid'],  // a unique identifier is important
+
+    ]);
+
+
+    ?>
+    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'rowOptions' =>  function($searchModel){
-            return  ['id' =>'tr_'.$searchModel['id']];
-            },
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            // 'id',
-            [
-                
-                'attribute' => 'name',
-                'value'=>function ($searchModel) {
-                    return Html::a($searchModel['name'] ,['sub-product-count/index','product_id'=>$searchModel->id]);
-                },
-                'contentOptions' => ['class' => 'name'],
-                'format'=>'html'
-            ],
-            [
-                'attribute'=>'thumbnail',
-                'value' => function ($searchModel) {
-                    return Html::img($searchModel->thumbnail,['width'=>'100','height'=>'100']);
-                },
-                'format' => 'html',
-            ],
-            [
-                'attribute'=>'purchasing_price',
-                'value' => function ($searchModel) {
-                    return    Html::a( $searchModel->purchasing_price,['products/change-purchasing-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
-                },
-                'contentOptions' => ['class' => 'purchasing_price'],
-                'format' => 'html',
-            ],
 
-            [
-                'attribute'=>'selling_price',
-                'value' => function ($searchModel) {
-                    return    Html::a( $searchModel->selling_price,['products/change-selling-price','id'=>$searchModel->id ],["class"=>"open_model"]);;
-                },
-                'contentOptions' => ['class' => 'selling_price'],
-                'format' => 'html',
-            ],
-
-            [
-                'attribute' => 'category_id',
-                'value' => 'category.name_ar',
-                'filter' =>Select2::widget([
-                    'name' => 'category_id',
-                    "value"=>(isset($_GET['category_id']))?$_GET['category_id']:null,
-                    'data' => ArrayHelper::map(Categorises::find()->all(), 'id', 'name_ar'),
-                    'options' => [
-                        'placeholder' => 'Select  ...',
-                        'multiple' => false
-                    ],
-                ]),
-                'contentOptions' => ['class' => 'category_id'],
-                'format' => 'html',
-            ],
-           
-//            'status',
-//            [
-//                'attribute' => 'supplier_id',
-//                'value' => 'supplier.name',
-//                    'filter' =>Select2::widget([
-//                    'name' => 'supplier_id',
-//                    "value"=>(isset($_GET['supplier_id']))?$_GET['supplier_id']:null,
-//                    'data' => ArrayHelper::map(Suppliers::find()->all(), 'id', 'name'),
-//                    'options' => [
-//                        'placeholder' => 'Select  ...',
-//                        'multiple' => false
-//                    ],
-//                ]),
-//
-//                'format' => 'html',
-//
-//
-//            ],
-           
-//            [
-//                'attribute' => 'unit_id',
-//                'value' => 'unit.name_ar',
-//
-//                 'filter' =>Select2::widget([
-//                    'name' => 'unit_id',
-//                    "value"=>(isset($_GET['unit_id']))?$_GET['unit_id']:null,
-//                    'data' => ArrayHelper::map(Units::find()->all(), 'id', 'name_ar'),
-//                    'options' => [
-//                        'placeholder' => 'Select  ...',
-//                        'multiple' => false
-//                    ],
-//                ]),
-//
-//                'format' => 'html',
-//
-//
-//            ],
-           
-//            [
-//                'attribute' => 'warehouse_id',
-//                'value' => 'warehouse.name',
-//                'filter' =>Select2::widget([
-//                    'name' => 'warehouse_id',
-//                    "value"=>(isset($_GET['warehouse_id']))?$_GET['warehouse_id']:null,
-//                    'data' => ArrayHelper::map(Warehouse::find()->all(), 'id', 'name'),
-//                    'options' => [
-//                        'placeholder' => 'Select  ...',
-//                        'multiple' => false
-//                    ],
-//                ]),
-//
-//                'format' => 'html',
-//
-//
-//            ],
-
-
-            [
-                'attribute'=>'quantity',
-                'value' => function ($searchModel) {
-                    $str="العدد الكلي " . $searchModel->quantity;  
-                    if(count($searchModel->subProductCount) > 1){
-                        foreach($searchModel->subProductCount as $subProductCount){
-                            $str.="<br />".$subProductCount->type ." ".$subProductCount->count ;
-                            
-                        }
-                    }
-                    return    Html::a( $str,['products/change-total','id'=>$searchModel->id ],["class"=>"open_model"]);;
-                },
-                'contentOptions' => ['class' => 'quantity'],
-                'format' => 'html',
-            ],
-
-            [
-                'attribute' =>'type_options',
-                'value'=>function($searchModel){
-                    $str='';
-                    if(count($searchModel->typeOptions ))
-                    {
-                        foreach ($searchModel->typeOptions as $type_option)
-                        {
-                            $str.=$type_option->text .'  <br />' ;
-                        }
-                    }
-
-                    return    Html::a($str,['options-sell-product/index','product_id'=>$searchModel->id]);;
-                },
-                'format' => 'html',
-                'headerOptions' => ['style' => 'width:20%'],
-            ],
-            [
-                'attribute'=>'quantity_come',
-                'value' => function ($searchModel) {
-                    return    Html::a( $searchModel->quantity_come,['products/change-quantity-come','id'=>$searchModel->id ],["class"=>"open_model"]);;
-                },
-                'contentOptions' => ['class' => 'quantity_come'],
-                'format' => 'html',
-            ],
-//            'created_at',
-            //'updated_at',
-
-            [   'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {faster-order}{view_web}{upsell}' ,
-                'buttons'=>[
-                    'faster-order' => function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $url, [
-                            'title' => Yii::t('app', 'fast_order'),
-                            'class'=>'fast_order'
-                        ]);
-
-                    },
-                    'view_web'=> function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-log-out"></span>', ['product/view','id'=>$model->id], [
-                            'title' => Yii::t('app', 'View'),'target'=>'_blank'
-
-                        ]);
-
-                    },
-                    'upsell'=> function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-menu-up"></span>', ['upsell/create','product_id'=>$model->id], [
-                            'title' => Yii::t('app', 'View'),'target'=>'_blank'
-
-                        ]);
-
-                    },
-                ]
-            ],
-        ],
-    ]); ?>
 
     <?php Pjax::end(); ?>
 
