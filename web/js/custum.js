@@ -973,6 +973,9 @@ var channel = pusher.subscribe('my-channel');
 channel.bind('my-event', function(data) {
     if($(".profile").attr("type")=="admin"){
         alerm();
+        setTimeout(() => {
+            $("audio").trigger("play");
+        }, 3000);
 
     }
 });
