@@ -115,6 +115,30 @@ $columns = [
     ],
 
 
+    [
+        'class' => 'kartik\grid\ActionColumn',
+        'dropdown' => false,
+        'order' => DynaGrid::ORDER_FIX_RIGHT,
+        'template' => '{view} {update} {delete} {faster-order}{view_web}' ,
+        'buttons'=>[
+            'faster-order' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $url, [
+                    'title' => Yii::t('app', 'fast_order'),
+                    'class'=>'fast_order'
+                ]);
+
+            },
+            'view_web'=> function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-log-out"></span>', ['product/view','id'=>$model->id], [
+                    'title' => Yii::t('app', 'View'),'target'=>'_blank'
+
+                ]);
+
+            },
+        ]
+    ],
+
+
     ['class' => 'kartik\grid\CheckboxColumn',  'order' => DynaGrid::ORDER_FIX_RIGHT],
 ];
 
