@@ -18,6 +18,7 @@ NewAsset::register($this);
         <title><?= Html::encode($this->title) ?></title>
         <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
         <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+        <script  src="https://cdn.jsdelivr.net/npm/notiflix@3.2.2/dist/notiflix-aio-3.2.2.min.js"></script>
         <?php $this->head() ?>
     </head>
 

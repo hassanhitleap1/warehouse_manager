@@ -972,6 +972,7 @@ var channel = pusher.subscribe('my-channel');
 
 channel.bind('my-event', function(data) {
     if($(".profile").attr("type")=="admin"){
+        Notiflix.Notify.success('طلب جديد');
         alerm();
         setTimeout(() => {
             $("audio").trigger("play");
