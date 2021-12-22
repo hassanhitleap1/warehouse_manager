@@ -58,7 +58,7 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             [['name','quantity', 'purchasing_price', 'selling_price','category_id', 'warehouse_id'], 'required','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
-            [['images_product',],'required','on'=>[self::SCENARIO_UPDATE]],
+            [['images_product',],'required','on'=>[self::SCENARIO_CREATE]],
             [['purchasing_price', 'selling_price'], 'double','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
             [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id','company_delivery_id','quantity_come'], 'integer','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
             [['name'], 'string', 'max' => 255,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
