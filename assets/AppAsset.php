@@ -21,8 +21,6 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
       'css/vendor/bootstrap.min.css',
-      'css/site.css',
-      'css/orders.css',
       'css/swiper/swiper-bundle.min.css',
 
     ];
@@ -40,4 +38,11 @@ class AppAsset extends AssetBundle
         // 'yii\bootstrap\BootstrapAsset',
         // 'airani\bootstrap\BootstrapRtlAsset',
     ];
+    public function __construct($config = [])
+    {
+        parent::__construct($config);
+        $this->css[]= 'css/site.css?v='.rand();
+        $this->css[]= 'css/orders.css?v='.rand();
+
+    }
 }
