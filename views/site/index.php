@@ -40,5 +40,9 @@ use yii\helpers\Html;
 
         <?php endforeach; ?>
     </div>
+
+    <a  class="whats-app" href="https://api.whatsapp.com/send?phone=<?=Yii::$app->params['phone']?>&text=أرجو الاتصال بي" target="_blank">
+        <i class="fa fa-whatsapp my-float"></i>
+    </a>
 </div>
 
