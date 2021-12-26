@@ -209,7 +209,7 @@ body{
 .product-grid .product-image a.image{ display: block; }
 .product-grid .product-image img{
     max-width: 90%;
-    height: auto;
+    height: 200px;
 }
 .product-grid .product-image .pic-1{ transition: all 0.3s ease 0s; }
 .product-grid .product-image:hover .pic-1{ transform: translateX(100%); }
@@ -222,7 +222,11 @@ body{
     left: 0;
     transition: all 0.3s ease 0s;
 }
-.product-grid .product-image:hover .pic-2{ transform: translateX(0); }
+.product-grid .product-image:hover .pic-2{
+    transform: translateX(0);
+    height: 300px;
+
+}
 .product-grid .product-sale-label{
     color: #fff;
     background: #0a805e;
