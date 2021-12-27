@@ -5,7 +5,21 @@
 $this->title = Yii::$app->name;
 use yii\helpers\Html;
 ?>
+
+
 <div class="container">
+    <div class="jumbotron text-white jumbotron-image shadow" style="background-image: url(https://static.wixstatic.com/media/a45867_b3fedc3730f84151a6aaf6b5dc4d6f8b~mv2.jpg/v1/fill/w_1065,h_415,al_c,q_85,usm_0.66_1.00_0.01/a45867_b3fedc3730f84151a6aaf6b5dc4d6f8b~mv2.webp);">
+        <h1 class="mb-4">
+            تسوق بذكاء
+        </h1>
+
+        <a href="#list-products" class="btn btn-primary">تسوق الان   </a>
+    </div>
+
+</div>
+
+<div class="container">
+
     <div class="row " id="list-products">
         <?php foreach ($models as  $key => $model) : ?>
             <div class="col-md-4 col-sm-6 card-product  animate__animated animate__bounce animate__repeat-1" >
