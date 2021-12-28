@@ -103,7 +103,10 @@ use app\models\User;use yii\helpers\Html;
                     <?= Html::a('<i class="fab fa-product-hunt"></i>'.Yii::t('app','Products'), ['products/index'])?>
 
                 </li>
+                    <li>
+                        <?= Html::a('<i class="fab fa-product-hunt"></i>'.Yii::t('app','Media'), ['medialibrary/index'])?>
 
+                    </li>
 
                 <li class="sidebar-dropdown">
                     <a href="#">

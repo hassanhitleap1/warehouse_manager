@@ -22,7 +22,7 @@ class MedialibraryController extends Controller
     public function init()
     {
         if (!Yii::$app->user->isGuest) {
-            $this->layout = "adminrte";
+            $this->layout = "new";
             if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
                 throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
             }
@@ -149,4 +149,54 @@ class MedialibraryController extends Controller
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
+
+
+    /**
+     * Creates a new Medialibrary model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionUpload()
+    {
+        $model = new Medialibrary();
+        if ($model->load(Yii::$app->request->post()) ) {
+
+            $models= Model::createMultiple(Medialibrary::classname());
+            Model::loadMultiple($models, Yii::$app->request->post());
+            $valid =Model::validateMultiple($models) ;
+            $valid =boolval($valid);
+            $images_media = UploadedFile::getInstances($model, 'media');
+            $path_array=[];
+            if(true){
+                $i=1;
+                $path="uploads/".date('Y/m/d')."/$i";
+                while (file_exists($path)){
+                    ++$i;
+                    $path="uploads/".date('Y/m/d')."/$i";
+                }
+
+                FileHelper::createDirectory($path,
+                    $mode = 0775, $recursive = true);
+                if (!is_null($images_media)) {
+                    foreach ($images_media as $key => $media) {
+                        $modelMedia = new  Medialibrary();
+                        $file_path = "$path/$key" . "." . $media->extension;
+                        $modelMedia->path = $file_path;
+                        $path_array[]=$file_path;
+                        $modelMedia->name="$path";
+                        $modelMedia->extension=$media->extension;
+                        $media->saveAs($file_path);
+                        $modelMedia->save(false);
+
+                    }
+                }
+
+            }
+            return $path_array;
+        }
+
+
+    }
+
+
 }

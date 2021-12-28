@@ -136,18 +136,11 @@ if (!$model->isNewRecord) {
     </div>
   
         <div class="row">
-
-
             <div class="col-md-12">
                 <?= $form->field($model, 'description')->widget(Summernote::class, [
                         'options' => ['placeholder' => 'Edit your blog content here...']
                     ]);?>
             </div>
-            
-            
-            
-           
-            
         </div>
         <div class="row " style="margin-top: 10px" >
             <div class="col-md-12" >
