@@ -1,9 +1,9 @@
 <?php
 
-use app\assets\AppAsset;
+use app\assets\EmptyAsset;
 use kartik\helpers\Html;
 
-AppAsset::register($this);
+EmptyAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
