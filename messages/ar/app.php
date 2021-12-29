@@ -221,7 +221,8 @@ return [
     "Orderss"=>"الطلبات",
     "Profile"=>"الملف الشخصي",
     "Statistics"=>"الاحصائيات",
-    "Customers"=>"Customers"
+    "Customers"=>"Customers",
+    "Similar_Item"=>"منتجات مشابهة"
 
 
 ];
