@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Model;
 use app\models\User;
+use Carbon\Carbon;
 use Yii;
 use app\models\medialibrary\Medialibrary;
 use app\models\medialibrary\MedialibrarySearch;
@@ -158,42 +159,41 @@ class MedialibraryController extends Controller
      */
     public function actionUpload()
     {
-        $model = new Medialibrary();
-        if ($model->load(Yii::$app->request->post()) ) {
 
-            $models= Model::createMultiple(Medialibrary::classname());
-            Model::loadMultiple($models, Yii::$app->request->post());
-            $valid =Model::validateMultiple($models) ;
-            $valid =boolval($valid);
-            $images_media = UploadedFile::getInstances($model, 'media');
-            $path_array=[];
-            if(true){
-                $i=1;
-                $path="uploads/".date('Y/m/d')."/$i";
-                while (file_exists($path)){
-                    ++$i;
-                    $path="uploads/".date('Y/m/d')."/$i";
-                }
-
-                FileHelper::createDirectory($path,
-                    $mode = 0775, $recursive = true);
-                if (!is_null($images_media)) {
-                    foreach ($images_media as $key => $media) {
-                        $modelMedia = new  Medialibrary();
-                        $file_path = "$path/$key" . "." . $media->extension;
-                        $modelMedia->path = $file_path;
-                        $path_array[]=$file_path;
-                        $modelMedia->name="$path";
-                        $modelMedia->extension=$media->extension;
-                        $media->saveAs($file_path);
-                        $modelMedia->save(false);
-
-                    }
-                }
-
+        if ($this->request->isPost) {
+            $model = new Medialibrary();
+            $newId = Medialibrary::find()->max('id') + 1;
+            $uploaddir="/uploads/".date('Y/m/d')."/$newId";
+            FileHelper::createDirectory(\Yii::getAlias('@webroot').$uploaddir);
+            $model->name=$today=Carbon::now("Asia/Amman")->toDateString();
+            $image = $_FILES['image']['name'];
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
+            // that's the directory in the document_root where I put pics
+            $uploadfile = "$uploaddir/index.$ext" ;
+            if( move_uploaded_file($_FILES['image']['tmp_name'],\Yii::getAlias('@webroot').$uploadfile)) {
+                $model->path=$uploadfile;
+                $model->save(false);
             }
-            return $path_array;
+            return \Yii::getAlias('@web').$uploadfile;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
+
+
+
 
 
     }

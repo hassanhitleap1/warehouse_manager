@@ -689,5 +689,9 @@ class ProductsController extends BaseController
           
         ]);
     }
+
+    public function actionTest(){
+        return $this->render('test');
+    }
     
 }

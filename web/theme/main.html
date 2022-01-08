@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bootstrap4</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous">
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+</head>
+<body>
+<textarea id="summernote"></textarea>
+<script>
+
+
+
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                height: "300px",
+                dialogsInBody: true,
+                callbacks: {
+                    onImageUpload: function(files) {
+
+                        uploadFile(files[0]);
+                    }
+                }
+            });
+        });
+
+        function uploadFile(file) {
+        data = new FormData();
+        console.log(file)
+        data.append("file", file);
+
+        $.ajax({
+        data: data,
+        type: "POST",
+        url: "upload_url_path", //replace with your url
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(url) {
+        $('#summernote').summernote("insertImage", url);
+    }
+    });
+    }
+
+
+
+
+
+    // $('textarea#summernote').summernote({
+    //     height: ($(window).height() - 300),
+    //     callbacks: {
+    //         onImageUpload: function(image) {
+    //             uploadImage(image[0]);
+    //         }
+    //     }
+    // });
+    //
+    // function uploadImage(image) {
+    //     var data = new FormData();
+    //     data.append("image", image);
+    //     console.log(data.image);
+    //     $.ajax({
+    //         url: 'http://localhost:8080/index.php?r=products%2Fupload/',
+    //         cache: false,
+    //         contentType: false,
+    //         processData: false,
+    //         data: data,
+    //         type: "post",
+    //         success: function(url) {
+    //             var image = $('<img>').attr('src', 'https://static.wixstatic.com/media/a45867_b3fedc3730f84151a6aaf6b5dc4d6f8b~mv2.jpg');
+    //             $('#summernote').summernote("insertNode", image[0]);
+    //         },
+    //         error: function(data) {
+    //             console.log(data);
+    //         }
+    //     });
+    // }
+</script>
+</body>
+</html>
