@@ -16,6 +16,10 @@
 
 <textarea id="summernote"></textarea>
 <script>
+    $( document ).ready(function() {
+
+    });
+
 
     $('#summernote').summernote({
         lang: 'fr-FR', // <= nobody is perfect :)
@@ -47,8 +51,12 @@
             contentType: false,
             processData: false,
             success: function(url) {
+                
                 var image = SITE_URL + url;
-                $('#summernote').summernote("insertImage", image);
+                setTimeout(function(){
+                    $('#summernote').summernote("insertImage", image);
+                }, 500);
+
             },
             error: function(data) {
                 console.log(data);
