@@ -4,30 +4,33 @@
 
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js" defer></script>
 
 <textarea id="summernote"></textarea>
 <script>
 
-
-
-    $('#summernote').summernote({
-        lang: 'fr-FR', // <= nobody is perfect :)
-        height: 300,
-        toolbar : [
-            ['style',['bold','italic','underline','clear']],
-            ['font',['fontsize']],
-            ['color',['color']],
-            ['para',['ul','ol','paragraph']],
-            ['link',['link']],
-            ['picture',['picture']]
-        ],
-        callbacks : {
-            onImageUpload: function(image) {
-                uploadImage(image[0]);
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            lang: 'fr-FR', // <= nobody is perfect :)
+            height: 300,
+            toolbar : [
+                ['style',['bold','italic','underline','clear']],
+                ['font',['fontsize']],
+                ['color',['color']],
+                ['para',['ul','ol','paragraph']],
+                ['link',['link']],
+                ['picture',['picture']]
+            ],
+            callbacks : {
+                onImageUpload: function(image) {
+                    uploadImage(image[0]);
+                }
             }
-        }
+        });
     });
+
+
+
 
     function uploadImage(image) {
         var data = new FormData();
