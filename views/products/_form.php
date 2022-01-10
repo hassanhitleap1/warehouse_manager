@@ -216,7 +216,7 @@ if (!$model->isNewRecord) {
             processData: false,
             success: function(url) {
 
-                var image = SITE_URL + url;
+                var image = document.location.origin + url;
                 setTimeout(function(){
                     $('#summernote').summernote("insertImage", image);
                 }, 500);
