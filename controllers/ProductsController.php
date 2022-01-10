@@ -178,21 +178,36 @@ class ProductsController extends BaseController
                     
 
                     if ($flag) {
-                        // var_dump($model->getErrors());
-                        // var_dump($subProductCount->getErrors());
-                        // var_dump($type_options[0]->getErrors());
-                        // exit;
-                    
+//                         var_dump($model->getErrors());
+//                         var_dump($subProductCount->getErrors());
+//                         var_dump($type_options[0]->getErrors());
+//                         exit;
+//
                         $transaction->commit();
                         return $this->redirect(['view', 'id' => $model->id]);
                     }
                 } catch (Exception $e) {
+                    var_dump($model->getErrors());
+                    var_dump($type_options[0]->getErrors());
+                    foreach ($subProductCounts as $subProduct){
+                        var_dump($subProduct->getErrors());
+                    }
+                    foreach ($type_options as $type_option){
+                        var_dump($type_option->getErrors());
+                    }
+                   var_dump($e);
+//                    exit;
+//                    foreach ($subProductCount as $subProduct){
+//                        var_dump($subProduct->getErrors());
+//                    }
+
+                    exit;
                     $transaction->rollBack();
 
-                    // var_dump($model->getErrors());
-                    // var_dump($subProductCount->getErrors());
-                    // var_dump($type_options[0]->getErrors());
-                    // exit;
+                     var_dump($model->getErrors());
+                     var_dump($subProductCount->getErrors());
+                     var_dump($type_options[0]->getErrors());
+                     exit;
                 }
             }
             // var_dump($model->getErrors());
