@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\silder\SilderSearch */
+/* @var $searchModel app\models\banner\BannerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Silders');
+$this->title = Yii::t('app', 'Banners');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="silder-index">
+<div class="banner-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Silder'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Banner'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'body',
             'image',
             'link',
 

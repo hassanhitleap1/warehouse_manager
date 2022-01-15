@@ -1,15 +1,15 @@
 <?php
 
-namespace app\models\silder;
+namespace app\models\banner;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\silder\Silder;
+use app\models\banner\Banner;
 
 /**
- * SilderSearch represents the model behind the search form of `app\models\silder\Silder`.
+ * BannerSearch represents the model behind the search form of `app\models\banner\Banner`.
  */
-class SilderSearch extends Silder
+class BannerSearch extends Banner
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class SilderSearch extends Silder
     {
         return [
             [['id'], 'integer'],
-            [['title', 'body', 'image','link'], 'safe'],
+            [['title', 'image', 'link'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class SilderSearch extends Silder
      */
     public function search($params)
     {
-        $query = Silder::find();
+        $query = Banner::find();
 
         // add conditions that should always apply here
 
@@ -62,9 +62,8 @@ class SilderSearch extends Silder
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'body', $this->body])
-            ->andFilterWhere(['like', 'link', $this->link])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['like', 'image', $this->image])
+            ->andFilterWhere(['like', 'link', $this->link]);
 
         return $dataProvider;
     }
