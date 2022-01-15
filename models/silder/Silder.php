@@ -35,7 +35,7 @@ class Silder extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 400],
             [['body'], 'string', 'max' => 255],
             [['image'], 'string', 'max' => 256],
-            ['link'=>'string'],
+            ['link','string'],
             [['file'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
         ];
     }
