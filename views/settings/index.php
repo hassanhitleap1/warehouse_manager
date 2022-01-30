@@ -73,6 +73,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     ->label(false)?>
             </div>
             <div class="col-md-2">
+                <?= $form->field($model, 'address')
+                    ->textInput(['maxlength' => true,'value'=>$params['address'],
+                        'placeholder'=>Yii::t('app','Address')])
+                    ->label(false)
+                ?>
+            </div>
+            <div class="col-md-2">
                 <?= $form->field($model, 'facebook_id')
                     ->textInput(['maxlength' => true,'value'=>$params['facebook_id'],
                         'placeholder'=>Yii::t('app','Facebook_Id')])

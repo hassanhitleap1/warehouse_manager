@@ -20,6 +20,7 @@ class Settings extends Model
     public $logo;
     public $massage_whatsapp;
     public $name_of_store;
+    public $address;
 
 
     /**
@@ -28,8 +29,8 @@ class Settings extends Model
     public function rules()
     {
         return [
-            [['adminEmail', 'massage_whatsapp','name_of_store','senderEmail', 'senderName', 'bsDependencyEnabled', 'phone','facebook_id','sanpchat_id','sanpchat_email','tiktok_id','company_delivery'], 'required'],
-            [['massage_whatsapp','name_of_store'],'string'],
+            [['adminEmail', 'massage_whatsapp','name_of_store','address','senderEmail', 'senderName', 'bsDependencyEnabled', 'phone','facebook_id','sanpchat_id','sanpchat_email','tiktok_id','company_delivery'], 'required'],
+            [['massage_whatsapp','address','name_of_store'],'string'],
             [['logo'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png'],
         ];
     }
@@ -54,6 +55,7 @@ class Settings extends Model
             'phone'=> Yii::t('app', 'Phone'),
             'company_delivery' => Yii::t('app', 'Company_Delivery'),
             'logo' => Yii::t('app', 'Logo'),
+            'address'=>Yii::t('app','Address'),
         ];
     }
 }

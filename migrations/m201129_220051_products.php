@@ -33,6 +33,11 @@ class m201129_220051_products extends Migration
             'video_url'=>$this->string(500)->defaultValue(null),
             'type_options'=> $this->smallInteger()->defaultValue(null),
             'company_delivery_id'=> $this->integer()->defaultValue(null),
+            'featured'=>$this->tinyInteger()->defaultValue(0),
+            'top_selling'=>$this->tinyInteger()->defaultValue(0),
+            'label'=>$this->tinyInteger()->defaultValue(0),
+            'countdown'=>$this->time()->defaultValue(null),
+            'discount'=>$this->string()->defaultValue(null),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);

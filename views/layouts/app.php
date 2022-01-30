@@ -1,10 +1,6 @@
 <?php
-
-/* @var $this \yii\web\View */
-/* @var $content string */
 use yii\helpers\Html;
-use app\assets\AppAsset;
-AppAsset::register($this);
+$path_theme= Yii::getAlias('@web').'theme/shop/'
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -16,31 +12,36 @@ AppAsset::register($this);
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php $this->registerCsrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-        <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
-        <link
-                rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-        />
-        <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
-        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
         <?php $this->head() ?>
     
-
-
+        <?php include("app/head.php")?>
     </head>
 
     <body>
     <?php $this->beginBody() ?>
 
-    <div class="wrap">
+    <div class="wrap" id="page">
 
-        <?php include ("navbar.php")  ?>
+        <?php include("app/header.php")?>
 
-        <?= $content ?>
-      
+        <?php include("app/top_panel.php")?>
+
+            <?= $content ?>
+
+        <?php include("app/footer.php")?>
 
     </div>
+
+    <div id="toTop"></div><!-- Back to top button -->
+
+    <!-- COMMON SCRIPTS -->
+    <script src="<?= $path_theme ?>js/common_scripts.min.js"></script>
+    <script src="<?= $path_theme ?>js/main.js"></script>
+
+    <!-- SPECIFIC SCRIPTS -->
+    <script src="<?= $path_theme ?>js/carousel-home.js"></script>
+
+
 
     <?php $this->endBody() ?>
     </body>

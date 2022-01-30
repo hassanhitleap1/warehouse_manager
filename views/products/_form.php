@@ -17,20 +17,14 @@ use kartik\editors\Summernote;
 /* @var $model app\models\products\Products */
 /* @var $form yii\widgets\ActiveForm */
 
-
-
 $dataImages = [];
 $images_path_product= [];
-
 
 
 if (!$model->isNewRecord) {
     foreach ($model->imagesProduct as $key => $value) {
         $images_path_product[] = Yii::getAlias('@web') . '/' . $value['path'];
     }
-
-
-
     $dataImages = [
 
         'showCaption' => true,
@@ -45,9 +39,7 @@ if (!$model->isNewRecord) {
         'overwriteInitial'=>true
 
     ];
-
 }else{
-
     $dataImages = [
 
         'showCaption' => true,
@@ -58,24 +50,13 @@ if (!$model->isNewRecord) {
 
 
 ?>
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js" defer></script>
-
-
-
-
-
-
-
-
 
 <div class="container">
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
@@ -83,7 +64,6 @@ if (!$model->isNewRecord) {
     <div class="row">
         <div class="col-md-2">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
         </div>
         <div class="col-md-2">
             <?= $form->field($model, 'purchasing_price')->textInput() ?>
@@ -91,6 +71,11 @@ if (!$model->isNewRecord) {
         <div class="col-md-2">
             <?= $form->field($model, 'selling_price')->textInput() ?>
         </div>
+        <div class="col-md-2">
+            <?= $form->field($model, 'discount')->textInput() ?>
+        </div>
+
+
         <div class="col-md-2">
             <?= $form->field($model, 'video_url')->textInput() ?>
         </div>
@@ -142,6 +127,30 @@ if (!$model->isNewRecord) {
             ]); ?>
         </div>
     </div>
+
+
+
+
+    <?= $form->field($model, 'featured')
+        ->checkBox(['data-size'=>'small', 'class'=>'bs_switch',
+            'style'=>'margin-bottom:4px;', 'id'=>'featured']) ?>
+
+    <?= $form->field($model, 'top_selling')
+        ->checkBox(['data-size'=>'small', 'class'=>'bs_switch',
+            'style'=>'margin-bottom:4px;', 'id'=>'top_selling']) ?>
+
+    <?php
+
+    echo '<label>Start Time</label>';
+    echo TimePicker::widget([
+        'name' => 'start_time',
+        'value' => '11:24 AM',
+        'pluginOptions' => [
+            'showSeconds' => true
+        ]
+    ]);
+    ?>
+
 
     <div class="row">
         <div class="col-md-6">

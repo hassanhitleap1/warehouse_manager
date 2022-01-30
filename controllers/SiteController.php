@@ -12,6 +12,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 
 use app\models\products\Products;
+use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions\F;
 use yii\data\Pagination;
 
 
@@ -160,6 +161,26 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionConnectUs()
+    {
+        return $this->render('connect-us');
+    }
+    
+
+
+    public function actionPrivacy()
+    {
+        return $this->render('privacy');
+    }
+
+
+    public function actionTermsAndConditions()
+    {
+        return $this->render('terms-and-conditions');
+    }
+
+
     
 
 }

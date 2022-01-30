@@ -26,6 +26,11 @@ use Yii;
  * @property int|null $supplier_id
  * @property int|null $unit_id
  * @property int $warehouse_id
+ * @property  int $featured
+ * @property  int top_selling
+ * @property int|null  label
+ * @property string|null countdown
+ * @property string|null discount
  * @property string $created_at
  * @property string $updated_at
  */
@@ -94,6 +99,12 @@ class Products extends \yii\db\ActiveRecord
             "video_url"=>Yii::t('app', 'Video_Url'),
             "description"=>Yii::t('app', 'Description'),
             'company_delivery_id'=>Yii::t('app', 'Company_Delivery'),
+            'featured'=>Yii::t('app', 'Featured'),
+            'top_selling'=>Yii::t('app', 'Top_Selling'),
+            'label'=>Yii::t('app', 'Label'),
+            'countdown'=>Yii::t('app', 'Countdown'),
+            'discount'=>Yii::t('app', 'Discount'),
+
         ];
     }
 

@@ -3,60 +3,295 @@
 /* @var $this yii\web\View */
 
 $this->title = Yii::$app->name;
-use yii\helpers\Html;
+$path_theme= Yii::getAlias('@web').'theme/shop/'
+
 ?>
-
-
-<div class="container">
-    <div class="jumbotron text-white jumbotron-image shadow" style="background-image: url(https://static.wixstatic.com/media/a45867_b3fedc3730f84151a6aaf6b5dc4d6f8b~mv2.jpg/v1/fill/w_1065,h_415,al_c,q_85,usm_0.66_1.00_0.01/a45867_b3fedc3730f84151a6aaf6b5dc4d6f8b~mv2.webp);">
-        <h1 class="mb-4">
-            تسوق بذكاء
-        </h1>
-
-        <a href="#list-products" class="btn btn-primary">تسوق الان   </a>
-    </div>
-
-</div>
-
-<div class="container">
-
-    <div class="row " id="list-products">
-        <?php foreach ($models as  $key => $model) : ?>
-            <div class="col-md-4 col-sm-6 card-product  animate__animated animate__bounce animate__repeat-1" >
-                <div class="product-grid">
-                    <div class="product-image">
-                        <a href="<?= \yii\helpers\Url::to(['/product/view','id'=>$model->id]) ?>" class="image">
-                            <?= Html::img($model->thumbnail, ['class' => 'pic-1']) ?>
-                            <?php if(count($model->imagesProduct)): ?>
-                                <?= Html::img($model->imagesProduct[0]['path'], ['class' => 'pic-2']) ?>
-                            <?php else: ?>
-                                <?= Html::img($model->thumbnail, ['class' => 'pic-2']) ?>
-                            <?php endif ?>
-
-
-                        </a>
-                        <a href="#" class="product-like-icon" data-tip="Add to Wishlist">
-                            <i class="far fa-heart"></i>
-                        </a>
-                        <ul class="product-links">
-                            <li><a href="<?= \yii\helpers\Url::to(['/product/view','id'=>$model->id]) ?>"><i class="fa fa-search"></i></a></li>
-                            <!-- <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-random"></i></a></li> -->
-                        </ul>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="title"><a href="#"><?= $model->name ?></a></h3>
-                        <div class="price"><?= $model->selling_price ?> JD</div>
+<main>
+    <div id="carousel-home" class="add_top_5">
+        <div class="owl-carousel owl-theme">
+            <div class="owl-slide cover" style="background-image: url(<?=$path_theme?>img/slides/slide_home_2.jpg);">
+                <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                    <div class="container">
+                        <div class="row justify-content-center justify-content-md-end">
+                            <div class="col-lg-6 static">
+                                <div class="slide-text text-right white">
+                                    <h2 class="owl-slide-animated owl-slide-title">Attack Air<br>Max 720 Sage Low</h2>
+                                    <p class="owl-slide-animated owl-slide-subtitle">
+                                        Limited items available at this price
+                                    </p>
+                                    <div class="owl-slide-animated owl-slide-cta"><a class="btn_1" href="listing-grid-1-full.html" role="button">Shop Now</a></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-
-        <?php endforeach; ?>
+            <!--/owl-slide-->
+            <div class="owl-slide cover" style="background-image: url(<?=$path_theme?>img/slides/slide_home_1.jpg);">
+                <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                    <div class="container">
+                        <div class="row justify-content-center justify-content-md-start">
+                            <div class="col-lg-6 static">
+                                <div class="slide-text white">
+                                    <h2 class="owl-slide-animated owl-slide-title">Attack Air<br>VaporMax Flyknit 3</h2>
+                                    <p class="owl-slide-animated owl-slide-subtitle">
+                                        Limited items available at this price
+                                    </p>
+                                    <div class="owl-slide-animated owl-slide-cta"><a class="btn_1" href="listing-grid-1-full.html" role="button">Shop Now</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/owl-slide-->
+            <div class="owl-slide cover" style="background-image: url(img/slides/slide_home_3.jpg);">
+                <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(255, 255, 255, 0.5)">
+                    <div class="container">
+                        <div class="row justify-content-center justify-content-md-start">
+                            <div class="col-lg-12 static">
+                                <div class="slide-text text-center black">
+                                    <h2 class="owl-slide-animated owl-slide-title">Attack Air<br>Monarch IV SE</h2>
+                                    <p class="owl-slide-animated owl-slide-subtitle">
+                                        Lightweight cushioning and durable support with a Phylon midsole
+                                    </p>
+                                    <div class="owl-slide-animated owl-slide-cta"><a class="btn_1" href="listing-grid-1-full.html" role="button">Shop Now</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/owl-slide-->
+            </div>
+        </div>
+        <div id="icon_drag_mobile"></div>
     </div>
+    <!--/carousel-->
 
-    <a  class="whats-app" href="https://api.whatsapp.com/send?phone=<?=Yii::$app->params['phone']?>&text=أرجو الاتصال بي" target="_blank">
-        <i class="fa fa-whatsapp my-float"></i>
-    </a>
-</div>
+    <ul id="banners_grid" class="clearfix">
+        <li>
+            <a href="#0" class="img_container">
+                <img src="<?= $path_theme ?>img/banners_cat_placeholder.jpg"  data-src="<?= $path_theme ?>img/banner_1.jpg" alt="" class="lazy">
+                <div class="short_info opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                    <h3>Men's Collection</h3>
+                    <div><span class="btn_1">Shop Now</span></div>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#0" class="img_container">
+                <img src="<?= $path_theme ?>img/banners_cat_placeholder.jpg"  data-src="<?= $path_theme ?>img/banner_2.jpg" alt="" class="lazy">
+                <div class="short_info opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                    <h3>Womens's Collection</h3>
+                    <div><span class="btn_1">Shop Now</span></div>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#0" class="img_container">
+                <img src="<?= $path_theme ?>img/banners_cat_placeholder.jpg"  data-src="<?= $path_theme ?>img/banner_3.jpg" alt="" class="lazy">
+                <div class="short_info opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                    <h3>Kids's Collection</h3>
+                    <div><span class="btn_1">Shop Now</span></div>
+                </div>
+            </a>
+        </li>
+    </ul>
+    <!--/banners_grid -->
 
+    <div class="container margin_60_35">
+        <div class="main_title">
+            <h2>Top Selling</h2>
+            <span>Products</span>
+            <p>Cum doctus civibus efficiantur in imperdiet deterruisset</p>
+        </div>
+        <div class="row small-gutters">
+
+            <?php foreach ($models as  $key => $model) : ?>
+                <div class="col-6 col-md-4 col-xl-3">
+                    <div class="grid_item">
+                        <span class="ribbon hot">Hot</span>
+                        <figure>
+                            <a href="product-detail-1.html">
+                                <img class="img-fluid lazy" src="<?= $path_theme ?>img/products/product_placeholder_square_medium.jpg"  data-src="<?= $path_theme ?>img/products/shoes/8.jpg" alt="">
+                            </a>
+                        </figure>
+                        <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
+                        <a href="product-detail-1.html">
+                            <h3>Armor Air Max 720</h3>
+                        </a>
+                        <div class="price_box">
+                            <span class="new_price">$120.00</span>
+                        </div>
+                        <ul>
+                            <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
+                            <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
+                            <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                        </ul>
+                    </div>
+                    <!-- /grid_item -->
+                </div>
+            <?php endforeach;?>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+
+    <div class="featured lazy" data-bg="url(img/featured_home.jpg)">
+        <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+            <div class="container margin_60">
+                <div class="row justify-content-center justify-content-md-start">
+                    <div class="col-lg-6 wow" data-wow-offset="150">
+                        <h3>Armor<br>Air Color 720</h3>
+                        <p>Lightweight cushioning and durable support with a Phylon midsole</p>
+                        <div class="feat_text_block">
+                            <div class="price_box">
+                                <span class="new_price">$90.00</span>
+                                <span class="old_price">$170.00</span>
+                            </div>
+                            <a class="btn_1" href="listing-grid-1-full.html" role="button">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /featured -->
+
+    <div class="container margin_60_35">
+        <div class="main_title">
+            <h2>Featured</h2>
+            <span>Products</span>
+            <p>Cum doctus civibus efficiantur in imperdiet deterruisset</p>
+        </div>
+        <div class="owl-carousel owl-theme products_carousel">
+            <div class="item">
+                <div class="grid_item">
+                    <span class="ribbon new">New</span>
+                    <figure>
+                        <a href="product-detail-1.html">
+                            <img class="owl-lazy" src="<?= $path_theme ?>img/products/product_placeholder_square_medium.jpg"  data-src="<?= $path_theme ?>img/products/shoes/4.jpg" alt="">
+                        </a>
+                    </figure>
+                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
+                    <a href="product-detail-1.html">
+                        <h3>ACG React Terra</h3>
+                    </a>
+                    <div class="price_box">
+                        <span class="new_price">$110.00</span>
+                    </div>
+                    <ul>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                    </ul>
+                </div>
+                <!-- /grid_item -->
+            </div>
+            <!-- /item -->
+            <div class="item">
+                <div class="grid_item">
+                    <span class="ribbon new">New</span>
+                    <figure>
+                        <a href="product-detail-1.html">
+                            <img class="owl-lazy" src="<?= $path_theme ?>img/products/product_placeholder_square_medium.jpg"  data-src="<?= $path_theme ?>img/products/shoes/5.jpg" alt="">
+                        </a>
+                    </figure>
+                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
+                    <a href="product-detail-1.html">
+                        <h3>Air Zoom Alpha</h3>
+                    </a>
+                    <div class="price_box">
+                        <span class="new_price">$140.00</span>
+                    </div>
+                    <ul>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                    </ul>
+                </div>
+                <!-- /grid_item -->
+            </div>
+            <!-- /item -->
+            <div class="item">
+                <div class="grid_item">
+                    <span class="ribbon hot">Hot</span>
+                    <figure>
+                        <a href="product-detail-1.html">
+                            <img class="owl-lazy" src="<?= $path_theme ?>img/products/product_placeholder_square_medium.jpg"  data-src="<?= $path_theme ?>img/products/shoes/8.jpg" alt="">
+                        </a>
+                    </figure>
+                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
+                    <a href="product-detail-1.html">
+                        <h3>Air Color 720</h3>
+                    </a>
+                    <div class="price_box">
+                        <span class="new_price">$120.00</span>
+                    </div>
+                    <ul>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                    </ul>
+                </div>
+                <!-- /grid_item -->
+            </div>
+            <!-- /item -->
+            <div class="item">
+                <div class="grid_item">
+                    <span class="ribbon off">-30%</span>
+                    <figure>
+                        <a href="product-detail-1.html">
+                            <img class="owl-lazy" src="<?= $path_theme ?>img/products/product_placeholder_square_medium.jpg"  data-src="<?= $path_theme ?>img/products/shoes/2.jpg" alt="">
+                        </a>
+                    </figure>
+                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
+                    <a href="product-detail-1.html">
+                        <h3>Okwahn II</h3>
+                    </a>
+                    <div class="price_box">
+                        <span class="new_price">$90.00</span>
+                        <span class="old_price">$170.00</span>
+                    </div>
+                    <ul>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                    </ul>
+                </div>
+                <!-- /grid_item -->
+            </div>
+            <!-- /item -->
+            <div class="item">
+                <div class="grid_item">
+                    <span class="ribbon off">-50%</span>
+                    <figure>
+                        <a href="product-detail-1.html">
+                            <img class="owl-lazy" src="<?= $path_theme ?>img/products/product_placeholder_square_medium.jpg"  data-src="<?= $path_theme ?>img/products/shoes/3.jpg" alt="">
+                        </a>
+                    </figure>
+                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
+                    <a href="product-detail-1.html">
+                        <h3>Air Wildwood ACG</h3>
+                    </a>
+                    <div class="price_box">
+                        <span class="new_price">$75.00</span>
+                        <span class="old_price">$155.00</span>
+                    </div>
+                    <ul>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                    </ul>
+                </div>
+                <!-- /grid_item -->
+            </div>
+            <!-- /item -->
+        </div>
+        <!-- /products_carousel -->
+    </div>
+    <!-- /container -->
+
+
+
+</main>

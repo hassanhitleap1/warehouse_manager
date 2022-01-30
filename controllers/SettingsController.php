@@ -61,6 +61,7 @@ class SettingsController extends BaseController
             $params['adminEmail'] = $model->adminEmail;
             $params['senderEmail'] = $model->senderEmail;
             $params['senderName'] = $model->senderName;
+            $params['address']=$model->address;
             $params['bsDependencyEnabled'] = $model->bsDependencyEnabled;
             $params['phone'] = $model->phone;
             $params['facebook_id'] = $model->facebook_id;
