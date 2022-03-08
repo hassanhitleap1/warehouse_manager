@@ -138,48 +138,7 @@ if (!$model->isNewRecord) {
     </div>
     
 
-        <div class="row">
-        <div class="col-md-2">
-            <?= $form->field($model, 'featured')
-                ->checkBox(['data-size'=>'small', 'class'=>'bs_switch',
-                'style'=>'margin-bottom:4px;', 'id'=>'featured']) ?>
-        </div>
-        <div class="col-md-2">
-            <?= $form->field($model, 'top_selling')
-            ->checkBox(['data-size'=>'small', 'class'=>'bs_switch control-label',
-                'style'=>'margin-bottom:4px;', 'id'=>'top_selling']) ?>
-        </div>
 
-<div class="col-md-2">
-            <?=$form->field($model, 'days')->textInput([
-                                 'type' => 'number',
-                                 'placeholder'=>Yii::t('app','days')
-                            ])->label(false)?>
-        </div>
-
-        <div class="col-md-2">
-        <?=$form->field($model, 'hours')->textInput([
-                                 'type' => 'number',
-                                 'placeholder'=>Yii::t('app','hours')
-                            ])->label(false)?>
-        </div>
-
-        <div class="col-md-2">
-                                        
-           <?=$form->field($model, 'muints')->textInput([
-                                 'type' => 'number',
-                                 'placeholder'=>Yii::t('app','muints')
-                            ])->label(false)?>
-        </div>
-
-        <div class="col-md-2">
-
-        <?=$form->field($model, 'second')->textInput([
-                                 'type' => 'number',
-                                 'placeholder'=>Yii::t('app','second')
-                            ])->label(false)?>
-        </div>
-        </div>
 
 
     <div class="row">

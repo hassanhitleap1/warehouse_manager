@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-
+use app\models\banner\Banner;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -12,10 +12,8 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 
 use app\models\products\Products;
-use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions\F;
+use app\models\silder\Silder;
 use yii\data\Pagination;
-
-
 
 class SiteController extends Controller
 {
@@ -78,6 +76,8 @@ class SiteController extends Controller
 
         // $this->layout='empty';
         // return $this->render('test');
+        $sliders  = Silder::find()->all();
+        $bansers= Banner::find()->all();
         $query =    Products::find();
         if(isset($_GET['category'])){
             $query->where(['category_id'=>$_GET['category']]) ;
@@ -93,6 +93,8 @@ class SiteController extends Controller
           return $this->render('index',[
             'models' => $models,
             'pages' => $pages,
+            'sliders'=>$sliders,
+            'bansers'=>$bansers 
         ]);
      
     }

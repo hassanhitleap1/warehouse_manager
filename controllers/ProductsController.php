@@ -35,8 +35,9 @@ class ProductsController extends BaseController
 
     public function init()
     {
+        $this->layout = "new";
         if (!Yii::$app->user->isGuest) {
-            $this->layout = "new";
+         
             if (Yii::$app->user->identity->type != User::SUPER_ADMIN) {
                 throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
             }
@@ -144,7 +145,21 @@ class ProductsController extends BaseController
                 
                         }
                     }
+                    $countdown= null ;
+                    if($model->days != null){
+                        $countdown ="$model->days :";
+                    }
 
+                    if($model->hours != null){
+                        $countdown ="$model->hours :";
+                    }
+
+
+                    if($model->days != null  || $model->hours != null ||  $model->muints != null || $model->second != null){
+                        
+                        $model->countdown ="$model->days :"."$model->hours :". "$model->muints :"."$model->second";
+                  
+                    }
                   
                     if ($flag = $model->save(false)) {
                     

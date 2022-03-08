@@ -37,6 +37,11 @@ use Yii;
 class Products extends \yii\db\ActiveRecord
 {
     public $images_product;
+    public $days;
+    public $hours;
+    public $muints ;
+    public $second;
+    
     const To_Be_Equipped=1;
     const To_Be_Ready=2;
     const Ready=3;
@@ -48,6 +53,7 @@ class Products extends \yii\db\ActiveRecord
     const TYPE_CHOOSE_BOX=2;
     const SCENARIO_CREATE = 'create';
     const SCENARIO_UPDATE = 'update';
+    
     /**
      * {@inheritdoc}
      */
