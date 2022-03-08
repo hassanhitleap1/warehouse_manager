@@ -38,6 +38,10 @@ class m201129_220051_products extends Migration
             'label'=>$this->tinyInteger()->defaultValue(0),
             'countdown'=>$this->time()->defaultValue(null),
             'discount'=>$this->string()->defaultValue(null),
+            'days'=>$this->smallInteger()->defaultValue(null),
+            'hours'=>$this->smallInteger()->defaultValue(null),
+            'muints'=>$this->smallInteger()->defaultValue(null),
+            'second'=>$this->smallInteger()->defaultValue(null),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
         ], $tableOptions);

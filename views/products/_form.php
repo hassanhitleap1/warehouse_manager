@@ -153,6 +153,7 @@ if (!$model->isNewRecord) {
 <div class="col-md-2">
             <?=$form->field($model, 'days')->textInput([
                                  'type' => 'number',
+                                 'min'=>1,'max'=>60,
                                  'placeholder'=>Yii::t('app','days')
                             ])->label(false)?>
         </div>
@@ -160,6 +161,7 @@ if (!$model->isNewRecord) {
         <div class="col-md-2">
         <?=$form->field($model, 'hours')->textInput([
                                  'type' => 'number',
+                                 'min'=>1,'max'=>60,
                                  'placeholder'=>Yii::t('app','hours')
                             ])->label(false)?>
         </div>
@@ -168,6 +170,7 @@ if (!$model->isNewRecord) {
                                         
            <?=$form->field($model, 'muints')->textInput([
                                  'type' => 'number',
+                                 'min'=>1,'max'=>60,
                                  'placeholder'=>Yii::t('app','muints')
                             ])->label(false)?>
         </div>
@@ -176,6 +179,7 @@ if (!$model->isNewRecord) {
 
         <?=$form->field($model, 'second')->textInput([
                                  'type' => 'number',
+                                 'min'=>1,'max'=>60,
                                  'placeholder'=>Yii::t('app','second')
                             ])->label(false)?>
         </div>

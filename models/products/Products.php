@@ -27,20 +27,17 @@ use Yii;
  * @property int|null $unit_id
  * @property int $warehouse_id
  * @property  int $featured
- * @property  int top_selling
- * @property int|null  label
- * @property string|null countdown
- * @property string|null discount
+ * @property  int $top_selling
+ * @property int|null  $label
+ * @property string|null $countdown
+ * @property string|null $discount
  * @property string $created_at
  * @property string $updated_at
  */
 class Products extends \yii\db\ActiveRecord
 {
     public $images_product;
-    public $days;
-    public $hours;
-    public $muints ;
-    public $second;
+
     
     const To_Be_Equipped=1;
     const To_Be_Ready=2;
@@ -75,6 +72,8 @@ class Products extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 255,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
              [['video_url','thumbnail','thumb'], 'string', 'max' => 500,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
              [['description'], 'string','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
+             [['top_selling','featured','label','countdown','days','hours','muints','second'],'safe','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
+             //[['days','hours','muints','second'],'max' => 60 ,'min'=>1 ,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
              [['images_product'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,jpeg,gif','maxFiles' => 20,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
              
         ];

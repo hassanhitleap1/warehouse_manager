@@ -154,12 +154,18 @@ class ProductsController extends BaseController
                         $countdown ="$model->hours :";
                     }
 
-
-                    if($model->days != null  || $model->hours != null ||  $model->muints != null || $model->second != null){
-                        
-                        $model->countdown ="$model->days :"."$model->hours :". "$model->muints :"."$model->second";
-                  
+                    if($model->muints != null){
+                        $countdown ="$model->muints :";
                     }
+
+                    if($model->second != null){
+                        $countdown ="$model->second";
+                    }
+                    
+
+                    $model->countdown= $countdown;
+
+                   
                   
                     if ($flag = $model->save(false)) {
                     
@@ -259,7 +265,7 @@ class ProductsController extends BaseController
 
         $modelSubProductCount = $model->subProductCount;
         $type_options = $model->typeOptions;
-
+       // $countdown=$model->countdown;
         if ($model->load(Yii::$app->request->post())) {
             
             $oldIDs = ArrayHelper::map($modelSubProductCount, 'id', 'id');
@@ -282,6 +288,25 @@ class ProductsController extends BaseController
             if ($valid) {
                $transaction = \Yii::$app->db->beginTransaction();
                try {
+                
+                // if($model->days != null){
+                //     $countdown ="$model->days :";
+                // }
+
+                // if($model->hours != null){
+                //     $countdown ="$model->hours :";
+                // }
+
+                // if($model->muints != null){
+                //     $countdown ="$model->muints :";
+                // }
+
+                // if($model->second != null){
+                //     $countdown ="$model->second";
+                // }
+                
+
+                // $model->countdown= $countdown;
 
                     $images_product = UploadedFile::getInstances($model, 'images_product');
                     if (!is_null($images_product) && count($images_product)) {
