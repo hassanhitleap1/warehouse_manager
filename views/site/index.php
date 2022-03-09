@@ -44,7 +44,7 @@ $path_theme= Yii::getAlias('@web').'theme/shop/'
                 <img src="<?= $path_theme ?>img/banners_cat_placeholder.jpg"  data-src="<?= $path_theme ?>img/banner_1.jpg" alt="" class="lazy">
                 <div class="short_info opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                     <h3><?= $banser->title?> </h3>
-                    <div><span class="btn_1">Shop Now</span></div>
+                    <div><span class="btn_1"><?=Yii::t('app','Shop Now')?></span></div>
                 </div>
             </a>
         </li>
@@ -55,16 +55,15 @@ $path_theme= Yii::getAlias('@web').'theme/shop/'
 
     <div class="container margin_60_35">
         <div class="main_title">
-            <h2>Top Selling</h2>
-            <span>Products</span>
-            <p>Cum doctus civibus efficiantur in imperdiet deterruisset</p>
+            <h2> <?= Yii::t('app','Top Selling') ;?> </h2>
+            <span><?= Yii::t('app','Products') ;?> </span>
         </div>
         <div class="row small-gutters">
 
             <?php foreach ($models as  $key => $model) : ?>
                 <div class="col-6 col-md-4 col-xl-3">
                     <div class="grid_item">
-                        <span class="ribbon hot">Hot</span>
+                        <span class="ribbon hot"><?=Yii::t('app','Hot')?></span>
                         <figure>
                             <a href="<?= \yii\helpers\Url::to(['/product/view','id'=>$model->id]) ?>">
                                 <?= Html::img($model->thumbnail , ['data-src'=>$model->thumbnail,'class'=>'img-fluid lazy'])?>
@@ -99,38 +98,19 @@ $path_theme= Yii::getAlias('@web').'theme/shop/'
     </div>
     <!-- /container -->
 
-    <div class="featured lazy" data-bg="url(img/featured_home.jpg)">
-        <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
-            <div class="container margin_60">
-                <div class="row justify-content-center justify-content-md-start">
-                    <div class="col-lg-6 wow" data-wow-offset="150">
-                        <h3>Armor<br>Air Color 720</h3>
-                        <p>Lightweight cushioning and durable support with a Phylon midsole</p>
-                        <div class="feat_text_block">
-                            <div class="price_box">
-                                <span class="new_price">$90.00</span>
-                                <span class="old_price">$170.00</span>
-                            </div>
-                            <a class="btn_1" href="listing-grid-1-full.html" role="button">Shop Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- /featured -->
 
     <div class="container margin_60_35">
         <div class="main_title">
-            <h2>Featured</h2>
-            <span>Products</span>
-            <p>Cum doctus civibus efficiantur in imperdiet deterruisset</p>
+            <h2><?= Yii::t('app','Featured') ;?></h2>
+            <span> <?= Yii::t('app','Products') ;?> </span>
         </div>
         <div class="owl-carousel owl-theme products_carousel">
             <?php foreach ($models as  $key => $model) : ?>
                 <div class="item">
                     <div class="grid_item">
-                        <span class="ribbon new">New</span>
+                        <span class="ribbon new"><?=Yii::t('app','New')?></span>
                         <figure>
                             <a href="<?= \yii\helpers\Url::to(['/product/view','id'=>$model->id]) ?>">
                                 <?= Html::img($model->thumbnail , ['data-src'=>$model->thumbnail,'class'=>'owl-lazy'])?>

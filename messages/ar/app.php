@@ -222,7 +222,23 @@ return [
     "Profile"=>"الملف الشخصي",
     "Statistics"=>"الاحصائيات",
     "Customers"=>"Customers",
-    "Similar_Item"=>"منتجات مشابهة"
+    "Similar_Item"=>"منتجات مشابهة",
+    'CONNECT_US'=>'اتنصل بنا',
+    'Featured'=>'متميز',
+    'Top Selling'=>'الأكثر مبيعا',
+    'What are you looking for?'=>'ما الذي تبحث عنه؟',
+    'About us'=>'معلومات عنا',
+    'Help'=>'مساعدة',
+    'My account'=>'حسابي',
+    'Blog'=>'مقالات',
+    'Contacts'=>'اتصل بنا',
+    'Keep in touch'=>'أبق على اتصال',
+    'Follow Us'=>'تابعنا',
+    'Quick Links'=>'روابط سريعة',
+    'Categories'=>"فئات",
+    'Shop Now'=>'تسوق الآن',
+    'New'=>'جديد',
+    'Hot'=>'حار',
 
 
 ];

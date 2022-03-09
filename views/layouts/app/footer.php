@@ -9,21 +9,21 @@ $categoris=Categorises::find()->all();
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6">
-                <h3 data-target="#collapse_1">Quick Links</h3>
+                <h3 data-target="#collapse_1"><?= Yii::t('app','Quick Links') ;?> </h3>
                 <div class="collapse dont-collapse-sm links" id="collapse_1">
                     <ul>
-                        <li><a href="about.html">About us</a></li>
-                        <li><a href="help.html">Faq</a></li>
-                        <li><a href="help.html">Help</a></li>
-                        <li><a href="account.html">My account</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contacts.html">Contacts</a></li>
+                        <li><a href="about.html"> <?= Yii::t('app','About us') ;?> </a></li>
+                        <li><a href="help.html"><?= Yii::t('app','Faq') ;?>  </a></li>
+                        <li><a href="help.html"> <?= Yii::t('app','Help') ;?> </a></li>
+                        <li><a href="account.html"> <?= Yii::t('app','My account') ;?></a></li>
+                        <li><a href="blog.html">  <?= Yii::t('app','Blog') ;?></a></li>
+                        <li><a href="contacts.html"><?= Yii::t('app','Contacts') ;?></a></li>
 
                     </ul>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h3 data-target="#collapse_2"><?=Yii::t('app','Catgories')?></h3>
+                <h3 data-target="#collapse_2"><?=Yii::t('app','Categories')?></h3>
                 <div class="collapse dont-collapse-sm links" id="collapse_2">
                     <ul>
                         <?php foreach ($categoris as $key => $category) :?>
@@ -35,7 +35,7 @@ $categoris=Categorises::find()->all();
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h3 data-target="#collapse_3">Contacts</h3>
+                <h3 data-target="#collapse_3"><?= Yii::t('app','Contacts') ;?></h3>
                 <div class="collapse dont-collapse-sm contacts" id="collapse_3">
                     <ul>
                         <li><i class="ti-home"></i><?= Yii::$app->params['address'] ?></li>
@@ -45,7 +45,7 @@ $categoris=Categorises::find()->all();
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h3 data-target="#collapse_4">Keep in touch</h3>
+                <h3 data-target="#collapse_4"><?= Yii::t('app','Contacts') ;?></h3>
                 <div class="collapse dont-collapse-sm" id="collapse_4">
                     <div id="newsletter">
                         <div class="form-group">
@@ -54,7 +54,7 @@ $categoris=Categorises::find()->all();
                         </div>
                     </div>
                     <div class="follow_us">
-                        <h5>Follow Us</h5>
+                        <h5><?= Yii::t('app','Follow Us') ;?> </h5>
                         <ul>
                             <li><a href="#0"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?= $path_theme ?>img/twitter_icon.svg" alt="" class="lazy"></a></li>
                             <li><a href="#0"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?= $path_theme ?>img/facebook_icon.svg" alt="" class="lazy"></a></li>
