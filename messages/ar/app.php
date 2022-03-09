@@ -223,7 +223,7 @@ return [
     "Statistics"=>"الاحصائيات",
     "Customers"=>"Customers",
     "Similar_Item"=>"منتجات مشابهة",
-    'CONNECT_US'=>'اتنصل بنا',
+    'Connect_Us'=>'اتنصل بنا',
     'Featured'=>'متميز',
     'Top Selling'=>'الأكثر مبيعا',
     'What are you looking for?'=>'ما الذي تبحث عنه؟',
