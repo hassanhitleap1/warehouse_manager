@@ -12,6 +12,32 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => $aliases,
     'components' => [
+        'cart' => [
+            'class' => 'devanych\cart\Cart',
+            'storageClass' => 'devanych\cart\storage\SessionStorage',
+            'calculatorClass' => 'devanych\cart\calculators\SimpleCalculator',
+            'params' => [
+                'key' => 'cart',
+                'expire' => 604800,
+                'productClass' => 'app\models\products\Products',
+                'productFieldId' => 'id',
+                'productFieldPrice' => 'selling_price',
+            ],
+        ],
+
+        'favorite' => [
+            'class' => 'devanych\cart\Cart',
+            'storageClass' => 'devanych\cart\storage\DbSessionStorage',
+            'calculatorClass' => 'devanych\cart\calculators\SimpleCalculator',
+            'params' => [
+                'key' => 'favorite',
+                'expire' => 604800,
+                'productClass' => 'app\models\products\Products',
+                'productFieldId' => 'id',
+                'productFieldPrice' => 'selling_price',
+            ],
+        ],
+
         'assetManager' => [
             'bundles' => [
                 'kartik\form\ActiveFormAsset' => [

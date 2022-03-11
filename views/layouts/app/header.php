@@ -61,31 +61,31 @@ use yii\helpers\Url;
 
                                     </ul>
                                     <div class="total_drop">
-                                        <div class="clearfix"><strong>Total</strong><span>$200.00</span></div>
-                                        <a href="cart.html" class="btn_1 outline">View Cart</a><a href="checkout.html" class="btn_1">Checkout</a>
+                                        <div class="clearfix"><strong><?= Yii::t('app','Total') ?></strong><span></span></div>
+                                        <a href="cart.html" class="btn_1 outline"><?= Yii::t('app','View Cart') ?></a><a href="checkout.html" class="btn_1"><?= Yii::t('app','Checkout') ?></a>
                                     </div>
                                 </div>
                             </div>
                             <!-- /dropdown-cart-->
                         </li>
                         <li>
-                            <a href="#0" class="wishlist"><span>Wishlist</span></a>
+                            <a href="#0" class="wishlist"><span><?= Yii::t('app','Wishlist') ?></span></a>
                         </li>
                         <li>
                             <div class="dropdown dropdown-access">
                                 <?php if(Yii::$app->user->isGuest):?>
-                                    <a href="account.html" class="access_link"><span>Account</span></a>
+                                    <a href="account.html" class="access_link"><span><?= Yii::t('app','Account') ?></span></a>
                                 <?php endif;?>
                                 <div class="dropdown-menu">
                                    <?php if(Yii::$app->user->isGuest):?>
-                                       <a href="account.html" class="btn_1">Sign In or Sign Up</a>
+                                       <a href="account.html" class="btn_1"> <?= Yii::t('app','Sign In or Sign Up') ?></a>
                                     <?php endif;?>
                                     <ul>
                                         <li>
-                                            <a href="account.html"><i class="ti-package"></i>My Orders</a>
+                                            <a href="account.html"><i class="ti-package"></i> <?= Yii::t('app','My Orders') ?></a>
                                         </li>
                                         <li>
-                                            <a href="account.html"><i class="ti-user"></i>My Profile</a>
+                                            <a href="account.html"><i class="ti-user"></i><?= Yii::t('app','My Profile') ?> </a>
                                         </li>
 
                                     </ul>
@@ -94,7 +94,7 @@ use yii\helpers\Url;
                             <!-- /dropdown-access-->
                         </li>
                         <li>
-                            <a href="javascript:void(0);" class="search_panel"><span>Search</span></a>
+                            <a href="javascript:void(0);" class="search_panel"><span><?= Yii::t('app','Search') ?></span></a>
                         </li>
 
                     </ul>

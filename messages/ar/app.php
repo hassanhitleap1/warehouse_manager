@@ -239,6 +239,17 @@ return [
     'Shop Now'=>'تسوق الآن',
     'New'=>'جديد',
     'Hot'=>'حار',
+    'About_Us'=>'معلومات عنا',
+    'Total'=>'المجموع',
+    'Checkout'=>'الدفع',
+    'Account'=>'حساب',
+    'Sign In or Sign Up'=>'تسجيل الدخول أو الاشتراك',
+    'My Profile'=>'ملفي',
+    'My Orders'=>'طلباتي',
+    'Wishlist'=>'قائمة الرغبات',
+    'View Cart'=>'عرض عربة التسوق',
+
+
 
 
 ];
