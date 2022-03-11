@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
 
 <!-- BASE CSS -->
-<link href="<?= $path_theme ?>css/bootstrap.custom.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
 <link href="<?= $path_theme ?>css/style.css" rel="stylesheet">
 
 <!-- SPECIFIC CSS -->
