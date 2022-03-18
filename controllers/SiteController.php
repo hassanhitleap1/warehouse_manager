@@ -183,6 +183,11 @@ class SiteController extends Controller
     }
 
 
-    
+    public  function actionCart(){
+
+        $cart = \Yii::$app->cart;
+
+        return $this->render('cart',['cart'=>$cart]);
+    }
 
 }

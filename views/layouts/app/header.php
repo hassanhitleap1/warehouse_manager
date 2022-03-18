@@ -55,14 +55,14 @@ use yii\helpers\Url;
                     <ul class="top_tools">
                         <li>
                             <div class="dropdown dropdown-cart">
-                                <a href="cart.html" class="cart_bt"><strong>0</strong></a>
+                                <a href="cart.html" class="cart_bt"><strong id="dropdown-cart-number">0</strong></a>
                                 <div class="dropdown-menu">
-                                    <ul>
+                                    <ul id="list_cart">
 
                                     </ul>
                                     <div class="total_drop">
                                         <div class="clearfix"><strong><?= Yii::t('app','Total') ?></strong><span></span></div>
-                                        <a href="cart.html" class="btn_1 outline"><?= Yii::t('app','View Cart') ?></a><a href="checkout.html" class="btn_1"><?= Yii::t('app','Checkout') ?></a>
+                                        <a href="<?= Url::to(['site/cart']) ?>" class="btn_1 outline"><?= Yii::t('app','View Cart') ?></a><a href="checkout.html" class="btn_1"><?= Yii::t('app','Checkout') ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -73,22 +73,24 @@ use yii\helpers\Url;
                         </li>
                         <li>
                             <div class="dropdown dropdown-access">
-                                <?php if(Yii::$app->user->isGuest):?>
-                                    <a href="account.html" class="access_link"><span><?= Yii::t('app','Account') ?></span></a>
-                                <?php endif;?>
+                                <a href="account.html" class="access_link"><span><?= Yii::t('app','Account') ?></span></a>
                                 <div class="dropdown-menu">
                                    <?php if(Yii::$app->user->isGuest):?>
-                                       <a href="account.html" class="btn_1"> <?= Yii::t('app','Sign In or Sign Up') ?></a>
+                                        <?= Html::a(Yii::t('app','Sign In or Sign Up') ,['site/login'],['class'=>'btn_1']) ?>
+                                    <?php else:?>
+                                       <?= Html::a(Yii::t('app','Dashboard') ,['dashboard/index'],['class'=>'btn_1']) ?>
                                     <?php endif;?>
-                                    <ul>
-                                        <li>
-                                            <a href="account.html"><i class="ti-package"></i> <?= Yii::t('app','My Orders') ?></a>
-                                        </li>
-                                        <li>
-                                            <a href="account.html"><i class="ti-user"></i><?= Yii::t('app','My Profile') ?> </a>
-                                        </li>
+                                    <?php if(!Yii::$app->user->isGuest):?>
+                                        <ul>
+                                            <li>
+                                                <?= Html::a('<i class="ti-package"></i> '.Yii::t('app','My Orders') ,['dashboard/index']) ?>
+                                            </li>
+                                            <li>
+                                                <?= Html::a('<i class="ti-user"></i>'.Yii::t('app','My Profile') ,['dashboard/index']) ?>
+                                            </li>
 
-                                    </ul>
+                                        </ul>
+                                    <?php endif;?>
                                 </div>
                             </div>
                             <!-- /dropdown-access-->

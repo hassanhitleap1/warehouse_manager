@@ -18,3 +18,12 @@
 
 <!-- YOUR CUSTOM CSS -->
 <link href="<?= $path_theme ?>css/custom.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
+<link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
+<script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>

@@ -928,6 +928,9 @@ $(document).on('click','.applyBtn',function (event) {
     $(".search_order").click();
 
 });
+
+
+
 function getMax(array, propName) {
     var max = 0;
     var maxItem = null;
@@ -1000,6 +1003,54 @@ async function alerm(){
     await playAudio(audio)
     // code that will run after audio finishes...
 }
+
+
+$(document).on('click','.add_to_cart',function (event) {
+    let price= parseFloat($(this).attr('att_price'));
+    let thumbnail= $(this).attr('att_thumbnail');
+    let discount= parseFloat($(this).attr('att_discount'));
+    let name= $(this).attr('att_name');
+    let id= $(this).attr('att_product_id');
+    let data ={
+        'price':price,
+        'thumbnail':thumbnail,
+        'discount':discount,
+        'name':name,
+        'id':id,
+    }
+    show_loader();
+    let url= `index.php?r=cart%2Fadd`;
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data:data,
+        success: function (json) {
+            console.log(json);
+            let number_of_cart =  parseInt($('#dropdown-cart-number').text());
+            $('#dropdown-cart-number').text(++number_of_cart);
+            appaend_products_to_cart(data);
+            setTimeout(function (){
+                hide_loader();
+            },700)
+
+        }
+    });
+
+});
+
+function  appaend_products_to_cart(product){
+    let html =`  <li>
+        <a  href="${SITE_URL}/index.php?r=product%2Fview&id=${product.id}">
+            <figure><img src="/${product.thumbnail}"
+                         data-src="/${product.thumbnail}" alt="" width="50" height="50" className="lazy">
+            </figure>
+            <strong><span>${product.name}</span>${product.price} Jd</strong>
+        </a>
+        <a href="${SITE_URL}/index.php?r=product%2Fview&id=${product.id}" className="action"><i className="ti-trash"></i></a>
+    </li>`;
+    $('#list_cart').append(html);
+}
+
 
 
 

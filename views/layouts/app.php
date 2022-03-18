@@ -22,6 +22,11 @@ $path_theme= Yii::getAlias('@web').'theme/shop/'
 
     <div class="wrap" id="page">
 
+
+        <div class="loader"></div>
+
+
+
         <?php include("app/header.php")?>
 
         <?php include("app/top_panel.php")?>
@@ -37,9 +42,10 @@ $path_theme= Yii::getAlias('@web').'theme/shop/'
     <!-- COMMON SCRIPTS -->
     <script src="<?= $path_theme ?>js/common_scripts.min.js"></script>
     <script src="<?= $path_theme ?>js/main.js"></script>
+    <script src="<?= $path_theme ?>js/main.js"></script>
 
     <!-- SPECIFIC SCRIPTS -->
-    <script src="<?= $path_theme ?>js/carousel-home.js"></script>
+    <script src="<?= Yii::getAlias('@web')?>/js/custum.js"></script>
 
 
 
