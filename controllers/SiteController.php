@@ -190,4 +190,27 @@ class SiteController extends Controller
         return $this->render('cart',['cart'=>$cart]);
     }
 
+
+    public function actionShop(){
+        $query =    Products::find();
+        if(isset($_GET['category'])){
+            $query->where(['category_id'=>$_GET['category']]) ;
+        }
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->orderBy([
+                'created_at' => SORT_DESC //specify sort order ASC for ascending DESC for descending
+            ])
+            ->all();
+        return $this->render('shop',[
+            'models' => $models,
+            'pages' => $pages,
+
+        ]);
+
+
+    }
+
 }

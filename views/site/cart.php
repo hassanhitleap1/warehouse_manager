@@ -1,9 +1,9 @@
 <?php
 $path_theme = Yii::getAlias('@web') . 'theme/shop/' ?>
-?>
+
 
 <link href="<?= $path_theme ?>css/cart.css" rel="stylesheet">
-=
+
 <main class="bg_gray">
     <div class="container margin_30">
         <div class="page_header">
@@ -54,14 +54,23 @@ $path_theme = Yii::getAlias('@web') . 'theme/shop/' ?>
                     </td>
                     <td>
                         <div class="numbers-row">
-                            <input type="text" value="<?= $cart->getItem($c->getProduct()->id)->getQuantity() ?>" id="quantity_1" class="qty2" name="quantity_1">
-                            <div class="inc button_inc">+</div><div class="dec button_inc">-</div></div>
+                            <input type="text" value="<?= $cart->getItem($c->getProduct()->id)->getQuantity() ?>"
+                                   id="quantity_1" class="qty2" name="quantity_1">
+                            <div class="inc button_inc inc_item"
+                                 att_product_id="<?= $c->getProduct()->id ?>">
+                                +
+                            </div>
+                            <div class="dec button_inc item_dec"
+                                 att_product_id="<?= $c->getProduct()->id ?>">
+                                -
+                            </div>
+                        </div>
                     </td>
                     <td>
                         <strong><?= $c->getProduct()->selling_price ?></strong>
                     </td>
                     <td class="options">
-                        <a href="#"><i class="ti-trash"></i></a>
+                        <a href="#"><i class="ti-trash" att_product_id="<?= $c->getProduct()->id ?>" ></i></a>
                     </td>
                 </tr>
             <?php endforeach;?>
@@ -70,18 +79,7 @@ $path_theme = Yii::getAlias('@web') . 'theme/shop/' ?>
             </tbody>
         </table>
 
-        <div class="row add_top_30 flex-sm-row-reverse cart_actions">
-            <div class="col-sm-4 text-right">
-                <button type="button" class="btn_1 gray">Update Cart</button>
-            </div>
-            <div class="col-sm-8">
-                <div class="apply-coupon">
-                    <div class="form-group form-inline">
-                        <input type="text" name="coupon-code" value="" placeholder="Promo code" class="form-control"><button type="button" class="btn_1 outline">Apply Coupon</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- /cart_actions -->
 
     </div>

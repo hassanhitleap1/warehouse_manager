@@ -56,7 +56,7 @@ class CartController  extends  Controller
 
 
 
-    public function actionMunoItem(){
+    public function actionMinusItem(){
         if ($this->request->isPost) {
             $request = Yii::$app->request;
             $id = $request->post('id');

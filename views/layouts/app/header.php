@@ -55,9 +55,23 @@ use yii\helpers\Url;
                     <ul class="top_tools">
                         <li>
                             <div class="dropdown dropdown-cart">
-                                <a href="cart.html" class="cart_bt"><strong id="dropdown-cart-number">0</strong></a>
+                                <a href="<?= Url::to(['site/cart']) ?>" class="cart_bt"><strong id="dropdown-cart-number"><?= count(\Yii::$app->cart->getItems())?></strong></a>
                                 <div class="dropdown-menu">
                                     <ul id="list_cart">
+                                        <?php foreach (\Yii::$app->cart->getItems() as $cart ):?>
+                                            <li>
+
+                                                <a  href="<?= Url::to(['product/view',['id'=>$cart->getProduct()->id]]) ?>">
+                                                    <figure>
+
+                                                        <?= \yii\helpers\Html::img($cart->getProduct()->thumbnail , ['data-src'=>$cart->getProduct()->thumbnail,'class'=>'lazy', 'width'=>"50" ,'height'=>"50"])?>
+\
+                                                    </figure>
+                                                    <strong><span><?= $cart->getProduct()->name?> </span><?= $cart->getProduct()->selling_price?> Jd</strong>
+                                                </a>
+                                                <a href="<?= Url::to(['product/view',['id'=>$cart->getProduct()->id]]) ?>" className="action"><i className="ti-trash"></i></a>
+                                            </li>
+                                        <?php endforeach;?>
 
                                     </ul>
                                     <div class="total_drop">

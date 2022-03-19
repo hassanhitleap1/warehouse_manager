@@ -1038,6 +1038,7 @@ $(document).on('click','.add_to_cart',function (event) {
 
 });
 
+
 function  appaend_products_to_cart(product){
     let html =`  <li>
         <a  href="${SITE_URL}/index.php?r=product%2Fview&id=${product.id}">
@@ -1051,6 +1052,77 @@ function  appaend_products_to_cart(product){
     $('#list_cart').append(html);
 }
 
+
+$(document).on('click','.inc_item',function (event) {
+
+    let id= $(this).attr('att_product_id');
+    let data ={
+        'id':id,
+    }
+    show_loader();
+    let url= `index.php?r=cart/plus-item`;
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data:data,
+        success: function (json) {
+            setTimeout(function (){
+                hide_loader();
+            },700)
+
+        }
+    });
+
+});
+
+
+$(document).on('click','.item_dec',function (event) {
+
+    let id= $(this).attr('att_product_id');
+    let data ={
+        'id':id,
+    }
+    show_loader();
+    let url= `index.php?r=cart/minus-item`;
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data:data,
+        success: function (json) {
+            setTimeout(function (){
+                hide_loader();
+            },700)
+
+        }
+    });
+
+});
+
+
+
+$(document).on('click','.ti-trash',function (event) {
+
+    let id= $(this).attr('att_product_id');
+    let _this=this;
+    let data ={
+        'id':id,
+    }
+    show_loader();
+    let url= `index.php?r=cart/remove-item`;
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data:data,
+        success: function (json) {
+            $(_this).closest('tr').remove();
+            setTimeout(function (){
+                hide_loader();
+            },700)
+
+        }
+    });
+
+});
 
 
 
