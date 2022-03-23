@@ -248,6 +248,7 @@ return [
     'My Orders'=>'طلباتي',
     'Wishlist'=>'قائمة الرغبات',
     'View Cart'=>'عرض عربة التسوق',
+    'Shop_Now'=>'تسوق الان'
 
 
 

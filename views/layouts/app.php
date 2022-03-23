@@ -3,54 +3,65 @@ use yii\helpers\Html;
 $path_theme= Yii::getAlias('@web').'theme/shop/'
 ?>
 <?php $this->beginPage() ?>
-    <!DOCTYPE html>
-    <html lang="<?= Yii::$app->language ?>">
-
-    <head>
-        <meta charset="<?= Yii::$app->charset ?>">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <?php $this->registerCsrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
-        <?php $this->head() ?>
-    
-        <?php include("app/head.php")?>
-    </head>
-
-    <body>
-    <?php $this->beginBody() ?>
-
-    <div class="wrap" id="page">
-
-
-        <div class="loader"></div>
 
 
 
-        <?php include("app/header.php")?>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>">
 
-        <?php include("app/top_panel.php")?>
+<head>
+    <meta charset="<?= Yii::$app->charset ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php $this->registerCsrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
+    <?php include  ("app/head.php") ?>
 
-            <?= $content ?>
+</head>
 
-        <?php include("app/footer.php")?>
+<body>
+<?php $this->beginBody() ?>
+<div id="page">
+    <div class="loader"></div>
+    <?php include  ("app/header.php") ?>
+    <!-- /header -->
 
+    <div class="top_panel">
+        <div class="container header_panel">
+            <a href="#0" class="btn_close_top_panel"><i class="ti-close"></i></a>
+            <small>What are you looking for?</small>
+        </div>
+        <!-- /header_panel -->
+
+        <div class="container">
+            <div class="search-input">
+                <input type="text" placeholder="Search over 10.000 products...">
+                <button type="submit"><i class="ti-search"></i></button>
+            </div>
+        </div>
+        <!-- /related -->
     </div>
+    <!-- /search_panel -->
+    <?= $content ?>
 
-    <div id="toTop"></div><!-- Back to top button -->
+    <!-- /main -->
 
-    <!-- COMMON SCRIPTS -->
-    <script src="<?= $path_theme ?>js/common_scripts.min.js"></script>
-    <script src="<?= $path_theme ?>js/main.js"></script>
-    <script src="<?= $path_theme ?>js/main.js"></script>
+    <?php include("app/footer.php")?>
+    <!--/footer-->
+</div>
+<!-- page -->
 
-    <!-- SPECIFIC SCRIPTS -->
-    <script src="<?= Yii::getAlias('@web')?>/js/custum.js"></script>
+<div id="toTop"></div><!-- Back to top button -->
 
+<!-- COMMON SCRIPTS -->
+<script src="<?= $path_theme ?>js/common_scripts.min.js"></script>
+<script src="<?= $path_theme ?>js/main.js"></script>
 
-
-    <?php $this->endBody() ?>
-    </body>
-
-    </html>
+<!-- SPECIFIC SCRIPTS -->
+<script src="<?= $path_theme ?>js/carousel-home.js"></script>
+<script src="<?= Yii::getAlias('@web')?>/js/custum.js"></script>
+<?php $this->endBody() ?>
+</body>
+</html>
 <?php $this->endPage() ?>
