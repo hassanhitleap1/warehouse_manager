@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\banner\Banner;
+use app\models\categorises\Categorises;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -192,9 +193,15 @@ class SiteController extends Controller
 
 
     public function actionShop(){
+
+        $catigories= Categorises::find()->all();
         $query =    Products::find();
-        if(isset($_GET['category'])){
-            $query->where(['category_id'=>$_GET['category']]) ;
+        if(isset($_GET['categories'])){
+            $query->andWhere(['in', 'category_id', $_GET['categories']]);
+        }
+
+        if(isset($_GET['q'])){
+            $query->andWhere(['like', 'name', $_GET['q'] . '%', false]);
         }
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
@@ -204,9 +211,11 @@ class SiteController extends Controller
                 'created_at' => SORT_DESC //specify sort order ASC for ascending DESC for descending
             ])
             ->all();
+
         return $this->render('shop',[
             'models' => $models,
             'pages' => $pages,
+            'catigories'=>$catigories
 
         ]);
 
