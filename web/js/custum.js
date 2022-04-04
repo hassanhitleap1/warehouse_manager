@@ -1040,21 +1040,22 @@ $(document).on('click','.add_to_cart',function (event) {
 
 
 function  appaend_products_to_cart(product){
-    let html =`  <li>
-        <a  href="${SITE_URL}/index.php?r=product%2Fview&id=${product.id}">
-            <figure><img src="/${product.thumbnail}"
-                         data-src="/${product.thumbnail}" alt="" width="50" height="50" className="lazy">
-            </figure>
-            <strong><span>${product.name}</span>${product.price} Jd</strong>
+
+    let html =`<li>
+       <a href="${SITE_URL}/index.php?r=product%2Fview&id=${product.id}">
+            <figure>
+                <img className="lazy loaded" src="/${product.thumbnail}" width="50" height="50" alt=""
+                     data-src="/${product.thumbnail}" data-was-processed="true"></figure>
+            <strong><span>${product.name} </span>>${product.price}  Jd</strong>
         </a>
-        <a href="${SITE_URL}/index.php?r=product%2Fview&id=${product.id}" className="action"><i className="ti-trash"></i></a>
+        <a href="#0" className="action"><i className="ti-trash"></i></a>
     </li>`;
-    $('#list_cart').append(html);
+
+    $('.list_cart').append(html);
 }
 
 
-$(document).on('click','.inc_item',function (event) {
-
+$(document).on('click','.but_dic',function (event) {
     let id= $(this).attr('att_product_id');
     let data ={
         'id':id,
@@ -1074,6 +1075,7 @@ $(document).on('click','.inc_item',function (event) {
     });
 
 });
+
 
 
 $(document).on('click','.item_dec',function (event) {
@@ -1123,6 +1125,61 @@ $(document).on('click','.ti-trash',function (event) {
     });
 
 });
+
+
+
+
+$(document).on('click','.add-to-wishlist',function (event) {
+
+    let id= $(this).attr('att_product_id');
+    let _this=this;
+    let data ={
+        'id':id,
+    }
+    show_loader();
+    let url= `index.php?r=wishlists/add`;
+    $.ajax({
+        url: url,
+        type: 'get',
+        data:data,
+        success: function (json) {
+            hide_loader();
+        }
+    });
+
+});
+
+
+$(document).on('click','.button_inc',function (event) {
+
+    let id= $(this).closest(".numbers-row").attr('att_product_id');
+
+
+    let data ={
+        'id':id,
+    }
+    show_loader();
+    let url;
+    if( $(this).text()=="+"){
+         url= `index.php?r=cart/plus-item`;
+    }else {
+         url= `index.php?r=cart/minus-item`
+    }
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data:data,
+        success: function (json) {
+            setTimeout(function (){
+                hide_loader();
+            },700)
+
+        }
+    });
+
+});
+
 
 
 

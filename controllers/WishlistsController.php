@@ -53,6 +53,18 @@ class WishlistsController extends Controller
         ]);
     }
 
+
+    public function actionList()
+    {
+        $this->layout='app';
+        $searchModel = new WishlistsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('list', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Wishlists model.
      * @param integer $id
@@ -135,11 +147,11 @@ class WishlistsController extends Controller
     }
 
 
-    public function actionAdd()
+    public function actionAdd($id)
     {
         $model = new Wishlists();
         $model->user_id =Yii::$app->user->identity->id;
-        $model->product_id = $_GET['product_id'];
+        $model->product_id =$id;
         $model->save();
 
     }

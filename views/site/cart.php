@@ -53,15 +53,13 @@ $path_theme = Yii::getAlias('@web') . 'theme/shop/' ?>
                         <strong><?= $c->getProduct()->selling_price ?></strong>
                     </td>
                     <td>
-                        <div class="numbers-row">
+                        <div class="numbers-row"  att_product_id="<?= $c->getProduct()->id ?>">
                             <input type="text" value="<?= $cart->getItem($c->getProduct()->id)->getQuantity() ?>"
                                    id="quantity_1" class="qty2" name="quantity_1">
-                            <div class="inc button_inc inc_item"
-                                 att_product_id="<?= $c->getProduct()->id ?>">
+                            <div class="inc button_inc inc_item but_inc">
                                 +
                             </div>
-                            <div class="dec button_inc item_dec"
-                                 att_product_id="<?= $c->getProduct()->id ?>">
+                            <div class="dec button_inc  but_dic">
                                 -
                             </div>
                         </div>

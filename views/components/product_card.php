@@ -22,7 +22,7 @@
 
         </div>
         <ul>
-            <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span><?= Yii::t('app','Add to favorites')?></span></a></li>
+            <li><a href="#0" class="tooltip-1 add-to-wishlist" att_product_id="<?=$model->id?>"  data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span><?= Yii::t('app','Add to favorites')?></span></a></li>
             <li><a href="#0" class="tooltip-1 add_to_cart"
                    att_price="<?=$model->selling_price ?>"  att_thumbnail="<?=$model->thumbnail?>"
                    att_product_id="<?=$model->id?>"    att_discount="<?=$model->discount?>"  att_name="<?= $model->name?>"
