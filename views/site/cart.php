@@ -1,5 +1,15 @@
 <?php
-$path_theme = Yii::getAlias('@web') . 'theme/shop/' ?>
+$path_theme = Yii::getAlias('@web') . 'theme/shop/';
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+$regions_model = \app\models\regions\Regions::find()->all();
+$regions = [];
+foreach ($regions_model as $key => $value) {
+    $regions[$value->id] = $value->name_ar . " ".Yii::t('app','Delivery_Price')." ( " . $value->price_delivery . " )";
+}
+
+
+?>
 
 
 <link href="<?= $path_theme ?>css/cart.css" rel="stylesheet">
@@ -82,27 +92,60 @@ $path_theme = Yii::getAlias('@web') . 'theme/shop/' ?>
 
     </div>
     <!-- /container -->
-
-    <div class="box_cart">
-        <div class="container">
-            <div class="row justify-content-end">
-                <div class="col-xl-4 col-lg-4 col-md-6">
-                    <ul>
-                        <li>
-                            <span>Subtotal</span> $240.00
-                        </li>
-                        <li>
-                            <span>Shipping</span> $7.00
-                        </li>
-                        <li>
-                            <span>Total</span> $247.00
-                        </li>
-                    </ul>
-                    <a href="cart-2.html" class="btn_1 full-width cart">Proceed to Checkout</a>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="container">
+                <?php $form = \yii\widgets\ActiveForm::begin(['id' => "order_landig"]); ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'required' => true]) ?>
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'other_phone')->textInput(['placeholder' => "07xxxxxxxx"]) ?>
+                    </div>
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'phone')->textInput(['required' => true,'placeholder' => "07xxxxxxxx"]) ?>
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'address')->textInput(['required' => true]) ?>
+                    </div>
+                    <div class="col-md-6">
+
+                        <?= $form->field($model, 'region_id')->dropDownList($regions) ?>
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+
+                    <?= Html::submitButton(
+                        '<span class="spinner spinner-border spinner-border-sm" id="spinner" role="status" aria-hidden="true"></span>'.
+                        Yii::t('app', 'Order_Now') . ' <span class="fas fa-shopping-cart"></span> ', ['class' => 'btn_1  cart', 'id' => 'send_order','data-loading-text'=>"Loading..."]) ?>
+                </div>
+                <?php ActiveForm::end(); ?>
+
             </div>
         </div>
+        <div class="col-md-4">
+            <h3><?=Yii::t('app',"Total")?>
+            <?=$cart->getTotalCost() + 2?>
+            </h3>
+        </div>
     </div>
+
     <!-- /box_cart -->
+
+
 
 </main>

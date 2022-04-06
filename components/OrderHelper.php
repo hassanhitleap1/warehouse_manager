@@ -220,4 +220,16 @@ class OrderHelper extends BaseObject
         return $status;
     }
    
+
+
+
+
+    public static function cart_profit($cart){
+        $cost= 0;
+        foreach($cart->getItems() as  $c){
+            $cost+=$c->getProduct()->purchasing_price;
+        }
+
+        return ["cost" => $cost,"profit" => $cart->getTotalCost() - $cost];
+    } 
 }

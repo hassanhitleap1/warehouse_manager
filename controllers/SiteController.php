@@ -2,8 +2,17 @@
 
 namespace app\controllers;
 
+use app\components\NotifcationHelper;
+use app\components\OrderHelper;
 use app\models\banner\Banner;
 use app\models\categorises\Categorises;
+use app\models\OptionsSellProduct\OptionsSellProduct;
+use app\models\orders\CartForm;
+use app\models\orders\Orders;
+use app\models\ordersitem\OrdersItem;
+use app\models\regions\Regions;
+use app\models\users\Users;
+use Carbon\Carbon;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -187,9 +196,80 @@ class SiteController extends Controller
     public  function actionCart(){
 
         $cart = \Yii::$app->cart;
+        $model= new CartForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $region=Regions::findOne($model->region_id);
+            $order= new Orders();
+            $today=Carbon::now("Asia/Amman");
+            $next_order =Orders::find()->max('id') + 1;
+            $order->order_id = (string) $next_order;
+            $order->delivery_time=$today->addDay(1);
+            $order->country_id=1;
+            $order->delivery_price =$region->price_delivery;
+            $order->region_id=$model->region_id;
+            $order->phone=$model->phone;
+            $order->name=$model->name;
+            $order->other_phone=$model->other_phone;
+            $order->address=is_null($model->address)?$region->name_ar:$model->address;
+            $order->status_id=1;
+            $order->discount= 0;
 
-        return $this->render('cart',['cart'=>$cart]);
+    
+            $profit__cost=OrderHelper::cart_profit($cart);
+            $profit_margin=$profit__cost["profit"];
+            $cost=$profit__cost["cost"];
+            
+            $order->total_price=$order->delivery_price + $cart->getTotalCost();
+            $order->amount_required=$cart->getTotalCost();
+            $transaction = \Yii::$app->db->beginTransaction();
+
+           
+            
+            if ($order->save()) {
+                $userModel = Users::find()->where(['phone'=> $model->phone])->one();
+                if(is_null($userModel)){
+                    $userModel= new Users();
+                }
+                $user=OrderHelper::set_value_user($userModel,$model);
+                $user->save();
+   
+                foreach($cart->getItems() as  $c){
+                    $orderItemModel=new OrdersItem;
+                    $orderItemModel->order_id = $order->id;
+                    $product=Products::findOne($c->getProduct()->id);
+                    $orderItemModel->product_id=$c->getProduct()->id;
+                    $orderItemModel->sub_product_id=$product->typeOptions[0]->id;
+
+
+                    $orderItemModel->price=$product->selling_price;
+                    $orderItemModel->price_item_count=$product->typeOptions[0]->price ;
+                    $orderItemModel->profits_margin= $profit_margin;
+                    $orderItemModel->profit_margin= ($profit_margin / $product->typeOptions[0]->number);
+                    $orderItemModel->quantity=$product->typeOptions[0]->number ;
+                    $order->user_id=$user->id;
+                    $order->save(false);
+
+                    if($orderItemModel->save()){
+                        $transaction->commit();
+                
+                        Yii::$app->session->set('order_model', $order );
+                        NotifcationHelper::push_order_notifcation($order);
+                        return $this->redirect(['product/thanks']);
+                    }else{
+                        Yii::$app->session->set('message', Yii::t('app', 'Error'));
+                        $transaction->rollBack();
+                    }
+
+                }
+
+
+            }
+        }
+      
+        return $this->render('cart',['cart'=>$cart,'model'=>$model]);
     }
+     
+    
 
 
     public function actionShop(){
