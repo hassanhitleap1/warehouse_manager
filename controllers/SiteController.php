@@ -20,7 +20,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-
+use app\models\orders\OrderForm;
 use app\models\products\Products;
 use app\models\silder\Silder;
 use yii\data\Pagination;
@@ -219,7 +219,7 @@ class SiteController extends Controller
             $profit_margin=$profit__cost["profit"];
             $cost=$profit__cost["cost"];
             
-            $order->total_price=$order->delivery_price + $cart->getTotalCost();
+            $order->total_price=$region->price_delivery + $cart->getTotalCost();
             $order->amount_required=$cart->getTotalCost();
             $transaction = \Yii::$app->db->beginTransaction();
 
@@ -232,36 +232,42 @@ class SiteController extends Controller
                 }
                 $user=OrderHelper::set_value_user($userModel,$model);
                 $user->save();
-   
+                $orderItem=[];
                 foreach($cart->getItems() as  $c){
-                    $orderItemModel=new OrdersItem;
-                    $orderItemModel->order_id = $order->id;
                     $product=Products::findOne($c->getProduct()->id);
-                    $orderItemModel->product_id=$c->getProduct()->id;
-                    $orderItemModel->sub_product_id=$product->typeOptions[0]->id;
+                    $orderItem[]=[
+                        'order_id'=>$order->id,
+                        'product_id'=>$c->getProduct()->id,
+                        'sub_product_id'=>$product->typeOptions[0]->id,
+                        'price'=>$product->selling_price,
+                        'price_item_count'=>$product->typeOptions[0]->price ,
+                        'profits_margin'=>$profit_margin,
+                        'profit_margin'=> ($profit_margin / $product->typeOptions[0]->number),
+                        'quantity'=>$cart->getItem($c->getProduct()->id)->getQuantity(),
+                    ];
 
-
-                    $orderItemModel->price=$product->selling_price;
-                    $orderItemModel->price_item_count=$product->typeOptions[0]->price ;
-                    $orderItemModel->profits_margin= $profit_margin;
-                    $orderItemModel->profit_margin= ($profit_margin / $product->typeOptions[0]->number);
-                    $orderItemModel->quantity=$product->typeOptions[0]->number ;
-                    $order->user_id=$user->id;
-                    $order->save(false);
-
-                    if($orderItemModel->save()){
-                        $transaction->commit();
-                
-                        Yii::$app->session->set('order_model', $order );
-                        NotifcationHelper::push_order_notifcation($order);
-                        return $this->redirect(['product/thanks']);
-                    }else{
-                        Yii::$app->session->set('message', Yii::t('app', 'Error'));
-                        $transaction->rollBack();
-                    }
 
                 }
 
+                $order->user_id=$user->id;
+                $order->save(false);
+
+                $is_inserted=Yii::$app->db->createCommand()->batchInsert(
+                    OrdersItem::tableName(), 
+                    ['order_id', 'product_id','sub_product_id','price','price_item_count','profits_margin','profit_margin','quantity'], 
+                    $orderItem
+                )->execute();
+
+                if($is_inserted){
+                    $transaction->commit();
+            
+                    Yii::$app->session->set('order_model', $order );
+                    NotifcationHelper::push_order_notifcation($order);
+                    return $this->redirect(['product/thanks']);
+                }else{
+                    Yii::$app->session->set('message', Yii::t('app', 'Error'));
+                    $transaction->rollBack();
+                }
 
             }
         }
