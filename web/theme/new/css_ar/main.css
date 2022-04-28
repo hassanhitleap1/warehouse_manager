@@ -545,12 +545,3 @@ a svg {
 .dropdown-menu {
     right: auto;
 }
-
-.control-label {
-    font-family:'Monotype Light' !important;
-    font-size: 14px;
-}
-.field-featured ,.field-top_selling{
-    font-family:'Monotype Light' !important;
-    font-size: 14px; 
-}
