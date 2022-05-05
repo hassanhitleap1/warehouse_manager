@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87fe67ee6a3b8d56981e8dd61a99afb0",
+    "content-hash": "ecdffde526ec45fc917604314c0f53a0",
     "packages": [
         {
             "name": "airani/yii2-bootstrap-rtl",
@@ -2216,16 +2216,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
-            "version": "dev-master",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-activeform.git",
-                "reference": "f49b8b9acc1801f944c20f18eaa22f01eecf1001"
+                "reference": "c2f60855af6ca9e66e25380e7ce746b50e504a33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/f49b8b9acc1801f944c20f18eaa22f01eecf1001",
-                "reference": "f49b8b9acc1801f944c20f18eaa22f01eecf1001",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/c2f60855af6ca9e66e25380e7ce746b50e504a33",
+                "reference": "c2f60855af6ca9e66e25380e7ce746b50e504a33",
                 "shasum": ""
             },
             "require": {
@@ -2266,7 +2266,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kartik-v/yii2-widget-activeform/issues",
-                "source": "https://github.com/kartik-v/yii2-widget-activeform/tree/master"
+                "source": "https://github.com/kartik-v/yii2-widget-activeform/tree/v1.6.1"
             },
             "funding": [
                 {
@@ -2274,7 +2274,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2021-10-19T10:08:21+00:00"
+            "time": "2022-02-13T18:09:01+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-colorinput",
@@ -9060,7 +9060,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "kartik-v/yii2-field-range": 20,
-        "kartik-v/yii2-widget-activeform": 20,
         "kartik-v/yii2-grid": 20,
         "kartik-v/yii2-dynagrid": 20,
         "kartik-v/yii2-editable": 20,
@@ -9073,5 +9072,5 @@
         "php": ">=5.6.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.1.0"
 }
