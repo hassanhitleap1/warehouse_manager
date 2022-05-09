@@ -11,12 +11,17 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
 
-    <h4><?= Html::encode($this->title) ?></h4>
+ 
+
+</div>
+
+<div class="regions-create">
+
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
         'subProductCounts'=>$subProductCounts,
         'type_options'=>$type_options
     ]) ?>
-
 </div>
