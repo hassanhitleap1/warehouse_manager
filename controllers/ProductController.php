@@ -27,7 +27,7 @@ class ProductController extends Controller
     public function __construct($id, $module, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->layout='app';
+        $this->layout='theme';
     }
     /**
      * Displays a single Area model.
