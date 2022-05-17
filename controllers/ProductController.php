@@ -24,6 +24,19 @@ class ProductController extends Controller
 {
   
 
+    /**
+     * @inheritdoc
+     */
+    public function beforeAction($action)
+    {            
+        if ($action->id == 'view') {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
+    }
+
+
     public function __construct($id, $module, $config = [])
     {
         parent::__construct($id, $module, $config);
@@ -40,6 +53,8 @@ class ProductController extends Controller
         
         $modelOrder= new OrderForm();
         $product_suggested=Products::find()->where(['!=','id',$id])->where(['!=','quantity',0])->limit(4)->all();
+        
+       
         if ($modelOrder->load(Yii::$app->request->post())&&  $modelOrder->validate()) {
             $product=Products::findOne($id);
             $next_order=Orders::find()->max('id') + 1;
