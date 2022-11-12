@@ -1,101 +1,76 @@
-<?php
+  <!-- Footer Section Begin -->
+  <footer class="footer">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="footer__about">
+                      <div class="footer__logo">
+                          <a href="#"><img src="img/footer-logo.png" alt=""></a>
+                      </div>
+                      <p>The customer is at the heart of our unique business model, which includes design.</p>
+                      <a href="#"><img src="img/payment.png" alt=""></a>
+                  </div>
+              </div>
+              <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                  <div class="footer__widget">
+                      <h6>Shopping</h6>
+                      <ul>
+                          <li><a href="#">Clothing Store</a></li>
+                          <li><a href="#">Trending Shoes</a></li>
+                          <li><a href="#">Accessories</a></li>
+                          <li><a href="#">Sale</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-lg-2 col-md-3 col-sm-6">
+                  <div class="footer__widget">
+                      <h6>Shopping</h6>
+                      <ul>
+                          <li><a href="#">Contact Us</a></li>
+                          <li><a href="#">Payment Methods</a></li>
+                          <li><a href="#">Delivary</a></li>
+                          <li><a href="#">Return & Exchanges</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                  <div class="footer__widget">
+                      <h6>NewLetter</h6>
+                      <div class="footer__newslatter">
+                          <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                          <form action="#">
+                              <input type="text" placeholder="Your email">
+                              <button type="submit"><span class="icon_mail_alt"></span></button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <div class="footer__copyright__text">
+                      <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                      <p>Copyright ©
+                          <script>
+                              document.write(new Date().getFullYear());
+                          </script>2020
+                          All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                      </p>
+                      <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+  <!-- Footer Section End -->
 
-use app\models\categorises\Categorises;
-use yii\bootstrap\Html;
-
-$categoris=Categorises::find()->all();
-?>
-<footer class="revealed">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <h3 data-target="#collapse_1"><?= Yii::t('app','Quick Links') ;?> </h3>
-                <div class="collapse dont-collapse-sm links" id="collapse_1">
-                    <ul>
-                        <li><a href="about.html"> <?= Yii::t('app','About us') ;?> </a></li>
-                        <li><a href="help.html"><?= Yii::t('app','Faq') ;?>  </a></li>
-                        <li><a href="help.html"> <?= Yii::t('app','Help') ;?> </a></li>
-                        <li><a href="account.html"> <?= Yii::t('app','My account') ;?></a></li>
-                        <li><a href="blog.html">  <?= Yii::t('app','Blog') ;?></a></li>
-                        <li><a href="contacts.html"><?= Yii::t('app','Contacts') ;?></a></li>
-
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h3 data-target="#collapse_2"><?=Yii::t('app','Categories')?></h3>
-                <div class="collapse dont-collapse-sm links" id="collapse_2">
-                    <ul>
-                        <?php foreach ($categoris as $key => $category) :?>
-                            <li><a href="listing-grid-1-full.html"><?=$category->name_ar?></a></li>
-
-                        <?php endforeach;?>
-
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h3 data-target="#collapse_3"><?= Yii::t('app','Contacts') ;?></h3>
-                <div class="collapse dont-collapse-sm contacts" id="collapse_3">
-                    <ul>
-                        <li><i class="ti-home"></i><?= Yii::$app->params['address'] ?></li>
-                        <li><i class="ti-headphone-alt"></i><?= Yii::$app->params['phone'] ?></li>
-                        <li><i class="ti-email"></i><a href="#0"><?= Yii::$app->params['adminEmail'] ?></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h3 data-target="#collapse_4"><?= Yii::t('app','Contacts') ;?></h3>
-                <div class="collapse dont-collapse-sm" id="collapse_4">
-                    <div id="newsletter">
-                        <div class="form-group">
-                            <input type="email" name="email_newsletter" id="email_newsletter" class="form-control" placeholder="Your email">
-                            <button type="submit" id="submit-newsletter"><i class="ti-angle-double-right"></i></button>
-                        </div>
-                    </div>
-                    <div class="follow_us">
-                        <h5><?= Yii::t('app','Follow Us') ;?> </h5>
-                        <ul>
-                            <li><a href="#0"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?= $path_theme ?>img/twitter_icon.svg" alt="" class="lazy"></a></li>
-                            <li><a href="#0"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?= $path_theme ?>img/facebook_icon.svg" alt="" class="lazy"></a></li>
-                            <li><a href="#0"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?= $path_theme ?>img/instagram_icon.svg" alt="" class="lazy"></a></li>
-                            <li><a href="#0"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?= $path_theme ?>img/youtube_icon.svg" alt="" class="lazy"></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /row-->
-        <hr>
-        <div class="row add_bottom_25">
-            <div class="col-lg-6">
-                <ul class="footer-selector clearfix">
-                    <li>
-                        <div class="styled-select lang-selector">
-                            <select>
-                                <option value="English" selected>Arabic</option>
-
-                            </select>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="styled-select currency-selector">
-                            <select>
-                                <option value="US Dollars" selected>jordenin denier</option>
-
-                            </select>
-                        </div>
-                    </li>
-                    <li><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?= $path_theme ?>img/cards_all.svg" alt="" width="198" height="30" class="lazy"></li>
-                </ul>
-            </div>
-            <div class="col-lg-6">
-                <ul class="additional_links">
-                    <?= Html::a('Terms and conditions',['site/terms-and-conditions']) ?>
-                    <?= Html::a('Privacy',['site/privacy']) ?>
-                    <li><span>© 2020 Allaia</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
+  <!-- Search Begin -->
+  <div class="search-model">
+      <div class="h-100 d-flex align-items-center justify-content-center">
+          <div class="search-close-switch">+</div>
+          <form class="search-model-form">
+              <input type="text" id="search-input" placeholder="Search here.....">
+          </form>
+      </div>
+  </div>
+  <!-- Search End -->

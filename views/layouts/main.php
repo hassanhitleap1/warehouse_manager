@@ -6,42 +6,38 @@
 use app\widgets\Alert;
 
 use yii\widgets\Breadcrumbs;
-use app\assets\MainAsset;
+use app\assets\AppAsset;
+use yii\bootstrap4\Html;
 
-
-MainAsset::register($this);
+AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
+
+
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 
 <head>
-    <?php include ("section-client/head.php")?>
+
+    <meta charset="<?= Yii::$app->charset ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php $this->registerCsrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+
 </head>
 
 <body>
     <?php $this->beginBody() ?>
-    
-    <div class="wrap">
-    
-        <?php include ("section-client/navbar.php");?>
 
-        <div class="container">
-            <div class="loader"></div>
+    <?php include("app/header.php") ?>
 
-                <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
+    <?= $content ?>
 
-                <?= Alert::widget() ?>
-
-                <?= $content ?>
-            </div>
-        </div>
-
-<!--    footer-->
-    <?php include ("section-client/footer.php");?>
-
+    <?php include("app/footer.php") ?>
 
     <?php $this->endBody() ?>
 </body>

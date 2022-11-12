@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link http://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -20,29 +21,29 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-      'css/vendor/bootstrap.min.css',
-      'css/swiper/swiper-bundle.min.css',
+        "malefashion-master/css/bootstrap.min.css",
+        "malefashion-master/css/font-awesome.min.css",
+        "malefashion-master/css/elegant-icons.css",
+        "malefashion-master/css/magnific-popup.css",
+        "malefashion-master/css/nice-select.css",
+        "malefashion-master/css/owl.carousel.min.css",
+        "malefashion-master/css/slicknav.min.css",
+        "malefashion-master/css/style.css",
 
     ];
     public $js = [
-        '/js/vendor/popper.min.js',
-        'js/vendor/pusher.min.js',
-        'js/vendor/pusher-with-encryption.min.js',
-        'js/site.js',
-        'js/main.js',
-        'js/custum.js',
-        'js/sweetalert2/main.js', 
+        "malefashion-master/js/jquery-3.3.1.min.js",
+        "malefashion-master/js/bootstrap.min.js",
+        "malefashion-master/js/jquery.nice-select.min.js",
+        "malefashion-master/js/jquery.nicescroll.min.js",
+        "malefashion-master/js/jquery.magnific-popup.min.js",
+        "malefashion-master/js/jquery.countdown.min.js",
+        "malefashion-master/js/jquery.slicknav.js",
+        "malefashion-master/js/mixitup.min.js",
+        "malefashion-master/js/owl.carousel.min.js",
+        "malefashion-master/js/main.js"
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        // 'yii\bootstrap\BootstrapAsset',
-        // 'airani\bootstrap\BootstrapRtlAsset',
     ];
-    public function __construct($config = [])
-    {
-        parent::__construct($config);
-        $this->css[]= 'css/site.css?v='.rand();
-        $this->css[]= 'css/orders.css?v='.rand();
-
-    }
 }

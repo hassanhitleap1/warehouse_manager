@@ -28,11 +28,11 @@ use yii\data\Pagination;
 class SiteController extends Controller
 {
 
-   public function __construct($id, $module, $config = [])
-   {
-       parent::__construct($id, $module, $config);
-       $this->layout='app';
-   }
+    //    public function __construct($id, $module, $config = [])
+    //    {
+    //        parent::__construct($id, $module, $config);
+    //        $this->layout='app';
+    //    }
 
     /**
      * {@inheritdoc}
@@ -87,10 +87,10 @@ class SiteController extends Controller
         // $this->layout='empty';
         // return $this->render('test');
         $sliders  = Silder::find()->all();
-        $bansers= Banner::find()->all();
+        $bansers = Banner::find()->all();
         $query =    Products::find();
-        if(isset($_GET['category'])){
-            $query->where(['category_id'=>$_GET['category']]) ;
+        if (isset($_GET['category'])) {
+            $query->where(['category_id' => $_GET['category']]);
         }
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
@@ -100,18 +100,17 @@ class SiteController extends Controller
                 'created_at' => SORT_DESC //specify sort order ASC for ascending DESC for descending      
             ])
             ->all();
-          return $this->render('index',[
+        return $this->render('index', [
             'models' => $models,
             'pages' => $pages,
-            'sliders'=>$sliders,
-            'bansers'=>$bansers 
+            'sliders' => $sliders,
+            'bansers' => $bansers
         ]);
-     
     }
 
-    
-      
-    
+
+
+
     /**
      * Login action.
      *
@@ -178,7 +177,7 @@ class SiteController extends Controller
     {
         return $this->render('connect-us');
     }
-    
+
 
 
     public function actionPrivacy()
@@ -193,100 +192,99 @@ class SiteController extends Controller
     }
 
 
-    public  function actionCart(){
+    public  function actionCart()
+    {
 
         $cart = \Yii::$app->cart;
-        $model= new CartForm();
+        $model = new CartForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $region=Regions::findOne($model->region_id);
-            $order= new Orders();
-            $today=Carbon::now("Asia/Amman");
-            $next_order =Orders::find()->max('id') + 1;
+            $region = Regions::findOne($model->region_id);
+            $order = new Orders();
+            $today = Carbon::now("Asia/Amman");
+            $next_order = Orders::find()->max('id') + 1;
             $order->order_id = (string) $next_order;
-            $order->delivery_time=$today->addDay(1);
-            $order->country_id=1;
-            $order->delivery_price =$region->price_delivery;
-            $order->region_id=$model->region_id;
-            $order->phone=$model->phone;
-            $order->name=$model->name;
-            $order->other_phone=$model->other_phone;
-            $order->address=is_null($model->address)?$region->name_ar:$model->address;
-            $order->status_id=1;
-            $order->discount= 0;
+            $order->delivery_time = $today->addDay(1);
+            $order->country_id = 1;
+            $order->delivery_price = $region->price_delivery;
+            $order->region_id = $model->region_id;
+            $order->phone = $model->phone;
+            $order->name = $model->name;
+            $order->other_phone = $model->other_phone;
+            $order->address = is_null($model->address) ? $region->name_ar : $model->address;
+            $order->status_id = 1;
+            $order->discount = 0;
 
-    
-            $profit__cost=OrderHelper::cart_profit($cart);
-            $profit_margin=$profit__cost["profit"];
-            $cost=$profit__cost["cost"];
-            
-            $order->total_price=$region->price_delivery + $cart->getTotalCost();
-            $order->amount_required=$cart->getTotalCost();
+
+            $profit__cost = OrderHelper::cart_profit($cart);
+            $profit_margin = $profit__cost["profit"];
+            $cost = $profit__cost["cost"];
+
+            $order->total_price = $region->price_delivery + $cart->getTotalCost();
+            $order->amount_required = $cart->getTotalCost();
             $transaction = \Yii::$app->db->beginTransaction();
 
-           
-            
+
+
             if ($order->save()) {
-                $userModel = Users::find()->where(['phone'=> $model->phone])->one();
-                if(is_null($userModel)){
-                    $userModel= new Users();
+                $userModel = Users::find()->where(['phone' => $model->phone])->one();
+                if (is_null($userModel)) {
+                    $userModel = new Users();
                 }
-                $user=OrderHelper::set_value_user($userModel,$model);
+                $user = OrderHelper::set_value_user($userModel, $model);
                 $user->save();
-                $orderItem=[];
-                foreach($cart->getItems() as  $c){
-                    $product=Products::findOne($c->getProduct()->id);
-                    $orderItem[]=[
-                        'order_id'=>$order->id,
-                        'product_id'=>$c->getProduct()->id,
-                        'sub_product_id'=>$product->typeOptions[0]->id,
-                        'price'=>$product->selling_price,
-                        'price_item_count'=>$product->typeOptions[0]->price ,
-                        'profits_margin'=>$profit_margin,
-                        'profit_margin'=> ($profit_margin / $product->typeOptions[0]->number),
-                        'quantity'=>$cart->getItem($c->getProduct()->id)->getQuantity(),
+                $orderItem = [];
+                foreach ($cart->getItems() as  $c) {
+                    $product = Products::findOne($c->getProduct()->id);
+                    $orderItem[] = [
+                        'order_id' => $order->id,
+                        'product_id' => $c->getProduct()->id,
+                        'sub_product_id' => $product->typeOptions[0]->id,
+                        'price' => $product->selling_price,
+                        'price_item_count' => $product->typeOptions[0]->price,
+                        'profits_margin' => $profit_margin,
+                        'profit_margin' => ($profit_margin / $product->typeOptions[0]->number),
+                        'quantity' => $cart->getItem($c->getProduct()->id)->getQuantity(),
                     ];
-
-
                 }
 
-                $order->user_id=$user->id;
+                $order->user_id = $user->id;
                 $order->save(false);
 
-                $is_inserted=Yii::$app->db->createCommand()->batchInsert(
-                    OrdersItem::tableName(), 
-                    ['order_id', 'product_id','sub_product_id','price','price_item_count','profits_margin','profit_margin','quantity'], 
+                $is_inserted = Yii::$app->db->createCommand()->batchInsert(
+                    OrdersItem::tableName(),
+                    ['order_id', 'product_id', 'sub_product_id', 'price', 'price_item_count', 'profits_margin', 'profit_margin', 'quantity'],
                     $orderItem
                 )->execute();
 
-                if($is_inserted){
+                if ($is_inserted) {
                     $transaction->commit();
-            
-                    Yii::$app->session->set('order_model', $order );
+
+                    Yii::$app->session->set('order_model', $order);
                     NotifcationHelper::push_order_notifcation($order);
                     return $this->redirect(['product/thanks']);
-                }else{
+                } else {
                     Yii::$app->session->set('message', Yii::t('app', 'Error'));
                     $transaction->rollBack();
                 }
-
             }
         }
-      
-        return $this->render('cart',['cart'=>$cart,'model'=>$model]);
+
+        return $this->render('cart', ['cart' => $cart, 'model' => $model]);
     }
-     
-    
 
 
-    public function actionShop(){
 
-        $catigories= Categorises::find()->all();
+
+    public function actionShop()
+    {
+
+        $catigories = Categorises::find()->all();
         $query =    Products::find();
-        if(isset($_GET['categories'])){
+        if (isset($_GET['categories'])) {
             $query->andWhere(['in', 'category_id', $_GET['categories']]);
         }
 
-        if(isset($_GET['q'])){
+        if (isset($_GET['q'])) {
             $query->andWhere(['like', 'name', $_GET['q'] . '%', false]);
         }
         $countQuery = clone $query;
@@ -298,14 +296,11 @@ class SiteController extends Controller
             ])
             ->all();
 
-        return $this->render('shop',[
+        return $this->render('shop', [
             'models' => $models,
             'pages' => $pages,
-            'catigories'=>$catigories
+            'catigories' => $catigories
 
         ]);
-
-
     }
-
 }
