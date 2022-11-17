@@ -7,6 +7,7 @@ use app\models\products\Products;
 use app\models\regions\Regions;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 $regions_model = Regions::find()->all();
@@ -32,104 +33,195 @@ if(is_null($model->company_delivery_id)){
 $path_theme = Yii::getAlias('@web') . 'theme/shop/'
 
 ?>
-
-
-
-
-<link href="<?=$path_theme?>css/product_page.css" rel="stylesheet">
-
 <main>
-    <div class="container margin_30">
-        <div class="countdown_inner">-20% This offer ends in <div data-countdown="2019/05/15" class="countdown"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="all">
-                    <div class="slider">
-                        <div class="owl-carousel owl-theme main">
+	    <div class="container margin_30">
+	        <div class="countdown_inner">-20% This offer ends in <div data-countdown="2019/05/15" class="countdown"></div>
+	        </div>
+	        <div class="row">
+	            <div class="col-md-6">
+	                <div class="all">
+	                    <div class="slider">
+	                        <div class="owl-carousel owl-theme main">
+                                <?php foreach ($model->imagesProduct as $key => $img) : ?>
+                                    <div style="background-image: url(<?= $img->path ?>);" class="item-box"></div>
+                                   
+                                <?php endforeach; ?>
+	                           
+	                        </div>
+	                        <div class="left nonl"><i class="ti-angle-left"></i></div>
+	                        <div class="right"><i class="ti-angle-right"></i></div>
+	                    </div>
+	                    <div class="slider-two">
+	                        <div class="owl-carousel owl-theme thumbs">
                             <?php foreach ($model->imagesProduct as $key => $img) : ?>
-                                <div style="background-image: url(<?= "'/$img->path'" ?>);" class="item-box"></div>
-                            <?php endforeach; ?>
-
-                        </div>
-                        <div class="left nonl"><i class="ti-angle-left"></i></div>
-                        <div class="right"><i class="ti-angle-right"></i></div>
-                    </div>
-                    <div class="slider-two">
-                        <div class="owl-carousel owl-theme thumbs">
-                            <?php foreach ($model->imagesProduct as $key => $img) : ?>
-                                <div style="background-image: url(<?= "'/$img->path'" ?>);" class="item <?= $key == 0 ? 'active':'' ?>"></div>
-                            <?php endforeach; ?>
-
-
-                        </div>
-                        <div class="left-t nonl-t"></div>
-                        <div class="right-t"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-
-                <!-- /page_header -->
-                <div class="prod_info">
-                    <h1> <?=$model->name;?></h1>
-
-                    <p> <br>
+                                
+                                    <div style="background-image: url(<?= $img->path ?>);" class="item active"></div>
+                                <?php endforeach; ?>
+	   
+	                        </div>
+	                        <div class="left-t nonl-t"></div>
+	                        <div class="right-t"></div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-md-6">
+	              
+	                <!-- /page_header -->
+	                <div class="prod_info">
+                        <h1> <?=$model->name;?></h1>
+	              
+                        <p> <br>
                         <?php print  $model->description ?>
                     </p>
+
+                  
+    
+                    <?php $uri  =  Url::to(['product/view', 'id' => $model->id]);?>
+                    <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>" />
                     <div class="prod_options">
-                        <?php $form = ActiveForm::begin(['id' => "order_landig"]); ?>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <?= $form->field($modelOrder, 'name')->textInput(['maxlength' => true, 'required' => true]) ?>
-                            </div>
-                        </div>
+                        <form id='order_landig' action="<?=$uri?> " method='post'>
+                                
 
                         <div class="row">
-                            <div class="col-md-6">
-                                <?= $form->field($modelOrder, 'other_phone')->textInput(['placeholder' => "07xxxxxxxx"]) ?>
-                            </div>
-                            <div class="col-md-6">
-                                <?= $form->field($modelOrder, 'phone')->textInput(['required' => true,'placeholder' => "07xxxxxxxx"]) ?>
-                            </div>
+                                <div class="col-12 ">
+                                    <div class="form-group field-orderform-name required">
+                                        <input type="text" id="orderform-name" class="form-control"  placeholder="الأسم" name="OrderForm[name]"  value="<?= isset($_POST['OrderForm']['name']) ?$_POST['OrderForm']['name'] :''?>"  aria-required="true">
+                                        <?php if($modelOrder->hasErrors("name")):?>
+                                        <div class="help-block"><?= $modelOrder->getErrors("name")[0]?></div>
+                                        <?php endif;?>
+                                    </div>
+                                </div>
+
                         </div>
 
 
                         <div class="row">
-
                             <div class="col-md-6">
-                                <?= $form->field($modelOrder, 'address')->textInput(['required' => true]) ?>
+                                <div class="form-group field-orderform-phone required has-error">
+                                        <label class="control-label" for="orderform-phone">هاتف </label>
+                                        <input type="text" id="orderform-phone"  class="form-control" name="OrderForm[phone]"  placeholder="07xxxxxxxx" value="<?= isset($_POST['OrderForm']['phone']) ?$_POST['OrderForm']['phone'] :''?>" aria-required="true" aria-invalid="true">
+                                        <?php if($modelOrder->hasErrors("phone")):?>
+                                        <div class="help-block"><?= $modelOrder->getErrors("phone")[0]?></div>
+                                        <?php endif;?>
+                                    </div>  
                             </div>
                             <div class="col-md-6">
+                                <div class="form-group field-orderform-other_phone">
+                                    <label class="control-label" for="orderform-other_phone">هاتف اخر</label>
+                                    <input type="text" id="orderform-other_phone" class="form-control" name="OrderForm[other_phone]"  value="<?= isset($_POST['OrderForm']['other_phone']) ?$_POST['OrderForm']['other_phone'] :''?>" placeholder="07xxxxxxxx">
+                                    <?php if($modelOrder->hasErrors("other_phone")):?>
+                                    <div class="help-block"><?= $modelOrder->getErrors("other_phone")[0]?></div>
+                                    <?php endif;?>
+                                </div>
+                            </div>
+                        </div> 
 
-                                <?= $form->field($modelOrder, 'region_id')->dropDownList($regions) ?>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group field-orderform-address required has-error">
+                                    <label class="control-label" for="orderform-address">العنوان</label>
+                                    <input type="text" id="orderform-address" class="form-control" name="OrderForm[address]"   value="<?= isset($_POST['OrderForm']['address']) ?$_POST['OrderForm']['address'] :''?>" aria-required="true" aria-invalid="true">
+                                    <?php if($modelOrder->hasErrors("address")):?>
+                                    <div class="help-block"><?= $modelOrder->getErrors("address")[0]?></div>
+                                    <?php endif;?>
+                                </div>                           
+                            </div>
+                         
+                            <div class="col-md-6">
+                                <div class="form-group field-orderform-region_id">
+                                <label class="control-label" for="orderform-region_id">المحافظة</label>
+                                <select id="orderform-region_id" class="form-control" name="OrderForm[region_id]">
+                                    <?php foreach($regions as $key=> $region):?>
+                                        <option value="<?=$key?>"  <?= isset($_POST['OrderForm']['region_id']) && $_POST['OrderForm']['region_id'] == $key ?'selected' :''?> ><?= $region?></option>
+                                     <?php endforeach;?>   
+                                </select>
 
+                                <?php if($modelOrder->hasErrors("region_id")):?>
+                                    <div class="help-block"><?= $modelOrder->getErrors("region_id")[0]?></div>
+                                    <?php endif;?>
+                                </div>
                             </div>
                         </div>
-
 
                         <div class="row">
                             <?php if (count($model->subProductCount) >= 2 ) : ?>
                                 <div class="col-md-6">
-                                    <?= $form->field($modelOrder, 'type')->dropDownList(ArrayHelper::map($model->subProductCount, 'id', 'type')) ?>
+
+                                <div class="form-group field-orderform-type">
+                                <label class="control-label" for="orderform-region_id">النوع</label>
+                                <select id="orderform-type" class="form-control" name="OrderForm[type]">
+                                    <?php foreach($model->subProductCoun as $key=> $subProductCoun):?>
+                                        <option value="<?=$subProductCoun->id?>"  <?= isset($_POST['OrderForm']['type']) && $_POST['OrderForm']['type'] == $subProductCoun->id?'selected' :''?> ><?= $subProductCoun->text?></option>
+                                     <?php endforeach;?>   
+                                </select>
+
+                                <?php if($modelOrder->hasErrors("type")):?>
+                                    <div class="help-block"><?= $modelOrder->getErrors("type")[0]?></div>
+                                    <?php endif;?>
+                                </div>
+
+                              
                                 </div>
                             <?php else : ?>
-                                <?= $form->field($modelOrder, 'type')->hiddenInput(['value' => $model->subProductCount[0]->id])->label(false); ?>
+                                <input type="hidden" name="OrderForm[type]" value="<?=$model->subProductCount[0]->id?>" >
+                               
                             <?php endif; ?>
 
                             <div class="col-md-6">
                                 <?php if ($model->type_options == Products::TYPE_CHOOSE_BOX) : ?>
-                                    <?php
-                                    $typeOptions= ArrayHelper::map($model->typeOptions, 'id', 'text');
-                                    $modelOrder->typeoption = array_key_first($typeOptions);;
-                                    ?>
-                                    <?= $form->field($modelOrder, 'typeoption')->radioList($typeOptions) ?>
+                                    
+                                <div class="form-group field-orderform-typeoption">
+                                <label class="control-label" for="orderform-typeoption">النوع</label>
+                                <select id="orderform-typeoption" class="form-control" name="OrderForm[typeoption]">
+                                    <?php foreach($model->typeOptions as $key=> $typeOptions):?>
+                                        <option value="<?=$typeOptions->id?>"  <?= isset($_POST['OrderForm']['typeoption']) && $_POST['OrderForm']['typeoption'] == $typeOptions->id?'selected' :''?> ><?= $typeOptions->text?></option>
+                                     <?php endforeach;?>   
+                                </select>
+
+                                <?php if($modelOrder->hasErrors("typeoption")):?>
+                                    <div class="help-block"><?= $modelOrder->getErrors("typeoption")[0]?></div>
+                                    <?php endif;?>
+                                </div>
+
+
+
+
+
                                 <?php else : ?>
-                                    <?= $form->field($modelOrder, 'typeoption')->dropDownList(ArrayHelper::map($model->typeOptions, 'id', 'text')) ?>
+
+
+
+
+
+                                <div class="form-group field-orderform-typeoption">
+                                <label class="control-label" for="orderform-typeoption">النوع</label>
+                                <select id="orderform-typeoption" class="form-control" name="OrderForm[typeoption]">
+                                    <?php foreach($model->typeOptions as $key=> $typeOptions):?>
+                                        <option value="<?=$typeOptions->id?>"  <?= isset($_POST['OrderForm']['typeoption']) && $_POST['OrderForm']['typeoption'] == $typeOptions->id?'selected' :''?> ><?= $typeOptions->text?></option>
+                                     <?php endforeach;?>   
+                                </select>
+
+                                <?php if($modelOrder->hasErrors("typeoption")):?>
+                                    <div class="help-block"><?= $modelOrder->getErrors("typeoption")[0]?></div>
+                                    <?php endif;?>
+                                </div>
+
+
+
                                 <?php endif; ?>
                             </div>
                         </div>
+                   
+               
 
+
+
+
+                    
+
+
+
+                      
 
                         <div class="form-group">
 
@@ -137,18 +229,23 @@ $path_theme = Yii::getAlias('@web') . 'theme/shop/'
                                 '<span class="spinner spinner-border spinner-border-sm" id="spinner" role="status" aria-hidden="true"></span>'.
                                 Yii::t('app', 'Order_Now') . ' <span class="fas fa-shopping-cart"></span> ', ['class' => 'btn_1  cart', 'id' => 'send_order','data-loading-text'=>"Loading..."]) ?>
                         </div>
-                        <?php ActiveForm::end(); ?>
+
+
+                        </form>
                     </div>
 
-                </div>
-                <!-- /prod_info -->
+                    
+	                </div>
+	       
+	            </div>
+	        </div>
+	        <!-- /row -->
+	    </div>
+	    <!-- /container -->
+	    
+	
 
-            </div>
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-
+        
     <div class="tabs_product">
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
@@ -197,6 +294,4 @@ $path_theme = Yii::getAlias('@web') . 'theme/shop/'
 
     <!-- /container -->
 
-
-
-</main>
+	</main>

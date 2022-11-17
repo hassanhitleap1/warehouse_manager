@@ -33,8 +33,8 @@
         <div class="offcanvas__nav__option">
             <a href="#" class="search-switch"><img src="<?= Yii::getAlias('@web') . "/malefashion-master" ?>/img/icon/search.png" alt=""></a>
             <a href="#"><img src="<?= Yii::getAlias('@web') . "/malefashion-master" ?>/img/icon/heart.png" alt=""></a>
-            <a href="#"><img src="<?= Yii::getAlias('@web') . "/malefashion-master" ?>/img/icon/cart.png" alt=""> <span>0</span></a>
-            <div class="price">$0.00</div>
+
+            <!-- <div class="price">$0.00</div> -->
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__text">
@@ -80,7 +80,11 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="<?= Yii::getAlias('@web') . "/malefashion-master" ?>/img/logo.png" alt=""></a>
+                        <?= \yii\helpers\Html::a(
+                            \yii\helpers\Html::img('/images/logo.png'),
+                            ['site/index']
+                        ) ?>
+
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -96,8 +100,8 @@
                     <div class="header__nav__option">
                         <a href="#" class="search-switch"><img src="<?= Yii::getAlias('@web') . "/malefashion-master" ?>/img/icon/search.png" alt=""></a>
                         <a href="#"><img src="img/icon/heart.png" alt=""></a>
-                        <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+                        <!-- <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a> -->
+                        <!-- <div class="price">$0.00</div> -->
                     </div>
                 </div>
             </div>

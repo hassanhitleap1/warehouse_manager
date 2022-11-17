@@ -3849,3 +3849,10 @@ ol {
 		height: 250px;
 	}
 }
+
+.header__logo > img{
+
+    width: 124px;
+    height: 37px;
+
+}

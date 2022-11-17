@@ -89,20 +89,16 @@ class SiteController extends Controller
         $sliders  = Silder::find()->all();
         $bansers = Banner::find()->all();
         $query =    Products::find();
-        if (isset($_GET['category'])) {
-            $query->where(['category_id' => $_GET['category']]);
-        }
-        $countQuery = clone $query;
-        $pages = new Pagination(['totalCount' => $countQuery->count()]);
-        $models = $query->offset($pages->offset)
-            ->limit($pages->limit)
+
+        $models = $query
+            ->limit(30)
             ->orderBy([
                 'created_at' => SORT_DESC //specify sort order ASC for ascending DESC for descending      
             ])
             ->all();
+
         return $this->render('index', [
             'models' => $models,
-            'pages' => $pages,
             'sliders' => $sliders,
             'bansers' => $bansers
         ]);

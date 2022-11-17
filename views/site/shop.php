@@ -1,87 +1,135 @@
-<?php
-$path_theme = Yii::getAlias('@web') . 'theme/shop/' ?>
+    <?php
 
-
-<link href="<?= $path_theme ?>css/listing.css" rel="stylesheet">
-
-<main>
-    <div class="container margin_30">
-        <div class="row">
-            <div class="col-lg-9">
-                <div class="top_banner">
-                    <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.3)">
-                        <div class="container pl-lg-5">
-                            <h1><?= Yii::t('app','Shop')?></h1>
+    use yii\helpers\Html; ?>
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shop</h4>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <span>Shop</span>
                         </div>
                     </div>
-                    <img src="img/bg_cat_shoes.jpg" class="img-fluid" alt="">
-                </div>
-                <!-- /top_banner -->
-                <div id="stick_here"></div>
-                <div class="toolbox elemento_stick add_bottom_30">
-                    <div class="container">
-
-                    </div>
-                </div>
-                <!-- /toolbox -->
-                <div class="row small-gutters">
-
-                    <?php foreach ($models as $model):?>
-                        <?= $this->render('@app/views/components/shop_product', ['model' => $model]); ?>
-                    <?php endforeach;?>
-
-                </div>
-                <!-- /row -->
-                <div class="pagination__wrapper">
-                    <?php echo \yii\widgets\LinkPager::widget([
-                        'pagination' => $pages,
-                        'prevPageLabel' => false,
-                        'nextPageLabel' => false,
-                        'maxButtonCount'=>2,
-                    ]); ?>
-
                 </div>
             </div>
-            <!-- /col -->
-
-            <aside class="col-lg-3" id="sidebar_fixed">
-                <div class="filter_col">
-                    <div class="inner_bt"><a href="#" class="open_filters"><i class="ti-close"></i></a></div>
-                    <?php $form = \yii\widgets\ActiveForm::begin([ 'method' => 'get' ,'action' => 'index.php?r=site%2Fshop']); ?>
-                            <div class="filter_type version_2">
-                                <h4><a href="#filter_1" data-toggle="collapse" class="opened"><?= Yii::t('app','Categories')?></a></h4>
-                                <div class="collapse show" id="filter_1">
-
-
-                                    <ul>
-                                        <?php foreach ($catigories as $catgory):?>
-                                            <li>
-                                                <label class="container_check"><?= $catgory->name_ar?></small>
-                                                    <input type="checkbox" name="categories[]"  <?= isset($_GET['categories']) && in_array($catgory->id ,$_GET['categories']) ? 'checked':''  ?>  value="<?= $catgory->id ?>">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                        <?php endforeach;;?>
-
-                                    </ul>
-                                </div>
-                                <!-- /filter_type -->
-                            </div>
-                            <!-- /filter_type -->
-                            <div class="buttons">
-                                <button  class="btn_1"><?= Yii::t('app','Filter')?></button>
-                                <a href="<?= \yii\helpers\Url::to(['/site/shop']) ?>" class="btn_1 gray"> <?= Yii::t('app','Reset')?></a>
-                            </div>
-                    <?php \yii\widgets\ActiveForm::end(); ?>
-                </div>
-            </aside>
-
-            <!-- /col -->
         </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</main>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shop Section Begin -->
+    <section class="shop spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="shop__sidebar">
+                        <div class="shop__sidebar__search">
+                            <form action="#">
+                                <input type="text" placeholder="Search...">
+                                <button type="submit"><span class="icon_search"></span></button>
+                            </form>
+                        </div>
+                        <div class="shop__sidebar__accordion">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__categories">
+                                                <ul class="nice-scroll">
+                                                    <?php foreach ($catigories  as $categoty) : ?>
+                                                        <li>
+                                                            <?= Html::a($categoty->name_ar, ['shop', 'categories' => $categoty->id]) ?>
+                                                        </li>
+                                                    <?php endforeach; ?>
 
 
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="shop__product__option">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="shop__product__option__left">
+                                    <p>Showing 1–12 of 126 results</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <?php foreach ($models as $model) : ?>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="<?= Yii::getAlias('@web') . "/" . $model->thumbnail ?>">
+                                        <ul class="product__hover">
+                                            <!-- <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
+                                            <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a>
+                                            </li>
+                                            <li><a href="#"><img src="img/icon/search.png" alt=""></a></li> -->
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><?= $model->name ?></h6>
+
+                                        <?= Html::a(Yii::t('app', 'Update'), ['/product/view', 'id' => $model->id], ['class' => 'add-cart']) ?>
+
+                                        <div class="rating">
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </div>
+                                        <h5><?= $model->purchasing_price ?> JOD</h5>
+                                        <div class="product__color__select">
+                                            <!-- <label for="pc-4">
+                                                <input type="radio" id="pc-4">
+                                            </label>
+                                            <label class="active black" for="pc-5">
+                                                <input type="radio" id="pc-5">
+                                            </label>
+                                            <label class="grey" for="pc-6">
+                                                <input type="radio" id="pc-6">
+                                            </label> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+
+
+                    </div>
+                    <div class="row">
+                        <?= \yii\widgets\LinkPager::widget([
+                            'pagination' => $pages,
+                        ]); ?>
+                        <!-- <div class="col-lg-12">
+                            <div class="product__pagination">
+                                <a class="active" href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <span>...</span>
+                                <a href="#">21</a>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
