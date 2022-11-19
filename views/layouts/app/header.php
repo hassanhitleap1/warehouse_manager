@@ -14,8 +14,9 @@
                 <?php else : ?>
 
                     <?= \yii\helpers\Html::beginForm(['/site/logout'], 'post') ?>
-                    <?= \yii\helpers\Html::a('logout', ['site/login']) ?>
+                    <?= \yii\helpers\Html::submitButton('logout') ?>
                     <?= \yii\helpers\Html::endForm() ?>
+
                 <?php endif; ?>
 
 
@@ -60,8 +61,13 @@
                                     <?= \yii\helpers\Html::a('Sign in', ['site/login']) ?>
                                 <?php else : ?>
                                     <?= \yii\helpers\Html::beginForm(['/site/logout'], 'post') ?>
-                                    <?= \yii\helpers\Html::a('logout', ['site/login']) ?>
+                                    <?= \yii\helpers\Html::submitButton('logout') ?>
                                     <?= \yii\helpers\Html::endForm() ?>
+
+
+
+
+
                                 <?php endif; ?>
                             </div>
                             <div class="header__top__hover">
@@ -92,7 +98,7 @@
                         <ul>
                             <li class="active"><?= \yii\helpers\Html::a('Home', ['site/index']) ?></li>
                             <li><?= \yii\helpers\Html::a('Shop', ['site/shop']) ?></li>
-                            <li><?= \yii\helpers\Html::a('Contacts', ['site/contacts']) ?></li>
+                            <li><?= \yii\helpers\Html::a('Contacts', ['site/contact']) ?></li>
                         </ul>
                     </nav>
                 </div>
