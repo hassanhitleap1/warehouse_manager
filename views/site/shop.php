@@ -1,6 +1,8 @@
     <?php
 
     use yii\helpers\Html;
+
+    $this->title = 'shop';
     ?>
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
@@ -10,7 +12,7 @@
                     <div class="breadcrumb__text">
                         <h4>Shop</h4>
                         <div class="breadcrumb__links">
-                            <a href="./index.html">Home</a>
+                            <?= Html::a(Yii::t('app', 'Home'), ['site/index']) ?>
                             <span>Shop</span>
                         </div>
                     </div>
@@ -27,10 +29,10 @@
                 <div class="col-lg-3">
                     <div class="shop__sidebar">
                         <div class="shop__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
+                            <?php $form = \yii\widgets\ActiveForm::begin(['method' => 'get', 'action' => 'index.php?r=site%2Fshop']); ?>
+                            <input type="text" id="search-input" name='q' value="<?= @$_GET['q'] ?>" placeholder="Search here.....">
+                            <?php \yii\widgets\ActiveForm::end(); ?>
+
                         </div>
                         <div class="shop__sidebar__accordion">
                             <div class="accordion" id="accordionExample">
@@ -64,7 +66,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__left">
-                                    <p>Showing 1–12 of 126 results</p>
+                                    <p>Showing <?= $offset ?>–<?= $limit ?> of <?= $totalCount ?> results</p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -82,9 +84,11 @@
 
                     </div>
                     <div class="row">
-                        <?= \yii\widgets\LinkPager::widget([
-                            'pagination' => $pages,
-                        ]); ?>
+                        <div class="col-lg-12">
+                            <?= \yii\widgets\LinkPager::widget([
+                                'pagination' => $pages,
+                            ]); ?>
+                        </div>
                         <!-- <div class="col-lg-12">
                             <div class="product__pagination">
                                 <a class="active" href="#">1</a>

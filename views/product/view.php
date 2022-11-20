@@ -38,8 +38,9 @@ $path_theme = Yii::getAlias('@web') . 'theme/shop/'
             <div class="row">
                 <div class="col-lg-12">
                     <div class="product__details__breadcrumb">
-                        <a href="./index.html">Home</a>
-                        <a href="./shop.html">Shop</a>
+                        <?= Html::a(Yii::t('app', 'Home'), ['site/index']) ?>
+                        <?= Html::a(Yii::t('app', 'Shop'), ['site/shop']) ?>
+
                         <span>Product Details</span>
                     </div>
                 </div>

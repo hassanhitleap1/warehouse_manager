@@ -284,7 +284,11 @@ class SiteController extends Controller
             $query->andWhere(['like', 'name', $_GET['q'] . '%', false]);
         }
         $countQuery = clone $query;
+        $totalCount = $countQuery->count();
+
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $limit = $pages->limit;
+        $offset = $pages->offset;
         $models = $query->offset($pages->offset)
             ->limit($pages->limit)
             ->orderBy([
@@ -295,7 +299,10 @@ class SiteController extends Controller
         return $this->render('shop', [
             'models' => $models,
             'pages' => $pages,
-            'catigories' => $catigories
+            'catigories' => $catigories,
+            'totalCount' => $totalCount,
+            'offset' => $offset,
+            'limit' => $limit
 
         ]);
     }

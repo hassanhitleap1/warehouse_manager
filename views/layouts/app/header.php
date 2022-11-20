@@ -1,3 +1,8 @@
+    <?php
+
+    use app\models\User;
+
+    ?>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -16,7 +21,9 @@
                     <?= \yii\helpers\Html::beginForm(['/site/logout'], 'post') ?>
                     <?= \yii\helpers\Html::submitButton('logout') ?>
                     <?= \yii\helpers\Html::endForm() ?>
-
+                    <?php if (Yii::$app->user->identity->type == User::SUPER_ADMIN) : ?>
+                        <?= \yii\helpers\Html::a(Yii::t('app', 'dashboard'), ['dashboard/index']) ?>
+                    <?php endif; ?>
                 <?php endif; ?>
 
 
@@ -60,11 +67,14 @@
                                 <?php if (Yii::$app->user->isGuest) : ?>
                                     <?= \yii\helpers\Html::a('Sign in', ['site/login']) ?>
                                 <?php else : ?>
+
                                     <?= \yii\helpers\Html::beginForm(['/site/logout'], 'post') ?>
                                     <?= \yii\helpers\Html::submitButton('logout') ?>
                                     <?= \yii\helpers\Html::endForm() ?>
 
-
+                                    <?php if (Yii::$app->user->identity->type == User::SUPER_ADMIN) : ?>
+                                        <?= \yii\helpers\Html::a(Yii::t('app', 'dashboard'), ['dashboard/index']) ?>
+                                    <?php endif; ?>
 
 
 

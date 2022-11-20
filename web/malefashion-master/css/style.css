@@ -3856,3 +3856,7 @@ ol {
     height: 37px;
 
 }
+
+.header__logo img{
+	height: 20px;
+}
