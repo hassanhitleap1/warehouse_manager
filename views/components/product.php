@@ -16,13 +16,13 @@ use yii\helpers\Html;
 
         <?= Html::a(Yii::t('app', 'view'), ['/product/view', 'id' => $model->id], ['class' => 'add-cart']) ?>
 
-        <div class="rating">
+        <!-- <div class="rating">
             <i class="fa fa-star-o"></i>
             <i class="fa fa-star-o"></i>
             <i class="fa fa-star-o"></i>
             <i class="fa fa-star-o"></i>
             <i class="fa fa-star-o"></i>
-        </div>
+        </div> -->
         <h5><?= $model->purchasing_price ?> JOD</h5>
         <div class="product__color__select">
             <!-- <label for="pc-4">

@@ -266,7 +266,9 @@ return [
     'Successfuly_Send' => "تم الأرسال بنجاج",
     'Subject' => "الموضوع",
     'Body' => "النص",
-    'verifyCode' => "رمز التحقق"
+    'verifyCode' => "رمز التحقق",
+    'view' => "عرض",
+    'Related Products' => "منتجات ذات صلة"
 
 
 ];

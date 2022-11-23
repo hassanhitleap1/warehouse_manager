@@ -3870,3 +3870,13 @@ ol {
 .help-block{
 	color: red;
 }
+
+.thanck-continaer{
+	text-align: center;
+
+}
+
+.thanck-continaer > p{
+    font-size: xx-large;
+	margin: 17px;
+}

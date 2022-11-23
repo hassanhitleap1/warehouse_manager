@@ -6,10 +6,9 @@ $this->title = $model->name;
 use app\models\pricecompanydelivery\PriceCompanyDelivery;
 use app\models\products\Products;
 use app\models\regions\Regions;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
+
 
 $regions_model = Regions::find()->all();
 $regions = [];
@@ -39,9 +38,9 @@ $path_theme = Yii::getAlias('@web') . 'theme/shop/'
                 <div class="col-lg-12">
                     <div class="product__details__breadcrumb">
                         <?= Html::a(Yii::t('app', 'Home'), ['site/index']) ?>
-                        <?= Html::a(Yii::t('app', 'Shop'), ['site/shop']) ?>
+                        <?= Html::a(Yii::t('app', 'Shop Now'), ['site/shop']) ?>
 
-                        <span>Product Details</span>
+                        <span><?= $model->name; ?></span>
                     </div>
                 </div>
             </div>
@@ -82,14 +81,14 @@ $path_theme = Yii::getAlias('@web') . 'theme/shop/'
                 <div class="col-lg-8">
                     <div class="product__details__text">
                         <h4><?= $model->name ?></h4>
-                        <div class="rating">
+                        <!-- <div class="rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-o"></i>
                             <span> - 5 Reviews</span>
-                        </div>
+                        </div> -->
                         <h3> <?= $model->purchasing_price ?> JOD</h3>
                         <p> <?php print  $model->description ?></p>
                         <?php $uri  =  Url::to(['product/view', 'id' => $model->id]); ?>
@@ -250,7 +249,7 @@ $path_theme = Yii::getAlias('@web') . 'theme/shop/'
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="related-title">Related Product</h3>
+                <h3 class="related-title"><?= Yii::t('app', 'Related Products') ?></h3>
             </div>
         </div>
         <div class="row">
