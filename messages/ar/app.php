@@ -262,7 +262,11 @@ return [
     "To receive all the news" => "كي يصلك كل الأخبار",
     'Showing' => "عرض",
     'results' => "نتائج",
-    'Search here.....' => 'البحث هنا .....'
+    'Search here.....' => 'البحث هنا .....',
+    'Successfuly_Send' => "تم الأرسال بنجاج",
+    'Subject' => "الموضوع",
+    'Body' => "النص",
+    'verifyCode' => "رمز التحقق"
 
 
 ];

@@ -25,20 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-lg-6 col-md-6">
                 <div class="contact__text">
                     <div class="section-title">
-                        <span>Information</span>
-                        <h2>Contact Us</h2>
-                        <p>As you might expect of a company that began as a high-end interiors contractor, we pay
-                            strict attention.</p>
+
+                        <h2><?= Yii::t('app', 'Contacts') ?></h2>
+
                     </div>
                     <ul>
                         <li>
-                            <h4>America</h4>
-                            <p>195 E Parker Square Dr, Parker, CO 801 <br />+43 982-314-0958</p>
+                            <h4>عمان</h4>
+
+                            <p><?= Yii::$app->params['address'] ?> <br /><?= Yii::$app->params['phone'] ?></p>
                         </li>
-                        <li>
-                            <h4>France</h4>
-                            <p>109 Avenue Léon, 63 Clermont-Ferrand <br />+12 345-423-9893</p>
-                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -46,19 +43,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="contact__form">
                     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')) : ?>
                         <div class="alert alert-success">
-                            Thank you for contacting us. We will respond to you as soon as possible.
+
+                            <?= Yii::t('app', 'Successfuly_Send') ?>
+
                         </div>
 
-                        <p>
-                            Note that if you turn on the Yii debugger, you should be able
-                            to view the mail message on the mail panel of the debugger.
-                            <?php if (Yii::$app->mailer->useFileTransport) : ?>
-                                Because the application is in development mode, the email is not sent but saved as
-                                a file under <code><?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?></code>.
-                                Please configure the <code>useFileTransport</code> property of the <code>mail</code>
-                                application component to be false to enable email sending.
-                            <?php endif; ?>
-                        </p>
+
 
                     <?php else : ?>
 
@@ -73,12 +63,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
 
-                        <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                            'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                        ]) ?>
 
                         <div class="form-group">
-                            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                            <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                         </div>
 
                         <?php ActiveForm::end(); ?>
