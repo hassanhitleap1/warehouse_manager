@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 ?>
-<div class="product__item">
+<div class="product__item" onclick="openproduct(<?= $model->id ?>)">
     <div class="product__item__pic set-bg" data-setbg="<?= Yii::getAlias('@web') . "/" . $model->thumbnail ?>">
         <ul class="product__hover">
             <!-- <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
@@ -14,7 +14,7 @@ use yii\helpers\Html;
     <div class="product__item__text">
         <h6><?= $model->name ?></h6>
 
-        <?= Html::a(Yii::t('app', 'Update'), ['/product/view', 'id' => $model->id], ['class' => 'add-cart']) ?>
+        <?= Html::a(Yii::t('app', 'view'), ['/product/view', 'id' => $model->id], ['class' => 'add-cart']) ?>
 
         <div class="rating">
             <i class="fa fa-star-o"></i>

@@ -2,7 +2,7 @@
 
     use yii\helpers\Html;
 
-    $this->title = 'shop';
+    $this->title = Yii::t('app', 'Shop Now');
     ?>
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
@@ -10,10 +10,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Shop</h4>
+                        <h4><?= Yii::t('app', 'Shop Now') ?></h4>
                         <div class="breadcrumb__links">
                             <?= Html::a(Yii::t('app', 'Home'), ['site/index']) ?>
-                            <span>Shop</span>
+                            <span><?= Yii::t('app', 'Shop Now') ?></span>
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     <div class="shop__sidebar">
                         <div class="shop__sidebar__search">
                             <?php $form = \yii\widgets\ActiveForm::begin(['method' => 'get', 'action' => 'index.php?r=site%2Fshop']); ?>
-                            <input type="text" id="search-input" name='q' value="<?= @$_GET['q'] ?>" placeholder="Search here.....">
+                            <input type="text" id="search-input" name='q' value="<?= @$_GET['q'] ?>" placeholder="<?= Yii::t('app', 'Search here.....') ?>">
                             <?php \yii\widgets\ActiveForm::end(); ?>
 
                         </div>
@@ -38,7 +38,7 @@
                             <div class="accordion" id="accordionExample">
                                 <div class="card">
                                     <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                        <a data-toggle="collapse" data-target="#collapseOne"> <?= Yii::t('app', 'Categories') ?></a>
                                     </div>
                                     <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
@@ -66,7 +66,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="shop__product__option__left">
-                                    <p>Showing <?= $offset ?>–<?= $limit ?> of <?= $totalCount ?> results</p>
+                                    <p> <?= Yii::t('app', 'Showing') ?> <?= $offset ?>–<?= $limit ?> of <?= $totalCount ?> <?= Yii::t('app', 'results') ?> </p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">

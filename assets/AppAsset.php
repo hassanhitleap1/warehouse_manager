@@ -32,6 +32,7 @@ class AppAsset extends AssetBundle
 
     ];
     public $js = [
+        "js/custum.js",
         "malefashion-master/js/jquery-3.3.1.min.js",
         "malefashion-master/js/bootstrap.min.js",
         "malefashion-master/js/jquery.nice-select.min.js",

@@ -3860,3 +3860,13 @@ ol {
 .header__logo img{
 	height: 20px;
 }
+
+.cart-fill{
+	    width: -webkit-fill-available;
+		position: fixed;
+		bottom: 0;
+		z-index: 99999;
+}
+.help-block{
+	color: red;
+}

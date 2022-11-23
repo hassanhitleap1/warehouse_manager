@@ -257,84 +257,19 @@ $path_theme = Yii::getAlias('@web') . 'theme/shop/'
             <?php if (count($model->upsell)) : ?>
                 <?php foreach ($model->upsell as $key => $upsell) : ?>
                     <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="<?= Yii::getAlias('@web') . "/" . $upsell->thumbnail ?>">
-                                <ul class="product__hover">
-                                    <!-- <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                            <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a>
-                                            </li>
-                                            <li><a href="#"><img src="img/icon/search.png" alt=""></a></li> -->
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><?= $upsell->name ?></h6>
-
-                                <?= Html::a(Yii::t('app', 'Update'), ['/product/view', 'id' => $upsell->id], ['class' => 'add-cart']) ?>
-
-                                <div class="rating">
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </div>
-                                <h5><?= $upsell->purchasing_price ?> JOD</h5>
-                                <div class="product__color__select">
-                                    <!-- <label for="pc-4">
-                                                <input type="radio" id="pc-4">
-                                            </label>
-                                            <label class="active black" for="pc-5">
-                                                <input type="radio" id="pc-5">
-                                            </label>
-                                            <label class="grey" for="pc-6">
-                                                <input type="radio" id="pc-6">
-                                            </label> -->
-                                </div>
-                            </div>
-                        </div>
+                        <?= $this->render('/components/product', ['model' => $upsell]); ?>
                     </div>
                 <?php endforeach; ?>
             <?php else : ?>
                 <?php foreach ($product_suggested as $key => $product) : ?>
                     <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="<?= Yii::getAlias('@web') . "/" . $product->thumbnail ?>">
-                                <ul class="product__hover">
-                                    <!-- <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                            <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a>
-                                            </li>
-                                            <li><a href="#"><img src="img/icon/search.png" alt=""></a></li> -->
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><?= $product->name ?></h6>
-
-                                <?= Html::a(Yii::t('app', 'Update'), ['/product/view', 'id' => $product->id], ['class' => 'add-cart']) ?>
-
-                                <div class="rating">
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </div>
-                                <h5><?= $product->purchasing_price ?> JOD</h5>
-                                <div class="product__color__select">
-                                    <!-- <label for="pc-4">
-                                                <input type="radio" id="pc-4">
-                                            </label>
-                                            <label class="active black" for="pc-5">
-                                                <input type="radio" id="pc-5">
-                                            </label>
-                                            <label class="grey" for="pc-6">
-                                                <input type="radio" id="pc-6">
-                                            </label> -->
-                                </div>
-                            </div>
-                        </div>
+                        <?= $this->render('/components/product', ['model' => $product]); ?>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
 </section>
 <!-- Related Section End -->
+<div class="row">
+    <button class="primary-btn  cart cart-fill"><?= Yii::t('app', 'Order_Now') ?></button>
+</div>

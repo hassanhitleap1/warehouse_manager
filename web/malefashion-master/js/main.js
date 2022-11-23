@@ -213,4 +213,19 @@
         });
     });
 
+    
+    $('.cart-fill').click(function() {
+     
+        $( 'html, body' ).animate({
+            scrollTop: $( '.product__details__text' ).offset().top
+      }, '600' );
+    }); 
+
+    if($("div").hasClass('help-block')){
+        $( 'html, body' ).animate({
+            scrollTop: $( '.product__details__text' ).offset().top
+      }, '600' ); 
+    }
+    ;   
+
 })(jQuery);

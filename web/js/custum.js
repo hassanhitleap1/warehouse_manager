@@ -513,11 +513,11 @@ function fade_in_out_button() {
 
         order_landig_top=$("#order_landig").offset().top - window.pageYOffset - 120
         if(order_landig_top < document.documentElement.scrollTop){
-            $( ".productmainbtn" ).fadeOut( "slow", function() {
+            $( ".cart-fill" ).fadeOut( "slow", function() {
                 // Animation complete.
             });
         }else{
-            $( ".productmainbtn" ).fadeIn( "slow", function() {
+            $( ".cart-fill" ).fadeIn( "slow", function() {
                 // Animation complete.
             });
         }
@@ -533,6 +533,7 @@ function fade_in_out_button() {
 
 
 }
+
 
 function show_loader(){
     $(".loader").show();
@@ -1053,6 +1054,14 @@ function  appaend_products_to_cart(product){
 
     $('.list_cart').append(html);
 }
+
+function  openproduct(id){
+    window.location.replace(`${SITE_URL}/index.php?r=product/view&id=${id}`);
+}
+
+
+
+
 
 
 $(document).on('click','.but_dic',function (event) {
