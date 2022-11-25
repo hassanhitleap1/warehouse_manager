@@ -268,7 +268,10 @@ return [
     'Body' => "النص",
     'verifyCode' => "رمز التحقق",
     'view' => "عرض",
-    'Related Products' => "منتجات ذات صلة"
+    'Related Products' => "منتجات ذات صلة",
+    "Media" => "ميديا",
+    "Silder" => "سلايدر",
+    "Banner" => "بنر"
 
 
 ];
