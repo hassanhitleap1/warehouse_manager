@@ -47,7 +47,11 @@
         "pusher/pusher-php-server": "^7.0",
         "intervention/image": "^2.7",
         "kartik-v/yii2-widget-colorinput": "*",
-        "devanych/yii2-cart": "*"
+        "devanych/yii2-cart": "*",
+        "shopify/shopify-api": "^4.3",
+        "shopify/shopify-php": "^0.11.0",
+        "phpclassic/php-shopify": "^1.2",
+        "phpoffice/phpspreadsheet": "^1.29"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

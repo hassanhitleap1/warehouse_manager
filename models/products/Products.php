@@ -38,19 +38,21 @@ class Products extends \yii\db\ActiveRecord
 {
     public $images_product;
 
-    
-    const To_Be_Equipped=1;
-    const To_Be_Ready=2;
-    const Ready=3;
-    const Connecting=4; 
-    const To_Be_Deliverd=5;
-    const Canceled=6;
-    const Delayed=7;
-    const TYPE_DROP_DAWNLIST=1;
-    const TYPE_CHOOSE_BOX=2;
+
+    const To_Be_Equipped = 1;
+    const To_Be_Ready = 2;
+    const Ready = 3;
+    const Connecting = 4;
+    const To_Be_Deliverd = 5;
+    const Canceled = 6;
+    const Delayed = 7;
+    const TYPE_DROP_DAWNLIST = 1;
+    const TYPE_CHOOSE_BOX = 2;
     const SCENARIO_CREATE = 'create';
     const SCENARIO_UPDATE = 'update';
-    
+
+    const SCENARIO_IMPORT = 'import';
+
     /**
      * {@inheritdoc}
      */
@@ -65,17 +67,17 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','quantity', 'purchasing_price', 'selling_price','category_id', 'warehouse_id'], 'required','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
-            [['images_product',],'required','on'=>[self::SCENARIO_CREATE]],
-            [['purchasing_price', 'selling_price'], 'double','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
-            [['quantity', 'category_id','type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id','company_delivery_id','quantity_come'], 'integer','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
-            [['name'], 'string', 'max' => 255,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
-             [['video_url','thumbnail','thumb'], 'string', 'max' => 500,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
-             [['description'], 'string','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
-             [['top_selling','featured','label','countdown','days','hours','muints','second'],'safe','on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
-             //[['days','hours','muints','second'],'max' => 60 ,'min'=>1 ,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
-             [['images_product'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,jpeg,gif','maxFiles' => 20,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
-             
+            [['name', 'quantity', 'purchasing_price', 'selling_price', 'category_id', 'warehouse_id'], 'required', 'on' => [self::SCENARIO_UPDATE, self::SCENARIO_CREATE, self::SCENARIO_IMPORT]],
+            [['images_product',], 'required', 'on' => [self::SCENARIO_CREATE]],
+            [['purchasing_price', 'selling_price'], 'double', 'on' => [self::SCENARIO_UPDATE, self::SCENARIO_CREATE, self::SCENARIO_IMPORT]],
+            [['quantity', 'category_id', 'type_options', 'status', 'supplier_id', 'unit_id', 'warehouse_id', 'company_delivery_id', 'quantity_come', 'product_id'], 'integer', 'on' => [self::SCENARIO_UPDATE, self::SCENARIO_CREATE, self::SCENARIO_IMPORT]],
+            [['name'], 'string', 'max' => 255, 'on' => [self::SCENARIO_UPDATE, self::SCENARIO_CREATE, self::SCENARIO_IMPORT]],
+            [['video_url', 'thumbnail', 'thumb'], 'string', 'max' => 500, 'on' => [self::SCENARIO_UPDATE, self::SCENARIO_CREATE, self::SCENARIO_IMPORT]],
+            [['description'], 'string', 'on' => [self::SCENARIO_UPDATE, self::SCENARIO_CREATE, self::SCENARIO_IMPORT]],
+            [['top_selling', 'featured', 'label', 'countdown', 'days', 'hours', 'muints', 'second'], 'safe', 'on' => [self::SCENARIO_UPDATE, self::SCENARIO_CREATE, self::SCENARIO_IMPORT]],
+            //[['days','hours','muints','second'],'max' => 60 ,'min'=>1 ,'on'=>[self::SCENARIO_UPDATE,self::SCENARIO_CREATE]],
+            [['images_product'], 'image', 'skipOnEmpty' => true, 'extensions' => 'png,jpg,jpeg,gif', 'maxFiles' => 20, 'on' => [self::SCENARIO_UPDATE, self::SCENARIO_CREATE]],
+
         ];
     }
 
@@ -91,7 +93,7 @@ class Products extends \yii\db\ActiveRecord
             'purchasing_price' => Yii::t('app', 'Purchasing_Price'),
             'selling_price' => Yii::t('app', 'Selling_Price'),
             'quantity' => Yii::t('app', 'Quantity'),
-            'quantity_come'=> Yii::t('app', 'Quantity'),
+            'quantity_come' => Yii::t('app', 'Quantity'),
             'category_id' => Yii::t('app', 'Category'),
             'status' => Yii::t('app', 'Status'),
             'supplier_id' => Yii::t('app', 'Supplier'),
@@ -99,21 +101,21 @@ class Products extends \yii\db\ActiveRecord
             'warehouse_id' => Yii::t('app', 'Warehouse'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
-            "images_product"=>Yii::t('app', 'Images_Product'),
-            "type_options"=>Yii::t('app', 'Type_Options'),
-            "video_url"=>Yii::t('app', 'Video_Url'),
-            "description"=>Yii::t('app', 'Description'),
-            'company_delivery_id'=>Yii::t('app', 'Company_Delivery'),
-            'featured'=>Yii::t('app', 'Featured'),
-            'top_selling'=>Yii::t('app', 'Top_Selling'),
-            'label'=>Yii::t('app', 'Label'),
-            'countdown'=>Yii::t('app', 'Countdown'),
-            'discount'=>Yii::t('app', 'Discount'),
+            "images_product" => Yii::t('app', 'Images_Product'),
+            "type_options" => Yii::t('app', 'Type_Options'),
+            "video_url" => Yii::t('app', 'Video_Url'),
+            "description" => Yii::t('app', 'Description'),
+            'company_delivery_id' => Yii::t('app', 'Company_Delivery'),
+            'featured' => Yii::t('app', 'Featured'),
+            'top_selling' => Yii::t('app', 'Top_Selling'),
+            'label' => Yii::t('app', 'Label'),
+            'countdown' => Yii::t('app', 'Countdown'),
+            'discount' => Yii::t('app', 'Discount'),
 
         ];
     }
 
-      /**
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getSubProductCount()
@@ -128,7 +130,7 @@ class Products extends \yii\db\ActiveRecord
     {
         return $this->hasMany(OptionsSellProduct::className(), ['product_id' => 'id']);
     }
-      /**
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getImagesProduct()
@@ -136,7 +138,8 @@ class Products extends \yii\db\ActiveRecord
         return $this->hasMany(ProductsImage::className(), ['product_id' => 'id']);
     }
 
-    public function getUpsell(){
+    public function getUpsell()
+    {
         return $this->hasMany(Upsell::class, ['product_id' => 'id']);
     }
 
@@ -149,12 +152,12 @@ class Products extends \yii\db\ActiveRecord
         return new ProductsQuery(get_called_class());
     }
 
-       /**
+    /**
      * @inheritdoc
      */
     public function beforeSave($insert)
     {
-        $today=Carbon::now("Asia/Amman");
+        $today = Carbon::now("Asia/Amman");
         if (parent::beforeSave($insert)) {
             // Place your custom code here
             if ($this->isNewRecord) {
@@ -163,7 +166,7 @@ class Products extends \yii\db\ActiveRecord
 
 
             } else {
-                $this->updated_at =$today;
+                $this->updated_at = $today;
             }
 
             return true;
@@ -176,25 +179,25 @@ class Products extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Categorises::className(), ['id' => 'category_id']);
-    } 
+    }
 
 
     public function getWarehouse()
     {
         return $this->hasOne(Warehouse::className(), ['id' => 'warehouse_id']);
-    } 
+    }
 
 
     public function getSupplier()
     {
         return $this->hasOne(Suppliers::className(), ['id' => 'supplier_id']);
-    } 
+    }
 
 
     public function getUnit()
     {
         return $this->hasOne(Categorises::className(), ['id' => 'unit_id']);
-    } 
+    }
 
 
 

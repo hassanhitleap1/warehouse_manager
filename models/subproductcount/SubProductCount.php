@@ -10,6 +10,7 @@ use Yii;
  *
  * @property int $id
  * @property string $type
+ * @property string $variant_id
  * @property int $count
  * @property int $product_id
  * @property string|null $created_at
@@ -31,20 +32,22 @@ class SubProductCount extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type'], 'custum_required_type' ,'skipOnEmpty' => false, 'skipOnError' => false],
-            [['count'],'custum_required_count', 'skipOnEmpty' => false, 'skipOnError' => false],
+            [['type'], 'custum_required_type', 'skipOnEmpty' => false, 'skipOnError' => false],
+            [['count'], 'custum_required_count', 'skipOnEmpty' => false, 'skipOnError' => false],
             [['count', 'product_id'], 'integer'],
-            [['type'], 'string', 'max' => 255],
+            [['type', 'variant_id'], 'string', 'max' => 255],
         ];
     }
 
-    public function custum_required_type($attribute, $params){
-        if($this->type =='' && ($this->count !='' )){
+    public function custum_required_type($attribute, $params)
+    {
+        if ($this->type == '' && ($this->count != '')) {
             $this->addError($attribute, Yii::t('app', 'Required'));
         }
     }
-    public function custum_required_count($attribute, $params){
-        if($this->type =='' && ($this->count !='' )){
+    public function custum_required_count($attribute, $params)
+    {
+        if ($this->type == '' && ($this->count != '')) {
             $this->addError($attribute, Yii::t('app', 'Required'));
         }
     }

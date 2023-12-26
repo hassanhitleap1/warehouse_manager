@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=wherehouse',
+    'dsn' => 'mysql:host=localhost;dbname=store;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock',
     'username' => 'root',
-    'password' => 'rootroot',
+    'password' => 'root',
     'charset' => 'utf8',
 
 
