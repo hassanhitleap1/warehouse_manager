@@ -143,15 +143,25 @@ class ImportController extends BaseController
 
     public function actionProducts()
     {
-
         $category = Categorises::find()->one();
-
         $supplier = Suppliers::find()->one();
-
         $warehouse = Warehouse::find()->one();
 
-        $productsData = ProductShpifyHelper::getProduct();
+        $productsData = ProductShpifyHelper::getDraftProducts();
+        foreach ($productsData['products'] as $key => $product) {
+            $nextId = Products::find()->max('id') + 1;
+            $productModel = Products::find()->where(['product_id' => $product['id']])->one();
+            $productModel = ProductShpifyHelper::saveProduct($product, $productModel, $nextId, $category, $supplier, $warehouse, $key);
+        }
 
+        $productsData = ProductShpifyHelper::getArchivedProducts();
+        foreach ($productsData['products'] as $key => $product) {
+            $nextId = Products::find()->max('id') + 1;
+            $productModel = Products::find()->where(['product_id' => $product['id']])->one();
+            $productModel = ProductShpifyHelper::saveProduct($product, $productModel, $nextId, $category, $supplier, $warehouse, $key);
+        }
+
+        $productsData = ProductShpifyHelper::getActiveProducts();
         foreach ($productsData['products'] as $key => $product) {
             $nextId = Products::find()->max('id') + 1;
             $productModel = Products::find()->where(['product_id' => $product['id']])->one();
@@ -161,4 +171,7 @@ class ImportController extends BaseController
 
 
     }
+
+
+
 }

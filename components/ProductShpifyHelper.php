@@ -24,34 +24,72 @@ class ProductShpifyHelper extends BaseObject
     public static function getProduct()
     {
         $api_url = "https://" . self::$domain . "/admin/api/2021-07/products.json";
-        // Construct the API endpoint URL
-
-        // Initialize cURL session
         $ch = curl_init($api_url);
-
-        // Set cURL options
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
         curl_setopt($ch, CURLOPT_USERPWD, self::$apiKey . ":" . self::$apiSecret);
-
-        // Execute the cURL request
         $response = curl_exec($ch);
-
-        // Check for cURL errors and HTTP status code
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        // Close cURL session
         curl_close($ch);
-
         if ($httpCode === 200) {
-
             return json_decode($response, true);
-
-
         }
-
-
         throw new \Exception("error in rquast httpCode");
+    }
+
+
+
+
+    public static function getActiveProducts()
+    {
+        $api_url = "https://" . self::$domain . "/admin/api/2022-01/products.json?status=active";
+        $ch = curl_init($api_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+        curl_setopt($ch, CURLOPT_USERPWD, self::$apiKey . ":" . self::$apiSecret);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        if ($httpCode === 200) {
+            return json_decode($response, true);
+        }
+        throw new \Exception("error in rquast httpCode");
+
+    }
+
+    public static function getArchivedProducts()
+    {
+        $api_url = "https://" . self::$domain . "/admin/api/2022-01/products.json?status=archived";
+        $ch = curl_init($api_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+        curl_setopt($ch, CURLOPT_USERPWD, self::$apiKey . ":" . self::$apiSecret);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        if ($httpCode === 200) {
+            return json_decode($response, true);
+        }
+        throw new \Exception("error in rquast httpCode");
+
+    }
+
+    public static function getDraftProducts()
+    {
+
+        $api_url = "https://" . self::$domain . "/admin/api/2022-01/products.json?status=draft";
+        $ch = curl_init($api_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+        curl_setopt($ch, CURLOPT_USERPWD, self::$apiKey . ":" . self::$apiSecret);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        if ($httpCode === 200) {
+            return json_decode($response, true);
+        }
+        throw new \Exception("error in rquast httpCode");
+
     }
 
 
@@ -59,24 +97,16 @@ class ProductShpifyHelper extends BaseObject
     public static function getProductById($id)
     {
         $api_url = "https://" . self::$domain . "/admin/api/2021-07/products/$id.json";
-        // Construct the API endpoint URL
-        // Initialize cURL session
         $ch = curl_init($api_url);
-        // Set cURL options
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
         curl_setopt($ch, CURLOPT_USERPWD, self::$apiKey . ":" . self::$apiSecret);
-
-        // Execute the cURL request
         $response = curl_exec($ch);
-        // Check for cURL errors and HTTP status code
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        // Close cURL session
         curl_close($ch);
         if ($httpCode === 200) {
             return json_decode($response, true);
         }
-
         throw new \Exception("error in rquast httpCode");
     }
 
@@ -86,7 +116,6 @@ class ProductShpifyHelper extends BaseObject
         if ($product['status'] == "active") {
             return true;
         }
-
         return false;
     }
 
@@ -96,13 +125,14 @@ class ProductShpifyHelper extends BaseObject
     {
 
         $isNew = true;
+        $newLine = "<br/>";
+        echo "key $keyProduct $newLine";
 
         if (is_null($productModel)) {
             $isNew = false;
             $productModel = new Products();
             $nextId = $productModel->id;
         }
-
         $productModel->scenario = Products::SCENARIO_IMPORT;
 
         $productModel->name = !isset($product['title']) && $product['title'] !== "" ? $product['title'] : ".....";
@@ -115,7 +145,13 @@ class ProductShpifyHelper extends BaseObject
         $productModel->category_id = !is_null($category) ? $category->id : 1;
         $productModel->supplier_id = !is_null($supplier) ? $supplier->id : 1;
         $productModel->warehouse_id = !is_null($warehouse) ? $warehouse->id : 1;
-        $dataThumbnail = self::saveImageInStorage($product['image']['src'], $nextId, $isNew);
+        if (isset($product['image']['src'])) {
+            $dataThumbnail = self::saveImageInStorage($product['image']['src'], $nextId, $isNew);
+        } else {
+            $dataThumbnail['thumbnail'] = 'thumbnail.png';
+            $dataThumbnail['thumb'] = 'thumb.png';
+        }
+
         $productModel->thumbnail = $dataThumbnail['thumbnail'];
         $productModel->thumb = $dataThumbnail['thumb'];
         $productModel->unit_id = 1;
@@ -133,20 +169,14 @@ class ProductShpifyHelper extends BaseObject
 
 
         if (!$productModel->save()) {
-
             echo "error in  product $keyProduct\n";
             $allErrors = $productModel->getErrors();
-
             foreach ($allErrors as $attributeErrors) {
                 foreach ($attributeErrors as $error) {
                     echo "$error \n";
                 }
             }
-
-
-            return Controller::EXIT_CODE_ERROR; // exit with an error code
         }
-
 
         self::saveImagesInStorage($product['images'], $productModel, $isNew);
 
@@ -216,18 +246,10 @@ class ProductShpifyHelper extends BaseObject
 
 
         $folderPath = "products/$productModel->id";
-
         FileHelper::createDirectory($folderPath, 0777, true);
-
-
-
         foreach ($images as $key => $image) {
-
-
             $modelImagesProduct = new ProductsImage();
-
             $filePath = "$folderPath/$key" . ".png";
-
             if (self::storeImageInStorage(Yii::getAlias('@app/web') . '/' . $filePath, $image['src'])) {
                 $modelImagesProduct->product_id = $productModel->id;
                 $modelImagesProduct->path = $filePath;
@@ -235,18 +257,7 @@ class ProductShpifyHelper extends BaseObject
                 $modelImagesProduct->save(false);
             }
 
-
-
         }
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -257,20 +268,13 @@ class ProductShpifyHelper extends BaseObject
     public static function saveVariants($variants, $productModel, $isNew)
     {
 
-        echo $productModel->product_id;
-        exit;
 
         if ($isNew) {
             foreach ($variants as $variant) {
                 $subProductCount = new SubProductCount();
                 $subProductCount->product_id = $productModel->id;
-
                 $subProductCount->variant_id = (string) $variant['id'];
-
-
-
                 $subProductCount->type = $variant['title'];
-
                 $subProductCount->count = 10000;
                 $subProductCount->save(false);
             }
@@ -282,12 +286,10 @@ class ProductShpifyHelper extends BaseObject
             $optionsSellProduct->price = (float) $variant['price'];
             $optionsSellProduct->save(false);
 
-
         } else {
 
             foreach ($variants as $variant) {
                 $subProductCount = SubProductCount::find()->where(['variant_id' => $variant['id']])->one();
-
                 if (is_null($subProductCount)) {
                     $subProductCount = new SubProductCount();
                     $subProductCount->product_id = $productModel->id;
@@ -324,12 +326,9 @@ class ProductShpifyHelper extends BaseObject
 
             }
 
-
         }
 
-
     }
-
 
 
 }
