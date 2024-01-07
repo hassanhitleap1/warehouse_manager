@@ -64,76 +64,23 @@ class OrderShpifyHelper extends BaseObject
     }
 
 
-
-    public static function getApiOrderByDate($form, $to)
+    public static function getOrdersFiltered($filters)
     {
-
-        $api_url = "https://" . self::$domain . "/admin/api/2021-07/orders.json?created_at_min=$form&created_at_max=$to";
-
+        $queryString = http_build_query($filters);
+        $api_url = "https://" . self::$domain . "/admin/api/2021-07/orders.json$queryString";
         $ch = curl_init($api_url);
-
-        // Set cURL options
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
         curl_setopt($ch, CURLOPT_USERPWD, self::$apiKey . ":" . self::$apiSecret);
-
-        // Execute the cURL request
         $response = curl_exec($ch);
-
-        // Check for cURL errors and HTTP status code
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        // Close cURL session
         curl_close($ch);
-
         if ($httpCode === 200) {
             return json_decode($response, true);
         }
-
         throw new \Exception("error in rquast httpCode");
 
     }
-
-
-
-
-
-
-
-    public static function getOrders()
-    {
-        $api_url = "https://" . self::$domain . "/admin/api/2021-07/orders.json";
-        // Construct the API endpoint URL
-
-        // Initialize cURL session
-        $ch = curl_init($api_url);
-
-        // Set cURL options
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
-        curl_setopt($ch, CURLOPT_USERPWD, self::$apiKey . ":" . self::$apiSecret);
-
-        // Execute the cURL request
-        $response = curl_exec($ch);
-
-        // Check for cURL errors and HTTP status code
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        // Close cURL session
-        curl_close($ch);
-
-        if ($httpCode === 200) {
-
-            return json_decode($response, true);
-
-
-        }
-
-        throw new \Exception("error in rquast httpCode");
-    }
-
-
-
 
 
     public static function saveOrder($order, $keyOrder, $countryModel, $category, $regionsModel, $supplier, $warehouse)
@@ -184,13 +131,13 @@ class OrderShpifyHelper extends BaseObject
             $allErrors = $user->getErrors();
             foreach ($allErrors as $attributeErrors) {
                 foreach ($attributeErrors as $error) {
-                    echo "<user> $error $newLine";
+                    echo "<user> $error   <keyOrder> $keyOrder  $newLine";
                 }
             }
             $flag = false;
 
             $transaction->rollBack();
-            return Controller::EXIT_CODE_ERROR; // exit with an error code
+
 
         }
 
@@ -199,23 +146,20 @@ class OrderShpifyHelper extends BaseObject
             $allErrors = $model->getErrors();
             foreach ($allErrors as $attributeErrors) {
                 foreach ($attributeErrors as $error) {
-                    echo "<order> $error $newLine";
+                    echo "<order> $error    <keyOrder> $keyOrder $newLine";
+
                 }
             }
             $flag = false;
-            return Controller::EXIT_CODE_ERROR; // exit with an error code
         }
 
 
         if (count($order['line_items']) >= 0) {
             foreach ($order['line_items'] as $item) {
-
                 $orderItem = new OrdersItem();
                 $subProductCount = SubProductCount::find()->where(['variant_id' => (string) $item['variant_id']])->one();
-
                 if (is_null($subProductCount)) {
                     $product = ProductShpifyHelper::getProductById($item['product_id'])['product'];
-
                     $nextId = Products::find()->max('id') + 1;
                     $productModel = Products::find()->where(['product_id' => $item['product_id']])->one();
                     $productModel = ProductShpifyHelper::saveProduct(
@@ -242,20 +186,10 @@ class OrderShpifyHelper extends BaseObject
                 $orderItem = self::setOrderItems($model, $orderItem, $item, $subProductCount);
 
                 if (!$orderItem->save()) {
-                    echo "error in  orderItem <<<<<<<<<>>>>>>>>>>>>>>>>>>> $keyOrder $newLine";
-
-
-                    echo "----------<<<<<<<<<<>>>>>>>>>>>>>>>>>>>------------------------$newLine";
-                    echo "variant_id " . $item['variant_id'] . "$newLine";
-                    echo "product_id " . $item['product_id'] . "$newLine";
-
-                    echo "----------<<<<<<<<<<>>>>>>>>>>>>>>>>>>>------------------------$newLine";
-
-
                     $allErrors = $orderItem->getErrors();
                     foreach ($allErrors as $attributeErrors) {
                         foreach ($attributeErrors as $error) {
-                            echo "$error $newLine";
+                            echo "<orderItem> $error    <keyOrder> $keyOrder $newLine";
                         }
                     }
 
@@ -263,19 +197,14 @@ class OrderShpifyHelper extends BaseObject
 
                     $transaction->rollBack();
 
-                    return Controller::EXIT_CODE_ERROR; // exit with an error code
 
 
-                } else {
-                    echo "save orderItem  $newLine";
+
                 }
-
 
 
             }
 
-        } else {
-            echo "count number line_items   " . count($order['line_items']) . "$newLine";
         }
 
 
@@ -302,7 +231,6 @@ class OrderShpifyHelper extends BaseObject
         $orderItem->order_id = $model->id;
         $orderItem->sub_product_id = $subProductCount->id;
         $orderItem->quantity = 1;
-        $orderItem->order_id = $model->id;
         $orderItem->price = 1.00; //$item['price'];
         $orderItem->profit_margin = 1.00; //$item['price'];
         $orderItem->price_item_count = 1.00; //$item['price'];

@@ -38,7 +38,15 @@ class OrderImportController extends Controller
     {
 
 
-        $ordersData = OrderShpifyHelper::getOrders();
+        $filters = [
+            // 'created_at_min' => $from,
+            // 'created_at_max' => $to,
+
+        ];
+        $ordersData = OrderShpifyHelper::getOrdersFiltered($filters);
+
+
+        echo "number order " . count($ordersData['orders']) . "\n";
 
         foreach ($ordersData['orders'] as $key => $order) {
 

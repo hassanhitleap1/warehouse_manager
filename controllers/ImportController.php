@@ -68,10 +68,29 @@ class ImportController extends BaseController
     public function actionIndex()
     {
 
+
+        //  Order Status:
+        // Fulfillment Status: fulfillment_status
+        // Possible values: fulfilled, partial, unshipped, shipped, unfulfilled
+        // Financial Status: financial_status
+        // Possible values: paid, pending, partially_paid, partially_refunded, refunded, voided, pending
+        // Order Status: status
+        // Possible values: open, closed, cancelled
+        // Product Status:
+
+        // Product Status: status
+        // Possible values: active, archived, draft
+        // Fulfillment Status:
+
+        // Fulfillment Status: status
+        // Possible values: pending, open, success, cancelled, error
+        // Payment Status (For Invoices):
+
+        // Payment Status: status
+        // Possible values: pending, authorized, partially_paid, paid, voided, partially_refunded, refunded
+
         $from = Carbon::now()->addDays(-300)->toIso8601String();
         $to = Carbon::now()->addDays(1)->toIso8601String();
-
-
 
         $category = Categorises::find()->one();
 
@@ -82,19 +101,22 @@ class ImportController extends BaseController
         $countryModel = Countries::find()->one();
         $regionsModel = Regions::find()->one();
 
+        $filters = [
+            // 'created_at_min' => $from,
+            // 'created_at_max' => $to,
 
-        //$ordersData = OrderShpifyHelper::getApiOrderByDate($from, $to);
+        ];
 
-        $ordersData = OrderShpifyHelper::getOrders();
+
+        $ordersData = OrderShpifyHelper::getOrdersFiltered($filters);
+
+
         echo "number order " . count($ordersData['orders']) . "<br/>";
 
 
         foreach ($ordersData['orders'] as $keyOrder => $order) {
 
-
-
-
-            $productModel = OrderShpifyHelper::saveOrder(
+            OrderShpifyHelper::saveOrder(
                 $order,
                 $keyOrder,
                 $countryModel,
