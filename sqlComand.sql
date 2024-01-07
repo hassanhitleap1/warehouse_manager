@@ -6,3 +6,8 @@ ALTER TABLE `products` ADD `product_id` VARCHAR(255) NULL AFTER `top_selling`;
 
 ALTER TABLE `products` CHANGE `warehouse_id` `warehouse_id` INT(11) NULL;
 
+
+
+ALTER TABLE `orders` ADD `order_shopify_id` VARCHAR(255) NULL AFTER `deported`;
+
+

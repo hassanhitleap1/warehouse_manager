@@ -56,4 +56,36 @@ class ProductImportController extends Controller
 
         return ExitCode::OK;
     }
+
+
+
+    public function actionProduct($id)
+    {
+
+
+        $category = Categorises::find()->one();
+
+        $supplier = Suppliers::find()->one();
+
+        $warehouse = Warehouse::find()->one();
+
+        $product = ProductShpifyHelper::getProductById($id);
+
+        $nextId = Products::find()->max('id') + 1;
+
+        $productModel = Products::find()->where(['product_id' => $product['id']])->one();
+        if (ProductShpifyHelper::isActive($product)) {
+            $productModel = ProductShpifyHelper::saveProduct(
+                $product,
+                $productModel,
+                $nextId,
+                $category,
+                $supplier,
+                $warehouse,
+                1
+            );
+        }
+
+        return ExitCode::OK;
+    }
 }

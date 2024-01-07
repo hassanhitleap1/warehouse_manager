@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * RegionsController implements the CRUD actions for Regions model.
  */
-class RegionsController extends BaseController 
+class RegionsController extends BaseController
 {
 
     public function init()
@@ -26,7 +26,7 @@ class RegionsController extends BaseController
         }
         parent::init();
     }
-        /**
+    /**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -72,18 +72,20 @@ class RegionsController extends BaseController
     public function actionGetPrice($id)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        if(isset($_GET['company_delivery_id'])&& $_GET['company_delivery_id'] !=''){
-            $price_delivery_model=PriceCompanyDelivery::find()->where(['=','region_id',$id])
-                ->andWhere(['=','company_delivery_id',$_GET['company_delivery_id']])
-                ->one();
-            $price_delivery=$price_delivery_model->price;
-        }else{
-            $price_delivery_model=$this->findModel($id);
-            $price_delivery=$price_delivery_model->price_delivery;
-        }
-        
-        return ['data'=> ['price_delivery'=> $price_delivery]];
-      
+        // if(isset($_GET['company_delivery_id'])&& $_GET['company_delivery_id'] !=''){
+        //     $price_delivery_model=PriceCompanyDelivery::find()->where(['=','region_id',$id])
+        //         ->andWhere(['=','company_delivery_id',$_GET['company_delivery_id']])
+        //         ->one();
+        //     $price_delivery=$price_delivery_model->price;
+        // }else{
+        //     $price_delivery_model=$this->findModel($id);
+        //     $price_delivery=$price_delivery_model->price_delivery;
+        // }
+
+        $price_delivery_model = $this->findModel($id);
+
+        return ['data' => ['price_delivery' => $price_delivery_model->price_delivery]];
+
     }
 
     /**

@@ -55,6 +55,32 @@ class ProductShpifyHelper extends BaseObject
     }
 
 
+
+    public static function getProductById($id)
+    {
+        $api_url = "https://" . self::$domain . "/admin/api/2021-07/products/$id.json";
+        // Construct the API endpoint URL
+        // Initialize cURL session
+        $ch = curl_init($api_url);
+        // Set cURL options
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+        curl_setopt($ch, CURLOPT_USERPWD, self::$apiKey . ":" . self::$apiSecret);
+
+        // Execute the cURL request
+        $response = curl_exec($ch);
+        // Check for cURL errors and HTTP status code
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        // Close cURL session
+        curl_close($ch);
+        if ($httpCode === 200) {
+            return json_decode($response, true);
+        }
+
+        throw new \Exception("error in rquast httpCode");
+    }
+
+
     public static function isActive($product)
     {
         if ($product['status'] == "active") {
@@ -81,7 +107,7 @@ class ProductShpifyHelper extends BaseObject
 
         $productModel->name = !isset($product['title']) && $product['title'] !== "" ? $product['title'] : ".....";
         $productModel->product_id = (string) $product['id'];
-        $productModel->description = $product['body_html'];
+        $productModel->description = "description"; //$product['body_html'];
         $productModel->purchasing_price = ($product['variants'][0]['price'] * 0.20) - $product['variants'][0]['price'];
         $productModel->selling_price = (float) $product['variants'][0]['price'];
         $productModel->quantity = 10;
@@ -231,13 +257,20 @@ class ProductShpifyHelper extends BaseObject
     public static function saveVariants($variants, $productModel, $isNew)
     {
 
+        echo $productModel->product_id;
+        exit;
 
         if ($isNew) {
             foreach ($variants as $variant) {
                 $subProductCount = new SubProductCount();
                 $subProductCount->product_id = $productModel->id;
-                $subProductCount->variant_id = $variant['id'];
+
+                $subProductCount->variant_id = (string) $variant['id'];
+
+
+
                 $subProductCount->type = $variant['title'];
+
                 $subProductCount->count = 10000;
                 $subProductCount->save(false);
             }

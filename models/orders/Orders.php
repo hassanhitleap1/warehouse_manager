@@ -40,9 +40,9 @@ class Orders extends \yii\db\ActiveRecord
     public $sub_product_id;
     public $name_in_facebook;
     public $order;
-    public $products_id=[] ;
-    const DEPOTED=1;
-    const UN_DEPOTED=0;
+    public $products_id = [];
+    const DEPOTED = 1;
+    const UN_DEPOTED = 0;
 
     /**
      * {@inheritdoc}
@@ -58,13 +58,13 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'order_id','status_id','phone','name','address','delivery_price','discount','total_price','amount_required','region_id'], 'required'],
-            [['user_id', 'country_id', 'region_id', 'area_id', 'status_id','company_delivery_id'], 'integer'],
-            [['discount','total_price','delivery_price','amount_required','profit_margin'],'double'],
+            [['order_id', 'status_id', 'phone', 'name', 'address', 'delivery_price', 'discount', 'total_price', 'amount_required', 'region_id'], 'required'],
+            [['user_id', 'country_id', 'region_id', 'area_id', 'status_id', 'company_delivery_id'], 'integer'],
+            [['discount', 'total_price', 'delivery_price', 'amount_required', 'profit_margin'], 'double'],
             [['delivery_date', 'delivery_time'], 'safe'],
-            [['name','note'],'string'],
+            [['name', 'note', 'order_shopify_id'], 'string'],
             [['address'], 'string', 'max' => 250],
-            [['phone','other_phone'], 'isJordanPhone'],
+            [['phone', 'other_phone'], 'isJordanPhone'],
         ];
     }
 
@@ -86,22 +86,22 @@ class Orders extends \yii\db\ActiveRecord
             'status_id' => Yii::t('app', 'Status'),
             'phone' => Yii::t('app', 'Phone'),
             'other_phone' => Yii::t('app', 'Other_Phone'),
-            'address'=> Yii::t('app', 'Address'),
+            'address' => Yii::t('app', 'Address'),
             'name' => Yii::t('app', 'Name'),
             'delivery_price' => Yii::t('app', 'Delivery_Price'),
             'discount' => Yii::t('app', 'Discount'),
             'total_price' => Yii::t('app', 'Total_Price'),
             'amount_required' => Yii::t('app', 'Amount_Required'),
-            'sub_product_id'=> Yii::t('app', 'Sub_Product_Id'),
+            'sub_product_id' => Yii::t('app', 'Sub_Product_Id'),
             'created_at' => Yii::t('app', 'Created_At'),
             'updated_at' => Yii::t('app', 'Updated_At'),
-            'profit_margin'=> Yii::t('app', 'Profit_Margin'),
-            'note'=> Yii::t('app', 'Note'),
-            'name_in_facebook'=>Yii::t('app', 'Name_In_Facebook'),
-            'order'=>Yii::t('app', 'Orders'),
-            'search_string'=>Yii::t('app', 'Search'),
-            'company_delivery_id'=>Yii::t('app', 'Company_Delivery'),
-            'products_id'=>Yii::t('app', 'Products'),
+            'profit_margin' => Yii::t('app', 'Profit_Margin'),
+            'note' => Yii::t('app', 'Note'),
+            'name_in_facebook' => Yii::t('app', 'Name_In_Facebook'),
+            'order' => Yii::t('app', 'Orders'),
+            'search_string' => Yii::t('app', 'Search'),
+            'company_delivery_id' => Yii::t('app', 'Company_Delivery'),
+            'products_id' => Yii::t('app', 'Products'),
         ];
     }
 
@@ -117,32 +117,32 @@ class Orders extends \yii\db\ActiveRecord
     public function beforeValidate()
     {
         if (parent::beforeValidate()) {
-            $this->phone=trim($this->phone);
-            $this->phone= OrderHelper::faTOen($this->phone);
-            if(!is_null($this->other_phone)){
-                $this->other_phone=trim($this->other_phone);
-                $this->other_phone= OrderHelper::faTOen($this->other_phone);
+            $this->phone = trim($this->phone);
+            $this->phone = OrderHelper::faTOen($this->phone);
+            if (!is_null($this->other_phone)) {
+                $this->other_phone = trim($this->other_phone);
+                $this->other_phone = OrderHelper::faTOen($this->other_phone);
             }
             return true;
         }
         return false;
     }
 
-    
-        /**
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getOrderItems()
     {
         return $this->hasMany(OrdersItem::className(), ['order_id' => 'id']);
     }
-    
-     /**
+
+    /**
      * @inheritdoc
      */
     public function beforeSave($insert)
     {
-        $today=Carbon::now("Asia/Amman");
+        $today = Carbon::now("Asia/Amman");
         if (parent::beforeSave($insert)) {
             // Place your custom code here
             if ($this->isNewRecord) {
@@ -151,7 +151,7 @@ class Orders extends \yii\db\ActiveRecord
 
 
             } else {
-                $this->updated_at =$today;
+                $this->updated_at = $today;
             }
 
             return true;
@@ -163,7 +163,7 @@ class Orders extends \yii\db\ActiveRecord
     public function isJordanPhone($attribute)
     {
         if (!preg_match('/^(079|078|077)[0-9]{7}$/', $this->$attribute)) {
-            $this->addError($attribute, Yii::t('app','Check_Phone'));
+            $this->addError($attribute, Yii::t('app', 'Check_Phone'));
         }
     }
 
@@ -200,7 +200,7 @@ class Orders extends \yii\db\ActiveRecord
         return $this->hasOne(Users::className(), ['id' => 'user_id']);
     }
 
-    
+
     /**
      * get total
      */
