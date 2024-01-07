@@ -126,7 +126,8 @@ class ProductShpifyHelper extends BaseObject
 
         $isNew = true;
         $newLine = "<br/>";
-        echo "key $keyProduct $newLine";
+        $flag = true;
+        $transaction = \Yii::$app->db->beginTransaction();
 
         if (is_null($productModel)) {
             $isNew = false;
@@ -164,9 +165,7 @@ class ProductShpifyHelper extends BaseObject
         $productModel->muints = 45;
         $productModel->second = 45;
         $productModel->status = 1;
-
         $productModel->images_product = "";
-
 
         if (!$productModel->save()) {
             echo "error in  product $keyProduct\n";
@@ -178,22 +177,84 @@ class ProductShpifyHelper extends BaseObject
             }
         }
 
+
+        foreach ($product['variants'] as $variant) {
+            $subProductCount = self::setSubProductCount($variant, $productModel);
+            if (!$subProductCount->save()) {
+                $allErrors = $subProductCount->getErrors();
+                foreach ($allErrors as $attributeErrors) {
+                    foreach ($attributeErrors as $error) {
+                        echo "$error $newLine";
+                    }
+                }
+                $transaction->rollBack();
+                $flag = false;
+            }
+
+        }
+
+        foreach ($product['variants'] as $variant) {
+            $optionsSellProduct = self::setOptionsSellProduct($variant, $productModel);
+            if (!$optionsSellProduct->save()) {
+                $allErrors = $optionsSellProduct->getErrors();
+                foreach ($allErrors as $attributeErrors) {
+                    foreach ($attributeErrors as $error) {
+                        echo "$error $newLine";
+                    }
+                }
+                $transaction->rollBack();
+                $flag = false;
+            }
+
+        }
+
+
         self::saveImagesInStorage($product['images'], $productModel, $isNew);
+        if ($flag) {
+            $transaction->commit();
+        }
 
-
-        self::saveVariants($product['variants'], $productModel, $isNew);
 
 
         return $productModel;
     }
 
 
+    public static function setSubProductCount($variant, $productModel)
+    {
+        $subProductCount = SubProductCount::find()->where(['variant_id' => (string) $variant['id']])->one();
+        if (is_null($subProductCount)) {
+            $subProductCount = new SubProductCount();
+        }
+        $subProductCount->product_id = $productModel->id;
+        $subProductCount->variant_id = (string) $variant['id'];
+        $subProductCount->type = $variant['title'];
+        $subProductCount->count = 10000;
+        return $subProductCount;
+    }
+
+
+    public static function setOptionsSellProduct($variant, $productModel)
+    {
+
+        $optionsSellProduct = OptionsSellProduct::find()->where(['variant_id' => (string) $variant['id']])->one();
+        if (is_null($optionsSellProduct)) {
+            $optionsSellProduct = new OptionsSellProduct();
+        }
+        $optionsSellProduct->number = 1;
+        $optionsSellProduct->product_id = $productModel->id;
+        $optionsSellProduct->variant_id = (string) $variant['id'];
+        $optionsSellProduct->text = $productModel->name;
+        $optionsSellProduct->price = (float) $variant['price'];
+        return $optionsSellProduct;
+    }
+
+
+
 
 
     public static function saveImageInStorage($imageUrl, $nextId, $isNew)
     {
-
-
         $folderPath = "products/$nextId";
         FileHelper::createDirectory($folderPath, 0777, true);
         $filePath = $folderPath . '/1.png';
@@ -203,23 +264,13 @@ class ProductShpifyHelper extends BaseObject
                 'thumb' => $filePath,
             ];
         }
-
-
         return [
             'thumbnail' => '/',
             'thumb' => './'
         ];
-
-
-
-
-
-
-
-
-
-
     }
+
+
 
 
 
@@ -264,71 +315,6 @@ class ProductShpifyHelper extends BaseObject
 
 
 
-
-    public static function saveVariants($variants, $productModel, $isNew)
-    {
-
-
-        if ($isNew) {
-            foreach ($variants as $variant) {
-                $subProductCount = new SubProductCount();
-                $subProductCount->product_id = $productModel->id;
-                $subProductCount->variant_id = (string) $variant['id'];
-                $subProductCount->type = $variant['title'];
-                $subProductCount->count = 10000;
-                $subProductCount->save(false);
-            }
-
-            $optionsSellProduct = new OptionsSellProduct();
-            $optionsSellProduct->number = 1;
-            $optionsSellProduct->product_id = $productModel->id;
-            $optionsSellProduct->text = $productModel->name;
-            $optionsSellProduct->price = (float) $variant['price'];
-            $optionsSellProduct->save(false);
-
-        } else {
-
-            foreach ($variants as $variant) {
-                $subProductCount = SubProductCount::find()->where(['variant_id' => $variant['id']])->one();
-                if (is_null($subProductCount)) {
-                    $subProductCount = new SubProductCount();
-                    $subProductCount->product_id = $productModel->id;
-                    $subProductCount->variant_id = $variant['id'];
-                    $subProductCount->type = $variant['title'];
-                    $subProductCount->count = 10000;
-                    $subProductCount->save();
-                } else {
-                    $subProductCount->product_id = $productModel->id;
-                    $subProductCount->variant_id = $variant['id'];
-                    $subProductCount->type = $variant['title'];
-                    $subProductCount->count = 10000;
-                    $subProductCount->save();
-                }
-
-            }
-
-
-            $optionsSellProduct = OptionsSellProduct::find()->where(['product_id' => $productModel->id])->one();
-            if (!empty($subProductCount)) {
-                $optionsSellProduct = new OptionsSellProduct();
-                $optionsSellProduct->number = 1;
-                $optionsSellProduct->product_id = $productModel->id;
-                $optionsSellProduct->text = $productModel->name;
-                $optionsSellProduct->price = (float) $variant['price'];
-                $optionsSellProduct->save(false);
-
-            } else {
-                $optionsSellProduct->number = 1;
-                $optionsSellProduct->product_id = $productModel->id;
-                $optionsSellProduct->text = $productModel->name;
-                $optionsSellProduct->price = (float) $variant['price'];
-                $optionsSellProduct->save(false);
-
-            }
-
-        }
-
-    }
 
 
 }

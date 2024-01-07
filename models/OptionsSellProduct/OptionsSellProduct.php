@@ -32,9 +32,10 @@ class OptionsSellProduct extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['number', 'text','price'], 'required'],
+            [['number', 'text', 'price'], 'required'],
             [['price'], 'double'],
-            [['number', 'product_id','variant_id'], 'integer'],
+            [['number', 'product_id'], 'integer'],
+            [['variant_id'], 'string'],
             [['text'], 'string', 'max' => 500],
         ];
     }
@@ -58,7 +59,7 @@ class OptionsSellProduct extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        $today=Carbon::now("Asia/Amman");
+        $today = Carbon::now("Asia/Amman");
         if (parent::beforeSave($insert)) {
             // Place your custom code here
             if ($this->isNewRecord) {
@@ -67,7 +68,7 @@ class OptionsSellProduct extends \yii\db\ActiveRecord
 
 
             } else {
-                $this->updated_at =$today;
+                $this->updated_at = $today;
             }
 
             return true;
