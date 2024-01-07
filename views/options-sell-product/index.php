@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\products\OptionsSellProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -12,7 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="options-sell-product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?= Html::encode($this->title) ?>
+    </h1>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create_Options_Sell_Products'), ['create'], ['class' => 'btn btn-success']) ?>
@@ -27,15 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-//            'id',
+            //            'id',
             'price',
             'number',
             'text',
             'product.name',
-
+            'variant_id',
             //'created_at',
             //'updated_at',
-
+    
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

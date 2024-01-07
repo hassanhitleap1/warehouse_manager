@@ -35,7 +35,8 @@ class SubProductCount extends \yii\db\ActiveRecord
             [['type'], 'custum_required_type', 'skipOnEmpty' => false, 'skipOnError' => false],
             [['count'], 'custum_required_count', 'skipOnEmpty' => false, 'skipOnError' => false],
             [['count', 'product_id'], 'integer'],
-            [['type', 'variant_id'], 'string', 'max' => 255],
+            [['type'], 'string', 'max' => 255],
+            [['variant_id'], 'string'],
         ];
     }
 
